@@ -167,7 +167,8 @@
 			children = (
 				7685A1A428687C6000A4BC3C /* App */,
 				7685A1A728687DB300A4BC3C /* Features */,
-				7685A1AB286880DF00A4BC3C /* Packages */,
+				7685A1AC286880F600A4BC3C /* API */,
+				7639A6AE286889DB00A76FE9 /* UI */,
 				7685A192286868AC00A4BC3C /* Products */,
 				7685A1AD2868810D00A4BC3C /* Frameworks */,
 			);
@@ -202,15 +203,6 @@
 				7639A6C7286895CB00A76FE9 /* Raindrops */,
 			);
 			path = Features;
-			sourceTree = "<group>";
-		};
-		7685A1AB286880DF00A4BC3C /* Packages */ = {
-			isa = PBXGroup;
-			children = (
-				7639A6AE286889DB00A76FE9 /* UI */,
-				7685A1AC286880F600A4BC3C /* API */,
-			);
-			path = Packages;
 			sourceTree = "<group>";
 		};
 		7685A1AD2868810D00A4BC3C /* Frameworks */ = {
