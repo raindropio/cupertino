@@ -10,10 +10,8 @@ struct BrowserView: View {
         switch page {
         case .collection(let collection):
             return collection.title
-        case .filter:
-            return "filter"
-        case .tag:
-            return "tag"
+        case .search(let query):
+            return query
         }
     }
     
@@ -29,6 +27,5 @@ struct BrowserView: View {
         }
             .listStyle(.inset)
             .navigationTitle(getTitle())
-            .navigationBarTitleDisplayMode(.inline)
     }
 }

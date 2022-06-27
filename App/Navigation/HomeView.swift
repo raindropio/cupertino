@@ -2,7 +2,7 @@ import SwiftUI
 import UI
 
 struct HomeView: View {
-    @State private var page: BrowserPage?
+    @State private var page: BrowserPage? = .collection(.Preview.items.first!)
     @State private var path = NavigationPath()
     
     var body: some View {
