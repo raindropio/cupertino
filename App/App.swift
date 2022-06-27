@@ -6,10 +6,15 @@ struct RaindropApp: App {
         WindowGroup {
             Main()
         }
+            #if os(macOS)
+            .commands {
+                SidebarCommands()
+            }
+            #endif
         
         #if os(macOS)
         Settings {
-            SettingsView()
+            SettingsMain()
         }
         #endif
     }

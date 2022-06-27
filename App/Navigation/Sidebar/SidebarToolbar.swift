@@ -20,7 +20,7 @@ struct SidebarToolbar: ViewModifier {
             #if os(iOS)
             .navigationBarTitleDisplayMode(.inline)
             .sheet(isPresented: $showSettings) {
-                SettingsView()
+                SettingsMain()
             }
             #endif
     }

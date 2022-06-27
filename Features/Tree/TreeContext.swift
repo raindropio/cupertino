@@ -2,7 +2,6 @@ import SwiftUI
 import API
 
 struct TreeContext: ViewModifier {
-    @Environment(\.editMode) private var editMode
     @State private var action: TreeActionKey.Action?
     
     func body(content: Content) -> some View {

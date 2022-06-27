@@ -6,10 +6,10 @@ struct Main: View {
         if UIDevice.current.userInterfaceIdiom == .phone {
             PhoneView()
         } else {
-            HomeView()
+            Home()
         }
         #else
-        HomeView()
+        Home()
         #endif
     }
 }
@@ -19,12 +19,12 @@ struct PhoneView: View {
     
     var body: some View {
         TabView {
-            HomeView()
+            Home()
                 .tabItem {
                     Image(systemName: "folder")
                 }
             
-            DetailView(section: .collection(.Preview.system.first!), path: $detailPath)
+            Detail(section: .collection(.Preview.system.first!), path: $detailPath)
                 .tabItem {
                     Image(systemName: "star")
                 }
@@ -34,7 +34,7 @@ struct PhoneView: View {
                     Image(systemName: "magnifyingglass")
                 }
             
-            SettingsView()
+            SettingsMain()
                 .tabItem {
                     Image(systemName: "gear")
                 }

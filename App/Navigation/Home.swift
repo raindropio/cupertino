@@ -1,7 +1,7 @@
 import SwiftUI
 import UI
 
-struct HomeView: View {
+struct Home: View {
     @State private var selection: Set<SidebarSelection> = [.collection(.Preview.items.first!)]
     @State private var path = NavigationPath()
     
@@ -11,7 +11,7 @@ struct HomeView: View {
         } detail: {
             ZStack {
                 if let page = selection.first {
-                    DetailView(section: page, path: $path)
+                    Detail(section: page, path: $path)
                 }
             }
         }

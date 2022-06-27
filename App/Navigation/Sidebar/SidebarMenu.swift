@@ -6,6 +6,7 @@ struct SidebarMenu: ViewModifier {
         content
             .contextMenu(forSelectionType: SidebarSelection.self) {
                 let (collections, _, _) = groupped($0)
+                
                 if !collections.isEmpty {
                     TreeMenu(selection: collections)
                 }
