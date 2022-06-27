@@ -24,7 +24,7 @@ struct PhoneView: View {
                     Image(systemName: "folder")
                 }
             
-            DetailView(path: $detailPath, page: .collection(.Preview.system.first!))
+            DetailView(section: .collection(.Preview.system.first!), path: $detailPath)
                 .tabItem {
                     Image(systemName: "star")
                 }

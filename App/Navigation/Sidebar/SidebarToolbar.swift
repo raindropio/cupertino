@@ -1,16 +1,10 @@
 import SwiftUI
-import API
 
-struct SidebarView: View {
-    @Binding var page: BrowserPage?
+struct SidebarToolbar: ViewModifier {
     @State private var showSettings = false
 
-    var body: some View {
-        List(selection: $page) {
-            CollectionsTreeView {
-                BrowserPage.collection($0)
-            }
-        }
+    func body(content: Content) -> some View {
+        content
             .navigationTitle("exentrich")
             .toolbar {
                 #if os(iOS)

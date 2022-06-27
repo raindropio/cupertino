@@ -3,15 +3,17 @@ import API
 import UI
 
 struct BrowserView: View {
-    var page: BrowserPage
+    var page: SidebarSelection
     @State private var selection = Set<Raindrop>()
     
     func getTitle() -> String {
         switch page {
         case .collection(let collection):
             return collection.title
-        case .search(let query):
-            return query
+        case .filter(let filter):
+            return filter.title
+        case .tag(let tag):
+            return tag.title
         }
     }
     
@@ -23,7 +25,7 @@ struct BrowserView: View {
                 }
             }
             
-            RaindropsItemsView()
+            RaindropItems()
         }
             .listStyle(.inset)
             .navigationTitle(getTitle())

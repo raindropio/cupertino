@@ -12,7 +12,7 @@ struct ChildrenView: View {
                 LazyHGrid(rows: rows, spacing: 16) {
                     ForEach(Collection.Preview.items) { collection in
                         NavigationLink(value: collection) {
-                            CollectionItemView(collection: collection)
+                            CollectionRow(collection: collection)
                         }
                             .tag(collection)
                     }

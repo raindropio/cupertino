@@ -1,7 +1,7 @@
 import SwiftUI
 import API
 
-struct RaindropsItemsView: View {
+struct RaindropItems: View {
     var body: some View {
         ForEach(Raindrop.preview) { raindrop in
             Label(raindrop.title, systemImage: "bookmark")

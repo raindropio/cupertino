@@ -2,20 +2,20 @@ import SwiftUI
 import UI
 
 struct HomeView: View {
-    @State private var page: BrowserPage? = .collection(.Preview.items.first!)
+    @State private var selection: Set<SidebarSelection> = [.collection(.Preview.items.first!)]
     @State private var path = NavigationPath()
     
     var body: some View {
         NavigationSplitView {
-            SidebarView(page: $page)
+            Sidebar(selection: $selection)
         } detail: {
             ZStack {
-                if let page = page {
-                    DetailView(path: $path, page: page)
+                if let page = selection.first {
+                    DetailView(section: page, path: $path)
                 }
             }
         }
-            .onChange(of: page) { _ in
+            .onChange(of: selection) { _ in
                 path.removeLast(path.count)
             }
     }

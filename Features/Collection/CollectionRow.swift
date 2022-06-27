@@ -1,7 +1,7 @@
 import SwiftUI
 import API
 
-struct CollectionItemView: View {
+struct CollectionRow: View {
     var collection: Collection
     
     var body: some View {

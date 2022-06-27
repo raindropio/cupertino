@@ -2,10 +2,10 @@ import SwiftUI
 import API
 
 struct DetailView: View {
+    var section: SidebarSelection
     @Binding var path: NavigationPath
-    var page: BrowserPage
     
-    func browse(_ page: BrowserPage) -> some View {
+    func browse(_ page: SidebarSelection) -> some View {
         BrowserView(page: page)
             .contextAction(forSelectionType: Raindrop.self) {
                 if $0.count == 1, let raindrop = $0.first {
@@ -16,7 +16,7 @@ struct DetailView: View {
     
     var body: some View {
         NavigationStack(path: $path) {
-            browse(page)
+            browse(section)
                 .navigationDestination(for: Collection.self) {
                     browse(.collection($0))
                 }
