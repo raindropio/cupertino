@@ -6,9 +6,11 @@ struct TreeMenu: View {
     @Environment(\.treeAction) private var action
     
     var body: some View {
+        #if os(iOS)
         Button(action: {}) {
             Label("Select", systemImage: "checkmark.circle")
         }
+        #endif
         
         Button(action: { action.wrappedValue = .edit(selection.first!) }) {
             Label("Edit", systemImage: "pencil")

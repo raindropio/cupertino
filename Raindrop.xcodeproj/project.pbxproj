@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		7635737B286A55370058BE9C /* SettingsRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7635737A286A55370058BE9C /* SettingsRow.swift */; };
+		7635737E286C21C90058BE9C /* SettingsCommands.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7635737D286C21C90058BE9C /* SettingsCommands.swift */; };
+		76357381286C28EA0058BE9C /* ProView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76357380286C28EA0058BE9C /* ProView.swift */; };
+		76357383286C2D5E0058BE9C /* RaindropQuickLook.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76357382286C2D5E0058BE9C /* RaindropQuickLook.swift */; };
 		7639A6A92868847C00A76FE9 /* Sidebar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7639A6A82868847C00A76FE9 /* Sidebar.swift */; };
 		7639A6AD2868859800A76FE9 /* TreeItems.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7639A6AC2868859800A76FE9 /* TreeItems.swift */; };
 		7639A6B028688A7900A76FE9 /* UI in Frameworks */ = {isa = PBXBuildFile; productRef = 7639A6AF28688A7900A76FE9 /* UI */; };
@@ -36,6 +40,10 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		7635737A286A55370058BE9C /* SettingsRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsRow.swift; sourceTree = "<group>"; };
+		7635737D286C21C90058BE9C /* SettingsCommands.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsCommands.swift; sourceTree = "<group>"; };
+		76357380286C28EA0058BE9C /* ProView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProView.swift; sourceTree = "<group>"; };
+		76357382286C2D5E0058BE9C /* RaindropQuickLook.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RaindropQuickLook.swift; sourceTree = "<group>"; };
 		7639A6A82868847C00A76FE9 /* Sidebar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sidebar.swift; sourceTree = "<group>"; };
 		7639A6AC2868859800A76FE9 /* TreeItems.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TreeItems.swift; sourceTree = "<group>"; };
 		7639A6AE286889DB00A76FE9 /* UI */ = {isa = PBXFileReference; lastKnownFileType = text; path = UI; sourceTree = SOURCE_ROOT; };
@@ -79,6 +87,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		7635737F286C28D90058BE9C /* Pro */ = {
+			isa = PBXGroup;
+			children = (
+				76357380286C28EA0058BE9C /* ProView.swift */,
+			);
+			path = Pro;
+			sourceTree = "<group>";
+		};
 		7639A6A72868846E00A76FE9 /* Navigation */ = {
 			isa = PBXGroup;
 			children = (
@@ -110,9 +126,12 @@
 			isa = PBXGroup;
 			children = (
 				768E495A2869C18C0049BE12 /* Account */,
+				7635737F286C28D90058BE9C /* Pro */,
 				7639A6C12868933600A76FE9 /* Import */,
 				7639A6B928688C3000A76FE9 /* SettingsMain.swift */,
 				7639A6BF2868925500A76FE9 /* SettingsPage.swift */,
+				7635737A286A55370058BE9C /* SettingsRow.swift */,
+				7635737D286C21C90058BE9C /* SettingsCommands.swift */,
 			);
 			path = Settings;
 			sourceTree = "<group>";
@@ -137,6 +156,7 @@
 			isa = PBXGroup;
 			children = (
 				7639A6C9286895FD00A76FE9 /* RaindropItems.swift */,
+				76357382286C2D5E0058BE9C /* RaindropQuickLook.swift */,
 			);
 			path = Raindrop;
 			sourceTree = "<group>";
@@ -326,7 +346,9 @@
 				7639A6BE286890CA00A76FE9 /* Detail.swift in Sources */,
 				76C69E2B2869BA0000E2DEF4 /* CollectionView.swift in Sources */,
 				7685A197286868AC00A4BC3C /* Home.swift in Sources */,
+				7635737E286C21C90058BE9C /* SettingsCommands.swift in Sources */,
 				7639A6BC28688E3D00A76FE9 /* Main.swift in Sources */,
+				7635737B286A55370058BE9C /* SettingsRow.swift in Sources */,
 				7639A6D028689AC600A76FE9 /* CollectionRow.swift in Sources */,
 				7639A6B728688B7C00A76FE9 /* SidebarSelection.swift in Sources */,
 				7639A6A92868847C00A76FE9 /* Sidebar.swift in Sources */,
@@ -338,9 +360,11 @@
 				76C69E292869AA0E00E2DEF4 /* SidebarToolbar.swift in Sources */,
 				76C69E2D2869BACC00E2DEF4 /* FilterView.swift in Sources */,
 				7639A6CA286895FD00A76FE9 /* RaindropItems.swift in Sources */,
+				76357381286C28EA0058BE9C /* ProView.swift in Sources */,
 				7639A6BA28688C3000A76FE9 /* SettingsMain.swift in Sources */,
 				76C69E2F2869BB4600E2DEF4 /* TagView.swift in Sources */,
 				7685A195286868AC00A4BC3C /* App.swift in Sources */,
+				76357383286C2D5E0058BE9C /* RaindropQuickLook.swift in Sources */,
 				76C69E272869A9BF00E2DEF4 /* SidebarMenu.swift in Sources */,
 				7639A6AD2868859800A76FE9 /* TreeItems.swift in Sources */,
 				7639A6C02868925500A76FE9 /* SettingsPage.swift in Sources */,

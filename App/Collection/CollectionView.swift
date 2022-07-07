@@ -15,5 +15,6 @@ struct CollectionView: View {
         }
             .listStyle(.inset)
             .navigationTitle(collection.title)
+            .modifier(RaindropQuickLook(selection: $selection))
     }
 }

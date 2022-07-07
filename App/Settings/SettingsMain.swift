@@ -2,54 +2,38 @@ import SwiftUI
 
 struct SettingsMain: View {
     @State var page: SettingsPage?
-    
-    #if os(iOS)
-    @State private var path = NavigationPath()
+    @Environment(\.horizontalSizeClass) private var horizontalSizeClass
     
     var body: some View {
-        NavigationStack(path: $path) {
-            List {
-                NavigationLink(value: SettingsPage.import) {
-                    Label(SettingsPage.import.title, systemImage: SettingsPage.import.systemImage)
+        NavigationSplitView(columnVisibility: .constant(.all)) {
+            List(selection: $page) {
+                Section {
+                    SettingsRow(page: .account)
+                    SettingsRow(page: .pro)
+                }
+                
+                Section {
+                    SettingsRow(page: .import)
                 }
             }
+                .navigationSplitViewColumnWidth(180)
                 .navigationTitle("Settings")
-                .navigationDestination(for: SettingsPage.self) { page in
+        } detail: {
+            ZStack {
+                if let page = page {
                     switch(page) {
-                        case .account: AccountView()
-                        case .import: ImportView()
+                    case .account: AccountView()
+                    case .pro: ProView()
+                    case .import: ImportView()
                     }
                 }
-        }
-        .onAppear {
-            if let page = page {
-                path.append(page)
             }
         }
-        .onChange(of: page) {
-            if let selected = $0 {
-                path.append(selected)
-            } else {
-                path.removeLast(path.count)
+            .navigationSplitViewStyle(.balanced)
+            .onAppear {
+                if page == nil, horizontalSizeClass == .regular {
+                    page = .account
+                }
             }
-        }
     }
-    #else
-    var body: some View {
-        TabView(selection: $page) {
-            ImportView()
-                .tabItem {
-                    Label(SettingsPage.import.title, systemImage: SettingsPage.import.systemImage)
-                }
-                .tag(SettingsPage.import)
-            
-            AccountView()
-                .tabItem {
-                    Label(SettingsPage.account.title, systemImage: SettingsPage.account.systemImage)
-                }
-                .tag(SettingsPage.account)
-        }
-        .frame(minWidth: 500, minHeight: 100)
-    }
-    #endif
 }

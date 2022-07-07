@@ -12,15 +12,16 @@ public extension Collection {
             Collection(id: 0, title: "All bookmarks"),
             Collection(id: -1, title: "Unsorted"),
         ]
-        static public var items = [
-            Collection(
+        static public var items: [Collection] = [
+            .init(
                 id: 66,
                 title: "Design",
                 children: [
                     .init(id: 134, title: "Inspiration")
                 ]
             ),
-            Collection(id: 33, title: "Development")
+            .init(id: 33, title: "Development"),
+            
         ]
     }
 }
