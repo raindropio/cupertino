@@ -2,8 +2,10 @@ import SwiftUI
 import API
 
 struct RaindropsView<Header: View>: View {
-    @Binding var selection: Set<Raindrop>
+    @Binding var query: String
     @ViewBuilder var header: () -> Header
+
+    @State private var selection = Set<Raindrop>()
     
     var body: some View {
         List(selection: $selection) {

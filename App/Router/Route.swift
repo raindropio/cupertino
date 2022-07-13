@@ -4,7 +4,7 @@ import API
 enum Route: Hashable {
     case browse(Collection, String)
     case search
-    case tag(String)
-    case filter(String)
+    case tag(Tag)
+    case filter(Filter)
     case preview(Raindrop)
 }

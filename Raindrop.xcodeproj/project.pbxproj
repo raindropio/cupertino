@@ -27,6 +27,10 @@
 		765F0DD6287EDB07001E34CA /* PhoneScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 765F0DD5287EDB07001E34CA /* PhoneScene.swift */; };
 		765F0DD8287EDB13001E34CA /* PadScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 765F0DD7287EDB13001E34CA /* PadScene.swift */; };
 		765F0DDD287EE32F001E34CA /* SettingsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 765F0DDC287EE32F001E34CA /* SettingsService.swift */; };
+		765F0DE2287EFBA2001E34CA /* Preview.swift in Sources */ = {isa = PBXBuildFile; fileRef = 765F0DE1287EFBA2001E34CA /* Preview.swift */; };
+		765F0DE5287EFEC7001E34CA /* SearchModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 765F0DE4287EFEC7001E34CA /* SearchModifier.swift */; };
+		765F0DE7287F0042001E34CA /* SearchScope.swift in Sources */ = {isa = PBXBuildFile; fileRef = 765F0DE6287F0042001E34CA /* SearchScope.swift */; };
+		765F0DE9287F1BB2001E34CA /* SearchToken.swift in Sources */ = {isa = PBXBuildFile; fileRef = 765F0DE8287F1BB2001E34CA /* SearchToken.swift */; };
 		767362E92868AB6200A70B4B /* ChildrenLabelStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 767362E82868AB6200A70B4B /* ChildrenLabelStyle.swift */; };
 		7685A195286868AC00A4BC3C /* App.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7685A194286868AC00A4BC3C /* App.swift */; };
 		7685A199286868AD00A4BC3C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7685A198286868AD00A4BC3C /* Assets.xcassets */; };
@@ -62,6 +66,10 @@
 		765F0DD7287EDB13001E34CA /* PadScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PadScene.swift; sourceTree = "<group>"; };
 		765F0DDB287EE0FB001E34CA /* App.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = App.plist; sourceTree = "<group>"; };
 		765F0DDC287EE32F001E34CA /* SettingsService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsService.swift; sourceTree = "<group>"; };
+		765F0DE1287EFBA2001E34CA /* Preview.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Preview.swift; sourceTree = "<group>"; };
+		765F0DE4287EFEC7001E34CA /* SearchModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchModifier.swift; sourceTree = "<group>"; };
+		765F0DE6287F0042001E34CA /* SearchScope.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchScope.swift; sourceTree = "<group>"; };
+		765F0DE8287F1BB2001E34CA /* SearchToken.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchToken.swift; sourceTree = "<group>"; };
 		767362E82868AB6200A70B4B /* ChildrenLabelStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChildrenLabelStyle.swift; sourceTree = "<group>"; };
 		7685A191286868AC00A4BC3C /* Raindrop.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Raindrop.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7685A194286868AC00A4BC3C /* App.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = App.swift; sourceTree = "<group>"; };
@@ -181,6 +189,24 @@
 			path = Scene;
 			sourceTree = "<group>";
 		};
+		765F0DE0287EFB96001E34CA /* Preview */ = {
+			isa = PBXGroup;
+			children = (
+				765F0DE1287EFBA2001E34CA /* Preview.swift */,
+			);
+			path = Preview;
+			sourceTree = "<group>";
+		};
+		765F0DE3287EFEB5001E34CA /* Search */ = {
+			isa = PBXGroup;
+			children = (
+				765F0DE4287EFEC7001E34CA /* SearchModifier.swift */,
+				765F0DE6287F0042001E34CA /* SearchScope.swift */,
+				765F0DE8287F1BB2001E34CA /* SearchToken.swift */,
+			);
+			path = Search;
+			sourceTree = "<group>";
+		};
 		7685A188286868AC00A4BC3C = {
 			isa = PBXGroup;
 			children = (
@@ -206,6 +232,7 @@
 			children = (
 				76A8C7BB287EA3D100825E83 /* Sidebar */,
 				765F0DCA287EC9FE001E34CA /* Browse */,
+				765F0DE0287EFB96001E34CA /* Preview */,
 				765F0DCD287ECB3A001E34CA /* Search */,
 				765F0DB7287EB0BC001E34CA /* Settings */,
 				76A8C7B0287E9ECF00825E83 /* Router */,
@@ -225,6 +252,7 @@
 				7639A6AA2868858100A76FE9 /* Collection */,
 				7639A6CB286899D700A76FE9 /* Children */,
 				7639A6C7286895CB00A76FE9 /* Raindrop */,
+				765F0DE3287EFEB5001E34CA /* Search */,
 			);
 			path = Features;
 			sourceTree = "<group>";
@@ -342,18 +370,22 @@
 				7639A6D028689AC600A76FE9 /* CollectionRow.swift in Sources */,
 				765F0DD6287EDB07001E34CA /* PhoneScene.swift in Sources */,
 				765F0DC3287EC2A2001E34CA /* SettingsAccount.swift in Sources */,
+				765F0DE9287F1BB2001E34CA /* SearchToken.swift in Sources */,
 				765F0DC7287EC883001E34CA /* SidebarMenu.swift in Sources */,
 				767362E92868AB6200A70B4B /* ChildrenLabelStyle.swift in Sources */,
 				765F0DD4287EDAFB001E34CA /* MacScene.swift in Sources */,
 				76C69E202869A24E00E2DEF4 /* TreeMenu.swift in Sources */,
 				76C69E222869A80100E2DEF4 /* TreeContext.swift in Sources */,
+				765F0DE7287F0042001E34CA /* SearchScope.swift in Sources */,
 				76A8C7B2287E9EDC00825E83 /* Route.swift in Sources */,
 				765F0DB9287EB0C7001E34CA /* SettingsIOS.swift in Sources */,
 				765F0DB6287EAEDC001E34CA /* SplitViewScene.swift in Sources */,
 				7639A6CA286895FD00A76FE9 /* RaindropsView.swift in Sources */,
 				76A8C7B5287E9F5300825E83 /* Router.swift in Sources */,
 				7685A195286868AC00A4BC3C /* App.swift in Sources */,
+				765F0DE2287EFBA2001E34CA /* Preview.swift in Sources */,
 				765F0DD8287EDB13001E34CA /* PadScene.swift in Sources */,
+				765F0DE5287EFEC7001E34CA /* SearchModifier.swift in Sources */,
 				765F0DCF287ECB45001E34CA /* Search.swift in Sources */,
 				765F0DC0287EC257001E34CA /* SettingsIndex.swift in Sources */,
 				76A8C7BD287EA3DF00825E83 /* Sidebar.swift in Sources */,

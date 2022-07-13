@@ -21,6 +21,8 @@ struct SidebarMenu: ViewModifier {
         selection.forEach {
             switch($0) {
             case .browse(let collection, _): collections.insert(collection)
+            case .tag(let tag): tags.insert(tag)
+            case .filter(let filter): filters.insert(filter)
             default: break
             }
         }

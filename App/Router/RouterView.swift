@@ -10,7 +10,7 @@ struct RouterView: View {
         case .browse(let collection, let query): Browse(collection: collection, query: query)
         case .tag(let tag): EmptyView()
         case .filter(let filter): EmptyView()
-        case .preview(let raindrop): EmptyView()
+        case .preview(let raindrop): Preview(raindrop: raindrop)
         case .search: Search()
         }
     }
