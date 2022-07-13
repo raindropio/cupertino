@@ -31,6 +31,7 @@
 		765F0DE5287EFEC7001E34CA /* SearchModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 765F0DE4287EFEC7001E34CA /* SearchModifier.swift */; };
 		765F0DE7287F0042001E34CA /* SearchScope.swift in Sources */ = {isa = PBXBuildFile; fileRef = 765F0DE6287F0042001E34CA /* SearchScope.swift */; };
 		765F0DE9287F1BB2001E34CA /* SearchToken.swift in Sources */ = {isa = PBXBuildFile; fileRef = 765F0DE8287F1BB2001E34CA /* SearchToken.swift */; };
+		765F0DEB287F249D001E34CA /* SearchService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 765F0DEA287F249D001E34CA /* SearchService.swift */; };
 		767362E92868AB6200A70B4B /* ChildrenLabelStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 767362E82868AB6200A70B4B /* ChildrenLabelStyle.swift */; };
 		7685A195286868AC00A4BC3C /* App.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7685A194286868AC00A4BC3C /* App.swift */; };
 		7685A199286868AD00A4BC3C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7685A198286868AD00A4BC3C /* Assets.xcassets */; };
@@ -70,6 +71,7 @@
 		765F0DE4287EFEC7001E34CA /* SearchModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchModifier.swift; sourceTree = "<group>"; };
 		765F0DE6287F0042001E34CA /* SearchScope.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchScope.swift; sourceTree = "<group>"; };
 		765F0DE8287F1BB2001E34CA /* SearchToken.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchToken.swift; sourceTree = "<group>"; };
+		765F0DEA287F249D001E34CA /* SearchService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchService.swift; sourceTree = "<group>"; };
 		767362E82868AB6200A70B4B /* ChildrenLabelStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChildrenLabelStyle.swift; sourceTree = "<group>"; };
 		7685A191286868AC00A4BC3C /* Raindrop.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Raindrop.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7685A194286868AC00A4BC3C /* App.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = App.swift; sourceTree = "<group>"; };
@@ -201,6 +203,7 @@
 			isa = PBXGroup;
 			children = (
 				765F0DE4287EFEC7001E34CA /* SearchModifier.swift */,
+				765F0DEA287F249D001E34CA /* SearchService.swift */,
 				765F0DE6287F0042001E34CA /* SearchScope.swift */,
 				765F0DE8287F1BB2001E34CA /* SearchToken.swift */,
 			);
@@ -370,6 +373,7 @@
 				7639A6D028689AC600A76FE9 /* CollectionRow.swift in Sources */,
 				765F0DD6287EDB07001E34CA /* PhoneScene.swift in Sources */,
 				765F0DC3287EC2A2001E34CA /* SettingsAccount.swift in Sources */,
+				765F0DEB287F249D001E34CA /* SearchService.swift in Sources */,
 				765F0DE9287F1BB2001E34CA /* SearchToken.swift in Sources */,
 				765F0DC7287EC883001E34CA /* SidebarMenu.swift in Sources */,
 				767362E92868AB6200A70B4B /* ChildrenLabelStyle.swift in Sources */,

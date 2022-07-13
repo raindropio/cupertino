@@ -21,4 +21,8 @@ enum SearchToken: Identifiable, Hashable {
         case .matchOr: return "Match Any"
         }
     }
+    
+    var systemImage: String {
+        "line.3.horizontal.decrease.circle"
+    }
 }

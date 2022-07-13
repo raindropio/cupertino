@@ -17,8 +17,5 @@ struct SidebarToolbar: ViewModifier {
                 }
                 #endif
             }
-            #if os(iOS)
-            .navigationBarTitleDisplayMode(.inline)
-            #endif
     }
 }

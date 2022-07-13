@@ -1,52 +1,44 @@
 import SwiftUI
 import API
+import Combine
 
 struct SearchModifier: ViewModifier {
     @Binding var collection: Collection
     @Binding var query: String
-    
-    @Environment(\.isSearching) private var isSearching: Bool
-    @State private var text: String = ""
-    @State private var tokens: [SearchToken] = []
-    @State private var scope: SearchScope = .everywhere
-    @State private var origin: Collection?
-    @State private var hideSuggestions = false
-    
-    func prepare(_ query: String) {
-        if text != query {
-            text = query
-        }
-    }
-    
-    func apply(_ text: String) {
-        if text != query {
-            query = text
-        }
-    }
+    @StateObject private var service = SearchService()
     
     func body(content: Content) -> some View {
         content
-            .modifier(SearchEffect(collection: $collection, origin: $origin, query: $query, scope: $scope))
-            .onAppear { prepare(query) }
-            .onChange(of: query) { prepare($0) }
-            .onChange(of: text) { apply($0) }
-            .searchable(text: $text, tokens: $tokens) { token in
-                Text(token.label)
+            //MARK: - Two way binding
+            .modifier(ReactToEnv(service: service))
+            .task(id: collection.id) { service.collection = collection }
+            .task(id: service.collection?.id) { if service.collection != nil { collection = service.collection } }
+            .task(id: query) { service.setQuery(query) }
+            .task(id: service.tokens) { query = service.getQuery() }
+            .task(id: service.text) { query = service.getQuery() }
+            //MARK: - UI
+            //Tokens are very slow in ios 16 beta 3 :(
+            .searchable(text: $service.text, tokens: $service.tokens) { token in
+                Label(token.label, systemImage: token.systemImage)
             }
-            .searchScopes($scope) {
-                if collection.id != 0 || origin != nil {
+            //MARK: - Scope
+            //Active state bug ios 16 beta 3 :(
+            .searchScopes($service.scope) {
+                if let secondScope = service.secondScope {
                     Text("Everywhere")
                         .tag(SearchScope.everywhere)
-                    Text((origin ?? collection).title)
+                    Text(secondScope.title)
                         .tag(SearchScope.incollection)
                 }
             }
-            .onChange(of: text) { _ in hideSuggestions = false }
+            //MARK: - Suggestions
             .searchSuggestions {
-                if !hideSuggestions {
-                    if !text.isEmpty {
-                        Button(text) {
-                            hideSuggestions = true
+                if !service.hideSuggestions {
+                    if !service.text.isEmpty {
+                        Button {
+                            service.hideSuggestions = true
+                        } label: {
+                            Label(service.text, systemImage: "magnifyingglass")
                         }
                     }
                     
@@ -60,48 +52,13 @@ struct SearchModifier: ViewModifier {
 }
 
 extension SearchModifier {
-    struct SearchEffect: ViewModifier {
-        @Binding var collection: Collection
-        @Binding var origin: Collection?
-        @Binding var query: String
-        @Binding var scope: SearchScope
-        
+    struct ReactToEnv: ViewModifier {
+        @ObservedObject var service: SearchService
         @Environment(\.isSearching) var isSearching
-        
-        func apply(_ isSearching: Bool) {
-            if isSearching {
-                if !query.isEmpty {
-                    switch scope {
-                    case .everywhere:
-                        if collection.id != 0 {
-                            origin = collection
-                            collection = .Preview.system.first!
-                        }
-                        
-                    case .incollection:
-                        if let o = origin {
-                            collection = o
-                            origin = nil
-                        }
-                    }
-                }
-            } else if let o = origin {
-                collection = o
-                origin = nil
-            }
-        }
         
         func body(content: Content) -> some View {
             content
-                .onChange(of: isSearching) {
-                    if $0, collection.id != 0, !query.isEmpty {
-                        scope = .incollection
-                    }
-                    
-                    apply($0)
-                }
-                .onChange(of: query) { _ in apply(isSearching) }
-                .onChange(of: scope) { _ in apply(isSearching) }
+                .task(id: isSearching) { service.isSearching = isSearching }
         }
     }
 }

@@ -19,6 +19,7 @@ struct Browse: View {
                     router.path.append(.preview(raindrop))
                 }
             }
-            .navigationTitle(query.isEmpty ? collection.title : query)
+            .navigationTitle(collection.title)
+            .toolbarRole(.browser)
     }
 }

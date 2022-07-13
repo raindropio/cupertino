@@ -1,6 +1,6 @@
 import Foundation
 
-enum SearchScope: String {
+enum SearchScope {
     case everywhere
     case incollection
 }
