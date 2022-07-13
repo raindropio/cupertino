@@ -1,12 +1,12 @@
 import SwiftUI
 
 struct Sidebar: View {
-    @Binding var selection: Set<SidebarSelection>
-
+    @EnvironmentObject private var router: Router
+    
     var body: some View {
-        List(selection: $selection) {
+        List(selection: $router.sidebar) {
             TreeItems {
-                SidebarSelection.collection($0)
+                Route.browse($0, "")
             }
         }
             .modifier(SidebarMenu())

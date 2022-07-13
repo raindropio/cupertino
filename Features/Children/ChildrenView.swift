@@ -1,8 +1,9 @@
 import SwiftUI
 import API
 
-struct ChildrenView: View {
-    var collection: Collection
+struct ChildrenView<Tag: Hashable>: View {
+    var parent: Collection
+    var tag: (_ collection: Collection) -> Tag
     
     private let rows = [GridItem( .flexible(minimum: 100, maximum: 200) )]
     
@@ -11,10 +12,9 @@ struct ChildrenView: View {
             ScrollView(.horizontal) {
                 LazyHGrid(rows: rows, spacing: 16) {
                     ForEach(Collection.Preview.items) { collection in
-                        NavigationLink(value: collection) {
+                        NavigationLink(value: tag(collection)) {
                             CollectionRow(collection: collection)
                         }
-                            .tag(collection)
                     }
                 }
             }

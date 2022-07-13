@@ -2,24 +2,42 @@ import SwiftUI
 
 @main
 struct RaindropApp: App {
+    #if os(macOS)
+    @StateObject private var settings = SettingsService()
+    #endif
+    
     var body: some Scene {
+        //MARK: - Main Window
         WindowGroup {
-            Main()
+            Group {
+                #if os(macOS)
+                MacScene()
+                    .environmentObject(settings)
+                #else
+                switch UIDevice.current.userInterfaceIdiom {
+                    case .phone:
+                        PhoneScene()
+                    default:
+                        PadScene()
+                }
+                #endif
+            }
         }
             #if os(macOS)
             .commands {
-                SettingsCommands()
                 SidebarCommands()
             }
             #endif
         
+        //MARK: - Settings
         #if os(macOS)
-        Window("Settings", id: "settings") {
-            SettingsMain()
-                .frame(width: 600, height: 400)
+        Settings {
+            SettingsMac()
+                .environmentObject(settings)
+                .onOpenURL {
+                    settings.handleDeepLink($0)
+                }
         }
-            .windowResizability(.contentSize)
-            .defaultPosition(.center)
         #endif
     }
 }

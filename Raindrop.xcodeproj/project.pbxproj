@@ -7,71 +7,74 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		7635737B286A55370058BE9C /* SettingsRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7635737A286A55370058BE9C /* SettingsRow.swift */; };
-		7635737E286C21C90058BE9C /* SettingsCommands.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7635737D286C21C90058BE9C /* SettingsCommands.swift */; };
-		76357381286C28EA0058BE9C /* ProView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76357380286C28EA0058BE9C /* ProView.swift */; };
 		76357383286C2D5E0058BE9C /* RaindropQuickLook.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76357382286C2D5E0058BE9C /* RaindropQuickLook.swift */; };
-		7639A6A92868847C00A76FE9 /* Sidebar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7639A6A82868847C00A76FE9 /* Sidebar.swift */; };
 		7639A6AD2868859800A76FE9 /* TreeItems.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7639A6AC2868859800A76FE9 /* TreeItems.swift */; };
 		7639A6B028688A7900A76FE9 /* UI in Frameworks */ = {isa = PBXBuildFile; productRef = 7639A6AF28688A7900A76FE9 /* UI */; };
-		7639A6B728688B7C00A76FE9 /* SidebarSelection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7639A6B628688B7C00A76FE9 /* SidebarSelection.swift */; };
-		7639A6BA28688C3000A76FE9 /* SettingsMain.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7639A6B928688C3000A76FE9 /* SettingsMain.swift */; };
-		7639A6BC28688E3D00A76FE9 /* Main.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7639A6BB28688E3D00A76FE9 /* Main.swift */; };
-		7639A6BE286890CA00A76FE9 /* Detail.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7639A6BD286890CA00A76FE9 /* Detail.swift */; };
-		7639A6C02868925500A76FE9 /* SettingsPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7639A6BF2868925500A76FE9 /* SettingsPage.swift */; };
-		7639A6C32868934500A76FE9 /* ImportView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7639A6C22868934500A76FE9 /* ImportView.swift */; };
-		7639A6C6286894E000A76FE9 /* RaindropView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7639A6C5286894E000A76FE9 /* RaindropView.swift */; };
-		7639A6CA286895FD00A76FE9 /* RaindropItems.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7639A6C9286895FD00A76FE9 /* RaindropItems.swift */; };
+		7639A6CA286895FD00A76FE9 /* RaindropsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7639A6C9286895FD00A76FE9 /* RaindropsView.swift */; };
 		7639A6CD286899E800A76FE9 /* ChildrenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7639A6CC286899E800A76FE9 /* ChildrenView.swift */; };
 		7639A6D028689AC600A76FE9 /* CollectionRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7639A6CF28689AC600A76FE9 /* CollectionRow.swift */; };
+		765F0DB6287EAEDC001E34CA /* SplitViewScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 765F0DB5287EAEDC001E34CA /* SplitViewScene.swift */; };
+		765F0DB9287EB0C7001E34CA /* SettingsIOS.swift in Sources */ = {isa = PBXBuildFile; fileRef = 765F0DB8287EB0C7001E34CA /* SettingsIOS.swift */; };
+		765F0DBB287EB714001E34CA /* SettingsMac.swift in Sources */ = {isa = PBXBuildFile; fileRef = 765F0DBA287EB714001E34CA /* SettingsMac.swift */; };
+		765F0DC0287EC257001E34CA /* SettingsIndex.swift in Sources */ = {isa = PBXBuildFile; fileRef = 765F0DBF287EC257001E34CA /* SettingsIndex.swift */; };
+		765F0DC3287EC2A2001E34CA /* SettingsAccount.swift in Sources */ = {isa = PBXBuildFile; fileRef = 765F0DC2287EC2A2001E34CA /* SettingsAccount.swift */; };
+		765F0DC5287EC623001E34CA /* SettingsLabelStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 765F0DC4287EC623001E34CA /* SettingsLabelStyle.swift */; };
+		765F0DC7287EC883001E34CA /* SidebarMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 765F0DC6287EC883001E34CA /* SidebarMenu.swift */; };
+		765F0DC9287EC929001E34CA /* SidebarToolbar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 765F0DC8287EC929001E34CA /* SidebarToolbar.swift */; };
+		765F0DCC287ECA0B001E34CA /* Browse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 765F0DCB287ECA0B001E34CA /* Browse.swift */; };
+		765F0DCF287ECB45001E34CA /* Search.swift in Sources */ = {isa = PBXBuildFile; fileRef = 765F0DCE287ECB45001E34CA /* Search.swift */; };
+		765F0DD4287EDAFB001E34CA /* MacScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 765F0DD3287EDAFB001E34CA /* MacScene.swift */; };
+		765F0DD6287EDB07001E34CA /* PhoneScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 765F0DD5287EDB07001E34CA /* PhoneScene.swift */; };
+		765F0DD8287EDB13001E34CA /* PadScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 765F0DD7287EDB13001E34CA /* PadScene.swift */; };
+		765F0DDD287EE32F001E34CA /* SettingsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 765F0DDC287EE32F001E34CA /* SettingsService.swift */; };
 		767362E92868AB6200A70B4B /* ChildrenLabelStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 767362E82868AB6200A70B4B /* ChildrenLabelStyle.swift */; };
 		7685A195286868AC00A4BC3C /* App.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7685A194286868AC00A4BC3C /* App.swift */; };
-		7685A197286868AC00A4BC3C /* Home.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7685A196286868AC00A4BC3C /* Home.swift */; };
 		7685A199286868AD00A4BC3C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7685A198286868AD00A4BC3C /* Assets.xcassets */; };
 		7685A1AF2868810D00A4BC3C /* API in Frameworks */ = {isa = PBXBuildFile; productRef = 7685A1AE2868810D00A4BC3C /* API */; };
-		768E495C2869C1950049BE12 /* AccountView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 768E495B2869C1950049BE12 /* AccountView.swift */; };
+		76A8C7B2287E9EDC00825E83 /* Route.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76A8C7B1287E9EDC00825E83 /* Route.swift */; };
+		76A8C7B5287E9F5300825E83 /* Router.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76A8C7B4287E9F5300825E83 /* Router.swift */; };
+		76A8C7B7287EA11000825E83 /* SettingsPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76A8C7B6287EA11000825E83 /* SettingsPage.swift */; };
+		76A8C7BD287EA3DF00825E83 /* Sidebar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76A8C7BC287EA3DF00825E83 /* Sidebar.swift */; };
+		76A8C7C2287EA50300825E83 /* RouterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76A8C7C1287EA50300825E83 /* RouterView.swift */; };
 		76C69E202869A24E00E2DEF4 /* TreeMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76C69E1F2869A24E00E2DEF4 /* TreeMenu.swift */; };
 		76C69E222869A80100E2DEF4 /* TreeContext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76C69E212869A80100E2DEF4 /* TreeContext.swift */; };
-		76C69E272869A9BF00E2DEF4 /* SidebarMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76C69E262869A9BF00E2DEF4 /* SidebarMenu.swift */; };
-		76C69E292869AA0E00E2DEF4 /* SidebarToolbar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76C69E282869AA0E00E2DEF4 /* SidebarToolbar.swift */; };
-		76C69E2B2869BA0000E2DEF4 /* CollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76C69E2A2869BA0000E2DEF4 /* CollectionView.swift */; };
-		76C69E2D2869BACC00E2DEF4 /* FilterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76C69E2C2869BACC00E2DEF4 /* FilterView.swift */; };
-		76C69E2F2869BB4600E2DEF4 /* TagView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76C69E2E2869BB4600E2DEF4 /* TagView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		7635737A286A55370058BE9C /* SettingsRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsRow.swift; sourceTree = "<group>"; };
-		7635737D286C21C90058BE9C /* SettingsCommands.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsCommands.swift; sourceTree = "<group>"; };
-		76357380286C28EA0058BE9C /* ProView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProView.swift; sourceTree = "<group>"; };
 		76357382286C2D5E0058BE9C /* RaindropQuickLook.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RaindropQuickLook.swift; sourceTree = "<group>"; };
-		7639A6A82868847C00A76FE9 /* Sidebar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sidebar.swift; sourceTree = "<group>"; };
 		7639A6AC2868859800A76FE9 /* TreeItems.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TreeItems.swift; sourceTree = "<group>"; };
 		7639A6AE286889DB00A76FE9 /* UI */ = {isa = PBXFileReference; lastKnownFileType = text; path = UI; sourceTree = SOURCE_ROOT; };
-		7639A6B628688B7C00A76FE9 /* SidebarSelection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SidebarSelection.swift; sourceTree = "<group>"; };
-		7639A6B928688C3000A76FE9 /* SettingsMain.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsMain.swift; sourceTree = "<group>"; };
-		7639A6BB28688E3D00A76FE9 /* Main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Main.swift; sourceTree = "<group>"; };
-		7639A6BD286890CA00A76FE9 /* Detail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Detail.swift; sourceTree = "<group>"; };
-		7639A6BF2868925500A76FE9 /* SettingsPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsPage.swift; sourceTree = "<group>"; };
-		7639A6C22868934500A76FE9 /* ImportView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImportView.swift; sourceTree = "<group>"; };
-		7639A6C5286894E000A76FE9 /* RaindropView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RaindropView.swift; sourceTree = "<group>"; };
-		7639A6C9286895FD00A76FE9 /* RaindropItems.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RaindropItems.swift; sourceTree = "<group>"; };
+		7639A6C9286895FD00A76FE9 /* RaindropsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RaindropsView.swift; sourceTree = "<group>"; };
 		7639A6CC286899E800A76FE9 /* ChildrenView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChildrenView.swift; sourceTree = "<group>"; };
 		7639A6CF28689AC600A76FE9 /* CollectionRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionRow.swift; sourceTree = "<group>"; };
+		765F0DB5287EAEDC001E34CA /* SplitViewScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplitViewScene.swift; sourceTree = "<group>"; };
+		765F0DB8287EB0C7001E34CA /* SettingsIOS.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsIOS.swift; sourceTree = "<group>"; };
+		765F0DBA287EB714001E34CA /* SettingsMac.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsMac.swift; sourceTree = "<group>"; };
+		765F0DBF287EC257001E34CA /* SettingsIndex.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsIndex.swift; sourceTree = "<group>"; };
+		765F0DC2287EC2A2001E34CA /* SettingsAccount.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsAccount.swift; sourceTree = "<group>"; };
+		765F0DC4287EC623001E34CA /* SettingsLabelStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsLabelStyle.swift; sourceTree = "<group>"; };
+		765F0DC6287EC883001E34CA /* SidebarMenu.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SidebarMenu.swift; sourceTree = "<group>"; };
+		765F0DC8287EC929001E34CA /* SidebarToolbar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SidebarToolbar.swift; sourceTree = "<group>"; };
+		765F0DCB287ECA0B001E34CA /* Browse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Browse.swift; sourceTree = "<group>"; };
+		765F0DCE287ECB45001E34CA /* Search.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Search.swift; sourceTree = "<group>"; };
+		765F0DD3287EDAFB001E34CA /* MacScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MacScene.swift; sourceTree = "<group>"; };
+		765F0DD5287EDB07001E34CA /* PhoneScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhoneScene.swift; sourceTree = "<group>"; };
+		765F0DD7287EDB13001E34CA /* PadScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PadScene.swift; sourceTree = "<group>"; };
+		765F0DDB287EE0FB001E34CA /* App.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = App.plist; sourceTree = "<group>"; };
+		765F0DDC287EE32F001E34CA /* SettingsService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsService.swift; sourceTree = "<group>"; };
 		767362E82868AB6200A70B4B /* ChildrenLabelStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChildrenLabelStyle.swift; sourceTree = "<group>"; };
 		7685A191286868AC00A4BC3C /* Raindrop.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Raindrop.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7685A194286868AC00A4BC3C /* App.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = App.swift; sourceTree = "<group>"; };
-		7685A196286868AC00A4BC3C /* Home.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Home.swift; sourceTree = "<group>"; };
 		7685A198286868AD00A4BC3C /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		7685A19A286868AD00A4BC3C /* App.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = App.entitlements; sourceTree = "<group>"; };
 		7685A1AC286880F600A4BC3C /* API */ = {isa = PBXFileReference; lastKnownFileType = text; path = API; sourceTree = SOURCE_ROOT; };
-		768E495B2869C1950049BE12 /* AccountView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountView.swift; sourceTree = "<group>"; };
+		76A8C7B1287E9EDC00825E83 /* Route.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Route.swift; sourceTree = "<group>"; };
+		76A8C7B4287E9F5300825E83 /* Router.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Router.swift; sourceTree = "<group>"; };
+		76A8C7B6287EA11000825E83 /* SettingsPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsPage.swift; sourceTree = "<group>"; };
+		76A8C7BC287EA3DF00825E83 /* Sidebar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sidebar.swift; sourceTree = "<group>"; };
+		76A8C7C1287EA50300825E83 /* RouterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RouterView.swift; sourceTree = "<group>"; };
 		76C69E1F2869A24E00E2DEF4 /* TreeMenu.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TreeMenu.swift; sourceTree = "<group>"; };
 		76C69E212869A80100E2DEF4 /* TreeContext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TreeContext.swift; sourceTree = "<group>"; };
-		76C69E262869A9BF00E2DEF4 /* SidebarMenu.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SidebarMenu.swift; sourceTree = "<group>"; };
-		76C69E282869AA0E00E2DEF4 /* SidebarToolbar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SidebarToolbar.swift; sourceTree = "<group>"; };
-		76C69E2A2869BA0000E2DEF4 /* CollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionView.swift; sourceTree = "<group>"; };
-		76C69E2C2869BACC00E2DEF4 /* FilterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterView.swift; sourceTree = "<group>"; };
-		76C69E2E2869BB4600E2DEF4 /* TagView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -87,25 +90,6 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		7635737F286C28D90058BE9C /* Pro */ = {
-			isa = PBXGroup;
-			children = (
-				76357380286C28EA0058BE9C /* ProView.swift */,
-			);
-			path = Pro;
-			sourceTree = "<group>";
-		};
-		7639A6A72868846E00A76FE9 /* Navigation */ = {
-			isa = PBXGroup;
-			children = (
-				7639A6BB28688E3D00A76FE9 /* Main.swift */,
-				7685A196286868AC00A4BC3C /* Home.swift */,
-				76C69E252869A99200E2DEF4 /* Sidebar */,
-				7639A6BD286890CA00A76FE9 /* Detail.swift */,
-			);
-			path = Navigation;
-			sourceTree = "<group>";
-		};
 		7639A6AA2868858100A76FE9 /* Collection */ = {
 			isa = PBXGroup;
 			children = (
@@ -114,48 +98,10 @@
 			path = Collection;
 			sourceTree = "<group>";
 		};
-		7639A6B328688B2100A76FE9 /* Collection */ = {
-			isa = PBXGroup;
-			children = (
-				76C69E2A2869BA0000E2DEF4 /* CollectionView.swift */,
-			);
-			path = Collection;
-			sourceTree = "<group>";
-		};
-		7639A6B828688C2700A76FE9 /* Settings */ = {
-			isa = PBXGroup;
-			children = (
-				768E495A2869C18C0049BE12 /* Account */,
-				7635737F286C28D90058BE9C /* Pro */,
-				7639A6C12868933600A76FE9 /* Import */,
-				7639A6B928688C3000A76FE9 /* SettingsMain.swift */,
-				7639A6BF2868925500A76FE9 /* SettingsPage.swift */,
-				7635737A286A55370058BE9C /* SettingsRow.swift */,
-				7635737D286C21C90058BE9C /* SettingsCommands.swift */,
-			);
-			path = Settings;
-			sourceTree = "<group>";
-		};
-		7639A6C12868933600A76FE9 /* Import */ = {
-			isa = PBXGroup;
-			children = (
-				7639A6C22868934500A76FE9 /* ImportView.swift */,
-			);
-			path = Import;
-			sourceTree = "<group>";
-		};
-		7639A6C4286894C100A76FE9 /* Raindrop */ = {
-			isa = PBXGroup;
-			children = (
-				7639A6C5286894E000A76FE9 /* RaindropView.swift */,
-			);
-			path = Raindrop;
-			sourceTree = "<group>";
-		};
 		7639A6C7286895CB00A76FE9 /* Raindrop */ = {
 			isa = PBXGroup;
 			children = (
-				7639A6C9286895FD00A76FE9 /* RaindropItems.swift */,
+				7639A6C9286895FD00A76FE9 /* RaindropsView.swift */,
 				76357382286C2D5E0058BE9C /* RaindropQuickLook.swift */,
 			);
 			path = Raindrop;
@@ -168,6 +114,71 @@
 				767362E82868AB6200A70B4B /* ChildrenLabelStyle.swift */,
 			);
 			path = Children;
+			sourceTree = "<group>";
+		};
+		765F0DB7287EB0BC001E34CA /* Settings */ = {
+			isa = PBXGroup;
+			children = (
+				765F0DBC287EB819001E34CA /* iOS */,
+				765F0DBD287EB823001E34CA /* macOS */,
+				765F0DC1287EC294001E34CA /* Account */,
+				76A8C7B6287EA11000825E83 /* SettingsPage.swift */,
+				765F0DDC287EE32F001E34CA /* SettingsService.swift */,
+			);
+			path = Settings;
+			sourceTree = "<group>";
+		};
+		765F0DBC287EB819001E34CA /* iOS */ = {
+			isa = PBXGroup;
+			children = (
+				765F0DB8287EB0C7001E34CA /* SettingsIOS.swift */,
+				765F0DBF287EC257001E34CA /* SettingsIndex.swift */,
+				765F0DC4287EC623001E34CA /* SettingsLabelStyle.swift */,
+			);
+			path = iOS;
+			sourceTree = "<group>";
+		};
+		765F0DBD287EB823001E34CA /* macOS */ = {
+			isa = PBXGroup;
+			children = (
+				765F0DBA287EB714001E34CA /* SettingsMac.swift */,
+			);
+			path = macOS;
+			sourceTree = "<group>";
+		};
+		765F0DC1287EC294001E34CA /* Account */ = {
+			isa = PBXGroup;
+			children = (
+				765F0DC2287EC2A2001E34CA /* SettingsAccount.swift */,
+			);
+			path = Account;
+			sourceTree = "<group>";
+		};
+		765F0DCA287EC9FE001E34CA /* Browse */ = {
+			isa = PBXGroup;
+			children = (
+				765F0DCB287ECA0B001E34CA /* Browse.swift */,
+			);
+			path = Browse;
+			sourceTree = "<group>";
+		};
+		765F0DCD287ECB3A001E34CA /* Search */ = {
+			isa = PBXGroup;
+			children = (
+				765F0DCE287ECB45001E34CA /* Search.swift */,
+			);
+			path = Search;
+			sourceTree = "<group>";
+		};
+		765F0DD0287EDAC5001E34CA /* Scene */ = {
+			isa = PBXGroup;
+			children = (
+				765F0DB5287EAEDC001E34CA /* SplitViewScene.swift */,
+				765F0DD3287EDAFB001E34CA /* MacScene.swift */,
+				765F0DD5287EDB07001E34CA /* PhoneScene.swift */,
+				765F0DD7287EDB13001E34CA /* PadScene.swift */,
+			);
+			path = Scene;
 			sourceTree = "<group>";
 		};
 		7685A188286868AC00A4BC3C = {
@@ -193,14 +204,15 @@
 		7685A1A428687C6000A4BC3C /* App */ = {
 			isa = PBXGroup;
 			children = (
-				7639A6A72868846E00A76FE9 /* Navigation */,
-				7639A6B328688B2100A76FE9 /* Collection */,
-				76C69E302869BC0400E2DEF4 /* Filter */,
-				76C69E312869BC0B00E2DEF4 /* Tag */,
-				7639A6C4286894C100A76FE9 /* Raindrop */,
-				7639A6B828688C2700A76FE9 /* Settings */,
+				76A8C7BB287EA3D100825E83 /* Sidebar */,
+				765F0DCA287EC9FE001E34CA /* Browse */,
+				765F0DCD287ECB3A001E34CA /* Search */,
+				765F0DB7287EB0BC001E34CA /* Settings */,
+				76A8C7B0287E9ECF00825E83 /* Router */,
+				765F0DD0287EDAC5001E34CA /* Scene */,
 				7685A194286868AC00A4BC3C /* App.swift */,
 				7685A19A286868AD00A4BC3C /* App.entitlements */,
+				765F0DDB287EE0FB001E34CA /* App.plist */,
 				7685A198286868AD00A4BC3C /* Assets.xcassets */,
 			);
 			path = App;
@@ -224,12 +236,24 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
-		768E495A2869C18C0049BE12 /* Account */ = {
+		76A8C7B0287E9ECF00825E83 /* Router */ = {
 			isa = PBXGroup;
 			children = (
-				768E495B2869C1950049BE12 /* AccountView.swift */,
+				76A8C7B4287E9F5300825E83 /* Router.swift */,
+				76A8C7C1287EA50300825E83 /* RouterView.swift */,
+				76A8C7B1287E9EDC00825E83 /* Route.swift */,
 			);
-			path = Account;
+			path = Router;
+			sourceTree = "<group>";
+		};
+		76A8C7BB287EA3D100825E83 /* Sidebar */ = {
+			isa = PBXGroup;
+			children = (
+				76A8C7BC287EA3DF00825E83 /* Sidebar.swift */,
+				765F0DC6287EC883001E34CA /* SidebarMenu.swift */,
+				765F0DC8287EC929001E34CA /* SidebarToolbar.swift */,
+			);
+			path = Sidebar;
 			sourceTree = "<group>";
 		};
 		76C69E242869A85A00E2DEF4 /* Tree */ = {
@@ -240,33 +264,6 @@
 				76C69E1F2869A24E00E2DEF4 /* TreeMenu.swift */,
 			);
 			path = Tree;
-			sourceTree = "<group>";
-		};
-		76C69E252869A99200E2DEF4 /* Sidebar */ = {
-			isa = PBXGroup;
-			children = (
-				7639A6A82868847C00A76FE9 /* Sidebar.swift */,
-				7639A6B628688B7C00A76FE9 /* SidebarSelection.swift */,
-				76C69E262869A9BF00E2DEF4 /* SidebarMenu.swift */,
-				76C69E282869AA0E00E2DEF4 /* SidebarToolbar.swift */,
-			);
-			path = Sidebar;
-			sourceTree = "<group>";
-		};
-		76C69E302869BC0400E2DEF4 /* Filter */ = {
-			isa = PBXGroup;
-			children = (
-				76C69E2C2869BACC00E2DEF4 /* FilterView.swift */,
-			);
-			path = Filter;
-			sourceTree = "<group>";
-		};
-		76C69E312869BC0B00E2DEF4 /* Tag */ = {
-			isa = PBXGroup;
-			children = (
-				76C69E2E2869BB4600E2DEF4 /* TagView.swift */,
-			);
-			path = Tag;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -342,33 +339,34 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				7639A6C32868934500A76FE9 /* ImportView.swift in Sources */,
-				7639A6BE286890CA00A76FE9 /* Detail.swift in Sources */,
-				76C69E2B2869BA0000E2DEF4 /* CollectionView.swift in Sources */,
-				7685A197286868AC00A4BC3C /* Home.swift in Sources */,
-				7635737E286C21C90058BE9C /* SettingsCommands.swift in Sources */,
-				7639A6BC28688E3D00A76FE9 /* Main.swift in Sources */,
-				7635737B286A55370058BE9C /* SettingsRow.swift in Sources */,
 				7639A6D028689AC600A76FE9 /* CollectionRow.swift in Sources */,
-				7639A6B728688B7C00A76FE9 /* SidebarSelection.swift in Sources */,
-				7639A6A92868847C00A76FE9 /* Sidebar.swift in Sources */,
-				768E495C2869C1950049BE12 /* AccountView.swift in Sources */,
+				765F0DD6287EDB07001E34CA /* PhoneScene.swift in Sources */,
+				765F0DC3287EC2A2001E34CA /* SettingsAccount.swift in Sources */,
+				765F0DC7287EC883001E34CA /* SidebarMenu.swift in Sources */,
 				767362E92868AB6200A70B4B /* ChildrenLabelStyle.swift in Sources */,
-				7639A6C6286894E000A76FE9 /* RaindropView.swift in Sources */,
+				765F0DD4287EDAFB001E34CA /* MacScene.swift in Sources */,
 				76C69E202869A24E00E2DEF4 /* TreeMenu.swift in Sources */,
 				76C69E222869A80100E2DEF4 /* TreeContext.swift in Sources */,
-				76C69E292869AA0E00E2DEF4 /* SidebarToolbar.swift in Sources */,
-				76C69E2D2869BACC00E2DEF4 /* FilterView.swift in Sources */,
-				7639A6CA286895FD00A76FE9 /* RaindropItems.swift in Sources */,
-				76357381286C28EA0058BE9C /* ProView.swift in Sources */,
-				7639A6BA28688C3000A76FE9 /* SettingsMain.swift in Sources */,
-				76C69E2F2869BB4600E2DEF4 /* TagView.swift in Sources */,
+				76A8C7B2287E9EDC00825E83 /* Route.swift in Sources */,
+				765F0DB9287EB0C7001E34CA /* SettingsIOS.swift in Sources */,
+				765F0DB6287EAEDC001E34CA /* SplitViewScene.swift in Sources */,
+				7639A6CA286895FD00A76FE9 /* RaindropsView.swift in Sources */,
+				76A8C7B5287E9F5300825E83 /* Router.swift in Sources */,
 				7685A195286868AC00A4BC3C /* App.swift in Sources */,
+				765F0DD8287EDB13001E34CA /* PadScene.swift in Sources */,
+				765F0DCF287ECB45001E34CA /* Search.swift in Sources */,
+				765F0DC0287EC257001E34CA /* SettingsIndex.swift in Sources */,
+				76A8C7BD287EA3DF00825E83 /* Sidebar.swift in Sources */,
+				765F0DC5287EC623001E34CA /* SettingsLabelStyle.swift in Sources */,
 				76357383286C2D5E0058BE9C /* RaindropQuickLook.swift in Sources */,
-				76C69E272869A9BF00E2DEF4 /* SidebarMenu.swift in Sources */,
+				765F0DBB287EB714001E34CA /* SettingsMac.swift in Sources */,
 				7639A6AD2868859800A76FE9 /* TreeItems.swift in Sources */,
-				7639A6C02868925500A76FE9 /* SettingsPage.swift in Sources */,
+				765F0DC9287EC929001E34CA /* SidebarToolbar.swift in Sources */,
+				76A8C7B7287EA11000825E83 /* SettingsPage.swift in Sources */,
 				7639A6CD286899E800A76FE9 /* ChildrenView.swift in Sources */,
+				765F0DCC287ECA0B001E34CA /* Browse.swift in Sources */,
+				765F0DDD287EE32F001E34CA /* SettingsService.swift in Sources */,
+				76A8C7C2287EA50300825E83 /* RouterView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -497,7 +495,7 @@
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = "";
+				INFOPLIST_FILE = App/App.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = Raindrop.io;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.productivity";
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
@@ -533,7 +531,7 @@
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = "";
+				INFOPLIST_FILE = App/App.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = Raindrop.io;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.productivity";
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";

@@ -1,8 +1,8 @@
 import SwiftUI
 
 struct SidebarToolbar: ViewModifier {
-    @State private var showSettings = false
-
+    @EnvironmentObject private var settings: SettingsService
+    
     func body(content: Content) -> some View {
         content
             .navigationTitle("exentrich")
@@ -10,7 +10,7 @@ struct SidebarToolbar: ViewModifier {
                 #if os(iOS)
                 if UIDevice.current.userInterfaceIdiom == .pad {
                     ToolbarItem {
-                        Button(action: { showSettings = true }) {
+                        Button(action: { settings.page = .index }) {
                             Label("Settings", systemImage: "gear")
                         }
                     }
@@ -19,9 +19,6 @@ struct SidebarToolbar: ViewModifier {
             }
             #if os(iOS)
             .navigationBarTitleDisplayMode(.inline)
-            .sheet(isPresented: $showSettings) {
-                SettingsMain()
-            }
             #endif
     }
 }
