@@ -1,4 +1,5 @@
 import SwiftUI
+import API
 
 struct RouterView: View {
     @EnvironmentObject private var router: Router
@@ -7,10 +8,14 @@ struct RouterView: View {
     @ViewBuilder
     func screenForRoute(_ route: Route) -> some View {
         switch route {
-        case .browse(let collection, let query): Browse(collection: collection, query: query)
-        case .tag(let tag): EmptyView()
-        case .filter(let filter): EmptyView()
-        case .preview(let raindrop): Preview(raindrop: raindrop)
+        case .browse(let collection, let search):
+            Browse(collection: collection, search: search ?? .init())
+        case .tag(let tag):
+            EmptyView()
+        case .filter(let filter):
+            Browse(collection: Collection.Preview.system.first!, search: .init(tokens: [.filter(filter)]))
+        case .preview(let raindrop):
+            Preview(raindrop: raindrop)
         case .search: Search()
         }
     }

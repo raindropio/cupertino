@@ -19,7 +19,7 @@ struct PhoneScene: View {
                 }
                 .tag(PhoneTab.collections)
             
-            RouterView(index: .browse(Collection.Preview.system.first!, ""))
+            RouterView(index: .browse(Collection.Preview.system.first!, nil))
                 .environmentObject(all)
                 .tabItem {
                     Image(systemName: "star")

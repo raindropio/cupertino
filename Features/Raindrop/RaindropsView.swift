@@ -2,7 +2,7 @@ import SwiftUI
 import API
 
 struct RaindropsView<Header: View>: View {
-    @Binding var query: String
+    @Binding var search: SearchQuery
     @ViewBuilder var header: () -> Header
 
     @State private var selection = Set<Raindrop>()
