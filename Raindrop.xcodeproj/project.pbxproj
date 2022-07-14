@@ -28,9 +28,9 @@
 		765F0DD8287EDB13001E34CA /* PadScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 765F0DD7287EDB13001E34CA /* PadScene.swift */; };
 		765F0DDD287EE32F001E34CA /* SettingsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 765F0DDC287EE32F001E34CA /* SettingsService.swift */; };
 		765F0DE2287EFBA2001E34CA /* Preview.swift in Sources */ = {isa = PBXBuildFile; fileRef = 765F0DE1287EFBA2001E34CA /* Preview.swift */; };
-		765F0DE5287EFEC7001E34CA /* SearchModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 765F0DE4287EFEC7001E34CA /* SearchModifier.swift */; };
 		765F0DE7287F0042001E34CA /* SearchScope.swift in Sources */ = {isa = PBXBuildFile; fileRef = 765F0DE6287F0042001E34CA /* SearchScope.swift */; };
 		765F0DEF287FF609001E34CA /* SearchSuggestions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 765F0DEE287FF609001E34CA /* SearchSuggestions.swift */; };
+		765F0DF128800619001E34CA /* WithSearch.swift in Sources */ = {isa = PBXBuildFile; fileRef = 765F0DF028800619001E34CA /* WithSearch.swift */; };
 		767362E92868AB6200A70B4B /* ChildrenLabelStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 767362E82868AB6200A70B4B /* ChildrenLabelStyle.swift */; };
 		7685A195286868AC00A4BC3C /* App.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7685A194286868AC00A4BC3C /* App.swift */; };
 		7685A199286868AD00A4BC3C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7685A198286868AD00A4BC3C /* Assets.xcassets */; };
@@ -67,9 +67,9 @@
 		765F0DDB287EE0FB001E34CA /* App.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = App.plist; sourceTree = "<group>"; };
 		765F0DDC287EE32F001E34CA /* SettingsService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsService.swift; sourceTree = "<group>"; };
 		765F0DE1287EFBA2001E34CA /* Preview.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Preview.swift; sourceTree = "<group>"; };
-		765F0DE4287EFEC7001E34CA /* SearchModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchModifier.swift; sourceTree = "<group>"; };
 		765F0DE6287F0042001E34CA /* SearchScope.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchScope.swift; sourceTree = "<group>"; };
 		765F0DEE287FF609001E34CA /* SearchSuggestions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchSuggestions.swift; sourceTree = "<group>"; };
+		765F0DF028800619001E34CA /* WithSearch.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WithSearch.swift; sourceTree = "<group>"; };
 		767362E82868AB6200A70B4B /* ChildrenLabelStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChildrenLabelStyle.swift; sourceTree = "<group>"; };
 		7685A191286868AC00A4BC3C /* Raindrop.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Raindrop.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7685A194286868AC00A4BC3C /* App.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = App.swift; sourceTree = "<group>"; };
@@ -200,7 +200,7 @@
 		765F0DE3287EFEB5001E34CA /* Search */ = {
 			isa = PBXGroup;
 			children = (
-				765F0DE4287EFEC7001E34CA /* SearchModifier.swift */,
+				765F0DF028800619001E34CA /* WithSearch.swift */,
 				765F0DEE287FF609001E34CA /* SearchSuggestions.swift */,
 				765F0DE6287F0042001E34CA /* SearchScope.swift */,
 			);
@@ -385,10 +385,10 @@
 				7685A195286868AC00A4BC3C /* App.swift in Sources */,
 				765F0DE2287EFBA2001E34CA /* Preview.swift in Sources */,
 				765F0DD8287EDB13001E34CA /* PadScene.swift in Sources */,
-				765F0DE5287EFEC7001E34CA /* SearchModifier.swift in Sources */,
 				765F0DCF287ECB45001E34CA /* Search.swift in Sources */,
 				765F0DC0287EC257001E34CA /* SettingsIndex.swift in Sources */,
 				76A8C7BD287EA3DF00825E83 /* Sidebar.swift in Sources */,
+				765F0DF128800619001E34CA /* WithSearch.swift in Sources */,
 				765F0DC5287EC623001E34CA /* SettingsLabelStyle.swift in Sources */,
 				76357383286C2D5E0058BE9C /* RaindropQuickLook.swift in Sources */,
 				765F0DBB287EB714001E34CA /* SettingsMac.swift in Sources */,
