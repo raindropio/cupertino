@@ -2,24 +2,23 @@ import SwiftUI
 import API
 
 struct Browse: View {
-    var collection: Collection
-    @State var search = SearchQuery()
-    
+    var collection: Collection = .Preview.system.first!
+    @State var search: SearchQuery = SearchQuery()
+
     @EnvironmentObject private var router: Router
     
     var body: some View {
         WithSearch(search: $search, in: collection) { collection in
-            RaindropsView(search: $search) {
-                if !search.isEmpty {
-                    Text("Search \(search.text) in \(collection.title)")
+            Raindrops(search: $search) {}
+                .contextAction {
+                    router.path.append(.preview($0))
                 }
-            }
-                .contextAction(forSelectionType: Raindrop.self) {
-                    if $0.count == 1, let raindrop = $0.first {
-                        router.path.append(.preview(raindrop))
-                    }
-                }
-                .navigationTitle(collection.title)
+                .navigationTitle(
+                    !search.isEmpty ?
+                        (collection.id != 0 ? "\(collection.title) / " : "") + search.title :
+                        collection.title
+                )
+                .toolbarRole(.editor)
         }
     }
 }

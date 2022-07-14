@@ -31,6 +31,11 @@ struct RaindropApp: App {
         
         //MARK: - Settings
         #if os(macOS)
+        MenuBarExtra("Raindrop.io") {
+            MenuBarScene()
+        }
+            .menuBarExtraStyle(.window)
+        
         Settings {
             SettingsMac()
                 .environmentObject(settings)

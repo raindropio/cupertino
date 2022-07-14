@@ -3,22 +3,28 @@ import API
 
 struct Search: View {
     @State private var search = SearchQuery()
-    
+    @EnvironmentObject private var router: Router
+
     var body: some View {
         WithSearch(
             search: $search,
-            placement: .navigationBarDrawer(displayMode: .always)
+            placement: placement
         ) { _ in
-            Button {
+            if search.isEmpty {
                 
-            } label: {
-                Image(systemName: "magnifyingglass")
-                    .font(.largeTitle)
-                    .symbolRenderingMode(.hierarchical)
-                    .foregroundColor(.secondary)
-                    .contentShape(Rectangle())
-                    .frame(maxWidth: .infinity, maxHeight: .infinity)
+            } else {
+                Raindrops(search: $search) {}
+                    .contextAction {
+                        router.path.append(.preview($0))
+                    }
             }
         }
+            .navigationTitle("Search")
     }
 }
+
+#if os(iOS)
+private let placement = SearchFieldPlacement.navigationBarDrawer(displayMode: .always)
+#else
+private let placement = SearchFieldPlacement.sidebar
+#endif

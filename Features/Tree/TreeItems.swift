@@ -23,13 +23,21 @@ struct TreeItems<Tag: Hashable>: View {
                     print("a")
                 } label: {
                     Image(systemName: "plus")
-                        .imageScale(.large)
+                        .frame(width: 32, height: 24)
                 }
-                    .buttonStyle(.borderless)
-                    .padding(.vertical, 6)
                 
-                ZStack{}.frame(width: 16)
+                #if os(iOS)
+                ZStack{}.frame(width: 10)
+                #endif
             }
+                #if os(macOS)
+                .buttonStyle(.borderless)
+                .tint(.secondary)
+                #endif
+                .imageScale(.large)
         }
+            #if os(macOS)
+            .collapsible(false)
+            #endif
     }
 }

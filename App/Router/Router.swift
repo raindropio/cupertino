@@ -1,9 +1,10 @@
 import SwiftUI
 import Combine
+import API
 
 class Router: ObservableObject {
     @Published var path = [Route]()
-    @Published var sidebar: Route? = nil
+    @Published var sidebar: Route? = .browse(Collection.Preview.items.first!, nil)
     
     private var cancellables = Set<AnyCancellable>()
     

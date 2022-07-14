@@ -21,7 +21,7 @@ public enum SearchToken: Identifiable, Equatable, Hashable {
     
     public var systemImage: String {
         switch self {
-        case .filter(let filter): return filter.title
+        case .filter(let filter): return filter.systemImage
         case .tag(let tag): return tag.systemImage
         case .matchOr: return "arrow.triangle.branch"
         }

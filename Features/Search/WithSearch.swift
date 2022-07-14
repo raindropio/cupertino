@@ -6,12 +6,21 @@ struct WithSearch<Content: View>: View {
     @Binding var search: SearchQuery
     var `in`: Collection = .Preview.system.first!
     var placement: SearchFieldPlacement = .automatic
-    var content: (_ searchIn: Collection) -> Content
+    @ViewBuilder var content: (_ searchIn: Collection) -> Content
     
     @State private var isSearching = false
     @State private var scope: SearchScope = .everywhere
     @State private var origin: Collection? = nil
     @State private var hideSuggestions = false
+    
+    func getPlacement() -> SearchFieldPlacement {
+        #if os(iOS)
+        if UIDevice.current.userInterfaceIdiom == .phone {
+            return .navigationBarDrawer(displayMode: search.isEmpty ? .automatic : .always)
+        }
+        #endif
+        return placement
+    }
     
     var body: some View {
         let suggestionsFor = scope == .everywhere ? .Preview.system.first! : `in`
@@ -22,9 +31,13 @@ struct WithSearch<Content: View>: View {
             .searchable(
                 text: $search.text,
                 tokens: $search.tokens,
-                placement: placement
-            ) {
-                Label($0.title, systemImage: $0.systemImage)
+                placement: getPlacement()
+            ) { token in
+                Label(
+                    token.title,
+                    systemImage: token.systemImage
+                )
+                .symbolVariant(.fill)
             }
             .searchScopes($scope) {
                 if `in`.id != 0 {
@@ -54,4 +67,9 @@ private struct WithSearchEnv: ViewModifier {
             .onAppear { isSearching = iss }
             .onChange(of: iss) { isSearching = $0 }
     }
+}
+
+private enum SearchScope {
+    case everywhere
+    case incollection
 }

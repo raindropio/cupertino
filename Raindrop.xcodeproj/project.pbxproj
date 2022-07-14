@@ -10,7 +10,7 @@
 		76357383286C2D5E0058BE9C /* RaindropQuickLook.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76357382286C2D5E0058BE9C /* RaindropQuickLook.swift */; };
 		7639A6AD2868859800A76FE9 /* TreeItems.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7639A6AC2868859800A76FE9 /* TreeItems.swift */; };
 		7639A6B028688A7900A76FE9 /* UI in Frameworks */ = {isa = PBXBuildFile; productRef = 7639A6AF28688A7900A76FE9 /* UI */; };
-		7639A6CA286895FD00A76FE9 /* RaindropsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7639A6C9286895FD00A76FE9 /* RaindropsView.swift */; };
+		7639A6CA286895FD00A76FE9 /* Raindrops.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7639A6C9286895FD00A76FE9 /* Raindrops.swift */; };
 		7639A6CD286899E800A76FE9 /* ChildrenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7639A6CC286899E800A76FE9 /* ChildrenView.swift */; };
 		7639A6D028689AC600A76FE9 /* CollectionRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7639A6CF28689AC600A76FE9 /* CollectionRow.swift */; };
 		765F0DB6287EAEDC001E34CA /* SplitViewScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 765F0DB5287EAEDC001E34CA /* SplitViewScene.swift */; };
@@ -28,7 +28,6 @@
 		765F0DD8287EDB13001E34CA /* PadScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 765F0DD7287EDB13001E34CA /* PadScene.swift */; };
 		765F0DDD287EE32F001E34CA /* SettingsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 765F0DDC287EE32F001E34CA /* SettingsService.swift */; };
 		765F0DE2287EFBA2001E34CA /* Preview.swift in Sources */ = {isa = PBXBuildFile; fileRef = 765F0DE1287EFBA2001E34CA /* Preview.swift */; };
-		765F0DE7287F0042001E34CA /* SearchScope.swift in Sources */ = {isa = PBXBuildFile; fileRef = 765F0DE6287F0042001E34CA /* SearchScope.swift */; };
 		765F0DEF287FF609001E34CA /* SearchSuggestions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 765F0DEE287FF609001E34CA /* SearchSuggestions.swift */; };
 		765F0DF128800619001E34CA /* WithSearch.swift in Sources */ = {isa = PBXBuildFile; fileRef = 765F0DF028800619001E34CA /* WithSearch.swift */; };
 		767362E92868AB6200A70B4B /* ChildrenLabelStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 767362E82868AB6200A70B4B /* ChildrenLabelStyle.swift */; };
@@ -42,13 +41,14 @@
 		76A8C7C2287EA50300825E83 /* RouterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76A8C7C1287EA50300825E83 /* RouterView.swift */; };
 		76C69E202869A24E00E2DEF4 /* TreeMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76C69E1F2869A24E00E2DEF4 /* TreeMenu.swift */; };
 		76C69E222869A80100E2DEF4 /* TreeContext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76C69E212869A80100E2DEF4 /* TreeContext.swift */; };
+		76CDA8BF28803496009813B3 /* MenuBarScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76CDA8BE28803496009813B3 /* MenuBarScene.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		76357382286C2D5E0058BE9C /* RaindropQuickLook.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RaindropQuickLook.swift; sourceTree = "<group>"; };
 		7639A6AC2868859800A76FE9 /* TreeItems.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TreeItems.swift; sourceTree = "<group>"; };
 		7639A6AE286889DB00A76FE9 /* UI */ = {isa = PBXFileReference; lastKnownFileType = text; path = UI; sourceTree = SOURCE_ROOT; };
-		7639A6C9286895FD00A76FE9 /* RaindropsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RaindropsView.swift; sourceTree = "<group>"; };
+		7639A6C9286895FD00A76FE9 /* Raindrops.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Raindrops.swift; sourceTree = "<group>"; };
 		7639A6CC286899E800A76FE9 /* ChildrenView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChildrenView.swift; sourceTree = "<group>"; };
 		7639A6CF28689AC600A76FE9 /* CollectionRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionRow.swift; sourceTree = "<group>"; };
 		765F0DB5287EAEDC001E34CA /* SplitViewScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplitViewScene.swift; sourceTree = "<group>"; };
@@ -67,7 +67,6 @@
 		765F0DDB287EE0FB001E34CA /* App.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = App.plist; sourceTree = "<group>"; };
 		765F0DDC287EE32F001E34CA /* SettingsService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsService.swift; sourceTree = "<group>"; };
 		765F0DE1287EFBA2001E34CA /* Preview.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Preview.swift; sourceTree = "<group>"; };
-		765F0DE6287F0042001E34CA /* SearchScope.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchScope.swift; sourceTree = "<group>"; };
 		765F0DEE287FF609001E34CA /* SearchSuggestions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchSuggestions.swift; sourceTree = "<group>"; };
 		765F0DF028800619001E34CA /* WithSearch.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WithSearch.swift; sourceTree = "<group>"; };
 		767362E82868AB6200A70B4B /* ChildrenLabelStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChildrenLabelStyle.swift; sourceTree = "<group>"; };
@@ -83,6 +82,7 @@
 		76A8C7C1287EA50300825E83 /* RouterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RouterView.swift; sourceTree = "<group>"; };
 		76C69E1F2869A24E00E2DEF4 /* TreeMenu.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TreeMenu.swift; sourceTree = "<group>"; };
 		76C69E212869A80100E2DEF4 /* TreeContext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TreeContext.swift; sourceTree = "<group>"; };
+		76CDA8BE28803496009813B3 /* MenuBarScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuBarScene.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -98,30 +98,30 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		7639A6AA2868858100A76FE9 /* Collection */ = {
+		7639A6AA2868858100A76FE9 /* Collections */ = {
 			isa = PBXGroup;
 			children = (
 				7639A6CF28689AC600A76FE9 /* CollectionRow.swift */,
 			);
-			path = Collection;
+			path = Collections;
 			sourceTree = "<group>";
 		};
-		7639A6C7286895CB00A76FE9 /* Raindrop */ = {
+		7639A6C7286895CB00A76FE9 /* Raindrops */ = {
 			isa = PBXGroup;
 			children = (
-				7639A6C9286895FD00A76FE9 /* RaindropsView.swift */,
+				7639A6C9286895FD00A76FE9 /* Raindrops.swift */,
 				76357382286C2D5E0058BE9C /* RaindropQuickLook.swift */,
 			);
-			path = Raindrop;
+			path = Raindrops;
 			sourceTree = "<group>";
 		};
-		7639A6CB286899D700A76FE9 /* Children */ = {
+		7639A6CB286899D700A76FE9 /* Childrens */ = {
 			isa = PBXGroup;
 			children = (
 				7639A6CC286899E800A76FE9 /* ChildrenView.swift */,
 				767362E82868AB6200A70B4B /* ChildrenLabelStyle.swift */,
 			);
-			path = Children;
+			path = Childrens;
 			sourceTree = "<group>";
 		};
 		765F0DB7287EB0BC001E34CA /* Settings */ = {
@@ -185,6 +185,7 @@
 				765F0DD3287EDAFB001E34CA /* MacScene.swift */,
 				765F0DD5287EDB07001E34CA /* PhoneScene.swift */,
 				765F0DD7287EDB13001E34CA /* PadScene.swift */,
+				76CDA8BE28803496009813B3 /* MenuBarScene.swift */,
 			);
 			path = Scene;
 			sourceTree = "<group>";
@@ -202,7 +203,6 @@
 			children = (
 				765F0DF028800619001E34CA /* WithSearch.swift */,
 				765F0DEE287FF609001E34CA /* SearchSuggestions.swift */,
-				765F0DE6287F0042001E34CA /* SearchScope.swift */,
 			);
 			path = Search;
 			sourceTree = "<group>";
@@ -249,9 +249,9 @@
 			isa = PBXGroup;
 			children = (
 				76C69E242869A85A00E2DEF4 /* Tree */,
-				7639A6AA2868858100A76FE9 /* Collection */,
-				7639A6CB286899D700A76FE9 /* Children */,
-				7639A6C7286895CB00A76FE9 /* Raindrop */,
+				7639A6AA2868858100A76FE9 /* Collections */,
+				7639A6CB286899D700A76FE9 /* Childrens */,
+				7639A6C7286895CB00A76FE9 /* Raindrops */,
 				765F0DE3287EFEB5001E34CA /* Search */,
 			);
 			path = Features;
@@ -376,11 +376,10 @@
 				765F0DD4287EDAFB001E34CA /* MacScene.swift in Sources */,
 				76C69E202869A24E00E2DEF4 /* TreeMenu.swift in Sources */,
 				76C69E222869A80100E2DEF4 /* TreeContext.swift in Sources */,
-				765F0DE7287F0042001E34CA /* SearchScope.swift in Sources */,
 				76A8C7B2287E9EDC00825E83 /* Route.swift in Sources */,
 				765F0DB9287EB0C7001E34CA /* SettingsIOS.swift in Sources */,
 				765F0DB6287EAEDC001E34CA /* SplitViewScene.swift in Sources */,
-				7639A6CA286895FD00A76FE9 /* RaindropsView.swift in Sources */,
+				7639A6CA286895FD00A76FE9 /* Raindrops.swift in Sources */,
 				76A8C7B5287E9F5300825E83 /* Router.swift in Sources */,
 				7685A195286868AC00A4BC3C /* App.swift in Sources */,
 				765F0DE2287EFBA2001E34CA /* Preview.swift in Sources */,
@@ -392,6 +391,7 @@
 				765F0DC5287EC623001E34CA /* SettingsLabelStyle.swift in Sources */,
 				76357383286C2D5E0058BE9C /* RaindropQuickLook.swift in Sources */,
 				765F0DBB287EB714001E34CA /* SettingsMac.swift in Sources */,
+				76CDA8BF28803496009813B3 /* MenuBarScene.swift in Sources */,
 				7639A6AD2868859800A76FE9 /* TreeItems.swift in Sources */,
 				765F0DC9287EC929001E34CA /* SidebarToolbar.swift in Sources */,
 				76A8C7B7287EA11000825E83 /* SettingsPage.swift in Sources */,

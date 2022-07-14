@@ -6,7 +6,7 @@ public struct Raindrop: Identifiable, Hashable {
     public var title: String
 }
 
-//MARK: Preview
+//MARK: - Preview
 public extension Raindrop {
     static var preview = [
         Raindrop(id: 272043111, link: URL(string: "https://sarunw.com/posts/swiftui-menu-bar-app/")!, title: "Челленджи в TMNT: Shredder’s Revenge"),

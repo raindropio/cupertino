@@ -10,10 +10,13 @@ struct RouterView: View {
         switch route {
         case .browse(let collection, let search):
             Browse(collection: collection, search: search ?? .init())
+                .id(search)
         case .tag(let tag):
-            EmptyView()
+            Browse(search: .init(tokens: [.tag(tag)]))
+                .id(tag)
         case .filter(let filter):
-            Browse(collection: Collection.Preview.system.first!, search: .init(tokens: [.filter(filter)]))
+            Browse(search: .init(tokens: [.filter(filter)]))
+                .id(filter)
         case .preview(let raindrop):
             Preview(raindrop: raindrop)
         case .search: Search()
