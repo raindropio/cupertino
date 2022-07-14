@@ -5,7 +5,7 @@ struct SidebarToolbar: ViewModifier {
     
     func body(content: Content) -> some View {
         content
-            .navigationTitle("exentrich")
+            .navigationTitle("Exentrich")
             .toolbar {
                 #if os(iOS)
                 if UIDevice.current.userInterfaceIdiom == .pad {

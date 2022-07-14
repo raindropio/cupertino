@@ -13,6 +13,7 @@ struct Sidebar: View {
             Section(header: Text("Filters")) {
                 ForEach(Filter.preview) { filter in
                     Label(filter.title, systemImage: filter.systemImage)
+                        .tint(filter.color)
                         .tag(Route.filter(filter))
                 }
             }

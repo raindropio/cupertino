@@ -30,6 +30,8 @@
 		765F0DE2287EFBA2001E34CA /* Preview.swift in Sources */ = {isa = PBXBuildFile; fileRef = 765F0DE1287EFBA2001E34CA /* Preview.swift */; };
 		765F0DEF287FF609001E34CA /* SearchSuggestions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 765F0DEE287FF609001E34CA /* SearchSuggestions.swift */; };
 		765F0DF128800619001E34CA /* WithSearch.swift in Sources */ = {isa = PBXBuildFile; fileRef = 765F0DF028800619001E34CA /* WithSearch.swift */; };
+		765F0DF328804113001E34CA /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 765F0DF228804113001E34CA /* AppDelegate.swift */; };
+		765F0DF6288051BF001E34CA /* SwiftUIX in Frameworks */ = {isa = PBXBuildFile; productRef = 765F0DF5288051BF001E34CA /* SwiftUIX */; };
 		767362E92868AB6200A70B4B /* ChildrenLabelStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 767362E82868AB6200A70B4B /* ChildrenLabelStyle.swift */; };
 		7685A195286868AC00A4BC3C /* App.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7685A194286868AC00A4BC3C /* App.swift */; };
 		7685A199286868AD00A4BC3C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7685A198286868AD00A4BC3C /* Assets.xcassets */; };
@@ -69,6 +71,7 @@
 		765F0DE1287EFBA2001E34CA /* Preview.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Preview.swift; sourceTree = "<group>"; };
 		765F0DEE287FF609001E34CA /* SearchSuggestions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchSuggestions.swift; sourceTree = "<group>"; };
 		765F0DF028800619001E34CA /* WithSearch.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WithSearch.swift; sourceTree = "<group>"; };
+		765F0DF228804113001E34CA /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		767362E82868AB6200A70B4B /* ChildrenLabelStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChildrenLabelStyle.swift; sourceTree = "<group>"; };
 		7685A191286868AC00A4BC3C /* Raindrop.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Raindrop.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7685A194286868AC00A4BC3C /* App.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = App.swift; sourceTree = "<group>"; };
@@ -90,6 +93,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				765F0DF6288051BF001E34CA /* SwiftUIX in Frameworks */,
 				7639A6B028688A7900A76FE9 /* UI in Frameworks */,
 				7685A1AF2868810D00A4BC3C /* API in Frameworks */,
 			);
@@ -238,6 +242,7 @@
 				76A8C7B0287E9ECF00825E83 /* Router */,
 				765F0DD0287EDAC5001E34CA /* Scene */,
 				7685A194286868AC00A4BC3C /* App.swift */,
+				765F0DF228804113001E34CA /* AppDelegate.swift */,
 				7685A19A286868AD00A4BC3C /* App.entitlements */,
 				765F0DDB287EE0FB001E34CA /* App.plist */,
 				7685A198286868AD00A4BC3C /* Assets.xcassets */,
@@ -313,6 +318,7 @@
 			packageProductDependencies = (
 				7685A1AE2868810D00A4BC3C /* API */,
 				7639A6AF28688A7900A76FE9 /* UI */,
+				765F0DF5288051BF001E34CA /* SwiftUIX */,
 			);
 			productName = cupertino;
 			productReference = 7685A191286868AC00A4BC3C /* Raindrop.app */;
@@ -342,6 +348,9 @@
 				Base,
 			);
 			mainGroup = 7685A188286868AC00A4BC3C;
+			packageReferences = (
+				765F0DF4288051BF001E34CA /* XCRemoteSwiftPackageReference "SwiftUIX" */,
+			);
 			productRefGroup = 7685A192286868AC00A4BC3C /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -367,6 +376,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				765F0DF328804113001E34CA /* AppDelegate.swift in Sources */,
 				7639A6D028689AC600A76FE9 /* CollectionRow.swift in Sources */,
 				765F0DD6287EDB07001E34CA /* PhoneScene.swift in Sources */,
 				765F0DC3287EC2A2001E34CA /* SettingsAccount.swift in Sources */,
@@ -611,10 +621,26 @@
 		};
 /* End XCConfigurationList section */
 
+/* Begin XCRemoteSwiftPackageReference section */
+		765F0DF4288051BF001E34CA /* XCRemoteSwiftPackageReference "SwiftUIX" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/SwiftUIX/SwiftUIX";
+			requirement = {
+				branch = master;
+				kind = branch;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
 /* Begin XCSwiftPackageProductDependency section */
 		7639A6AF28688A7900A76FE9 /* UI */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = UI;
+		};
+		765F0DF5288051BF001E34CA /* SwiftUIX */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 765F0DF4288051BF001E34CA /* XCRemoteSwiftPackageReference "SwiftUIX" */;
+			productName = SwiftUIX;
 		};
 		7685A1AE2868810D00A4BC3C /* API */ = {
 			isa = XCSwiftPackageProductDependency;

@@ -4,6 +4,8 @@ import SwiftUI
 struct RaindropApp: App {
     #if os(macOS)
     @StateObject private var settings = SettingsService()
+    #else
+    @UIApplicationDelegateAdaptor(AppDelegate.self) var appDelegate
     #endif
     
     var body: some Scene {

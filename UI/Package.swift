@@ -13,11 +13,15 @@ let package = Package(
             targets: ["UI"]),
     ],
     dependencies: [
+        .package(
+            url: "https://github.com/SwiftUIX/SwiftUIX",
+            branch: "master"
+        )
     ],
     targets: [
         .target(
             name: "UI",
-            dependencies: [],
+            dependencies: ["SwiftUIX"],
             path: ""
         )
     ]

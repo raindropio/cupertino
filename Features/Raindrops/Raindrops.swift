@@ -24,8 +24,12 @@ struct Raindrops<Header: View>: View {
                     Label(raindrop.title, systemImage: "bookmark")
                         .tag(raindrop)
                 }
+                    .onDelete { index in
+                        
+                    }
             }
         }
+            .listStyle(.inset)
             .contextAction(forSelectionType: Raindrop.self) {
                 if $0.count == 1, let raindrop = $0.first {
                     contextAction?(raindrop)

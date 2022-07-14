@@ -1,3 +1,5 @@
+import SwiftUI
+
 public enum Filter: Identifiable, Hashable {
     case important
     case type(RaindropType)
@@ -41,6 +43,19 @@ public enum Filter: Identifiable, Hashable {
         case .file: return "doc"
         }
     }
+    
+    public var color: Color {
+        switch self {
+        case .important: return .red
+        case .type(let type): return type.color
+        case .created(_): return .secondary
+        case .highlights: return .purple
+        case .notag: return .secondary
+        case .broken: return .pink
+        case .duplicate: return .green
+        case .file: return .teal
+        }
+    }
 }
 
 //MARK: Type
@@ -69,6 +84,15 @@ public extension Filter {
             case .document: return "doc"
             }
         }
+        
+        public var color: Color { switch self {
+            case .link: return .secondary
+            case .article: return .orange
+            case .image: return .green
+            case .video: return .purple
+            case .document: return .brown
+            case .audio: return .indigo
+        }}
     }
 }
 

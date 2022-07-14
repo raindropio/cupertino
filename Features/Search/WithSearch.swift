@@ -39,6 +39,7 @@ struct WithSearch<Content: View>: View {
                 )
                 .symbolVariant(.fill)
             }
+            .autocorrectionDisabled(true)
             .searchScopes($scope) {
                 if `in`.id != 0 {
                     Text("Everywhere").tag(SearchScope.everywhere)
