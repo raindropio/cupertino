@@ -15,13 +15,24 @@ struct Preview: View {
             }
             
             Section {
-                TokenField("Tags", value: $tags, prompt: "Add tags...") { text in
-                    [.section("Recent"), .text("a"), .text("b"), .section("Other"), .text("c"), .text("d"), .text("e"), .text("f"), .text("g"), .text("h"), .text("e"), .text("j"), .text("k"), .text("l"), .text("m"), .text("n")]
-                }
+                TokenField(
+                    "Tags",
+                    value: $tags,
+                    prompt: "Add tags...",
+                    suggestions: ["a", "b", "c"]
+                )
                     .autocorrectionDisabled(true)
+                    .accentColor(.red)
+                
+                Button("reset") {
+                    tags = []
+                }
             }
         }
             .formStyle(.grouped)
             .navigationTitle(raindrop.title)
+            .onSubmit(of: .text) {
+                print("sibmit")
+            }
     }
 }

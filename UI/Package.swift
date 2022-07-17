@@ -16,12 +16,16 @@ let package = Package(
         .package(
             url: "https://github.com/SwiftUIX/SwiftUIX",
             branch: "master"
+        ),
+        .package(
+            url: "https://github.com/apple/swift-algorithms",
+            from: "1.0.0"
         )
     ],
     targets: [
         .target(
             name: "UI",
-            dependencies: ["SwiftUIX"],
+            dependencies: ["SwiftUIX", .product(name: "Algorithms", package: "swift-algorithms")],
             path: ""
         )
     ]
