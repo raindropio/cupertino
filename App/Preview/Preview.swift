@@ -19,7 +19,7 @@ struct Preview: View {
                     "Tags",
                     value: $tags,
                     prompt: "Add tags...",
-                    suggestions: ["a", "b", "c"]
+                    suggestions: ["angular", "books", "cd"]
                 )
                     .autocorrectionDisabled(true)
                     .accentColor(.red)
@@ -30,6 +30,7 @@ struct Preview: View {
             }
         }
             .formStyle(.grouped)
+            .controlSize(.large)
             .navigationTitle(raindrop.title)
             .onSubmit(of: .text) {
                 print("sibmit")

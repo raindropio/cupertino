@@ -14,7 +14,7 @@ public enum SearchToken: Identifiable, Equatable, Hashable {
     public var title: String {
         switch self {
         case .filter(let filter): return filter.title
-        case .tag(let tag): return tag.name
+        case .tag(let tag): return tag.id
         case .matchOr: return "Match Any"
         }
     }

@@ -1,8 +1,5 @@
 public struct Tag: Identifiable, Hashable {
-    public var id: String {
-        name
-    }
-    public var name: String
+    public var id: String
     
     public var systemImage: String {
         "number"
@@ -12,8 +9,8 @@ public struct Tag: Identifiable, Hashable {
 //MARK: - Preview
 public extension Tag {
     static var preview = [
-        Tag(name: "angular"),
-        Tag(name: "design"),
-        Tag(name: "ui")
+        Tag(id: "angular"),
+        Tag(id: "design"),
+        Tag(id: "ui")
     ]
 }

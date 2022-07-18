@@ -38,12 +38,12 @@ struct NativeTokenField: UIViewRepresentable {
         searchBar.searchTextField.autocorrectionType = context.environment.disableAutocorrection.map({ $0 ? .no : .yes }) ?? .default
         searchBar.searchTextField.autocapitalizationType = .none
         searchBar.searchTextField.returnKeyType = .default
-                
+        
         //right button
         searchBar.showsCancelButton = true
         let rightButton = searchBar.value(forKey: "cancelButton") as! UIButton
         rightButton.setTitle("  ", for: .normal)
-        rightButton.setImage(.init(systemName: "arrowtriangle.down.square.fill", withConfiguration: UIImage.SymbolConfiguration(scale: .large)), for: .normal)
+        rightButton.setImage(.init(systemName: "chevron.down.circle.fill", withConfiguration: UIImage.SymbolConfiguration(scale: .large)), for: .normal)
         searchBar.showsCancelButton = !suggestions.isEmpty
 
         //prompt

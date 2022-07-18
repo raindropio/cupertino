@@ -21,9 +21,7 @@ public struct TokenField: View {
                 .tintColor(.accentColor)
                 .listRowInsets(EdgeInsets())
         }
-            #if os(iOS)
             .labeledContentStyle(NativeTokenFieldLabeledContentStyle())
-            #endif
     }
 }
 
@@ -36,10 +34,10 @@ struct TokenFieldUtils {
                 return suggestions.filter { !value.contains($0) }
             }
         } else {
-            let find = query.lowercased().trimmingCharacters(in: .whitespacesAndNewlines)
-            
+            let find = query.localizedLowercase.trimmingCharacters(in: .whitespacesAndNewlines)
+                        
             return suggestions
-                .filter { !value.contains(query) && $0.lowercased().contains(find) }
+                .filter { $0.localizedLowercase.contains(find) }
                 .sorted { return $0 < $1 }
                 .uniqued { $0 }
         }

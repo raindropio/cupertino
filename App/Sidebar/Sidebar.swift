@@ -20,7 +20,7 @@ struct Sidebar: View {
             
             Section(header: Text("Tags")) {
                 ForEach(Tag.preview) { tag in
-                    Label(tag.name, systemImage: tag.systemImage)
+                    Label(tag.id, systemImage: tag.systemImage)
                         .tag(Route.tag(tag))
                 }
             }
