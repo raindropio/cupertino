@@ -16,11 +16,12 @@ struct Preview: View {
             
             Section {
                 TokenField(
-                    "Tags",
-                    value: $tags,
+                    $tags,
                     prompt: "Add tags...",
                     suggestions: ["angular", "backend", "books", "cd", "electron", "engineering", "fonts", "free", "icons", "inclusive", "invalid_cache", "invalid_parser", "ios", "javascript", "JSDoc"]
-                )
+                ) {
+                    Label("Tags", systemImage: "number")
+                }
                     .autocorrectionDisabled(true)
                     //.accentColor(.red)
                 

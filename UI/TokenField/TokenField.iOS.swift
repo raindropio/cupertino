@@ -2,20 +2,34 @@
 import SwiftUI
 import SwiftUIX
 
-struct PlatformTokenField: View {
-    var title: String = ""
+struct PlatformTokenField<FieldLabel: View>: View {
     @Binding public var value: [String]
     var prompt: String
     var suggestions: [String]
+    var label: (() -> FieldLabel)?
     
     @Environment(\.autocorrectionDisabled) private var autocorrectionDisabled
     
     var body: some View {
         NavigationLink {
-            TokenFieldPicker(title: title, value: $value, prompt: prompt, suggestions: suggestions)
+            TokenFieldPicker(
+                title: label?().getLabelTitle() ?? "",
+                value: $value,
+                prompt: prompt,
+                suggestions: suggestions
+            )
                 .environment(\.autocorrectionDisabled, autocorrectionDisabled)
         } label: {
-            Label(value.isEmpty ? title : value.joined(separator: ", "), systemImage: "number")
+            Group {
+                if let label {
+                    label()
+                } else {
+                    EmptyView()
+                }
+            }
+                .labelStyle(LabelStyleOverride(
+                    title: value.isEmpty ? nil : value.joined(separator: ", ")
+                ))
         }
     }
 }

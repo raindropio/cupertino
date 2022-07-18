@@ -3,15 +3,21 @@ import SwiftUI
 import AppKit
 import Algorithms
 
-struct PlatformTokenField: View {
-    var title: String = ""
+struct PlatformTokenField<FieldLabel: View>: View {
     @Binding public var value: [String]
     var prompt: String
     var suggestions: [String]
+    var label: (() -> FieldLabel)?
     
     var body: some View {
-        LabeledContent(title) {
+        LabeledContent {
             NativeTokenField(value: $value, prompt: prompt, suggestions: suggestions)
+        } label: {
+            if let label {
+                label()
+            } else {
+                Text("")
+            }
         }
             .labeledContentStyle(LabeledContentStyleFix())
     }

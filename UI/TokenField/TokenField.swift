@@ -2,25 +2,25 @@ import SwiftUI
 import SwiftUIX
 import Algorithms
 
-public struct TokenField: View {
-    var title: String = ""
+public struct TokenField<FieldLabel: View>: View {
     @Binding public var value: [String]
     public var prompt: String = ""
     public var suggestions: [String] = []
+    public var label: (() -> FieldLabel)?
     
-    public init(_ title: String = "", value: Binding<[String]>, prompt: String = "", suggestions: [String] = []) {
-        self.title = title
+    public init(_ value: Binding<[String]>, prompt: String = "", suggestions: [String] = [], label: (() -> FieldLabel)?) {
         self._value = value
         self.prompt = prompt
         self.suggestions = suggestions
+        self.label = label
     }
 
     public var body: some View {
         PlatformTokenField(
-            title: title,
             value: $value,
             prompt: prompt,
-            suggestions: suggestions
+            suggestions: suggestions,
+            label: label
         )
     }
 }
