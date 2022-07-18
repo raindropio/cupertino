@@ -19,10 +19,13 @@ struct Preview: View {
                     "Tags",
                     value: $tags,
                     prompt: "Add tags...",
-                    suggestions: ["angular", "books", "cd"]
+                    suggestions: ["angular", "backend", "books", "cd", "electron", "engineering", "fonts", "free", "icons", "inclusive", "invalid_cache", "invalid_parser", "ios", "javascript", "JSDoc"]
                 )
+                    .moreButton {
+                        print("more button")
+                    }
                     .autocorrectionDisabled(true)
-                    .accentColor(.red)
+                    //.accentColor(.red)
                 
                 Button("reset") {
                     tags = []
@@ -30,6 +33,7 @@ struct Preview: View {
             }
         }
             .formStyle(.grouped)
+            .scrollDismissesKeyboard(.never)
             .controlSize(.large)
             .navigationTitle(raindrop.title)
             .onSubmit(of: .text) {

@@ -12,6 +12,7 @@ struct NativeTokenField: UIViewRepresentable {
     @Binding public var value: [String]
     var prompt: String
     var suggestions: [String]
+    var moreButton: (() -> Void)?
     
     func textToToken(_ text: String) -> UISearchToken {
         let token = UISearchToken(icon: nil, text: text)
@@ -36,15 +37,22 @@ struct NativeTokenField: UIViewRepresentable {
         searchBar.searchTextField.font = context.environment.font?.toUIFont() ?? Font.body.toUIFont()
         searchBar.searchTextField.tokenBackgroundColor = context.environment.tintColor?.toUIColor()
         searchBar.searchTextField.autocorrectionType = context.environment.disableAutocorrection.map({ $0 ? .no : .yes }) ?? .default
+        searchBar.searchTextField.spellCheckingType = searchBar.searchTextField.autocorrectionType == .no ? .no : .default
         searchBar.searchTextField.autocapitalizationType = .none
         searchBar.searchTextField.returnKeyType = .default
+        searchBar.searchTextField.tintColor = UIColor.secondaryLabel
         
         //right button
         searchBar.showsCancelButton = true
         let rightButton = searchBar.value(forKey: "cancelButton") as! UIButton
+        rightButton.isEnabled = true
         rightButton.setTitle("  ", for: .normal)
-        rightButton.setImage(.init(systemName: "chevron.down.circle.fill", withConfiguration: UIImage.SymbolConfiguration(scale: .large)), for: .normal)
-        searchBar.showsCancelButton = !suggestions.isEmpty
+        var rightButtonImageConfig = UIImage.SymbolConfiguration(scale: .large)
+        if let tintColor = context.environment.tintColor?.toUIColor() {
+            rightButtonImageConfig = rightButtonImageConfig.applying(UIImage.SymbolConfiguration(hierarchicalColor: tintColor))
+        }
+        rightButton.setImage(.init(systemName: "ellipsis.circle.fill", withConfiguration: rightButtonImageConfig), for: .normal)
+        searchBar.showsCancelButton = moreButton != nil
 
         //prompt
         searchBar.searchTextField.attributedPlaceholder = .init(
@@ -57,7 +65,7 @@ struct NativeTokenField: UIViewRepresentable {
 
     public func updateUIView(_ searchBar: UISearchBar, context: Context) {
         searchBar.searchTextField.tokens = value.map { textToToken($0) }
-        searchBar.showsCancelButton = !suggestions.isEmpty
+        searchBar.showsCancelButton = moreButton != nil
         context.coordinator.update(self)
     }
 
@@ -112,12 +120,10 @@ struct NativeTokenField: UIViewRepresentable {
                 }
         }
         
-        //right button click
+        //more button click
         public func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
-            if let count = searchBar.searchTextField.searchSuggestions?.count, count > 0 {
-                searchBar.searchTextField.searchSuggestions = []
-            } else {
-                showSuggestions(searchBar)
+            if let moreButton = parent.moreButton {
+                moreButton()
             }
         }
 
@@ -136,12 +142,18 @@ struct NativeTokenField: UIViewRepresentable {
                     
         //initial focus
         func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {
-            
         }
         
         //blur
         func searchBarTextDidEndEditing(_ searchBar: UISearchBar) {
             apply(searchBar)
+            
+            //more button always enabled
+            DispatchQueue.main.async { [weak searchBar] in
+                if let cancelButton = searchBar?.value(forKey: "cancelButton") as? UIButton {
+                    cancelButton.isEnabled = true
+                }
+            }
         }
         
         //press enter
@@ -161,6 +173,18 @@ struct NativeTokenField: UIViewRepresentable {
                 searchTextField.text = text
                 searchTextField.insertText(",")
             }
+        }
+        
+        //copy tokens
+        func searchTextField(
+            _ searchTextField: UISearchTextField,
+            itemProviderForCopying token: UISearchToken
+        ) -> NSItemProvider {
+            var string = token.representedObject as? String ?? ""
+            if !string.isEmpty {
+                string += ","
+            }
+            return NSItemProvider(object: string as NSString)
         }
     }
 }
