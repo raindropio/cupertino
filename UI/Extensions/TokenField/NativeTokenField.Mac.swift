@@ -27,6 +27,7 @@ struct NativeTokenField: NSViewRepresentable {
     @Binding public var value: [String]
     var prompt: String
     var suggestions: [String]
+    var moreButton: (() -> Void)?
     
     public func makeCoordinator() -> Coordinator {
         Coordinator(self)
@@ -56,69 +57,115 @@ struct NativeTokenField: NSViewRepresentable {
         
         //values
         tokenField.placeholderString = prompt
-        tokenField.objectValue = value
+        tokenField.objectValue = value.map { Token($0) }
         
         return tokenField
     }
     
     public func updateNSView(_ nsView: NativeView, context: Context) {
-        nsView.objectValue = value
+        nsView.objectValue = value.map { Token($0) }
         context.coordinator.update(self)
     }
     
     final class Coordinator: NSObject, NSTokenFieldDelegate {
-        var parent: NativeTokenField
+        private var parent: NativeTokenField
 
-        init(_ parent: NativeTokenField) {
+        public init(_ parent: NativeTokenField) {
             self.parent = parent
         }
         
-        func update(_ parent: NativeTokenField) {
+        public func update(_ parent: NativeTokenField) {
             self.parent = parent
+        }
+        
+        //helpers
+        public func getValue(_ tokenField: NSTokenField) -> [String] {
+            (tokenField.objectValue as? [Any])?.compactMap{ ($0 as? Token)?.text } ?? []
+        }
+        
+        public func getSubstring(_ tokenField: NSTokenField) -> String {
+            (tokenField.objectValue as? [Any])?.compactMap { $0 as? String }.first ?? ""
         }
                 
         //end editing
         func controlTextDidEndEditing(_ obj: Notification) {
-            if let field = obj.object as? NativeView,
-               let tokens = field.objectValue as? [String] {
-                parent.value = tokens.uniqued { $0 }
+            if let tokenField = obj.object as? NSTokenField {
+                parent.value = tokenField.stringValue
+                    .split(separator: ",")
+                    .map { String($0).trimmingCharacters(in: .whitespacesAndNewlines) }
+                    .filter{ !$0.isEmpty }
+                    .uniqued { $0 }
             }
         }
         
         //text change
         func controlTextDidChange(_ obj: Notification) {
-            if let field = obj.object as? NativeView {
-                //suggestions is clicked
+            if let field = obj.object as? NSTokenField {
+                //suggestion clicked
                 if let event = NSApp.currentEvent, event.type == .leftMouseUp{
                     field.stringValue += ","
                 }
             }
         }
         
+        //token label
+        func tokenField(
+            _ tokenField: NSTokenField,
+            displayStringForRepresentedObject representedObject: Any
+        ) -> String? {
+            (representedObject as? Token)?.text
+        }
+        
+        //validation
+        func tokenField(
+            _ tokenField: NSTokenField,
+            shouldAdd tokens: [Any],
+            at index: Int
+        ) -> [Any] {
+            let existing = getValue(tokenField)
+            return tokens
+                .compactMap { $0 as? String }
+                .filter { !existing.contains($0) }
+                .map { Token($0) }
+        }
+        
         //suggestions list
-        func control(_ control: NSControl, textView: NSTextView, completions words: [String], forPartialWordRange charRange: NSRange, indexOfSelectedItem index: UnsafeMutablePointer<Int>) -> [String] {
-            let value = (control as? NativeView)?.objectValue as? [String] ?? []
-            let query = textView.string.isEmpty ? "" : (value.last ?? "")
-
+        func control(
+            _ control: NSControl,
+            textView: NSTextView,
+            completions words: [String],
+            forPartialWordRange charRange: NSRange,
+            indexOfSelectedItem index: UnsafeMutablePointer<Int>
+        ) -> [String] {
+            guard let tokenField = control as? NSTokenField else {
+                return []
+            }
+            
+            let query = getSubstring(tokenField)
+            
             var tokens = TokenFieldUtils.filter(
                 parent.suggestions,
-                value: value,
+                value: getValue(tokenField),
                 by: query
             )
             
             if let first = tokens.first, !first.starts(with: query) {
                 tokens.insert(query, at: 0)
             }
-
+            
             return tokens
         }
         
         //keyboard actions
-        @objc func control(_ control: NSControl, textView: NSTextView, doCommandBy commandSelector: Selector) -> Bool {
+        @objc func control(
+            _ control: NSControl,
+            textView: NSTextView,
+            doCommandBy commandSelector: Selector
+        ) -> Bool {
             switch commandSelector {
             //up/down
             case #selector(NSResponder.moveUp(_:)), #selector(NSResponder.moveDown(_:)):
-                if let field = control as? NativeView {
+                if let field = control as? NSTokenField {
                     field.currentEditor()?.complete(nil)
                 }
                 return true
@@ -148,4 +195,8 @@ struct NativeTokenField: NSViewRepresentable {
     }
 }
 
+fileprivate struct Token {
+    var text: String
+    init(_ text: String) { self.text = text }
+}
 #endif
