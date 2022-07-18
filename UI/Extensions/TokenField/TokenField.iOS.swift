@@ -31,26 +31,19 @@ struct TokenFieldPicker: View {
     @FocusState private var searching: Bool
     
     func add(_ text: String) {
-        withAnimation {
-            value = value + text
-                .split(separator: ",")
-                .map { String($0).trimmingCharacters(in: .whitespacesAndNewlines) }
-                .filter { !$0.isEmpty }
-        }
+        value = value + text
+            .split(separator: ",")
+            .map { String($0).trimmingCharacters(in: .whitespacesAndNewlines) }
+            .filter { !$0.isEmpty }
     }
     
     var body: some View {
-        let valueFiltered = TokenFieldUtils.filter(value, value: [], by: search)
-        let suggestionsFiltered = TokenFieldUtils.filter(suggestions, value: value, by: search)
+        let all = TokenFieldUtils.filter(value, value: suggestions, by: search) + TokenFieldUtils.filter(suggestions, value: [], by: search)
         
         List(
             selection: .init(
                 get: { Set(value) },
-                set: { next in
-                    withAnimation {
-                        value = value.filter { next.contains($0) } + next.filter { !value.contains($0) }
-                    }
-                }
+                set: { next in value = value.filter { next.contains($0) } + next.filter { !value.contains($0) } }
             )
         ) {
             Section {
@@ -77,22 +70,17 @@ struct TokenFieldPicker: View {
             }
             
             Section {
-                ForEach(valueFiltered, id: \.self) {
-                    Text($0)
-                }
-            }
-            
-            Section {
-                ForEach(suggestionsFiltered, id:\.self) {
+                ForEach(all, id:\.self) {
                     Text($0)
                 }
             }
         }
-            //state & animation
+            //env
             .environment(\.editMode, .constant(.active))
             //appearance
             .controlSize(.large)
             .navigationTitle(value.isEmpty ? title : "Selected \(value.count)")
+            .navigationBarTitleDisplayMode(.inline)
             .toolbar(.hidden, in: .tabBar)
             //default focus
             .scrollDismissesKeyboard(.never)
