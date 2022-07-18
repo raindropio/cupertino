@@ -3,31 +3,24 @@ import SwiftUI
 import AppKit
 import Algorithms
 
-struct NativeTokenFieldLabeledContentStyle: LabeledContentStyle {
-    func makeBody(configuration: Configuration) -> some View {
-        HStack {
-            configuration.label
-            configuration.content
-                .alignmentGuide(.controlAlignment) { $0[.leading] }
+struct PlatformTokenField: View {
+    var title: String = ""
+    @Binding public var value: [String]
+    var prompt: String
+    var suggestions: [String]
+    
+    var body: some View {
+        LabeledContent(title) {
+            NativeTokenField(value: $value, prompt: prompt, suggestions: suggestions)
         }
-            .alignmentGuide(.leading) { $0[.controlAlignment] }
+            .labeledContentStyle(LabeledContentStyleFix())
     }
-}
-
-extension HorizontalAlignment {
-    private enum ControlAlignment: AlignmentID {
-        static func defaultValue(in context: ViewDimensions) -> CGFloat {
-            return context[HorizontalAlignment.center]
-        }
-    }
-    internal static let controlAlignment = HorizontalAlignment(ControlAlignment.self)
 }
 
 struct NativeTokenField: NSViewRepresentable {
     @Binding public var value: [String]
     var prompt: String
     var suggestions: [String]
-    var moreButton: (() -> Void)?
     
     public func makeCoordinator() -> Coordinator {
         Coordinator(self)

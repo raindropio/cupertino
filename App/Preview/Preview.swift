@@ -21,9 +21,6 @@ struct Preview: View {
                     prompt: "Add tags...",
                     suggestions: ["angular", "backend", "books", "cd", "electron", "engineering", "fonts", "free", "icons", "inclusive", "invalid_cache", "invalid_parser", "ios", "javascript", "JSDoc"]
                 )
-                    .moreButton {
-                        print("more button")
-                    }
                     .autocorrectionDisabled(true)
                     //.accentColor(.red)
                 

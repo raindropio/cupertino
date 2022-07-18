@@ -8,12 +8,6 @@ public struct TokenField: View {
     public var prompt: String = ""
     public var suggestions: [String] = []
     
-    //MARK: - Optional actions
-    private var moreButton: (() -> Void)?
-    public func moreButton(_ action: (() -> Void)?) -> Self {
-        var copy = self; copy.moreButton = action; return copy
-    }
-    
     public init(_ title: String = "", value: Binding<[String]>, prompt: String = "", suggestions: [String] = []) {
         self.title = title
         self._value = value
@@ -22,12 +16,12 @@ public struct TokenField: View {
     }
 
     public var body: some View {
-        LabeledContent(title) {
-            NativeTokenField(value: $value, prompt: prompt, suggestions: suggestions, moreButton: moreButton)
-                .tintColor(.accentColor)
-                .listRowInsets(EdgeInsets())
-        }
-            .labeledContentStyle(NativeTokenFieldLabeledContentStyle())
+        PlatformTokenField(
+            title: title,
+            value: $value,
+            prompt: prompt,
+            suggestions: suggestions
+        )
     }
 }
 
