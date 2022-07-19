@@ -43,6 +43,7 @@ public struct CollectionView<Item: Identifiable, Header: View, Content: View>: V
             content: content,
             contextAction: contextAction
         )
+            .ignoresSafeArea(.all)
     }
 }
 #endif

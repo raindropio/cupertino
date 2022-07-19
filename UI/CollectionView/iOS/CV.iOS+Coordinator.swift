@@ -15,6 +15,7 @@ extension CV { class Coordinator: NSObject, UICollectionViewDelegate {
         //collection view
         collectionView = UICollectionView(frame: .zero, collectionViewLayout: makeLayout(parent.style))
         collectionView.delegate = self
+        setAppearance()
         
         //edit mode
         collectionView.allowsSelectionDuringEditing = true
@@ -32,10 +33,21 @@ extension CV { class Coordinator: NSObject, UICollectionViewDelegate {
                     .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .leading)
             }
                 .background {
-                    if cell.isSelected || cell.isHighlighted {
-                        Color.red
+                    Group {
+                        if cell.isSelected || cell.isHighlighted {
+                            Color.red
+                        } else if self.parent.style == .grid {
+                            Color(UIColor.systemBackground)
+                        } else {
+                            Color.clear
+                        }
                     }
+                        .cornerRadius(self.parent.style == .grid ? 5 : 0)
                 }
+            
+            cell.accessories = self.parent.style == .list ?
+                [.multiselect(displayed: .whenEditing), .reorder(displayed: .whenEditing)] :
+                []
         }
         
         //data source
@@ -46,6 +58,15 @@ extension CV { class Coordinator: NSObject, UICollectionViewDelegate {
                 item: item
             )
         }
+        
+        //reorder
+        dataSource.reorderingHandlers.canReorderItem = { item in return true }
+        dataSource.reorderingHandlers.didReorder = { [weak self] transaction in
+            guard let self = self else { return }
+            
+        }
+        
+        //set data
         setData()
     }
     
@@ -61,7 +82,10 @@ extension CV { class Coordinator: NSObject, UICollectionViewDelegate {
         
         //changed style
         if styleChanged {
-            collectionView.setCollectionViewLayout(makeLayout(parent.style), animated: true)
+            setAppearance()
+            collectionView.setCollectionViewLayout(makeLayout(parent.style), animated: true) { [weak self] _ in
+                self?.rerender()
+            }
         }
         
         //changed data
@@ -110,10 +134,16 @@ extension CV { class Coordinator: NSObject, UICollectionViewDelegate {
         }
     }
     
-    private func rerender(animated: Bool = false) {
+    private func setAppearance() {
+        collectionView.backgroundColor = parent.style == .grid ? .systemGroupedBackground : nil
+    }
+    
+    private func rerender(_ single: Item? = nil, animated: Bool = false) {
         var snapshot = dataSource.snapshot()
         snapshot.reconfigureItems(
-            collectionView.indexPathsForVisibleItems.compactMap { item($0) }
+            single != nil ?
+                [single!] :
+                collectionView.indexPathsForVisibleItems.compactMap { item($0) }
         )
         dataSource.apply(snapshot, animatingDifferences: animated)
     }
@@ -148,24 +178,21 @@ extension CV { class Coordinator: NSObject, UICollectionViewDelegate {
     
     //Cell Highlighting
     public func collectionView(_ collectionView: UICollectionView, didHighlightItemAt indexPath: IndexPath) {
-        rerender()
+        rerender(item(indexPath))
     }
 
     public func collectionView(_ collectionView: UICollectionView, didUnhighlightItemAt indexPath: IndexPath) {
-        rerender()
+        rerender(item(indexPath))
     }
     
     //MARK: - Helpers
     private func indexPath(_ item: Item) -> IndexPath? {
-        if let index = parent.data.firstIndex(of: item) {
-            return IndexPath(row: index, section: 0)
-        }
-        return nil
+        dataSource.indexPath(for: item)
     }
     
     private func indexPath(_ id: Item.ID) -> IndexPath? {
-        if let index = parent.data.firstIndex(where: { $0.id == id }) {
-            return IndexPath(row: index, section: 0)
+        if let item = item(id) {
+            return indexPath(item)
         }
         return nil
     }
@@ -175,11 +202,7 @@ extension CV { class Coordinator: NSObject, UICollectionViewDelegate {
     }
     
     private func item(_ indexPath: IndexPath) -> Item? {
-        let index = indexPath.row
-        if parent.data.indices.contains(index) {
-            return parent.data[index]
-        }
-        return nil
+        dataSource.itemIdentifier(for: indexPath)
     }
     
     private func id(_ indexPath: IndexPath) -> Item.ID? {

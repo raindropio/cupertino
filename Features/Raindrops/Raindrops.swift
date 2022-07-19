@@ -34,7 +34,7 @@ struct Raindrops<Header: View>: View {
                 
                 ToolbarItem {
                     Button("All") {
-                        selection = .init(Raindrop.preview.map { $0.id })
+                        selection = selection.isEmpty ? .init(Raindrop.preview.map { $0.id }) : .init()
                     }
                 }
                 

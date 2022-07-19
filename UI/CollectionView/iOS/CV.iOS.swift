@@ -7,7 +7,7 @@ struct CV<Item: Identifiable, Header: View, Content: View> where Item: Hashable 
     //aliases
     typealias DataSource = UICollectionViewDiffableDataSource<String, Item>
     typealias DataSourceSnapshot = NSDiffableDataSourceSnapshot<String, Item>
-    typealias ContentRegistration = UICollectionView.CellRegistration<UICollectionViewCell, Item>
+    typealias ContentRegistration = UICollectionView.CellRegistration<UICollectionViewListCell, Item>
     
     //props
     var data: [Item]
