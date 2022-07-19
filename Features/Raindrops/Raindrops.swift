@@ -17,13 +17,24 @@ struct Raindrops<Header: View>: View {
     @State private var selection = Set<Raindrop.ID>()
     
     var body: some View {
-        CollectionView(Raindrop.preview, selection: $selection) { raindrop in
+        CollectionView(
+            Raindrop.preview,
+            selection: $selection,
+            style: .grid,
+            header: header
+        ) { raindrop in
             Label(raindrop.title, systemImage: "bookmark")
         }
             .contextAction(contextAction)
             .toolbar {
                 ToolbarItem {
                     EditButton()
+                }
+                
+                ToolbarItem {
+                    Button("All") {
+                        selection = .init(Raindrop.preview.map { $0.id })
+                    }
                 }
             }
         

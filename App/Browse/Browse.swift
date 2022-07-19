@@ -9,7 +9,9 @@ struct Browse: View {
     
     var body: some View {
         WithSearch(search: $search, in: collection) { collection in
-            Raindrops(search: $search) {}
+            Raindrops(search: $search) {
+                Text("header")
+            }
                 .contextAction {
                     router.path.append(.preview($0))
                 }
