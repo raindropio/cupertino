@@ -3,12 +3,7 @@ import SwiftUI
 import UIKit
 
 //Props etc
-public struct CollectionView<Item: Identifiable, Header: View, Content: View> where Item: Hashable {
-    //aliases
-    public typealias DataSource = UICollectionViewDiffableDataSource<String, Item>
-    public typealias DataSourceSnapshot = NSDiffableDataSourceSnapshot<String, Item>
-    public typealias ContentRegistration = UICollectionView.CellRegistration<UICollectionViewCell, Item>
-    
+public struct CollectionView<Item: Identifiable, Header: View, Content: View>: View where Item: Hashable {
     //props
     public var data: [Item]
     @Binding public var selection: Set<Item.ID>
@@ -22,6 +17,9 @@ public struct CollectionView<Item: Identifiable, Header: View, Content: View> wh
         var copy = self; copy.contextAction = action; return copy
     }
     
+    //internal
+    @Environment(\.editMode) private var editMode
+    
     public init(
         _ data: [Item],
         selection: Binding<Set<Item.ID>>,
@@ -34,6 +32,17 @@ public struct CollectionView<Item: Identifiable, Header: View, Content: View> wh
         self.style = style
         self.header = header
         self.content = content
+    }
+    
+    public var body: some View {
+        CV(
+            data: data,
+            selection: $selection,
+            style: style,
+            header: header,
+            content: content,
+            contextAction: contextAction
+        )
     }
 }
 #endif
