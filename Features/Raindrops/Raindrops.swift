@@ -1,5 +1,6 @@
 import SwiftUI
 import API
+import UI
 
 struct Raindrops<Header: View>: View {
     //MARK: - Props
@@ -13,27 +14,37 @@ struct Raindrops<Header: View>: View {
     }
 
     //MARK: - State
-    @State private var selection = Set<Raindrop>()
+    @State private var selection = Set<Raindrop.ID>()
     
     var body: some View {
-        List(selection: $selection) {
-            header()
-            
-            Section {
-                ForEach(Raindrop.preview) { raindrop in
-                    Label(raindrop.title, systemImage: "bookmark")
-                        .tag(raindrop)
-                }
-                    .onDelete { index in
-                        
-                    }
-            }
+        CollectionView(Raindrop.preview, selection: $selection) { raindrop in
+            Label(raindrop.title, systemImage: "bookmark")
         }
-            .listStyle(.inset)
-            .contextAction(forSelectionType: Raindrop.self) {
-                if $0.count == 1, let raindrop = $0.first {
-                    contextAction?(raindrop)
+            .contextAction(contextAction)
+            .toolbar {
+                ToolbarItem {
+                    EditButton()
                 }
             }
+        
+//        List(selection: $selection) {
+//            header()
+//
+//            Section {
+//                ForEach(Raindrop.preview) { raindrop in
+//                    Label(raindrop.title, systemImage: "bookmark")
+//                        .tag(raindrop)
+//                }
+//                    .onDelete { index in
+//
+//                    }
+//            }
+//        }
+//            .listStyle(.inset)
+//            .contextAction(forSelectionType: Raindrop.self) {
+//                if $0.count == 1, let raindrop = $0.first {
+//                    contextAction?(raindrop)
+//                }
+//            }
     }
 }

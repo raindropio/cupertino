@@ -1,6 +1,5 @@
 #if os(iOS)
 import SwiftUI
-import SwiftUIX
 
 struct PlatformTokenField<FieldLabel: View>: View {
     @Binding public var value: [String]
@@ -126,7 +125,7 @@ extension TokenFieldPicker {
                 } icon: {
                     Image(systemName: selected ? "checkmark.circle.fill" : "circle")
                         .imageScale(.large)
-                        .foregroundColor(selected ? .accentColor : .tertiaryLabel)
+                        .foregroundColor(selected ? .accentColor : .secondary)
                 }
             }
         }

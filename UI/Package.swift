@@ -14,10 +14,6 @@ let package = Package(
     ],
     dependencies: [
         .package(
-            url: "https://github.com/SwiftUIX/SwiftUIX",
-            from: "0.1.2"
-        ),
-        .package(
             url: "https://github.com/apple/swift-algorithms",
             from: "1.0.0"
         )
@@ -26,7 +22,6 @@ let package = Package(
         .target(
             name: "UI",
             dependencies: [
-                "SwiftUIX",
                 .product(name: "Algorithms", package: "swift-algorithms")
             ],
             path: ""

@@ -23,7 +23,6 @@ struct Preview: View {
                     Label("Tags", systemImage: "number")
                 }
                     .autocorrectionDisabled(true)
-                    //.accentColor(.red)
                 
                 Button("reset") {
                     tags = []
