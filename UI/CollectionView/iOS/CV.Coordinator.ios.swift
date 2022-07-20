@@ -10,7 +10,8 @@ extension CV { class Coordinator: NSObject, UICollectionViewDelegate, UICollecti
     private typealias SupplementaryRegistration = UICollectionView.SupplementaryRegistration<UIHostingCollectionReusableView>
     private typealias ContentRegistration = UICollectionView.CellRegistration<UICollectionViewCell, Item>
     
-    var collectionView: UICollectionView! = nil
+    var controller: UICollectionViewController! = nil
+    weak var collectionView: UICollectionView! = nil
     
     private var parent: CV
     private var dataSource: DataSource! = nil
@@ -19,8 +20,11 @@ extension CV { class Coordinator: NSObject, UICollectionViewDelegate, UICollecti
         self.parent = parent
         super.init()
         
+        //controller
+        controller = UICollectionViewController(collectionViewLayout: CVLayout(parent.style))
+        
         //collection view
-        collectionView = UICollectionView(frame: .zero, collectionViewLayout: CVLayout(parent.style))
+        collectionView = controller.collectionView
         collectionView.delegate = self
         
         //edit mode
@@ -100,7 +104,7 @@ extension CV { class Coordinator: NSObject, UICollectionViewDelegate, UICollecti
         //changed style
         if styleChanged {
             collectionView.setCollectionViewLayout(CVLayout(parent.style), animated: true) { [weak self] _ in
-                self?.renderContent()
+                self?.render()
             }
         }
         
@@ -112,7 +116,7 @@ extension CV { class Coordinator: NSObject, UICollectionViewDelegate, UICollecti
         //changed selection
         if selectionChanged {
             setSelection()
-            renderContent()
+            render()
         }
         
         //update header/footer
@@ -145,7 +149,7 @@ extension CV { class Coordinator: NSObject, UICollectionViewDelegate, UICollecti
         }
     }
     
-    private func renderContent(_ single: Item? = nil, animated: Bool = false) {
+    private func render(_ single: Item? = nil, animated: Bool = false) {
         var snapshot = dataSource.snapshot()
         snapshot.reconfigureItems(
             single != nil ?
@@ -186,7 +190,6 @@ extension CV { class Coordinator: NSObject, UICollectionViewDelegate, UICollecti
     //Primary action
     func collectionView(_ collectionView: UICollectionView, canPerformPrimaryActionForItemAt indexPath: IndexPath) -> Bool {
         if !collectionView.isEditing, parent.contextAction != nil {
-            parent.selection = .init()
             return true
         }
         return false
@@ -194,8 +197,18 @@ extension CV { class Coordinator: NSObject, UICollectionViewDelegate, UICollecti
     
     func collectionView(_ collectionView: UICollectionView, performPrimaryActionForItemAt indexPath: IndexPath) {
         if let contextAction = parent.contextAction,
-            parent.data.indices.contains(indexPath.row) {
-            contextAction(parent.data[indexPath.row])
+           let item = item(indexPath) {
+            //simulate select
+            collectionView.selectItem(at: indexPath, animated: false, scrollPosition: [])
+            render(item)
+            
+            contextAction(item)
+            
+            //reset selection
+            Task {
+                try? await Task.sleep(until: .now + .seconds(0.3), clock: .continuous)
+                parent.selection = .init()
+            }
         }
     }
     
@@ -226,11 +239,11 @@ extension CV { class Coordinator: NSObject, UICollectionViewDelegate, UICollecti
     
     //Cell Highlighting
     func collectionView(_ collectionView: UICollectionView, didHighlightItemAt indexPath: IndexPath) {
-        renderContent(item(indexPath))
+        render(item(indexPath))
     }
 
     func collectionView(_ collectionView: UICollectionView, didUnhighlightItemAt indexPath: IndexPath) {
-        renderContent(item(indexPath))
+        render(item(indexPath))
     }
     
     //MARK: - Helpers

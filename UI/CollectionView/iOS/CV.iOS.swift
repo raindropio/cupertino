@@ -17,9 +17,9 @@ struct CV<Item: Identifiable & Hashable, Header: View, Footer: View, Content: Vi
     var reorderAction: ((_ item: Item, _ to: Int) -> Void)?
 }
 
-extension CV: UIViewRepresentable {
+extension CV: UIViewControllerRepresentable {
     func makeCoordinator() -> Coordinator { Coordinator(self) }
-    func makeUIView(context: Context) -> UICollectionView { context.coordinator.collectionView }
-    func updateUIView(_ uiView: UICollectionView, context: Context) { context.coordinator.update(self, environment: context.environment) }
+    func makeUIViewController(context: Context) -> UICollectionViewController { context.coordinator.controller }
+    func updateUIViewController(_ uiViewController: UICollectionViewController, context: Context) { context.coordinator.update(self, environment: context.environment) }
 }
 #endif
