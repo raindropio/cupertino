@@ -6,11 +6,12 @@ struct Browse: View {
     @State var search: SearchQuery = SearchQuery()
 
     @EnvironmentObject private var router: Router
+    @State private var test = 0
     
     var body: some View {
         WithSearch(search: $search, in: collection) { collection in
             Raindrops(search: $search) {
-                Text("header")
+                Button("Test \(test)") { test += 1 }
             }
                 .contextAction {
                     router.path.append(.preview($0))

@@ -7,6 +7,7 @@ extension CV { class Coordinator: NSObject, UICollectionViewDelegate, UICollecti
     private typealias DataSource = UICollectionViewDiffableDataSource<String, Item>
     private typealias DataSourceSnapshot = NSDiffableDataSourceSnapshot<String, Item>
     private typealias DataSourceTransaction = NSDiffableDataSourceTransaction<String, Item>
+    private typealias HeaderRegistration = UICollectionView.SupplementaryRegistration<UIHostingCollectionReusableView<Header>>
     private typealias ContentRegistration = UICollectionView.CellRegistration<UICollectionViewCell, Item>
     
     var collectionView: UICollectionView! = nil
@@ -21,7 +22,6 @@ extension CV { class Coordinator: NSObject, UICollectionViewDelegate, UICollecti
         //collection view
         collectionView = UICollectionView(frame: .zero, collectionViewLayout: makeLayout(parent.style))
         collectionView.delegate = self
-        setAppearance()
         
         //edit mode
         collectionView.allowsSelection = true
@@ -32,6 +32,13 @@ extension CV { class Coordinator: NSObject, UICollectionViewDelegate, UICollecti
         //keyboard nav
         collectionView.allowsFocus = true
         collectionView.remembersLastFocusedIndexPath = true
+        
+        //header
+        let headerRegistration = HeaderRegistration(elementKind: "header") { view, _, _ in
+            if let header = view as? UIHostingCollectionReusableView {
+                header.rootView = self.parent.header()
+            }
+        }
         
         //content
         let contentRegistration = ContentRegistration { cell, _, item in
@@ -51,6 +58,12 @@ extension CV { class Coordinator: NSObject, UICollectionViewDelegate, UICollecti
                 item: item
             )
         }
+        dataSource.supplementaryViewProvider = { _, kind, index in
+            self.collectionView.dequeueConfiguredReusableSupplementary(
+                using: headerRegistration,
+                for: index
+            )
+        }
         
         //reordering
         dataSource.reorderingHandlers.canReorderItem = canReorderItem
@@ -66,7 +79,7 @@ extension CV { class Coordinator: NSObject, UICollectionViewDelegate, UICollecti
         let styleChanged = self.parent.style != parent.style
         let dataChanged = self.parent.data != parent.data
         let selectionChanged = self.parent.selection != parent.selection || (collectionView.indexPathsForSelectedItems?.count ?? 0) != parent.selection.count
-
+        
         self.parent = parent
         
         //edit mode
@@ -75,10 +88,7 @@ extension CV { class Coordinator: NSObject, UICollectionViewDelegate, UICollecti
         //changed style
         if styleChanged {
             collectionView.setCollectionViewLayout(makeLayout(parent.style), animated: true) { [weak self] _ in
-                UIView.animate(withDuration: 0.2) {
-                    self?.setAppearance()
-                    self?.rerender()
-                }
+                self?.renderContent()
             }
         }
         
@@ -90,16 +100,16 @@ extension CV { class Coordinator: NSObject, UICollectionViewDelegate, UICollecti
         //changed selection
         if selectionChanged {
             setSelection()
-            rerender()
+            renderContent()
         }
     }
     
     private func makeLayout(_ style: CollectionViewStyle) -> UICollectionViewLayout {
-        UICollectionViewCompositionalLayout { sectionIndex, layoutEnvironment in
-            switch style {
-            case .list: return CollectionViewListLayout(layoutEnvironment)
-            case .grid: return CollectionViewGridLayout(layoutEnvironment)
-            }
+        switch style {
+        case .list:
+            return CollectionViewListLayout()
+        case .grid:
+            return CollectionViewGridLayout()
         }
     }
     
@@ -128,11 +138,7 @@ extension CV { class Coordinator: NSObject, UICollectionViewDelegate, UICollecti
         }
     }
     
-    private func setAppearance() {
-        collectionView.backgroundColor = parent.style == .grid ? .systemGroupedBackground : nil
-    }
-    
-    private func rerender(_ single: Item? = nil, animated: Bool = false) {
+    private func renderContent(_ single: Item? = nil, animated: Bool = false) {
         var snapshot = dataSource.snapshot()
         snapshot.reconfigureItems(
             single != nil ?
@@ -213,11 +219,11 @@ extension CV { class Coordinator: NSObject, UICollectionViewDelegate, UICollecti
     
     //Cell Highlighting
     func collectionView(_ collectionView: UICollectionView, didHighlightItemAt indexPath: IndexPath) {
-        rerender(item(indexPath))
+        renderContent(item(indexPath))
     }
 
     func collectionView(_ collectionView: UICollectionView, didUnhighlightItemAt indexPath: IndexPath) {
-        rerender(item(indexPath))
+        renderContent(item(indexPath))
     }
     
     //MARK: - Helpers
