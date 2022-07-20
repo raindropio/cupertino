@@ -2,7 +2,7 @@
 import SwiftUI
 import UIKit
 
-extension CV { class Coordinator: NSObject, UICollectionViewDelegate {
+extension CV { class Coordinator: NSObject, UICollectionViewDelegate, UICollectionViewDragDelegate, UICollectionViewDropDelegate {
     //aliases
     typealias DataSource = UICollectionViewDiffableDataSource<String, Item>
     typealias DataSourceSnapshot = NSDiffableDataSourceSnapshot<String, Item>
@@ -13,7 +13,6 @@ extension CV { class Coordinator: NSObject, UICollectionViewDelegate {
     
     private var parent: CV
     private var dataSource: DataSource! = nil
-    private var reordering = false
     
     init(_ parent: CV) {
         self.parent = parent
@@ -55,7 +54,8 @@ extension CV { class Coordinator: NSObject, UICollectionViewDelegate {
         //reordering
         dataSource.reorderingHandlers.canReorderItem = canReorderItem
         dataSource.reorderingHandlers.didReorder = didReorder
-        collectionView.addGestureRecognizer(UILongPressGestureRecognizer(target: self, action: #selector(dragReorder(_:))))
+        collectionView.dragDelegate = self
+        collectionView.dropDelegate = self
         
         //set data
         setData()
@@ -142,40 +142,30 @@ extension CV { class Coordinator: NSObject, UICollectionViewDelegate {
     }
     
     //MARK: - Reordering
+    //Enable reordering
     func canReorderItem(_ item: Item) -> Bool {
         parent.reorderAction != nil
     }
     
+    //End reordering
     func didReorder(_ transaction: DataSourceTransaction) {
         guard let reorderAction = parent.reorderAction else { return }
+        guard let insertion = transaction.difference.insertions.first else { return }
         
-        if let insertion = transaction.difference.insertions.first {
-            switch insertion {
-            case .insert(let to, let element, _):
-                reorderAction(element, to)
-            default: break
-            }
+        switch insertion {
+        case .insert(let to, let element, _):
+            reorderAction(element, to)
+        default: break;
         }
     }
     
-    @objc private func dragReorder(_ sender: UILongPressGestureRecognizer) {
-        guard sender.view === collectionView else { return }
-        
-        switch(sender.state) {
-        case .began:
-            guard let indexPath = collectionView.indexPathForItem(at: sender.location(in: collectionView)) else { break }
-            reordering = true
-            collectionView.beginInteractiveMovementForItem(at: indexPath)
-        case .changed:
-            collectionView.updateInteractiveMovementTargetPosition(sender.location(in: collectionView))
-        case .ended:
-            collectionView.endInteractiveMovement()
-            rerender()
-            reordering = false
-        default:
-            collectionView.cancelInteractiveMovement()
-            reordering = false
-        }
+    //Drag start (required)
+    func collectionView(_ collectionView: UICollectionView, itemsForBeginning _: UIDragSession, at _: IndexPath) -> [UIDragItem] {
+        []
+    }
+    
+    //Dropped something (required)
+    func collectionView(_ collectionView: UICollectionView, performDropWith _: UICollectionViewDropCoordinator) {
     }
     
     //MARK: - CollectionView Delegate Methods
@@ -203,14 +193,14 @@ extension CV { class Coordinator: NSObject, UICollectionViewDelegate {
     
     //Cell Selection
     public func collectionView(_ collectionView: UICollectionView, shouldSelectItemAt indexPath: IndexPath) -> Bool {
-        if collectionView.isEditing, !reordering, let item = item(indexPath) {
+        if collectionView.isEditing, let item = item(indexPath) {
             parent.selection.insert(item.id)
         }
         return false
     }
     
     public func collectionView(_ collectionView: UICollectionView, shouldDeselectItemAt indexPath: IndexPath) -> Bool {
-        if collectionView.isEditing, !reordering, let id = id(indexPath) {
+        if collectionView.isEditing, let id = id(indexPath) {
             parent.selection.remove(id)
         }
         return false
