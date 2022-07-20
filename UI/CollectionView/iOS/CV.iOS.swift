@@ -3,13 +3,14 @@ import SwiftUI
 import UIKit
 
 //Props etc
-struct CV<Item: Identifiable & Hashable, Header: View, Content: View> {
+struct CV<Item: Identifiable & Hashable, Header: View, Footer: View, Content: View> {
     //props
     var data: [Item]
     @Binding var selection: Set<Item.ID>
     var style: CollectionViewStyle
-    var header: () -> Header
     var content: (Item) -> Content
+    var header: () -> Header
+    var footer: () -> Footer
     
     //optionals
     var contextAction: ((_ item: Item) -> Void)?

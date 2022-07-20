@@ -1,15 +1,14 @@
-#if os(iOS)
 import SwiftUI
 import UIKit
 
-//Props etc
-public struct CollectionView<Item: Identifiable, Header: View, Content: View>: View where Item: Hashable {
+public struct CollectionView<Item: Identifiable, Header: View, Footer: View, Content: View>: View where Item: Hashable {
     //props
     public var data: [Item]
     @Binding public var selection: Set<Item.ID>
     public var style: CollectionViewStyle
-    public var header: () -> Header
     public var content: (Item) -> Content
+    public var header: () -> Header
+    public var footer: () -> Footer
     
     //optionals
     public var contextAction: ((_ item: Item) -> Void)?
@@ -21,22 +20,21 @@ public struct CollectionView<Item: Identifiable, Header: View, Content: View>: V
     public func reorderAction(_ action: ((_ item: Item, _ to: Int) -> Void)?) -> Self {
         var copy = self; copy.reorderAction = action; return copy
     }
-    
-    //internal
-    @Environment(\.editMode) private var editMode
-    
+        
     public init(
         _ data: [Item],
         selection: Binding<Set<Item.ID>>,
         style: CollectionViewStyle = .list,
+        content: @escaping (Item) -> Content,
         header: @escaping () -> Header,
-        content: @escaping (Item) -> Content
+        footer: @escaping () -> Footer
     ) {
         self.data = data
         self._selection = selection
         self.style = style
-        self.header = header
         self.content = content
+        self.header = header
+        self.footer = footer
     }
     
     public var body: some View {
@@ -44,12 +42,12 @@ public struct CollectionView<Item: Identifiable, Header: View, Content: View>: V
             data: data,
             selection: $selection,
             style: style,
-            header: header,
             content: content,
+            header: header,
+            footer: footer,
             contextAction: contextAction,
             reorderAction: reorderAction
         )
             .ignoresSafeArea(.all)
     }
 }
-#endif

@@ -1,8 +1,9 @@
+#if os(iOS)
 import SwiftUI
 import Foundation
 
-class UIHostingCollectionReusableView<RootView: View>: UICollectionReusableView {
-    private var controller: UIHostingController<RootView>?
+class UIHostingCollectionReusableView: UICollectionReusableView {
+    private var controller: UIHostingController<AnyView>?
     
 //    override func prepareForReuse() {
 //        if let hostView = controller?.view {
@@ -11,7 +12,7 @@ class UIHostingCollectionReusableView<RootView: View>: UICollectionReusableView 
 //        controller = nil
 //    }
     
-    var rootView: RootView? {
+    var rootView: AnyView? {
         willSet {
             guard let view = newValue else { return }
             
@@ -47,3 +48,4 @@ class UIHostingCollectionReusableView<RootView: View>: UICollectionReusableView 
         ) ?? targetSize
     }
 }
+#endif

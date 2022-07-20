@@ -7,8 +7,7 @@ extension CV { class Coordinator: NSObject, UICollectionViewDelegate, UICollecti
     private typealias DataSource = UICollectionViewDiffableDataSource<String, Item>
     private typealias DataSourceSnapshot = NSDiffableDataSourceSnapshot<String, Item>
     private typealias DataSourceTransaction = NSDiffableDataSourceTransaction<String, Item>
-    private typealias HeaderReusableView = UIHostingCollectionReusableView<Header>
-    private typealias HeaderRegistration = UICollectionView.SupplementaryRegistration<HeaderReusableView>
+    private typealias SupplementaryRegistration = UICollectionView.SupplementaryRegistration<UIHostingCollectionReusableView>
     private typealias ContentRegistration = UICollectionView.CellRegistration<UICollectionViewCell, Item>
     
     var collectionView: UICollectionView! = nil
@@ -21,7 +20,7 @@ extension CV { class Coordinator: NSObject, UICollectionViewDelegate, UICollecti
         super.init()
         
         //collection view
-        collectionView = UICollectionView(frame: .zero, collectionViewLayout: makeLayout(parent.style))
+        collectionView = UICollectionView(frame: .zero, collectionViewLayout: CVLayout(parent.style))
         collectionView.delegate = self
         
         //edit mode
@@ -35,18 +34,32 @@ extension CV { class Coordinator: NSObject, UICollectionViewDelegate, UICollecti
         collectionView.remembersLastFocusedIndexPath = true
         
         //header
-        let headerRegistration = HeaderRegistration(elementKind: "header") { header, _, _ in
-            header.rootView = self.parent.header()
+        let headerRegistration = SupplementaryRegistration(elementKind: "header") { header, _, _ in
+            header.rootView = AnyView(self.parent.header())
+        }
+        
+        //footer
+        let footerRegistration = SupplementaryRegistration(elementKind: "footer") { footer, _, _ in
+            footer.rootView = AnyView(self.parent.footer())
         }
         
         //content
         let contentRegistration = ContentRegistration { cell, _, item in
+            //background
+            switch self.parent.style {
+            case .list:
+                cell.backgroundConfiguration = .listPlainCell()
+                cell.backgroundConfiguration?.cornerRadius = 0
+            case .grid(_):
+                cell.backgroundConfiguration = .listGroupedCell()
+                cell.backgroundConfiguration?.cornerRadius = 5
+            }
+            
+            //view
             cell.contentConfiguration = UIHostingConfiguration {
                 self.parent.content(item)
                     .frame(maxWidth: .infinity, alignment: .leading)
             }
-            cell.backgroundConfiguration = self.parent.style == .grid ? .listGroupedCell() : .listPlainCell()
-            cell.backgroundConfiguration?.cornerRadius = self.parent.style == .grid ? 5 : 0
         }
         
         //data source
@@ -59,7 +72,7 @@ extension CV { class Coordinator: NSObject, UICollectionViewDelegate, UICollecti
         }
         dataSource.supplementaryViewProvider = { _, kind, index in
             self.collectionView.dequeueConfiguredReusableSupplementary(
-                using: headerRegistration,
+                using: kind == "header" ? headerRegistration : footerRegistration,
                 for: index
             )
         }
@@ -86,7 +99,7 @@ extension CV { class Coordinator: NSObject, UICollectionViewDelegate, UICollecti
         
         //changed style
         if styleChanged {
-            collectionView.setCollectionViewLayout(makeLayout(parent.style), animated: true) { [weak self] _ in
+            collectionView.setCollectionViewLayout(CVLayout(parent.style), animated: true) { [weak self] _ in
                 self?.renderContent()
             }
         }
@@ -102,17 +115,9 @@ extension CV { class Coordinator: NSObject, UICollectionViewDelegate, UICollecti
             renderContent()
         }
         
-        //update header
-        (visibleSupplementaryView("header") as? HeaderReusableView)?.rootView = self.parent.header()
-    }
-    
-    private func makeLayout(_ style: CollectionViewStyle) -> UICollectionViewLayout {
-        switch style {
-        case .list:
-            return CollectionViewListLayout()
-        case .grid:
-            return CollectionViewGridLayout()
-        }
+        //update header/footer
+        visibleSupplementaryView("header")?.rootView = AnyView(self.parent.header())
+        visibleSupplementaryView("footer")?.rootView = AnyView(self.parent.footer())
     }
     
     private func setData() {
@@ -255,9 +260,9 @@ extension CV { class Coordinator: NSObject, UICollectionViewDelegate, UICollecti
         return nil
     }
     
-    private func visibleSupplementaryView(_ ofKind: String) -> UICollectionReusableView? {
+    private func visibleSupplementaryView(_ ofKind: String) -> UIHostingCollectionReusableView? {
         if let at = collectionView.indexPathsForVisibleSupplementaryElements(ofKind: ofKind).first {
-            return collectionView.supplementaryView(forElementKind: ofKind, at: at)
+            return collectionView.supplementaryView(forElementKind: ofKind, at: at) as? UIHostingCollectionReusableView
         }
         return nil
     }

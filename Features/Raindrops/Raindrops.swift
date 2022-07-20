@@ -21,10 +21,13 @@ struct Raindrops<Header: View>: View {
         CollectionView(
             Raindrop.preview,
             selection: $selection,
-            style: collectionViewStyle,
-            header: header
+            style: collectionViewStyle
         ) { raindrop in
             Label(raindrop.title, systemImage: "bookmark")
+        } header: {
+            header()
+        } footer: {
+            Text("Footer")
         }
             .contextAction(contextAction)
             .reorderAction { item, to in
@@ -43,7 +46,7 @@ struct Raindrops<Header: View>: View {
                 
                 ToolbarItem {
                     Button("Toggle") {
-                        collectionViewStyle = collectionViewStyle == .list ? .grid : .list
+                        collectionViewStyle = collectionViewStyle == .list ? .grid(250) : .list
                     }
                 }
             }
