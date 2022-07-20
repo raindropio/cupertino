@@ -7,7 +7,8 @@ extension CV { class Coordinator: NSObject, UICollectionViewDelegate, UICollecti
     private typealias DataSource = UICollectionViewDiffableDataSource<String, Item>
     private typealias DataSourceSnapshot = NSDiffableDataSourceSnapshot<String, Item>
     private typealias DataSourceTransaction = NSDiffableDataSourceTransaction<String, Item>
-    private typealias HeaderRegistration = UICollectionView.SupplementaryRegistration<UIHostingCollectionReusableView<Header>>
+    private typealias HeaderReusableView = UIHostingCollectionReusableView<Header>
+    private typealias HeaderRegistration = UICollectionView.SupplementaryRegistration<HeaderReusableView>
     private typealias ContentRegistration = UICollectionView.CellRegistration<UICollectionViewCell, Item>
     
     var collectionView: UICollectionView! = nil
@@ -34,10 +35,8 @@ extension CV { class Coordinator: NSObject, UICollectionViewDelegate, UICollecti
         collectionView.remembersLastFocusedIndexPath = true
         
         //header
-        let headerRegistration = HeaderRegistration(elementKind: "header") { view, _, _ in
-            if let header = view as? UIHostingCollectionReusableView {
-                header.rootView = self.parent.header()
-            }
+        let headerRegistration = HeaderRegistration(elementKind: "header") { header, _, _ in
+            header.rootView = self.parent.header()
         }
         
         //content
@@ -102,6 +101,9 @@ extension CV { class Coordinator: NSObject, UICollectionViewDelegate, UICollecti
             setSelection()
             renderContent()
         }
+        
+        //update header
+        (visibleSupplementaryView("header") as? HeaderReusableView)?.rootView = self.parent.header()
     }
     
     private func makeLayout(_ style: CollectionViewStyle) -> UICollectionViewLayout {
@@ -249,6 +251,13 @@ extension CV { class Coordinator: NSObject, UICollectionViewDelegate, UICollecti
     private func id(_ indexPath: IndexPath) -> Item.ID? {
         if let item = item(indexPath) {
             return item.id
+        }
+        return nil
+    }
+    
+    private func visibleSupplementaryView(_ ofKind: String) -> UICollectionReusableView? {
+        if let at = collectionView.indexPathsForVisibleSupplementaryElements(ofKind: ofKind).first {
+            return collectionView.supplementaryView(forElementKind: ofKind, at: at)
         }
         return nil
     }

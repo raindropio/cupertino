@@ -7,15 +7,14 @@ public func CollectionViewListLayout() -> UICollectionViewCompositionalLayout {
             layoutEnvironment: layout
         )
         
-        let header = NSCollectionLayoutBoundarySupplementaryItem(
-            layoutSize: .init(
-                widthDimension: .fractionalWidth(1),
-                heightDimension: .estimated(20)
-            ),
-            elementKind: "header",
-            alignment: .top
-        )
-        section.boundarySupplementaryItems = [header]
+        section.boundarySupplementaryItems = [
+            //header
+            .init(
+                layoutSize: .init(widthDimension: .fractionalWidth(1), heightDimension: .estimated(100)),
+                elementKind: "header",
+                alignment: .top
+            )
+        ]
         
         return section
     }

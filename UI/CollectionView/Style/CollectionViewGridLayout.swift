@@ -25,17 +25,14 @@ public func CollectionViewGridLayout(_ idealWidth: CGFloat = 250) -> UICollectio
         //section
         let section = NSCollectionLayoutSection(group: group)
         section.interGroupSpacing = gap * 2
-        
-        //header
-        let header = NSCollectionLayoutBoundarySupplementaryItem(
-            layoutSize: .init(
-                widthDimension: .fractionalWidth(1),
-                heightDimension: .estimated(20)
-            ),
-            elementKind: "header",
-            alignment: .top
-        )
-        section.boundarySupplementaryItems = [header]
+        section.boundarySupplementaryItems = [
+            //header
+            .init(
+                layoutSize: .init(widthDimension: .fractionalWidth(1), heightDimension: .estimated(1)),
+                elementKind: "header",
+                alignment: .top
+            )
+        ]
         
         //full screen background
         section.visibleItemsInvalidationHandler = { _, _, _ in
