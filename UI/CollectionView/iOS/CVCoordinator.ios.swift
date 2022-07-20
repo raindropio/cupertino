@@ -3,10 +3,17 @@ import SwiftUI
 import UIKit
 
 extension CV { class Coordinator: NSObject, UICollectionViewDelegate {
+    //aliases
+    typealias DataSource = UICollectionViewDiffableDataSource<String, Item>
+    typealias DataSourceSnapshot = NSDiffableDataSourceSnapshot<String, Item>
+    typealias DataSourceTransaction = NSDiffableDataSourceTransaction<String, Item>
+    typealias ContentRegistration = UICollectionView.CellRegistration<UICollectionViewCell, Item>
+    
     var collectionView: UICollectionView! = nil
     
     private var parent: CV
     private var dataSource: DataSource! = nil
+    private var reordering = false
     
     init(_ parent: CV) {
         self.parent = parent
@@ -30,24 +37,10 @@ extension CV { class Coordinator: NSObject, UICollectionViewDelegate {
         let contentRegistration = ContentRegistration { cell, _, item in
             cell.contentConfiguration = UIHostingConfiguration {
                 self.parent.content(item)
-                    .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .leading)
+                    .frame(maxWidth: .infinity, alignment: .leading)
             }
-                .background {
-                    Group {
-                        if cell.isSelected || cell.isHighlighted {
-                            Color.red
-                        } else if self.parent.style == .grid {
-                            Color(UIColor.systemBackground)
-                        } else {
-                            Color.clear
-                        }
-                    }
-                        .cornerRadius(self.parent.style == .grid ? 5 : 0)
-                }
-            
-            cell.accessories = self.parent.style == .list ?
-                [.multiselect(displayed: .whenEditing), .reorder(displayed: .whenEditing)] :
-                []
+            cell.backgroundConfiguration = self.parent.style == .grid ? .listGroupedCell() : .listPlainCell()
+            cell.backgroundConfiguration?.cornerRadius = self.parent.style == .grid ? 5 : 0
         }
         
         //data source
@@ -59,12 +52,10 @@ extension CV { class Coordinator: NSObject, UICollectionViewDelegate {
             )
         }
         
-        //reorder
-        dataSource.reorderingHandlers.canReorderItem = { item in return true }
-        dataSource.reorderingHandlers.didReorder = { [weak self] transaction in
-            guard let self = self else { return }
-            
-        }
+        //reordering
+        dataSource.reorderingHandlers.canReorderItem = canReorderItem
+        dataSource.reorderingHandlers.didReorder = didReorder
+        collectionView.addGestureRecognizer(UILongPressGestureRecognizer(target: self, action: #selector(dragReorder(_:))))
         
         //set data
         setData()
@@ -82,9 +73,11 @@ extension CV { class Coordinator: NSObject, UICollectionViewDelegate {
         
         //changed style
         if styleChanged {
-            setAppearance()
             collectionView.setCollectionViewLayout(makeLayout(parent.style), animated: true) { [weak self] _ in
-                self?.rerender()
+                UIView.animate(withDuration: 0.2) {
+                    self?.setAppearance()
+                    self?.rerender()
+                }
             }
         }
         
@@ -120,7 +113,7 @@ extension CV { class Coordinator: NSObject, UICollectionViewDelegate {
         //deselect old
         collectionView.indexPathsForSelectedItems?.forEach {
             guard let item = item($0), parent.selection.contains(item.id) else {
-                collectionView.deselectItem(at: $0, animated: true)
+                collectionView.deselectItem(at: $0, animated: false)
                 return
             }
         }
@@ -129,7 +122,7 @@ extension CV { class Coordinator: NSObject, UICollectionViewDelegate {
         let selected = collectionView.indexPathsForSelectedItems?.compactMap { id($0) } ?? []
         parent.selection.forEach {
             if !selected.contains($0), let at = indexPath($0) {
-                collectionView.selectItem(at: at, animated: true, scrollPosition: [])
+                collectionView.selectItem(at: at, animated: false, scrollPosition: [])
             }
         }
     }
@@ -148,6 +141,43 @@ extension CV { class Coordinator: NSObject, UICollectionViewDelegate {
         dataSource.apply(snapshot, animatingDifferences: animated)
     }
     
+    //MARK: - Reordering
+    func canReorderItem(_ item: Item) -> Bool {
+        parent.reorderAction != nil
+    }
+    
+    func didReorder(_ transaction: DataSourceTransaction) {
+        guard let reorderAction = parent.reorderAction else { return }
+        
+        if let insertion = transaction.difference.insertions.first {
+            switch insertion {
+            case .insert(let to, let element, _):
+                reorderAction(element, to)
+            default: break
+            }
+        }
+    }
+    
+    @objc private func dragReorder(_ sender: UILongPressGestureRecognizer) {
+        guard sender.view === collectionView else { return }
+        
+        switch(sender.state) {
+        case .began:
+            guard let indexPath = collectionView.indexPathForItem(at: sender.location(in: collectionView)) else { break }
+            reordering = true
+            collectionView.beginInteractiveMovementForItem(at: indexPath)
+        case .changed:
+            collectionView.updateInteractiveMovementTargetPosition(sender.location(in: collectionView))
+        case .ended:
+            collectionView.endInteractiveMovement()
+            rerender()
+            reordering = false
+        default:
+            collectionView.cancelInteractiveMovement()
+            reordering = false
+        }
+    }
+    
     //MARK: - CollectionView Delegate Methods
     //Primary action
     public func collectionView(_ collectionView: UICollectionView, canPerformPrimaryActionForItemAt indexPath: IndexPath) -> Bool {
@@ -161,16 +191,26 @@ extension CV { class Coordinator: NSObject, UICollectionViewDelegate {
         }
     }
     
+    //Context menu
+    public func collectionView(_ collectionView: UICollectionView, contextMenuConfigurationForItemsAt indexPaths: [IndexPath], point: CGPoint) -> UIContextMenuConfiguration? {
+        .init(identifier: nil, previewProvider: nil) { actions in
+            let delete = UIAction(title: "Delete", image: UIImage(systemName: "trash.fill"), identifier: nil) { action in
+                // whatever
+            }
+            return UIMenu(title: "Menu", image: nil, identifier: nil, children:[delete])
+        }
+    }
+    
     //Cell Selection
     public func collectionView(_ collectionView: UICollectionView, shouldSelectItemAt indexPath: IndexPath) -> Bool {
-        if collectionView.isEditing, let item = item(indexPath) {
+        if collectionView.isEditing, !reordering, let item = item(indexPath) {
             parent.selection.insert(item.id)
         }
         return false
     }
     
     public func collectionView(_ collectionView: UICollectionView, shouldDeselectItemAt indexPath: IndexPath) -> Bool {
-        if collectionView.isEditing, let id = id(indexPath) {
+        if collectionView.isEditing, !reordering, let id = id(indexPath) {
             parent.selection.remove(id)
         }
         return false

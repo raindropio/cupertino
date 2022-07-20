@@ -17,6 +17,11 @@ public struct CollectionView<Item: Identifiable, Header: View, Content: View>: V
         var copy = self; copy.contextAction = action; return copy
     }
     
+    public var reorderAction: ((_ item: Item, _ to: Int) -> Void)?
+    public func reorderAction(_ action: ((_ item: Item, _ to: Int) -> Void)?) -> Self {
+        var copy = self; copy.reorderAction = action; return copy
+    }
+    
     //internal
     @Environment(\.editMode) private var editMode
     
@@ -41,7 +46,8 @@ public struct CollectionView<Item: Identifiable, Header: View, Content: View>: V
             style: style,
             header: header,
             content: content,
-            contextAction: contextAction
+            contextAction: contextAction,
+            reorderAction: reorderAction
         )
             .ignoresSafeArea(.all)
     }

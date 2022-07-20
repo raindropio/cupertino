@@ -4,11 +4,6 @@ import UIKit
 
 //Props etc
 struct CV<Item: Identifiable, Header: View, Content: View> where Item: Hashable {
-    //aliases
-    typealias DataSource = UICollectionViewDiffableDataSource<String, Item>
-    typealias DataSourceSnapshot = NSDiffableDataSourceSnapshot<String, Item>
-    typealias ContentRegistration = UICollectionView.CellRegistration<UICollectionViewListCell, Item>
-    
     //props
     var data: [Item]
     @Binding var selection: Set<Item.ID>
@@ -18,9 +13,7 @@ struct CV<Item: Identifiable, Header: View, Content: View> where Item: Hashable 
     
     //optionals
     var contextAction: ((_ item: Item) -> Void)?
-    func contextAction(_ action: ((_ item: Item) -> Void)?) -> Self {
-        var copy = self; copy.contextAction = action; return copy
-    }
+    var reorderAction: ((_ item: Item, _ to: Int) -> Void)?
 }
 
 extension CV: UIViewRepresentable {
