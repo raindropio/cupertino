@@ -3,7 +3,7 @@ import SwiftUI
 import UIKit
 
 //Props etc
-struct CV<Item: Identifiable, Header: View, Content: View> where Item: Hashable {
+struct CV<Item: Identifiable & Hashable, Header: View, Content: View> {
     //props
     var data: [Item]
     @Binding var selection: Set<Item.ID>

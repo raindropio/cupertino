@@ -4,10 +4,10 @@ import UIKit
 
 extension CV { class Coordinator: NSObject, UICollectionViewDelegate, UICollectionViewDragDelegate, UICollectionViewDropDelegate {
     //aliases
-    typealias DataSource = UICollectionViewDiffableDataSource<String, Item>
-    typealias DataSourceSnapshot = NSDiffableDataSourceSnapshot<String, Item>
-    typealias DataSourceTransaction = NSDiffableDataSourceTransaction<String, Item>
-    typealias ContentRegistration = UICollectionView.CellRegistration<UICollectionViewCell, Item>
+    private typealias DataSource = UICollectionViewDiffableDataSource<String, Item>
+    private typealias DataSourceSnapshot = NSDiffableDataSourceSnapshot<String, Item>
+    private typealias DataSourceTransaction = NSDiffableDataSourceTransaction<String, Item>
+    private typealias ContentRegistration = UICollectionView.CellRegistration<UICollectionViewCell, Item>
     
     var collectionView: UICollectionView! = nil
     
@@ -24,13 +24,14 @@ extension CV { class Coordinator: NSObject, UICollectionViewDelegate, UICollecti
         setAppearance()
         
         //edit mode
+        collectionView.allowsSelection = true
+        collectionView.allowsMultipleSelection = true
         collectionView.allowsSelectionDuringEditing = true
         collectionView.allowsMultipleSelectionDuringEditing = true
         
         //keyboard nav
         collectionView.allowsFocus = true
         collectionView.remembersLastFocusedIndexPath = true
-        collectionView.selectionFollowsFocus = true
         
         //content
         let contentRegistration = ContentRegistration { cell, _, item in
@@ -93,7 +94,7 @@ extension CV { class Coordinator: NSObject, UICollectionViewDelegate, UICollecti
         }
     }
     
-    func makeLayout(_ style: CollectionViewStyle) -> UICollectionViewLayout {
+    private func makeLayout(_ style: CollectionViewStyle) -> UICollectionViewLayout {
         UICollectionViewCompositionalLayout { sectionIndex, layoutEnvironment in
             switch style {
             case .list: return CollectionViewListLayout(layoutEnvironment)
@@ -143,12 +144,12 @@ extension CV { class Coordinator: NSObject, UICollectionViewDelegate, UICollecti
     
     //MARK: - Reordering
     //Enable reordering
-    func canReorderItem(_ item: Item) -> Bool {
+    private func canReorderItem(_ item: Item) -> Bool {
         parent.reorderAction != nil
     }
     
     //End reordering
-    func didReorder(_ transaction: DataSourceTransaction) {
+    private func didReorder(_ transaction: DataSourceTransaction) {
         guard let reorderAction = parent.reorderAction else { return }
         guard let insertion = transaction.difference.insertions.first else { return }
         
@@ -170,11 +171,15 @@ extension CV { class Coordinator: NSObject, UICollectionViewDelegate, UICollecti
     
     //MARK: - CollectionView Delegate Methods
     //Primary action
-    public func collectionView(_ collectionView: UICollectionView, canPerformPrimaryActionForItemAt indexPath: IndexPath) -> Bool {
-        !collectionView.isEditing && parent.contextAction != nil
+    func collectionView(_ collectionView: UICollectionView, canPerformPrimaryActionForItemAt indexPath: IndexPath) -> Bool {
+        if !collectionView.isEditing, parent.contextAction != nil {
+            parent.selection = .init()
+            return true
+        }
+        return false
     }
     
-    public func collectionView(_ collectionView: UICollectionView, performPrimaryActionForItemAt indexPath: IndexPath) {
+    func collectionView(_ collectionView: UICollectionView, performPrimaryActionForItemAt indexPath: IndexPath) {
         if let contextAction = parent.contextAction,
             parent.data.indices.contains(indexPath.row) {
             contextAction(parent.data[indexPath.row])
@@ -182,7 +187,7 @@ extension CV { class Coordinator: NSObject, UICollectionViewDelegate, UICollecti
     }
     
     //Context menu
-    public func collectionView(_ collectionView: UICollectionView, contextMenuConfigurationForItemsAt indexPaths: [IndexPath], point: CGPoint) -> UIContextMenuConfiguration? {
+    func collectionView(_ collectionView: UICollectionView, contextMenuConfigurationForItemsAt indexPaths: [IndexPath], point: CGPoint) -> UIContextMenuConfiguration? {
         .init(identifier: nil, previewProvider: nil) { actions in
             let delete = UIAction(title: "Delete", image: UIImage(systemName: "trash.fill"), identifier: nil) { action in
                 // whatever
@@ -192,26 +197,26 @@ extension CV { class Coordinator: NSObject, UICollectionViewDelegate, UICollecti
     }
     
     //Cell Selection
-    public func collectionView(_ collectionView: UICollectionView, shouldSelectItemAt indexPath: IndexPath) -> Bool {
-        if collectionView.isEditing, let item = item(indexPath) {
+    func collectionView(_ collectionView: UICollectionView, shouldSelectItemAt indexPath: IndexPath) -> Bool {
+        if let item = item(indexPath) {
             parent.selection.insert(item.id)
         }
         return false
     }
     
-    public func collectionView(_ collectionView: UICollectionView, shouldDeselectItemAt indexPath: IndexPath) -> Bool {
-        if collectionView.isEditing, let id = id(indexPath) {
+    func collectionView(_ collectionView: UICollectionView, shouldDeselectItemAt indexPath: IndexPath) -> Bool {
+        if let id = id(indexPath) {
             parent.selection.remove(id)
         }
         return false
     }
     
     //Cell Highlighting
-    public func collectionView(_ collectionView: UICollectionView, didHighlightItemAt indexPath: IndexPath) {
+    func collectionView(_ collectionView: UICollectionView, didHighlightItemAt indexPath: IndexPath) {
         rerender(item(indexPath))
     }
 
-    public func collectionView(_ collectionView: UICollectionView, didUnhighlightItemAt indexPath: IndexPath) {
+    func collectionView(_ collectionView: UICollectionView, didUnhighlightItemAt indexPath: IndexPath) {
         rerender(item(indexPath))
     }
     
