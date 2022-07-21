@@ -33,10 +33,15 @@ struct Raindrops<Header: View>: View {
             .reorderAction { item, to in
                 print("reorder \(item.title) to \(to)")
             }
+            .refreshable {
+                try? await Task.sleep(until: .now + .seconds(1), clock: .continuous)
+            }
             .toolbar {
+                #if os(iOS)
                 ToolbarItem {
                     EditButton()
                 }
+                #endif
                 
                 ToolbarItem {
                     Button("All") {

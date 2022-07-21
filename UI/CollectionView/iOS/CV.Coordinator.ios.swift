@@ -7,10 +7,11 @@ extension CV { class Coordinator: NSObject, UICollectionViewDelegate, UICollecti
     private typealias DataSourceSnapshot = NSDiffableDataSourceSnapshot<String, Item>
     private typealias DataSourceTransaction = NSDiffableDataSourceTransaction<String, Item>
     private typealias SupplementaryRegistration = UICollectionView.SupplementaryRegistration<UIHostingCollectionReusableView>
-    private typealias ContentRegistration = UICollectionView.CellRegistration<UICollectionViewCell, Item>
+    private typealias ContentRegistration = UICollectionView.CellRegistration<UICollectionViewListCell, Item>
     
     private weak var controller: UICollectionViewController! = nil
     private weak var collectionView: UICollectionView! = nil
+    private var refresh: RefreshAction?
     
     private var parent: CV! = nil
     private var dataSource: DataSource! = nil
@@ -44,26 +45,35 @@ extension CV { class Coordinator: NSObject, UICollectionViewDelegate, UICollecti
         collectionView.allowsFocus = true
         collectionView.remembersLastFocusedIndexPath = true
         
+        //pull to refresh
+        collectionView.refreshControl?.addTarget(self, action: #selector(didPullToRefresh(_:)), for: .valueChanged)
+        
         //header
-        let headerRegistration = SupplementaryRegistration(elementKind: CVHeaderKind) { header, _, _ in
+        let headerRegistration = SupplementaryRegistration(elementKind: CVHeaderKind) { [weak self] header, _, _ in
+            guard let self else { return }
             header.host(AnyView(self.parent.header()), self.controller)
         }
         
         //footer
-        let footerRegistration = SupplementaryRegistration(elementKind: CVFooterKind) { footer, _, _ in
+        let footerRegistration = SupplementaryRegistration(elementKind: CVFooterKind) { [weak self] footer, _, _ in
+            guard let self else { return }
             footer.host(AnyView(self.parent.footer()), self.controller)
         }
         
         //content
-        let contentRegistration = ContentRegistration { cell, _, item in
+        let contentRegistration = ContentRegistration { [weak self] cell, _, item in
+            guard let self else { return }
+
             //background
             switch self.parent.style {
             case .list:
                 cell.backgroundConfiguration = .listPlainCell()
                 cell.backgroundConfiguration?.cornerRadius = 0
+                cell.accessories = [.multiselect(displayed: .whenEditing)]
             case .grid(_):
                 cell.backgroundConfiguration = .listGroupedCell()
                 cell.backgroundConfiguration?.cornerRadius = 5
+                cell.accessories = []
             }
             
             //view
@@ -81,8 +91,8 @@ extension CV { class Coordinator: NSObject, UICollectionViewDelegate, UICollecti
                 item: item
             )
         }
-        dataSource.supplementaryViewProvider = { _, kind, index in
-            self.collectionView.dequeueConfiguredReusableSupplementary(
+        dataSource.supplementaryViewProvider = { [weak self] _, kind, index in
+            self!.collectionView.dequeueConfiguredReusableSupplementary(
                 using: kind == CVHeaderKind ? headerRegistration : footerRegistration,
                 for: index
             )
@@ -105,6 +115,10 @@ extension CV { class Coordinator: NSObject, UICollectionViewDelegate, UICollecti
         
         //edit mode
         collectionView.isEditing = environment.editMode?.wrappedValue.isEditing ?? false
+        
+        //refresh
+        refresh = environment.refresh
+        collectionView.refreshControl?.isHidden = (refresh == nil)
         
         //changed style
         if styleChanged {
@@ -174,6 +188,18 @@ extension CV { class Coordinator: NSObject, UICollectionViewDelegate, UICollecti
         }
         if refresh {
             render()
+        }
+    }
+    
+    //MARK: - Pull to refresh
+    @objc private func didPullToRefresh(_ sender: Any) {
+        if let refreshControl = collectionView.refreshControl {
+            Task {
+                if let refresh {
+                    await refresh()
+                }
+                refreshControl.endRefreshing()
+            }
         }
     }
     

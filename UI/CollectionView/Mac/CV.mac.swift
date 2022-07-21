@@ -1,6 +1,6 @@
-#if os(iOS)
+#if os(macOS)
 import SwiftUI
-import UIKit
+import AppKit
 
 //Props etc
 struct CV<Item: Identifiable & Hashable, Header: View, Footer: View, Content: View> {
@@ -17,20 +17,26 @@ struct CV<Item: Identifiable & Hashable, Header: View, Footer: View, Content: Vi
     var reorderAction: ((_ item: Item, _ to: Int) -> Void)?
 }
 
-extension CV: UIViewControllerRepresentable {
+extension CV: NSViewRepresentable {
     func makeCoordinator() -> Coordinator { Coordinator(self) }
-    func makeUIViewController(context: Context) -> UICollectionViewController {
-        let controller = UICollectionViewController(collectionViewLayout: CVLayout(style))
-        let refreshControl = UIRefreshControl()
-        controller.collectionView.refreshControl = refreshControl
+    func makeNSView(context: Context) -> NSScrollView {
+        //scrollview
+        let scrollView = NSScrollView()
+        scrollView.borderType = .noBorder
         
-        context.coordinator.start(controller)
-        return controller
+        //collectionview
+        let collectionView = NSCollectionView()
+        scrollView.documentView = collectionView
+        
+        //apply to coordinator
+        context.coordinator.start(collectionView)
+        
+        return scrollView
     }
-    func updateUIViewController(_ uiViewController: UICollectionViewController, context: Context) {
+    func updateNSView(_ scrollView: NSScrollView, context: Context) {
         context.coordinator.update(self, environment: context.environment)
     }
-    static func dismantleUIViewController(_ uiViewController: UICollectionViewController, coordinator: Coordinator) {
+    static func dismantleNSView(_ scrollView: NSScrollView, coordinator: Coordinator) {
         coordinator.cleanup()
     }
 }

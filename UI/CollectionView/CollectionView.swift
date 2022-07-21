@@ -1,5 +1,4 @@
 import SwiftUI
-import UIKit
 
 public struct CollectionView<Item: Identifiable, Header: View, Footer: View, Content: View>: View where Item: Hashable {
     //props

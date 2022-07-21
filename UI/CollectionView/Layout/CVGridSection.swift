@@ -3,7 +3,11 @@ import SwiftUI
 func CVGridSection(_ idealWidth: CGFloat, environment: NSCollectionLayoutEnvironment) -> NSCollectionLayoutSection {
     let columns = max(round(environment.container.effectiveContentSize.width / idealWidth), 2)
     let gap: CGFloat = 5
+    #if os(iOS)
     let padding: CGFloat = UIDevice.current.userInterfaceIdiom == .pad ? 16 : 11
+    #else
+    let padding: CGFloat = 11
+    #endif
     
     //item size
     let item = NSCollectionLayoutItem(

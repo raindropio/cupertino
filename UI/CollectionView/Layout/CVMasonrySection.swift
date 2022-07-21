@@ -1,3 +1,5 @@
+#if os(iOS)
+import SwiftUI
 import UIKit
 
 //https://techblog.yahoo.co.jp/entry/2022071930317404/?cpt_n=BlogFeed&cpt_m=lnk&cpt_s=rss
@@ -46,3 +48,4 @@ public func CollectionViewMasonryLayout() -> UICollectionViewCompositionalLayout
     
     return layout
 }
+#endif
