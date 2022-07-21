@@ -38,13 +38,13 @@ extension CV { class Coordinator: NSObject, UICollectionViewDelegate, UICollecti
         collectionView.remembersLastFocusedIndexPath = true
         
         //header
-        let headerRegistration = SupplementaryRegistration(elementKind: "header") { header, _, _ in
-            header.rootView = AnyView(self.parent.header())
+        let headerRegistration = SupplementaryRegistration(elementKind: CVHeaderKind) { header, _, _ in
+            header.host(AnyView(self.parent.header()), self.controller)
         }
         
         //footer
-        let footerRegistration = SupplementaryRegistration(elementKind: "footer") { footer, _, _ in
-            footer.rootView = AnyView(self.parent.footer())
+        let footerRegistration = SupplementaryRegistration(elementKind: CVFooterKind) { footer, _, _ in
+            footer.host(AnyView(self.parent.footer()), self.controller)
         }
         
         //content
@@ -76,7 +76,7 @@ extension CV { class Coordinator: NSObject, UICollectionViewDelegate, UICollecti
         }
         dataSource.supplementaryViewProvider = { _, kind, index in
             self.collectionView.dequeueConfiguredReusableSupplementary(
-                using: kind == "header" ? headerRegistration : footerRegistration,
+                using: kind == CVHeaderKind ? headerRegistration : footerRegistration,
                 for: index
             )
         }
@@ -103,9 +103,8 @@ extension CV { class Coordinator: NSObject, UICollectionViewDelegate, UICollecti
         
         //changed style
         if styleChanged {
-            collectionView.setCollectionViewLayout(CVLayout(parent.style), animated: true) { [weak self] _ in
-                self?.render()
-            }
+            collectionView.setCollectionViewLayout(CVLayout(parent.style), animated: false)
+            render()
         }
         
         //changed data
@@ -120,8 +119,7 @@ extension CV { class Coordinator: NSObject, UICollectionViewDelegate, UICollecti
         }
         
         //update header/footer
-        visibleSupplementaryView("header")?.rootView = AnyView(self.parent.header())
-        visibleSupplementaryView("footer")?.rootView = AnyView(self.parent.footer())
+        renderSupplementary()
     }
     
     private func setData() {
@@ -157,6 +155,21 @@ extension CV { class Coordinator: NSObject, UICollectionViewDelegate, UICollecti
                 collectionView.indexPathsForVisibleItems.compactMap { item($0) }
         )
         dataSource.apply(snapshot, animatingDifferences: animated)
+    }
+    
+    private func renderSupplementary() {
+        var refresh = false
+        if let header = visibleSupplementaryView(CVHeaderKind) {            
+            header.host(AnyView(parent.header()), controller)
+            refresh = true
+        }
+        if let footer = visibleSupplementaryView(CVFooterKind) {
+            footer.host(AnyView(parent.footer()), controller)
+            refresh = true
+        }
+        if refresh {
+            render()
+        }
     }
     
     //MARK: - Reordering

@@ -5,26 +5,21 @@ import Foundation
 class UIHostingCollectionReusableView: UICollectionReusableView {
     private var controller: UIHostingController<AnyView>?
     
-//    override func prepareForReuse() {
-//        if let hostView = controller?.view {
-//            hostView.removeFromSuperview()
-//        }
-//        controller = nil
-//    }
-    
-    var rootView: AnyView? {
-        willSet {
-            guard let view = newValue else { return }
-            
-            if controller != nil {
-                controller?.sizingOptions = .preferredContentSize
-                controller?.rootView = view
-            } else {
-                controller = UIHostingController(rootView: view)
-                if let hostView = controller?.view {
-                    hostView.backgroundColor = nil
-                    addSubview(hostView)
-                    hostView.frame = bounds
+    func host(_ view: AnyView, _ parent: UIViewController? = nil) {
+        if controller != nil {
+            controller?.sizingOptions = .preferredContentSize
+            controller?.rootView = view
+        } else {
+            controller = UIHostingController(rootView: view)
+            if let hostView = controller?.view {
+                hostView.backgroundColor = nil
+                hostView.insetsLayoutMarginsFromSafeArea = false
+                parent?.addChild(controller!)
+                addSubview(hostView)
+                hostView.frame = bounds
+                
+                if let parent {
+                    controller?.didMove(toParent: parent)
                 }
             }
         }
@@ -47,5 +42,12 @@ class UIHostingCollectionReusableView: UICollectionReusableView {
             in: targetSize
         ) ?? targetSize
     }
+    
+    //    override func prepareForReuse() {
+    //        if let hostView = controller?.view {
+    //            hostView.removeFromSuperview()
+    //        }
+    //        controller = nil
+    //    }
 }
 #endif
