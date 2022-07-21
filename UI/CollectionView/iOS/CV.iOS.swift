@@ -19,7 +19,16 @@ struct CV<Item: Identifiable & Hashable, Header: View, Footer: View, Content: Vi
 
 extension CV: UIViewControllerRepresentable {
     func makeCoordinator() -> Coordinator { Coordinator(self) }
-    func makeUIViewController(context: Context) -> UICollectionViewController { context.coordinator.controller }
-    func updateUIViewController(_ uiViewController: UICollectionViewController, context: Context) { context.coordinator.update(self, environment: context.environment) }
+    func makeUIViewController(context: Context) -> UICollectionViewController {
+        let controller = UICollectionViewController(collectionViewLayout: CVLayout(style))
+        context.coordinator.start(controller)
+        return controller
+    }
+    func updateUIViewController(_ uiViewController: UICollectionViewController, context: Context) {
+        context.coordinator.update(self, environment: context.environment)
+    }
+    static func dismantleUIViewController(_ uiViewController: UICollectionViewController, coordinator: Coordinator) {
+        coordinator.cleanup()
+    }
 }
 #endif

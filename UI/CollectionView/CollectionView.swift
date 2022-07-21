@@ -48,6 +48,7 @@ public struct CollectionView<Item: Identifiable, Header: View, Footer: View, Con
             contextAction: contextAction,
             reorderAction: reorderAction
         )
+            //.id(style)
             .ignoresSafeArea(.all)
     }
 }

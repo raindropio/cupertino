@@ -3,29 +3,36 @@ import SwiftUI
 import UIKit
 
 extension CV { class Coordinator: NSObject, UICollectionViewDelegate, UICollectionViewDragDelegate, UICollectionViewDropDelegate {
-    //aliases
     private typealias DataSource = UICollectionViewDiffableDataSource<String, Item>
     private typealias DataSourceSnapshot = NSDiffableDataSourceSnapshot<String, Item>
     private typealias DataSourceTransaction = NSDiffableDataSourceTransaction<String, Item>
     private typealias SupplementaryRegistration = UICollectionView.SupplementaryRegistration<UIHostingCollectionReusableView>
     private typealias ContentRegistration = UICollectionView.CellRegistration<UICollectionViewCell, Item>
     
-    var controller: UICollectionViewController! = nil
-    weak var collectionView: UICollectionView! = nil
+    private weak var controller: UICollectionViewController! = nil
+    private weak var collectionView: UICollectionView! = nil
     
-    private var parent: CV
+    private var parent: CV! = nil
     private var dataSource: DataSource! = nil
     
     init(_ parent: CV) {
         self.parent = parent
         super.init()
-        
-        //controller
-        controller = UICollectionViewController(collectionViewLayout: CVLayout(parent.style))
+    }
+    
+    func cleanup() {
+        parent = nil
+        dataSource = nil
+    }
+    
+    func start(_ controller: UICollectionViewController) {
+        self.controller = controller
         
         //collection view
         collectionView = controller.collectionView
         collectionView.delegate = self
+        collectionView.dragDelegate = self
+        collectionView.dropDelegate = self
         
         //edit mode
         collectionView.allowsSelection = true
@@ -84,8 +91,6 @@ extension CV { class Coordinator: NSObject, UICollectionViewDelegate, UICollecti
         //reordering
         dataSource.reorderingHandlers.canReorderItem = canReorderItem
         dataSource.reorderingHandlers.didReorder = didReorder
-        collectionView.dragDelegate = self
-        collectionView.dropDelegate = self
         
         //set data
         setData()
@@ -159,7 +164,7 @@ extension CV { class Coordinator: NSObject, UICollectionViewDelegate, UICollecti
     
     private func renderSupplementary() {
         var refresh = false
-        if let header = visibleSupplementaryView(CVHeaderKind) {            
+        if let header = visibleSupplementaryView(CVHeaderKind) {
             header.host(AnyView(parent.header()), controller)
             refresh = true
         }
