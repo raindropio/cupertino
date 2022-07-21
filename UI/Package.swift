@@ -1,10 +1,10 @@
-// swift-tools-version: 5.7
+// swift-tools-version: 5.6
 import PackageDescription
 
 let package = Package(
     name: "UI",
     platforms: [
-        .macOS("13.0"),
+        .macOS("12.0"),
         .iOS("16.0")
     ],
     products: [

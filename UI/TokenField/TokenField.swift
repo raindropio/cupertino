@@ -1,6 +1,7 @@
 import SwiftUI
 import Algorithms
 
+@available(macOS 13.0, *)
 public struct TokenField<FieldLabel: View>: View {
     @Binding public var value: [String]
     public var prompt: String = ""

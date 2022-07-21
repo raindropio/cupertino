@@ -3,6 +3,7 @@ import SwiftUI
 import AppKit
 import Algorithms
 
+@available(macOS 13.0, *)
 struct PlatformTokenField<FieldLabel: View>: View {
     @Binding public var value: [String]
     var prompt: String

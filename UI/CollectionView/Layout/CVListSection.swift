@@ -31,10 +31,10 @@ func CVListSection(environment: NSCollectionLayoutEnvironment) -> NSCollectionLa
     )
     #endif
     
-    section.boundarySupplementaryItems = [
-        CVHeaderItem(),
-        CVFooterItem()
-    ]
+//    section.boundarySupplementaryItems = [
+//        CVHeaderItem(),
+//        CVFooterItem()
+//    ]
     
     return section
 }
