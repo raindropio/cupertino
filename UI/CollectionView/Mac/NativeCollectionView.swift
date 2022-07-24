@@ -11,6 +11,37 @@ final class NativeCollectionView: NSCollectionView {
         }
     }
     
+    override func becomeFirstResponder() -> Bool {
+        let become = super.becomeFirstResponder()
+        if become {
+            //select first element
+            if selectionIndexPaths.isEmpty {
+                if numberOfItems(inSection: 0) != 0 {
+                    selectionIndexPaths = [.init(item: 0, section: 0)]
+                    delegate?.collectionView?(self, didSelectItemsAt: selectionIndexPaths)
+                }
+            }
+            //update selection appearance
+            else {
+                selectionIndexPaths.forEach {
+                    item(at: $0)?.isSelected = true
+                }
+            }
+        }
+        return become
+    }
+    
+    override func resignFirstResponder() -> Bool {
+        let resigned = super.resignFirstResponder()
+        if resigned {
+            //update selection appearance
+            selectionIndexPaths.forEach {
+                item(at: $0)?.isSelected = true
+            }
+        }
+        return resigned
+    }
+    
     override func keyDown(with event: NSEvent) {
         if event.keyCode == 36 {
             handlePrimaryAction()

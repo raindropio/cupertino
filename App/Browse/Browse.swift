@@ -11,8 +11,11 @@ struct Browse: View {
     var body: some View {
         WithSearch(search: $search, in: collection) { collection in
             Raindrops(search: $search) {
-                Button("Test \(test)") { test += 1 }
-                    .frame(height: 30 + test)
+                HStack {
+                    Button("+ Test \(test)") { test += 1 }
+                    Button("- Test \(test)") { test -= 1 }
+                }
+                .frame(height: 30 + test)
             }
                 .contextAction {
                     router.path.append(.preview($0))

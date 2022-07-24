@@ -16,6 +16,7 @@ extension CV { class Coordinator: NSObject, NSCollectionViewDelegate, NativeColl
         super.init()
     }
     
+    //MARK: - Main
     func cleanup() {
         parent = nil
         dataSource = nil
@@ -39,22 +40,21 @@ extension CV { class Coordinator: NSObject, NSCollectionViewDelegate, NativeColl
         collectionView.collectionViewLayout = CVLayout(parent.style)
         
         //data source
-        dataSource = DataSource(collectionView:collectionView){ (collectionView, indexPath, item) -> NSCollectionViewItem? in
-            guard let view = collectionView.makeItem(withIdentifier: HostCollectionItem.identifier, for: indexPath) as? HostCollectionItem else {
+        dataSource = DataSource(collectionView:collectionView){ [weak self] (collectionView, indexPath, item) -> NSCollectionViewItem? in
+            guard
+                let view = collectionView.makeItem(withIdentifier: HostCollectionItem.identifier, for: indexPath) as? HostCollectionItem,
+                let content = self?.parent.content(item) else {
                 return nil
             }
-            view.host(self.parent.content(item), isCard: self.parent.style != .list)
+            view.host(content, isCard: self?.parent.style != .list)
             return view
         }
-        dataSource.supplementaryViewProvider = { collectionView, kind, indexPath in
+        
+        dataSource.supplementaryViewProvider = { [weak self] collectionView, kind, indexPath in
             guard let view = collectionView.makeSupplementaryView(ofKind: kind, withIdentifier: HostSupplementaryView.identifier, for: indexPath) as? HostSupplementaryView else {
                 return nil
             }
-            switch kind {
-            case CVHeaderKind: view.host(self.parent.header())
-            case CVFooterKind: view.host(self.parent.footer())
-            default: return nil
-            }
+            self?.hostSupplementary(kind, view: view)
             return view
         }
         
@@ -64,7 +64,7 @@ extension CV { class Coordinator: NSObject, NSCollectionViewDelegate, NativeColl
     func update(_ parent: CV, environment: EnvironmentValues) {
         let styleChanged = self.parent.style != parent.style
         let dataChanged = self.parent.data != parent.data
-        let selectionChanged = self.parent.selection != parent.selection
+        let selectionChanged = self.parent.selection != parent.selection || collectionView.selectionIndexes.count != parent.selection.count
         
         self.parent = parent
         
@@ -78,12 +78,13 @@ extension CV { class Coordinator: NSObject, NSCollectionViewDelegate, NativeColl
             setData()
         }
         
-        //update header/footer
-        renderSupplementary()
-        
-        if styleChanged || selectionChanged {
-            render()
+        //selection changed
+        if selectionChanged {
+            collectionView.selectionIndexPaths = Set(parent.selection.compactMap { indexPath($0) })
         }
+        
+        //update header/footer
+        updateSupplementary()
     }
     
     private func setData() {
@@ -93,27 +94,28 @@ extension CV { class Coordinator: NSObject, NSCollectionViewDelegate, NativeColl
         dataSource.apply(snapshot, animatingDifferences: false)
     }
     
-    private func render(_ single: Item? = nil, animated: Bool = false) {
-        //reaply data
-        var snapshot = dataSource.snapshot()
-        snapshot.reloadItems(
-            single != nil ?
-                [single!] :
-                collectionView.indexPathsForVisibleItems().compactMap { item($0) }
-        )
-        dataSource.apply(snapshot, animatingDifferences: animated)
-        
-        //update selection
-        let newSelection = Set(parent.selection.compactMap { indexPath($0) })
-        if collectionView.selectionIndexPaths != newSelection {
-            collectionView.selectionIndexPaths = newSelection
+    //MARK: - Supplementary
+    private func hostSupplementary(_ kind: String, view: HostSupplementaryView) {
+        switch kind {
+        case CVHeaderKind: view.host(self.parent.header())
+        case CVFooterKind: view.host(self.parent.footer())
+        default: break
         }
     }
     
-    private func renderSupplementary() {
-        if visibleSupplementaryView(CVHeaderKind) != nil ||
-            visibleSupplementaryView(CVFooterKind) != nil {
-            render()
+    private func updateSupplementary() {
+        let invalidate = NSCollectionViewLayoutInvalidationContext()
+
+        [CVHeaderKind, CVFooterKind].forEach {
+            if let at = collectionView.indexPathsForVisibleSupplementaryElements(ofKind: $0).first,
+               let view = collectionView.supplementaryView(forElementKind: $0, at: at) as? HostSupplementaryView {
+                hostSupplementary($0, view: view)
+                invalidate.invalidateSupplementaryElements(ofKind: $0, at: [at])
+            }
+        }
+        
+        if invalidate.invalidatedSupplementaryIndexPaths != nil {
+            collectionView.collectionViewLayout?.invalidateLayout(with: invalidate)
         }
     }
     
@@ -162,13 +164,6 @@ extension CV { class Coordinator: NSObject, NSCollectionViewDelegate, NativeColl
     private func id(_ indexPath: IndexPath) -> Item.ID? {
         if let item = item(indexPath) {
             return item.id
-        }
-        return nil
-    }
-    
-    private func visibleSupplementaryView(_ ofKind: String) -> HostSupplementaryView? {
-        if let at = collectionView.indexPathsForVisibleSupplementaryElements(ofKind: ofKind).first {
-            return collectionView.supplementaryView(forElementKind: ofKind, at: at) as? HostSupplementaryView
         }
         return nil
     }

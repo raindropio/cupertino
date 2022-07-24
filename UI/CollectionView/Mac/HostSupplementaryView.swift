@@ -12,20 +12,28 @@ final class HostSupplementaryView: NSView, NSCollectionViewElement {
         fatalError("init(coder:) has not been implemented")
     }
     
-    func host<Content>(_ rootView: Content) where Content: View {
+    override func prepareForReuse() {
         for view in self.subviews {
             view.removeFromSuperview()
         }
-        let view = NSHostingView(rootView: rootView.frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .leading))
-        self.addSubview(view)
-        view.translatesAutoresizingMaskIntoConstraints = false
-        NSLayoutConstraint.activate([
-            view.leftAnchor.constraint(equalTo: self.leftAnchor, constant: 0),
-            view.rightAnchor.constraint(equalTo: self.rightAnchor, constant: 0),
-            view.topAnchor.constraint(equalTo: self.topAnchor, constant: 0),
-            view.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: 0),
-        ])
-        view.layer?.masksToBounds = true
+    }
+    
+    func host<Content>(_ rootView: Content) where Content: View {
+        if let view = subviews.first as? NSHostingView<Content>{
+            view.rootView = rootView
+        } else {
+            let view = NSHostingView(rootView: rootView)
+            self.addSubview(view)
+            
+            view.translatesAutoresizingMaskIntoConstraints = false
+            NSLayoutConstraint.activate([
+                view.topAnchor.constraint(equalTo: topAnchor),
+                view.bottomAnchor.constraint(equalTo: bottomAnchor),
+                view.leadingAnchor.constraint(equalTo: leadingAnchor),
+                view.trailingAnchor.constraint(equalTo: trailingAnchor)
+            ])
+            view.layer?.masksToBounds = true
+        }
     }
 }
 #endif

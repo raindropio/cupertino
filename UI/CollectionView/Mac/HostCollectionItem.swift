@@ -12,24 +12,29 @@ class HostCollectionItem: NSCollectionViewItem {
         view.wantsLayer = true
     }
     
-    func host<Content>(_ rootView: Content, isCard: Bool = false) where Content: View {
-        self.isCard = isCard
-        
+    override func prepareForReuse() {
         for view in self.view.subviews {
             view.removeFromSuperview()
         }
-
-        let hostView = NSHostingView(rootView: rootView.frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .leading))
+    }
+    
+    func host<Content>(_ rootView: Content, isCard: Bool = false) where Content: View {
+        self.isCard = isCard
         
-        self.view.addSubview(hostView)
-        hostView.translatesAutoresizingMaskIntoConstraints = false
-        NSLayoutConstraint.activate([
-            hostView.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 0),
-            hostView.rightAnchor.constraint(equalTo: view.rightAnchor, constant: 0),
-            hostView.topAnchor.constraint(equalTo: view.topAnchor, constant: 0),
-            hostView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: 0),
-        ])
-        hostView.layer?.masksToBounds = true
+        if let item = view.subviews.first as? NSHostingView<Content>{
+            item.rootView = rootView
+        } else {
+            let item = NSHostingView(rootView: rootView)
+            view.addSubview(item)
+            
+            item.translatesAutoresizingMaskIntoConstraints = false
+            NSLayoutConstraint.activate([
+                item.topAnchor.constraint(equalTo: view.topAnchor),
+                item.bottomAnchor.constraint(equalTo: view.bottomAnchor),
+                item.widthAnchor.constraint(equalTo: view.widthAnchor),
+            ])
+            view.layer?.masksToBounds = true
+        }
         
         updateAppearance()
     }
@@ -37,7 +42,9 @@ class HostCollectionItem: NSCollectionViewItem {
     //appearance
     override var highlightState: NSCollectionViewItem.HighlightState {
         didSet {
-            updateAppearance()
+            if oldValue != highlightState {
+                updateAppearance()
+            }
         }
     }
 
@@ -47,16 +54,17 @@ class HostCollectionItem: NSCollectionViewItem {
         }
     }
 
-    private func updateAppearance() {
+    func updateAppearance() {
         guard isViewLoaded else { return }
-        
+            
         let showAsHighlighted = (highlightState == .forSelection) ||
             (isSelected && highlightState != .forDeselection) ||
             (highlightState == .asDropTarget)
-        
+                        
         view.layer?.backgroundColor = showAsHighlighted ?
-            NSColor.selectedContentBackgroundColor.cgColor :
-        (isCard ? NSColor.alternatingContentBackgroundColors.last!.cgColor : nil)
+            ((collectionView?.isFirstResponder ?? false) ? NSColor.selectedContentBackgroundColor.cgColor : NSColor.unemphasizedSelectedContentBackgroundColor.cgColor) :
+            (isCard ? NSColor.alternatingContentBackgroundColors.last!.cgColor : nil)
+        
         view.layer?.cornerRadius = isCard ? 3 : 0
     }
 
