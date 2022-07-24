@@ -11,11 +11,7 @@ func CVLayout(_ style: CollectionViewStyle) -> NSCollectionViewLayout {
             return CVListSection(environment: environment)
             
         case .grid(let idealWidth):
-            let section = CVGridSection(idealWidth, environment: environment)
-            section.visibleItemsInvalidationHandler = { _, _, _ in
-                //layout.collectionView?.enclosingScrollView?.backgroundColor = .windowBackgroundColor
-            }
-            return section
+            return CVGridSection(idealWidth, environment: environment)
         }
     }
     

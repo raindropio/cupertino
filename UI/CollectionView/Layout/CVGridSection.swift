@@ -1,32 +1,39 @@
 import SwiftUI
 
 func CVGridSection(_ idealWidth: CGFloat, environment: NSCollectionLayoutEnvironment) -> NSCollectionLayoutSection {
-    let columns = max(round(environment.container.effectiveContentSize.width / idealWidth), 2)
-    let gap: CGFloat = 5
+    let columns = Int(max(round(environment.container.effectiveContentSize.width / idealWidth), 2))
+    
+    //gap
     #if os(iOS)
-    let padding: CGFloat = UIDevice.current.userInterfaceIdiom == .pad ? 16 : 11
+    let gap: CGFloat = 5
+    let inset: CGFloat = UIDevice.current.userInterfaceIdiom == .pad ? 16 : 11
     #else
-    let padding: CGFloat = 11
+    let gap: CGFloat = 4
+    let inset: CGFloat = 8
     #endif
     
-    //item size
-    let item = NSCollectionLayoutItem(
-        layoutSize: .init(
-            widthDimension: .fractionalWidth(1 / columns),
-            heightDimension: .estimated(64)
-        )
-    )
-    item.contentInsets = NSDirectionalEdgeInsets(top: 0, leading: gap, bottom: 0, trailing: gap)
-    
+    //group
     let group = NSCollectionLayoutGroup.horizontal(
-        layoutSize: .init(widthDimension: .fractionalWidth(1.0), heightDimension: .estimated(64)),
-        subitems: [item]
+        layoutSize: .init(
+            widthDimension: .fractionalWidth(1.0),
+            heightDimension: .estimated(64)
+        ),
+        subitem: .init(
+            layoutSize: .init(
+                widthDimension: .fractionalWidth(1),
+                heightDimension: .estimated(64)
+            )
+        ),
+        count: columns
     )
-    group.contentInsets = NSDirectionalEdgeInsets(top: 0, leading: padding, bottom: 0, trailing: padding)
+    group.interItemSpacing = .fixed(gap)
     
     //section
     let section = NSCollectionLayoutSection(group: group)
-    section.interGroupSpacing = gap * 2
+    section.interGroupSpacing = gap
+    section.contentInsets = .init(top: 0, leading: inset, bottom: 0, trailing: inset)
+    
+    //header & footer
     section.boundarySupplementaryItems = [
         CVHeaderItem(),
         CVFooterItem()

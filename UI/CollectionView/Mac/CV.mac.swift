@@ -20,7 +20,7 @@ struct CV<Item: Identifiable & Hashable, Header: View, Footer: View, Content: Vi
 extension CV: NSViewRepresentable {
     func makeCoordinator() -> Coordinator { Coordinator(self) }
     func makeNSView(context: Context) -> NSScrollView {
-        let collectionView = NSCollectionView()
+        let collectionView = NativeCollectionView()
         
         //scrollview
         let scrollView = NSScrollView()
