@@ -16,7 +16,7 @@ final class HostSupplementaryView: NSView, NSCollectionViewElement {
         for view in self.subviews {
             view.removeFromSuperview()
         }
-        let view = NSHostingView(rootView: rootView)
+        let view = NSHostingView(rootView: rootView.frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .leading))
         self.addSubview(view)
         view.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([

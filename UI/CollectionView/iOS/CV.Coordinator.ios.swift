@@ -146,6 +146,9 @@ extension CV { class Coordinator: NSObject, UICollectionViewDelegate, UICollecti
         snapshot.appendSections([""])
         snapshot.appendItems(parent.data)
         dataSource.apply(snapshot)
+        
+        collectionView.setNeedsFocusUpdate()
+        collectionView.updateFocusIfNeeded()
     }
     
     private func setSelection() {
@@ -231,6 +234,10 @@ extension CV { class Coordinator: NSObject, UICollectionViewDelegate, UICollecti
     }
     
     //MARK: - CollectionView Delegate Methods
+    func collectionView(_ collectionView: UICollectionView, canFocusItemAt indexPath: IndexPath) -> Bool {
+        true
+    }
+    
     //Primary action
     func collectionView(_ collectionView: UICollectionView, canPerformPrimaryActionForItemAt indexPath: IndexPath) -> Bool {
         if !collectionView.isEditing, parent.contextAction != nil {

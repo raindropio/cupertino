@@ -33,7 +33,7 @@ extension CV: NSViewRepresentable {
         
         //apply to coordinator
         context.coordinator.start(collectionView)
-
+        
         return scrollView
     }
     func updateNSView(_ scrollView: NSScrollView, context: Context) {

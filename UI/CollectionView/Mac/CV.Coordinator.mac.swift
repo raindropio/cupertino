@@ -22,6 +22,8 @@ extension CV { class Coordinator: NSObject, NSCollectionViewDelegate, NativeColl
     }
     
     func start(_ cv: NativeCollectionView) {
+        if self.collectionView != nil { return }
+        
         self.collectionView = cv
         collectionView.delegate = self
         collectionView.nativeDelegate = self

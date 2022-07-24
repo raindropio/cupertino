@@ -21,6 +21,8 @@ extension CV: UIViewControllerRepresentable {
     func makeCoordinator() -> Coordinator { Coordinator(self) }
     func makeUIViewController(context: Context) -> UICollectionViewController {
         let controller = UICollectionViewController(collectionViewLayout: CVLayout(style))
+        controller.useLayoutToLayoutNavigationTransitions = false
+        
         let refreshControl = UIRefreshControl()
         controller.collectionView.refreshControl = refreshControl
         

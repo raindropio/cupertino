@@ -16,13 +16,13 @@ func CVListSection(environment: NSCollectionLayoutEnvironment) -> NSCollectionLa
     let section = NSCollectionLayoutSection(
         group: .horizontal(
             layoutSize: .init(
-                widthDimension: .fractionalWidth(1.0),
+                widthDimension: .estimated(environment.container.effectiveContentSize.width), //just fractionalWidth doesn't work
                 heightDimension: .estimated(20)
             ),
             subitems: [
                 .init(
                     layoutSize: .init(
-                        widthDimension: .fractionalWidth(1.0),
+                        widthDimension: .fractionalWidth(1),
                         heightDimension: .estimated(20)
                     )
                 )

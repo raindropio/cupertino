@@ -19,7 +19,8 @@ class HostCollectionItem: NSCollectionViewItem {
             view.removeFromSuperview()
         }
 
-        let hostView = NSHostingView(rootView: rootView)
+        let hostView = NSHostingView(rootView: rootView.frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .leading))
+        
         self.view.addSubview(hostView)
         hostView.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
