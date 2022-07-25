@@ -64,22 +64,23 @@ extension CV { class Coordinator: NSObject, NSCollectionViewDelegate, NativeColl
     func update(_ parent: CV, environment: EnvironmentValues) {
         let styleChanged = self.parent.style != parent.style
         let dataChanged = self.parent.data != parent.data
-        let selectionChanged = self.parent.selection != parent.selection || collectionView.selectionIndexes.count != parent.selection.count
+        let selectionChanged = self.parent.selection != parent.selection
         
         self.parent = parent
-        
-        //changed style
-        if styleChanged {
-            collectionView.collectionViewLayout = CVLayout(parent.style)
-        }
         
         //changed data
         if dataChanged {
             setData()
         }
         
+        //changed style
+        if styleChanged {
+            collectionView.collectionViewLayout = CVLayout(parent.style)
+            reloadData()
+        }
+        
         //selection changed
-        if selectionChanged {
+        if selectionChanged || collectionView.selectionIndexes.count != parent.selection.count {
             collectionView.selectionIndexPaths = Set(parent.selection.compactMap { indexPath($0) })
         }
         
@@ -92,6 +93,16 @@ extension CV { class Coordinator: NSObject, NSCollectionViewDelegate, NativeColl
         snapshot.appendSections([""])
         snapshot.appendItems(parent.data)
         dataSource.apply(snapshot, animatingDifferences: false)
+    }
+    
+    private func reloadData(_ items: [Item]? = nil, animated: Bool = false) {
+        var snapshot = dataSource.snapshot()
+        snapshot.reloadItems(
+            items != nil ?
+            items! :
+                collectionView.indexPathsForVisibleItems().compactMap { item($0) }
+        )
+        dataSource.apply(snapshot, animatingDifferences: animated)
     }
     
     //MARK: - Supplementary

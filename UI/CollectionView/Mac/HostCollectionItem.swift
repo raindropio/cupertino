@@ -12,12 +12,6 @@ class HostCollectionItem: NSCollectionViewItem {
         view.wantsLayer = true
     }
     
-    override func prepareForReuse() {
-        for view in self.view.subviews {
-            view.removeFromSuperview()
-        }
-    }
-    
     func host<Content>(_ rootView: Content, isCard: Bool = false) where Content: View {
         self.isCard = isCard
         
@@ -56,11 +50,11 @@ class HostCollectionItem: NSCollectionViewItem {
 
     func updateAppearance() {
         guard isViewLoaded else { return }
-            
+                    
         let showAsHighlighted = (highlightState == .forSelection) ||
             (isSelected && highlightState != .forDeselection) ||
             (highlightState == .asDropTarget)
-                        
+                                
         view.layer?.backgroundColor = showAsHighlighted ?
             ((collectionView?.isFirstResponder ?? false) ? NSColor.selectedContentBackgroundColor.cgColor : NSColor.unemphasizedSelectedContentBackgroundColor.cgColor) :
             (isCard ? NSColor.alternatingContentBackgroundColors.last!.cgColor : nil)
