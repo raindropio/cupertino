@@ -46,7 +46,8 @@ extension CV { class Coordinator: NSObject, NSCollectionViewDelegate, NativeColl
                 let content = self?.parent.content(item) else {
                 return nil
             }
-            view.host(content, isCard: self?.parent.style != .list)
+            view.isCard = self?.parent.style != .list
+            view.content = AnyView(content)
             return view
         }
         

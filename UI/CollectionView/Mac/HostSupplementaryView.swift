@@ -12,12 +12,6 @@ final class HostSupplementaryView: NSView, NSCollectionViewElement {
         fatalError("init(coder:) has not been implemented")
     }
     
-    override func prepareForReuse() {
-        for view in self.subviews {
-            view.removeFromSuperview()
-        }
-    }
-    
     func host<Content>(_ rootView: Content) where Content: View {
         if let view = subviews.first as? NSHostingView<Content>{
             view.rootView = rootView
