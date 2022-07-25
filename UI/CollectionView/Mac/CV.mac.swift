@@ -20,13 +20,17 @@ struct CV<Item: Identifiable & Hashable, Header: View, Footer: View, Content: Vi
 extension CV: NSViewRepresentable {
     func makeCoordinator() -> Coordinator { Coordinator(self) }
     func makeNSView(context: Context) -> NSScrollView {
-        let collectionView = NativeCollectionView()
+        let collectionView = NativeCollectionView(frame: .zero)
+        
+        //keep scroll position on resize
+        collectionView.autoresizingMask = [.width]
         
         //scrollview
-        let scrollView = NSScrollView()
+        let scrollView = NSScrollView(frame: .zero)
         scrollView.documentView = collectionView
         scrollView.borderType = .noBorder
         scrollView.hasVerticalScroller = true
+        scrollView.autohidesScrollers = true
         scrollView.contentView.drawsBackground = false
         scrollView.drawsBackground = false
         scrollView.backgroundColor = .clear

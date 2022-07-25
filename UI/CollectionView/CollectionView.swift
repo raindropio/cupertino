@@ -23,7 +23,7 @@ public struct CollectionView<Item: Identifiable, Header: View, Footer: View, Con
     public init(
         _ data: [Item],
         selection: Binding<Set<Item.ID>>,
-        style: CollectionViewStyle = .list,
+        style: CollectionViewStyle,
         content: @escaping (Item) -> Content,
         header: @escaping () -> Header,
         footer: @escaping () -> Footer

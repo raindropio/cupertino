@@ -46,8 +46,16 @@ extension CV { class Coordinator: NSObject, NSCollectionViewDelegate, NativeColl
                 let content = self?.parent.content(item) else {
                 return nil
             }
-            view.isCard = self?.parent.style != .list
-            view.content = AnyView(content)
+            let isCard = {
+                if case .list = self?.parent.style {
+                    return false
+                }
+                return true
+            }()
+            view.host(
+                content.frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .leading),
+                isCard: isCard
+            )
             return view
         }
         
@@ -55,7 +63,7 @@ extension CV { class Coordinator: NSObject, NSCollectionViewDelegate, NativeColl
             guard let view = collectionView.makeSupplementaryView(ofKind: kind, withIdentifier: HostSupplementaryView.identifier, for: indexPath) as? HostSupplementaryView else {
                 return nil
             }
-            self?.hostSupplementary(kind, view: view)
+            self?.hostHelmet(kind, view: view)
             return view
         }
         
@@ -82,11 +90,11 @@ extension CV { class Coordinator: NSObject, NSCollectionViewDelegate, NativeColl
         
         //selection changed
         if selectionChanged || collectionView.selectionIndexes.count != parent.selection.count {
-            collectionView.selectionIndexPaths = Set(parent.selection.compactMap { indexPath($0) })
+            updateSelection()
         }
         
         //update header/footer
-        updateSupplementary()
+        updateHelmet()
     }
     
     private func setData() {
@@ -106,22 +114,29 @@ extension CV { class Coordinator: NSObject, NSCollectionViewDelegate, NativeColl
         dataSource.apply(snapshot, animatingDifferences: animated)
     }
     
+    private func updateSelection() {
+        let actual = Set(parent.selection.compactMap(indexPath))
+        if actual != collectionView.selectionIndexPaths {
+            collectionView.selectionIndexPaths = actual
+        }
+    }
+    
     //MARK: - Supplementary
-    private func hostSupplementary(_ kind: String, view: HostSupplementaryView) {
+    private func hostHelmet(_ kind: String, view: HostSupplementaryView) {
         switch kind {
-        case CVHeaderKind: view.host(self.parent.header())
-        case CVFooterKind: view.host(self.parent.footer())
+        case CVHeaderKind: view.host(self.parent.header().frame(maxWidth: .infinity, alignment: .leading))
+        case CVFooterKind: view.host(self.parent.footer().frame(maxWidth: .infinity, alignment: .leading))
         default: break
         }
     }
     
-    private func updateSupplementary() {
+    private func updateHelmet() {
         let invalidate = NSCollectionViewLayoutInvalidationContext()
-
+        
         [CVHeaderKind, CVFooterKind].forEach {
             if let at = collectionView.indexPathsForVisibleSupplementaryElements(ofKind: $0).first,
                let view = collectionView.supplementaryView(forElementKind: $0, at: at) as? HostSupplementaryView {
-                hostSupplementary($0, view: view)
+                hostHelmet($0, view: view)
                 invalidate.invalidateSupplementaryElements(ofKind: $0, at: [at])
             }
         }

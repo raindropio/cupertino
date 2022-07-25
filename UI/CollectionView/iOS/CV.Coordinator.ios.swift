@@ -9,7 +9,6 @@ extension CV { class Coordinator: NSObject, UICollectionViewDelegate, UICollecti
     private typealias SupplementaryRegistration = UICollectionView.SupplementaryRegistration<UIHostingCollectionReusableView>
     private typealias ContentRegistration = UICollectionView.CellRegistration<UICollectionViewListCell, Item>
     
-    private weak var controller: UICollectionViewController! = nil
     private weak var collectionView: UICollectionView! = nil
     private var refresh: RefreshAction?
     
@@ -26,11 +25,9 @@ extension CV { class Coordinator: NSObject, UICollectionViewDelegate, UICollecti
         dataSource = nil
     }
     
-    func start(_ controller: UICollectionViewController) {
-        self.controller = controller
-        
+    func start(_ cv: UICollectionView) {
         //collection view
-        collectionView = controller.collectionView
+        collectionView = cv
         collectionView.delegate = self
         collectionView.dragDelegate = self
         collectionView.dropDelegate = self
@@ -51,13 +48,13 @@ extension CV { class Coordinator: NSObject, UICollectionViewDelegate, UICollecti
         //header
         let headerRegistration = SupplementaryRegistration(elementKind: CVHeaderKind) { [weak self] header, _, _ in
             guard let self else { return }
-            header.host(AnyView(self.parent.header()), self.controller)
+            header.host(AnyView(self.parent.header()))
         }
         
         //footer
         let footerRegistration = SupplementaryRegistration(elementKind: CVFooterKind) { [weak self] footer, _, _ in
             guard let self else { return }
-            footer.host(AnyView(self.parent.footer()), self.controller)
+            footer.host(AnyView(self.parent.footer()))
         }
         
         //content
@@ -118,7 +115,6 @@ extension CV { class Coordinator: NSObject, UICollectionViewDelegate, UICollecti
         
         //refresh
         refresh = environment.refresh
-        collectionView.refreshControl?.isHidden = (refresh == nil)
         
         //changed style
         if styleChanged {
@@ -145,10 +141,7 @@ extension CV { class Coordinator: NSObject, UICollectionViewDelegate, UICollecti
         var snapshot = DataSourceSnapshot()
         snapshot.appendSections([""])
         snapshot.appendItems(parent.data)
-        dataSource.apply(snapshot)
-        
-        collectionView.setNeedsFocusUpdate()
-        collectionView.updateFocusIfNeeded()
+        dataSource.apply(snapshot, animatingDifferences: false)
     }
     
     private func setSelection() {
@@ -182,11 +175,11 @@ extension CV { class Coordinator: NSObject, UICollectionViewDelegate, UICollecti
     private func renderSupplementary() {
         var refresh = false
         if let header = visibleSupplementaryView(CVHeaderKind) {
-            header.host(AnyView(parent.header()), controller)
+            header.host(AnyView(parent.header()))
             refresh = true
         }
         if let footer = visibleSupplementaryView(CVFooterKind) {
-            footer.host(AnyView(parent.footer()), controller)
+            footer.host(AnyView(parent.footer()))
             refresh = true
         }
         if refresh {
@@ -234,10 +227,6 @@ extension CV { class Coordinator: NSObject, UICollectionViewDelegate, UICollecti
     }
     
     //MARK: - CollectionView Delegate Methods
-    func collectionView(_ collectionView: UICollectionView, canFocusItemAt indexPath: IndexPath) -> Bool {
-        true
-    }
-    
     //Primary action
     func collectionView(_ collectionView: UICollectionView, canPerformPrimaryActionForItemAt indexPath: IndexPath) -> Bool {
         if !collectionView.isEditing, parent.contextAction != nil {

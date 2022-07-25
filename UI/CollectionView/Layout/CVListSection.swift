@@ -1,6 +1,6 @@
 import SwiftUI
 
-func CVListSection(environment: NSCollectionLayoutEnvironment) -> NSCollectionLayoutSection {
+func CVListSection(_ estimatedHeight: CGFloat = 20, environment: NSCollectionLayoutEnvironment) -> NSCollectionLayoutSection {
     #if os(iOS)
     var config = UICollectionLayoutListConfiguration(
         appearance: .plain
@@ -17,12 +17,12 @@ func CVListSection(environment: NSCollectionLayoutEnvironment) -> NSCollectionLa
         group: .horizontal(
             layoutSize: .init(
                 widthDimension: .fractionalWidth(1),
-                heightDimension: .estimated(20)
+                heightDimension: .estimated(estimatedHeight)
             ),
             subitem: .init(
                 layoutSize: .init(
                     widthDimension: .fractionalWidth(1),
-                    heightDimension: .estimated(20)
+                    heightDimension: .estimated(estimatedHeight)
                 )
             ),
             count: 1
@@ -31,8 +31,8 @@ func CVListSection(environment: NSCollectionLayoutEnvironment) -> NSCollectionLa
     #endif
     
     section.boundarySupplementaryItems = [
-        CVHeaderItem(),
-        CVFooterItem()
+        CVHeaderItem,
+        CVFooterItem
     ]
     
     return section

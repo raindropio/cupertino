@@ -7,7 +7,6 @@ class UIHostingCollectionReusableView: UICollectionReusableView {
     
     func host(_ view: AnyView, _ parent: UIViewController? = nil) {
         if controller != nil {
-            controller?.sizingOptions = .preferredContentSize
             controller?.rootView = view
         } else {
             controller = UIHostingController(rootView: view)
@@ -29,11 +28,6 @@ class UIHostingCollectionReusableView: UICollectionReusableView {
         .zero
     }
 
-    override func layoutSubviews() {
-        super.layoutSubviews()
-        controller?.view.frame = bounds
-    }
-    
     override func systemLayoutSizeFitting(_ targetSize: CGSize, withHorizontalFittingPriority horizontalFittingPriority: UILayoutPriority, verticalFittingPriority: UILayoutPriority) -> CGSize {
         controller?.view.setNeedsLayout()
         controller?.view.layoutIfNeeded()
@@ -42,12 +36,5 @@ class UIHostingCollectionReusableView: UICollectionReusableView {
             in: targetSize
         ) ?? targetSize
     }
-    
-    //    override func prepareForReuse() {
-    //        if let hostView = controller?.view {
-    //            hostView.removeFromSuperview()
-    //        }
-    //        controller = nil
-    //    }
 }
 #endif

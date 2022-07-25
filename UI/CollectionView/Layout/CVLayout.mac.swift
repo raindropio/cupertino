@@ -7,11 +7,11 @@ func CVLayout(_ style: CollectionViewStyle) -> NSCollectionViewLayout {
     
     layout = NSCollectionViewCompositionalLayout{ sectionIndex, environment in
         switch style {
-        case .list:
-            return CVListSection(environment: environment)
+        case .list(let estimatedHeight):
+            return CVListSection(estimatedHeight, environment: environment)
             
-        case .grid(let idealWidth):
-            return CVGridSection(idealWidth, environment: environment)
+        case .grid(let estimatedSize):
+            return CVGridSection(estimatedSize, environment: environment)
         }
     }
     

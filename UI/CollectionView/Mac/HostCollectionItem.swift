@@ -3,49 +3,64 @@ import Cocoa
 import SwiftUI
 
 class HostCollectionItem: NSCollectionViewItem {
-    static var identifier = NSUserInterfaceItemIdentifier("UI.CollectionViewItem")
+    static var identifier = NSUserInterfaceItemIdentifier("UI.HostCollectionItem")
     
-    //props
-    var content: AnyView? = nil {
-        didSet { rerender() }
-    }
+    var isCard = false
     
-    var isCard = false {
-        didSet { rerender() }
-    }
-    
-    override var highlightState: NSCollectionViewItem.HighlightState {
-        didSet { rerender() }
-    }
-
-    override var isSelected: Bool {
-        didSet { rerender() }
-    }
-    
-    //view
     override func loadView() {
-        view = NSHostingView(rootView: makeView())
+        view = NSView()
         view.wantsLayer = true
     }
     
-    func rerender() {
-        (view as? NSHostingView)?.rootView = makeView()
+    func host<Content>(_ rootView: Content, isCard: Bool = false) where Content: View {
+        self.isCard = isCard
+        
+        if let item = view.subviews.first as? NSHostingView<Content>{
+            item.rootView = rootView
+        } else {
+            let item = NSHostingView(rootView: rootView)
+            view.addSubview(item)
+            
+            item.translatesAutoresizingMaskIntoConstraints = false
+            NSLayoutConstraint.activate([
+                item.topAnchor.constraint(equalTo: view.topAnchor),
+                item.bottomAnchor.constraint(equalTo: view.bottomAnchor),
+                item.widthAnchor.constraint(equalTo: view.widthAnchor),
+            ])
+            view.layer?.masksToBounds = true
+        }
+        
+        updateAppearance()
     }
     
-    @ViewBuilder
-    func makeView() -> some View {
-        let highlighted = (highlightState == .forSelection) || (isSelected && highlightState != .forDeselection) || (highlightState == .asDropTarget)
-        
-        VStack {
-            content
+    //appearance
+    override var highlightState: NSCollectionViewItem.HighlightState {
+        didSet {
+            if oldValue != highlightState {
+                updateAppearance()
+            }
         }
-            .frame(maxWidth: .infinity, alignment: .leading)
-            .contentShape(Rectangle())
-            .background(highlighted ?
-                ((collectionView?.isFirstResponder ?? false) ? Color.accentColor : Color.secondary.opacity(0.5)) :
-                isCard ? .secondary.opacity(0.1) : .clear
-            )
-            .cornerRadius(isCard ? 3 : 0)
     }
+
+    override var isSelected: Bool {
+        didSet {
+            updateAppearance()
+        }
+    }
+
+    func updateAppearance() {
+        guard isViewLoaded else { return }
+                    
+        let showAsHighlighted = (highlightState == .forSelection) ||
+            (isSelected && highlightState != .forDeselection) ||
+            (highlightState == .asDropTarget)
+                                
+        view.layer?.backgroundColor = showAsHighlighted ?
+            ((collectionView?.isFirstResponder ?? false) ? NSColor.selectedContentBackgroundColor.cgColor : NSColor.unemphasizedSelectedContentBackgroundColor.cgColor) :
+            (isCard ? NSColor.alternatingContentBackgroundColors.last!.cgColor : nil)
+        
+        view.layer?.cornerRadius = isCard ? 3 : 0
+    }
+
 }
 #endif

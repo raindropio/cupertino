@@ -15,7 +15,7 @@ struct Raindrops<Header: View>: View {
 
     //MARK: - State
     @State private var selection = Set<Raindrop.ID>()
-    @State private var collectionViewStyle = CollectionViewStyle.list
+    @State private var collectionViewStyle = CollectionViewStyle.list(20)
     
     var body: some View {
         CollectionView(
@@ -23,7 +23,7 @@ struct Raindrops<Header: View>: View {
             selection: $selection,
             style: collectionViewStyle
         ) { raindrop in
-            Label(raindrop.title, systemImage: "bookmark")
+            Text(raindrop.title)
         } header: {
             header()
         } footer: {
@@ -51,7 +51,10 @@ struct Raindrops<Header: View>: View {
                 
                 ToolbarItem {
                     Button("Toggle") {
-                        collectionViewStyle = collectionViewStyle == .list ? .grid(250) : .list
+                        switch collectionViewStyle {
+                        case .list(_): collectionViewStyle = .grid(.init(width: 250, height: 40))
+                        case .grid(_): collectionViewStyle = .list(20)
+                        }
                     }
                 }
             }

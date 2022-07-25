@@ -1,12 +1,18 @@
 import SwiftUI
 
-func CVGridSection(_ idealWidth: CGFloat, environment: NSCollectionLayoutEnvironment) -> NSCollectionLayoutSection {
-    let columns = Int(max(round(environment.container.effectiveContentSize.width / idealWidth), 2))
+#if os(iOS)
+let minColumns = 2
+#else
+let minColumns = 1
+#endif
+
+func CVGridSection(_ estimatedSize: CGSize, environment: NSCollectionLayoutEnvironment) -> NSCollectionLayoutSection {
+    let columns = max(Int(round(environment.container.effectiveContentSize.width / estimatedSize.width)), minColumns)
     
     //gap
     #if os(iOS)
-    let gap: CGFloat = 5
-    let inset: CGFloat = UIDevice.current.userInterfaceIdiom == .pad ? 16 : 11
+    let gap: CGFloat = 8
+    let inset: CGFloat = 16
     #else
     let gap: CGFloat = 4
     let inset: CGFloat = 8
@@ -16,12 +22,12 @@ func CVGridSection(_ idealWidth: CGFloat, environment: NSCollectionLayoutEnviron
     let group = NSCollectionLayoutGroup.horizontal(
         layoutSize: .init(
             widthDimension: .fractionalWidth(1.0),
-            heightDimension: .estimated(64)
+            heightDimension: .estimated(estimatedSize.height)
         ),
         subitem: .init(
             layoutSize: .init(
                 widthDimension: .fractionalWidth(1),
-                heightDimension: .estimated(64)
+                heightDimension: .estimated(estimatedSize.height)
             )
         ),
         count: columns
@@ -32,11 +38,12 @@ func CVGridSection(_ idealWidth: CGFloat, environment: NSCollectionLayoutEnviron
     let section = NSCollectionLayoutSection(group: group)
     section.interGroupSpacing = gap
     section.contentInsets = .init(top: 0, leading: inset, bottom: 0, trailing: inset)
+    section.supplementariesFollowContentInsets = false
     
     //header & footer
     section.boundarySupplementaryItems = [
-        CVHeaderItem(),
-        CVFooterItem()
+        CVHeaderItem,
+        CVFooterItem
     ]
     
     return section

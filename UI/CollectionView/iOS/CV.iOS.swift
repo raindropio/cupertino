@@ -17,22 +17,19 @@ struct CV<Item: Identifiable & Hashable, Header: View, Footer: View, Content: Vi
     var reorderAction: ((_ item: Item, _ to: Int) -> Void)?
 }
 
-extension CV: UIViewControllerRepresentable {
+extension CV: UIViewRepresentable {
     func makeCoordinator() -> Coordinator { Coordinator(self) }
-    func makeUIViewController(context: Context) -> UICollectionViewController {
-        let controller = UICollectionViewController(collectionViewLayout: CVLayout(style))
-        controller.useLayoutToLayoutNavigationTransitions = false
-        
+    func makeUIView(context: Context) -> UICollectionView {
+        let collectionView = UICollectionView(frame: .zero, collectionViewLayout: CVLayout(style))
         let refreshControl = UIRefreshControl()
-        controller.collectionView.refreshControl = refreshControl
-        
-        context.coordinator.start(controller)
-        return controller
+        collectionView.refreshControl = refreshControl
+        context.coordinator.start(collectionView)
+        return collectionView
     }
-    func updateUIViewController(_ uiViewController: UICollectionViewController, context: Context) {
+    func updateUIView(_ uiView: UICollectionView, context: Context) {
         context.coordinator.update(self, environment: context.environment)
     }
-    static func dismantleUIViewController(_ uiViewController: UICollectionViewController, coordinator: Coordinator) {
+    static func dismantleUIView(_ uiView: UICollectionView, coordinator: Coordinator) {
         coordinator.cleanup()
     }
 }

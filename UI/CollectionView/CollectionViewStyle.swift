@@ -1,6 +1,6 @@
 import Foundation
 
-public enum CollectionViewStyle: Equatable, Hashable {
-    case list
-    case grid(CGFloat)
+public enum CollectionViewStyle: Equatable {
+    case list(CGFloat)
+    case grid(CGSize)
 }
