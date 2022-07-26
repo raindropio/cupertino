@@ -52,8 +52,7 @@ class HostCollectionItem: NSCollectionViewItem {
         guard isViewLoaded else { return }
                     
         let showAsHighlighted = (highlightState == .forSelection) ||
-            (isSelected && highlightState != .forDeselection) ||
-            (highlightState == .asDropTarget)
+            (isSelected && highlightState != .forDeselection)
                                 
         view.layer?.backgroundColor = showAsHighlighted ?
             ((collectionView?.isFirstResponder ?? false) ? NSColor.selectedContentBackgroundColor.cgColor : NSColor.unemphasizedSelectedContentBackgroundColor.cgColor) :

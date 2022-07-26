@@ -10,6 +10,7 @@ extension CV { class Coordinator: NSObject, NSCollectionViewDelegate, NativeColl
     
     private var parent: CV! = nil
     private var dataSource: DataSource! = nil
+    private var dragItems = Set<Item>()
     
     init(_ parent: CV) {
         self.parent = parent
@@ -20,6 +21,7 @@ extension CV { class Coordinator: NSObject, NSCollectionViewDelegate, NativeColl
     func cleanup() {
         parent = nil
         dataSource = nil
+        dragItems = []
     }
     
     func start(_ cv: NativeCollectionView) {
@@ -38,6 +40,10 @@ extension CV { class Coordinator: NSObject, NSCollectionViewDelegate, NativeColl
         collectionView.register(HostSupplementaryView.self, forSupplementaryViewOfKind: CVHeaderKind, withIdentifier: HostSupplementaryView.identifier)
         collectionView.register(HostSupplementaryView.self, forSupplementaryViewOfKind: CVFooterKind, withIdentifier: HostSupplementaryView.identifier)
         collectionView.collectionViewLayout = CVLayout(parent.style)
+        
+        //reordering
+        collectionView.setDraggingSourceOperationMask(.move, forLocal: true)
+        collectionView.registerForDraggedTypes([.string])
         
         //data source
         dataSource = DataSource(collectionView:collectionView){ [weak self] (collectionView, indexPath, item) -> NSCollectionViewItem? in
@@ -135,7 +141,7 @@ extension CV { class Coordinator: NSObject, NSCollectionViewDelegate, NativeColl
         
         [CVHeaderKind, CVFooterKind].forEach {
             if let at = collectionView.indexPathsForVisibleSupplementaryElements(ofKind: $0).first,
-               let view = collectionView.supplementaryView(forElementKind: $0, at: at) as? HostSupplementaryView {
+               let view = collectionView.supplementaryView(forElementKind: $0, at: at) as? HostSupplementaryView {                
                 hostHelmet($0, view: view)
                 invalidate.invalidateSupplementaryElements(ofKind: $0, at: [at])
             }
@@ -168,6 +174,67 @@ extension CV { class Coordinator: NSObject, NSCollectionViewDelegate, NativeColl
         didSelectChange()
     }
     
+    //Reordering
+    func collectionView(_ collectionView: NSCollectionView, canDragItemsAt indexPaths: Set<IndexPath>, with event: NSEvent) -> Bool {
+        parent.reorderAction != nil
+    }
+    
+    func collectionView(_ collectionView: NSCollectionView, pasteboardWriterForItemAt indexPath: IndexPath) -> NSPasteboardWriting? {
+        
+        let retorno = NSPasteboardItem()
+        retorno.setData(Data("test".utf8), forType: .string)
+        return retorno
+    }
+    
+    func collectionView(_ collectionView: NSCollectionView, draggingSession session: NSDraggingSession, willBeginAt screenPoint: NSPoint, forItemsAt indexPaths: Set<IndexPath>) {
+        dragItems = Set(indexPaths.compactMap(item))
+    }
+    
+    func collectionView(_ collectionView: NSCollectionView, draggingSession session: NSDraggingSession, endedAt screenPoint: NSPoint, dragOperation operation: NSDragOperation) {
+        dragItems = .init()
+    }
+    
+    func collectionView(_ collectionView: NSCollectionView, validateDrop draggingInfo: NSDraggingInfo, proposedIndexPath proposedDropIndexPath: AutoreleasingUnsafeMutablePointer<NSIndexPath>, dropOperation proposedDropOperation: UnsafeMutablePointer<NSCollectionView.DropOperation>) -> NSDragOperation {
+        if dragItems.isEmpty {
+            return .copy
+        }
+        
+        if proposedDropOperation.pointee == .before {
+            proposedDropOperation.pointee = .on
+        }
+        
+        if dragItems.count == 1,
+           let origin = dragItems.first,
+            let destination = item(proposedDropIndexPath.pointee) {
+            if origin != destination {
+                let from = indexPath(origin)!.item
+                let to = indexPath(destination)!.item
+
+                var snapshot = dataSource.snapshot()
+                if from <= to {
+                    snapshot.moveItem(origin, afterItem: destination)
+                } else {
+                    snapshot.moveItem(origin, beforeItem: destination)
+                }
+                
+                dataSource.apply(snapshot, animatingDifferences: true)
+            }
+            return .move
+        }
+        
+        return .generic
+    }
+    
+    func collectionView(_ collectionView: NSCollectionView, acceptDrop draggingInfo: NSDraggingInfo, indexPath: IndexPath, dropOperation: NSCollectionView.DropOperation) -> Bool {
+        if dragItems.count == 1,
+           let reorderAction = parent.reorderAction,
+           let origin = dragItems.first {
+            reorderAction(origin, indexPath.item)
+            return true
+        }
+        return false
+    }
+    
     //MARK: - Helpers
     private func indexPath(_ item: Item) -> IndexPath? {
         dataSource.indexPath(for: item)
@@ -186,6 +253,10 @@ extension CV { class Coordinator: NSObject, NSCollectionViewDelegate, NativeColl
     
     private func item(_ indexPath: IndexPath) -> Item? {
         dataSource.itemIdentifier(for: indexPath)
+    }
+    
+    private func item(_ indexPath: NSIndexPath) -> Item? {
+        item(IndexPath(item: indexPath.item, section: indexPath.section))
     }
     
     private func id(_ indexPath: IndexPath) -> Item.ID? {

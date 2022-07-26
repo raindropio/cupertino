@@ -1,10 +1,24 @@
 import Foundation
+import UniformTypeIdentifiers
+import SwiftUI
 
-public struct Raindrop: Identifiable, Hashable {
+public struct Raindrop: Identifiable, Hashable, Codable {
     public var id: Int
     public var link: URL
     public var title: String
 }
+
+extension UTType {
+    public static var raindrop = UTType(exportedAs: "\(Bundle.main.bundleIdentifier!).raindrop")
+}
+
+//@available(macOS 13.0, *)
+//extension Raindrop: Transferable {
+//    public static var transferRepresentation: some TransferRepresentation {
+//        CodableRepresentation(for: Self.self, contentType: .raindrop)
+//        ProxyRepresentation(exporting: \.link)
+//    }
+//}
 
 //MARK: - Preview
 public extension Raindrop {
