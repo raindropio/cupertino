@@ -48,13 +48,13 @@ extension CV { class Coordinator: NSObject, UICollectionViewDelegate, UICollecti
         //header
         let headerRegistration = SupplementaryRegistration(elementKind: CVHeaderKind) { [weak self] header, _, _ in
             guard let self else { return }
-            header.host(AnyView(self.parent.header()))
+            header.host(AnyView(self.parent.header().frame(maxWidth: .infinity, alignment: .leading)))
         }
         
         //footer
         let footerRegistration = SupplementaryRegistration(elementKind: CVFooterKind) { [weak self] footer, _, _ in
             guard let self else { return }
-            footer.host(AnyView(self.parent.footer()))
+            footer.host(AnyView(self.parent.footer().frame(maxWidth: .infinity, alignment: .leading)))
         }
         
         //content

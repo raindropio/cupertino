@@ -3,12 +3,12 @@ import SwiftUI
 import AppKit
 
 //Props etc
-struct CV<Item: Identifiable & Hashable, Header: View, Footer: View, Content: View> {
+struct CV<Item: Identifiable & Hashable, Header: View, Footer: View, C: View> {
     //props
     var data: [Item]
     @Binding var selection: Set<Item.ID>
     var style: CollectionViewStyle
-    var content: (Item) -> Content
+    var content: (Item) -> C
     var header: () -> Header
     var footer: () -> Footer
     

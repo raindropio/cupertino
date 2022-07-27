@@ -24,9 +24,6 @@ class UIHostingCollectionReusableView: UICollectionReusableView {
         }
     }
     
-    override public var safeAreaInsets: UIEdgeInsets {
-        .zero
-    }
 
     override func systemLayoutSizeFitting(_ targetSize: CGSize, withHorizontalFittingPriority horizontalFittingPriority: UILayoutPriority, verticalFittingPriority: UILayoutPriority) -> CGSize {
         controller?.view.setNeedsLayout()

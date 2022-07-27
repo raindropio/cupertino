@@ -12,10 +12,10 @@ class HostCollectionItem: NSCollectionViewItem {
         view.wantsLayer = true
     }
     
-    func host<Content>(_ rootView: Content, isCard: Bool = false) where Content: View {
+    func host<C>(_ rootView: C, isCard: Bool = false) where C: View {
         self.isCard = isCard
         
-        if let item = view.subviews.first as? NSHostingView<Content>{
+        if let item = view.subviews.first as? NSHostingView<C>{
             item.rootView = rootView
         } else {
             let item = NSHostingView(rootView: rootView)
