@@ -8,5 +8,5 @@ let CVHeaderItem = NSCollectionLayoutBoundarySupplementaryItem(
         heightDimension: .estimated(1)
     ),
     elementKind: CVHeaderKind,
-    alignment: .topLeading
+    alignment: .top
 )

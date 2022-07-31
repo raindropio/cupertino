@@ -23,7 +23,6 @@ class UIHostingCollectionReusableView: UICollectionReusableView {
             }
         }
     }
-    
 
     override func systemLayoutSizeFitting(_ targetSize: CGSize, withHorizontalFittingPriority horizontalFittingPriority: UILayoutPriority, verticalFittingPriority: UILayoutPriority) -> CGSize {
         controller?.view.setNeedsLayout()

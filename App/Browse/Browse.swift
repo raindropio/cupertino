@@ -15,7 +15,7 @@ struct Browse: View {
                     Button("+ Test \(test)") { test += 1 }
                     Button("- Test \(test)") { test -= 1 }
                 }
-                .frame(height: 30 + test, alignment: .leading)
+                .frame(height: 30 + test)
             }
                 .contextAction {
                     router.path.append(.preview($0))

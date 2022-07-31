@@ -34,6 +34,13 @@ extension FakeListForEach {
                         itemAction?([item.id])
                     }
                 }
+                .onDrag {
+                    NSItemProvider(item: item.id as? NSData, typeIdentifier: "a")
+                }
+                .onDrop(of: ["a"], isTargeted: .constant(true), perform: { providers in
+                    print(providers)
+                    return false
+                })
         }
     }
 }
