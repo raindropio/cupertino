@@ -12,13 +12,12 @@ extension UTType {
     public static var raindrop = UTType(exportedAs: "\(Bundle.main.bundleIdentifier!).raindrop")
 }
 
-//@available(macOS 13.0, *)
-//extension Raindrop: Transferable {
-//    public static var transferRepresentation: some TransferRepresentation {
-//        CodableRepresentation(for: Self.self, contentType: .raindrop)
-//        ProxyRepresentation(exporting: \.link)
-//    }
-//}
+extension Raindrop: Transferable {
+    public static var transferRepresentation: some TransferRepresentation {
+        CodableRepresentation(for: Self.self, contentType: .raindrop)
+        ProxyRepresentation(exporting: \.link)
+    }
+}
 
 //MARK: - Preview
 public extension Raindrop {

@@ -7,5 +7,5 @@ enum Route: Hashable {
     case filter(Filter)
     
     case search
-    case preview(Raindrop)
+    case preview(Raindrop.ID)
 }

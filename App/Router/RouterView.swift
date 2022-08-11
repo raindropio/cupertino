@@ -17,8 +17,8 @@ struct RouterView: View {
         case .filter(let filter):
             Browse(search: .init(tokens: [.filter(filter)]))
                 .id(filter)
-        case .preview(let raindrop):
-            Preview(raindrop: raindrop)
+        case .preview(let id):
+            Preview(raindrop: id)
         case .search: Search()
         }
     }

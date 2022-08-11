@@ -8,31 +8,32 @@ struct Raindrops<Header: View>: View {
     @ViewBuilder var header: () -> Header
     
     //MARK: - Optional actions
-    var contextAction: ((_ raindrop: Raindrop) -> Void)?
-    func contextAction(_ action: ((_ raindrop: Raindrop) -> Void)?) -> Self {
+    var contextAction: ((_ id: Raindrop.ID) -> Void)?
+    func contextAction(_ action: ((_ id: Raindrop.ID) -> Void)?) -> Self {
         var copy = self; copy.contextAction = action; return copy
     }
 
     //MARK: - State
     @State private var selection = Set<Raindrop.ID>()
-    @State private var collectionViewStyle = CollectionViewStyle.list(20)
+    @State private var collectionViewStyle = CollectionViewLayout.list
     
     var body: some View {
-        CollectionView(
-            Raindrop.preview,
-            selection: $selection,
-            style: collectionViewStyle
-        ) { raindrop in
-            Text(raindrop.title)
-        } header: {
+        CollectionView(collectionViewStyle, selection: $selection) {
             header()
-        } footer: {
-            Text("Footer")
-        }
-            .contextAction(contextAction)
-            .reorderAction { item, to in
-                print("reorder \(item.title) to \(to)")
+            
+            DataSource(Raindrop.preview) { raindrop in
+                Text(raindrop.title)
             }
+            
+            Text("Footer")
+        } action: {
+            contextAction?($0)
+        } reorder: { id, to in
+            print("reorder \(id) to \(to)")
+        } contextMenu: { selection in
+            Button("aaa") {}
+        }
+            .listStyle(.inset)
             .refreshable {
                 try? await Task.sleep(until: .now + .seconds(1), clock: .continuous)
             }
@@ -52,8 +53,8 @@ struct Raindrops<Header: View>: View {
                 ToolbarItem {
                     Button("Toggle") {
                         switch collectionViewStyle {
-                        case .list(_): collectionViewStyle = .grid(.init(width: 250, height: 40))
-                        case .grid(_): collectionViewStyle = .list(20)
+                        case .list: collectionViewStyle = .grid(100)
+                        case .grid(_): collectionViewStyle = .list
                         }
                     }
                 }

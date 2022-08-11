@@ -1,53 +1,63 @@
 import SwiftUI
 
-public struct CollectionView<Item: Identifiable, Header: View, Footer: View, Content: View>: View where Item: Hashable {
-    //props
-    public var data: [Item]
-    @Binding public var selection: Set<Item.ID>
-    public var style: CollectionViewStyle
-    public var content: (Item) -> Content
-    public var header: () -> Header
-    public var footer: () -> Footer
+public struct CollectionView<Content: View, ID: Hashable, Menu: View> {
+    @StateObject private var model = CollectionViewModel<ID>()
+    @Environment(\.editMode) private var editMode
     
-    //optionals
-    public var contextAction: ((_ item: Item) -> Void)?
-    public func contextAction(_ action: ((_ item: Item) -> Void)?) -> Self {
-        var copy = self; copy.contextAction = action; return copy
-    }
+    var layout: CollectionViewLayout
+    @Binding var selection: Set<ID>
+    var content: () -> Content
     
-    public var reorderAction: ((_ item: Item, _ to: Int) -> Void)?
-    public func reorderAction(_ action: ((_ item: Item, _ to: Int) -> Void)?) -> Self {
-        var copy = self; copy.reorderAction = action; return copy
-    }
-        
+    var action: ((ID) -> Void)?
+    var reorder: ((ID, Int) -> Void)?
+    var contextMenu: (Set<ID>) -> Menu
+    
     public init(
-        _ data: [Item],
-        selection: Binding<Set<Item.ID>>,
-        style: CollectionViewStyle,
-        content: @escaping (Item) -> Content,
-        header: @escaping () -> Header,
-        footer: @escaping () -> Footer
+        _ layout: CollectionViewLayout,
+        selection: Binding<Set<ID>>,
+        @ViewBuilder content: @escaping () -> Content,
+        action: ((ID) -> Void)? = nil,
+        reorder: ((ID, Int) -> Void)? = nil,
+        contextMenu: @escaping (Set<ID>) -> Menu
     ) {
-        self.data = data
+        self.layout = layout
         self._selection = selection
-        self.style = style
         self.content = content
-        self.header = header
-        self.footer = footer
+        self.action = action
+        self.reorder = reorder
+        self.contextMenu = contextMenu
     }
-    
+}
+
+extension CollectionView: View {
     public var body: some View {
-        CV(
-            data: data,
-            selection: $selection,
-            style: style,
-            content: content,
-            header: header,
-            footer: footer,
-            contextAction: contextAction,
-            reorderAction: reorderAction
-        )
-            //.id(style)
-            .ignoresSafeArea(.all)
+        Group {
+            switch layout {
+            case .list:
+                List(selection: $selection, content: content)
+                    .contextMenu(forSelectionType: ID.self, menu: contextMenu)
+                
+            case .grid(_):
+                GridScrollView(content: content)
+                    .task {
+                        model.action = action
+                        model.contextMenu = { AnyView(contextMenu($0)) }
+                    }
+                    .onChange(of: editMode?.wrappedValue) {
+                        //reset selection on edit mode exit
+                        if $0 == .inactive {
+                            selection = .init()
+                        }
+                    }
+            }
+        }
+            .task {
+                model.reorder = reorder
+            }
+            .task(id: selection) { model.selection = selection }
+            .task(id: model.selection) { selection = model.selection }
+            .task(id: editMode?.wrappedValue.isEditing) { model.isEditing = editMode?.wrappedValue.isEditing ?? false }
+            .environment(\.collectionViewLayout, layout)
+            .environmentObject(model)
     }
 }

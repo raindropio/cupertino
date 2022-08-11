@@ -3,7 +3,7 @@ import API
 import UI
 
 struct Preview: View {
-    var raindrop: Raindrop
+    var raindrop: Raindrop.ID
     
     @State private var tags: [String] = ["angular", "google"]
     
@@ -15,11 +15,11 @@ struct Preview: View {
             }
             
             Section {
-                TokenField(
-                    $tags,
-                    prompt: "Add tags...",
-                    suggestions: ["angular", "backend", "books", "cd", "electron", "engineering", "fonts", "free", "icons", "inclusive", "invalid_cache", "invalid_parser", "ios", "javascript", "JSDoc"]
-                ) {
+                MultiPicker(selection: $tags, prompt: "Add tags...") { filter in
+                    ForEach(Tag.preview) {
+                        Text($0.id)
+                    }
+                } label: {
                     Label("Tags", systemImage: "number")
                 }
                     .autocorrectionDisabled(true)
@@ -32,7 +32,7 @@ struct Preview: View {
             .formStyle(.grouped)
             .scrollDismissesKeyboard(.never)
             .controlSize(.large)
-            .navigationTitle(raindrop.title)
+            .navigationTitle("Edit")
             .onSubmit(of: .text) {
                 print("sibmit")
             }
