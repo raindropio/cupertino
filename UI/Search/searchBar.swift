@@ -5,12 +5,14 @@ public extension View {
         withToolbar: Bool? = nil,
         cancelable: Bool? = nil,
         clearable: Bool? = nil,
+        scopeBarActivation: UISearchController.ScopeBarActivation = .automatic,
         tokenBackgroundColor: Color? = nil
     ) -> some View {
         modifier(SearchBarModifier(
             withToolbar: withToolbar,
             cancelable: cancelable,
             clearable: clearable,
+            scopeBarActivation: scopeBarActivation,
             tokenBackgroundColor: tokenBackgroundColor
         ))
     }
@@ -20,6 +22,7 @@ fileprivate struct SearchBarModifier: ViewModifier {
     var withToolbar: Bool?
     var cancelable: Bool?
     var clearable: Bool?
+    var scopeBarActivation: UISearchController.ScopeBarActivation
     var tokenBackgroundColor: Color? = nil
     
     @State private var controller: UISearchController?
@@ -34,6 +37,8 @@ fileprivate struct SearchBarModifier: ViewModifier {
                     }
                 }
             .onChange(of: controller) {
+                $0?.scopeBarActivation = scopeBarActivation
+
                 if let withToolbar {
                     $0?.hidesNavigationBarDuringPresentation = !withToolbar
                 }
@@ -62,6 +67,9 @@ fileprivate struct SearchBarModifier: ViewModifier {
                     controller?.searchBar.searchTextField.clearButtonMode = clearable ? .always : .never
                 }
             }
+            .onChange(of: scopeBarActivation) {
+                controller?.scopeBarActivation = $0
+            }
             .onChange(of: tokenBackgroundColor) {
                 if let tokenBackgroundColor = $0 {
                     controller?.searchBar.searchTextField.tokenBackgroundColor = UIColor(tokenBackgroundColor)
@@ -69,4 +77,3 @@ fileprivate struct SearchBarModifier: ViewModifier {
             }
     }
 }
-

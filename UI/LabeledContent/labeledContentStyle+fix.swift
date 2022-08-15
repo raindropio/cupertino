@@ -1,5 +1,9 @@
 import SwiftUI
 
+public extension LabeledContentStyle where Self == AutomaticLabeledContentStyle {
+    static var fix: LabeledContentStyleFix { LabeledContentStyleFix() }
+}
+
 public struct LabeledContentStyleFix: LabeledContentStyle {
     public func makeBody(configuration: Configuration) -> some View {
         HStack {

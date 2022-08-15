@@ -34,34 +34,40 @@ fileprivate struct WithSearchController: UIViewControllerRepresentable {
     func updateUIViewController(_ controller: VC, context: Context) {}
     
     class VC: UIViewController {
-        var onWillAppear: (UISearchController) -> Void
+        var onAvailable: (UISearchController) -> Void
         var onDidAppear: (UISearchController) -> Void
         var onWillDisappear: (UISearchController) -> Void
         
         init(
-            onWillAppear: @escaping (UISearchController) -> Void,
+            onAvailable: @escaping (UISearchController) -> Void,
             onDidAppear: @escaping (UISearchController) -> Void,
             onDisappear: @escaping (UISearchController) -> Void
         ) {
-            self.onWillAppear = onWillAppear
+            self.onAvailable = onAvailable
             self.onDidAppear = onDidAppear
             self.onWillDisappear = onDisappear
             super.init(nibName: nil, bundle: nil)
         }
         
-        override func viewWillAppear(_ animated: Bool) {
-            super.viewWillAppear(animated)
-            
+        override func willMove(toParent parent: UIViewController?) {
+            super.willMove(toParent: parent)
             if let searchController = parent?.navigationItem.searchController {
-                onWillAppear(searchController)
+                onAvailable(searchController)
+                
+                //fix search blink, ios glitch
+                if parent?.navigationItem.hidesSearchBarWhenScrolling ?? false,
+                   searchController.searchBarPlacement != .inline {
+                    searchController.searchBar.isHidden = true
+                }
             }
         }
         
         override func viewDidAppear(_ animated: Bool) {
             super.viewDidAppear(animated)
-            
+                        
             if let searchController = parent?.navigationItem.searchController {
                 onDidAppear(searchController)
+                searchController.searchBar.isHidden = false
             }
         }
         
