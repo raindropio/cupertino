@@ -1,0 +1,45 @@
+import SwiftUI
+
+struct GridStaggered<D: RandomAccessCollection, Content: View> {
+    @Environment(\.horizontalSizeClass) private var horizontalSizeClass
+    @Environment(\.gridScrollSize) private var size
+
+    let data: D
+    let width: CGFloat
+    let content: (D) -> Content
+    
+    init(_ data: D, _ width: CGFloat, content: @escaping (D) -> Content) {
+        self.data = data
+        self.width = width
+        self.content = content
+    }
+}
+
+extension GridStaggered: View {
+    func group(_ columns: Int, _ column: Int) -> D {
+        let rows: [Int] = Array(0..<Int(ceil(CGFloat(data.count) / CGFloat(max(columns,1)))))
+        
+        return rows.compactMap {
+            let index = $0 * columns + column
+            
+            if index < data.count {
+                return data[index as! D.Index]
+            } else {
+                return nil
+            }
+        } as! D
+    }
+    
+    var body: some View {
+        let columns = max(Int(size.width / width), 1)
+        
+        HStack(alignment: .top, spacing: 12) {
+            ForEach(0..<columns, id: \.self) { column in
+                LazyVStack(spacing: 12) {
+                    content(group(columns, column))
+                }
+            }
+        }
+            .padding(horizontalSizeClass == .compact ? 16 : 24)
+    }
+}

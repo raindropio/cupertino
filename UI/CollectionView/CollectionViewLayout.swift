@@ -2,7 +2,7 @@ import SwiftUI
 
 public enum CollectionViewLayout: Hashable {
     case list
-    case grid(CGFloat)
+    case grid(CGFloat, Bool)
 }
 
 private struct CollectionViewLayoutKey: EnvironmentKey {

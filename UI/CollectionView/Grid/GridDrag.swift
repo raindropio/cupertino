@@ -14,7 +14,8 @@ extension GridDrag: ViewModifier {
                 if dragging.count == 1,
                    let origin = dragging.first,
                    let from = getIndex(origin),
-                   let to = getIndex(element){
+                   let to = getIndex(element),
+                    from != to {
                     model.reorder?(origin.id, to > from ? to + 1 : to)
                     return true
                 }

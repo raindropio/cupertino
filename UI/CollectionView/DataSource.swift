@@ -22,9 +22,15 @@ extension DataSource: View {
         case .list:
             ListForEach(data, content: content)
             
-        case .grid(let width):
-            GridColumns(width) {
-                GridForEach(data, content: content)
+        case .grid(let width, let staggered):
+            if staggered {
+                GridStaggered(data, width) { group in
+                    GridForEach(group, content: content)
+                }
+            } else {
+                GridColumns(width) {
+                    GridForEach(data, content: content)
+                }
             }
             
         case nil:

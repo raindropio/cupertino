@@ -2,7 +2,6 @@ import SwiftUI
 
 public struct CollectionView<Content: View, ID: Hashable, Menu: View> {
     @StateObject private var model = CollectionViewModel<ID>()
-    @Environment(\.editMode) private var editMode
     
     var layout: CollectionViewLayout
     @Binding var selection: Set<ID>
@@ -37,17 +36,21 @@ extension CollectionView: View {
                 List(selection: $selection, content: content)
                     .contextMenu(forSelectionType: ID.self, menu: contextMenu)
                 
-            case .grid(_):
-                GridScrollView(content: content)
+            case .grid(_, _):
+                GridScrollView {
+                    content()
+                        .innerEditMode {
+                            model.isEditing = $0.isEditing
+                            
+                            //reset selection on edit mode exit
+                            if $0 == .inactive {
+                                selection = .init()
+                            }
+                        }
+                }
                     .task {
                         model.action = action
                         model.contextMenu = { AnyView(contextMenu($0)) }
-                    }
-                    .onChange(of: editMode?.wrappedValue) {
-                        //reset selection on edit mode exit
-                        if $0 == .inactive {
-                            selection = .init()
-                        }
                     }
             }
         }
@@ -56,8 +59,8 @@ extension CollectionView: View {
             }
             .task(id: selection) { model.selection = selection }
             .task(id: model.selection) { selection = model.selection }
-            .task(id: editMode?.wrappedValue.isEditing) { model.isEditing = editMode?.wrappedValue.isEditing ?? false }
             .environment(\.collectionViewLayout, layout)
             .environmentObject(model)
     }
 }
+
