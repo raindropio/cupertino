@@ -1,14 +1,14 @@
 import SwiftUI
 
 extension View {
-    func withSearchController(
-        _ searchController: Binding<UISearchController?>,
+    func withNavigationController(
+        _ navigationController: Binding<UINavigationController?>,
         onAppear: (() -> Void)? = nil,
         onDisappear: (() -> Void)? = nil
     ) -> some View {
         overlay {
-            WithSearchController(
-                searchController: searchController,
+            WithNavigationController(
+                navigationController: navigationController,
                 onAppear: onAppear,
                 onDisappear: onDisappear
             )
@@ -17,14 +17,14 @@ extension View {
     }
 }
 
-fileprivate struct WithSearchController: UIViewControllerRepresentable {
-    @Binding var searchController: UISearchController?
+fileprivate struct WithNavigationController: UIViewControllerRepresentable {
+    @Binding var navigationController: UINavigationController?
     var onAppear: (() -> Void)?
     var onDisappear: (() -> Void)?
     
     func makeUIViewController(context: Context) -> VC {
         VC {
-            searchController = $0
+            navigationController = $0
         } onDidAppear: { _ in
             onAppear?()
         } onDisappear: { _ in
@@ -35,14 +35,14 @@ fileprivate struct WithSearchController: UIViewControllerRepresentable {
     func updateUIViewController(_ controller: VC, context: Context) {}
     
     class VC: UIViewController {
-        var onAvailable: (UISearchController) -> Void
-        var onDidAppear: (UISearchController) -> Void
-        var onWillDisappear: (UISearchController) -> Void
+        var onAvailable: (UINavigationController) -> Void
+        var onDidAppear: (UINavigationController) -> Void
+        var onWillDisappear: (UINavigationController) -> Void
         
         init(
-            onAvailable: @escaping (UISearchController) -> Void,
-            onDidAppear: @escaping (UISearchController) -> Void,
-            onDisappear: @escaping (UISearchController) -> Void
+            onAvailable: @escaping (UINavigationController) -> Void,
+            onDidAppear: @escaping (UINavigationController) -> Void,
+            onDisappear: @escaping (UINavigationController) -> Void
         ) {
             self.onAvailable = onAvailable
             self.onDidAppear = onDidAppear
@@ -52,31 +52,24 @@ fileprivate struct WithSearchController: UIViewControllerRepresentable {
         
         override func willMove(toParent parent: UIViewController?) {
             super.willMove(toParent: parent)
-            if let searchController = parent?.navigationItem.searchController {
-                onAvailable(searchController)
-                
-                //fix search blink, ios glitch
-                if parent?.navigationItem.hidesSearchBarWhenScrolling ?? false,
-                   searchController.searchBarPlacement != .inline {
-                    searchController.searchBar.isHidden = true
-                }
+            if let navigationController = parent?.navigationController {
+                onAvailable(navigationController)
             }
         }
         
         override func viewDidAppear(_ animated: Bool) {
             super.viewDidAppear(animated)
                         
-            if let searchController = parent?.navigationItem.searchController {
-                onDidAppear(searchController)
-                searchController.searchBar.isHidden = false
+            if let navigationController = parent?.navigationController {
+                onDidAppear(navigationController)
             }
         }
         
         override func viewWillDisappear(_ animated: Bool) {
             super.viewWillDisappear(animated)
             
-            if let searchController = parent?.navigationItem.searchController {
-                onWillDisappear(searchController)
+            if let navigationController = parent?.navigationController {
+                onWillDisappear(navigationController)
             }
         }
         
@@ -85,3 +78,4 @@ fileprivate struct WithSearchController: UIViewControllerRepresentable {
         }
     }
 }
+

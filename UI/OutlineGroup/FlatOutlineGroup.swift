@@ -1,5 +1,4 @@
 import SwiftUI
-import API
 
 public struct FlatOutlineGroup<Element: Identifiable, Leaf: View> {
     var data: [Element]

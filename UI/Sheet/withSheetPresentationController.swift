@@ -6,12 +6,13 @@ extension View {
         onAppear: (() -> Void)? = nil,
         onDisappear: (() -> Void)? = nil
     ) -> some View {
-        background {
+        overlay {
             WithSheetPresentationController(
                 sheetPresentationController: sheetPresentationController,
                 onAppear: onAppear,
                 onDisappear: onDisappear
             )
+                .opacity(0)
         }
     }
 }
