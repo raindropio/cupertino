@@ -1,17 +1,22 @@
 import SwiftUI
+import Combine
 
 public extension View {
     func searchBar(
         withToolbar: Bool? = nil,
+        withButton: Bool? = nil,
         cancelable: Bool? = nil,
         clearable: Bool? = nil,
+        autoReturnKey: Bool? = nil,
         scopeBarActivation: UISearchController.ScopeBarActivation = .automatic,
         tokenBackgroundColor: Color? = nil
     ) -> some View {
         modifier(SearchBarModifier(
             withToolbar: withToolbar,
+            withButton: withButton,
             cancelable: cancelable,
             clearable: clearable,
+            autoReturnKey: autoReturnKey,
             scopeBarActivation: scopeBarActivation,
             tokenBackgroundColor: tokenBackgroundColor
         ))
@@ -20,12 +25,15 @@ public extension View {
 
 fileprivate struct SearchBarModifier: ViewModifier {
     var withToolbar: Bool?
+    var withButton: Bool?
     var cancelable: Bool?
     var clearable: Bool?
+    var autoReturnKey: Bool?
     var scopeBarActivation: UISearchController.ScopeBarActivation
     var tokenBackgroundColor: Color? = nil
     
     @State private var controller: UISearchController?
+    @State private var showToolbarButton = true
     
     func body(content: Content) -> some View {
         content
@@ -36,9 +44,19 @@ fileprivate struct SearchBarModifier: ViewModifier {
                         controller?.isActive = false
                     }
                 }
+                onVisibilityChange: {
+                    showToolbarButton = (withButton == true) && !$0
+                }
+            .toolbar {
+                if showToolbarButton {
+                    ToolbarItem {
+                        SearchButton(controller: $controller)
+                    }
+                }
+            }
             .onChange(of: controller) {
                 $0?.scopeBarActivation = scopeBarActivation
-
+                                
                 if let withToolbar {
                     $0?.hidesNavigationBarDuringPresentation = !withToolbar
                 }
@@ -47,6 +65,9 @@ fileprivate struct SearchBarModifier: ViewModifier {
                 }
                 if let clearable {
                     $0?.searchBar.searchTextField.clearButtonMode = clearable ? .always : .never
+                }
+                if let autoReturnKey {
+                    $0?.searchBar.searchTextField.enablesReturnKeyAutomatically = autoReturnKey
                 }
                 if let tokenBackgroundColor {
                     $0?.searchBar.searchTextField.tokenBackgroundColor = UIColor(tokenBackgroundColor)
@@ -65,6 +86,11 @@ fileprivate struct SearchBarModifier: ViewModifier {
             .onChange(of: clearable) {
                 if let clearable = $0 {
                     controller?.searchBar.searchTextField.clearButtonMode = clearable ? .always : .never
+                }
+            }
+            .onChange(of: autoReturnKey) {
+                if let autoReturnKey = $0 {
+                    controller?.searchBar.searchTextField.enablesReturnKeyAutomatically = autoReturnKey
                 }
             }
             .onChange(of: scopeBarActivation) {

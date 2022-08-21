@@ -1,14 +1,14 @@
 import SwiftUI
 
 public extension View {
-    func withNavigationController(
-        _ navigationController: Binding<UINavigationController?>,
+    func withNavigationItem(
+        _ navigationItem: Binding<UINavigationItem?>,
         onAppear: (() -> Void)? = nil,
         onDisappear: (() -> Void)? = nil
     ) -> some View {
         overlay {
-            WithNavigationController(
-                navigationController: navigationController,
+            WithNavigationItem(
+                navigationItem: navigationItem,
                 onAppear: onAppear,
                 onDisappear: onDisappear
             )
@@ -17,14 +17,14 @@ public extension View {
     }
 }
 
-fileprivate struct WithNavigationController: UIViewControllerRepresentable {
-    @Binding var navigationController: UINavigationController?
+fileprivate struct WithNavigationItem: UIViewControllerRepresentable {
+    @Binding var navigationItem: UINavigationItem?
     var onAppear: (() -> Void)?
     var onDisappear: (() -> Void)?
     
     func makeUIViewController(context: Context) -> VC {
         VC {
-            navigationController = $0
+            navigationItem = $0
         } onDidAppear: { _ in
             onAppear?()
         } onDisappear: { _ in
@@ -35,14 +35,14 @@ fileprivate struct WithNavigationController: UIViewControllerRepresentable {
     func updateUIViewController(_ controller: VC, context: Context) {}
     
     class VC: UIViewController {
-        var onAvailable: (UINavigationController) -> Void
-        var onDidAppear: (UINavigationController) -> Void
-        var onWillDisappear: (UINavigationController) -> Void
+        var onAvailable: (UINavigationItem) -> Void
+        var onDidAppear: (UINavigationItem) -> Void
+        var onWillDisappear: (UINavigationItem) -> Void
         
         init(
-            onAvailable: @escaping (UINavigationController) -> Void,
-            onDidAppear: @escaping (UINavigationController) -> Void,
-            onDisappear: @escaping (UINavigationController) -> Void
+            onAvailable: @escaping (UINavigationItem) -> Void,
+            onDidAppear: @escaping (UINavigationItem) -> Void,
+            onDisappear: @escaping (UINavigationItem) -> Void
         ) {
             self.onAvailable = onAvailable
             self.onDidAppear = onDidAppear
@@ -52,24 +52,24 @@ fileprivate struct WithNavigationController: UIViewControllerRepresentable {
         
         override func willMove(toParent parent: UIViewController?) {
             super.willMove(toParent: parent)
-            if let navigationController = parent?.navigationController {
-                onAvailable(navigationController)
+            if let navigationItem = parent?.navigationItem {
+                onAvailable(navigationItem)
             }
         }
         
         override func viewDidAppear(_ animated: Bool) {
             super.viewDidAppear(animated)
                         
-            if let navigationController = parent?.navigationController {
-                onDidAppear(navigationController)
+            if let navigationItem = parent?.navigationItem {
+                onDidAppear(navigationItem)
             }
         }
         
         override func viewWillDisappear(_ animated: Bool) {
             super.viewWillDisappear(animated)
             
-            if let navigationController = parent?.navigationController {
-                onWillDisappear(navigationController)
+            if let navigationItem = parent?.navigationItem {
+                onWillDisappear(navigationItem)
             }
         }
         

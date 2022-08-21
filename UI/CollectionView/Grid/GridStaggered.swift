@@ -17,7 +17,7 @@ struct GridStaggered<D: RandomAccessCollection, Content: View> {
 
 extension GridStaggered: View {
     func group(_ columns: Int, _ column: Int) -> D {
-        let rows: [Int] = Array(0..<Int(ceil(CGFloat(data.count) / CGFloat(max(columns,1)))))
+        let rows: [Int] = Array(0..<Int(ceil(CGFloat(data.count) / CGFloat(columns))))
         
         return rows.compactMap {
             let index = $0 * columns + column
@@ -31,7 +31,7 @@ extension GridStaggered: View {
     }
     
     var body: some View {
-        let columns = max(Int(size.width / width), 1)
+        let columns = min(max(Int(size.width / width), 1), data.count)
         
         HStack(alignment: .top, spacing: 12) {
             ForEach(0..<columns, id: \.self) { column in

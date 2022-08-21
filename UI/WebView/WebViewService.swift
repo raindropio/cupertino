@@ -4,13 +4,13 @@ import WebKit
 
 @dynamicMemberLookup
 public class WebViewService: NSObject, ObservableObject, WKNavigationDelegate, WKUIDelegate, UIScrollViewDelegate {
+    private var cancellables = Set<AnyCancellable>()
+    private var startingUrl: URL?
+
+    @Published public var error: Error?
     @Published public var prefersHiddenToolbars: Bool = false
-    
-    private var observers: [NSKeyValueObservation] = []
     public var webView: WKWebView
     public var refreshControl: UIRefreshControl
-    
-    private var startingUrl: URL?
     
     public override init() {
         webView = .init()
@@ -21,7 +21,7 @@ public class WebViewService: NSObject, ObservableObject, WKNavigationDelegate, W
         webView.navigationDelegate = self
         
         //appearance
-        webView.allowsBackForwardNavigationGestures = false
+        webView.allowsBackForwardNavigationGestures = true
         webView.scrollView.contentInsetAdjustmentBehavior = .always
         webView.scrollView.delegate = self
         setTransparent(true)
@@ -37,15 +37,17 @@ public class WebViewService: NSObject, ObservableObject, WKNavigationDelegate, W
         refreshControl.addTarget(self, action: #selector(reloadWebView(_:)), for: .valueChanged)
         
         //observe changes
-        observers = [
-            subscriber(for: \.title),
-            subscriber(for: \.url),
-            subscriber(for: \.isLoading),
-            subscriber(for: \.estimatedProgress),
-            subscriber(for: \.canGoBack),
-            subscriber(for: \.canGoForward),
-            subscriber(for: \.underPageBackgroundColor)
-        ]
+        Publishers.MergeMany([
+            webView.url.publisher.map({ _ in }).eraseToAnyPublisher(),
+            webView.themeColor.publisher.map({ _ in }).eraseToAnyPublisher(),
+            webView.underPageBackgroundColor.publisher.map({ _ in }).eraseToAnyPublisher(),
+            webView.publisher(for: \.estimatedProgress).map({ _ in }).eraseToAnyPublisher(),
+            webView.publisher(for: \.isLoading).map({ _ in }).eraseToAnyPublisher(),
+            webView.publisher(for: \.backForwardList).map({ _ in }).eraseToAnyPublisher()
+        ])
+            .debounce(for: .milliseconds(100), scheduler: RunLoop.main)
+            .sink { [weak self] _ in self?.webViewChanged() }
+            .store(in: &cancellables)
     }
     
     public subscript<T>(dynamicMember keyPath: KeyPath<WKWebView, T>) -> T {
@@ -61,17 +63,17 @@ public class WebViewService: NSObject, ObservableObject, WKNavigationDelegate, W
         }
     }
     
+    //MARK: - Private methods
+    private func webViewChanged() {
+        objectWillChange.send()
+        refreshControl.tintColor = webView.underPageBackgroundColor.isLight ? .lightGray : .white
+    }
+    
     #if canImport(UIKit)
-    @objc func reloadWebView(_ sender: UIRefreshControl) {
+    @objc private func reloadWebView(_ sender: UIRefreshControl) {
         webView.reload()
     }
     #endif
-    
-    private func subscriber<Value>(for keyPath: KeyPath<WKWebView, Value>) -> NSKeyValueObservation {
-        webView.observe(keyPath) { [weak self] _, _ in
-            self?.objectWillChange.send()
-        }
-    }
     
     private func setTransparent(_ transparent: Bool, _ withAnimation: Bool = false) {
         #if canImport(UIKit)
@@ -90,6 +92,7 @@ public class WebViewService: NSObject, ObservableObject, WKNavigationDelegate, W
         #endif
     }
     
+    //MARK: - Scroll View Delegate
     public func scrollViewWillEndDragging(
         _ scrollView: UIScrollView,
         withVelocity velocity: CGPoint,
@@ -99,7 +102,6 @@ public class WebViewService: NSObject, ObservableObject, WKNavigationDelegate, W
         let newY = targetContentOffset.pointee.y
         
         if newY == oldY {
-            
         } else if newY > oldY, newY > scrollView.frame.height / 2 {
             if !prefersHiddenToolbars {
                 prefersHiddenToolbars = true
@@ -116,9 +118,10 @@ public class WebViewService: NSObject, ObservableObject, WKNavigationDelegate, W
         return true
     }
     
+    //MARK: - WebView Delegate
     //start loading
     public func webView(_ webView: WKWebView, didStartProvisionalNavigation navigation: WKNavigation!) {
-        
+        self.error = nil
     }
     
     //getting data
@@ -128,12 +131,29 @@ public class WebViewService: NSObject, ObservableObject, WKNavigationDelegate, W
     
     //end loading
     public func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
+        self.error = nil
         refreshControl.endRefreshing()
+        
+        if webView.scrollView.contentOffset.y <= 0 && prefersHiddenToolbars {
+            prefersHiddenToolbars = false
+        }
     }
     
     //error loading
     public func webView(_ webView: WKWebView, didFail navigation: WKNavigation!, withError error: Error) {
+        self.error = error
         setTransparent(false)
+        refreshControl.endRefreshing()
+
+        if webView.scrollView.contentOffset.y <= 0 && prefersHiddenToolbars {
+            prefersHiddenToolbars = false
+        }
+    }
+    
+    public func webView(_ webView: WKWebView, didFailProvisionalNavigation navigation: WKNavigation!, withError error: Error) {
+        setTransparent(false)
+        self.error = error
+        refreshControl.endRefreshing()
     }
     
     //window.open, etc

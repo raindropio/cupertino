@@ -1,16 +1,19 @@
 import SwiftUI
+import Combine
 
 extension View {
     func withSearchController(
         _ searchController: Binding<UISearchController?>,
         onAppear: (() -> Void)? = nil,
-        onDisappear: (() -> Void)? = nil
+        onDisappear: (() -> Void)? = nil,
+        onVisibilityChange: ((Bool) -> Void)? = nil
     ) -> some View {
         overlay {
             WithSearchController(
                 searchController: searchController,
                 onAppear: onAppear,
-                onDisappear: onDisappear
+                onDisappear: onDisappear,
+                onVisibilityChange: onVisibilityChange
             )
                 .opacity(0)
         }
@@ -21,6 +24,7 @@ fileprivate struct WithSearchController: UIViewControllerRepresentable {
     @Binding var searchController: UISearchController?
     var onAppear: (() -> Void)?
     var onDisappear: (() -> Void)?
+    var onVisibilityChange: ((Bool) -> Void)?
     
     func makeUIViewController(context: Context) -> VC {
         VC {
@@ -29,37 +33,54 @@ fileprivate struct WithSearchController: UIViewControllerRepresentable {
             onAppear?()
         } onDisappear: { _ in
             onDisappear?()
+        } onVisibilityChange: { _, visible in
+            onVisibilityChange?(visible)
         }
     }
 
     func updateUIViewController(_ controller: VC, context: Context) {}
     
     class VC: UIViewController {
+        private var cancellables = Set<AnyCancellable>()
+        
         var onAvailable: (UISearchController) -> Void
         var onDidAppear: (UISearchController) -> Void
         var onWillDisappear: (UISearchController) -> Void
+        var onVisibilityChange: (UISearchController, Bool) -> Void
         
         init(
             onAvailable: @escaping (UISearchController) -> Void,
             onDidAppear: @escaping (UISearchController) -> Void,
-            onDisappear: @escaping (UISearchController) -> Void
+            onDisappear: @escaping (UISearchController) -> Void,
+            onVisibilityChange: @escaping (UISearchController, Bool) -> Void
         ) {
             self.onAvailable = onAvailable
             self.onDidAppear = onDidAppear
             self.onWillDisappear = onDisappear
+            self.onVisibilityChange = onVisibilityChange
             super.init(nibName: nil, bundle: nil)
+        }
+        
+        private func observe(_ controller: UISearchController) {
+            cancellables = .init()
+            
+            //track visibility
+            controller.searchBar.publisher(for: \.frame)
+                .removeDuplicates { ($0.height == 0) == ($1.height == 0) }
+                .sink { [weak controller] in
+                    if let controller {
+                        let isVisible = !controller.searchBar.isHidden && ($0.height != 0)
+                        self.onVisibilityChange(controller, isVisible)
+                    }
+                }
+                .store(in: &cancellables)
         }
         
         override func willMove(toParent parent: UIViewController?) {
             super.willMove(toParent: parent)
             if let searchController = parent?.navigationItem.searchController {
                 onAvailable(searchController)
-                
-                //fix search blink, ios glitch
-                if parent?.navigationItem.hidesSearchBarWhenScrolling ?? false,
-                   searchController.searchBarPlacement != .inline {
-                    searchController.searchBar.isHidden = true
-                }
+                observe(searchController)
             }
         }
         
@@ -68,7 +89,6 @@ fileprivate struct WithSearchController: UIViewControllerRepresentable {
                         
             if let searchController = parent?.navigationItem.searchController {
                 onDidAppear(searchController)
-                searchController.searchBar.isHidden = false
             }
         }
         

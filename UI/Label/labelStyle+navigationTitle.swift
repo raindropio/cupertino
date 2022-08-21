@@ -12,7 +12,7 @@ public struct NavigationTitleLabelStyle: LabelStyle {
                 .lineLimit(1)
         } icon: {
             configuration.icon
-                .frame(width: 24, height: 24)
+                .frame(width: 28, height: 28)
         }
             .labelStyle(.titleAndIcon)
     }

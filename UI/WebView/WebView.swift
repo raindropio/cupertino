@@ -16,27 +16,33 @@ public struct WebView {
 extension WebView: View {
     public var body: some View {
         let pageScheme: ColorScheme = (service.underPageBackgroundColor?.isLight ?? false) ? .light : .dark
-        let overrideScheme: ColorScheme? = colorScheme != pageScheme ? pageScheme : nil
-        
+        let overrideScheme: ColorScheme? = service.error == nil && colorScheme != pageScheme ? pageScheme : nil
+                
         ZStack(alignment: .topLeading) {
-            NativeWebView(service: service, url: url)
-                .ignoresSafeArea()
+            if service.error != nil {
+                WebViewError(service: service)
+                    .frame(maxWidth: .infinity, maxHeight: .infinity)
+            } else {
+                NativeWebView(service: service, url: url)
+                    .ignoresSafeArea()
+            }
             
             Rectangle()
                 .foregroundColor(Color(service.underPageBackgroundColor))
-                .overlay(.ultraThickMaterial)
-                .frame(height: 1)
+                .overlay(.bar)
+                .frame(height: 0)
                 .opacity(service.prefersHiddenToolbars ? 1 : 0)
-                .animation(nil, value: service.prefersHiddenToolbars)
             
             ProgressView(value: service.estimatedProgress, total: 1)
                 .progressViewStyle(.simpleHorizontal)
                 .opacity(service.isLoading ? 1 : 0)
                 .animation(.default, value: service.isLoading)
         }
-            .toolbarColorScheme(overrideScheme)
+//            .environment(\.colorScheme, overrideScheme ?? colorScheme)
+//            .toolbarColorScheme(overrideScheme)
             .toolbarBackground(overrideScheme != nil ? .visible : .automatic)
             .toolbar(service.prefersHiddenToolbars ? .hidden : .automatic, for: .navigationBar, .bottomBar, .tabBar)
             .animation(.default, value: service.prefersHiddenToolbars)
+            .animation(.default, value: overrideScheme)
     }
 }
