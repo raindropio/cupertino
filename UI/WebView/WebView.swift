@@ -38,9 +38,9 @@ extension WebView: View {
                 .opacity(service.isLoading ? 1 : 0)
                 .animation(.default, value: service.isLoading)
         }
-//            .environment(\.colorScheme, overrideScheme ?? colorScheme)
-//            .toolbarColorScheme(overrideScheme)
-            .toolbarBackground(overrideScheme != nil ? .visible : .automatic)
+            .environment(\.colorScheme, overrideScheme ?? colorScheme)
+            .toolbarColorScheme(overrideScheme)
+            .toolbarBackground(.visible, for: .bottomBar)
             .toolbar(service.prefersHiddenToolbars ? .hidden : .automatic, for: .navigationBar, .bottomBar, .tabBar)
             .animation(.default, value: service.prefersHiddenToolbars)
             .animation(.default, value: overrideScheme)

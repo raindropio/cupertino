@@ -23,7 +23,7 @@ public extension View {
     }
 }
 
-fileprivate struct SearchBarModifier: ViewModifier {
+fileprivate struct SearchBarModifier: ViewModifier {    
     var withToolbar: Bool?
     var withButton: Bool?
     var cancelable: Bool?
@@ -49,7 +49,7 @@ fileprivate struct SearchBarModifier: ViewModifier {
                 }
             .toolbar {
                 if showToolbarButton {
-                    ToolbarItem {
+                    ToolbarItem(placement: .primaryAction) {
                         SearchButton(controller: $controller)
                     }
                 }

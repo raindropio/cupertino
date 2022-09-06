@@ -15,5 +15,6 @@ public struct NavigationTitleLabelStyle: LabelStyle {
                 .frame(width: 28, height: 28)
         }
             .labelStyle(.titleAndIcon)
+            .frame(maxHeight: .infinity)
     }
 }
