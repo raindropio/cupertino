@@ -1,8 +1,6 @@
 import SwiftUI
 
 struct GridColumns<Content: View> {
-    @Environment(\.horizontalSizeClass) var horizontalSizeClass
-
     let width: CGFloat
     let content: () -> Content
     
@@ -19,6 +17,6 @@ extension GridColumns: View {
         ]
         
         LazyVGrid(columns: columns, spacing: 12, content: content)
-            .padding(horizontalSizeClass == .compact ? 16 : 24)
+            .padding(.horizontal, 16)
     }
 }

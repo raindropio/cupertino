@@ -17,7 +17,7 @@ public struct CollectionView<Content: View, ID: Hashable, Menu: View> {
         @ViewBuilder content: @escaping () -> Content,
         action: ((ID) -> Void)? = nil,
         reorder: ((ID, Int) -> Void)? = nil,
-        contextMenu: @escaping (Set<ID>) -> Menu
+        @ViewBuilder contextMenu: @escaping (Set<ID>) -> Menu
     ) {
         self.layout = layout
         self._selection = selection
@@ -34,7 +34,11 @@ extension CollectionView: View {
             switch layout {
             case .list:
                 List(selection: $selection, content: content)
-                    .contextMenu(forSelectionType: ID.self, menu: contextMenu)
+                    .contextMenu(forSelectionType: ID.self, menu: contextMenu) {
+                        if let id = $0.first {
+                            action?(id)
+                        }
+                    }
                 
             case .grid(_, _):
                 GridScrollView {

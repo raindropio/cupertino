@@ -1,7 +1,6 @@
 import SwiftUI
 
 struct GridStaggered<D: RandomAccessCollection, Content: View> {
-    @Environment(\.horizontalSizeClass) private var horizontalSizeClass
     @Environment(\.gridScrollSize) private var size
 
     let data: D
@@ -40,6 +39,6 @@ extension GridStaggered: View {
                 }
             }
         }
-            .padding(horizontalSizeClass == .compact ? 16 : 24)
+            .padding(.horizontal, 16)
     }
 }
