@@ -84,10 +84,22 @@ fileprivate struct WithSearchController: UIViewControllerRepresentable {
             }
         }
         
+        override func viewWillAppear(_ animated: Bool) {
+            super.viewWillAppear(animated)
+            
+            if let navigationItem = parent?.navigationItem,
+                let searchController = navigationItem.searchController {
+                if navigationItem.hidesSearchBarWhenScrolling {
+                    searchController.searchBar.isHidden = true
+                }
+            }
+        }
+        
         override func viewDidAppear(_ animated: Bool) {
             super.viewDidAppear(animated)
                         
             if let searchController = parent?.navigationItem.searchController {
+                searchController.searchBar.isHidden = false
                 onDidAppear(searchController)
             }
         }

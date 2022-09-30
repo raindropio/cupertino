@@ -12,10 +12,7 @@ extension GridCard: ViewModifier {
         let isSelected = model.isSelected(element.id)
         let isEditing = editMode?.wrappedValue.isEditing ?? false
 
-        VStack {
-            content
-        }
-            .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .leading)
+        content
             .background(
                 isSelected ?
                     Color(UIColor.tertiaryLabel) :

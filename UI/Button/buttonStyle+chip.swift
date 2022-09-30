@@ -19,6 +19,7 @@ public struct ChipButtonStyle: ButtonStyle {
             )
             .clipShape(RoundedRectangle(cornerRadius: 8))
             .opacity(isEnabled ? 1 : 0.4)
+            .hoverEffect(.lift)
     }
 }
 

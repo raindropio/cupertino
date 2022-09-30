@@ -42,7 +42,6 @@ extension SuperTabView: View {
             }
         )) {
             content()
-                .toolbarBackground(.bar, for: .tabBar)
                 .withTabBarController($controller)
         }
             .onAppear {

@@ -1,6 +1,8 @@
 import SwiftUI
 
 struct GridScrollView<Content: View> {
+    @ScaledMetric private var gap = CollectionViewLayout.gap(.grid(0, false))
+
     var content: () -> Content
 }
 
@@ -9,11 +11,13 @@ extension GridScrollView: View {
         GeometryReader { geo in
             ScrollView(.vertical) {
                 content()
+                    //size / insets
                     .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .leading)
+                    ._safeAreaInsets(.init(top: 0, leading: gap, bottom: 0, trailing: gap))
             }
                 .environment(\.gridScrollSize, geo.size)
-                //appearance
                 .frame(maxWidth: .infinity, maxHeight: .infinity)
+                //appearance
                 .scrollContentBackground(.hidden)
                 .background(Color(UIColor.systemGroupedBackground))
         }
