@@ -37,9 +37,12 @@ fileprivate struct CustomTitleView<S: StringProtocol, I: View>: ViewModifier {
             .withNavigationController($controller)
             .onChange(of: controller) {
                 cancellables = .init()
+                
+                let largeBarHeight = ($0?.navigationBar.frame.height ?? 0) - 30
+                
                 $0?.navigationBar.publisher(for: \.frame)
-                    .removeDuplicates { ($0.height >= 90) == ($1.height >= 90) }
-                    .sink { isLargeTitle = $0.height >= 90 }
+                    .removeDuplicates { ($0.height >= largeBarHeight) == ($1.height >= largeBarHeight) }
+                    .sink { isLargeTitle = $0.height >= largeBarHeight }
                     .store(in: &cancellables)
             }
             #endif

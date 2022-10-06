@@ -41,7 +41,8 @@ fileprivate struct SearchBarModifier: ViewModifier {
                 onDisappear: {
                     //otherwise buggy
                     if let withToolbar, withToolbar {
-                        controller?.isActive = false
+//                        controller?.isActive = false
+                        controller?.searchBar.resignFirstResponder()
                     }
                 }
                 onVisibilityChange: {
@@ -56,7 +57,7 @@ fileprivate struct SearchBarModifier: ViewModifier {
             }
             .onChange(of: controller) {
                 $0?.scopeBarActivation = scopeBarActivation
-                                
+                   
                 if let withToolbar {
                     $0?.hidesNavigationBarDuringPresentation = !withToolbar
                 }

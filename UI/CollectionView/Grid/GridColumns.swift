@@ -1,6 +1,7 @@
 import SwiftUI
 
 struct GridColumns<Content: View> {
+    @Environment(\.gridScrollColumns) private var columns
     @ScaledMetric private var gap = CollectionViewLayout.gap(.grid(0, false))
     
     let width: CGFloat
@@ -14,10 +15,15 @@ struct GridColumns<Content: View> {
 
 extension GridColumns: View {
     var body: some View {
-        let columns: [GridItem] = [
-            .init(.adaptive(minimum: width), spacing: gap, alignment: .top)
-        ]
+        let columns = [GridItem](
+            repeating: .init(
+                .flexible(),
+                spacing: gap / 2,
+                alignment: .top
+            ),
+            count: columns
+        )
         
-        LazyVGrid(columns: columns, alignment: .leading, spacing: gap, content: content)
+        LazyVGrid(columns: columns, alignment: .leading, spacing: gap / 2, content: content)
     }
 }

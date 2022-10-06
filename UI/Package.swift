@@ -13,12 +13,16 @@ let package = Package(
             targets: ["UI"]),
     ],
     dependencies: [
-        
+        .package(
+            url: "https://github.com/onevcat/Kingfisher",
+            from: "7.0.0"
+        )
     ],
     targets: [
         .target(
             name: "UI",
             dependencies: [
+                "Kingfisher"
             ],
             path: ""
         )

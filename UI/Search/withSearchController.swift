@@ -69,7 +69,7 @@ fileprivate struct WithSearchController: UIViewControllerRepresentable {
                 .removeDuplicates { ($0.height == 0) == ($1.height == 0) }
                 .sink { [weak controller] in
                     if let controller {
-                        let isVisible = !controller.searchBar.isHidden && ($0.height != 0)
+                        let isVisible = controller.searchBarPlacement == .inline || !controller.searchBar.isHidden && ($0.height != 0)
                         self.onVisibilityChange(controller, isVisible)
                     }
                 }
@@ -78,20 +78,16 @@ fileprivate struct WithSearchController: UIViewControllerRepresentable {
         
         override func willMove(toParent parent: UIViewController?) {
             super.willMove(toParent: parent)
-            if let searchController = parent?.navigationItem.searchController {
-                onAvailable(searchController)
-                observe(searchController)
-            }
-        }
-        
-        override func viewWillAppear(_ animated: Bool) {
-            super.viewWillAppear(animated)
             
             if let navigationItem = parent?.navigationItem,
                 let searchController = navigationItem.searchController {
                 if navigationItem.hidesSearchBarWhenScrolling {
                     searchController.searchBar.isHidden = true
                 }
+                
+                
+                onAvailable(searchController)
+                observe(searchController)
             }
         }
         

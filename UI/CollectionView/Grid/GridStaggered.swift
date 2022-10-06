@@ -1,7 +1,7 @@
 import SwiftUI
 
 struct GridStaggered<D: RandomAccessCollection, Content: View> {
-    @Environment(\.gridScrollSize) private var size
+    @Environment(\.gridScrollColumns) private var columns
     @ScaledMetric private var gap = CollectionViewLayout.gap(.grid(0, true))
     
     let data: D
@@ -31,11 +31,11 @@ extension GridStaggered: View {
     }
     
     var body: some View {
-        let columns = min(max(Int(size.width / width), 1), data.count)
+        let columns = min(columns, data.count)
         
-        HStack(alignment: .top, spacing: gap) {
+        HStack(alignment: .top, spacing: gap / 2) {
             ForEach(0..<columns, id: \.self) { column in
-                LazyVStack(alignment: .leading, spacing: gap) {
+                LazyVStack(alignment: .leading, spacing: gap / 2) {
                     content(group(columns, column))
                 }
             }
