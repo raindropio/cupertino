@@ -19,24 +19,6 @@ extension GridCard: ViewModifier {
             .opacity(isSelected ? 0.9 : (isEditing ? 0.6 : 1))
             .clipShape(RoundedRectangle(cornerRadius: 5))
             .contentShape(RoundedRectangle(cornerRadius: 5))
-            .overlay(alignment: .topTrailing) {
-                if isEditing {
-                    VStack {
-                        Image(systemName: "checkmark")
-                            .foregroundColor(.white)
-                            .opacity(isSelected ? 1 : 0)
-                    }
-                        .frame(width: 28, height: 28)
-                        .background {
-                            if isSelected {
-                                Circle().foregroundStyle(.tint)
-                            } else {
-                                Circle().foregroundStyle(.tertiary)
-                            }
-                        }
-                        .padding(10)
-                }
-            }
             ._onButtonGesture {
                 model.touch(element.id, down: $0)
             } perform: {

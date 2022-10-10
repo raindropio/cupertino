@@ -1,3 +1,4 @@
+#if canImport(UIKit)
 import UIKit
 
 extension UIColor {
@@ -7,3 +8,4 @@ extension UIColor {
         return white > 0.5
     }
 }
+#endif

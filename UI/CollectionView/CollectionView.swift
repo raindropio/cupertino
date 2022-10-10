@@ -9,6 +9,7 @@ public struct CollectionView<Content: View, ID: Hashable, Menu: View> {
     
     var action: ((ID) -> Void)?
     var reorder: ((ID, Int) -> Void)?
+    var delete: ((Set<ID>) -> Void)?
     var contextMenu: (Set<ID>) -> Menu
     
     public init(
@@ -17,6 +18,7 @@ public struct CollectionView<Content: View, ID: Hashable, Menu: View> {
         @ViewBuilder content: @escaping () -> Content,
         action: ((ID) -> Void)? = nil,
         reorder: ((ID, Int) -> Void)? = nil,
+        delete: ((Set<ID>) -> Void)? = nil,
         @ViewBuilder contextMenu: @escaping (Set<ID>) -> Menu
     ) {
         self.layout = layout
@@ -24,6 +26,7 @@ public struct CollectionView<Content: View, ID: Hashable, Menu: View> {
         self.content = content
         self.action = action
         self.reorder = reorder
+        self.delete = delete
         self.contextMenu = contextMenu
     }
 }
@@ -60,6 +63,7 @@ extension CollectionView: View {
         }
             .task {
                 model.reorder = reorder
+                model.delete = delete
             }
             .task(id: selection) { model.selection = selection }
             .task(id: model.selection) { selection = model.selection }

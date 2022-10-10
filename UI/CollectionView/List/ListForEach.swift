@@ -25,11 +25,23 @@ extension ListForEach: View {
         }
     }
     
+    func performDelete(_ indexSet: IndexSet) {
+        if let delete = model.delete,
+           let array = data as? [D.Element]  {
+            delete(Set(
+                indexSet.map {
+                    array[$0].id
+                }
+            ))
+        }
+    }
+    
     var body: some View {
         ForEach(data) {
             content($0)
                 .draggable($0)
         }
             .onMove(perform: performReorder)
+            .onDelete(perform: performDelete)
     }
 }

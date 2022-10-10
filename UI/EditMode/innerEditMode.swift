@@ -1,5 +1,6 @@
 import SwiftUI
 
+#if os(iOS)
 struct InnerEditModeModifier: ViewModifier {
     @Environment(\.editMode) private var editMode
     var action: (EditMode) -> Void
@@ -19,3 +20,4 @@ public extension View {
         modifier(InnerEditModeModifier(action: action))
     }
 }
+#endif

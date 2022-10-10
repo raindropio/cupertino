@@ -30,11 +30,13 @@ public struct FabButtonStyle: ButtonStyle {
             .clipShape(Circle())
             .scaleEffect(configuration.isPressed ? 0.8 : 1)
             .shadow(radius: 30, y: 5)
+            #if os(iOS)
             .onChange(of: configuration.isPressed) {
                 if $0 {
                     guard CHHapticEngine.capabilitiesForHardware().supportsHaptics else { return }
                     UIImpactFeedbackGenerator(style: .light).impactOccurred()
                 }
             }
+            #endif
     }
 }

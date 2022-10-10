@@ -1,5 +1,6 @@
 import SwiftUI
 
+#if os(iOS)
 public struct EditButton<Label> : View where Label : View {
     @Environment(\.editMode) private var editMode
     var label: (EditMode) -> Label
@@ -26,3 +27,4 @@ public struct EditButton<Label> : View where Label : View {
         }
     }
 }
+#endif

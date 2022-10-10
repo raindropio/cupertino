@@ -8,6 +8,7 @@ class CollectionViewModel<ID: Hashable>: ObservableObject {
     
     var action: ((ID) -> Void)?
     var reorder: ((ID, Int) -> Void)?
+    var delete: ((Set<ID>) -> Void)?
     var contextMenu: ((Set<ID>) -> AnyView)?
     
     func touch(_ id: ID, down: Bool = false) {

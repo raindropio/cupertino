@@ -1,107 +1,88 @@
 import SwiftUI
 
-public enum Filter: Identifiable, Hashable {
-    case important
-    case type(RaindropType)
-    case created(String)
-    case highlights
-    case broken
-    case duplicate
-    case notag
-    case file
+public struct Filter {
+    public var kind: Kind
+    public var title: String { kind.title }
+    public var systemImage: String { kind.systemImage }
+    public var color: Color { kind.color }
+    public var count: Int = 0
     
-    public var id: String {
-        switch self {
-        case .type(let type): return "type:\(type.rawValue)"
-        case .created(let date): return "created:\(date)"
-        default: return "\(self):true"
-        }
-    }
-    
-    public var title: String {
-        switch self {
-        case .important: return "Favorites"
-        case .type(let type): return type.title
-        case .created(let date): return "Created \(date)"
-        case .highlights: return "Highlights"
-        case .broken: return "Broken links"
-        case .duplicate: return "Duplicates"
-        case .notag: return "Without tags"
-        case .file: return "Files"
-        }
-    }
-    
-    public var systemImage: String {
-        switch self {
-        case .important: return "heart"
-        case .type(let type): return type.systemImage
-        case .created(_): return "calendar"
-        case .highlights: return "highlighter"
-        case .broken: return "exclamationmark.bubble"
-        case .duplicate: return "square.on.square"
-        case .notag: return "number.square"
-        case .file: return "doc"
-        }
-    }
-    
-    public var color: Color {
-        switch self {
-        case .important: return .red
-        case .type(let type): return type.color
-        case .created(_): return .secondary
-        case .highlights: return .purple
-        case .notag: return .secondary
-        case .broken: return .pink
-        case .duplicate: return .green
-        case .file: return .teal
-        }
+    public init(_ kind: Kind) {
+        self.kind = kind
     }
 }
 
-//MARK: Type
-public extension Filter {
-    enum RaindropType: String {
-        case link, article, image, video, audio, document
+extension Filter: Identifiable {
+    public var id: String { description }
+}
+
+extension Filter: CustomStringConvertible {
+    public var description: String { "\(kind)" }
+}
+
+extension Filter: Equatable {}
+
+extension Filter {
+    //TODO: ExpressibleByStringLiteral
+    public enum Kind: CustomStringConvertible, Equatable {
+        case important
+        case type(Raindrop.`Type`)
+        case created(String)
+        case highlights
+        case broken
+        case duplicate
+        case notag
+        case file
+        case tag(String)
+        
+        public var description: String {
+            switch self {
+            case .type(let type): return "\(self):\(type.rawValue)"
+            case .created(let date): return "\(self):\(date)"
+            default: return "\(self):true"
+            }
+        }
         
         public var title: String {
             switch self {
-            case .link: return "Links"
-            case .article: return "Articles"
-            case .image: return "Images"
-            case .video: return "Video"
-            case .audio: return "Audio"
-            case .document: return "Documents"
+            case .important: return "Favorites"
+            case .type(let type): return type.title
+            case .created(let date): return "Created \(date)"
+            case .highlights: return "Highlights"
+            case .broken: return "Broken links"
+            case .duplicate: return "Duplicates"
+            case .notag: return "Without tags"
+            case .file: return "Files"
+            case .tag(let tag): return tag
             }
         }
         
         public var systemImage: String {
             switch self {
-            case .link: return "link"
-            case .article: return "square.text.square"
-            case .image: return "photo"
-            case .audio: return "music.note"
-            case .video: return "play.circle"
-            case .document: return "doc"
+            case .important: return "heart"
+            case .type(let type): return type.systemImage
+            case .created(_): return "calendar"
+            case .highlights: return "highlighter"
+            case .broken: return "exclamationmark.bubble"
+            case .duplicate: return "square.on.square"
+            case .notag: return "number.square"
+            case .file: return "doc"
+            case .tag(_): return "number"
             }
         }
         
-        public var color: Color { switch self {
-            case .link: return .secondary
-            case .article: return .orange
-            case .image: return .green
-            case .video: return .purple
-            case .document: return .brown
-            case .audio: return .indigo
-        }}
+        public var color: Color {
+            switch self {
+            case .important: return .red
+            case .type(let type): return type.color
+            case .created(_): return .secondary
+            case .highlights: return .purple
+            case .notag: return .secondary
+            case .broken: return .pink
+            case .duplicate: return .green
+            case .file: return .teal
+            case .tag: return .secondary
+            }
+        }
     }
-}
-
-//MARK: - Preview
-public extension Filter {
-    static var preview = [
-        Filter.important,
-        Filter.type(.article),
-        Filter.type(.image),
-        Filter.highlights
-    ]
 }
