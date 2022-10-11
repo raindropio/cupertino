@@ -2,14 +2,16 @@ import SwiftUI
 
 public struct Filter {
     public var kind: Kind
+    public var count: Int = 0
+    
+    public init(_ kind: Kind, count: Int = 0) {
+        self.kind = kind
+        self.count = 0
+    }
+
     public var title: String { kind.title }
     public var systemImage: String { kind.systemImage }
     public var color: Color { kind.color }
-    public var count: Int = 0
-    
-    public init(_ kind: Kind) {
-        self.kind = kind
-    }
 }
 
 extension Filter: Identifiable {

@@ -11,10 +11,11 @@ public struct Collection: Identifiable, Hashable, Codable {
     public var sort = 0
     public var count = 0
 //    public var color: Color?
+    public var view: View = .list
+    
     public var systemImage: String {
         "folder"
     }
-    
     public var isSystem: Bool { id <= 0 }
 }
 
