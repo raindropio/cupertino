@@ -19,9 +19,9 @@ extension Store {
     }
     
     public enum RaindropsAction {
-        case load(FindBy)
-        case fetch(FindBy)
-        case nextPage(FindBy)
+        case load(FindBy, SortBy)
+        case fetch(FindBy, SortBy)
+        case nextPage(FindBy, SortBy)
         
         case create([Raindrop])
     }

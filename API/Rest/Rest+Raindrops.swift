@@ -1,9 +1,9 @@
-extension Client {
+extension Rest {
     struct Raindrops {}
 }
 
 //MARK: - Get
-extension Client.Raindrops {
+extension Rest.Raindrops {
     static func get(
         _ find: FindBy,
         sort: SortBy,
@@ -14,7 +14,7 @@ extension Client.Raindrops {
 }
 
 //MARK: - Create
-extension Client.Raindrops {
+extension Rest.Raindrops {
     static func create(
         _ raindrops: [Raindrop]
     ) async throws -> [Raindrop] {
@@ -23,7 +23,7 @@ extension Client.Raindrops {
 }
 
 //MARK: - Update
-extension Client.Raindrops {
+extension Rest.Raindrops {
     static func update(
         _ find: FindBy,
         pick: Pick,
@@ -42,7 +42,7 @@ extension Client.Raindrops {
 }
 
 //MARK: - Delete
-extension Client.Raindrops {
+extension Rest.Raindrops {
     static func delete(
         _ find: FindBy,
         pick: Pick
@@ -52,7 +52,7 @@ extension Client.Raindrops {
 }
 
 //MARK: - Helpers
-extension Client.Raindrops {
+extension Rest.Raindrops {
     internal enum Pick {
         case all
         case ids([Raindrop.ID])

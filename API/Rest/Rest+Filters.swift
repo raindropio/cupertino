@@ -1,11 +1,11 @@
 import Foundation
 
-extension Client {
+extension Rest {
     struct Filters {}
 }
 
 //MARK: - Get
-extension Client.Filters {
+extension Rest.Filters {
     static func get(_ find: FindBy) async throws -> [Filter] {
         []
     }

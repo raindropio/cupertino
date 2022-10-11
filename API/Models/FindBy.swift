@@ -1,6 +1,6 @@
 import Foundation
 
-public struct FindBy: Equatable {
+public struct FindBy: Equatable, Hashable {
     public var collectionId: Collection.ID = 0
     public var filters = [Filter]()
     public var text: String = ""

@@ -18,6 +18,8 @@ extension Filter: Identifiable {
     public var id: String { description }
 }
 
+extension Filter: Hashable {}
+
 extension Filter: CustomStringConvertible {
     public var description: String { "\(kind)" }
 }
@@ -26,7 +28,7 @@ extension Filter: Equatable {}
 
 extension Filter {
     //TODO: ExpressibleByStringLiteral
-    public enum Kind: CustomStringConvertible, Equatable {
+    public enum Kind: CustomStringConvertible, Equatable, Hashable {
         case important
         case type(Raindrop.`Type`)
         case created(String)

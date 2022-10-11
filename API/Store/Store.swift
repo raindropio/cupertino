@@ -2,7 +2,7 @@ import Foundation
 
 public actor Store: ObservableObject {
     @MainActor @Published public var raindrops = RaindropsState()
-    @MainActor @Published public var users = UsersState()
+    @MainActor @Published public var user = UserState()
     @MainActor private var log = LogState()
     
     public init() {
@@ -15,7 +15,7 @@ public actor Store: ObservableObject {
         do {
             try await dispatch(action, to: \.log)
             try await dispatch(action, to: \.raindrops)
-            try await dispatch(action, to: \.users)
+            try await dispatch(action, to: \.user)
         } catch {
             //TODO: Error handling
             print("!Store Error:", error)
