@@ -1,38 +1,45 @@
+//MARK: - Get many
 extension Rest {
-    struct Raindrops {}
-}
-
-//MARK: - Get
-extension Rest.Raindrops {
-    static func get(
+    public func raindropsGet(
         _ find: FindBy,
         sort: SortBy,
         afterId: Raindrop.ID? = nil
     ) async throws -> [Raindrop] {
-        []
+        let res: RaindropsGetResponse = try await fetch.get(
+            "raindrops/\(find.collectionId)",
+            query:
+                find.query
+                + [.init(name: "sort", value: "\(sort.description)")]
+                //TODO: support afterId
+        )
+        return res.items
+    }
+    
+    fileprivate struct RaindropsGetResponse: Decodable {
+        var items: [Raindrop]
     }
 }
 
-//MARK: - Create
-extension Rest.Raindrops {
-    static func create(
+//MARK: - Create many
+extension Rest {
+    public func raindropsCreate(
         _ raindrops: [Raindrop]
     ) async throws -> [Raindrop] {
         []
     }
 }
 
-//MARK: - Update
-extension Rest.Raindrops {
-    static func update(
+//MARK: - Update many
+extension Rest {
+    public func raindropsUpdate(
         _ find: FindBy,
-        pick: Pick,
-        operation: UpdateOperation
+        pick: RaindropsPick,
+        operation: RaindropsUpdateOperation
     ) async throws -> Int {
         0
     }
     
-    internal enum UpdateOperation {
+    public enum RaindropsUpdateOperation {
         case moveTo(Collection.ID)
         case addTags([String])
         case removeTags
@@ -41,19 +48,19 @@ extension Rest.Raindrops {
     }
 }
 
-//MARK: - Delete
-extension Rest.Raindrops {
-    static func delete(
+//MARK: - Remove many
+extension Rest {
+    public func raindropsDelete(
         _ find: FindBy,
-        pick: Pick
+        pick: RaindropsPick
     ) async throws -> Int {
         0
     }
 }
 
-//MARK: - Helpers
-extension Rest.Raindrops {
-    internal enum Pick {
+//MARK: - Etc
+extension Rest {
+    public enum RaindropsPick {
         case all
         case ids([Raindrop.ID])
     }

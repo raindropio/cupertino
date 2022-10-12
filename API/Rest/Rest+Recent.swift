@@ -1,19 +1,33 @@
 import Foundation
 
+//MARK: - Recent search
 extension Rest {
-    struct Recent {}
-}
-
-//MARK: - Search
-extension Rest.Recent {
-    static func search() async throws -> [String] {
-        []
+    public func recentSearch() async throws -> [String] {
+        let res: RecentSearchResponse = try await fetch.get("raindrops/recent/search")
+        return res.items.map { $0._id }
+    }
+    
+    fileprivate struct RecentSearchResponse: Decodable {
+        var items: [Item]
+        
+        struct Item: Decodable {
+            var _id: String
+        }
     }
 }
 
-//MARK: - Tags
-extension Rest.Recent {
-    static func tags() async throws -> [String] {
-        []
+//MARK: - Recent tags
+extension Rest {
+    public func recentTags() async throws -> [String] {
+        let res: RecentTagsResponse = try await fetch.get("tags/recent")
+        return res.items.map { $0._id }
+    }
+    
+    fileprivate struct RecentTagsResponse: Decodable {
+        var items: [Item]
+        
+        struct Item: Decodable {
+            var _id: String
+        }
     }
 }

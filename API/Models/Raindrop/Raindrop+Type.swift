@@ -1,7 +1,7 @@
 import SwiftUI
 
 extension Raindrop {
-    public enum `Type`: String, Codable {
+    public enum `Type`: String, Codable, CaseIterable {
         case link, article, image, video, audio, document
         
         public var title: String {
@@ -34,5 +34,14 @@ extension Raindrop {
             case .document: return .brown
             case .audio: return .indigo
         }}
+    }
+}
+
+extension Raindrop.`Type`: ExpressibleByStringLiteral {
+    public typealias StringLiteralType = String
+    public init(stringLiteral value: String) {
+        self = Self.allCases.first {
+            String(describing: $0) == value
+        } ?? .link
     }
 }

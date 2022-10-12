@@ -40,6 +40,13 @@ extension FindBy {
     }
 }
 
+extension FindBy {
+    var query: [URLQueryItem] {
+        [.init(name: "search", value: search)]
+        + (search.isEmpty ? [] : [.init(name: "nested", value: "true")])
+    }
+}
+
 //Ability to concat multiple queries
 extension FindBy {
     public static func +(lhs: Self, rhs: Self) -> Self {

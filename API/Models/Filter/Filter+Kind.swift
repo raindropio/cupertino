@@ -1,33 +1,7 @@
 import SwiftUI
 
-public struct Filter {
-    public var kind: Kind
-    public var count: Int = 0
-    
-    public init(_ kind: Kind, count: Int = 0) {
-        self.kind = kind
-        self.count = 0
-    }
-
-    public var title: String { kind.title }
-    public var systemImage: String { kind.systemImage }
-    public var color: Color { kind.color }
-}
-
-extension Filter: Identifiable {
-    public var id: String { description }
-}
-
-extension Filter: Hashable {}
-
-extension Filter: CustomStringConvertible {
-    public var description: String { "\(kind)" }
-}
-
-extension Filter: Equatable {}
-
+//TODO: ExpressibleByStringLiteral
 extension Filter {
-    //TODO: ExpressibleByStringLiteral
     public enum Kind: CustomStringConvertible, Equatable, Hashable {
         case important
         case type(Raindrop.`Type`)
@@ -41,9 +15,15 @@ extension Filter {
         
         public var description: String {
             switch self {
-            case .type(let type): return "\(self):\(type.rawValue)"
-            case .created(let date): return "\(self):\(date)"
-            default: return "\(self):true"
+            case .important: return "important:true"
+            case .type(let type): return "type:\(type.rawValue)"
+            case .created(let date): return "created:\(date)"
+            case .highlights: return "highlights:true"
+            case .broken: return "broken:true"
+            case .duplicate: return "duplicate:true"
+            case .notag: return "notag:true"
+            case .file: return "file:true"
+            case .tag(let tag): return tag.contains(" ") ? "\"#\(tag)\"" : "#\(tag)"
             }
         }
         
