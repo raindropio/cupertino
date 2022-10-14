@@ -1,7 +1,7 @@
 import Foundation
 
-public class RaindropStore: ReduxStore {
-    public var redux: Redux<RaindropState, RaindropAction>
+public class RaindropsStore: ReduxStore {
+    public var redux: Redux<RaindropsState, RaindropsAction>
     var rest = Rest()
     
     @MainActor public init() {
@@ -11,17 +11,17 @@ public class RaindropStore: ReduxStore {
 }
 
 //MARK: - Catch all actions
-extension RaindropStore {
+extension RaindropsStore {
     public func react(to action: ReduxAction) async throws {
-        if let action = action as? RaindropAction {
+        if let action = action as? RaindropsAction {
             try await react(to: action)
         }
     }
 }
 
 //MARK: - Store specific actions
-extension RaindropStore {
-    public func react(to action: RaindropAction) async throws {
+extension RaindropsStore {
+    public func react(to action: RaindropsAction) async throws {
         switch action {
         case .reload(let find, let sort):
             try await reload(find: find, sort: sort)
@@ -30,7 +30,7 @@ extension RaindropStore {
             try await loadMore(find: find, sort: sort)
             
         case .create(let item):
-            redux.dispatch(RaindropAction.createMany([item]))
+            redux.dispatch(RaindropsAction.createMany([item]))
             
         case .createMany(let items):
             try await createMany(items: items)

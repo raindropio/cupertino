@@ -1,7 +1,7 @@
 import Foundation
 import SwiftUI
 
-public struct RaindropState: Equatable {
+public struct RaindropsState: Equatable {
     @Cached("rns-items") var items = [Raindrop.ID: Raindrop]()
     
     typealias Groups = [ FindBy : Group ]

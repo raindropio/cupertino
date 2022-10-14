@@ -1,4 +1,4 @@
-extension RaindropStore {
+extension RaindropsStore {
     func reload(find: FindBy, sort: SortBy) async throws {
         try await mutate { state in
             state[find].status = .loading

@@ -1,6 +1,6 @@
 import Foundation
 
-extension RaindropState {
+extension RaindropsState {
     public struct Group: Equatable, Codable {
         static let blank = Self()
 
@@ -24,7 +24,7 @@ extension RaindropState {
     }
 }
 
-extension RaindropState {
+extension RaindropsState {
     public func items(_ find: FindBy) -> [Raindrop] {
         self[find].ids.compactMap { items[$0] }
     }
