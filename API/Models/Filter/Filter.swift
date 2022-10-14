@@ -1,6 +1,6 @@
 import SwiftUI
 
-public struct Filter: Hashable, Equatable {
+public struct Filter: Hashable, Equatable, Codable {
     public var kind: Kind
     public var count: Int = 0
     

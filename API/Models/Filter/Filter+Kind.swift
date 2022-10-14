@@ -2,7 +2,7 @@ import SwiftUI
 
 //TODO: ExpressibleByStringLiteral
 extension Filter {
-    public enum Kind: CustomStringConvertible, Equatable, Hashable {
+    public enum Kind: CustomStringConvertible, Equatable, Hashable, Codable {
         case important
         case type(Raindrop.`Type`)
         case created(String)

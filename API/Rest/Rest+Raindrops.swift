@@ -9,7 +9,10 @@ extension Rest {
             "raindrops/\(find.collectionId)",
             query:
                 find.query
-                + [.init(name: "sort", value: "\(sort.description)")]
+                + [
+                    .init(name: "sort", value: "\(sort.description)"),
+                    .init(name: "perpage", value: "50")
+                ]
                 //TODO: support afterId
         )
         return res.items
