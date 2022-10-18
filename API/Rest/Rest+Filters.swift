@@ -6,9 +6,20 @@ extension Rest {
         let res: FiltersGetResponse = try await fetch.get(
             "filters/\(find.collectionId)",
             query: find.query
+                + [.init(name: "nested", value: "true")]
         )
-        
+
         var filters: [Filter] = []
+        
+        //important
+        if let important = res.important {
+            filters.append(.init(.important, count: important.count))
+        }
+        
+        //highlights
+        if let highlights = res.highlights {
+            filters.append(.init(.highlights, count: highlights.count))
+        }
         
         //tags
         if let tags = res.tags {
@@ -30,6 +41,11 @@ extension Rest {
             }
         }
         
+        //file
+        if let file = res.file {
+            filters.append(.init(.file, count: file.count))
+        }
+        
         //created
         if let created = res.created {
             filters += created.compactMap {
@@ -44,32 +60,17 @@ extension Rest {
         if let notag = res.notag {
             filters.append(.init(.notag, count: notag.count))
         }
-        
-        //notag
-        if let important = res.important {
-            filters.append(.init(.important, count: important.count))
-        }
-        
+                
         //broken
         if let broken = res.broken {
             filters.append(.init(.broken, count: broken.count))
-        }
-        
-        //file
-        if let file = res.file {
-            filters.append(.init(.file, count: file.count))
         }
         
         //duplicate
         if let duplicate = res.duplicate {
             filters.append(.init(.duplicate, count: duplicate.count))
         }
-        
-        //highlights
-        if let highlights = res.highlights {
-            filters.append(.init(.highlights, count: highlights.count))
-        }
-        
+                        
         return filters
     }
     

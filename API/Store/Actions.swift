@@ -4,3 +4,7 @@ public enum RaindropsAction: ReduxAction {
     case create(Raindrop)
     case createMany([Raindrop])
 }
+
+public enum FiltersAction: ReduxAction {
+    case reload(FindBy)
+}

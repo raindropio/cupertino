@@ -24,6 +24,7 @@ extension RaindropsStore {
                     return .error
                 }()
             }
+            throw error
         }
     }
 }

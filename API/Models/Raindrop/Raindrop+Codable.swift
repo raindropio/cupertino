@@ -29,7 +29,6 @@ extension Raindrop: Codable {
         title = try container.decode(Swift.type(of: title), forKey: .title)
         excerpt = (try? container.decode(Swift.type(of: excerpt), forKey: .excerpt)) ?? ""
         link = (try? container.decode(Swift.type(of: link), forKey: .link)) ?? URL(string: "http://incorrect.url")!
-        cover = try? container.decode(Swift.type(of: cover), forKey: .cover)
         media = (try? container.decode(Swift.type(of: media), forKey: .media)) ?? []
         type = (try? container.decode(Swift.type(of: type), forKey: .type)) ?? .link
         tags = try container.decode(Swift.type(of: tags), forKey: .tags)
@@ -41,6 +40,10 @@ extension Raindrop: Codable {
         duplicate = try? container.decode(Swift.type(of: duplicate), forKey: .duplicate)
         file = try? container.decode(Swift.type(of: file), forKey: .file)
         cache = try? container.decode(Swift.type(of: cache), forKey: .cache)
+        
+        if let coverUrl = try? container.decode(URL.self, forKey: .cover) {
+            cover = .init(coverUrl)
+        }
         
         if let collectionContainer = try? container.nestedContainer(keyedBy: MongoRef<Collection.ID>.CodingKeys.self, forKey: .collection) {
             collection = try collectionContainer.decode(Swift.type(of: collection), forKey: .id)

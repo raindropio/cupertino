@@ -24,40 +24,39 @@ public struct FindBy: Equatable, Hashable, Codable {
     public init(_ filter: Filter) {
         self.filters = [filter]
     }
-    
-    public func scope(_ otherCollectionId: Collection.ID?) -> Self {
-        if let otherCollectionId {
-            return .init(otherCollectionId, filters: filters, text: text)
-        } else {
-            return self
-        }
-    }
 }
 
 extension FindBy {
     var search: String {
-        (filters.map{ $0.description } + [text]).joined(separator: " ")
+        (filters.map{ $0.description } + [text]).joined(separator: " ").trimmingCharacters(in: .whitespacesAndNewlines)
     }
 }
 
 extension FindBy {
     var query: [URLQueryItem] {
-        [.init(name: "search", value: search)]
+        [
+            .init(name: "search", value: search),
+            .init(name: "version", value: "2")
+        ]
         + (search.isEmpty ? [] : [.init(name: "nested", value: "true")])
     }
 }
 
 //Ability to concat multiple queries
 extension FindBy {
-    public static func +(lhs: Self, rhs: Self) -> Self {
-        .init(rhs.collectionId, filters: lhs.filters + rhs.filters, text: "\(lhs.text) \(rhs.text)")
+    public static func +(lhs: Self, rhs: Collection.ID?) -> Self {
+        if let rhs {
+            return .init(rhs, filters: lhs.filters, text: lhs.text)
+        } else {
+            return lhs
+        }
     }
     
-    public static func +(lhs: Self, rhs: Filter) -> Self {
-        .init(lhs.collectionId, filters: lhs.filters+[rhs], text: lhs.text)
+    public static func +(lhs: Self, rhs: [Filter]) -> Self {
+        .init(lhs.collectionId, filters: lhs.filters+rhs, text: lhs.text)
     }
     
     public static func +(lhs: Self, rhs: String) -> Self {
-        .init(lhs.collectionId, filters: lhs.filters, text: "\(lhs.text) \(rhs)")
+        .init(lhs.collectionId, filters: lhs.filters, text: "\(lhs.text) \(rhs)".trimmingCharacters(in: .whitespacesAndNewlines))
     }
 }

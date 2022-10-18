@@ -31,7 +31,7 @@ extension Filter {
             switch self {
             case .important: return "Favorites"
             case .type(let type): return type.title
-            case .created(let date): return "Created \(date)"
+            case .created(let date): return CreatedDateFormatter.format(date)
             case .highlights: return "Highlights"
             case .broken: return "Broken links"
             case .duplicate: return "Duplicates"
@@ -68,5 +68,23 @@ extension Filter {
             case .tag: return .secondary
             }
         }
+    }
+}
+
+fileprivate final class CreatedDateFormatter {
+    private static var cache = [String: String]()
+    
+    static func format(_ string: String) -> String {
+        if cache[string] == nil {
+            let formatter = DateFormatter()
+            formatter.dateFormat = "yyyy-MM"
+            
+            cache[string] = formatter.date(from: string)?
+                .formatted(
+                    .dateTime.month(.abbreviated).year()
+                )
+        }
+        
+        return cache[string] ?? ""
     }
 }
