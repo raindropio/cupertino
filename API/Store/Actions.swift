@@ -9,5 +9,4 @@ public enum RaindropsAction: ReduxAction {
 
 public enum FiltersAction: ReduxAction {
     case reload(FindBy)
-    case complete(FindBy)
 }

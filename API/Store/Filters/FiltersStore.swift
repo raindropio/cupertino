@@ -25,9 +25,6 @@ extension FiltersStore {
         switch action {
         case .reload(let find):
             try await reload(find: find)
-            
-        case .complete(let find):
-            try await complete(find: find)
         }
     }
 }

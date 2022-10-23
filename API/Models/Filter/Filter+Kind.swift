@@ -49,7 +49,7 @@ extension Filter {
             case .highlights: return "highlighter"
             case .broken: return "exclamationmark.bubble"
             case .duplicate: return "square.on.square"
-            case .notag: return "number.square"
+            case .notag: return "circlebadge.2"
             case .file: return "doc"
             case .tag(_): return "number"
             }
@@ -81,7 +81,7 @@ fileprivate final class CreatedDateFormatter {
             
             cache[string] = formatter.date(from: string)?
                 .formatted(
-                    .dateTime.month(.abbreviated).year()
+                    .dateTime.month(.wide).year()
                 )
         }
         

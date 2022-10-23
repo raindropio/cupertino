@@ -1,20 +1,24 @@
 extension FiltersStore {
     func reload(find: FindBy) async throws {
-        var group = FiltersState.Group()
-        let (filters, total) = try await rest.filtersGet(find)
+        let (filters, _) = try await rest.filtersGet(find)
         
-        group.raindrops = total
+        var simple = [Filter]()
+        var tags = [Filter]()
+        var created = [Filter]()
         
         filters.forEach {
             switch $0.kind {
-            case .tag(_), .notag: group.tags.append($0)
-            case .created(_): group.created.append($0)
-            default: group.general.append($0)
+            case .tag(_), .notag: tags.append($0)
+            case .created(_): created.append($0)
+            case .type(let type): if type != .link { simple.append($0) } //ignore .link types
+            default: simple.append($0)
             }
         }
                 
         try await mutate { state in
-            state[find] = group
+            state.simple[find] = simple
+            state.tags[find] = tags
+            state.created[find] = created
         }
     }
 }
