@@ -1,7 +1,7 @@
 import Foundation
 
-public class FiltersStore: ReduxStore {
-    public var redux: Redux<FiltersState, FiltersAction>
+public class UserStore: ReduxStore {
+    public var redux: Redux<UserState, UserAction>
     var rest = Rest()
     
     @MainActor public init() {
@@ -11,11 +11,11 @@ public class FiltersStore: ReduxStore {
 }
 
 //MARK: - Catch all actions
-extension FiltersStore {
+extension UserStore {
     public func react(to action: ReduxAction) async throws {
         switch action {
-        case is FiltersAction:
-            try await react(to: action as! FiltersAction)
+        case is UserAction:
+            try await react(to: action as! UserAction)
             
         case is AuthAction:
             try await react(to: action as! AuthAction)
@@ -26,17 +26,17 @@ extension FiltersStore {
 }
 
 //MARK: - Store specific actions
-extension FiltersStore {
-    public func react(to action: FiltersAction) async throws {
+extension UserStore {
+    public func react(to action: UserAction) async throws {
         switch action {
-        case .reload(let find):
-            try await reload(find: find)
+        case .reload:
+            try await reload()
         }
     }
 }
 
 //MARK: - Auth specific actions
-extension FiltersStore {
+extension UserStore {
     public func react(to action: AuthAction) async throws {
         switch action {
         case .logout:

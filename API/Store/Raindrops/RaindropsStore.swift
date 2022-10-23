@@ -13,8 +13,14 @@ public class RaindropsStore: ReduxStore {
 //MARK: - Catch all actions
 extension RaindropsStore {
     public func react(to action: ReduxAction) async throws {
-        if let action = action as? RaindropsAction {
-            try await react(to: action)
+        switch action {
+        case is RaindropsAction:
+            try await react(to: action as! RaindropsAction)
+            
+        case is AuthAction:
+            try await react(to: action as! AuthAction)
+            
+        default: break
         }
     }
 }
@@ -34,6 +40,19 @@ extension RaindropsStore {
             
         case .createMany(let items):
             try await createMany(items: items)
+        }
+    }
+}
+
+//MARK: - Auth specific actions
+extension RaindropsStore {
+    public func react(to action: AuthAction) async throws {
+        switch action {
+        case .logout:
+            try await logout()
+            
+        default:
+            break
         }
     }
 }

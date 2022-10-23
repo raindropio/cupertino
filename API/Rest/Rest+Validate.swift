@@ -19,7 +19,6 @@ extension Rest {
     
     fileprivate struct FailedResponse: Decodable {
         var status: Int?
-        var error: String?
         var errorMessage: String?
     }
 }
