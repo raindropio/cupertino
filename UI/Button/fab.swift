@@ -1,7 +1,7 @@
 import SwiftUI
 
 public extension View {
-    func fab<B>(_ buttons: @escaping () -> B) -> some View where B: View {
+    func fab<B>(@ViewBuilder _ buttons: @escaping () -> B) -> some View where B: View {
         modifier(Fab(buttons: buttons))
     }
 }

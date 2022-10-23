@@ -5,7 +5,7 @@ public struct FindBy: Equatable, Hashable, Codable {
     public var filters = [Filter]()
     public var text: String = ""
     
-    private init(
+    public init(
         _ collectionId: Collection.ID = 0,
         filters: [Filter] = [],
         text: String = ""
@@ -30,6 +30,10 @@ extension FindBy {
     var search: String {
         (filters.map{ $0.description } + [text]).joined(separator: " ").trimmingCharacters(in: .whitespacesAndNewlines)
     }
+    
+    public var isSearching: Bool {
+        !filters.isEmpty || !text.isEmpty
+    }
 }
 
 extension FindBy {
@@ -42,21 +46,32 @@ extension FindBy {
     }
 }
 
-//Ability to concat multiple queries
 extension FindBy {
-    public static func +(lhs: Self, rhs: Collection.ID?) -> Self {
-        if let rhs {
-            return .init(rhs, filters: lhs.filters, text: lhs.text)
-        } else {
+    public static func +(lhs: Self, rhs: Self) -> Self {
+        if lhs == rhs {
             return lhs
         }
+        
+        return .init(
+            rhs.collectionId,
+            filters: lhs.filters + rhs.filters, //TODO: uniqnes
+            text: "\(lhs.text) \(rhs.text)"
+                .trimmingCharacters(in: .whitespacesAndNewlines)
+        )
     }
     
-    public static func +(lhs: Self, rhs: [Filter]) -> Self {
-        .init(lhs.collectionId, filters: lhs.filters+rhs, text: lhs.text)
+    public func excludingText() -> Self {
+        var copy = self
+        copy.text = ""
+        return copy
     }
-    
-    public static func +(lhs: Self, rhs: String) -> Self {
-        .init(lhs.collectionId, filters: lhs.filters, text: "\(lhs.text) \(rhs)".trimmingCharacters(in: .whitespacesAndNewlines))
+}
+
+extension FindBy {
+    public mutating func complete(_ filter: Filter) {
+        if !filters.contains(filter) {
+            filters.append(filter)
+            text.removeLast(filter.completionEnd(of: text))
+        }
     }
 }
