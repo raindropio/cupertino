@@ -23,7 +23,7 @@ public struct PreviewData {
                 sort: 0
             ),
             .init(
-                id: 134,
+                id: 2752,
                 title: "Inspiration",
                 count: 44,
                 cover: URL(string: "https://up.raindrop.io/collection/thumbs/275/2/4deca09fcc940c6aabf3cf08a96f6665.png"),
@@ -31,7 +31,7 @@ public struct PreviewData {
                 sort: 0
             ),
             .init(
-                id: 234,
+                id: 890646,
                 title: "Fonts",
                 count: 12,
                 cover: URL(string: "https://up.raindrop.io/collection/thumbs/836/440/3/c126f0e4e5839b60acf123515f398263.png"),
@@ -39,19 +39,19 @@ public struct PreviewData {
                 sort: 1
             ),
             .init(
-                id: 355,
+                id: 3404389,
                 title: "Utils & Kits",
                 count: 3,
                 cover: URL(string: "https://up.raindrop.io/collection/thumbs/340/438/9/c524e8435d45cf0998d076bb26a4748f.png"),
-                parent: 134,
+                parent: 66,
                 sort: 0
             ),
             .init(
-                id: 356,
+                id: 8379524,
                 title: "Websites",
                 count: 8,
                 cover: URL(string: "https://up.raindrop.io/collection/thumbs/837/952/4/49b5fe6b61e380418a9258bbef0af300.png"),
-                parent: 134,
+                parent: 2752,
                 sort: 1
             ),
             .init(

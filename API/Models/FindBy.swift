@@ -28,11 +28,13 @@ public struct FindBy: Equatable, Hashable, Codable {
 
 extension FindBy {
     var search: String {
-        (filters.map{ $0.description } + [text]).joined(separator: " ").trimmingCharacters(in: .whitespacesAndNewlines)
+        (filters.map{ $0.description } + [text])
+            .joined(separator: " ")
+            .trimmingCharacters(in: .whitespacesAndNewlines)
     }
     
     public var isSearching: Bool {
-        !filters.isEmpty || !text.isEmpty
+        !search.isEmpty
     }
 }
 

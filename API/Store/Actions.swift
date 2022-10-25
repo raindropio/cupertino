@@ -5,6 +5,10 @@ public enum AuthAction: ReduxAction {
     case logout
 }
 
+public enum CollectionsAction: ReduxAction {
+    case reload
+}
+
 public enum RaindropsAction: ReduxAction {
     case reload(FindBy, SortBy)
     case loadMore(FindBy, SortBy)

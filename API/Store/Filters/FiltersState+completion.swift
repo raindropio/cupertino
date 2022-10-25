@@ -3,7 +3,7 @@ import Foundation
 extension FiltersState {
     public func completion(_ find: FindBy) -> [Filter] {
         //doesn't need completion
-        guard !find.text.isEmpty
+        guard !find.text.trimmingCharacters(in: .whitespaces).isEmpty
         else { return [] }
         
         if MemCache.store[find] == nil {
@@ -25,7 +25,7 @@ extension FiltersState {
     /// Ignore completion filters
     func withoutCompletion(_ find: FindBy, _ filters: [Filter]?) -> [Filter] {
         guard let filters else { return [] }
-        guard !find.text.isEmpty else { return filters }
+        guard !find.text.trimmingCharacters(in: .whitespaces).isEmpty else { return filters }
         
         let completion = completion(find)
         return filters.filter { !completion.contains($0) }

@@ -47,7 +47,7 @@ extension SortBy: CaseIterable {
     public static func someCases(for findBy: FindBy) -> [SortBy] {
         (
             findBy.search.isEmpty ?
-                findBy.collectionId > 0 ? [.sort] : []
+                findBy.collectionId != 0 ? [.sort] : []
                 : [.score]
         )
         + [
@@ -63,7 +63,7 @@ extension SortBy: CustomStringConvertible {
     public var description: String {
         switch self {
             case .sort: return "-sort"
-            case .score: return "-score"
+            case .score: return "score"
             case .created(let order): return "\(order == .desc ? "-": "")created"
             case .title(let order): return "\(order == .desc ? "-" : "")title"
         }
