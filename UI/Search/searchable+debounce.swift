@@ -3,7 +3,7 @@ import SwiftUI
 public extension View {
     func searchable<C: RandomAccessCollection & RangeReplaceableCollection & Equatable, T: View>(
         text: Binding<String>,
-        debounce: UInt64 = 0,
+        debounce: Double = 0,
         tokens: Binding<C>,
         placement: SearchFieldPlacement = .automatic,
         prompt: Text? = nil,
@@ -17,7 +17,7 @@ fileprivate struct SearchableDebounceModifier<C: RandomAccessCollection & RangeR
     @State private var temp = ""
     
     @Binding var text: String
-    var debounce: UInt64 = 0
+    var debounce: Double = 0
     @Binding var tokens: C
     var placement: SearchFieldPlacement
     var prompt: Text?
@@ -32,10 +32,13 @@ fileprivate struct SearchableDebounceModifier<C: RandomAccessCollection & RangeR
                 prompt: prompt,
                 token: token
             )
+            .onSubmit(of: .search) {
+                text = temp
+            }
             .task(id: temp, priority: .utility) {
                 do {
                     if !temp.isEmpty, temp != text {
-                        try await Task.sleep(nanoseconds: 1_000_000 * debounce)
+                        try await Task.sleep(nanoseconds: UInt64(1_000_000_000 * debounce))
                     }
                     text = temp
                 } catch {}

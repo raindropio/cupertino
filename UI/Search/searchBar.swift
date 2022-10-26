@@ -1,6 +1,7 @@
 import SwiftUI
 import Combine
 
+#if canImport(UIKit)
 public extension View {
     func searchBar(
         withToolbar: Bool? = nil,
@@ -104,3 +105,4 @@ fileprivate struct SearchBarModifier: ViewModifier {
             }
     }
 }
+#endif

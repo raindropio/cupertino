@@ -27,8 +27,8 @@ extension FiltersState {
         guard let filters else { return [] }
         guard !find.text.trimmingCharacters(in: .whitespaces).isEmpty else { return filters }
         
-        let completion = completion(find)
-        return filters.filter { !completion.contains($0) }
+        let completionKinds = completion(find).map { $0.kind }
+        return filters.filter { !completionKinds.contains($0.kind) }
     }
 }
 

@@ -2,6 +2,8 @@ import SwiftUI
 import Kingfisher
 
 public struct Thumbnail {
+    @Environment(\.displayScale) private var displayScale
+    
     var url: URL?
     var width: CGFloat?
     var height: CGFloat?
@@ -41,6 +43,12 @@ public struct Thumbnail {
 }
 
 extension Thumbnail: Equatable {
+    public static func == (lhs: Self, rhs: Self) -> Bool {
+        lhs.url == rhs.url &&
+        lhs.width == rhs.width &&
+        lhs.height == rhs.height &&
+        lhs.aspectRatio == rhs.aspectRatio
+    }
 }
 
 extension Thumbnail: View {
@@ -56,11 +64,10 @@ extension Thumbnail: View {
     var naturalSize: CGSize {
         let w = Int(width ?? (height ?? 0) / (aspectRatio ?? 1))
         let h = Int(height ?? (width ?? 0) / (aspectRatio ?? 1))
-        let scaleFactor = Int(UIScreen.main.scale)
 
         return CGSize(
-            width: w * scaleFactor,
-            height: h * scaleFactor
+            width: w * Int(displayScale),
+            height: h * Int(displayScale)
         )
     }
     

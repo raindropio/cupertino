@@ -2,7 +2,9 @@ import SwiftUI
 
 struct GridCard<Element: Identifiable & Transferable> {
     @EnvironmentObject private var model: CollectionViewModel<Element.ID>
+    #if canImport(UIKit)
     @Environment(\.editMode) private var editMode
+    #endif
     
     var element: Element
 }
@@ -10,11 +12,16 @@ struct GridCard<Element: Identifiable & Transferable> {
 extension GridCard: ViewModifier {
     func body(content: Content) -> some View {
         let isSelected = model.isSelected(element.id)
+        
+        #if canImport(UIKit)
         let isEditing = editMode?.wrappedValue.isEditing ?? false
+        #else
+        let isEditing = false
+        #endif
 
         content
             .background(
-                Color(isSelected ? UIColor.tertiaryLabel : UIColor.secondarySystemGroupedBackground)
+                isSelected ? Color.tertiaryLabel : Color.secondaryGroupedBackground
             )
             .opacity(isSelected ? 0.9 : (isEditing ? 0.6 : 1))
             .clipShape(RoundedRectangle(cornerRadius: 5))

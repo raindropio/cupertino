@@ -7,11 +7,17 @@ public extension View {
 }
 
 fileprivate struct Fab<B: View>: ViewModifier {
+    #if canImport(UIKit)
     @Environment(\.editMode) private var editMode
+    #endif
     var buttons: () -> B
     
     func body(content: Content) -> some View {
+        #if canImport(UIKit)
         let hide = editMode?.wrappedValue == .active
+        #else
+        let hide = false
+        #endif
         
         content
 //            ._safeAreaInsets(.init(top: 0, leading: 0, bottom: 60, trailing: 0))

@@ -90,17 +90,19 @@ extension MultiPicker: View {
             .searchable(
                 text: $filter,
                 tokens: searchTokens,
-                placement: .navigationBarDrawer(displayMode: .always),
+                //placement: .navigationBarDrawer(displayMode: .always),
                 prompt: prompt
             ) { Text($0.id) }
-            .textInputAutocapitalization(autocorrectionDisabled ? .never : .sentences)
             .searchFocus(.always)
+            #if canImport(UIKit)
+            .textInputAutocapitalization(autocorrectionDisabled ? .never : .sentences)
             .searchBar(
                 withToolbar: true,
                 cancelable: false,
                 clearable: false,
                 tokenBackgroundColor: Color.accentColor.opacity(0.65)
             )
+            #endif
             .animation(.easeIn(duration: 0.15), value: selection)
             .onSubmit(of: .search, submit)
             .onChange(of: filter) {

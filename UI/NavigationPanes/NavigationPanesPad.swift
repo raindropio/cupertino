@@ -1,5 +1,6 @@
 import SwiftUI
 
+#if canImport(UIKit)
 extension NavigationPanes {
     struct Pad: View {
         @Environment(\.horizontalSizeClass) private var sizeClass
@@ -156,3 +157,4 @@ fileprivate extension NavigationPanes {
         }
     }
 }
+#endif

@@ -46,6 +46,7 @@ extension CollectionView: View {
             case .grid(_, _):
                 GridScrollView {
                     content()
+                        #if canImport(UIKit)
                         .innerEditMode {
                             model.isEditing = $0.isEditing
                             
@@ -54,6 +55,7 @@ extension CollectionView: View {
                                 selection = .init()
                             }
                         }
+                        #endif
                 }
                     .task {
                         model.action = action

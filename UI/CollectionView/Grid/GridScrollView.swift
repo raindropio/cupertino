@@ -21,7 +21,7 @@ extension GridScrollView: View {
                 .frame(maxWidth: .infinity, maxHeight: .infinity)
                 //appearance
                 .scrollContentBackground(.hidden)
-                .background(Color(UIColor.systemGroupedBackground))
+                .background(Color.groupedBackground)
             }
         }
     }

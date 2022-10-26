@@ -3,18 +3,23 @@ import Combine
 import WebKit
 
 @dynamicMemberLookup
-public class WebViewService: NSObject, ObservableObject, WKNavigationDelegate, WKUIDelegate, UIScrollViewDelegate {
+public class WebViewService: NSObject, ObservableObject, WKNavigationDelegate, WKUIDelegate {
     private var cancellables = Set<AnyCancellable>()
     private var startingUrl: URL?
 
     @Published public var error: Error?
     @Published public var prefersHiddenToolbars: Bool = false
     public var webView: WKWebView
+    
+    #if canImport(UIKit)
     public var refreshControl: UIRefreshControl
+    #endif
     
     public override init() {
         webView = .init()
+        #if canImport(UIKit)
         refreshControl = .init()
+        #endif
         super.init()
         
         webView.uiDelegate = self
@@ -22,8 +27,10 @@ public class WebViewService: NSObject, ObservableObject, WKNavigationDelegate, W
         
         //appearance
         webView.allowsBackForwardNavigationGestures = true
+        #if canImport(UIKit)
         webView.scrollView.contentInsetAdjustmentBehavior = .always
         webView.scrollView.delegate = self
+        #endif
         setTransparent(true)
         
         //reuse cookies
@@ -33,8 +40,10 @@ public class WebViewService: NSObject, ObservableObject, WKNavigationDelegate, W
         }
         
         //pull to refresh
+        #if canImport(UIKit)
         webView.scrollView.refreshControl = refreshControl
         refreshControl.addTarget(self, action: #selector(reloadWebView(_:)), for: .valueChanged)
+        #endif
         
         //observe changes
         Publishers.MergeMany([
@@ -66,7 +75,9 @@ public class WebViewService: NSObject, ObservableObject, WKNavigationDelegate, W
     //MARK: - Private methods
     private func webViewChanged() {
         objectWillChange.send()
+        #if canImport(UIKit)
         refreshControl.tintColor = webView.underPageBackgroundColor.isLight ? .lightGray : .white
+        #endif
     }
     
     #if canImport(UIKit)
@@ -92,7 +103,62 @@ public class WebViewService: NSObject, ObservableObject, WKNavigationDelegate, W
         #endif
     }
     
-    //MARK: - Scroll View Delegate
+    //MARK: - WebView Delegate
+    //start loading
+    public func webView(_ webView: WKWebView, didStartProvisionalNavigation navigation: WKNavigation!) {
+        self.error = nil
+    }
+    
+    //getting data
+    public func webView(_ webView: WKWebView, didCommit navigation: WKNavigation!) {
+        setTransparent(false)
+    }
+    
+    //end loading
+    public func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
+        self.error = nil
+        
+        #if canImport(UIKit)
+        refreshControl.endRefreshing()
+        
+        if webView.scrollView.contentOffset.y <= 0 && prefersHiddenToolbars {
+            prefersHiddenToolbars = false
+        }
+        #endif
+    }
+    
+    //error loading
+    public func webView(_ webView: WKWebView, didFail navigation: WKNavigation!, withError error: Error) {
+        self.error = error
+        setTransparent(false)
+        
+        #if canImport(UIKit)
+        refreshControl.endRefreshing()
+
+        if webView.scrollView.contentOffset.y <= 0 && prefersHiddenToolbars {
+            prefersHiddenToolbars = false
+        }
+        #endif
+    }
+    
+    public func webView(_ webView: WKWebView, didFailProvisionalNavigation navigation: WKNavigation!, withError error: Error) {
+        setTransparent(false)
+        self.error = error
+        
+        #if canImport(UIKit)
+        refreshControl.endRefreshing()
+        #endif
+    }
+    
+    //window.open, etc
+    public func webView(_ webView: WKWebView, createWebViewWith configuration: WKWebViewConfiguration, for navigationAction: WKNavigationAction, windowFeatures: WKWindowFeatures) -> WKWebView? {
+        webView.load(navigationAction.request)
+        return nil
+    }
+}
+
+#if canImport(UIKit)
+extension WebViewService: UIScrollViewDelegate {
     public func scrollViewWillEndDragging(
         _ scrollView: UIScrollView,
         withVelocity velocity: CGPoint,
@@ -117,48 +183,5 @@ public class WebViewService: NSObject, ObservableObject, WKNavigationDelegate, W
         prefersHiddenToolbars = false
         return true
     }
-    
-    //MARK: - WebView Delegate
-    //start loading
-    public func webView(_ webView: WKWebView, didStartProvisionalNavigation navigation: WKNavigation!) {
-        self.error = nil
-    }
-    
-    //getting data
-    public func webView(_ webView: WKWebView, didCommit navigation: WKNavigation!) {
-        setTransparent(false)
-    }
-    
-    //end loading
-    public func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
-        self.error = nil
-        refreshControl.endRefreshing()
-        
-        if webView.scrollView.contentOffset.y <= 0 && prefersHiddenToolbars {
-            prefersHiddenToolbars = false
-        }
-    }
-    
-    //error loading
-    public func webView(_ webView: WKWebView, didFail navigation: WKNavigation!, withError error: Error) {
-        self.error = error
-        setTransparent(false)
-        refreshControl.endRefreshing()
-
-        if webView.scrollView.contentOffset.y <= 0 && prefersHiddenToolbars {
-            prefersHiddenToolbars = false
-        }
-    }
-    
-    public func webView(_ webView: WKWebView, didFailProvisionalNavigation navigation: WKNavigation!, withError error: Error) {
-        setTransparent(false)
-        self.error = error
-        refreshControl.endRefreshing()
-    }
-    
-    //window.open, etc
-    public func webView(_ webView: WKWebView, createWebViewWith configuration: WKWebViewConfiguration, for navigationAction: WKNavigationAction, windowFeatures: WKWindowFeatures) -> WKWebView? {
-        webView.load(navigationAction.request)
-        return nil
-    }
 }
+#endif

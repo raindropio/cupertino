@@ -1,6 +1,7 @@
 import SwiftUI
 import Combine
 
+#if canImport(UIKit)
 extension View {
     func withSearchController(
         _ searchController: Binding<UISearchController?>,
@@ -81,10 +82,9 @@ fileprivate struct WithSearchController: UIViewControllerRepresentable {
             
             if let navigationItem = parent?.navigationItem,
                 let searchController = navigationItem.searchController {
-                if navigationItem.hidesSearchBarWhenScrolling {
+                if navigationItem.hidesSearchBarWhenScrolling && searchController.searchBarPlacement != .inline {
                     searchController.searchBar.isHidden = true
                 }
-                
                 
                 onAvailable(searchController)
                 observe(searchController)
@@ -94,7 +94,8 @@ fileprivate struct WithSearchController: UIViewControllerRepresentable {
         override func viewDidAppear(_ animated: Bool) {
             super.viewDidAppear(animated)
                         
-            if let searchController = parent?.navigationItem.searchController {
+            if let searchController = parent?.navigationItem.searchController,
+               searchController.searchBarPlacement != .inline {
                 searchController.searchBar.isHidden = false
                 onDidAppear(searchController)
             }
@@ -113,3 +114,4 @@ fileprivate struct WithSearchController: UIViewControllerRepresentable {
         }
     }
 }
+#endif

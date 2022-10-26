@@ -1,25 +1,22 @@
 import SwiftUI
 
 public extension View {
-    func onEvent<T>(_ name: Notification.Name, ofType: T.Type, callback: @escaping (T) -> Void) -> some View {
-        modifier(OnEventModifier(name, callback: callback))
+    func onEvent<T>(_ name: String, ofType: T.Type, action: @escaping (T) -> Void) -> some View {
+        modifier(EventConsumerModifer(name: name, ofType: ofType, action: action))
     }
 }
 
-fileprivate struct OnEventModifier<T>: ViewModifier {
-    private var receiver: NotificationCenter.Publisher
-    private var callback: (T) -> Void
-
-    init(_ name: Notification.Name, callback: @escaping (T) -> Void) {
-        self.callback = callback
-        self.receiver = NotificationCenter.default.publisher(for: name)
-    }
+fileprivate struct EventConsumerModifer<T>: ViewModifier {
+    @EnvironmentObject private var event: Event
+    var name: String
+    var ofType: T.Type
+    var action: (T) -> Void
     
     func body(content: Content) -> some View {
         content
-            .onReceive(receiver) {
-                if let object = $0.object as? T {
-                    callback(object)
+            .onReceive(event.publisher) {
+                if $0.0 == name, let object = $0.1 as? T {
+                    action(object)
                 }
             }
     }

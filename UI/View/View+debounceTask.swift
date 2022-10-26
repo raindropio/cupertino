@@ -9,12 +9,12 @@ struct DebouncingTaskViewModifier<ID: Equatable>: ViewModifier {
     init(
         id: ID,
         priority: TaskPriority = .userInitiated,
-        debounce: UInt64 = 0,
+        debounce: Double = 0,
         task: @Sendable @escaping () async -> Void
     ) {
         self.id = id
         self.priority = priority
-        self.nanoseconds = 1_000_000 * debounce
+        self.nanoseconds = UInt64(1_000_000_000 * debounce)
         self.task = task
     }
     
@@ -34,7 +34,7 @@ public extension View {
     func task<ID: Equatable>(
         id: ID,
         priority: TaskPriority = .userInitiated,
-        debounce: UInt64 = 0,
+        debounce: Double = 0,
         task: @Sendable @escaping () async -> Void
     ) -> some View {
         modifier(

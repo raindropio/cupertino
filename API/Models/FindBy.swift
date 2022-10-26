@@ -71,7 +71,7 @@ extension FindBy {
 
 extension FindBy {
     public mutating func complete(_ filter: Filter) {
-        if !filters.contains(filter) {
+        if !filters.contains(where: { $0.kind == filter.kind }) {
             filters.append(filter)
             text.removeLast(filter.completionEnd(of: text))
         }

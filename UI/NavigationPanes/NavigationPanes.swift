@@ -18,10 +18,14 @@ public struct NavigationPanes<P: MutableCollection, S: View, D: View> where P: R
 
 extension NavigationPanes: View {
     public var body: some View {
+        #if canImport(UIKit)
         if isPhone {
             Phone(path: $path, sidebar: sidebar, detail: detail)
         } else {
             Pad(path: $path, sidebar: sidebar, detail: detail)
         }
+        #else
+        Mac(path: $path, sidebar: sidebar, detail: detail)
+        #endif
     }
 }

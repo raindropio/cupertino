@@ -14,6 +14,8 @@ public enum SearchFocusType {
 
 fileprivate struct SearchFocusModifier: ViewModifier {
     var type: SearchFocusType
+    
+    #if canImport(UIKit)
     @State private var searchController: UISearchController?
 
     func body(content: Content) -> some View {
@@ -35,4 +37,9 @@ fileprivate struct SearchFocusModifier: ViewModifier {
                 }
             }
     }
+    #else
+    func body(content: Content) -> some View {
+        content
+    }
+    #endif
 }

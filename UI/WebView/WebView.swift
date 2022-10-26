@@ -40,9 +40,11 @@ extension WebView: View {
         }
             .environment(\.colorScheme, overrideScheme ?? colorScheme)
             .toolbarColorScheme(overrideScheme)
+            #if canImport(UIKit)
             .toolbarBackground(overrideScheme == nil ? .automatic : .visible, for: .navigationBar)
             .toolbarBackground(.visible, for: .bottomBar)
             .toolbar(service.prefersHiddenToolbars ? .hidden : .automatic, for: .navigationBar, .bottomBar, .tabBar)
+            #endif
             .animation(.default, value: service.prefersHiddenToolbars)
             .animation(.default, value: overrideScheme)
     }

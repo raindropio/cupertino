@@ -1,6 +1,6 @@
 import SwiftUI
 
-#if os(iOS)
+#if canImport(UIKit)
 struct InnerEditModeModifier: ViewModifier {
     @Environment(\.editMode) private var editMode
     var action: (EditMode) -> Void
