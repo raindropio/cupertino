@@ -1,6 +1,6 @@
 import Foundation
 
-extension Collection: Codable {
+extension UserCollection: Codable {
     //variables that should be in json to send to API
     enum CodingKeys: String, CodingKey {
         case _id
@@ -34,7 +34,7 @@ extension Collection: Codable {
         lastUpdate = try? container.decode(type(of: lastUpdate), forKey: .lastUpdate)
         self.public = (try? container.decode(type(of: self.public), forKey: .public)) ?? false
         expanded = (try? container.decode(type(of: expanded), forKey: .expanded)) ?? false
-        view = try? container.decode(type(of: view), forKey: .view)
+        view = (try? container.decode(type(of: view), forKey: .view)) ?? .list
         sort = (try? container.decode(type(of: sort), forKey: .sort)) ?? 0
         access = (try? container.decode(type(of: access), forKey: .access)) ?? .init()
         creatorRef = try? container.decode(Swift.type(of: creatorRef), forKey: .creatorRef)
@@ -46,7 +46,7 @@ extension Collection: Codable {
             cover = nil
         }
                 
-        if let parentContainer = try? container.nestedContainer(keyedBy: MongoRef<Collection.ID>.CodingKeys.self, forKey: .parent) {
+        if let parentContainer = try? container.nestedContainer(keyedBy: MongoRef<UserCollection.ID>.CodingKeys.self, forKey: .parent) {
             parent = try parentContainer.decode(type(of: parent), forKey: .id)
         } else {
             parent = nil
@@ -85,7 +85,7 @@ extension Collection: Codable {
         }
         
         if parent != nil {
-            try container.encode(MongoRef<Collection.ID>(id: parent!), forKey: .parent)
+            try container.encode(MongoRef<UserCollection.ID>(id: parent!), forKey: .parent)
         }
         
         if collaborators != nil {

@@ -6,8 +6,8 @@ public struct RecentState: Equatable {
 }
 
 extension RecentState {
-    public func search(_ find: FindBy?) -> [String] {
-        guard find == nil || (find!.collectionId == 0 && !find!.isSearching)
+    public func search(_ find: FindBy = .init()) -> [String] {
+        guard find.collectionId == 0 && !find.isSearching
         else { return [] }
         
         return search

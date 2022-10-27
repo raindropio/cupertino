@@ -52,15 +52,6 @@ extension Thumbnail: Equatable {
 }
 
 extension Thumbnail: View {
-    var isSmall: Bool {
-        if let width, width <= 50 {
-            return true
-        } else if let height, height <= 50 {
-            return true
-        }
-        return false
-    }
-    
     var naturalSize: CGSize {
         let w = Int(width ?? (height ?? 0) / (aspectRatio ?? 1))
         let h = Int(height ?? (width ?? 0) / (aspectRatio ?? 1))
@@ -73,9 +64,7 @@ extension Thumbnail: View {
     
     var base: some KFImageProtocol {
         KFImage(url)
-            .backgroundDecode(!isSmall)
-            .loadDiskFileSynchronously(isSmall)
-            .cancelOnDisappear(true)
+            .backgroundDecode()
             .cacheOriginalImage()
             .interpolation(.low)
             .antialiased(false)

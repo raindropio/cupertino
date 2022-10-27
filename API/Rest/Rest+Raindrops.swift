@@ -43,7 +43,7 @@ extension Rest {
     }
     
     public enum RaindropsUpdateOperation {
-        case moveTo(Collection.ID)
+        case moveTo(Int)
         case addTags([String])
         case removeTags
         case reparse

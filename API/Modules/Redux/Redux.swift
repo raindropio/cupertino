@@ -67,10 +67,11 @@ public class Redux<State: Equatable, Action: ReduxAction>: ObservableObject {
         var newState = await state
         
         try await perform(&newState)
+        
+        guard await state != newState
+        else { return }
 
         await MainActor.run { [newState] in
-            guard state != newState else { return }
-            
             state = newState
             delegate.objectWillChange.send()
         }
@@ -81,7 +82,7 @@ public class Redux<State: Equatable, Action: ReduxAction>: ObservableObject {
         var tries = 0
         
         while !(await condition(state)) {
-            try? await Task.sleep(until: .now + .milliseconds(100), clock: .continuous)
+            try? await Task.sleep(nanoseconds: UInt64(1_000_000_000 * 0.1))
             tries += 1
             
             //max 10 seconds

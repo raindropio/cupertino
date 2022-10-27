@@ -6,19 +6,12 @@ extension RaindropsState {
 
         public var ids = [Raindrop.ID]()
         public var status = Status.idle
-        public var more = More.idle
+        public var more = Status.idle
         
         public enum Status: String, Equatable, Codable {
             case idle
             case loading
             case notFound
-            case error
-        }
-        
-        public enum More: String, Equatable, Codable {
-            case idle
-            case loading
-            case end
             case error
         }
     }
@@ -33,10 +26,14 @@ extension RaindropsState {
         self[find].status
     }
     
+    public func isEmpty(_ find: FindBy) -> Bool {
+        self[find].ids.isEmpty
+    }
+    
     //save only valid groups to cache
     static func cachable(_ segments: Segments) -> Segments {
         segments.filter {
-            $0.1.status == .idle && ($0.1.more == .idle || $0.1.more == .end)
+            $0.1.status == .idle && ($0.1.more == .idle || $0.1.more == .notFound)
         }
     }
     

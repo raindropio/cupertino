@@ -1,12 +1,12 @@
 import Foundation
 
 public struct FindBy: Equatable, Hashable, Codable {
-    public var collectionId: Collection.ID = 0
+    public var collectionId: Int = 0
     public var filters = [Filter]()
     public var text: String = ""
     
     public init(
-        _ collectionId: Collection.ID = 0,
+        _ collectionId: Int = 0,
         filters: [Filter] = [],
         text: String = ""
     ) {
@@ -17,7 +17,11 @@ public struct FindBy: Equatable, Hashable, Codable {
     
     public init() {}
     
-    public init(_ collection: Collection) {
+    public init(_ collection: SystemCollection) {
+        self.collectionId = collection.id
+    }
+    
+    public init(_ collection: UserCollection) {
         self.collectionId = collection.id
     }
     

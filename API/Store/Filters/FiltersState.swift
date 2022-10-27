@@ -7,15 +7,15 @@ public struct FiltersState: Equatable {
 }
 
 extension FiltersState {
-    public func simple(_ find: FindBy) -> [Filter] {
+    public func simple(_ find: FindBy = .init()) -> [Filter] {
         return withoutCompletion(find, simple[find])
     }
     
-    public func tags(_ find: FindBy) -> [Filter] {
+    public func tags(_ find: FindBy = .init()) -> [Filter] {
         return withoutCompletion(find, tags[find])
     }
     
-    public func created(_ find: FindBy) -> [Filter] {
+    public func created(_ find: FindBy = .init()) -> [Filter] {
         return withoutCompletion(find, created[find])
     }
 }

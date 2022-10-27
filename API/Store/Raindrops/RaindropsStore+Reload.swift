@@ -1,7 +1,12 @@
 extension RaindropsStore {
     func reload(find: FindBy, sort: SortBy) async throws {
-        try await mutate { state in
-            state[find].status = .loading
+        let oldStatus = await state.status(find)
+        let isEmpty = await state.isEmpty(find)
+        
+        if isEmpty || oldStatus != .idle {
+            try await mutate { state in
+                state[find].status = .loading
+            }
         }
         
         do {

@@ -45,7 +45,7 @@ extension Raindrop: Codable {
             cover = .init(coverUrl)
         }
         
-        if let collectionContainer = try? container.nestedContainer(keyedBy: MongoRef<Collection.ID>.CodingKeys.self, forKey: .collection) {
+        if let collectionContainer = try? container.nestedContainer(keyedBy: MongoRef<Int>.CodingKeys.self, forKey: .collection) {
             collection = try collectionContainer.decode(Swift.type(of: collection), forKey: .id)
         } else {
             collection = nil
@@ -72,7 +72,7 @@ extension Raindrop: Codable {
         try container.encode(cache, forKey: .cache)
         
         if collection != nil {
-            try container.encode(MongoRef<Collection.ID>(id: collection!), forKey: .collection)
+            try container.encode(MongoRef<Int>(id: collection!), forKey: .collection)
         }
     }
 }

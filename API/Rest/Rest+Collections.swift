@@ -2,15 +2,15 @@ import Foundation
 
 //MARK: - Get many
 extension Rest {
-    public func collectionsGet() async throws -> [Collection] {
-        async let fetchAll: CollectionsResponse = fetch.get("collections/all")
-        async let fetchSystem: CollectionsResponse = fetch.get("user/stats")
-        let (all, system) = try await (fetchAll, fetchSystem)
-        return system.items + all.items
+    public func collectionsGet() async throws -> ([SystemCollection], [UserCollection]) {
+        async let fetchSystem: CollectionsResponse<SystemCollection> = fetch.get("user/stats")
+        async let fetchAll: CollectionsResponse<UserCollection> = fetch.get("collections/all")
+        let (system, all) = try await (fetchSystem, fetchAll)
+        return (system.items, all.items)
     }
     
-    fileprivate struct CollectionsResponse: Decodable {
-        var items: [Collection]
+    fileprivate struct CollectionsResponse<C: CollectionProtocol>: Decodable {
+        var items: [C]
     }
 }
 

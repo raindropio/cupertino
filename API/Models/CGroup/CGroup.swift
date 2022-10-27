@@ -5,5 +5,5 @@ public struct CGroup: Identifiable, Equatable {
     public var title: String
     public var hidden = false
     public var sort = 0
-    public var collections: [Collection.ID] = []
+    public var collections: [UserCollection.ID] = []
 }

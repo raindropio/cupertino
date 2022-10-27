@@ -1,6 +1,6 @@
 extension RecentStore {
-    func reload(find: FindBy?) async throws {
-        guard find == nil || (find!.collectionId == 0 && !find!.isSearching)
+    func reload(find: FindBy) async throws {
+        guard find.collectionId == 0 && !find.isSearching
         else { return }
         
         async let fetchSearch = rest.recentSearch()

@@ -17,11 +17,11 @@ public enum RaindropsAction: ReduxAction {
 }
 
 public enum FiltersAction: ReduxAction {
-    case reload(FindBy)
+    case reload(FindBy = .init())
 }
 
 public enum RecentAction: ReduxAction {
-    case reload(FindBy?)
+    case reload(FindBy = .init())
     case clearSearch
     case clearTags
 }
