@@ -2,7 +2,7 @@
 
 ### Folders structure
 - Models: All public models
-- Packages
+- Modules
     - Cached: Propery wrapper to persist data in cache (file storage)
     - Fetch: Library to interact with HTTP API's'
     - Render: Library to generate image URL (resize, screenshot, favicon)
