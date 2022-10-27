@@ -31,3 +31,17 @@ extension Rest {
         }
     }
 }
+
+//MARK: - Clear recent search
+extension Rest {
+    public func clearRecentSearch() async throws {
+        try await fetch.delete("raindrops/recent/search")
+    }
+}
+
+//MARK: - Clear recent tags
+extension Rest {
+    public func clearRecentTags() async throws {
+        try await fetch.delete("tags/recent")
+    }
+}

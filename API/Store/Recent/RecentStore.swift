@@ -1,7 +1,7 @@
 import Foundation
 
-public class UserStore: ReduxStore {
-    public var redux: Redux<UserState, UserAction>
+public class RecentStore: ReduxStore {
+    public var redux: Redux<RecentState, RecentAction>
     var rest = Rest()
     
     @MainActor public init() {
@@ -11,10 +11,10 @@ public class UserStore: ReduxStore {
 }
 
 //MARK: - Catch all actions
-extension UserStore {
+extension RecentStore {
     public func react(to action: ReduxAction) async throws {
-        if let action = action as? UserAction {
-            try await user(action)
+        if let action = action as? RecentAction {
+            try await recent(action)
         } else if let action = action as? AuthAction {
             try await auth(action)
         }
@@ -22,17 +22,23 @@ extension UserStore {
 }
 
 //MARK: - Store specific actions
-extension UserStore {
-    public func user(_ action: UserAction) async throws {
+extension RecentStore {
+    public func recent(_ action: RecentAction) async throws {
         switch action {
-        case .reload:
-            try await reload()
+        case .reload(let find):
+            try await reload(find: find)
+            
+        case .clearSearch:
+            try await clearSearch()
+            
+        case .clearTags:
+            try await clearTags()
         }
     }
 }
 
 //MARK: - Auth specific actions
-extension UserStore {
+extension RecentStore {
     public func auth(_ action: AuthAction) async throws {
         switch action {
         case .logout:

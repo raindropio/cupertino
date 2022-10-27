@@ -13,21 +13,17 @@ public class CollectionsStore: ReduxStore {
 //MARK: - Catch all actions
 extension CollectionsStore {
     public func react(to action: ReduxAction) async throws {
-        switch action {
-        case is CollectionsAction:
-            try await react(to: action as! CollectionsAction)
-            
-        case is AuthAction:
-            try await react(to: action as! AuthAction)
-            
-        default: break
+        if let action = action as? CollectionsAction {
+            try await collections(action)
+        } else if let action = action as? AuthAction {
+            try await auth(action)
         }
     }
 }
 
 //MARK: - Store specific actions
 extension CollectionsStore {
-    public func react(to action: CollectionsAction) async throws {
+    public func collections(_ action: CollectionsAction) async throws {
         switch action {
         case .reload:
             try await reload()
@@ -37,7 +33,7 @@ extension CollectionsStore {
 
 //MARK: - Auth specific actions
 extension CollectionsStore {
-    public func react(to action: AuthAction) async throws {
+    public func auth(_ action: AuthAction) async throws {
         switch action {
         case .logout:
             try await logout()

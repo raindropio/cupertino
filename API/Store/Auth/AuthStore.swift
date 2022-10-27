@@ -14,7 +14,7 @@ public class AuthStore: ReduxStore {
 extension AuthStore {
     public func react(to action: ReduxAction) async throws {
         if let action = action as? AuthAction {
-            try await react(to: action)
+            try await auth(action)
         }
     }
 }
@@ -36,7 +36,7 @@ extension AuthStore {
 
 //MARK: - Store specific actions
 extension AuthStore {
-    public func react(to action: AuthAction) async throws {
+    public func auth(_ action: AuthAction) async throws {
         switch action {
         case .login(let form):
             try await login(form: form)

@@ -20,6 +20,12 @@ public enum FiltersAction: ReduxAction {
     case reload(FindBy)
 }
 
+public enum RecentAction: ReduxAction {
+    case reload(FindBy?)
+    case clearSearch
+    case clearTags
+}
+
 public enum UserAction: ReduxAction {
     case reload
 }
