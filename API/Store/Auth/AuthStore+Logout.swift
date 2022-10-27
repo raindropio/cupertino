@@ -6,11 +6,10 @@ extension AuthStore {
         
         do {
             _ = try await rest.authLogout()
+            try await mutate {
+                $0.status.logout = .idle
+            }
         }
-        //prevent cycle (already logged out)
-        catch RestError.unauthorized {
-        }
-        //some other error
         catch {
             try await mutate {
                 $0.status.logout = .error(
@@ -18,11 +17,6 @@ extension AuthStore {
                 )
             }
             throw error
-        }
-        
-        //job done
-        try await mutate {
-            $0.status.logout = .idle
         }
     }
 }

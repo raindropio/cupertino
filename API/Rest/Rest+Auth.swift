@@ -17,7 +17,18 @@ extension Rest {
 //MARK: - Logout
 extension Rest {
     public func authLogout() async throws -> Bool {
-        let res: AuthGenericResponse = try await fetch.get("auth/logout", query: [.init(name: "no_redirect", value: nil)])
-        return res.result
+        do {
+            let res: AuthGenericResponse = try await fetch.get(
+                "auth/logout",
+                query: [.init(name: "no_redirect", value: nil)]
+            )
+            return res.result
+        }
+        catch RestError.unauthorized {
+            return true
+        }
+        catch {
+            throw error
+        }
     }
 }
