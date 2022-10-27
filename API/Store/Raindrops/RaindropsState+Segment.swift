@@ -5,6 +5,7 @@ extension RaindropsState {
         static let blank = Self()
 
         public var ids = [Raindrop.ID]()
+        public var sort = SortBy.sort
         public var status = Status.idle
         public var more = Status.idle
         
@@ -26,8 +27,16 @@ extension RaindropsState {
         self[find].status
     }
     
+    public func sort(_ find: FindBy) -> SortBy {
+        self[find].sort
+    }
+    
     public func isEmpty(_ find: FindBy) -> Bool {
         self[find].ids.isEmpty
+    }
+    
+    public func exists(_ find: FindBy) -> Bool {
+        segments[find] != nil
     }
     
     //save only valid groups to cache

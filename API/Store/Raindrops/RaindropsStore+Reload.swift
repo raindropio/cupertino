@@ -1,15 +1,20 @@
 extension RaindropsStore {
-    func reload(find: FindBy, sort: SortBy) async throws {
-        let oldStatus = await state.status(find)
-        let isEmpty = await state.isEmpty(find)
+    func reload(find: FindBy) async throws {
+        let exists = await state.exists(find)
         
-        if isEmpty || oldStatus != .idle {
+        //first run
+        if !exists {
             try await mutate { state in
+                //default sort
+                state[find].sort = SortBy.someCases(for: find).first!
+                
+                //only change status when there never run
                 state[find].status = .loading
             }
         }
         
         do {
+            let sort = await state.sort(find)
             let items = try await rest.raindropsGet(find, sort: sort)
             
             //add to items dictionary and update group

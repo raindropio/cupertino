@@ -10,8 +10,9 @@ public enum CollectionsAction: ReduxAction {
 }
 
 public enum RaindropsAction: ReduxAction {
-    case reload(FindBy, SortBy)
-    case loadMore(FindBy, SortBy)
+    case reload(FindBy)
+    case loadMore(FindBy)
+    case sort(FindBy, SortBy)
     case create(Raindrop)
     case createMany([Raindrop])
 }

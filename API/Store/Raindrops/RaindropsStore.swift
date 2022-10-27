@@ -25,11 +25,14 @@ extension RaindropsStore {
 extension RaindropsStore {
     public func raindrops(_ action: RaindropsAction) async throws {
         switch action {
-        case .reload(let find, let sort):
-            try await reload(find: find, sort: sort)
+        case .reload(let find):
+            try await reload(find: find)
             
-        case .loadMore(let find, let sort):
-            try await loadMore(find: find, sort: sort)
+        case .loadMore(let find):
+            try await loadMore(find: find)
+            
+        case .sort(let find, let by):
+            try await sort(find: find, by: by)
             
         case .create(let item):
             redux.dispatch(RaindropsAction.createMany([item]))

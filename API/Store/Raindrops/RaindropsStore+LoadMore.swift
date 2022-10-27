@@ -1,5 +1,5 @@
 extension RaindropsStore {
-    func loadMore(find: FindBy, sort: SortBy) async throws {
+    func loadMore(find: FindBy) async throws {
         
     }
 }
