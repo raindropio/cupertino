@@ -1,7 +1,7 @@
 import Foundation
 
 extension RaindropsState {
-    public struct Group: Equatable, Codable {
+    public struct Segment: Equatable, Codable {
         static let blank = Self()
 
         public var ids = [Raindrop.ID]()
@@ -29,22 +29,22 @@ extension RaindropsState {
         self[find].ids.compactMap { items[$0] }
     }
     
-    public func status(_ find: FindBy) -> Group.Status {
+    public func status(_ find: FindBy) -> Segment.Status {
         self[find].status
     }
     
     //save only valid groups to cache
-    static func cachable(_ groups: Groups) -> Groups {
-        groups.filter {
+    static func cachable(_ segments: Segments) -> Segments {
+        segments.filter {
             $0.1.status == .idle && ($0.1.more == .idle || $0.1.more == .end)
         }
     }
     
     //access specific group by state[find].ids, etc
-    subscript(find: FindBy) -> Group {
-        get { groups[find] ?? Group.blank }
+    subscript(find: FindBy) -> Segment {
+        get { segments[find] ?? Segment.blank }
         set {
-            groups[find] = newValue
+            segments[find] = newValue
         }
     }
 }

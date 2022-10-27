@@ -2,8 +2,8 @@ import Foundation
 import SwiftUI
 
 public struct RaindropsState: Equatable {
+    typealias Segments = [ FindBy : Segment ]
+
     @Cached("rns-items") var items = [Raindrop.ID: Raindrop]()
-    
-    typealias Groups = [ FindBy : Group ]
-    @Cached("rns-groups", cachable) var groups = Groups()
+    @Cached("rns-segments", cachable) var segments = Segments()
 }
