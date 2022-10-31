@@ -5,6 +5,7 @@ extension UserCollection: Codable {
     enum CodingKeys: String, CodingKey {
         case _id
         case title
+        case slug
         case description
         case count
         case cover
@@ -27,6 +28,7 @@ extension UserCollection: Codable {
         //as is
         id = try container.decode(type(of: id), forKey: ._id)
         title = try container.decode(type(of: title), forKey: .title)
+        slug = try container.decode(type(of: title), forKey: .slug)
         description = (try? container.decode(type(of: description), forKey: .description)) ?? ""
         count = (try? container.decode(type(of: count), forKey: .count)) ?? 0
 //        color = (try? container.decode(type(of: color), forKey: .color)) ?? nil
@@ -37,7 +39,7 @@ extension UserCollection: Codable {
         view = (try? container.decode(type(of: view), forKey: .view)) ?? .list
         sort = (try? container.decode(type(of: sort), forKey: .sort)) ?? 0
         access = (try? container.decode(type(of: access), forKey: .access)) ?? .init()
-        creatorRef = try? container.decode(Swift.type(of: creatorRef), forKey: .creatorRef)
+        creatorRef = try? container.decode(type(of: creatorRef), forKey: .creatorRef)
 
         //complicated
         if let coverArray = try? container.decode([URL].self, forKey: .cover), coverArray.count>0 {
@@ -64,6 +66,7 @@ extension UserCollection: Codable {
         var container = encoder.container(keyedBy: CodingKeys.self)
         try container.encode(id, forKey: ._id)
         try container.encode(title, forKey: .title)
+        try container.encode(slug, forKey: .slug)
         try container.encode(description, forKey: .description)
         try container.encode(count, forKey: .count)
         try container.encode(created, forKey: .created)

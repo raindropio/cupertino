@@ -23,7 +23,7 @@ extension RaindropsStore {
 
 //MARK: - Store specific actions
 extension RaindropsStore {
-    public func raindrops(_ action: RaindropsAction) async throws {
+    private func raindrops(_ action: RaindropsAction) async throws {
         switch action {
         case .reload(let find):
             try await reload(find: find)
@@ -45,7 +45,7 @@ extension RaindropsStore {
 
 //MARK: - Auth specific actions
 extension RaindropsStore {
-    public func auth(_ action: AuthAction) async throws {
+    private func auth(_ action: AuthAction) async throws {
         switch action {
         case .logout:
             try await logout()

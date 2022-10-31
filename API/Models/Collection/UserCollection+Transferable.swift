@@ -8,8 +8,8 @@ extension UTType {
 extension UserCollection: Transferable {
     public static var transferRepresentation: some TransferRepresentation {
         CodableRepresentation(contentType: .userCollection)
-        DataRepresentation(exportedContentType: .url) { _ in
-            URL(string: "https://raindrop.io")!.dataRepresentation
+        DataRepresentation(exportedContentType: .url) {
+            $0.publicPage?.dataRepresentation ?? .init()
         }
         ProxyRepresentation(exporting: \.title)
     }

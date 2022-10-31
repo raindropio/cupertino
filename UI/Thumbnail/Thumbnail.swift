@@ -65,19 +65,13 @@ extension Thumbnail: View {
     var base: some KFImageProtocol {
         KFImage(url)
             .backgroundDecode()
+            .retry(maxCount: 3, interval: .seconds(5))
             .cacheOriginalImage()
+            .cancelOnDisappear(true)
+            .fade(duration: 0.2)
             .interpolation(.low)
             .antialiased(false)
             .resizable()
-            .placeholder {
-                Rectangle().foregroundStyle(.quaternary)
-            }
-            .onSuccess {
-                //cache aspect ratio for later
-                if let url, aspectRatio == nil, (width == nil || height == nil) {
-                    Self.cacheAspect[url] = $0.image.size.width / $0.image.size.height
-                }
-            }
     }
     
     public var body: some View {
@@ -100,6 +94,12 @@ extension Thumbnail: View {
         else {
             base
                 .downsampling(size: naturalSize)
+                .onSuccess {
+                    //cache aspect ratio for later
+                    if let url, aspectRatio == nil, (width == nil || height == nil) {
+                        Self.cacheAspect[url] = $0.image.size.width / $0.image.size.height
+                    }
+                }
                 .aspectRatio(url != nil ? Self.cacheAspect[url!] : nil, contentMode: .fit)
         }
     }

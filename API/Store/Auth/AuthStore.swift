@@ -36,7 +36,7 @@ extension AuthStore {
 
 //MARK: - Store specific actions
 extension AuthStore {
-    public func auth(_ action: AuthAction) async throws {
+    private func auth(_ action: AuthAction) async throws {
         switch action {
         case .login(let form):
             try await login(form: form)

@@ -23,7 +23,7 @@ extension UserStore {
 
 //MARK: - Store specific actions
 extension UserStore {
-    public func user(_ action: UserAction) async throws {
+    private func user(_ action: UserAction) async throws {
         switch action {
         case .reload:
             try await reload()
@@ -33,7 +33,7 @@ extension UserStore {
 
 //MARK: - Auth specific actions
 extension UserStore {
-    public func auth(_ action: AuthAction) async throws {
+    private func auth(_ action: AuthAction) async throws {
         switch action {
         case .logout:
             try await logout()

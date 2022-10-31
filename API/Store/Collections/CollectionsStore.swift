@@ -23,7 +23,7 @@ extension CollectionsStore {
 
 //MARK: - Store specific actions
 extension CollectionsStore {
-    public func collections(_ action: CollectionsAction) async throws {
+    private func collections(_ action: CollectionsAction) async throws {
         switch action {
         case .reload:
             try await reload()
@@ -33,7 +33,7 @@ extension CollectionsStore {
 
 //MARK: - Auth specific actions
 extension CollectionsStore {
-    public func auth(_ action: AuthAction) async throws {
+    private func auth(_ action: AuthAction) async throws {
         switch action {
         case .logout:
             try await logout()

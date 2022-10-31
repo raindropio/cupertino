@@ -1,19 +1,47 @@
 import SwiftUI
 
 public extension View {
+    func searchable(
+        text: Binding<String>,
+        debounce: Double,
+        placement: SearchFieldPlacement = .automatic,
+        prompt: String
+    ) -> some View {
+        modifier(SearchableDebounceModifier(text: text, debounce: debounce, placement: placement, prompt: prompt))
+    }
+    
     func searchable<C: RandomAccessCollection & RangeReplaceableCollection & Equatable, T: View>(
         text: Binding<String>,
-        debounce: Double = 0,
+        debounce: Double,
         tokens: Binding<C>,
         placement: SearchFieldPlacement = .automatic,
         prompt: Text? = nil,
         token: @escaping (C.Element) -> T
     ) -> some View where C.Element : Identifiable {
-        modifier(SearchableDebounceModifier(text: text, debounce: debounce, tokens: tokens, placement: placement, token: token))
+        modifier(SearchableTokensDebounceModifier(text: text, debounce: debounce, tokens: tokens, placement: placement, prompt: prompt, token: token))
     }
 }
 
-fileprivate struct SearchableDebounceModifier<C: RandomAccessCollection & RangeReplaceableCollection & Equatable, T: View>: ViewModifier where C.Element : Identifiable {
+fileprivate struct SearchableDebounceModifier: ViewModifier {
+    @Binding var text: String
+    var debounce: Double = 0
+    var placement: SearchFieldPlacement
+    var prompt: String
+    
+    @State private var temp = ""
+    
+    func body(content: Content) -> some View {
+        content
+            .searchable(
+                text: $temp,
+                placement: placement,
+                prompt: prompt
+            )
+            .modifier(DebounceSearchText(text: $text, temp: $temp, debounce: debounce))
+    }
+}
+
+fileprivate struct SearchableTokensDebounceModifier<C: RandomAccessCollection & RangeReplaceableCollection & Equatable, T: View>: ViewModifier where C.Element : Identifiable {
     @State private var temp = ""
     
     @Binding var text: String
@@ -32,8 +60,24 @@ fileprivate struct SearchableDebounceModifier<C: RandomAccessCollection & RangeR
                 prompt: prompt,
                 token: token
             )
+            .modifier(DebounceSearchText(text: $text, temp: $temp, debounce: debounce))
+    }
+}
+
+fileprivate struct DebounceSearchText: ViewModifier {
+    @Binding var text: String
+    @Binding var temp: String
+    var debounce: Double = 0
+
+    func body(content: Content) -> some View {
+        content
             .onSubmit(of: .search) {
                 text = temp
+            }
+            .task(id: text) {
+                if temp != text {
+                    temp = text
+                }
             }
             .task(id: temp, priority: .utility) {
                 do {
@@ -43,10 +87,8 @@ fileprivate struct SearchableDebounceModifier<C: RandomAccessCollection & RangeR
                     text = temp
                 } catch {}
             }
-            .task(id: text) {
-                if temp != text {
-                    temp = text
-                }
-            }
+            
     }
 }
+
+

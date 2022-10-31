@@ -12,7 +12,7 @@ public struct Raindrop: Identifiable, Hashable {
     public var tags = [String]()
     public var created = Date()
     public var lastUpdate = Date()
-    public var creatorRef: User?
+    public var creatorRef: CreatorRef?
     public var important = false
     public var broken = false
     public var duplicate: Int?

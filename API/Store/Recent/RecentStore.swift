@@ -23,7 +23,7 @@ extension RecentStore {
 
 //MARK: - Store specific actions
 extension RecentStore {
-    public func recent(_ action: RecentAction) async throws {
+    private func recent(_ action: RecentAction) async throws {
         switch action {
         case .reload(let find):
             try await reload(find: find)
@@ -39,7 +39,7 @@ extension RecentStore {
 
 //MARK: - Auth specific actions
 extension RecentStore {
-    public func auth(_ action: AuthAction) async throws {
+    private func auth(_ action: AuthAction) async throws {
         switch action {
         case .logout:
             try await logout()

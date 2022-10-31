@@ -30,14 +30,14 @@ public actor CachedFileStorage {
     
     /// Debounce save
     static func save<T: Encodable>(_ cacheKey: String, value: T?, debounce: Double) {
-        cancelables[cacheKey]?.cancel()
-        cancelables[cacheKey] = Task {
-            do {
-                try await Task.sleep(nanoseconds: UInt64(1_000_000_000 * debounce))
-                try Task.checkCancellation()
+//        cancelables[cacheKey]?.cancel()
+//        cancelables[cacheKey] = Task {
+//            do {
+//                try await Task.sleep(nanoseconds: UInt64(1_000_000_000 * debounce))
+//                try Task.checkCancellation()
                 save(cacheKey, value: value)
-            } catch {}
-        }
+//            } catch {}
+//        }
     }
     
     private static func fileUrl(_ cacheKey: String) -> URL? {

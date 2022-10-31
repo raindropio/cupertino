@@ -5,6 +5,7 @@ import SwiftUI
 public struct UserCollection: CollectionProtocol {
     public var id: Int
     public var title: String
+    public var slug: String = ""
     public var description = ""
     public var count = 0
     public var cover: URL?
@@ -18,9 +19,15 @@ public struct UserCollection: CollectionProtocol {
     public var sort = 0
     public var access = CollectionAccess()
     public var collaborators: String?
-    public var creatorRef: User?
+    public var creatorRef: CreatorRef?
     
     public var systemImage: String {
         "folder"
+    }
+    
+    public var publicPage: URL? {
+        self.public ?
+            .init(string: "https://raindrop.io/\(creatorRef?.name ?? "")/\(slug)") :
+            nil
     }
 }

@@ -23,7 +23,7 @@ extension FiltersStore {
 
 //MARK: - Store specific actions
 extension FiltersStore {
-    public func filters(_ action: FiltersAction) async throws {
+    private func filters(_ action: FiltersAction) async throws {
         switch action {
         case .reload(let find):
             try await reload(find: find)
@@ -33,7 +33,7 @@ extension FiltersStore {
 
 //MARK: - Auth specific actions
 extension FiltersStore {
-    public func auth(_ action: AuthAction) async throws {
+    private func auth(_ action: AuthAction) async throws {
         switch action {
         case .logout:
             try await logout()

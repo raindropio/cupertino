@@ -9,6 +9,10 @@ public enum CollectionsAction: ReduxAction {
     case reload
 }
 
+public enum IconsAction: ReduxAction {
+    case reload(String = "")
+}
+
 public enum RaindropsAction: ReduxAction {
     case reload(FindBy)
     case loadMore(FindBy)
