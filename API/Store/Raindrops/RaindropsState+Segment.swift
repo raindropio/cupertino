@@ -6,8 +6,11 @@ extension RaindropsState {
 
         public var ids = [Raindrop.ID]()
         public var sort = SortBy.sort
+        public var page = 0
+        
         public var status = Status.idle
         public var more = Status.idle
+        public var total = 0
         
         public enum Status: String, Equatable, Codable {
             case idle
@@ -27,8 +30,16 @@ extension RaindropsState {
         self[find].status
     }
     
+    public func more(_ find: FindBy) -> Segment.Status {
+        self[find].more
+    }
+    
     public func sort(_ find: FindBy) -> SortBy {
         self[find].sort
+    }
+    
+    public func total(_ find: FindBy) -> Int {
+        self[find].total
     }
     
     public func isEmpty(_ find: FindBy) -> Bool {

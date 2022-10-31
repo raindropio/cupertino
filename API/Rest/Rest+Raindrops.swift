@@ -1,25 +1,31 @@
 //MARK: - Get many
 extension Rest {
+    public static let raindropsPerPage = 50
+}
+
+//MARK: - Get many
+extension Rest {
     public func raindropsGet(
         _ find: FindBy,
         sort: SortBy,
-        afterId: Raindrop.ID? = nil
-    ) async throws -> [Raindrop] {
+        page: Int = 0
+    ) async throws -> ([Raindrop], Int) {
         let res: RaindropsGetResponse = try await fetch.get(
             "raindrops/\(find.collectionId)",
             query:
                 find.query
                 + [
                     .init(name: "sort", value: "\(sort.description)"),
-                    .init(name: "perpage", value: "50")
+                    .init(name: "page", value: "\(page)"),
+                    .init(name: "perpage", value: "\(Self.raindropsPerPage)")
                 ]
-                //TODO: support afterId
         )
-        return res.items
+        return (res.items, res.count)
     }
     
     fileprivate struct RaindropsGetResponse: Decodable {
         var items: [Raindrop]
+        var count: Int
     }
 }
 
