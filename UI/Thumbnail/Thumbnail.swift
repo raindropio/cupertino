@@ -1,15 +1,19 @@
 import SwiftUI
-import Kingfisher
+import Nuke
+import NukeUI
 
 public struct Thumbnail {
-    @Environment(\.displayScale) private var displayScale
-    
     var url: URL?
     var width: CGFloat?
     var height: CGFloat?
     var aspectRatio: CGFloat?
     
     static var cacheAspect = [URL:CGFloat]()
+    static let diskCache: ImagePipeline = {
+        var configuration = ImagePipeline.Configuration.withDataCache
+        configuration.dataCachePolicy = .storeAll
+        return ImagePipeline(configuration: configuration)
+    }()
         
     public init(
         _ url: URL? = nil,
@@ -52,48 +56,52 @@ extension Thumbnail: Equatable {
 }
 
 extension Thumbnail: View {
-    var naturalSize: CGSize {
-        let w = Int(width ?? (height ?? 0) / (aspectRatio ?? 1))
-        let h = Int(height ?? (width ?? 0) / (aspectRatio ?? 1))
-
-        return CGSize(
-            width: w * Int(displayScale),
-            height: h * Int(displayScale)
-        )
+    var resize: ImageProcessors.Resize {
+        if let width, let height {
+            return .init(
+                size: .init(width: width, height: height),
+                contentMode: .aspectFill,
+                crop: true
+            )
+        } else if let width {
+            return .init(width: width)
+        } else if let height {
+            return .init(height: height)
+        } else {
+            let w = Int(width ?? (height ?? 0) / (aspectRatio ?? 1))
+            let h = Int(height ?? (width ?? 0) / (aspectRatio ?? 1))
+            return .init(
+                size: .init(width: w, height: h),
+                contentMode: .aspectFill,
+                crop: true
+            )
+        }
     }
     
-    var base: some KFImageProtocol {
-        KFImage(url)
-            .backgroundDecode()
-            .retry(maxCount: 3, interval: .seconds(5))
-            .cacheOriginalImage()
-            .cancelOnDisappear(true)
-            .fade(duration: 0.2)
-            .interpolation(.low)
-            .antialiased(false)
-            .resizable()
+    @MainActor
+    var base: LazyImage<NukeUI.Image> {
+        LazyImage(url: url)
+            .animation(nil)
+            .processors([resize])
+            .pipeline(Self.diskCache)
+            .priority(.veryLow)
     }
     
     public var body: some View {
         //fixed size
         if let width, let height {
             base
-                .resizing(referenceSize: naturalSize, mode: .aspectFill)
-                .cropping(size: naturalSize)
                 .frame(width: width, height: height)
                 .fixedSize()
         }
         //aspect ratio
         else if let aspectRatio {
             base
-                .resizing(referenceSize: naturalSize, mode: .aspectFill)
-                .cropping(size: naturalSize)
                 .aspectRatio(aspectRatio, contentMode: .fit)
         }
         //downsampled
         else {
             base
-                .downsampling(size: naturalSize)
                 .onSuccess {
                     //cache aspect ratio for later
                     if let url, aspectRatio == nil, (width == nil || height == nil) {
