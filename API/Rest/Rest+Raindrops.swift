@@ -10,7 +10,7 @@ extension Rest {
         sort: SortBy,
         page: Int = 0
     ) async throws -> ([Raindrop], Int) {
-        let res: RaindropsGetResponse = try await fetch.get(
+        let res: ItemsResponse<Raindrop> = try await fetch.get(
             "raindrops/\(find.collectionId)",
             query:
                 find.query
@@ -20,12 +20,7 @@ extension Rest {
                     .init(name: "perpage", value: "\(Self.raindropsPerPage)")
                 ]
         )
-        return (res.items, res.count)
-    }
-    
-    fileprivate struct RaindropsGetResponse: Decodable {
-        var items: [Raindrop]
-        var count: Int
+        return (res.items, res.count ?? 0)
     }
 }
 

@@ -67,7 +67,11 @@ extension Fetch {
         _ path: String,
         query: [URLQueryItem]? = nil
     ) async throws -> T {
-        try await post(path, query: query, body: Optional<Dumb>.none)
+        let (data, _) = try await request(
+            try urlRequest(path, method: "POST", query: query)
+        )
+        
+        return try await decode(data: data)
     }
 }
 
@@ -102,7 +106,11 @@ extension Fetch {
         _ path: String,
         query: [URLQueryItem]? = nil
     ) async throws -> T {
-        try await put(path, query: query, body: Optional<Dumb>.none)
+        let (data, _) = try await request(
+            try urlRequest(path, method: "PUT", query: query)
+        )
+        
+        return try await decode(data: data)
     }
 }
 
@@ -124,14 +132,20 @@ extension Fetch {
         _ path: String,
         query: [URLQueryItem]? = nil
     ) async throws -> T {
-        try await delete(path, query: query, body: Optional<Dumb>.none)
+        let (data, _) = try await request(
+            try urlRequest(path, method: "DELETE", query: query)
+        )
+        
+        return try await decode(data: data)
     }
     
     func delete(
         _ path: String,
         query: [URLQueryItem]? = nil
     ) async throws {
-        let _: Dumb = try await delete(path, query: query, body: Optional<Dumb>.none)
+        _ = try await request(
+            try urlRequest(path, method: "DELETE", query: query)
+        )
     }
 }
 
@@ -209,12 +223,6 @@ extension Fetch {
         req.addValue("application/json", forHTTPHeaderField: "Content-Type")
 //        print(String(data: try delegate.encoder.encode(body, configuration: configuration), encoding: .utf8)!)
         return req
-    }
-    
-    fileprivate struct Dumb: Codable, CodableWithConfiguration {
-        enum Configuration {}
-        init(from decoder: Decoder, configuration: Configuration) throws {}
-        func encode(to encoder: Encoder, configuration: Configuration) throws {}
     }
 }
 

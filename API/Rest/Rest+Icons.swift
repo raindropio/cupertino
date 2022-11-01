@@ -3,7 +3,7 @@ import Foundation
 //MARK: - Get
 extension Rest {
     public func iconsGet(_ filter: String = "") async throws -> [URL] {
-        let res: IconsResponse = try await fetch.get("collections/covers/\(filter)")
+        let res: ItemsResponse<Theme> = try await fetch.get("collections/covers/\(filter)")
         var icons = [URL]()
         
         res.items.forEach { theme in
@@ -14,15 +14,11 @@ extension Rest {
         return icons.unique()
     }
     
-    fileprivate struct IconsResponse: Decodable {
-        var items: [Items]
+    fileprivate struct Theme: Decodable {
+        var icons: [Icon]
         
-        struct Items: Decodable {
-            var icons: [Icon]
-            
-            struct Icon: Decodable {
-                var png: URL?
-            }
+        struct Icon: Decodable {
+            var png: URL?
         }
     }
 }

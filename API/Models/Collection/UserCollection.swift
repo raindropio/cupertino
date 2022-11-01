@@ -30,4 +30,19 @@ public struct UserCollection: CollectionProtocol {
             .init(string: "https://raindrop.io/\(creatorRef?.name ?? "")/\(slug)") :
             nil
     }
+    
+    public var isValid: Bool {
+        !title.isEmpty
+    }
+}
+
+extension UserCollection {
+    public static func new(parent: UserCollection.ID? = nil) -> Self {
+        .init(
+            id: 0,
+            title: "",
+            parent: parent,
+            access: .init(level: .owner, draggable: true)
+        )
+    }
 }

@@ -28,11 +28,21 @@ extension CollectionsStore {
         case .reload:
             try await reload()
             
+        case .create(let collection):
+            try await create(draft: collection)
+            
         case .update(let collection):
             try await update(changed: collection)
             
+        case .delete(let collection):
+            try await delete(id: collection.id)
+            
         case .changeView(let id, let view):
-            try await touch(id: id, keyPath: \.view, value: view)
+            if id > 0 {
+                try await touch(id: id, keyPath: \UserCollection.view, value: view)
+            } else {
+                try await touch(id: id, keyPath: \SystemCollection.view, value: view)
+            }
         }
     }
 }
