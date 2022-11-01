@@ -29,3 +29,19 @@ extension Rest {
         }
     }
 }
+
+//MARK: - Update collection
+extension Rest {
+    public func collectionUpdate(original: UserCollection, changed: UserCollection) async throws -> UserCollection {
+        let res: CollectionUpdateResponse = try await fetch.put(
+            "collection/\(original.id)",
+            body: changed,
+            configuration: .changed(from: original)
+        )
+        return res.item
+    }
+    
+    fileprivate struct CollectionUpdateResponse: Decodable {
+        var item: UserCollection
+    }
+}

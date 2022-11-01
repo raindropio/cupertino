@@ -1,8 +1,7 @@
 import Foundation
 
-extension UserCollection: Codable {
-    //variables that should be in json to send to API
-    enum CodingKeys: String, CodingKey {
+extension UserCollection: Codable, EncodableWithConfiguration {
+    enum CodingKeys: CodingKey {
         case _id
         case title
         case slug
@@ -22,77 +21,99 @@ extension UserCollection: Codable {
         case creatorRef
     }
     
+    public enum DecodeConfiguration {
+        case all
+        case changed(from: UserCollection)
+        case new
+    }
+    
     public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
-        
-        //as is
+
         id = try container.decode(type(of: id), forKey: ._id)
         title = try container.decode(type(of: title), forKey: .title)
         slug = try container.decode(type(of: title), forKey: .slug)
-        description = (try? container.decode(type(of: description), forKey: .description)) ?? ""
+        description = try container.decodeIfPresent(type(of: description), forKey: .description) ?? ""
         count = (try? container.decode(type(of: count), forKey: .count)) ?? 0
-//        color = (try? container.decode(type(of: color), forKey: .color)) ?? nil
+        color = try? container.decode(type(of: color), forKey: .color)
         created = try? container.decode(type(of: created), forKey: .created)
         lastUpdate = try? container.decode(type(of: lastUpdate), forKey: .lastUpdate)
-        self.public = (try? container.decode(type(of: self.public), forKey: .public)) ?? false
+        `public` = (try? container.decode(type(of: `public`), forKey: .public)) ?? false
         expanded = (try? container.decode(type(of: expanded), forKey: .expanded)) ?? false
         view = (try? container.decode(type(of: view), forKey: .view)) ?? .list
         sort = (try? container.decode(type(of: sort), forKey: .sort)) ?? 0
         access = (try? container.decode(type(of: access), forKey: .access)) ?? .init()
         creatorRef = try? container.decode(type(of: creatorRef), forKey: .creatorRef)
-
-        //complicated
-        if let coverArray = try? container.decode([URL].self, forKey: .cover), coverArray.count>0 {
-            cover = coverArray.first
-        } else {
-            cover = nil
-        }
-                
-        if let parentContainer = try? container.nestedContainer(keyedBy: MongoRef<UserCollection.ID>.CodingKeys.self, forKey: .parent) {
-            parent = try parentContainer.decode(type(of: parent), forKey: .id)
-        } else {
-            parent = nil
-        }
-        
-        if let collaboratorsContainer = try? container.nestedContainer(keyedBy: MongoRef<String>.CodingKeys.self, forKey: .collaborators) {
-            collaborators = try collaboratorsContainer.decode(type(of: collaborators), forKey: .id)
-        } else {
-            collaborators = nil
-        }
+        cover = (try? container.decodeIfPresent([URL].self, forKey: .cover))?.first
+        parent = (try? container.decode(MongoRef<UserCollection.ID>.self, forKey: .parent))?.id
+        collaborators = (try? container.decode(MongoRef<String>.self, forKey: .parent))?.id
     }
     
     public func encode(to encoder: Encoder) throws {
-        //as is
+        try encode(to: encoder, configuration: .all)
+    }
+    
+    public func encode(to encoder: Encoder, configuration: DecodeConfiguration) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
-        try container.encode(id, forKey: ._id)
-        try container.encode(title, forKey: .title)
-        try container.encode(slug, forKey: .slug)
-        try container.encode(description, forKey: .description)
-        try container.encode(count, forKey: .count)
-        try container.encode(created, forKey: .created)
-        try container.encode(lastUpdate, forKey: .lastUpdate)
-        try container.encode(self.public, forKey: .public)
-        try container.encode(expanded, forKey: .expanded)
-        try container.encode(view, forKey: .view)
-        try container.encode(sort, forKey: .sort)
-        try container.encode(access, forKey: .access)
-        try container.encode(creatorRef, forKey: .creatorRef)
         
-        //complicated
-//        if color != nil {
-//            try container.encode(color, forKey: .color)
-//        }
-        
-        if cover != nil {
-            try container.encode([cover], forKey: .cover)
+        //all
+        if case .all = configuration {
+            try container.encode(id, forKey: ._id)
+            try container.encode(slug, forKey: .slug)
+            try container.encode(count, forKey: .count)
+            try container.encodeIfPresent(color, forKey: .color)
+            try container.encode(access, forKey: .access)
+            try container.encode(creatorRef, forKey: .creatorRef)
         }
         
-        if parent != nil {
-            try container.encode(MongoRef<UserCollection.ID>(id: parent!), forKey: .parent)
+        //all or new
+        switch configuration {
+        case .all, .new:
+            try container.encodeIfPresent(created, forKey: .created)
+            try container.encodeIfPresent(lastUpdate, forKey: .lastUpdate)
+        default: break
+        }
+
+        //new or changed
+        var compare: UserCollection?
+        if case .changed(let from) = configuration {
+            compare = from
         }
         
-        if collaborators != nil {
-            try container.encode(MongoRef<String>(id: collaborators!), forKey: .collaborators)
+        if compare?.title != title {
+            try container.encode(title, forKey: .title)
+        }
+        
+        if compare?.description != description {
+            try container.encode(description, forKey: .description)
+        }
+        
+        if compare?.public != `public` {
+            try container.encode(`public`, forKey: .public)
+        }
+        
+        if compare?.expanded != expanded {
+            try container.encode(expanded, forKey: .expanded)
+        }
+        
+        if compare?.view != view {
+            try container.encode(view, forKey: .view)
+        }
+            
+        if compare?.sort != sort {
+            try container.encode(sort, forKey: .sort)
+        }
+        
+        if compare?.cover != cover {
+            try container.encode(cover != nil ? [cover] : [], forKey: .cover)
+        }
+        
+        if compare?.parent != parent {
+            try container.encode(parent != nil ? MongoRef<UserCollection.ID>(parent!) : nil, forKey: .parent)
+        }
+        
+        if compare?.collaborators != collaborators {
+            try container.encodeIfPresent(collaborators != nil ? MongoRef<String>(collaborators!) : nil, forKey: .collaborators)
         }
     }
 }

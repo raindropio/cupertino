@@ -1,7 +1,7 @@
 import SwiftUI
 
 @MainActor
-class CollectionViewModel<ID: Hashable>: ObservableObject {
+class LazyStackModel<ID: Hashable>: ObservableObject {
     @Published var selection: Set<ID> = []
     @Published var highlighted: ID?
     var isEditing: Bool = false

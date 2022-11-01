@@ -4,10 +4,9 @@ public extension View {
     func searchable(
         text: Binding<String>,
         debounce: Double,
-        placement: SearchFieldPlacement = .automatic,
-        prompt: String
+        placement: SearchFieldPlacement = .automatic
     ) -> some View {
-        modifier(SearchableDebounceModifier(text: text, debounce: debounce, placement: placement, prompt: prompt))
+        modifier(SearchableDebounceModifier(text: text, debounce: debounce, placement: placement))
     }
     
     func searchable<C: RandomAccessCollection & RangeReplaceableCollection & Equatable, T: View>(
@@ -26,7 +25,6 @@ fileprivate struct SearchableDebounceModifier: ViewModifier {
     @Binding var text: String
     var debounce: Double = 0
     var placement: SearchFieldPlacement
-    var prompt: String
     
     @State private var temp = ""
     
@@ -34,8 +32,7 @@ fileprivate struct SearchableDebounceModifier: ViewModifier {
         content
             .searchable(
                 text: $temp,
-                placement: placement,
-                prompt: prompt
+                placement: placement
             )
             .modifier(DebounceSearchText(text: $text, temp: $temp, debounce: debounce))
     }

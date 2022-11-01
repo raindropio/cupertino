@@ -2,7 +2,7 @@ import SwiftUI
 
 struct GridStaggered<D: RandomAccessCollection, Content: View> {
     @Environment(\.gridScrollColumns) private var columns
-    @ScaledMetric private var gap = CollectionViewLayout.gap(.grid(0, true))
+    @ScaledMetric private var gap = LazyStackLayout.gap(.grid(0, true))
     
     let data: D
     let width: CGFloat
@@ -40,5 +40,6 @@ extension GridStaggered: View {
                 }
             }
         }
+            .scenePadding(.horizontal)
     }
 }

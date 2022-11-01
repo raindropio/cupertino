@@ -27,7 +27,7 @@ extension RaindropsStore {
                 }
                 
                 state[find].status = .idle
-                state[find].more = total >= state[find].ids.count ? .notFound : .idle
+                state[find].more = state[find].ids.count >= total ? .notFound : .idle
                 state[find].total = total
             }
         }

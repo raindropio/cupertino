@@ -26,7 +26,7 @@ actor Fetch {
 extension Fetch {
     func get<T: Decodable>(
         _ path: String,
-        query: [URLQueryItem] = []
+        query: [URLQueryItem]? = nil
     ) async throws -> T {
         let (data, _) = try await request(
             try urlRequest(path, method: "GET", query: query)
@@ -38,10 +38,23 @@ extension Fetch {
 
 //MARK: - Post
 extension Fetch {
+    func post<T: Decodable, R: EncodableWithConfiguration>(
+        _ path: String,
+        query: [URLQueryItem]? = nil,
+        body: R,
+        configuration: R.EncodingConfiguration
+    ) async throws -> T {
+        let (data, _) = try await request(
+            try urlRequest(path, method: "POST", query: query, body: body, configuration: configuration)
+        )
+        
+        return try await decode(data: data)
+    }
+    
     func post<T: Decodable, R: Encodable>(
         _ path: String,
-        query: [URLQueryItem] = [],
-        body: R?
+        query: [URLQueryItem]? = nil,
+        body: R
     ) async throws -> T {
         let (data, _) = try await request(
             try urlRequest(path, method: "POST", query: query, body: body)
@@ -52,7 +65,7 @@ extension Fetch {
     
     func post<T: Decodable>(
         _ path: String,
-        query: [URLQueryItem] = []
+        query: [URLQueryItem]? = nil
     ) async throws -> T {
         try await post(path, query: query, body: Optional<Dumb>.none)
     }
@@ -60,10 +73,23 @@ extension Fetch {
 
 //MARK: - Put
 extension Fetch {
+    func put<T: Decodable, R: EncodableWithConfiguration>(
+        _ path: String,
+        query: [URLQueryItem]? = nil,
+        body: R,
+        configuration: R.EncodingConfiguration
+    ) async throws -> T {
+        let (data, _) = try await request(
+            try urlRequest(path, method: "PUT", query: query, body: body, configuration: configuration)
+        )
+        
+        return try await decode(data: data)
+    }
+    
     func put<T: Decodable, R: Encodable>(
         _ path: String,
-        query: [URLQueryItem] = [],
-        body: R?
+        query: [URLQueryItem]? = nil,
+        body: R
     ) async throws -> T {
         let (data, _) = try await request(
             try urlRequest(path, method: "PUT", query: query, body: body)
@@ -74,7 +100,7 @@ extension Fetch {
     
     func put<T: Decodable>(
         _ path: String,
-        query: [URLQueryItem] = []
+        query: [URLQueryItem]? = nil
     ) async throws -> T {
         try await put(path, query: query, body: Optional<Dumb>.none)
     }
@@ -84,8 +110,8 @@ extension Fetch {
 extension Fetch {
     func delete<T: Decodable, R: Encodable>(
         _ path: String,
-        query: [URLQueryItem] = [],
-        body: R?
+        query: [URLQueryItem]? = nil,
+        body: R
     ) async throws -> T {
         let (data, _) = try await request(
             try urlRequest(path, method: "DELETE", query: query, body: body)
@@ -96,14 +122,14 @@ extension Fetch {
     
     func delete<T: Decodable>(
         _ path: String,
-        query: [URLQueryItem] = []
+        query: [URLQueryItem]? = nil
     ) async throws -> T {
         try await delete(path, query: query, body: Optional<Dumb>.none)
     }
     
     func delete(
         _ path: String,
-        query: [URLQueryItem] = []
+        query: [URLQueryItem]? = nil
     ) async throws {
         let _: Dumb = try await delete(path, query: query, body: Optional<Dumb>.none)
     }
@@ -141,11 +167,10 @@ extension Fetch {
         return (result.0, result.1)
     }
     
-    func urlRequest<R: Encodable>(
+    func urlRequest(
         _ path: String,
         method: String,
-        query: [URLQueryItem] = [],
-        body: R?
+        query: [URLQueryItem]? = nil
     ) throws -> URLRequest {
         var components = URLComponents()
         components.path = path
@@ -157,23 +182,40 @@ extension Fetch {
         var req = URLRequest(url: url)
         req.httpMethod = method
         
-        if let body {
-            req.httpBody = try delegate.encoder.encode(body)
-            req.addValue("application/json", forHTTPHeaderField: "Content-Type")
-        }
-        
         return req
     }
     
-    func urlRequest(
+    func urlRequest<R: Encodable>(
         _ path: String,
         method: String,
-        query: [URLQueryItem] = []
+        query: [URLQueryItem]? = nil,
+        body: R
     ) throws -> URLRequest {
-        try urlRequest(path, method: method, query: query, body: Optional<Dumb>.none)
+        var req = try urlRequest(path, method: method, query: query)
+        req.httpBody = try delegate.encoder.encode(body)
+        req.addValue("application/json", forHTTPHeaderField: "Content-Type")
+        return req
     }
     
-    fileprivate struct Dumb: Codable {}
+    func urlRequest<R: EncodableWithConfiguration>(
+        _ path: String,
+        method: String,
+        query: [URLQueryItem]? = nil,
+        body: R,
+        configuration: R.EncodingConfiguration
+    ) throws -> URLRequest {
+        var req = try urlRequest(path, method: method, query: query)
+        req.httpBody = try delegate.encoder.encode(body, configuration: configuration)
+        req.addValue("application/json", forHTTPHeaderField: "Content-Type")
+//        print(String(data: try delegate.encoder.encode(body, configuration: configuration), encoding: .utf8)!)
+        return req
+    }
+    
+    fileprivate struct Dumb: Codable, CodableWithConfiguration {
+        enum Configuration {}
+        init(from decoder: Decoder, configuration: Configuration) throws {}
+        func encode(to encoder: Encoder, configuration: Configuration) throws {}
+    }
 }
 
 //MARK: - Validate

@@ -14,9 +14,6 @@ public struct SubmitButtonStyle: PrimitiveButtonStyle {
         })
             .buttonStyle(.borderedProminent)
             .fontWeight(.medium)
-            .listRowInsets(EdgeInsets())
-            .listRowBackground(Color.clear)
-            .listSectionSeparator(.hidden)
-            .listRowSeparator(.hidden)
+            .clearSection()
     }
 }

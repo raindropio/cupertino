@@ -41,7 +41,7 @@ extension RaindropsStore {
                 items.forEach { state.items[$0.id] = $0 }
                 
                 state[find].ids = state[find].ids + items.map(\.id)
-                state[find].more = total >= state[find].ids.count ? .notFound : .idle
+                state[find].more = state[find].ids.count >= total ? .notFound : .idle
                 state[find].page = nextPage
                 state[find].total = total
             }

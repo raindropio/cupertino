@@ -1,7 +1,7 @@
 import SwiftUI
 
 struct ListForEach<D: RandomAccessCollection, C: View> where D.Element: Identifiable & Transferable {
-    @EnvironmentObject private var model: CollectionViewModel<D.Element.ID>
+    @EnvironmentObject private var model: LazyStackModel<D.Element.ID>
     
     let data: D
     let content: (D.Element) -> C

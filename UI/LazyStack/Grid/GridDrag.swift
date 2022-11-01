@@ -1,7 +1,7 @@
 import SwiftUI
 
 struct GridDrag<Element: Identifiable & Transferable> {
-    @EnvironmentObject private var model: CollectionViewModel<Element.ID>
+    @EnvironmentObject private var model: LazyStackModel<Element.ID>
     var element: Element
     var getIndex: (_ element: Element) -> Int?
 }

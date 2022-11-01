@@ -1,9 +1,9 @@
 import SwiftUI
 
-public struct CollectionView<Content: View, ID: Hashable, Menu: View> {
-    @StateObject private var model = CollectionViewModel<ID>()
+public struct LazyStack<Content: View, ID: Hashable, Menu: View> {
+    @StateObject private var model = LazyStackModel<ID>()
     
-    var layout: CollectionViewLayout
+    var layout: LazyStackLayout
     @Binding var selection: Set<ID>
     var content: () -> Content
     
@@ -13,7 +13,7 @@ public struct CollectionView<Content: View, ID: Hashable, Menu: View> {
     var contextMenu: (Set<ID>) -> Menu
     
     public init(
-        _ layout: CollectionViewLayout,
+        _ layout: LazyStackLayout,
         selection: Binding<Set<ID>>,
         @ViewBuilder content: @escaping () -> Content,
         action: ((ID) -> Void)? = nil,
@@ -31,7 +31,7 @@ public struct CollectionView<Content: View, ID: Hashable, Menu: View> {
     }
 }
 
-extension CollectionView: View {
+extension LazyStack: View {
     public var body: some View {
         Group {
             switch layout {
@@ -69,7 +69,7 @@ extension CollectionView: View {
             }
             .task(id: selection) { model.selection = selection }
             .task(id: model.selection) { selection = model.selection }
-            .environment(\.collectionViewLayout, layout)
+            .environment(\.lazyStackLayout, layout)
             .environmentObject(model)
     }
 }

@@ -27,6 +27,12 @@ extension CollectionsStore {
         switch action {
         case .reload:
             try await reload()
+            
+        case .update(let collection):
+            try await update(changed: collection)
+            
+        case .changeView(let id, let view):
+            try await touch(id: id, keyPath: \.view, value: view)
         }
     }
 }

@@ -72,7 +72,7 @@ extension Raindrop: Codable {
         try container.encode(cache, forKey: .cache)
         
         if collection != nil {
-            try container.encode(MongoRef<Int>(id: collection!), forKey: .collection)
+            try container.encode(MongoRef<Int>(collection!), forKey: .collection)
         }
     }
 }

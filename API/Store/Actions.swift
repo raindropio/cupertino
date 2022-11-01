@@ -7,6 +7,8 @@ public enum AuthAction: ReduxAction {
 
 public enum CollectionsAction: ReduxAction {
     case reload
+    case update(UserCollection)
+    case changeView(UserCollection.ID, CollectionView)
 }
 
 public enum IconsAction: ReduxAction {

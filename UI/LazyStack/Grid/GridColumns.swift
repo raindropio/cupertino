@@ -2,7 +2,7 @@ import SwiftUI
 
 struct GridColumns<Content: View> {
     @Environment(\.gridScrollColumns) private var columns
-    @ScaledMetric private var gap = CollectionViewLayout.gap(.grid(0, false))
+    @ScaledMetric private var gap = LazyStackLayout.gap(.grid(0, false))
     
     let width: CGFloat
     let content: () -> Content
@@ -25,5 +25,6 @@ extension GridColumns: View {
         )
         
         LazyVGrid(columns: columns, alignment: .leading, spacing: gap / 2, content: content)
+            .scenePadding(.horizontal)
     }
 }

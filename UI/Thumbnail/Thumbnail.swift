@@ -104,3 +104,21 @@ extension Thumbnail: View {
         }
     }
 }
+
+
+struct Thumbnail_Previews: PreviewProvider {
+    static var previews: some View {
+        VStack {
+            Thumbnail(
+                URL(string: "https://via.placeholder.com/200x100"),
+                width: 100,
+                height: 100
+            )
+            
+            Thumbnail(
+                URL(string: "https://via.placeholder.com/200x100"),
+                width: 200
+            )
+        }
+    }
+}
