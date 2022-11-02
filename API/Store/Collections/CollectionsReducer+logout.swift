@@ -1,5 +1,5 @@
 extension CollectionsReducer {
-    func logout(state: inout S) async throws {
+    func logout(state: inout S) {
         state.user = .init()
     }
 }

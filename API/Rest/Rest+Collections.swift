@@ -52,10 +52,12 @@ extension Rest {
 
 //MARK: - Delete collection
 extension Rest {
-    public func collectionDelete(id: UserCollection.ID) async throws -> Bool {
+    public func collectionDelete(id: UserCollection.ID) async throws {
         let res: ResultResponse = try await fetch.delete(
             "collection/\(id)"
         )
-        return res.result
+        if !res.result {
+            throw RestError.unknown("server just ignored")
+        }
     }
 }

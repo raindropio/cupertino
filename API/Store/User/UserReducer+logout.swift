@@ -1,5 +1,5 @@
 extension UserReducer {
-    func logout(state: inout S) async throws {
+    func logout(state: inout S) {
         state.me = nil
     }
 }

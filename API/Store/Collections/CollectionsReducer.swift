@@ -8,23 +8,43 @@ public actor CollectionsReducer: Reducer {
     
     public func reduce(state: inout S, action: A) async throws -> ReduxAction? {
         switch action {
+        //load
+        case .load:
+            return load(state: &state)
+            
         case .reload:
-            try await reload(state: &state)
+            return try await reload(state: &state)
             
+        case .reloaded(let system, let user):
+            reloaded(state: &state, system: system, user: user)
+        
+        //create
         case .create(let collection):
-            try await create(state: &state, draft: collection)
+            return try await create(state: &state, draft: collection)
             
+        case .created(let collection):
+            created(state: &state, collection: collection)
+        
+        //update
         case .update(let collection):
-            try await update(state: &state, changed: collection)
+            return try await update(state: &state, changed: collection)
             
-        case .delete(let collection):
-            try await delete(state: &state, id: collection.id)
+        case .updated(let collection):
+            updated(state: &state, collection: collection)
             
+        //delete
+        case .delete(let id):
+            return try await delete(state: &state, id: id)
+            
+        case .deleted(let id):
+            deleted(state: &state, id: id)
+            
+        //touch
         case .changeView(let id, let view):
             if id > 0 {
                 return try await touch(state: &state, id: id, keyPath: \UserCollection.view, value: view)
             } else {
-                try await touch(state: &state, id: id, keyPath: \SystemCollection.view, value: view)
+                touch(state: &state, id: id, keyPath: \SystemCollection.view, value: view)
             }
         }
         return nil
@@ -34,7 +54,7 @@ public actor CollectionsReducer: Reducer {
         if let action = action as? AuthAction {
             switch action {
             case .logout:
-                try await logout(state: &state)
+                logout(state: &state)
                 
             default:
                 break

@@ -9,7 +9,10 @@ public actor UserReducer: Reducer {
     public func reduce(state: inout S, action: A) async throws -> ReduxAction? {
         switch action {
         case .reload:
-            try await reload(state: &state)
+            return try await reload(state: &state)
+            
+        case .reloaded(let user):
+            reloaded(state: &state, user: user)
         }
         return nil
     }
@@ -18,10 +21,10 @@ public actor UserReducer: Reducer {
         if let action = action as? AuthAction {
             switch action {
             case .login(_):
-                try await reload(state: &state)
+                return try await reload(state: &state)
                 
             case .logout:
-                try await logout(state: &state)
+                logout(state: &state)
             }
         }
         

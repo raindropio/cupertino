@@ -1,7 +1,10 @@
 extension FiltersReducer {
-    func reload(state: inout S, find: FindBy) async throws {
+    func reload(state: inout S, find: FindBy) async throws -> ReduxAction? {
         let (filters, _) = try await rest.filtersGet(find)
-        
+        return A.reloaded(find, filters)
+    }
+    
+    func reloaded(state: inout S, find: FindBy, filters: [Filter]) {
         var simple = [Filter]()
         var tags = [Filter]()
         var created = [Filter]()

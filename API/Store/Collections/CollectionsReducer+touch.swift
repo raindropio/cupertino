@@ -10,7 +10,7 @@ extension CollectionsReducer {
     }
     
     //system collection
-    func touch<V>(state: inout S, id: SystemCollection.ID, keyPath: WritableKeyPath<SystemCollection, V>, value: V) async throws {
+    func touch<V>(state: inout S, id: SystemCollection.ID, keyPath: WritableKeyPath<SystemCollection, V>, value: V) {
         state.system[id]?[keyPath: keyPath] = value
     }
 }
