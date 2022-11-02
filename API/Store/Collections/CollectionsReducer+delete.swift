@@ -1,5 +1,5 @@
-extension CollectionsStore {
-    func delete(id: UserCollection.ID) async throws {
+extension CollectionsReducer {
+    func delete(state: inout S, id: UserCollection.ID) async throws {
         guard id > 0
         else { return }
         
@@ -8,8 +8,6 @@ extension CollectionsStore {
             return
         }
         
-        try await mutate {
-            $0.user[id] = nil
-        }
+        state.user[id] = nil
     }
 }

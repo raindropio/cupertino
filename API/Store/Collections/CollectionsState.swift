@@ -1,7 +1,9 @@
-public struct CollectionsState: Equatable {
+public struct CollectionsState: ReduxState {
     var status = Status.idle
     @Cached("cos-system") var system = [SystemCollection.ID: SystemCollection]()
     @Cached("cos-user") var user = [UserCollection.ID: UserCollection]()
+    
+    public init() {}
 }
 
 extension CollectionsState {

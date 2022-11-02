@@ -1,8 +1,10 @@
 import Foundation
 
-public struct RecentState: Equatable {
+public struct RecentState: ReduxState {
     @Cached("res-search") var search = [String]()
     @Cached("res-tags") var tags = [String]()
+    
+    public init() { }
 }
 
 extension RecentState {

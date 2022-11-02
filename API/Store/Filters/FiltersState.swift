@@ -1,9 +1,11 @@
 import Foundation
 
-public struct FiltersState: Equatable {
+public struct FiltersState: ReduxState {
     @Cached("ffs-simple") var simple = [FindBy: [Filter]]()
     @Cached("ffs-tags") var tags = [FindBy: [Filter]]()
     @Cached("ffs-created") var created = [FindBy: [Filter]]()
+    
+    public init() {}
 }
 
 extension FiltersState {

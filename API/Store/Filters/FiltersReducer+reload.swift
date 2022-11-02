@@ -1,5 +1,5 @@
-extension FiltersStore {
-    func reload(find: FindBy) async throws {
+extension FiltersReducer {
+    func reload(state: inout S, find: FindBy) async throws {
         let (filters, _) = try await rest.filtersGet(find)
         
         var simple = [Filter]()
@@ -15,10 +15,8 @@ extension FiltersStore {
             }
         }
                 
-        try await mutate { state in
-            state.simple[find] = simple
-            state.tags[find] = tags
-            state.created[find] = created
-        }
+        state.simple[find] = simple
+        state.tags[find] = tags
+        state.created[find] = created
     }
 }

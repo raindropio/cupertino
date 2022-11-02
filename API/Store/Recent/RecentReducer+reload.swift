@@ -1,5 +1,5 @@
-extension RecentStore {
-    func reload(find: FindBy) async throws {
+extension RecentReducer {
+    func reload(state: inout S, find: FindBy) async throws {
         guard find.collectionId == 0 && !find.isSearching
         else { return }
         
@@ -7,9 +7,7 @@ extension RecentStore {
         async let fetchTags = rest.recentTags()
         let (search, tags) = try await (fetchSearch, fetchTags)
         
-        try await mutate { state in
-            state.search = search
-            state.tags = tags
-        }
+        state.search = search
+        state.tags = tags
     }
 }
