@@ -9,18 +9,20 @@ public enum CollectionsAction: ReduxAction {
     //load
     case load
     case reload
-    case reloaded([SystemCollection], [UserCollection])
+    case reloaded([CGroup], [SystemCollection], [UserCollection])
     //create
     case create(UserCollection)
     case created(UserCollection)
     //update
-    case update(UserCollection)
+    case update(UserCollection, fast: Bool = false)
     case updated(UserCollection)
     //delete
     case delete(UserCollection.ID)
     case deleted(UserCollection.ID)
     //helpers
-    case changeView(Int, CollectionView)
+    case reorder(UserCollection.ID, parent: UserCollection.ID?, order: Int)
+    case setView(Int, CollectionView)
+    case toggle(Int)
 }
 
 public enum IconsAction: ReduxAction {
@@ -28,14 +30,18 @@ public enum IconsAction: ReduxAction {
 }
 
 public enum RaindropsAction: ReduxAction {
+    //load
     case load(FindBy)
     case reload(FindBy)
     case reloaded(FindBy, [Raindrop], Int)
+    case sort(FindBy, SortBy)
+    //more
     case more(FindBy)
     case moreLoad(FindBy)
     case moreLoaded(FindBy, Int, [Raindrop], Int)
-    case sort(FindBy, SortBy)
-    case create(Raindrop)
+    //single
+    case create(Raindrop) // -> createMany
+    //multi
     case createMany([Raindrop])
 }
 

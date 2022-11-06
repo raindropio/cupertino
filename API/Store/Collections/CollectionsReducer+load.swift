@@ -12,16 +12,21 @@ extension CollectionsReducer {
     //MARK: - 2
     func reload(state: inout S) async throws -> ReduxAction? {
         do {
-            let (system, user) = try await rest.collectionsGet()
-            return A.reloaded(system, user)
+            async let fetchGroups = rest.collectionGroupsGet()
+            async let fetchCollections = rest.collectionsGet()
+            
+            let (groups, (system, user)) = try await (fetchGroups, fetchCollections)
+            return A.reloaded(groups, system, user)
         } catch {
             state.status = .error
             throw error
-        }        
+        }
     }
     
     //MARK: - 3
-    func reloaded(state: inout S, system: [SystemCollection], user: [UserCollection]) {
+    func reloaded(state: inout S, groups: [CGroup], system: [SystemCollection], user: [UserCollection]) {
+        state.groups = groups
+        
         system.forEach {
             var item = $0
             //do not override view
@@ -29,7 +34,9 @@ extension CollectionsReducer {
             state.system[$0.id] = item
         }
 
-        user.forEach { state.user[$0.id] = $0 }
+        user.forEach {
+            state.user[$0.id] = $0
+        }
 
         state.status = .idle
     }

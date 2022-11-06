@@ -8,6 +8,14 @@ extension CollectionsReducer {
     }
     
     func deleted(state: inout S, id: UserCollection.ID) {
+        //remove collection item
         state.user[id] = nil
+        
+        //remove from groups
+        state.groups = state.groups.map {
+            var group = $0
+            group.collections = group.collections.filter { $0 != id }
+            return group
+        }
     }
 }

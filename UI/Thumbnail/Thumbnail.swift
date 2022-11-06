@@ -3,6 +3,12 @@ import Nuke
 import NukeUI
 
 public struct Thumbnail {
+    #if os(macOS)
+    @Environment(\.displayScale) private var displayScale
+    #else
+    private var displayScale = 1.0
+    #endif
+    
     var url: URL?
     var width: CGFloat?
     var height: CGFloat?
@@ -59,20 +65,20 @@ extension Thumbnail: View {
     var resize: ImageProcessors.Resize {
         if let width, let height {
             return .init(
-                size: .init(width: width, height: height),
+                size: .init(width: width * displayScale, height: height * displayScale),
                 contentMode: .aspectFill,
                 crop: true
             )
         } else if let width {
-            return .init(width: width)
+            return .init(width: width * displayScale)
         } else if let height {
-            return .init(height: height)
+            return .init(height: height * displayScale)
         } else {
-            let w = Int(width ?? (height ?? 0) / (aspectRatio ?? 1))
-            let h = Int(height ?? (width ?? 0) / (aspectRatio ?? 1))
+            let w = CGFloat(Int(width ?? (height ?? 0) / (aspectRatio ?? 1)))
+            let h = CGFloat(Int(height ?? (width ?? 0) / (aspectRatio ?? 1)))
             return .init(
-                size: .init(width: w, height: h),
-                contentMode: .aspectFill,
+                size: .init(width: w * displayScale, height: h * displayScale),
+                contentMode: .aspectFit,
                 crop: true
             )
         }
@@ -84,7 +90,7 @@ extension Thumbnail: View {
             .animation(nil)
             .processors([resize])
             .pipeline(Self.diskCache)
-            .priority(.veryLow)
+//            .priority(.veryLow)
     }
     
     public var body: some View {
@@ -102,10 +108,15 @@ extension Thumbnail: View {
         //downsampled
         else {
             base
+                //cache aspect ratio for later
                 .onSuccess {
-                    //cache aspect ratio for later
-                    if let url, aspectRatio == nil, (width == nil || height == nil) {
+                    if let url, aspectRatio == nil, (width == nil || height == nil), Self.cacheAspect[url] == nil {
                         Self.cacheAspect[url] = $0.image.size.width / $0.image.size.height
+                    }
+                }
+                .onFailure { _ in
+                    if let url, Self.cacheAspect[url] == nil {
+                        Self.cacheAspect[url] = 1
                     }
                 }
                 .aspectRatio(url != nil ? Self.cacheAspect[url!] : nil, contentMode: .fit)
@@ -115,18 +126,32 @@ extension Thumbnail: View {
 
 
 struct Thumbnail_Previews: PreviewProvider {
+    static var url = URL(string: "https://p.calameoassets.com/210330110351-e4b885552abc85081417723d5999e906/p1.jpg")
+    
     static var previews: some View {
-        VStack {
-            Thumbnail(
-                URL(string: "https://via.placeholder.com/200x100"),
-                width: 100,
-                height: 100
-            )
+        HStack {
+            Thumbnail(url, width: 80, height: 60)
+                .cornerRadius(3)
             
-            Thumbnail(
-                URL(string: "https://via.placeholder.com/200x100"),
-                width: 200
-            )
+            Thumbnail(url, width: 24, height: 24)
+                .cornerRadius(3)
+            
+            VStack {
+                Thumbnail(url, width: 250, aspectRatio: 16/9)
+                Text("Title")
+                Text("Subtitle").foregroundStyle(.secondary)
+            }
+                .frame(width: 300)
+                .background(.secondary)
+            
+            VStack {
+                Thumbnail(url, width: 250)
+                Text("Title")
+                Text("Subtitle").foregroundStyle(.secondary)
+            }
+                .frame(width: 300)
+                .background(.secondary)
         }
+            .environment(\.colorScheme, .dark)
     }
 }

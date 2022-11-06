@@ -16,6 +16,7 @@ extension UserCollection: Codable, EncodableWithConfiguration {
         case expanded
         case view
         case sort
+        case order
         case access
         case collaborators
         case creatorRef
@@ -73,7 +74,7 @@ extension UserCollection: Codable, EncodableWithConfiguration {
             try container.encodeIfPresent(lastUpdate, forKey: .lastUpdate)
         default: break
         }
-
+        
         //new or changed
         var compare: UserCollection?
         if case .changed(let from) = configuration {
@@ -100,10 +101,6 @@ extension UserCollection: Codable, EncodableWithConfiguration {
             try container.encode(view, forKey: .view)
         }
             
-        if compare?.sort != sort {
-            try container.encode(sort, forKey: .sort)
-        }
-        
         if compare?.cover != cover {
             try container.encode(cover != nil ? [cover] : [], forKey: .cover)
         }
@@ -114,6 +111,17 @@ extension UserCollection: Codable, EncodableWithConfiguration {
         
         if compare?.collaborators != collaborators {
             try container.encodeIfPresent(collaborators != nil ? MongoRef<String>(collaborators!) : nil, forKey: .collaborators)
+        }
+        
+        //sort order
+        switch configuration {
+        case .all:
+            try container.encode(sort, forKey: .sort)
+            
+        case .new, .changed(_):
+            if compare?.sort != sort {
+                try container.encode(sort, forKey: .order)
+            }
         }
     }
 }

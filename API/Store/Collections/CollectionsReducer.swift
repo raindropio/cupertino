@@ -6,6 +6,7 @@ public actor CollectionsReducer: Reducer {
     
     public init() {}
     
+    //MARK: - My actions
     public func reduce(state: inout S, action: A) async throws -> ReduxAction? {
         switch action {
         //load
@@ -15,8 +16,8 @@ public actor CollectionsReducer: Reducer {
         case .reload:
             return try await reload(state: &state)
             
-        case .reloaded(let system, let user):
-            reloaded(state: &state, system: system, user: user)
+        case .reloaded(let groups, let system, let user):
+            reloaded(state: &state, groups: groups, system: system, user: user)
         
         //create
         case .create(let collection):
@@ -26,8 +27,8 @@ public actor CollectionsReducer: Reducer {
             created(state: &state, collection: collection)
         
         //update
-        case .update(let collection):
-            return try await update(state: &state, changed: collection)
+        case .update(let collection, let fast):
+            return try await update(state: &state, changed: collection, fast: fast)
             
         case .updated(let collection):
             updated(state: &state, collection: collection)
@@ -39,17 +40,21 @@ public actor CollectionsReducer: Reducer {
         case .deleted(let id):
             deleted(state: &state, id: id)
             
-        //touch
-        case .changeView(let id, let view):
-            if id > 0 {
-                return try await touch(state: &state, id: id, keyPath: \UserCollection.view, value: view)
-            } else {
-                touch(state: &state, id: id, keyPath: \SystemCollection.view, value: view)
-            }
+        //helpers
+        case .reorder(let id, let parent, let order):
+            return reorder(state: &state, id: id, parent: parent, order: order)
+            
+        case .setView(let id, let view):
+            return setView(state: &state, id: id, view: view)
+        
+        case .toggle(let id):
+            return toggle(state: &state, id: id)
         }
+
         return nil
     }
     
+    //MARK: - Other actions
     public func reduce(state: inout S, action: ReduxAction) async throws -> ReduxAction? {
         if let action = action as? AuthAction {
             switch action {

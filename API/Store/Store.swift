@@ -1,7 +1,9 @@
 import SwiftUI
 
 public actor Store: ReduxStore {
+    #if DEBUG
     @MainActor public var log = LogStore()
+    #endif
     @MainActor public var auth = AuthStore()
     @MainActor public var collections = CollectionsStore()
     @MainActor public var filters = FiltersStore()
@@ -15,7 +17,9 @@ public actor Store: ReduxStore {
     }
     
     @MainActor private func bind() {
+        #if DEBUG
         log.store = self
+        #endif
         auth.store = self
         collections.store = self
         filters.store = self
@@ -27,7 +31,9 @@ public actor Store: ReduxStore {
     
     func dispatch(_ some: Any) async throws {
         do {
+            #if DEBUG
             try await dispatch(some, store: \.log)
+            #endif
             try await dispatch(some, store: \.auth)
             try await dispatch(some, store: \.raindrops)
             try await dispatch(some, store: \.collections)
