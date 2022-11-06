@@ -15,20 +15,19 @@ extension ImagePicker {
                         url,
                         width: width,
                         height: height
-                    ).equatable()
-
+                    )
                 } else if let width {
                     Thumbnail(
                         url,
                         width: width,
                         aspectRatio: aspectRatio
-                    ).equatable()
+                    )
                 } else if let height {
                     Thumbnail(
                         url,
                         height: height,
                         aspectRatio: aspectRatio
-                    ).equatable()
+                    )
                 }
             }
                 .background {

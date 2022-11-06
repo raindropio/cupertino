@@ -13,7 +13,7 @@ public struct Cached<Value: Codable>: Equatable where Value: Equatable {
     private var transform: Transform = nil
     
     init(wrappedValue: Value, _ cacheKey: String, _ transform: Transform = nil) {
-        self._value = CachedFileStorage.load(cacheKey) ?? wrappedValue
+        self._value = /*CachedFileStorage.load(cacheKey) ??*/ wrappedValue
         self.cacheKey = cacheKey
         self.transform = transform
     }
@@ -27,11 +27,11 @@ public struct Cached<Value: Codable>: Equatable where Value: Equatable {
             if _value != newValue {
                 _value = newValue
                 
-                CachedFileStorage.save(
-                    cacheKey,
-                    value: transform?(newValue) ?? newValue,
-                    debounce: 0.5
-                )
+//                CachedFileStorage.save(
+//                    cacheKey,
+//                    value: transform?(newValue) ?? newValue,
+//                    debounce: 0.5
+//                )
             }
         }
     }

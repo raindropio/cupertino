@@ -14,7 +14,7 @@ public enum CollectionsAction: ReduxAction {
     case create(UserCollection)
     case created(UserCollection)
     //update
-    case update(UserCollection, fast: Bool = false)
+    case update(UserCollection, original: UserCollection? = nil)
     case updated(UserCollection)
     //delete
     case delete(UserCollection.ID)

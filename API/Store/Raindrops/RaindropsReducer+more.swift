@@ -1,9 +1,9 @@
 extension RaindropsReducer {
     func more(state: inout S, find: FindBy) -> ReduxAction? {
         //ignore when already loading
-        guard state[find].status == .idle, state[find].more != .loading
+        guard state[find].status == .idle && state[find].more != .loading
         else { return nil }
-                
+        
         state[find].more = .loading
         
         return A.moreLoad(find)
@@ -19,6 +19,9 @@ extension RaindropsReducer {
         }
         catch RestError.notFound {
             state[find].more = .notFound
+        }
+        catch is CancellationError {
+            state[find].more = .idle
         }
         catch {
             state[find].more = .error

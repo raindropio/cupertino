@@ -25,6 +25,9 @@ extension RaindropsReducer {
             state[find] = .init()
             state[find].status = .notFound
         }
+        catch is CancellationError {
+            state[find].more = .idle
+        }
         catch {
             state[find] = .init()
             state[find].status = .error

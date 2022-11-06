@@ -10,9 +10,6 @@ actor Fetch {
     private var delegate: FetchDelegate = DefaultFetchDelegate()
     private let session: URLSession = URLSession(configuration: .default)
     
-    //dedup
-    private var running: [URLRequest: Task<(Data, URLResponse), Error>] = [:]
-    
     init(_ base: URL) {
         self.base = base
     }
@@ -155,24 +152,13 @@ extension Fetch {
         guard let url = req.url
         else { throw FetchError.invalidRequest(nil) }
         
-        //keep only one running URLRequest same time
-        if (!running.keys.contains(req)) {
-            running[req] = Task{
-                defer { running[req] = nil }
-                
-                let (data, response) = try await session.data(for: req)
-                try Task.checkCancellation()
-                
-                return (data, response)
-            }
-        }
-        
         //get and validate
         var result: (Data, URLResponse)
         
         do {
-            result = try await running[req]!.value
+            result = try await session.data(for: req)
         } catch {
+            try Task.checkCancellation()
             throw FetchError.invalidResponse(url, error.localizedDescription)
         }
         
@@ -239,7 +225,12 @@ extension Fetch {
             throw FetchError.invalidStatus(url, httpResponse.statusCode)
         }
         
-        try await delegate.validate(data: data, res: res)
+        do {
+            try await delegate.validate(data: data, res: res)
+        } catch {
+            try Task.checkCancellation()
+            throw error
+        }
     }
 }
 
@@ -251,6 +242,7 @@ extension Fetch {
                 try await self.delegate.decoder.decode(T.self, from: data)
             }.value
         } catch {
+            try Task.checkCancellation()
             throw FetchError.decoding("\(error)")
         }
     }

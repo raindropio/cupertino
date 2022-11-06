@@ -17,7 +17,12 @@ extension CollectionsReducer {
             
             let (groups, (system, user)) = try await (fetchGroups, fetchCollections)
             return A.reloaded(groups, system, user)
-        } catch {
+        }
+        catch is CancellationError {
+            state.status = .idle
+            return nil
+        }
+        catch {
             state.status = .error
             throw error
         }

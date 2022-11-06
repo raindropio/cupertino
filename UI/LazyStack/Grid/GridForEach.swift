@@ -26,6 +26,7 @@ extension GridForEach: View {
             content(element)
                 .modifier(GridCard(element: element))
                 .modifier(GridDrag(element: element, getIndex: getIndex))
+                .infiniteScrollElement(element.id)
         }
     }
 }

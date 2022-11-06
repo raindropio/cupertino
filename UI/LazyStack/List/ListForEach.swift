@@ -5,7 +5,7 @@ struct ListForEach<D: RandomAccessCollection, C: View> where D.Element: Identifi
     
     let data: D
     let content: (D.Element) -> C
-    
+        
     public init(
         _ data: D,
         content: @escaping (D.Element) -> C
@@ -40,6 +40,7 @@ extension ListForEach: View {
         ForEach(data) {
             content($0)
                 .draggable($0)
+                .infiniteScrollElement($0.id)
         }
             .onMove(perform: performReorder)
             .onDelete(perform: performDelete)

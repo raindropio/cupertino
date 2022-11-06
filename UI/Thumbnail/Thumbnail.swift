@@ -13,6 +13,7 @@ public struct Thumbnail {
     var width: CGFloat?
     var height: CGFloat?
     var aspectRatio: CGFloat?
+    var cornerRadius: CGFloat = 0
     
     static var cacheAspect = [URL:CGFloat]()
     static let diskCache: ImagePipeline = {
@@ -24,11 +25,13 @@ public struct Thumbnail {
     public init(
         _ url: URL? = nil,
         width: CGFloat,
-        height: CGFloat
+        height: CGFloat,
+        cornerRadius: CGFloat = 0
     ) {
         self.url = url
         self.width = width
         self.height = height
+        self.cornerRadius = cornerRadius
     }
     
     public init(
@@ -49,15 +52,6 @@ public struct Thumbnail {
         self.url = url
         self.height = height
         self.aspectRatio = aspectRatio
-    }
-}
-
-extension Thumbnail: Equatable {
-    public static func == (lhs: Self, rhs: Self) -> Bool {
-        lhs.url == rhs.url &&
-        lhs.width == rhs.width &&
-        lhs.height == rhs.height &&
-        lhs.aspectRatio == rhs.aspectRatio
     }
 }
 
@@ -84,13 +78,17 @@ extension Thumbnail: View {
         }
     }
     
+    var roundedCorner: ImageProcessors.RoundedCorners {
+        .init(radius: cornerRadius)
+    }
+    
     @MainActor
     var base: LazyImage<NukeUI.Image> {
         LazyImage(url: url)
             .animation(nil)
-            .processors([resize])
+            .processors([resize, roundedCorner])
             .pipeline(Self.diskCache)
-//            .priority(.veryLow)
+            .priority(.veryLow)
     }
     
     public var body: some View {
@@ -130,11 +128,9 @@ struct Thumbnail_Previews: PreviewProvider {
     
     static var previews: some View {
         HStack {
-            Thumbnail(url, width: 80, height: 60)
-                .cornerRadius(3)
+            Thumbnail(url, width: 80, height: 60, cornerRadius: 3)
             
-            Thumbnail(url, width: 24, height: 24)
-                .cornerRadius(3)
+            Thumbnail(url, width: 24, height: 24, cornerRadius: 3)
             
             VStack {
                 Thumbnail(url, width: 250, aspectRatio: 16/9)

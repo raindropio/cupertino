@@ -27,8 +27,8 @@ public actor CollectionsReducer: Reducer {
             created(state: &state, collection: collection)
         
         //update
-        case .update(let collection, let fast):
-            return try await update(state: &state, changed: collection, fast: fast)
+        case .update(let collection, let original):
+            return try await update(state: &state, changed: collection, original: original)
             
         case .updated(let collection):
             updated(state: &state, collection: collection)

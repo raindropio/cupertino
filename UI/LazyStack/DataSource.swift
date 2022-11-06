@@ -6,13 +6,16 @@ public struct DataSource<D: RandomAccessCollection, C: View> where D.Element: Id
     
     let data: D
     let content: (D.Element) -> C
+    let loadMore: () async -> Void
     
     public init(
         _ data: D,
-        content: @escaping (D.Element) -> C
+        content: @escaping (D.Element) -> C,
+        loadMore: @escaping () async -> Void
     ) {
         self.data = data
         self.content = content
+        self.loadMore = loadMore
     }
 }
 
@@ -21,17 +24,21 @@ extension DataSource: View {
         switch layout {
         case .list:
             ListForEach(data, content: content)
+                .infiniteScroll(data, action: loadMore)
             
         case .grid(let width, let staggered):
-            if staggered {
-                GridStaggered(data, width) { group in
-                    GridForEach(group, content: content)
-                }
-            } else {
-                GridColumns(width) {
-                    GridForEach(data, content: content)
+            Group {
+                if staggered {
+                    GridStaggered(data, width) { group in
+                        GridForEach(group, content: content)
+                    }
+                } else {
+                    GridColumns(width) {
+                        GridForEach(data, content: content)
+                    }
                 }
             }
+                .infiniteScroll(data, action: loadMore)
             
         case nil:
             EmptyView()
