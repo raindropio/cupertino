@@ -76,7 +76,7 @@ fileprivate struct DebounceSearchText: ViewModifier {
                     temp = text
                 }
             }
-            .task(id: temp, priority: .utility) {
+            .task(id: temp, priority: .background) {
                 do {
                     if !temp.isEmpty, temp != text {
                         try await Task.sleep(nanoseconds: UInt64(1_000_000_000 * debounce))

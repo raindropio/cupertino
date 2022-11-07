@@ -8,6 +8,7 @@ public struct Thumbnail {
     #else
     private var displayScale = 1.0
     #endif
+    @State private var reload: UUID?
     
     var url: URL?
     var width: CGFloat?
@@ -16,9 +17,13 @@ public struct Thumbnail {
     var cornerRadius: CGFloat = 0
     
     static var cacheAspect = [URL:CGFloat]()
-    static let diskCache: ImagePipeline = {
-        var configuration = ImagePipeline.Configuration.withDataCache
-        configuration.dataCachePolicy = .storeAll
+    static let pipeline: ImagePipeline = {
+        ImageCache.shared.costLimit = 1024 * 1024 * 150 //150mb memory cache
+        
+        var configuration = ImagePipeline.Configuration.withDataCache(name: "\(Bundle.main.bundleIdentifier!).thumbnail", sizeLimit: ImageCache.shared.costLimit)
+        configuration.dataCachePolicy = .storeEncodedImages
+        configuration.isDecompressionEnabled = true
+        configuration.isRateLimiterEnabled = false
         return ImagePipeline(configuration: configuration)
     }()
         
@@ -82,12 +87,20 @@ extension Thumbnail: View {
         .init(radius: cornerRadius)
     }
     
+    func saveAspectRatio(_ result: ImageResponse) {
+        guard let url, Self.cacheAspect[url] == nil
+        else { return }
+        
+        Self.cacheAspect[url] = result.image.size.width / result.image.size.height
+        reload = .init()
+    }
+    
     @MainActor
     var base: LazyImage<NukeUI.Image> {
         LazyImage(url: url)
             .animation(nil)
             .processors([resize, roundedCorner])
-            .pipeline(Self.diskCache)
+            .pipeline(Self.pipeline)
             .priority(.veryLow)
     }
     
@@ -106,18 +119,9 @@ extension Thumbnail: View {
         //downsampled
         else {
             base
-                //cache aspect ratio for later
-                .onSuccess {
-                    if let url, aspectRatio == nil, (width == nil || height == nil), Self.cacheAspect[url] == nil {
-                        Self.cacheAspect[url] = $0.image.size.width / $0.image.size.height
-                    }
-                }
-                .onFailure { _ in
-                    if let url, Self.cacheAspect[url] == nil {
-                        Self.cacheAspect[url] = 1
-                    }
-                }
-                .aspectRatio(url != nil ? Self.cacheAspect[url!] : nil, contentMode: .fit)
+                .onSuccess(saveAspectRatio)
+                .aspectRatio(url != nil ? Self.cacheAspect[url!] : 2, contentMode: .fit)
+                .tag(reload)
         }
     }
 }

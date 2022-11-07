@@ -21,7 +21,7 @@ extension RaindropsReducer {
             state[find].more = .notFound
         }
         catch is CancellationError {
-            state[find].more = .idle
+            state[find].validMore()
         }
         catch {
             state[find].more = .error
@@ -54,8 +54,8 @@ extension RaindropsReducer {
         items.forEach { state.items[$0.id] = $0 }
         
         state[find].ids = state[find].ids + items.map(\.id)
-        state[find].more = state[find].ids.count >= total ? .notFound : .idle
         state[find].page = page
         state[find].total = total
+        state[find].validMore()
     }
 }

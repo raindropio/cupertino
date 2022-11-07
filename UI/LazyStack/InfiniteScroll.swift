@@ -32,7 +32,7 @@ struct InifiniteScrollModifier<D: RandomAccessCollection>: ViewModifier where D.
     func body(content: Content) -> some View {
         content
             .onPreferenceChange(InfiniteScrollElementId.self, perform: onElementAppear)
-            .task(id: page, priority: .utility) {
+            .task(id: page, priority: .background) {
                 guard page > 0 else { return }
                 await action()
             }

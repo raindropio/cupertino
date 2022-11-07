@@ -19,10 +19,14 @@ public enum CollectionsAction: ReduxAction {
     //delete
     case delete(UserCollection.ID)
     case deleted(UserCollection.ID)
-    //helpers
+    //groups
+    case saveGroups
+    case groupsUpdated([CGroup])
+    //shorthands
     case reorder(UserCollection.ID, parent: UserCollection.ID?, order: Int)
     case setView(Int, CollectionView)
-    case toggle(Int)
+    case toggle(UserCollection.ID)
+    case toggleGroup(CGroup.ID)
 }
 
 public enum IconsAction: ReduxAction {

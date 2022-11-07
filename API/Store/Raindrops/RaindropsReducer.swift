@@ -2,7 +2,7 @@ public actor RaindropsReducer: Reducer {
     public typealias S = RaindropsState
     public typealias A = RaindropsAction
     
-    var rest = Rest()
+    let rest = Rest()
     
     public init() {}
     

@@ -2,7 +2,7 @@ public actor RecentReducer: Reducer {
     public typealias S = RecentState
     public typealias A = RecentAction
     
-    var rest = Rest()
+    let rest = Rest()
     
     public init() {}
     

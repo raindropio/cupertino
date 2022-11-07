@@ -5,7 +5,7 @@ final class DefaultFetchDelegate: FetchDelegate {
     let encoder = JSONEncoder()
 }
 
-actor Fetch {
+final class Fetch {
     private let base: URL
     private var delegate: FetchDelegate = DefaultFetchDelegate()
     private let session: URLSession = URLSession(configuration: .default)
@@ -29,7 +29,7 @@ extension Fetch {
             try urlRequest(path, method: "GET", query: query)
         )
                 
-        return try await decode(data: data)
+        return try decode(data: data)
     }
 }
 
@@ -45,7 +45,7 @@ extension Fetch {
             try urlRequest(path, method: "POST", query: query, body: body, configuration: configuration)
         )
         
-        return try await decode(data: data)
+        return try decode(data: data)
     }
     
     func post<T: Decodable, R: Encodable>(
@@ -57,7 +57,7 @@ extension Fetch {
             try urlRequest(path, method: "POST", query: query, body: body)
         )
         
-        return try await decode(data: data)
+        return try decode(data: data)
     }
     
     func post<T: Decodable>(
@@ -68,7 +68,7 @@ extension Fetch {
             try urlRequest(path, method: "POST", query: query)
         )
         
-        return try await decode(data: data)
+        return try decode(data: data)
     }
 }
 
@@ -84,7 +84,7 @@ extension Fetch {
             try urlRequest(path, method: "PUT", query: query, body: body, configuration: configuration)
         )
         
-        return try await decode(data: data)
+        return try decode(data: data)
     }
     
     func put<T: Decodable, R: Encodable>(
@@ -96,7 +96,7 @@ extension Fetch {
             try urlRequest(path, method: "PUT", query: query, body: body)
         )
         
-        return try await decode(data: data)
+        return try decode(data: data)
     }
     
     func put<T: Decodable>(
@@ -107,7 +107,7 @@ extension Fetch {
             try urlRequest(path, method: "PUT", query: query)
         )
         
-        return try await decode(data: data)
+        return try decode(data: data)
     }
 }
 
@@ -122,7 +122,7 @@ extension Fetch {
             try urlRequest(path, method: "DELETE", query: query, body: body)
         )
         
-        return try await decode(data: data)
+        return try decode(data: data)
     }
     
     func delete<T: Decodable>(
@@ -133,7 +133,7 @@ extension Fetch {
             try urlRequest(path, method: "DELETE", query: query)
         )
         
-        return try await decode(data: data)
+        return try decode(data: data)
     }
     
     func delete(
@@ -236,13 +236,10 @@ extension Fetch {
 
 //MARK: - Decode in separate thread
 extension Fetch {
-    func decode<T: Decodable>(data: Data) async throws -> T {
+    func decode<T: Decodable>(data: Data) throws -> T {
         do {
-            return try await Task.detached {
-                try await self.delegate.decoder.decode(T.self, from: data)
-            }.value
+            return try delegate.decoder.decode(T.self, from: data)
         } catch {
-            try Task.checkCancellation()
             throw FetchError.decoding("\(error)")
         }
     }

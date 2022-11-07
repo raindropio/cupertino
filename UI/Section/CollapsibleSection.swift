@@ -1,14 +1,14 @@
 import SwiftUI
 
 public struct CollapsibleSection<C: View, T: View, A: View> {
-    var title: LocalizedStringKey
+    var title: String
     var collapsed: Bool
     var content: () -> C
     var toggle: () -> T
     var actions: () -> A
     
     public init(
-        _ title: LocalizedStringKey,
+        _ title: String,
         _ collapsed: Bool = false,
         content: @escaping () -> C,
         toggle: @escaping () -> T,

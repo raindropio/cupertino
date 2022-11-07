@@ -2,7 +2,7 @@ public actor CollectionsReducer: Reducer {
     public typealias S = CollectionsState
     public typealias A = CollectionsAction
     
-    var rest = Rest()
+    let rest = Rest()
     
     public init() {}
     
@@ -31,7 +31,7 @@ public actor CollectionsReducer: Reducer {
             return try await update(state: &state, changed: collection, original: original)
             
         case .updated(let collection):
-            updated(state: &state, collection: collection)
+            return updated(state: &state, collection: collection)
             
         //delete
         case .delete(let id):
@@ -39,6 +39,13 @@ public actor CollectionsReducer: Reducer {
             
         case .deleted(let id):
             deleted(state: &state, id: id)
+            
+        //groups
+        case .saveGroups:
+            return try await saveGroups(state: &state)
+            
+        case .groupsUpdated(let groups):
+            groupsUpdated(state: &state, groups: groups)
             
         //helpers
         case .reorder(let id, let parent, let order):
@@ -49,6 +56,9 @@ public actor CollectionsReducer: Reducer {
         
         case .toggle(let id):
             return toggle(state: &state, id: id)
+            
+        case .toggleGroup(let id):
+            return try await toggle(state: &state, id: id)
         }
 
         return nil

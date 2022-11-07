@@ -2,7 +2,7 @@ public actor FiltersReducer: Reducer {
     public typealias S = FiltersState
     public typealias A = FiltersAction
     
-    var rest = Rest()
+    let rest = Rest()
     
     public init() {}
     

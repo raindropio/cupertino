@@ -18,6 +18,10 @@ extension RaindropsState {
             case notFound
             case error
         }
+        
+        mutating func validMore() {
+            more = ids.count >= total ? .notFound : .idle
+        }
     }
 }
 
@@ -51,7 +55,7 @@ extension RaindropsState {
     }
     
     //save only valid groups to cache
-    static func cachable(_ segments: Segments) -> Segments {
+    static func restore(_ segments: Segments) -> Segments {
         segments.filter {
             $0.1.status == .idle && ($0.1.more == .idle || $0.1.more == .notFound)
         }

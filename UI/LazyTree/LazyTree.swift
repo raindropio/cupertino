@@ -67,8 +67,11 @@ extension LazyTree {
         
         let target: Element? = to < data.count ? data[to] : nil
         let newParent: Element.ID? = target?[keyPath: parent]
-        
-        let siblings = data.filter { $0[keyPath: parent] == newParent }
+                
+        let siblings = data
+            .filter { $0[keyPath: parent] == newParent }
+            .filter { !ids.contains($0.id) }
+            
         let order: Int = siblings.firstIndex { $0.id == target?.id } ?? siblings.count
         
         reorder(ids, newParent, order)

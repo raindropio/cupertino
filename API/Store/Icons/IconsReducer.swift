@@ -2,7 +2,7 @@ public actor IconsReducer: Reducer {
     public typealias S = IconsState
     public typealias A = IconsAction
     
-    var rest = Rest()
+    let rest = Rest()
     
     public init() {}
     

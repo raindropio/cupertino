@@ -4,15 +4,62 @@ extension CollectionsReducer {
         guard let original = original ?? state.user[changed.id], changed != original
         else { return nil }
         
-        let updated = try await rest.collectionUpdate(
-            original: original,
-            changed: changed
-        )
-        
-        return A.updated(updated)
+        do {
+            return A.updated(
+                try await rest.collectionUpdate(
+                    original: original,
+                    changed: changed
+                )
+            )
+        }
+        //reload all when some error happen (maybe local data is outdated)
+        catch RestError.forbidden, RestError.invalid(_) {
+            return A.reload
+        }
+        catch {
+            throw error
+        }
     }
     
-    func updated(state: inout S, collection: UserCollection) {
+    //MARK: - Receive updated collection from server
+    func updated(state: inout S, collection: UserCollection) -> ReduxAction? {
+        let original = state.user[collection.id]
         state.user[collection.id] = collection
+        
+        //reorder or change of a parent happen
+        if (
+            original?.parent != collection.parent ||
+            original?.sort != collection.sort
+        ) {
+            //become nested
+            if collection.parent != nil {
+                //reorder siblings (set correct `sort` value)
+                state.fixSiblings(of: collection)
+                
+                //remove from groups (server should do this by itself, just to make sure)
+                state.removeFromGroups(collection.id)
+                
+                return A.saveGroups
+            }
+            
+            //become root
+            if collection.parent == nil {
+                //originally belonged to group
+                var groupIndex = 0
+                if let original, let inGroup = state.path(to: original) {
+                    groupIndex = state.groups.firstIndex(of: inGroup) ?? 0
+                }
+                
+                //remove from groups (just to prevent duplicates)
+                state.removeFromGroups(collection.id)
+                
+                //insert to specific position inside group
+                state.groups[groupIndex].collections.insert(collection.id, at: collection.sort)
+                
+                return A.saveGroups
+            }
+        }
+        
+        return nil
     }
 }

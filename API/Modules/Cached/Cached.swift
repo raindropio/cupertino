@@ -1,21 +1,15 @@
 import Foundation
 
 @propertyWrapper
-public struct Cached<Value: Codable>: Equatable where Value: Equatable {
-    typealias Transform = ((Value) -> Value)?
-    
-    public static func == (lhs: Self, rhs: Self) -> Bool {
-        lhs._value == rhs._value
-    }
-    
+public struct Cached<Value: Codable & Equatable>: Equatable {
+    typealias Restore = ((Value) -> Value)?
+
     private var _value: Value
-    private var cacheKey: String
-    private var transform: Transform = nil
+    private var storage: Storage<Value>
     
-    init(wrappedValue: Value, _ cacheKey: String, _ transform: Transform = nil) {
-        self._value = /*CachedFileStorage.load(cacheKey) ??*/ wrappedValue
-        self.cacheKey = cacheKey
-        self.transform = transform
+    init(wrappedValue: Value, _ cacheKey: String, _ restore: Restore = nil) {
+        self.storage = .init(cacheKey)
+        self._value = storage.load(transform: restore) ?? wrappedValue
     }
     
     public var wrappedValue: Value {
@@ -24,15 +18,8 @@ public struct Cached<Value: Codable>: Equatable where Value: Equatable {
         }
         
         set {
-            if _value != newValue {
-                _value = newValue
-                
-//                CachedFileStorage.save(
-//                    cacheKey,
-//                    value: transform?(newValue) ?? newValue,
-//                    debounce: 0.5
-//                )
-            }
+            _value = newValue
+            storage.save(newValue)
         }
     }
 }

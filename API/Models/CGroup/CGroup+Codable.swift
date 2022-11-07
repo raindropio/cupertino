@@ -5,16 +5,15 @@ extension CGroup: Codable {
     enum CodingKeys: String, CodingKey {
         case title
         case hidden
-        case sort
         case collections
     }
     
     public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         
+        id = .init()
         title = try container.decode(type(of: title), forKey: .title)
         hidden = (try? container.decode(type(of: hidden), forKey: .hidden)) ?? false
-        sort = (try? container.decode(type(of: sort), forKey: .sort)) ?? 0
         collections = try container.decode(type(of: collections), forKey: .collections)
     }
     
@@ -22,7 +21,6 @@ extension CGroup: Codable {
         var container = encoder.container(keyedBy: CodingKeys.self)
         try container.encode(title, forKey: .title)
         try container.encode(hidden, forKey: .hidden)
-        try container.encode(sort, forKey: .sort)
         try container.encode(collections, forKey: .collections)
     }
 }

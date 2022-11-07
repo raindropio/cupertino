@@ -1,9 +1,6 @@
 extension RaindropsReducer {
     //MARK: - 1
     func load(state: inout S, find: FindBy) -> ReduxAction? {
-        guard state[find].status != .loading
-        else { return nil }
-        
         //default sort
         if !state.exists(find) {
             state[find].sort = SortBy.someCases(for: find).first!
@@ -26,7 +23,7 @@ extension RaindropsReducer {
             state[find].status = .notFound
         }
         catch is CancellationError {
-            state[find].more = .idle
+            state[find].validMore()
         }
         catch {
             state[find] = .init()
@@ -51,7 +48,7 @@ extension RaindropsReducer {
         }
         
         state[find].status = .idle
-        state[find].more = state[find].ids.count >= total ? .notFound : .idle
         state[find].total = total
+        state[find].validMore()
     }
 }

@@ -2,7 +2,7 @@ public actor UserReducer: Reducer {
     public typealias S = UserState
     public typealias A = UserAction
     
-    var rest = Rest()
+    let rest = Rest()
     
     public init() {}
     

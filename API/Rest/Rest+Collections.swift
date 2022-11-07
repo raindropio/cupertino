@@ -26,6 +26,21 @@ extension Rest {
     }
 }
 
+//MARK: - Update groups
+extension Rest {
+    public func collectionGroupsUpdate(groups: [CGroup]) async throws -> [CGroup] {
+        let res: CollectionGroupsResponse = try await fetch.put(
+            "user",
+            body: GroupsReq(groups: groups)
+        )
+        return res.user.groups
+    }
+    
+    fileprivate struct GroupsReq: Encodable {
+        var groups: [CGroup]
+    }
+}
+
 //MARK: - Create collection
 extension Rest {
     public func collectionCreate(collection: UserCollection) async throws -> UserCollection {

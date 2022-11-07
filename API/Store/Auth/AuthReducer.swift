@@ -2,7 +2,7 @@ public actor AuthReducer: Reducer {
     public typealias S = AuthState
     public typealias A = AuthAction
     
-    var rest = Rest()
+    let rest = Rest()
     
     public init() {}
     
