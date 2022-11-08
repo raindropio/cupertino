@@ -51,7 +51,10 @@ public enum RaindropsAction: ReduxAction {
 
 public enum FiltersAction: ReduxAction {
     case reload(FindBy = .init())
-    case reloaded(FindBy, [Filter])
+    case reloaded(FindBy, [Filter], FiltersConfig?)
+    case toggleSimple
+    case toggleTags
+    case saveConfig
 }
 
 public enum RecentAction: ReduxAction {

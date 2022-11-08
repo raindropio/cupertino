@@ -2,11 +2,12 @@ import Foundation
 
 //MARK: - Get
 extension Rest {
-    public func filtersGet(_ find: FindBy) async throws -> ([Filter], Int) {
+    public func filtersGet(_ find: FindBy, tagsSort: FiltersConfig.TagsSort = .title) async throws -> ([Filter], Int) {
         let res: FiltersGetResponse = try await fetch.get(
             "filters/\(find.collectionId)",
             query: find.query
                 + [.init(name: "nested", value: "true")]
+                + [.init(name: "tagsSort", value: tagsSort.rawValue)]
         )
 
         var filters: [Filter] = []

@@ -18,8 +18,6 @@ public actor Rest: FetchDelegate {
     let fetch = Fetch(base)
     
     public init() {
-        Task {
-            await fetch.setDelegate(self)
-        }
+        fetch.setDelegate(self)
     }
 }

@@ -5,6 +5,8 @@ public struct FiltersState: ReduxState {
     @Cached("ffs-tags") var tags = [FindBy: [Filter]]()
     @Cached("ffs-created") var created = [FindBy: [Filter]]()
     
+    @Cached("ffs-config") public var config = FiltersConfig()
+    
     public init() {}
 }
 

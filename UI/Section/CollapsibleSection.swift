@@ -27,6 +27,7 @@ extension CollapsibleSection: View {
         Section {
             if !collapsed {
                 content()
+                    .transition(.move(edge: .bottom))
             }
         } header: {
             HStack {

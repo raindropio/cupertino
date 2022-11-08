@@ -54,7 +54,11 @@ extension CollectionsReducer {
                 state.removeFromGroups(collection.id)
                 
                 //insert to specific position inside group
-                state.groups[groupIndex].collections.insert(collection.id, at: collection.sort)
+                state.groups[groupIndex].collections
+                    .insert(
+                        collection.id,
+                        at: max(0, min(collection.sort, state.groups[groupIndex].collections.count))
+                    )
                 
                 return A.saveGroups
             }
