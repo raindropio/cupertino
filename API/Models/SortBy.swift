@@ -19,8 +19,8 @@ public enum SortBy: Hashable, Codable {
         switch self {
         case .score: return "text.magnifyingglass"
         case .sort: return "arrow.up.arrow.down"
-        case .created(_): return "clock"
-        case .title(_): return "textformat"
+        case .created(let order): return order == .desc ? "clock" : "clock.arrow.circlepath"
+        case .title(let order): return order == .desc ? "textformat.size" : "textformat"
         }
     }
 }
