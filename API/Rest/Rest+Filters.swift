@@ -69,7 +69,7 @@ extension Rest {
         
         //duplicate
         if let duplicate = res.duplicate, duplicate.count > 0 {
-            filters.append(.init(.duplicate, count: duplicate.count))
+            filters.append(.init(.duplicate(), count: duplicate.count))
         }
         
         let count = res.total?.count ?? 0

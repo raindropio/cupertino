@@ -30,8 +30,15 @@ extension CollectionsReducer {
     
     //MARK: - 3
     func reloaded(state: inout S, groups: [CGroup], system: [SystemCollection], user: [UserCollection]) {
+        state.status = .idle
         state.groups = groups
         
+        //create default groups
+        if state.groups.isEmpty {
+            state.groups = [.blank]
+        }
+        
+        //update system
         system.forEach {
             var item = $0
             //do not override view
@@ -39,10 +46,19 @@ extension CollectionsReducer {
             state.system[$0.id] = item
         }
 
+        //user collections
         user.forEach {
             state.user[$0.id] = $0
         }
 
-        state.status = .idle
+        //out of groups fix
+        state.user
+            .filter { u in
+                u.value.parent == nil &&
+                !state.groups.contains { $0.collections.contains(u.value.id) }
+            }
+            .forEach {
+                state.groups[state.groups.indices.first!].collections.append($0.key)
+            }
     }
 }

@@ -20,7 +20,10 @@ public struct Thumbnail {
     static let pipeline: ImagePipeline = {
         ImageCache.shared.costLimit = 1024 * 1024 * 150 //150mb memory cache
         
-        var configuration = ImagePipeline.Configuration.withDataCache(name: "\(Bundle.main.bundleIdentifier!).thumbnail", sizeLimit: ImageCache.shared.costLimit)
+        var configuration = ImagePipeline.Configuration.withDataCache(
+            name: "\(Bundle.main.bundleIdentifier!).thumbnail",
+            sizeLimit: ImageCache.shared.costLimit
+        )
         configuration.dataCachePolicy = .storeEncodedImages
         configuration.isDecompressionEnabled = true
         configuration.isRateLimiterEnabled = false

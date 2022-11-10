@@ -9,3 +9,11 @@ extension CollectionsReducer {
         return A.update(collection)
     }
 }
+
+extension CollectionsReducer {
+    func reorderMany(state: inout S, by: UpdateCollectionsForm.Sort) -> ReduxAction? {
+        return A.updateMany(
+            .init(sort: by)
+        )
+    }
+}

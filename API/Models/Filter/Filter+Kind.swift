@@ -8,10 +8,11 @@ extension Filter {
         case created(String)
         case highlights
         case broken
-        case duplicate
+        case duplicate(of: Raindrop.ID? = nil)
         case notag
         case file
         case tag(String)
+        case raindrop(Raindrop.ID)
         
         public var description: String {
             switch self {
@@ -24,6 +25,7 @@ extension Filter {
             case .notag: return "notag:true"
             case .file: return "file:true"
             case .tag(let tag): return tag.contains(" ") ? "\"#\(tag)\"" : "#\(tag)"
+            case .raindrop(let id): return "_id:\(id)"
             }
         }
         
@@ -38,6 +40,7 @@ extension Filter {
             case .notag: return "Without tags"
             case .file: return "Files"
             case .tag(let tag): return tag
+            case .raindrop(let id): return "\(id)"
             }
         }
         
@@ -47,11 +50,12 @@ extension Filter {
             case .type(let type): return type.systemImage
             case .created(_): return "calendar"
             case .highlights: return "highlighter"
-            case .broken: return "exclamationmark.bubble"
+            case .broken: return "exclamationmark.triangle"
             case .duplicate: return "square.on.square"
             case .notag: return "circlebadge.2"
             case .file: return "doc"
             case .tag(_): return "number"
+            case .raindrop(_): return "star"
             }
         }
         
@@ -66,6 +70,7 @@ extension Filter {
             case .duplicate: return .green
             case .file: return .teal
             case .tag: return .secondary
+            case .raindrop(_): return .blue
             }
         }
     }

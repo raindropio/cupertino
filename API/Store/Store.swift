@@ -1,6 +1,7 @@
 import SwiftUI
 
 public actor Store: ReduxStore {
+    @MainActor public var dispatcher = Dispatcher()
     #if DEBUG
     @MainActor public var log = LogStore()
     #endif
@@ -13,26 +14,13 @@ public actor Store: ReduxStore {
     @MainActor public var user = UserStore()
 
     @MainActor public init() {
-        bind()
+        dispatcher.store = self
     }
     
-    @MainActor private func bind() {
-        #if DEBUG
-        log.store = self
-        #endif
-        auth.store = self
-        collections.store = self
-        filters.store = self
-        icons.store = self
-        raindrops.store = self
-        recent.store = self
-        user.store = self
-    }
-    
-    func dispatch(_ some: Any) async throws {
+    public func dispatch(_ some: Any) async throws {
         do {
             #if DEBUG
-            try await dispatch(some, store: \.log)
+//            try await dispatch(some, store: \.log)
             #endif
             try await dispatch(some, store: \.auth)
             try await dispatch(some, store: \.raindrops)
@@ -47,3 +35,5 @@ public actor Store: ReduxStore {
         }
     }
 }
+
+

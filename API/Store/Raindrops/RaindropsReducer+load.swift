@@ -38,7 +38,7 @@ extension RaindropsReducer {
         //add to items dictionary and update group
         items.forEach { state.items[$0.id] = $0 }
         
-        //do not override if data is not changed (useful for pagination)
+        //do not override if data is not modified (useful for pagination)
         let oldIds = state[find].ids
         let newIds = items.map(\.id)
 

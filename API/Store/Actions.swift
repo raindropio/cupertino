@@ -16,6 +16,7 @@ public enum CollectionsAction: ReduxAction {
     //update
     case update(UserCollection, original: UserCollection? = nil)
     case updated(UserCollection)
+    case updateMany(UpdateCollectionsForm)
     //delete
     case delete(UserCollection.ID)
     case deleted(UserCollection.ID)
@@ -24,9 +25,13 @@ public enum CollectionsAction: ReduxAction {
     case groupsUpdated([CGroup])
     //shorthands
     case reorder(UserCollection.ID, parent: UserCollection.ID?, order: Int)
+    case reorderMany(UpdateCollectionsForm.Sort)
     case setView(Int, CollectionView)
     case toggle(UserCollection.ID)
-    case toggleGroup(CGroup.ID)
+    case toggleMany
+    case toggleGroup(CGroup)
+    case renameGroup(CGroup)
+    case deleteGroup(CGroup)
 }
 
 public enum IconsAction: ReduxAction {

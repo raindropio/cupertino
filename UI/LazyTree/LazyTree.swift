@@ -1,75 +1,95 @@
 import SwiftUI
 
-public struct LazyTree<Element: Identifiable, Leaf: View> {
-    var data: [Element]
-    var parent: KeyPath<Element, Element.ID?>
-    var expanded: KeyPath<Element, Bool>
-    var expandable: (Element.ID) -> Bool
+public struct LazyTree<I: Identifiable & Equatable, C: View> {
+    //data
+    var root: [I.ID]
+    var items: [I.ID: I]
     
-    //optionals
-    public typealias ToggleClosue = ((Element.ID) -> Void)?
+    //key path's
+    var parent: KeyPath<I, I.ID?>
+    var expanded: KeyPath<I, Bool>
+    var sort: KeyPath<I, Int>
+    
+    //actions
+    public typealias ToggleClosue = (I.ID) -> Void
     var toggle: ToggleClosue
     
-    public typealias ReorderClosue = ((_ ids: [Element.ID], _ parent: Element.ID?, _ order: Int) -> Void)?
+    public typealias ReorderClosue = (_ ids: [I.ID], _ parent: I.ID?, _ order: Int) -> Void
     var reorder: ReorderClosue
     
-    //rendering
-    var leaf: (Element) -> Leaf
+    //content
+    var content: (I) -> C
     
     public init(
-        data: [Element],
-        parent: KeyPath<Element, Element.ID?>,
-        expanded: KeyPath<Element, Bool>,
-        expandable: @escaping (Element.ID) -> Bool,
-        toggle: ToggleClosue = nil,
-        reorder: ReorderClosue = nil,
-        leaf: @escaping (Element) -> Leaf
+        root: [I.ID],
+        items: [I.ID : I],
+        parent: KeyPath<I, I.ID?>,
+        expanded: KeyPath<I, Bool>,
+        sort: KeyPath<I, Int>,
+        toggle: @escaping ToggleClosue,
+        reorder: @escaping ReorderClosue,
+        content: @escaping (I) -> C
     ) {
-        self.data = data
+        self.root = root
+        self.items = items
         self.parent = parent
         self.expanded = expanded
-        self.expandable = expandable
+        self.sort = sort
         self.toggle = toggle
         self.reorder = reorder
-        self.leaf = leaf
+        self.content = content
     }
 }
 
 extension LazyTree {
-    func isExpanded(_ element: Element) -> Binding<Bool> {
-        .init { element[keyPath: expanded] } set: { _ in
-            toggle?(element.id)
-        }
+    struct Leaf: Identifiable {
+        var id: I.ID
+        var expandable: Bool = false
+        var level: CGFloat = 0
+    }
+}
+
+extension LazyTree {
+    var tree: [Leaf] {
+        root
+            .compactMap { items[$0] }
+            .flatMap { branch($0) }
     }
     
-    //parent: inset
-    func insets() -> [Element.ID?: CGFloat] {
-        var levels: [Element.ID?: CGFloat] = [nil: 0.0]
-        var prev: Element.ID?
+    func branch(_ item: I, level: CGFloat = 0) -> [Leaf] {
+        let more = childrens(item.id, level: level+1)
         
-        data.forEach {
-            let parent = $0[keyPath: parent]
-            if parent != prev {
-                if levels[parent] == nil {
-                    levels[parent] = (levels[prev] ?? 0.0) + 1
-                }
-                prev = parent
-            }
+        return [.init(
+            id: item.id,
+            expandable: !more.isEmpty,
+            level: level
+        )] + (item[keyPath: expanded] ? more : [])
+    }
+    
+    func childrens(_ parentId: I.ID, level: CGFloat) -> [Leaf] {
+        items
+            .filter { $0.value[keyPath: parent] == parentId }
+            .sorted(by: { $0.value[keyPath: sort] < $1.value[keyPath: sort] })
+            .flatMap { branch($0.value, level: level) }
+    }
+}
+
+extension LazyTree {
+    func isExpanded(_ id: I.ID) -> Binding<Bool> {
+        .init { items[id]?[keyPath: expanded] ?? false } set: { _ in
+            toggle(id)
         }
-        
-        return levels
     }
     
     func onMove(_ indices: IndexSet, _ to: Int) {
-        guard let reorder else { return }
+        let tree = tree
+        let ids = indices.map { tree[$0].id }
         
-        let ids = indices.map { data[$0].id }
-        
-        let target: Element? = to < data.count ? data[to] : nil
-        let newParent: Element.ID? = target?[keyPath: parent]
+        let target: I? = to < tree.count ? items[tree[to].id] : nil
+        let newParent: I.ID? = target?[keyPath: parent]
                 
-        let siblings = data
-            .filter { $0[keyPath: parent] == newParent }
+        let siblings = tree
+            .filter { items[$0.id]?[keyPath: parent] == newParent }
             .filter { !ids.contains($0.id) }
             
         let order: Int = siblings.firstIndex { $0.id == target?.id } ?? siblings.count
@@ -78,28 +98,28 @@ extension LazyTree {
     }
 }
 
-extension LazyTree: View {
-    public var body: some View {
-        let insets = insets()
-        
-        ForEach(data) { element in
-            Group {
-                if expandable(element.id) {
-                    DisclosureGroup(isExpanded: isExpanded(element)) {} label: {
-                        leaf(element)
-                    }
-                } else {
-                    leaf(element)
-                }
-            }
-                .padding(.leading, (insets[element[keyPath: parent]] ?? 0) * 32)
-        }
-            .onMove(perform: onMove)
+extension LazyTree: Equatable {
+    public static func == (lhs: Self, rhs: Self) -> Bool {
+        lhs.root == rhs.root &&
+        lhs.items == rhs.items
     }
 }
 
-extension LazyTree: Equatable where Element: Hashable {
-    public static func == (lhs: Self, rhs: Self) -> Bool {
-        lhs.data.hashValue == rhs.data.hashValue
+extension LazyTree: View {
+    public var body: some View {
+        ForEach(tree) { leaf in
+            Group {
+                if leaf.expandable {
+                    DisclosureGroup(isExpanded: isExpanded(leaf.id)) {} label: {
+                        content(items[leaf.id]!)
+                    }
+                } else {
+                    content(items[leaf.id]!)
+                }
+            }
+                .padding(.leading, leaf.level * 32)
+                .transition(.move(edge: .bottom))
+        }
+            .onMove { onMove($0, $1) }
     }
 }

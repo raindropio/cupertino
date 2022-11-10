@@ -3,6 +3,7 @@ import Foundation
 extension CGroup: Codable {
     //variables that should be in json of API
     enum CodingKeys: String, CodingKey {
+        case id
         case title
         case hidden
         case collections
@@ -11,7 +12,6 @@ extension CGroup: Codable {
     public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         
-        id = .init()
         title = try container.decode(type(of: title), forKey: .title)
         hidden = (try? container.decode(type(of: hidden), forKey: .hidden)) ?? false
         collections = try container.decode(type(of: collections), forKey: .collections)

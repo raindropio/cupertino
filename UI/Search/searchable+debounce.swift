@@ -76,12 +76,17 @@ fileprivate struct DebounceSearchText: ViewModifier {
                     temp = text
                 }
             }
+            //auto submit
             .task(id: temp, priority: .background) {
                 do {
+                    //wait
                     if !temp.isEmpty, temp != text {
                         try await Task.sleep(nanoseconds: UInt64(1_000_000_000 * debounce))
                     }
-                    text = temp
+                    //do not submit if there space in the end
+                    if !temp.hasSuffix(" ") {
+                        text = temp
+                    }
                 } catch {}
             }
             

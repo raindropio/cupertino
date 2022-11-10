@@ -19,3 +19,15 @@ extension CollectionsReducer {
         }
     }
 }
+
+extension CollectionsReducer {
+    //remove group
+    func delete(state: inout S, group: CGroup) -> ReduxAction? {
+        guard let index = state.groups.firstIndex(of: group)
+        else { return nil }
+        
+        state.groups.remove(at: index)
+        
+        return A.saveGroups
+    }
+}

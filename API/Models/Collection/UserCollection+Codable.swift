@@ -23,7 +23,7 @@ extension UserCollection: Codable, EncodableWithConfiguration {
     
     public enum DecodeConfiguration {
         case all
-        case changed(from: UserCollection)
+        case modified(from: UserCollection)
         case new
     }
     
@@ -74,9 +74,9 @@ extension UserCollection: Codable, EncodableWithConfiguration {
         default: break
         }
         
-        //new or changed
+        //new or modified
         var compare: UserCollection?
-        if case .changed(let from) = configuration {
+        if case .modified(let from) = configuration {
             compare = from
         }
         

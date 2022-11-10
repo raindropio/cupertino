@@ -28,10 +28,13 @@ public actor CollectionsReducer: Reducer {
         
         //update
         case .update(let collection, let original):
-            return try await update(state: &state, changed: collection, original: original)
+            return try await update(state: &state, modified: collection, original: original)
             
         case .updated(let collection):
             return updated(state: &state, collection: collection)
+            
+        case .updateMany(let form):
+            return try await updateMany(state: &state, form: form)
             
         //delete
         case .delete(let id):
@@ -51,14 +54,26 @@ public actor CollectionsReducer: Reducer {
         case .reorder(let id, let parent, let order):
             return reorder(state: &state, id: id, parent: parent, order: order)
             
+        case .reorderMany(let by):
+            return reorderMany(state: &state, by: by)
+            
         case .setView(let id, let view):
             return setView(state: &state, id: id, view: view)
         
         case .toggle(let id):
             return toggle(state: &state, id: id)
             
-        case .toggleGroup(let id):
-            return try await toggle(state: &state, id: id)
+        case .toggleMany:
+            return toggleMany(state: &state)
+            
+        case .toggleGroup(let group):
+            return toggle(state: &state, group: group)
+            
+        case .renameGroup(let group):
+            return rename(state: &state, group: group)
+            
+        case .deleteGroup(let group):
+            return delete(state: &state, group: group)
         }
 
         return nil

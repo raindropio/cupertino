@@ -15,7 +15,7 @@ public struct Raindrop: Identifiable, Hashable {
     public var creatorRef: CreatorRef?
     public var important = false
     public var broken = false
-    public var duplicate: Int?
+    public var duplicate: Raindrop.ID?
     public var file: File?
     public var cache: Cache?
     

@@ -6,6 +6,7 @@ public extension Formatter {
         formatter.dateStyle = .short
         formatter.timeStyle = .short
         formatter.doesRelativeDateFormatting = true
+        formatter.formattingContext = .listItem
         return formatter
     }()
 }

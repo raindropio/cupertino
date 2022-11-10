@@ -1,14 +1,14 @@
 extension CollectionsReducer {
-    func update(state: inout S, changed: UserCollection, original: UserCollection? = nil) async throws -> ReduxAction? {
-        //ignore if no original or nothing changed
-        guard let original = original ?? state.user[changed.id], changed != original
+    func update(state: inout S, modified: UserCollection, original: UserCollection? = nil) async throws -> ReduxAction? {
+        //ignore if no original or nothing modified
+        guard let original = original ?? state.user[modified.id], modified != original
         else { return nil }
         
         do {
             return A.updated(
                 try await rest.collectionUpdate(
                     original: original,
-                    changed: changed
+                    modified: modified
                 )
             )
         }
@@ -46,7 +46,7 @@ extension CollectionsReducer {
             if collection.parent == nil {
                 //originally belonged to group
                 var groupIndex = 0
-                if let original, let inGroup = state.path(to: original) {
+                if let original, let inGroup = state.location(of: original) {
                     groupIndex = state.groups.firstIndex(of: inGroup) ?? 0
                 }
                 

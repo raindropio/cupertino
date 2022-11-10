@@ -1,40 +1,24 @@
+import Foundation
+
 extension CollectionsState {
-    public func tree(of group: CGroup) -> [UserCollection] {
-        group.collections.flatMap {
-            if let collection = user[$0] {
-                return [collection] + tree(from: collection)
-            }
-            return []
-        }
-    }
-    
-    public func tree(from parent: UserCollection) -> [UserCollection] {
-        if parent.expanded {
-            return childrens(of: parent.id).flatMap {
-                return [$0] + tree(from: $0)
-            }
-        }
-        return []
-    }
-    
     public func childrens(of id: UserCollection.ID) -> [UserCollection] {
         user
             .filter { $0.value.parent == id }
             .map { $0.value }
-            .sorted(by: { $0.sort < $1.sort })
+            .sorted(using: KeyPathComparator(\.sort))
     }
     
-    public func path(to collection: UserCollection) -> [UserCollection] {
+    public func location(of collection: UserCollection) -> [UserCollection] {
         guard
             let parentId = collection.parent,
             let parent = user[parentId]
         else { return [] }
         
-        return [parent] + path(to: parent)
+        return [parent] + location(of: parent)
     }
     
-    public func path(to collection: UserCollection) -> CGroup? {
-        let rootId = path(to: collection).last?.id ?? collection.id
+    public func location(of collection: UserCollection) -> CGroup? {
+        let rootId = location(of: collection).last?.id ?? collection.id
                         
         for group in groups {
             if group.collections.contains(rootId) {
@@ -44,10 +28,21 @@ extension CollectionsState {
         return nil
     }
     
-    public func expandable(_ id: UserCollection.ID) -> Bool {
-        user.contains {
-            $0.value.parent == id
+    public func find(_ search: String) -> [UserCollection] {
+        let filter = search.localizedLowercase.trimmingCharacters(in: .whitespacesAndNewlines)
+        
+        if filter.isEmpty {
+            return []
         }
+        
+        return user
+            .filter {
+                $0.value.title.localizedLowercase.contains(filter)
+            }
+            .map {
+                $0.value
+            }
+            .sorted(using: KeyPathComparator(\.title))
     }
 }
 

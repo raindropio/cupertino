@@ -55,13 +55,23 @@ extension Rest {
 
 //MARK: - Update collection
 extension Rest {
-    public func collectionUpdate(original: UserCollection, changed: UserCollection) async throws -> UserCollection {
+    public func collectionUpdate(original: UserCollection, modified: UserCollection) async throws -> UserCollection {
         let res: ItemResponse<UserCollection> = try await fetch.put(
             "collection/\(original.id)",
-            body: changed,
-            configuration: .changed(from: original)
+            body: modified,
+            configuration: .modified(from: original)
         )
         return res.item
+    }
+}
+
+//MARK: - Update many collection
+extension Rest {
+    public func collectionUpdateMany(_ form: UpdateCollectionsForm) async throws {
+        let _: ResultResponse = try await fetch.put(
+            "collections",
+            body: form
+        )
     }
 }
 
