@@ -5,10 +5,10 @@ struct GridStaggered<D: RandomAccessCollection, Content: View> {
     @ScaledMetric private var gap = LazyStackLayout.gap(.grid(0, true))
     
     let data: D
-    let width: CGFloat
+    let width: Double
     let content: (D) -> Content
     
-    init(_ data: D, _ width: CGFloat, content: @escaping (D) -> Content) {
+    init(_ data: D, _ width: Double, content: @escaping (D) -> Content) {
         self.data = data
         self.width = width
         self.content = content
@@ -17,7 +17,7 @@ struct GridStaggered<D: RandomAccessCollection, Content: View> {
 
 extension GridStaggered: View {
     func group(_ columns: Int, _ column: Int) -> D {
-        let rows: [Int] = Array(0..<Int(ceil(CGFloat(data.count) / CGFloat(columns))))
+        let rows: [Int] = Array(0..<Int(ceil(Double(data.count) / Double(columns))))
         
         return rows.compactMap {
             let index = $0 * columns + column
@@ -41,5 +41,6 @@ extension GridStaggered: View {
             }
         }
             .scenePadding(.horizontal)
+            .padding(.vertical, gap / 3)
     }
 }

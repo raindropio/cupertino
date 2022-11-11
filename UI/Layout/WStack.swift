@@ -94,11 +94,11 @@ public struct WStack: Layout {
         }
     }
     
-    func layout(subviews: Subviews, containerWidth: CGFloat) -> LayoutCache {
+    func layout(subviews: Subviews, containerWidth: Double) -> LayoutCache {
         var result: LayoutCache = .init(targetContainerWidth: containerWidth)
         var currentPosition: CGPoint = .zero
-        var currentLineHeight: CGFloat = 0
-        var maxX: CGFloat = 0
+        var currentLineHeight: Double = 0
+        var maxX: Double = 0
         var lines: [Line] = [Line(y: 0)]
         for (index, subview) in zip(subviews.indices, subviews) {
             let size = subview.sizeThatFits(.init(width: containerWidth, height: nil))

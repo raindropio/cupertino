@@ -13,7 +13,11 @@ public struct HorizontalSizeClassKey: EnvironmentKey {
 public extension EnvironmentValues {
   var horizontalSizeClass: UserInterfaceSizeClass {
     get { self[HorizontalSizeClassKey.self] }
-    set { self[HorizontalSizeClassKey.self] = newValue }
+    set {
+        if self[HorizontalSizeClassKey.self] != newValue {
+            self[HorizontalSizeClassKey.self] = newValue
+        }
+    }
   }
 }
 
@@ -24,7 +28,11 @@ public struct VerticalSizeClassKey: EnvironmentKey {
 public extension EnvironmentValues {
   var verticalSizeClass: UserInterfaceSizeClass {
     get { self[VerticalSizeClassKey.self] }
-    set { self[VerticalSizeClassKey.self] = newValue }
+    set {
+        if self[VerticalSizeClassKey.self] != newValue {
+            self[VerticalSizeClassKey.self] = newValue
+        }
+    }
   }
 }
 #endif

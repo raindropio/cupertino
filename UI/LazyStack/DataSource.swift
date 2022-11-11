@@ -1,7 +1,6 @@
 import SwiftUI
 
 public struct DataSource<D: RandomAccessCollection, C: View> where D.Element: Identifiable & Transferable {
-    @EnvironmentObject private var model: LazyStackModel<D.Element.ID>
     @Environment(\.lazyStackLayout) private var layout
     
     let data: D

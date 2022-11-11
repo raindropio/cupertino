@@ -19,6 +19,10 @@ private struct MultiPickerStyleKey: EnvironmentKey {
 public extension EnvironmentValues {
     var multiPickerStyle: MultiPickerStyle {
         get { self[MultiPickerStyleKey.self] }
-        set { self[MultiPickerStyleKey.self] = newValue }
+        set {
+            if self[MultiPickerStyleKey.self] != newValue {
+                self[MultiPickerStyleKey.self] = newValue
+            }
+        }
     }
 }

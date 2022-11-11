@@ -45,7 +45,7 @@ extension LazyTree {
     struct Leaf: Identifiable {
         var id: I.ID
         var expandable: Bool = false
-        var level: CGFloat = 0
+        var level: Double = 0
     }
 }
 
@@ -56,7 +56,7 @@ extension LazyTree {
             .flatMap { branch($0) }
     }
     
-    func branch(_ item: I, level: CGFloat = 0) -> [Leaf] {
+    func branch(_ item: I, level: Double = 0) -> [Leaf] {
         let more = childrens(item.id, level: level+1)
         
         return [.init(
@@ -66,7 +66,7 @@ extension LazyTree {
         )] + (item[keyPath: expanded] ? more : [])
     }
     
-    func childrens(_ parentId: I.ID, level: CGFloat) -> [Leaf] {
+    func childrens(_ parentId: I.ID, level: Double) -> [Leaf] {
         items
             .filter { $0.value[keyPath: parent] == parentId }
             .sorted(by: { $0.value[keyPath: sort] < $1.value[keyPath: sort] })

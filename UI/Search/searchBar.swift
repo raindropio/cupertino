@@ -50,10 +50,9 @@ fileprivate struct SearchBarModifier: ViewModifier {
                     showToolbarButton = (withButton == true) && !$0
                 }
             .toolbar {
-                if showToolbarButton {
-                    ToolbarItem(placement: .primaryAction) {
-                        SearchButton(controller: $controller)
-                    }
+                ToolbarItem {
+                    SearchButton(controller: $controller)
+                        .opacity(showToolbarButton ? 1 : 0)
                 }
             }
             .onChange(of: controller) {

@@ -2,7 +2,7 @@ import SwiftUI
 
 extension ImagePicker {
     struct Columns<C: View>: View {
-        var width: CGFloat?
+        var width: Double?
         var content: () -> C
         
         var body: some View {

@@ -147,8 +147,6 @@ fileprivate extension NavigationPanes {
                             ToolbarItem(placement: .navigation) {
                                 Button(action: close) {
                                     Image(systemName: "xmark")
-                                        .symbolVariant(.circle.fill)
-                                        .symbolRenderingMode(.hierarchical)
                                 }
                             }
                         }

@@ -1,6 +1,6 @@
 import Foundation
 
-public struct SystemCollection: CollectionProtocol {
+public struct SystemCollection: CollectionType {
     public var id: Int
     public var count: Int = 0
     public var view: CollectionView = .list

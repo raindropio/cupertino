@@ -2,7 +2,11 @@ import Foundation
 
 extension CollectionsState {
     public func childrens(of id: UserCollection.ID) -> [UserCollection] {
-        user
+        if id <= 0 {
+            return []
+        }
+        
+        return user
             .filter { $0.value.parent == id }
             .map { $0.value }
             .sorted(using: KeyPathComparator(\.sort))
@@ -42,7 +46,10 @@ extension CollectionsState {
             .map {
                 $0.value
             }
-            .sorted(using: KeyPathComparator(\.title))
+            .sorted(using: [
+                KeyPathComparator(\.parent),
+                KeyPathComparator(\.title)
+            ])
     }
 }
 

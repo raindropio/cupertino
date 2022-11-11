@@ -1,10 +1,10 @@
 import SwiftUI
 
-public enum LazyStackLayout: Hashable {
+public enum LazyStackLayout: Hashable, Equatable {
     case list
-    case grid(CGFloat, Bool)
+    case grid(Double, Bool)
         
-    static func gap(_ layout: Self) -> CGFloat {
+    static func gap(_ layout: Self) -> Double {
         20
     }
 }
@@ -15,7 +15,13 @@ private struct LazyStackLayoutKey: EnvironmentKey {
 
 extension EnvironmentValues {
     var lazyStackLayout: LazyStackLayout? {
-        get { self[LazyStackLayoutKey.self] }
-        set { self[LazyStackLayoutKey.self] = newValue }
+        get {
+            self[LazyStackLayoutKey.self]
+        }
+        set {
+            if self[LazyStackLayoutKey.self] != newValue {
+                self[LazyStackLayoutKey.self] = newValue
+            }
+        }
     }
 }

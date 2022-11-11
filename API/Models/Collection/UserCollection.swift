@@ -2,7 +2,7 @@ import Foundation
 import UniformTypeIdentifiers
 import SwiftUI
 
-public struct UserCollection: CollectionProtocol {
+public struct UserCollection: CollectionType {
     public var id: Int
     public var title: String
     public var slug: String = ""

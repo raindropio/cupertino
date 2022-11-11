@@ -3,15 +3,15 @@ import SwiftUI
 public struct ImagePicker {
     var data: [URL]
     @Binding var selection: URL?
-    var width: CGFloat?
-    var height: CGFloat?
-    var aspectRatio: CGFloat?
+    var width: Double?
+    var height: Double?
+    var aspectRatio: Double?
     
     public init(
         _ data: [URL],
         selection: Binding<URL?>,
-        width: CGFloat,
-        height: CGFloat
+        width: Double,
+        height: Double
     ) {
         self.data = data
         self._selection = selection
@@ -22,8 +22,8 @@ public struct ImagePicker {
     public init(
         _ data: [URL],
         selection: Binding<URL?>,
-        width: CGFloat,
-        aspectRatio: CGFloat? = nil
+        width: Double,
+        aspectRatio: Double? = nil
     ) {
         self.data = data
         self._selection = selection
@@ -34,8 +34,8 @@ public struct ImagePicker {
     public init(
         _ data: [URL],
         selection: Binding<URL?>,
-        height: CGFloat,
-        aspectRatio: CGFloat? = nil
+        height: Double,
+        aspectRatio: Double? = nil
     ) {
         self.data = data
         self._selection = selection

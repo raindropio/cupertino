@@ -11,12 +11,12 @@ public struct Thumbnail {
     @State private var reload: UUID?
     
     var url: URL?
-    var width: CGFloat?
-    var height: CGFloat?
-    var aspectRatio: CGFloat?
-    var cornerRadius: CGFloat = 0
+    var width: Double?
+    var height: Double?
+    var aspectRatio: Double?
+    var cornerRadius: Double = 0
     
-    static var cacheAspect = [URL:CGFloat]()
+    static var cacheAspect = [URL: CGFloat]()
     static let pipeline: ImagePipeline = {
         ImageCache.shared.costLimit = 1024 * 1024 * 150 //150mb memory cache
         
@@ -32,9 +32,9 @@ public struct Thumbnail {
         
     public init(
         _ url: URL? = nil,
-        width: CGFloat,
-        height: CGFloat,
-        cornerRadius: CGFloat = 0
+        width: Double,
+        height: Double,
+        cornerRadius: Double = 0
     ) {
         self.url = url
         self.width = width
@@ -44,8 +44,8 @@ public struct Thumbnail {
     
     public init(
         _ url: URL? = nil,
-        width: CGFloat,
-        aspectRatio: CGFloat? = nil
+        width: Double,
+        aspectRatio: Double? = nil
     ) {
         self.url = url
         self.width = width
@@ -54,8 +54,8 @@ public struct Thumbnail {
     
     public init(
         _ url: URL? = nil,
-        height: CGFloat,
-        aspectRatio: CGFloat? = nil
+        height: Double,
+        aspectRatio: Double? = nil
     ) {
         self.url = url
         self.height = height
@@ -76,8 +76,8 @@ extension Thumbnail: View {
         } else if let height {
             return .init(height: height * displayScale)
         } else {
-            let w = CGFloat(Int(width ?? (height ?? 0) / (aspectRatio ?? 1)))
-            let h = CGFloat(Int(height ?? (width ?? 0) / (aspectRatio ?? 1)))
+            let w = Double(Int(width ?? (height ?? 0) / (aspectRatio ?? 1)))
+            let h = Double(Int(height ?? (width ?? 0) / (aspectRatio ?? 1)))
             return .init(
                 size: .init(width: w * displayScale, height: h * displayScale),
                 contentMode: .aspectFit,
@@ -123,7 +123,10 @@ extension Thumbnail: View {
         else {
             base
                 .onSuccess(saveAspectRatio)
-                .aspectRatio(url != nil ? Self.cacheAspect[url!] : 2, contentMode: .fit)
+                .aspectRatio(
+                    url != nil ? Self.cacheAspect[url!] : 2,
+                    contentMode: .fit
+                )
                 .tag(reload)
         }
     }

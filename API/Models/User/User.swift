@@ -1,6 +1,6 @@
 import Foundation
 
-public struct User: Identifiable, Equatable, Hashable {
+public struct User: UserType, Identifiable, Equatable, Hashable {
     public var id: Int
     public var name: String
     public var email = ""

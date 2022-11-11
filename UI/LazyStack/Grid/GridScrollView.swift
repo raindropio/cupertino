@@ -1,23 +1,33 @@
 import SwiftUI
 
 struct GridScrollView<Content: View> {
-    @Environment(\.lazyStackLayout) private var layout
     var content: () -> Content
 }
 
 extension GridScrollView: View {
-    var body: some View {
+    var body: some View {        
+        ScrollView(.vertical) {
+            content()
+                .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .leading)
+        }
+            .frame(maxWidth: .infinity, maxHeight: .infinity)
+            .scrollContentBackground(.hidden)
+            .background(Color.groupedBackground)
+            .modifier(ColumnsReader())
+    }
+}
+
+struct ColumnsReader: ViewModifier {
+    @Environment(\.lazyStackLayout) private var layout
+
+    func body(content: Content) -> some View {
         if case .grid(let width, _) = layout {
             GeometryReader { geo in
-                ScrollView(.vertical) {
-                    content()
-                        .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .leading)
-                }
-                .environment(\.gridScrollColumns, max(Int(geo.size.width / width), 2))
-                .frame(maxWidth: .infinity, maxHeight: .infinity)
-                .scrollContentBackground(.hidden)
-                .background(Color.groupedBackground)
+                content
+                    .environment(\.gridScrollColumns, max(Int(geo.size.width / width), 2))
             }
+        } else {
+            content
         }
     }
 }
@@ -29,7 +39,13 @@ private struct GridScrollColumnsKey: EnvironmentKey {
 
 extension EnvironmentValues {
     var gridScrollColumns: Int {
-        get { self[GridScrollColumnsKey.self] }
-        set { self[GridScrollColumnsKey.self] = newValue }
+        get {
+            self[GridScrollColumnsKey.self]
+        }
+        set {
+            if self[GridScrollColumnsKey.self] != newValue {
+                self[GridScrollColumnsKey.self] = newValue
+            }
+        }
     }
 }

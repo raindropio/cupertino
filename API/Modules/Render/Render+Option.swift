@@ -11,10 +11,10 @@ fileprivate let scaleFactor = NSScreen.main?.backingScaleFactor ?? 1
 extension Render {
     enum Option: RawRepresentable {
         case format(Format = .avif)
-        case dpr(CGFloat = scaleFactor)
+        case dpr(Double = scaleFactor)
         case maxDeviceSize
-        case width(CGFloat)
-        case height(CGFloat)
+        case width(Double)
+        case height(Double)
 
         init?(rawValue: [URLQueryItem]) {
             nil

@@ -4,10 +4,10 @@ struct GridColumns<Content: View> {
     @Environment(\.gridScrollColumns) private var columns
     @ScaledMetric private var gap = LazyStackLayout.gap(.grid(0, false))
     
-    let width: CGFloat
+    let width: Double
     let content: () -> Content
     
-    init(_ width: CGFloat, content: @escaping () -> Content) {
+    init(_ width: Double, content: @escaping () -> Content) {
         self.width = width
         self.content = content
     }
@@ -26,5 +26,6 @@ extension GridColumns: View {
         
         LazyVGrid(columns: columns, alignment: .leading, spacing: gap / 2, content: content)
             .scenePadding(.horizontal)
+            .padding(.vertical, gap / 3)
     }
 }

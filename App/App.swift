@@ -1,50 +1,26 @@
 import SwiftUI
+import API
 
 @main
 struct RaindropApp: App {
-    #if os(macOS)
-    @StateObject private var settings = SettingsService()
-    #else
-    @UIApplicationDelegateAdaptor(AppDelegate.self) var appDelegate
-    #endif
-    
+    @StateObject private var store = Store()
+
     var body: some Scene {
-        //MARK: - Main Window
         WindowGroup {
-            Group {
-                #if os(macOS)
-                MacScene()
-                    .environmentObject(settings)
-                #else
-                switch UIDevice.current.userInterfaceIdiom {
-                    case .phone:
-                        PhoneScene()
-                    default:
-                        PadScene()
-                }
-                #endif
-            }
+            AuthGroup(
+                authorized: AppScene.init,
+                notAuthorized: AuthScene.init
+            )
+                .modifier(SettingsScene.Attach())
+                .environmentObject(store.dispatcher)
+                .environmentObject(store.auth)
+                .environmentObject(store.collections)
+                .environmentObject(store.filters)
+                .environmentObject(store.icons)
+                .environmentObject(store.raindrops)
+                .environmentObject(store.filters)
+                .environmentObject(store.recent)
+                .environmentObject(store.user)
         }
-            #if os(macOS)
-            .commands {
-                SidebarCommands()
-            }
-            #endif
-        
-        //MARK: - Settings
-        #if os(macOS)
-        MenuBarExtra("Raindrop.io") {
-            MenuBarScene()
-        }
-            .menuBarExtraStyle(.window)
-        
-        Settings {
-            SettingsMac()
-                .environmentObject(settings)
-                .onOpenURL {
-                    settings.handleDeepLink($0)
-                }
-        }
-        #endif
     }
 }

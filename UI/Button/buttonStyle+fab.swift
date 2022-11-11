@@ -10,7 +10,7 @@ public extension ButtonStyle where Self == FabButtonStyle {
 public struct FabButtonStyle: ButtonStyle {
     @Environment(\.controlSize) private var controlSize
     
-    var size: CGFloat {
+    var size: Double {
         switch controlSize {
         case .large: return 8
         case .regular: return 0

@@ -5,20 +5,20 @@ public struct LazyStack<Content: View, ID: Hashable, Menu: View> {
     
     var layout: LazyStackLayout
     @Binding var selection: Set<ID>
-    var content: () -> Content
-    
     var action: ((ID) -> Void)?
     var reorder: ((ID, Int) -> Void)?
     var delete: ((Set<ID>) -> Void)?
+    
+    var content: () -> Content
     var contextMenu: (Set<ID>) -> Menu
     
     public init(
         _ layout: LazyStackLayout,
         selection: Binding<Set<ID>>,
-        @ViewBuilder content: @escaping () -> Content,
         action: ((ID) -> Void)? = nil,
         reorder: ((ID, Int) -> Void)? = nil,
         delete: ((Set<ID>) -> Void)? = nil,
+        @ViewBuilder content: @escaping () -> Content,
         @ViewBuilder contextMenu: @escaping (Set<ID>) -> Menu
     ) {
         self.layout = layout

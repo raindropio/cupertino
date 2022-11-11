@@ -4,9 +4,9 @@ extension ImagePicker {
     struct Cell: View, Equatable {
         var url: URL
         var selected: Bool = false
-        var width: CGFloat?
-        var height: CGFloat?
-        var aspectRatio: CGFloat?
+        var width: Double?
+        var height: Double?
+        var aspectRatio: Double?
         
         var body: some View {
             Group {
