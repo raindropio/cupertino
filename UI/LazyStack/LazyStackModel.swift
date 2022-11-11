@@ -7,8 +7,6 @@ class LazyStackModel<ID: Hashable>: ObservableObject {
     var isEditing: Bool = false
     
     var action: ((ID) -> Void)?
-    var reorder: ((ID, Int) -> Void)?
-    var delete: ((Set<ID>) -> Void)?
     var contextMenu: ((Set<ID>) -> AnyView)?
     
     func touch(_ id: ID, down: Bool = false) {

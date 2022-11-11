@@ -32,6 +32,26 @@ extension RaindropsItems {
         var body: some View {
             DataSource(items) { item in
                 RaindropItem(raindrop: item, view: view)
+                    .swipeActions(edge: .leading, allowsFullSwipe: false) {
+                        Link(destination: item.link) {
+                            Label("Open", systemImage: "safari")
+                        }
+                    }
+                    .swipeActions(edge: .trailing) {
+                        Button {
+                        } label: {
+                            Label("Edit", systemImage: "pencil")
+                        }
+                            .tint(.blue)
+
+                        Button {
+                        } label: {
+                            Label("Delete", systemImage: "trash")
+                        }
+                            .tint(.red)
+                        
+                        ShareLink(item: item.link)
+                    }
                     .id(item.id)
             } loadMore: {
                 try? await dispatch(RaindropsAction.more(find))

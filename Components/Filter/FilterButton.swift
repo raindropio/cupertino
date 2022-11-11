@@ -20,22 +20,20 @@ struct FilterButton: View {
                 switch filter.kind {
                 case .duplicate(let of) where of != nil:
                     Button {
-                        app.push(.browse(.init(
-                            Filter(.raindrop(of!))
-                        )))
+                        app.browse(Filter(.raindrop(of!)))
                     } label: {
                         Label("Find original", systemImage: "star")
                     }
                     
                     Button {
-                        app.push(.browse(.init(filter)))
+                        app.browse(filter)
                     } label: {
                         Label("Find similar", systemImage: filter.systemImage)
                     }
                     
                 default:
                     Button {
-                        app.push(.browse(.init(filter)))
+                        app.browse(filter)
                     } label: {
                         Label("Find \(filter.title.localizedLowercase)", systemImage: filter.systemImage)
                     }

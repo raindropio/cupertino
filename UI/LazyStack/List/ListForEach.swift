@@ -1,38 +1,18 @@
 import SwiftUI
 
 struct ListForEach<D: RandomAccessCollection, C: View> where D.Element: Identifiable & Transferable {
-    @EnvironmentObject private var model: LazyStackModel<D.Element.ID>
-    
     let data: D
+    let reorder: ((D.Element.ID, Int) -> Void)?
     let content: (D.Element) -> C
-        
-    public init(
-        _ data: D,
-        content: @escaping (D.Element) -> C
-    ) {
-        self.data = data
-        self.content = content
-    }
 }
 
 extension ListForEach: View {
     func performReorder(_ indexSet: IndexSet, _ to: Int) {
-        if let reorder = model.reorder,
+        if let reorder = reorder,
            indexSet.count == 1,
            let array = data as? [D.Element],
            let first = indexSet.first {
             reorder(array[first].id, to)
-        }
-    }
-    
-    func performDelete(_ indexSet: IndexSet) {
-        if let delete = model.delete,
-           let array = data as? [D.Element]  {
-            delete(Set(
-                indexSet.map {
-                    array[$0].id
-                }
-            ))
         }
     }
     
@@ -43,6 +23,5 @@ extension ListForEach: View {
                 .infiniteScrollElement($0.id)
         }
             .onMove(perform: performReorder)
-            .onDelete(perform: performDelete)
     }
 }

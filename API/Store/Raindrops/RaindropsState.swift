@@ -9,3 +9,9 @@ public struct RaindropsState: ReduxState {
     
     public init() {}
 }
+
+extension RaindropsState {
+    public func item(_ id: Raindrop.ID) -> Raindrop? {
+        items[id]
+    }
+}

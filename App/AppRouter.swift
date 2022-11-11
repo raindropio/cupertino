@@ -35,6 +35,21 @@ class AppRouter: ObservableObject {
     }
 }
 
+//MARK: Shorthands
+extension AppRouter {
+    func browse(_ filter: Filter) {
+        push(.browse(.init(filter)))
+    }
+    
+    func browse(_ collection: UserCollection) {
+        push(.browse(.init(collection)))
+    }
+    
+    func preview(_ id: Raindrop.ID) {
+        push(.preview(id))
+    }
+}
+
 //MARK: - Helpers
 extension AppRouter {
     var sidebarSelection: Int? {

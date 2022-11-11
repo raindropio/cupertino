@@ -12,7 +12,7 @@ struct CollectionsCarousel: View {
                 LazyHStack(spacing: 12) {
                     ForEach(items) { item in
                         Button {
-                            app.push(.browse(.init(item)))
+                            app.browse(item)
                         } label: {
                             UserCollectionItem(collection: item)
                         }

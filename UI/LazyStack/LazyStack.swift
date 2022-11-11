@@ -6,28 +6,22 @@ public struct LazyStack<Content: View, ID: Hashable, Menu: View> {
     var layout: LazyStackLayout
     @Binding var selection: Set<ID>
     var action: ((ID) -> Void)?
-    var reorder: ((ID, Int) -> Void)?
-    var delete: ((Set<ID>) -> Void)?
-    
-    var content: () -> Content
     var contextMenu: (Set<ID>) -> Menu
+
+    var content: () -> Content
     
     public init(
         _ layout: LazyStackLayout,
         selection: Binding<Set<ID>>,
         action: ((ID) -> Void)? = nil,
-        reorder: ((ID, Int) -> Void)? = nil,
-        delete: ((Set<ID>) -> Void)? = nil,
-        @ViewBuilder content: @escaping () -> Content,
-        @ViewBuilder contextMenu: @escaping (Set<ID>) -> Menu
+        @ViewBuilder contextMenu: @escaping (Set<ID>) -> Menu,
+        @ViewBuilder content: @escaping () -> Content
     ) {
         self.layout = layout
         self._selection = selection
-        self.content = content
         self.action = action
-        self.reorder = reorder
-        self.delete = delete
         self.contextMenu = contextMenu
+        self.content = content
     }
 }
 
@@ -63,10 +57,6 @@ extension LazyStack: View {
                     }
             }
         }
-            .task {
-                model.reorder = reorder
-                model.delete = delete
-            }
             .task(id: selection) { model.selection = selection }
             .task(id: model.selection) { selection = model.selection }
             .environment(\.lazyStackLayout, layout)

@@ -50,9 +50,8 @@ extension RaindropsList { fileprivate struct Memorized: View {
         LazyStack(
             layout,
             selection: $selection,
-            action: {
-                app.push(.preview($0))
-            }
+            action: app.preview,
+            contextMenu: Menus.init
         ) {
             header()
 
@@ -68,8 +67,6 @@ extension RaindropsList { fileprivate struct Memorized: View {
             } footer: {
                 RaindropsLoadMore(find: find)
             }
-        } contextMenu: { _ in
-            
         }
             .id(find)
             .listStyle(.plain)

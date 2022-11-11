@@ -43,6 +43,7 @@ fileprivate struct WithSearchController: UIViewControllerRepresentable {
     
     class VC: UIViewController {
         private var cancellables = Set<AnyCancellable>()
+        private var firstTime = true
         
         var onAvailable: (UISearchController) -> Void
         var onDidAppear: (UISearchController) -> Void
@@ -82,8 +83,11 @@ fileprivate struct WithSearchController: UIViewControllerRepresentable {
             
             if let navigationItem = parent?.navigationItem,
                 let searchController = navigationItem.searchController {
-                if navigationItem.hidesSearchBarWhenScrolling && searchController.searchBarPlacement != .inline {
-                    searchController.searchBar.isHidden = true
+                if firstTime {
+                    if navigationItem.hidesSearchBarWhenScrolling && searchController.searchBarPlacement != .inline {
+                        searchController.searchBar.isHidden = true
+                        firstTime = false
+                    }
                 }
                 
                 onAvailable(searchController)
