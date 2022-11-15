@@ -7,55 +7,55 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		760C9E252923C735001CB755 /* ChildrensList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 760C9DF52923C731001CB755 /* ChildrensList.swift */; };
+		760C9E262923C735001CB755 /* CollectionsCarousel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 760C9DF62923C731001CB755 /* CollectionsCarousel.swift */; };
+		760C9E272923C735001CB755 /* CollectionIcon.swift in Sources */ = {isa = PBXBuildFile; fileRef = 760C9DF82923C732001CB755 /* CollectionIcon.swift */; };
+		760C9E282923C735001CB755 /* CollectionLocation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 760C9DF92923C732001CB755 /* CollectionLocation.swift */; };
+		760C9E292923C735001CB755 /* UserCollectionMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 760C9DFA2923C732001CB755 /* UserCollectionMenu.swift */; };
+		760C9E2A2923C735001CB755 /* CollectionToolbar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 760C9DFB2923C732001CB755 /* CollectionToolbar.swift */; };
+		760C9E2B2923C735001CB755 /* SystemCollectionItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 760C9DFC2923C732001CB755 /* SystemCollectionItem.swift */; };
+		760C9E2C2923C735001CB755 /* UserCollectionItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 760C9DFD2923C732001CB755 /* UserCollectionItem.swift */; };
+		760C9E2D2923C735001CB755 /* RaindropsList+Menus.swift in Sources */ = {isa = PBXBuildFile; fileRef = 760C9DFF2923C732001CB755 /* RaindropsList+Menus.swift */; };
+		760C9E2E2923C735001CB755 /* RaindropsStatusBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 760C9E002923C732001CB755 /* RaindropsStatusBar.swift */; };
+		760C9E2F2923C735001CB755 /* RaindropsList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 760C9E012923C732001CB755 /* RaindropsList.swift */; };
+		760C9E302923C735001CB755 /* RaindropsSort.swift in Sources */ = {isa = PBXBuildFile; fileRef = 760C9E022923C732001CB755 /* RaindropsSort.swift */; };
+		760C9E312923C735001CB755 /* RaindropsList+Toolbar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 760C9E032923C732001CB755 /* RaindropsList+Toolbar.swift */; };
+		760C9E322923C735001CB755 /* RaindropsLoadMore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 760C9E042923C732001CB755 /* RaindropsLoadMore.swift */; };
+		760C9E332923C735001CB755 /* RaindropsItems+Empty.swift in Sources */ = {isa = PBXBuildFile; fileRef = 760C9E052923C732001CB755 /* RaindropsItems+Empty.swift */; };
+		760C9E342923C735001CB755 /* RaindropsItems.swift in Sources */ = {isa = PBXBuildFile; fileRef = 760C9E062923C732001CB755 /* RaindropsItems.swift */; };
+		760C9E352923C735001CB755 /* RaindropsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 760C9E072923C732001CB755 /* RaindropsView.swift */; };
+		760C9E362923C735001CB755 /* AuthGroup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 760C9E092923C732001CB755 /* AuthGroup.swift */; };
+		760C9E372923C735001CB755 /* CollectionEditForm.swift in Sources */ = {isa = PBXBuildFile; fileRef = 760C9E0B2923C733001CB755 /* CollectionEditForm.swift */; };
+		760C9E382923C735001CB755 /* CollectionsList+Animation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 760C9E0D2923C733001CB755 /* CollectionsList+Animation.swift */; };
+		760C9E392923C735001CB755 /* CollectionsList+Menus.swift in Sources */ = {isa = PBXBuildFile; fileRef = 760C9E0E2923C733001CB755 /* CollectionsList+Menus.swift */; };
+		760C9E3A2923C735001CB755 /* CollectionsList+Empty.swift in Sources */ = {isa = PBXBuildFile; fileRef = 760C9E0F2923C733001CB755 /* CollectionsList+Empty.swift */; };
+		760C9E3B2923C735001CB755 /* CollectionsActions+Service.swift in Sources */ = {isa = PBXBuildFile; fileRef = 760C9E102923C733001CB755 /* CollectionsActions+Service.swift */; };
+		760C9E3C2923C735001CB755 /* CollectionsList+Search.swift in Sources */ = {isa = PBXBuildFile; fileRef = 760C9E112923C733001CB755 /* CollectionsList+Search.swift */; };
+		760C9E3D2923C735001CB755 /* CollectionsGroupHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 760C9E122923C733001CB755 /* CollectionsGroupHeader.swift */; };
+		760C9E3E2923C735001CB755 /* CollectionsActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 760C9E132923C733001CB755 /* CollectionsActions.swift */; };
+		760C9E3F2923C735001CB755 /* CollectionsList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 760C9E142923C733001CB755 /* CollectionsList.swift */; };
+		760C9E402923C735001CB755 /* CollectionsTree.swift in Sources */ = {isa = PBXBuildFile; fileRef = 760C9E152923C733001CB755 /* CollectionsTree.swift */; };
+		760C9E412923C735001CB755 /* SearchCollections.swift in Sources */ = {isa = PBXBuildFile; fileRef = 760C9E162923C733001CB755 /* SearchCollections.swift */; };
+		760C9E422923C735001CB755 /* FilterItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 760C9E182923C733001CB755 /* FilterItem.swift */; };
+		760C9E432923C735001CB755 /* FilterButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 760C9E192923C733001CB755 /* FilterButton.swift */; };
+		760C9E442923C735001CB755 /* RaindropItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 760C9E1B2923C734001CB755 /* RaindropItem.swift */; };
+		760C9E452923C735001CB755 /* RaindropDetails.swift in Sources */ = {isa = PBXBuildFile; fileRef = 760C9E1C2923C734001CB755 /* RaindropDetails.swift */; };
+		760C9E462923C735001CB755 /* RaindropFilters.swift in Sources */ = {isa = PBXBuildFile; fileRef = 760C9E1D2923C734001CB755 /* RaindropFilters.swift */; };
+		760C9E472923C735001CB755 /* MeLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 760C9E1F2923C734001CB755 /* MeLabel.swift */; };
+		760C9E482923C735001CB755 /* UserLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 760C9E202923C734001CB755 /* UserLabel.swift */; };
+		760C9E492923C735001CB755 /* GlobalSearch.swift in Sources */ = {isa = PBXBuildFile; fileRef = 760C9E222923C735001CB755 /* GlobalSearch.swift */; };
+		760C9E4A2923C735001CB755 /* GlobalSearch+Suggestions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 760C9E232923C735001CB755 /* GlobalSearch+Suggestions.swift */; };
+		760C9E4B2923C735001CB755 /* GlobalSearch+Scopes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 760C9E242923C735001CB755 /* GlobalSearch+Scopes.swift */; };
 		760E7D8F28842D20008B603D /* API in Frameworks */ = {isa = PBXBuildFile; productRef = 760E7D8E28842D20008B603D /* API */; };
 		76143B0228842C85006A7508 /* UI in Frameworks */ = {isa = PBXBuildFile; productRef = 76143B0128842C85006A7508 /* UI */; };
 		7685A195286868AC00A4BC3C /* App.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7685A194286868AC00A4BC3C /* App.swift */; };
 		7685A199286868AD00A4BC3C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7685A198286868AD00A4BC3C /* Assets.xcassets */; };
-		76864F89291EA04E000B9B45 /* CollectionIcon.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76864F5B291EA04E000B9B45 /* CollectionIcon.swift */; };
-		76864F8A291EA04E000B9B45 /* CollectionLocation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76864F5C291EA04E000B9B45 /* CollectionLocation.swift */; };
-		76864F8B291EA04E000B9B45 /* UserCollectionMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76864F5D291EA04E000B9B45 /* UserCollectionMenu.swift */; };
-		76864F8C291EA04E000B9B45 /* CollectionToolbar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76864F5E291EA04E000B9B45 /* CollectionToolbar.swift */; };
-		76864F8D291EA04E000B9B45 /* SystemCollectionItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76864F5F291EA04E000B9B45 /* SystemCollectionItem.swift */; };
-		76864F8E291EA04E000B9B45 /* UserCollectionItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76864F60291EA04E000B9B45 /* UserCollectionItem.swift */; };
-		76864F8F291EA04E000B9B45 /* RaindropItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76864F62291EA04E000B9B45 /* RaindropItem.swift */; };
-		76864F90291EA04E000B9B45 /* RaindropDetails.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76864F63291EA04E000B9B45 /* RaindropDetails.swift */; };
-		76864F91291EA04E000B9B45 /* RaindropFilters.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76864F64291EA04E000B9B45 /* RaindropFilters.swift */; };
-		76864F92291EA04E000B9B45 /* AuthGroup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76864F66291EA04E000B9B45 /* AuthGroup.swift */; };
-		76864F93291EA04E000B9B45 /* MeLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76864F68291EA04E000B9B45 /* MeLabel.swift */; };
-		76864F94291EA04E000B9B45 /* UserLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76864F69291EA04E000B9B45 /* UserLabel.swift */; };
-		76864F95291EA04E000B9B45 /* RaindropsStatusBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76864F6B291EA04E000B9B45 /* RaindropsStatusBar.swift */; };
-		76864F96291EA04E000B9B45 /* RaindropsList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76864F6C291EA04E000B9B45 /* RaindropsList.swift */; };
-		76864F97291EA04E000B9B45 /* RaindropsSort.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76864F6D291EA04E000B9B45 /* RaindropsSort.swift */; };
-		76864F98291EA04E000B9B45 /* RaindropsList+Toolbar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76864F6E291EA04E000B9B45 /* RaindropsList+Toolbar.swift */; };
-		76864F99291EA04E000B9B45 /* RaindropsLoadMore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76864F6F291EA04E000B9B45 /* RaindropsLoadMore.swift */; };
-		76864F9A291EA04E000B9B45 /* RaindropsItems+Empty.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76864F70291EA04E000B9B45 /* RaindropsItems+Empty.swift */; };
-		76864F9B291EA04E000B9B45 /* RaindropsItems.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76864F71291EA04E000B9B45 /* RaindropsItems.swift */; };
-		76864F9C291EA04E000B9B45 /* RaindropsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76864F72291EA04E000B9B45 /* RaindropsView.swift */; };
-		76864F9D291EA04E000B9B45 /* FilterItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76864F74291EA04E000B9B45 /* FilterItem.swift */; };
-		76864F9E291EA04E000B9B45 /* FilterButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76864F75291EA04E000B9B45 /* FilterButton.swift */; };
-		76864F9F291EA04E000B9B45 /* CollectionsList+Animation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76864F77291EA04E000B9B45 /* CollectionsList+Animation.swift */; };
-		76864FA0291EA04E000B9B45 /* CollectionsList+Menus.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76864F78291EA04E000B9B45 /* CollectionsList+Menus.swift */; };
-		76864FA1291EA04E000B9B45 /* CollectionsList+Empty.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76864F79291EA04E000B9B45 /* CollectionsList+Empty.swift */; };
-		76864FA3291EA04E000B9B45 /* CollectionsActions+Service.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76864F7B291EA04E000B9B45 /* CollectionsActions+Service.swift */; };
-		76864FA4291EA04E000B9B45 /* CollectionsList+Search.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76864F7C291EA04E000B9B45 /* CollectionsList+Search.swift */; };
-		76864FA5291EA04E000B9B45 /* CollectionsGroupHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76864F7D291EA04E000B9B45 /* CollectionsGroupHeader.swift */; };
-		76864FA6291EA04E000B9B45 /* CollectionsActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76864F7E291EA04E000B9B45 /* CollectionsActions.swift */; };
-		76864FA7291EA04E000B9B45 /* CollectionsList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76864F7F291EA04E000B9B45 /* CollectionsList.swift */; };
-		76864FA8291EA04E000B9B45 /* CollectionsTree.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76864F80291EA04E000B9B45 /* CollectionsTree.swift */; };
-		76864FA9291EA04E000B9B45 /* SearchCollections.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76864F81291EA04E000B9B45 /* SearchCollections.swift */; };
-		76864FAA291EA04E000B9B45 /* ChildrensList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76864F83291EA04E000B9B45 /* ChildrensList.swift */; };
-		76864FAB291EA04E000B9B45 /* CollectionsCarousel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76864F84291EA04E000B9B45 /* CollectionsCarousel.swift */; };
-		76864FAC291EA04E000B9B45 /* GlobalSearch.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76864F86291EA04E000B9B45 /* GlobalSearch.swift */; };
-		76864FAD291EA04E000B9B45 /* GlobalSearch+Suggestions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76864F87291EA04E000B9B45 /* GlobalSearch+Suggestions.swift */; };
-		76864FAE291EA04E000B9B45 /* GlobalSearch+Scopes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76864F88291EA04E000B9B45 /* GlobalSearch+Scopes.swift */; };
-		76864FB9291EA059000B9B45 /* CollectionFields.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76864FB1291EA059000B9B45 /* CollectionFields.swift */; };
 		76864FBA291EA059000B9B45 /* PreviewScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76864FB2291EA059000B9B45 /* PreviewScreen.swift */; };
 		76864FBB291EA059000B9B45 /* CreateCollectionScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76864FB3291EA059000B9B45 /* CreateCollectionScreen.swift */; };
 		76864FBC291EA059000B9B45 /* IconPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76864FB4291EA059000B9B45 /* IconPicker.swift */; };
 		76864FBD291EA059000B9B45 /* SidebarScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76864FB5291EA059000B9B45 /* SidebarScreen.swift */; };
 		76864FBE291EA059000B9B45 /* EditCollectionScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76864FB6291EA059000B9B45 /* EditCollectionScreen.swift */; };
 		76864FBF291EA059000B9B45 /* BrowseScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76864FB7291EA059000B9B45 /* BrowseScreen.swift */; };
-		76864FC1291EA650000B9B45 /* RaindropsList+Menus.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76864FC0291EA650000B9B45 /* RaindropsList+Menus.swift */; };
 		76BFE36E291E9F6B00DE9DB2 /* AppScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76BFE369291E9F6B00DE9DB2 /* AppScene.swift */; };
 		76BFE36F291E9F6B00DE9DB2 /* AppRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76BFE36A291E9F6B00DE9DB2 /* AppRouter.swift */; };
 		76BFE370291E9F6B00DE9DB2 /* SettingsRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76BFE36B291E9F6B00DE9DB2 /* SettingsRouter.swift */; };
@@ -64,6 +64,45 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		760C9DF52923C731001CB755 /* ChildrensList.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChildrensList.swift; sourceTree = "<group>"; };
+		760C9DF62923C731001CB755 /* CollectionsCarousel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CollectionsCarousel.swift; sourceTree = "<group>"; };
+		760C9DF82923C732001CB755 /* CollectionIcon.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CollectionIcon.swift; sourceTree = "<group>"; };
+		760C9DF92923C732001CB755 /* CollectionLocation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CollectionLocation.swift; sourceTree = "<group>"; };
+		760C9DFA2923C732001CB755 /* UserCollectionMenu.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserCollectionMenu.swift; sourceTree = "<group>"; };
+		760C9DFB2923C732001CB755 /* CollectionToolbar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CollectionToolbar.swift; sourceTree = "<group>"; };
+		760C9DFC2923C732001CB755 /* SystemCollectionItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SystemCollectionItem.swift; sourceTree = "<group>"; };
+		760C9DFD2923C732001CB755 /* UserCollectionItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserCollectionItem.swift; sourceTree = "<group>"; };
+		760C9DFF2923C732001CB755 /* RaindropsList+Menus.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "RaindropsList+Menus.swift"; sourceTree = "<group>"; };
+		760C9E002923C732001CB755 /* RaindropsStatusBar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RaindropsStatusBar.swift; sourceTree = "<group>"; };
+		760C9E012923C732001CB755 /* RaindropsList.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RaindropsList.swift; sourceTree = "<group>"; };
+		760C9E022923C732001CB755 /* RaindropsSort.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RaindropsSort.swift; sourceTree = "<group>"; };
+		760C9E032923C732001CB755 /* RaindropsList+Toolbar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "RaindropsList+Toolbar.swift"; sourceTree = "<group>"; };
+		760C9E042923C732001CB755 /* RaindropsLoadMore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RaindropsLoadMore.swift; sourceTree = "<group>"; };
+		760C9E052923C732001CB755 /* RaindropsItems+Empty.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "RaindropsItems+Empty.swift"; sourceTree = "<group>"; };
+		760C9E062923C732001CB755 /* RaindropsItems.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RaindropsItems.swift; sourceTree = "<group>"; };
+		760C9E072923C732001CB755 /* RaindropsView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RaindropsView.swift; sourceTree = "<group>"; };
+		760C9E092923C732001CB755 /* AuthGroup.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuthGroup.swift; sourceTree = "<group>"; };
+		760C9E0B2923C733001CB755 /* CollectionEditForm.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CollectionEditForm.swift; sourceTree = "<group>"; };
+		760C9E0D2923C733001CB755 /* CollectionsList+Animation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "CollectionsList+Animation.swift"; sourceTree = "<group>"; };
+		760C9E0E2923C733001CB755 /* CollectionsList+Menus.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "CollectionsList+Menus.swift"; sourceTree = "<group>"; };
+		760C9E0F2923C733001CB755 /* CollectionsList+Empty.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "CollectionsList+Empty.swift"; sourceTree = "<group>"; };
+		760C9E102923C733001CB755 /* CollectionsActions+Service.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "CollectionsActions+Service.swift"; sourceTree = "<group>"; };
+		760C9E112923C733001CB755 /* CollectionsList+Search.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "CollectionsList+Search.swift"; sourceTree = "<group>"; };
+		760C9E122923C733001CB755 /* CollectionsGroupHeader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CollectionsGroupHeader.swift; sourceTree = "<group>"; };
+		760C9E132923C733001CB755 /* CollectionsActions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CollectionsActions.swift; sourceTree = "<group>"; };
+		760C9E142923C733001CB755 /* CollectionsList.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CollectionsList.swift; sourceTree = "<group>"; };
+		760C9E152923C733001CB755 /* CollectionsTree.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CollectionsTree.swift; sourceTree = "<group>"; };
+		760C9E162923C733001CB755 /* SearchCollections.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchCollections.swift; sourceTree = "<group>"; };
+		760C9E182923C733001CB755 /* FilterItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FilterItem.swift; sourceTree = "<group>"; };
+		760C9E192923C733001CB755 /* FilterButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FilterButton.swift; sourceTree = "<group>"; };
+		760C9E1B2923C734001CB755 /* RaindropItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RaindropItem.swift; sourceTree = "<group>"; };
+		760C9E1C2923C734001CB755 /* RaindropDetails.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RaindropDetails.swift; sourceTree = "<group>"; };
+		760C9E1D2923C734001CB755 /* RaindropFilters.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RaindropFilters.swift; sourceTree = "<group>"; };
+		760C9E1F2923C734001CB755 /* MeLabel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MeLabel.swift; sourceTree = "<group>"; };
+		760C9E202923C734001CB755 /* UserLabel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserLabel.swift; sourceTree = "<group>"; };
+		760C9E222923C735001CB755 /* GlobalSearch.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GlobalSearch.swift; sourceTree = "<group>"; };
+		760C9E232923C735001CB755 /* GlobalSearch+Suggestions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "GlobalSearch+Suggestions.swift"; sourceTree = "<group>"; };
+		760C9E242923C735001CB755 /* GlobalSearch+Scopes.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "GlobalSearch+Scopes.swift"; sourceTree = "<group>"; };
 		7639A6AE286889DB00A76FE9 /* UI */ = {isa = PBXFileReference; lastKnownFileType = text; path = UI; sourceTree = SOURCE_ROOT; };
 		765F0DDB287EE0FB001E34CA /* App.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = App.plist; sourceTree = "<group>"; };
 		7685A191286868AC00A4BC3C /* Raindrop.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Raindrop.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -71,51 +110,12 @@
 		7685A198286868AD00A4BC3C /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		7685A19A286868AD00A4BC3C /* App.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = App.entitlements; sourceTree = "<group>"; };
 		7685A1AC286880F600A4BC3C /* API */ = {isa = PBXFileReference; lastKnownFileType = text; path = API; sourceTree = SOURCE_ROOT; };
-		76864F5B291EA04E000B9B45 /* CollectionIcon.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CollectionIcon.swift; sourceTree = "<group>"; };
-		76864F5C291EA04E000B9B45 /* CollectionLocation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CollectionLocation.swift; sourceTree = "<group>"; };
-		76864F5D291EA04E000B9B45 /* UserCollectionMenu.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserCollectionMenu.swift; sourceTree = "<group>"; };
-		76864F5E291EA04E000B9B45 /* CollectionToolbar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CollectionToolbar.swift; sourceTree = "<group>"; };
-		76864F5F291EA04E000B9B45 /* SystemCollectionItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SystemCollectionItem.swift; sourceTree = "<group>"; };
-		76864F60291EA04E000B9B45 /* UserCollectionItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserCollectionItem.swift; sourceTree = "<group>"; };
-		76864F62291EA04E000B9B45 /* RaindropItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RaindropItem.swift; sourceTree = "<group>"; };
-		76864F63291EA04E000B9B45 /* RaindropDetails.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RaindropDetails.swift; sourceTree = "<group>"; };
-		76864F64291EA04E000B9B45 /* RaindropFilters.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RaindropFilters.swift; sourceTree = "<group>"; };
-		76864F66291EA04E000B9B45 /* AuthGroup.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuthGroup.swift; sourceTree = "<group>"; };
-		76864F68291EA04E000B9B45 /* MeLabel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MeLabel.swift; sourceTree = "<group>"; };
-		76864F69291EA04E000B9B45 /* UserLabel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserLabel.swift; sourceTree = "<group>"; };
-		76864F6B291EA04E000B9B45 /* RaindropsStatusBar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RaindropsStatusBar.swift; sourceTree = "<group>"; };
-		76864F6C291EA04E000B9B45 /* RaindropsList.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RaindropsList.swift; sourceTree = "<group>"; };
-		76864F6D291EA04E000B9B45 /* RaindropsSort.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RaindropsSort.swift; sourceTree = "<group>"; };
-		76864F6E291EA04E000B9B45 /* RaindropsList+Toolbar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "RaindropsList+Toolbar.swift"; sourceTree = "<group>"; };
-		76864F6F291EA04E000B9B45 /* RaindropsLoadMore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RaindropsLoadMore.swift; sourceTree = "<group>"; };
-		76864F70291EA04E000B9B45 /* RaindropsItems+Empty.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "RaindropsItems+Empty.swift"; sourceTree = "<group>"; };
-		76864F71291EA04E000B9B45 /* RaindropsItems.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RaindropsItems.swift; sourceTree = "<group>"; };
-		76864F72291EA04E000B9B45 /* RaindropsView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RaindropsView.swift; sourceTree = "<group>"; };
-		76864F74291EA04E000B9B45 /* FilterItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FilterItem.swift; sourceTree = "<group>"; };
-		76864F75291EA04E000B9B45 /* FilterButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FilterButton.swift; sourceTree = "<group>"; };
-		76864F77291EA04E000B9B45 /* CollectionsList+Animation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "CollectionsList+Animation.swift"; sourceTree = "<group>"; };
-		76864F78291EA04E000B9B45 /* CollectionsList+Menus.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "CollectionsList+Menus.swift"; sourceTree = "<group>"; };
-		76864F79291EA04E000B9B45 /* CollectionsList+Empty.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "CollectionsList+Empty.swift"; sourceTree = "<group>"; };
-		76864F7B291EA04E000B9B45 /* CollectionsActions+Service.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "CollectionsActions+Service.swift"; sourceTree = "<group>"; };
-		76864F7C291EA04E000B9B45 /* CollectionsList+Search.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "CollectionsList+Search.swift"; sourceTree = "<group>"; };
-		76864F7D291EA04E000B9B45 /* CollectionsGroupHeader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CollectionsGroupHeader.swift; sourceTree = "<group>"; };
-		76864F7E291EA04E000B9B45 /* CollectionsActions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CollectionsActions.swift; sourceTree = "<group>"; };
-		76864F7F291EA04E000B9B45 /* CollectionsList.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CollectionsList.swift; sourceTree = "<group>"; };
-		76864F80291EA04E000B9B45 /* CollectionsTree.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CollectionsTree.swift; sourceTree = "<group>"; };
-		76864F81291EA04E000B9B45 /* SearchCollections.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchCollections.swift; sourceTree = "<group>"; };
-		76864F83291EA04E000B9B45 /* ChildrensList.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChildrensList.swift; sourceTree = "<group>"; };
-		76864F84291EA04E000B9B45 /* CollectionsCarousel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CollectionsCarousel.swift; sourceTree = "<group>"; };
-		76864F86291EA04E000B9B45 /* GlobalSearch.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GlobalSearch.swift; sourceTree = "<group>"; };
-		76864F87291EA04E000B9B45 /* GlobalSearch+Suggestions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "GlobalSearch+Suggestions.swift"; sourceTree = "<group>"; };
-		76864F88291EA04E000B9B45 /* GlobalSearch+Scopes.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "GlobalSearch+Scopes.swift"; sourceTree = "<group>"; };
-		76864FB1291EA059000B9B45 /* CollectionFields.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CollectionFields.swift; sourceTree = "<group>"; };
 		76864FB2291EA059000B9B45 /* PreviewScreen.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PreviewScreen.swift; sourceTree = "<group>"; };
 		76864FB3291EA059000B9B45 /* CreateCollectionScreen.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreateCollectionScreen.swift; sourceTree = "<group>"; };
 		76864FB4291EA059000B9B45 /* IconPicker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IconPicker.swift; sourceTree = "<group>"; };
 		76864FB5291EA059000B9B45 /* SidebarScreen.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SidebarScreen.swift; sourceTree = "<group>"; };
 		76864FB6291EA059000B9B45 /* EditCollectionScreen.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditCollectionScreen.swift; sourceTree = "<group>"; };
 		76864FB7291EA059000B9B45 /* BrowseScreen.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BrowseScreen.swift; sourceTree = "<group>"; };
-		76864FC0291EA650000B9B45 /* RaindropsList+Menus.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "RaindropsList+Menus.swift"; sourceTree = "<group>"; };
 		76BFE369291E9F6B00DE9DB2 /* AppScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppScene.swift; sourceTree = "<group>"; };
 		76BFE36A291E9F6B00DE9DB2 /* AppRouter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppRouter.swift; sourceTree = "<group>"; };
 		76BFE36B291E9F6B00DE9DB2 /* SettingsRouter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsRouter.swift; sourceTree = "<group>"; };
@@ -136,12 +136,138 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		760C9DF32923C724001CB755 /* Components */ = {
+			isa = PBXGroup;
+			children = (
+				760C9E082923C732001CB755 /* Auth */,
+				760C9DF42923C731001CB755 /* Childrens */,
+				760C9DF72923C732001CB755 /* Collection */,
+				760C9E0C2923C733001CB755 /* Collections */,
+				760C9E0A2923C733001CB755 /* EditCollection */,
+				760C9E172923C733001CB755 /* Filter */,
+				760C9E212923C735001CB755 /* GlobalSearch */,
+				760C9E1A2923C734001CB755 /* Raindrop */,
+				760C9DFE2923C732001CB755 /* Raindrops */,
+				760C9E1E2923C734001CB755 /* User */,
+			);
+			path = Components;
+			sourceTree = "<group>";
+		};
+		760C9DF42923C731001CB755 /* Childrens */ = {
+			isa = PBXGroup;
+			children = (
+				760C9DF52923C731001CB755 /* ChildrensList.swift */,
+				760C9DF62923C731001CB755 /* CollectionsCarousel.swift */,
+			);
+			path = Childrens;
+			sourceTree = "<group>";
+		};
+		760C9DF72923C732001CB755 /* Collection */ = {
+			isa = PBXGroup;
+			children = (
+				760C9DF82923C732001CB755 /* CollectionIcon.swift */,
+				760C9DF92923C732001CB755 /* CollectionLocation.swift */,
+				760C9DFA2923C732001CB755 /* UserCollectionMenu.swift */,
+				760C9DFB2923C732001CB755 /* CollectionToolbar.swift */,
+				760C9DFC2923C732001CB755 /* SystemCollectionItem.swift */,
+				760C9DFD2923C732001CB755 /* UserCollectionItem.swift */,
+			);
+			path = Collection;
+			sourceTree = "<group>";
+		};
+		760C9DFE2923C732001CB755 /* Raindrops */ = {
+			isa = PBXGroup;
+			children = (
+				760C9DFF2923C732001CB755 /* RaindropsList+Menus.swift */,
+				760C9E002923C732001CB755 /* RaindropsStatusBar.swift */,
+				760C9E012923C732001CB755 /* RaindropsList.swift */,
+				760C9E022923C732001CB755 /* RaindropsSort.swift */,
+				760C9E032923C732001CB755 /* RaindropsList+Toolbar.swift */,
+				760C9E042923C732001CB755 /* RaindropsLoadMore.swift */,
+				760C9E052923C732001CB755 /* RaindropsItems+Empty.swift */,
+				760C9E062923C732001CB755 /* RaindropsItems.swift */,
+				760C9E072923C732001CB755 /* RaindropsView.swift */,
+			);
+			path = Raindrops;
+			sourceTree = "<group>";
+		};
+		760C9E082923C732001CB755 /* Auth */ = {
+			isa = PBXGroup;
+			children = (
+				760C9E092923C732001CB755 /* AuthGroup.swift */,
+			);
+			path = Auth;
+			sourceTree = "<group>";
+		};
+		760C9E0A2923C733001CB755 /* EditCollection */ = {
+			isa = PBXGroup;
+			children = (
+				760C9E0B2923C733001CB755 /* CollectionEditForm.swift */,
+			);
+			path = EditCollection;
+			sourceTree = "<group>";
+		};
+		760C9E0C2923C733001CB755 /* Collections */ = {
+			isa = PBXGroup;
+			children = (
+				760C9E0D2923C733001CB755 /* CollectionsList+Animation.swift */,
+				760C9E0E2923C733001CB755 /* CollectionsList+Menus.swift */,
+				760C9E0F2923C733001CB755 /* CollectionsList+Empty.swift */,
+				760C9E102923C733001CB755 /* CollectionsActions+Service.swift */,
+				760C9E112923C733001CB755 /* CollectionsList+Search.swift */,
+				760C9E122923C733001CB755 /* CollectionsGroupHeader.swift */,
+				760C9E132923C733001CB755 /* CollectionsActions.swift */,
+				760C9E142923C733001CB755 /* CollectionsList.swift */,
+				760C9E152923C733001CB755 /* CollectionsTree.swift */,
+				760C9E162923C733001CB755 /* SearchCollections.swift */,
+			);
+			path = Collections;
+			sourceTree = "<group>";
+		};
+		760C9E172923C733001CB755 /* Filter */ = {
+			isa = PBXGroup;
+			children = (
+				760C9E182923C733001CB755 /* FilterItem.swift */,
+				760C9E192923C733001CB755 /* FilterButton.swift */,
+			);
+			path = Filter;
+			sourceTree = "<group>";
+		};
+		760C9E1A2923C734001CB755 /* Raindrop */ = {
+			isa = PBXGroup;
+			children = (
+				760C9E1B2923C734001CB755 /* RaindropItem.swift */,
+				760C9E1C2923C734001CB755 /* RaindropDetails.swift */,
+				760C9E1D2923C734001CB755 /* RaindropFilters.swift */,
+			);
+			path = Raindrop;
+			sourceTree = "<group>";
+		};
+		760C9E1E2923C734001CB755 /* User */ = {
+			isa = PBXGroup;
+			children = (
+				760C9E1F2923C734001CB755 /* MeLabel.swift */,
+				760C9E202923C734001CB755 /* UserLabel.swift */,
+			);
+			path = User;
+			sourceTree = "<group>";
+		};
+		760C9E212923C735001CB755 /* GlobalSearch */ = {
+			isa = PBXGroup;
+			children = (
+				760C9E222923C735001CB755 /* GlobalSearch.swift */,
+				760C9E232923C735001CB755 /* GlobalSearch+Suggestions.swift */,
+				760C9E242923C735001CB755 /* GlobalSearch+Scopes.swift */,
+			);
+			path = GlobalSearch;
+			sourceTree = "<group>";
+		};
 		7685A188286868AC00A4BC3C = {
 			isa = PBXGroup;
 			children = (
 				7685A1A428687C6000A4BC3C /* App */,
 				76864FAF291EA059000B9B45 /* Screens */,
-				76864F59291EA04E000B9B45 /* Components */,
+				760C9DF32923C724001CB755 /* Components */,
 				7685A1AC286880F600A4BC3C /* API */,
 				7639A6AE286889DB00A76FE9 /* UI */,
 				7685A192286868AC00A4BC3C /* Products */,
@@ -180,133 +306,15 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
-		76864F59291EA04E000B9B45 /* Components */ = {
-			isa = PBXGroup;
-			children = (
-				76864F65291EA04E000B9B45 /* Auth */,
-				76864F5A291EA04E000B9B45 /* Collection */,
-				76864F76291EA04E000B9B45 /* Collections */,
-				76864F82291EA04E000B9B45 /* Childrens */,
-				76864F85291EA04E000B9B45 /* GlobalSearch */,
-				76864F73291EA04E000B9B45 /* Filter */,
-				76864F61291EA04E000B9B45 /* Raindrop */,
-				76864F6A291EA04E000B9B45 /* Raindrops */,
-				76864F67291EA04E000B9B45 /* User */,
-			);
-			path = Components;
-			sourceTree = "<group>";
-		};
-		76864F5A291EA04E000B9B45 /* Collection */ = {
-			isa = PBXGroup;
-			children = (
-				76864F5B291EA04E000B9B45 /* CollectionIcon.swift */,
-				76864F5C291EA04E000B9B45 /* CollectionLocation.swift */,
-				76864F5E291EA04E000B9B45 /* CollectionToolbar.swift */,
-				76864F60291EA04E000B9B45 /* UserCollectionItem.swift */,
-				76864F5D291EA04E000B9B45 /* UserCollectionMenu.swift */,
-				76864F5F291EA04E000B9B45 /* SystemCollectionItem.swift */,
-			);
-			path = Collection;
-			sourceTree = "<group>";
-		};
-		76864F61291EA04E000B9B45 /* Raindrop */ = {
-			isa = PBXGroup;
-			children = (
-				76864F62291EA04E000B9B45 /* RaindropItem.swift */,
-				76864F63291EA04E000B9B45 /* RaindropDetails.swift */,
-				76864F64291EA04E000B9B45 /* RaindropFilters.swift */,
-			);
-			path = Raindrop;
-			sourceTree = "<group>";
-		};
-		76864F65291EA04E000B9B45 /* Auth */ = {
-			isa = PBXGroup;
-			children = (
-				76864F66291EA04E000B9B45 /* AuthGroup.swift */,
-			);
-			path = Auth;
-			sourceTree = "<group>";
-		};
-		76864F67291EA04E000B9B45 /* User */ = {
-			isa = PBXGroup;
-			children = (
-				76864F68291EA04E000B9B45 /* MeLabel.swift */,
-				76864F69291EA04E000B9B45 /* UserLabel.swift */,
-			);
-			path = User;
-			sourceTree = "<group>";
-		};
-		76864F6A291EA04E000B9B45 /* Raindrops */ = {
-			isa = PBXGroup;
-			children = (
-				76864F6C291EA04E000B9B45 /* RaindropsList.swift */,
-				76864FC0291EA650000B9B45 /* RaindropsList+Menus.swift */,
-				76864F6E291EA04E000B9B45 /* RaindropsList+Toolbar.swift */,
-				76864F71291EA04E000B9B45 /* RaindropsItems.swift */,
-				76864F70291EA04E000B9B45 /* RaindropsItems+Empty.swift */,
-				76864F6F291EA04E000B9B45 /* RaindropsLoadMore.swift */,
-				76864F6B291EA04E000B9B45 /* RaindropsStatusBar.swift */,
-				76864F6D291EA04E000B9B45 /* RaindropsSort.swift */,
-				76864F72291EA04E000B9B45 /* RaindropsView.swift */,
-			);
-			path = Raindrops;
-			sourceTree = "<group>";
-		};
-		76864F73291EA04E000B9B45 /* Filter */ = {
-			isa = PBXGroup;
-			children = (
-				76864F74291EA04E000B9B45 /* FilterItem.swift */,
-				76864F75291EA04E000B9B45 /* FilterButton.swift */,
-			);
-			path = Filter;
-			sourceTree = "<group>";
-		};
-		76864F76291EA04E000B9B45 /* Collections */ = {
-			isa = PBXGroup;
-			children = (
-				76864F7E291EA04E000B9B45 /* CollectionsActions.swift */,
-				76864F7B291EA04E000B9B45 /* CollectionsActions+Service.swift */,
-				76864F7F291EA04E000B9B45 /* CollectionsList.swift */,
-				76864F77291EA04E000B9B45 /* CollectionsList+Animation.swift */,
-				76864F78291EA04E000B9B45 /* CollectionsList+Menus.swift */,
-				76864F79291EA04E000B9B45 /* CollectionsList+Empty.swift */,
-				76864F7C291EA04E000B9B45 /* CollectionsList+Search.swift */,
-				76864F80291EA04E000B9B45 /* CollectionsTree.swift */,
-				76864F7D291EA04E000B9B45 /* CollectionsGroupHeader.swift */,
-				76864F81291EA04E000B9B45 /* SearchCollections.swift */,
-			);
-			path = Collections;
-			sourceTree = "<group>";
-		};
-		76864F82291EA04E000B9B45 /* Childrens */ = {
-			isa = PBXGroup;
-			children = (
-				76864F83291EA04E000B9B45 /* ChildrensList.swift */,
-				76864F84291EA04E000B9B45 /* CollectionsCarousel.swift */,
-			);
-			path = Childrens;
-			sourceTree = "<group>";
-		};
-		76864F85291EA04E000B9B45 /* GlobalSearch */ = {
-			isa = PBXGroup;
-			children = (
-				76864F86291EA04E000B9B45 /* GlobalSearch.swift */,
-				76864F87291EA04E000B9B45 /* GlobalSearch+Suggestions.swift */,
-				76864F88291EA04E000B9B45 /* GlobalSearch+Scopes.swift */,
-			);
-			path = GlobalSearch;
-			sourceTree = "<group>";
-		};
 		76864FAF291EA059000B9B45 /* Screens */ = {
 			isa = PBXGroup;
 			children = (
-				76864FB1291EA059000B9B45 /* CollectionFields.swift */,
+				76864FB7291EA059000B9B45 /* BrowseScreen.swift */,
 				76864FB2291EA059000B9B45 /* PreviewScreen.swift */,
 				76864FB3291EA059000B9B45 /* CreateCollectionScreen.swift */,
 				76864FB4291EA059000B9B45 /* IconPicker.swift */,
 				76864FB5291EA059000B9B45 /* SidebarScreen.swift */,
 				76864FB6291EA059000B9B45 /* EditCollectionScreen.swift */,
-				76864FB7291EA059000B9B45 /* BrowseScreen.swift */,
 			);
 			path = Screens;
 			sourceTree = "<group>";
@@ -386,57 +394,57 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				76864F8A291EA04E000B9B45 /* CollectionLocation.swift in Sources */,
-				76864FAD291EA04E000B9B45 /* GlobalSearch+Suggestions.swift in Sources */,
-				76864F95291EA04E000B9B45 /* RaindropsStatusBar.swift in Sources */,
+				760C9E382923C735001CB755 /* CollectionsList+Animation.swift in Sources */,
 				76864FBF291EA059000B9B45 /* BrowseScreen.swift in Sources */,
-				76864F8F291EA04E000B9B45 /* RaindropItem.swift in Sources */,
+				760C9E312923C735001CB755 /* RaindropsList+Toolbar.swift in Sources */,
+				760C9E4B2923C735001CB755 /* GlobalSearch+Scopes.swift in Sources */,
+				760C9E2B2923C735001CB755 /* SystemCollectionItem.swift in Sources */,
+				760C9E252923C735001CB755 /* ChildrensList.swift in Sources */,
 				76864FBD291EA059000B9B45 /* SidebarScreen.swift in Sources */,
-				76864FAB291EA04E000B9B45 /* CollectionsCarousel.swift in Sources */,
-				76864FAC291EA04E000B9B45 /* GlobalSearch.swift in Sources */,
-				76864FB9291EA059000B9B45 /* CollectionFields.swift in Sources */,
 				76864FBB291EA059000B9B45 /* CreateCollectionScreen.swift in Sources */,
-				76864F9A291EA04E000B9B45 /* RaindropsItems+Empty.swift in Sources */,
-				76864FAE291EA04E000B9B45 /* GlobalSearch+Scopes.swift in Sources */,
-				76864F91291EA04E000B9B45 /* RaindropFilters.swift in Sources */,
-				76864F89291EA04E000B9B45 /* CollectionIcon.swift in Sources */,
-				76864FAA291EA04E000B9B45 /* ChildrensList.swift in Sources */,
-				76864F9B291EA04E000B9B45 /* RaindropsItems.swift in Sources */,
+				760C9E3F2923C735001CB755 /* CollectionsList.swift in Sources */,
+				760C9E462923C735001CB755 /* RaindropFilters.swift in Sources */,
+				760C9E332923C735001CB755 /* RaindropsItems+Empty.swift in Sources */,
+				760C9E2D2923C735001CB755 /* RaindropsList+Menus.swift in Sources */,
 				76BFE371291E9F6B00DE9DB2 /* AuthScene.swift in Sources */,
-				76864F98291EA04E000B9B45 /* RaindropsList+Toolbar.swift in Sources */,
-				76864F9C291EA04E000B9B45 /* RaindropsView.swift in Sources */,
-				76864FC1291EA650000B9B45 /* RaindropsList+Menus.swift in Sources */,
+				760C9E372923C735001CB755 /* CollectionEditForm.swift in Sources */,
+				760C9E292923C735001CB755 /* UserCollectionMenu.swift in Sources */,
+				760C9E302923C735001CB755 /* RaindropsSort.swift in Sources */,
 				76BFE372291E9F6B00DE9DB2 /* SettingsScene.swift in Sources */,
-				76864F8D291EA04E000B9B45 /* SystemCollectionItem.swift in Sources */,
-				76864F8E291EA04E000B9B45 /* UserCollectionItem.swift in Sources */,
-				76864FA5291EA04E000B9B45 /* CollectionsGroupHeader.swift in Sources */,
 				76864FBC291EA059000B9B45 /* IconPicker.swift in Sources */,
+				760C9E272923C735001CB755 /* CollectionIcon.swift in Sources */,
+				760C9E322923C735001CB755 /* RaindropsLoadMore.swift in Sources */,
+				760C9E2F2923C735001CB755 /* RaindropsList.swift in Sources */,
+				760C9E3D2923C735001CB755 /* CollectionsGroupHeader.swift in Sources */,
+				760C9E282923C735001CB755 /* CollectionLocation.swift in Sources */,
+				760C9E4A2923C735001CB755 /* GlobalSearch+Suggestions.swift in Sources */,
+				760C9E362923C735001CB755 /* AuthGroup.swift in Sources */,
+				760C9E412923C735001CB755 /* SearchCollections.swift in Sources */,
+				760C9E352923C735001CB755 /* RaindropsView.swift in Sources */,
+				760C9E402923C735001CB755 /* CollectionsTree.swift in Sources */,
+				760C9E392923C735001CB755 /* CollectionsList+Menus.swift in Sources */,
+				760C9E2E2923C735001CB755 /* RaindropsStatusBar.swift in Sources */,
 				76BFE36F291E9F6B00DE9DB2 /* AppRouter.swift in Sources */,
-				76864FA7291EA04E000B9B45 /* CollectionsList.swift in Sources */,
-				76864F92291EA04E000B9B45 /* AuthGroup.swift in Sources */,
-				76864F93291EA04E000B9B45 /* MeLabel.swift in Sources */,
-				76864FA3291EA04E000B9B45 /* CollectionsActions+Service.swift in Sources */,
-				76864FA1291EA04E000B9B45 /* CollectionsList+Empty.swift in Sources */,
-				76864F96291EA04E000B9B45 /* RaindropsList.swift in Sources */,
+				760C9E342923C735001CB755 /* RaindropsItems.swift in Sources */,
 				76BFE36E291E9F6B00DE9DB2 /* AppScene.swift in Sources */,
-				76864FA0291EA04E000B9B45 /* CollectionsList+Menus.swift in Sources */,
+				760C9E422923C735001CB755 /* FilterItem.swift in Sources */,
+				760C9E492923C735001CB755 /* GlobalSearch.swift in Sources */,
+				760C9E2C2923C735001CB755 /* UserCollectionItem.swift in Sources */,
+				760C9E3A2923C735001CB755 /* CollectionsList+Empty.swift in Sources */,
+				760C9E432923C735001CB755 /* FilterButton.swift in Sources */,
 				76864FBA291EA059000B9B45 /* PreviewScreen.swift in Sources */,
-				76864F97291EA04E000B9B45 /* RaindropsSort.swift in Sources */,
-				76864F9F291EA04E000B9B45 /* CollectionsList+Animation.swift in Sources */,
+				760C9E442923C735001CB755 /* RaindropItem.swift in Sources */,
 				7685A195286868AC00A4BC3C /* App.swift in Sources */,
-				76864F8C291EA04E000B9B45 /* CollectionToolbar.swift in Sources */,
-				76864FA9291EA04E000B9B45 /* SearchCollections.swift in Sources */,
 				76864FBE291EA059000B9B45 /* EditCollectionScreen.swift in Sources */,
+				760C9E3C2923C735001CB755 /* CollectionsList+Search.swift in Sources */,
+				760C9E2A2923C735001CB755 /* CollectionToolbar.swift in Sources */,
+				760C9E482923C735001CB755 /* UserLabel.swift in Sources */,
 				76BFE370291E9F6B00DE9DB2 /* SettingsRouter.swift in Sources */,
-				76864F8B291EA04E000B9B45 /* UserCollectionMenu.swift in Sources */,
-				76864F90291EA04E000B9B45 /* RaindropDetails.swift in Sources */,
-				76864FA8291EA04E000B9B45 /* CollectionsTree.swift in Sources */,
-				76864F9D291EA04E000B9B45 /* FilterItem.swift in Sources */,
-				76864FA6291EA04E000B9B45 /* CollectionsActions.swift in Sources */,
-				76864F99291EA04E000B9B45 /* RaindropsLoadMore.swift in Sources */,
-				76864FA4291EA04E000B9B45 /* CollectionsList+Search.swift in Sources */,
-				76864F94291EA04E000B9B45 /* UserLabel.swift in Sources */,
-				76864F9E291EA04E000B9B45 /* FilterButton.swift in Sources */,
+				760C9E3E2923C735001CB755 /* CollectionsActions.swift in Sources */,
+				760C9E472923C735001CB755 /* MeLabel.swift in Sources */,
+				760C9E3B2923C735001CB755 /* CollectionsActions+Service.swift in Sources */,
+				760C9E262923C735001CB755 /* CollectionsCarousel.swift in Sources */,
+				760C9E452923C735001CB755 /* RaindropDetails.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -1,51 +1,37 @@
 import SwiftUI
-import Combine
-import WebKit
 
 public struct WebView {
-    @Environment(\.colorScheme) private var colorScheme
-    @ObservedObject var service: WebViewService
+    @ObservedObject var page: WebPage
     var url: URL?
-
-    public init(_ url: URL? = nil, _ service: WebViewService) {
+    
+    public init(_ page: WebPage, url: URL? = nil) {
+        self.page = page
         self.url = url
-        self.service = service
     }
 }
 
 extension WebView: View {
     public var body: some View {
-        let pageScheme: ColorScheme = (service.underPageBackgroundColor?.isLight ?? false) ? .light : .dark
-        let overrideScheme: ColorScheme? = service.error == nil && colorScheme != pageScheme ? pageScheme : nil
-                
-        ZStack(alignment: .topLeading) {
-            if service.error != nil {
-                WebViewError(service: service)
-                    .frame(maxWidth: .infinity, maxHeight: .infinity)
-            } else {
-                NativeWebView(service: service, url: url)
-                    .ignoresSafeArea()
-            }
-            
-            Rectangle()
-                .foregroundColor(Color(service.underPageBackgroundColor))
-                .overlay(.bar)
-                .frame(height: 0)
-                .opacity(service.prefersHiddenToolbars ? 1 : 0)
-            
-            ProgressView(value: service.estimatedProgress, total: 1)
-                .progressViewStyle(.simpleHorizontal)
-                .opacity(service.isLoading ? 1 : 0)
-                .animation(.default, value: service.isLoading)
+        Proxy(page: page)
+            .ignoresSafeArea()
+            .transition(.opacity)
+            .animation(.default, value: page.error != nil)
+            //prevent white flash
+            .opacity(page.painted ? 1 : 0)
+            .animation(.default.delay(0.1), value: page.painted)
+            //helper
+            .task(id: url) { page.url = url }
+    }
+}
+
+extension WebView {
+    struct Proxy: UIViewRepresentable {
+        @ObservedObject var page: WebPage
+        
+        public func makeUIView(context: Context) -> RDWebView {
+            page.webView
         }
-            .environment(\.colorScheme, overrideScheme ?? colorScheme)
-            .toolbarColorScheme(overrideScheme)
-            #if canImport(UIKit)
-            .toolbarBackground(overrideScheme == nil ? .automatic : .visible, for: .navigationBar)
-            .toolbarBackground(.visible, for: .bottomBar)
-            .toolbar(service.prefersHiddenToolbars ? .hidden : .automatic, for: .navigationBar, .bottomBar, .tabBar)
-            #endif
-            .animation(.default, value: service.prefersHiddenToolbars)
-            .animation(.default, value: overrideScheme)
+        
+        public func updateUIView(_ webView: RDWebView, context: Context) {}
     }
 }

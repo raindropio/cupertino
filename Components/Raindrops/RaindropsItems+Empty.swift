@@ -11,6 +11,7 @@ extension RaindropsItems {
         
         var body: some View {
             Memorized(find: find, status: r.state.status(find))
+                .animation(.default, value: r.state.status(find))
         }
     }
 }
@@ -23,50 +24,53 @@ extension RaindropsItems.Empty {
         var status: RaindropsState.Segment.Status
         
         var body: some View {
-            switch status {
-            case .idle:
-                GroupBox {
-                    if find.isSearching {
-                        Text("Nothing found")
-                            .frame(maxWidth: .infinity)
+            Group {
+                switch status {
+                case .idle:
+                    GroupBox {
+                        if find.isSearching {
+                            Text("Nothing found")
+                                .frame(maxWidth: .infinity)
 
-                    } else {
-                        Text("Empty")
-                            .frame(maxWidth: .infinity)
-                        
-                        Button("Create bookmark") {
+                        } else {
+                            Text("Empty")
+                                .frame(maxWidth: .infinity)
                             
+                            Button("Create bookmark") {
+                                
+                            }
                         }
                     }
-                }
-                    .clearSection()
-                    .scenePadding()
-            
-            case .loading:
-                ProgressView()
-                    .progressViewStyle(.circular)
-                    .frame(maxWidth: .infinity)
+                        .clearSection()
+                        .scenePadding()
                 
-            case .error:
-                GroupBox {
-                    Text("Error")
+                case .loading:
+                    ProgressView()
+                        .progressViewStyle(.circular)
                         .frame(maxWidth: .infinity)
+                    
+                case .error:
+                    GroupBox {
+                        Text("Error")
+                            .frame(maxWidth: .infinity)
 
-                    Button("Try again") {
-                        dispatch.sync(RaindropsAction.load(find))
+                        Button("Try again") {
+                            dispatch.sync(RaindropsAction.load(find))
+                        }
                     }
+                        .clearSection()
+                        .scenePadding()
+                    
+                case .notFound:
+                    GroupBox {
+                        Text("Not found")
+                            .frame(maxWidth: .infinity)
+                    }
+                        .clearSection()
+                        .scenePadding()
                 }
-                    .clearSection()
-                    .scenePadding()
-                
-            case .notFound:
-                GroupBox {
-                    Text("Not found")
-                        .frame(maxWidth: .infinity)
-                }
-                    .clearSection()
-                    .scenePadding()
             }
+                .transition(.opacity)
         }
     }
 }

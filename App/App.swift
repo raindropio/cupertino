@@ -7,11 +7,14 @@ struct RaindropApp: App {
 
     var body: some Scene {
         WindowGroup {
-            AuthGroup(
-                authorized: AppScene.init,
-                notAuthorized: AuthScene.init
-            )
-                .modifier(SettingsScene.Attach())
+            AuthGroup {
+                AppScene()
+                    #if os(iOS)
+                    .modifier(SettingsScene.Attach())
+                    #endif
+            } notAuthorized: {
+                AuthScene()
+            }
                 .environmentObject(store.dispatcher)
                 .environmentObject(store.auth)
                 .environmentObject(store.collections)

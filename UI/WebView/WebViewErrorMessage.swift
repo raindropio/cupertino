@@ -1,7 +1,7 @@
 import SwiftUI
 
-struct WebViewError: View {
-    @ObservedObject var service: WebViewService
+struct WebViewErrorMessage: View {
+    @ObservedObject var page: WebPage
     
     var body: some View {
         VStack(spacing: 20) {
@@ -11,12 +11,12 @@ struct WebViewError: View {
                     .foregroundStyle(.yellow)
                     .imageScale(.large)
                 
-                Text(service.error?.localizedDescription ?? "")
+                Text(page.error?.localizedDescription ?? "")
                     .multilineTextAlignment(.center)
             }
             
-            Button("Retry") {
-                service.webView.reload()
+            Button(action: page.reload) {
+                Label("Reload", systemImage: "arrow.clockwise")
             }
                 .buttonStyle(.bordered)
                 .tint(.accentColor)

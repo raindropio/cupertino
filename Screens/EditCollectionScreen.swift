@@ -13,7 +13,7 @@ struct EditCollectionScreen: View {
 
     var body: some View {
         Form {
-            CollectionFields(collection: $collection)
+            CollectionEditForm(collection: $collection)
             
             if collection.access.level >= .member {
                 Button(role: .destructive) {

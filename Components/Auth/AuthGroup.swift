@@ -16,6 +16,8 @@ struct AuthGroup<A: View, N: View>: View {
                 notAuthorized()
             }
         }
+            .transition(.opacity)
+            .animation(.default, value: user.state.authorized)
             .task(priority: .background) {
                 try? await dispatch(UserAction.reload)
             }

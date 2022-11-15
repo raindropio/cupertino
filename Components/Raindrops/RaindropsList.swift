@@ -5,9 +5,16 @@ import UI
 struct RaindropsList<H: View>: View {
     @EnvironmentObject private var collections: CollectionsStore
     @EnvironmentObject private var raindrops: RaindropsStore
+    @EnvironmentObject private var app: AppRouter
 
     var find: FindBy
     var header: () -> H
+    
+    func action(_ id: Raindrop.ID) {
+        if let raindrop = raindrops.state.item(id) {
+            app.preview(raindrop)
+        }
+    }
     
     var body: some View {
         let view = collections.state.view(find.collectionId)
@@ -23,7 +30,8 @@ struct RaindropsList<H: View>: View {
             find: find,
             header: header,
             view: view,
-            layout: layout
+            layout: layout,
+            action: action
         )
     }
 }
@@ -36,21 +44,20 @@ extension RaindropsList where H == EmptyView {
 }
 
 extension RaindropsList { fileprivate struct Memorized: View {
-    @EnvironmentObject private var app: AppRouter
     @EnvironmentObject private var dispatch: Dispatcher
     @State private var selection = Set<Raindrop.ID>()
 
     var find: FindBy
-    var action: ((Raindrop.ID) -> Void)?
     var header: () -> H
     var view: CollectionView
     var layout: LazyStackLayout
-    
+    var action: (Raindrop.ID) -> Void
+
     var body: some View {
         LazyStack(
             layout,
             selection: $selection,
-            action: app.preview,
+            action: action,
             contextMenu: Menus.init
         ) {
             header()

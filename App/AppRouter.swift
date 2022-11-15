@@ -5,7 +5,7 @@ import UI
 //MARK: - Available pages
 enum AppRoute: NavigationPane {
     case browse(FindBy)
-    case preview(Raindrop.ID)
+    case preview(Raindrop)
     
     var appearance: NavigationPaneAppearance {
         switch self {
@@ -45,8 +45,8 @@ extension AppRouter {
         push(.browse(.init(collection)))
     }
     
-    func preview(_ id: Raindrop.ID) {
-        push(.preview(id))
+    func preview(_ raindrop: Raindrop) {
+        push(.preview(raindrop))
     }
 }
 

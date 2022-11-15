@@ -25,7 +25,7 @@ extension RaindropsList.Menus {
                 }
                 
                 Button {
-                    app.preview(item.id)
+                    app.preview(item)
                 } label: {
                     Label("Preview", systemImage: "eyeglasses")
                 }
