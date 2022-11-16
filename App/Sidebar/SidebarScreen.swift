@@ -1,6 +1,7 @@
 import SwiftUI
 import API
 import UI
+import Common
 
 struct SidebarScreen: View {
     @EnvironmentObject private var app: AppRouter
@@ -28,27 +29,5 @@ struct SidebarScreen: View {
                     }, label: MeLabel.init)
                 }
             }
-    }
-}
-
-extension SidebarScreen {
-    fileprivate struct OptionalGlobalSearch<C: View>: View {
-        @State private var find = FindBy()
-        var content: () -> C
-        
-        var body: some View {
-            if isPhone {
-                Group {
-                    if find.isSearching {
-                        RaindropsList(find: find)
-                    } else {
-                        content()
-                    }
-                }
-                    .globalSearch(find: $find)
-            } else {
-                content()
-            }
-        }
     }
 }

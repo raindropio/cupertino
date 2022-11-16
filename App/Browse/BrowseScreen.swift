@@ -6,15 +6,11 @@ struct BrowseScreen: View {
     @Binding var find: FindBy
     
     var body: some View {
-        RaindropsList(find: find) {
-            Group {
-                if !find.isSearching {
-                    CollectionChildrens(id: find.collectionId)
-                }
-            }
+        BrowseList(find: find) {
+            BrowseNested(find: find)
         }
             .globalSearch(find: $find)
-            .collectionToolbar(for: find.collectionId)
+            .modifier(Toolbar(find: find))
             #if os(iOS)
             .toolbarRole(isPhone ? .automatic : .browser)
             #endif
