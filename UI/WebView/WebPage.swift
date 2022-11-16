@@ -7,7 +7,9 @@ public class WebPage: ObservableObject {
     public var url: URL? {
         get { _url }
         set {
-            webView.load(.init(url: newValue ?? .init(string: "about:blank")!))
+            if let url = newValue {
+                webView.load(.init(url: url))
+            }
         }
     }
     
@@ -26,13 +28,13 @@ public class WebPage: ObservableObject {
     @Published public var underPageBackgroundColor: UIColor = .clear
     
     public var colorScheme: ColorScheme? {
-        guard painted else { return nil }
-        return underPageBackgroundColor.isLight ? ColorScheme.light : ColorScheme.dark
-    }
-    
-    public var painted: Bool {
-        webView.canGoBack || webView.canGoForward ||
-        progress >= 0.5
+        //do not set any color scheme for file viewer
+        switch webView.url?.pathExtension {
+        case "pdf": return nil
+        default: break
+        }
+        
+        return webView.underPageBackgroundColor.isLight ? ColorScheme.light : ColorScheme.dark
     }
     
     public init() {

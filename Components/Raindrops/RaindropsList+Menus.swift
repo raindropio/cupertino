@@ -24,11 +24,11 @@ extension RaindropsList.Menus {
                     Label("Open", systemImage: "safari")
                 }
                 
-                Button {
-                    app.preview(item)
-                } label: {
-                    Label("Preview", systemImage: "eyeglasses")
-                }
+//                Button {
+//                    
+//                } label: {
+//                    Label("Preview", systemImage: "eyeglasses")
+//                }
                 
                 ShareLink(item: item.link)
                 

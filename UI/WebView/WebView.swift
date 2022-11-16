@@ -14,12 +14,6 @@ extension WebView: View {
     public var body: some View {
         Proxy(page: page)
             .ignoresSafeArea()
-            .transition(.opacity)
-            .animation(.default, value: page.error != nil)
-            //prevent white flash
-            .opacity(page.painted ? 1 : 0)
-            .animation(.default.delay(0.1), value: page.painted)
-            //helper
             .task(id: url) { page.url = url }
     }
 }

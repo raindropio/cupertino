@@ -30,6 +30,7 @@ class RDWebView: WKWebView {
         
         //behaviour
         allowsBackForwardNavigationGestures = true
+        isOpaque = false
         
         //pull to refresh
         #if canImport(UIKit)

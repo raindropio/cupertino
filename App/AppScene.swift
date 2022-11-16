@@ -11,7 +11,6 @@ struct AppScene: View {
         } detail: { screen in
             switch screen {
             case .browse(let find): BrowseScreen(find: router.bind(find))
-            case .preview(let raindrop): PreviewScreen(raindrop: raindrop)
             case .none: Text("bla")
             }
         }

@@ -55,8 +55,6 @@ extension Render {
                 ]
             }
         }
-        
-        typealias RawValue = [URLQueryItem]
     }
     
     enum Format: String {

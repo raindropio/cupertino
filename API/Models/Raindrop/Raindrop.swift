@@ -26,4 +26,10 @@ public struct Raindrop: Identifiable, Hashable {
             return nil
         }
     }
+    
+    public var cacheLink: URL? {
+        self.cache != nil ?
+            Rest.raindropCacheLink(id) :
+            nil
+    }
 }
