@@ -8,9 +8,9 @@ struct RaindropsStatusBar: View {
     var body: some View {
         LabeledContent {
             HStack {
-                RaindropsSort(find: find)
+                RaindropsSortButton(find: find)
                     .labelStyle(.titleOnly)
-                RaindropsView(find: find)
+                RaindropsViewButton(find: find)
                     .labelStyle(.iconOnly)
                     .menuIndicator(.hidden)
             }

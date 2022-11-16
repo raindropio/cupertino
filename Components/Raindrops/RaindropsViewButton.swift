@@ -1,37 +1,40 @@
 import SwiftUI
 import API
 
-struct RaindropsSort: View {
+struct RaindropsViewButton: View {
+    @EnvironmentObject private var collections: CollectionsStore
     @EnvironmentObject private var raindrops: RaindropsStore
+
     var find: FindBy
     
     var body: some View {
-        Memorized(find: find, sort: raindrops.state.sort(find))
+        Memorized(find: find, view: collections.state.view(find.collectionId))
             .disabled(raindrops.state.isEmpty(find))
     }
 }
 
-extension RaindropsSort {
+extension RaindropsViewButton {
     fileprivate struct Memorized: View {
         @EnvironmentObject private var dispatch: Dispatcher
 
         var find: FindBy
-        var sort: SortBy
+        var view: CollectionView
         
         var body: some View {
             Picker(
-                "Sort",
+                "View",
                 selection: .init(get: {
-                    sort
-                }, set: { by in
-                    dispatch.sync(RaindropsAction.sort(find, by))
+                    view
+                }, set: { view in
+                    dispatch.sync(CollectionsAction.setView(find.collectionId, view))
                 })
             ) {
-                ForEach(SortBy.someCases(for: find)) {
+                ForEach(CollectionView.allCases) {
                     Label($0.title, systemImage: $0.systemImage)
                         .tag($0)
                 }
             }
+                .symbolVariant(.fill)
         }
     }
 }

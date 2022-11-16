@@ -32,7 +32,7 @@ extension RaindropsItems {
         var body: some View {
             DataSource(items) { item in
                 RaindropItem(raindrop: item, view: view)
-                    .swipeActions(edge: .leading, allowsFullSwipe: false) {
+                    .swipeActions(edge: .leading) {
                         Link(destination: item.link) {
                             Label("Open", systemImage: "safari")
                         }

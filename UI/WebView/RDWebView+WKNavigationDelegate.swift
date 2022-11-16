@@ -10,7 +10,7 @@ extension RDWebView: WKNavigationDelegate {
     
     //getting data
     func webView(_ webView: WKWebView, didCommit navigation: WKNavigation!) {
-        
+        webView.isOpaque = true
     }
     
     //end loading

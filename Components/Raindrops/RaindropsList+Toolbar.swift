@@ -12,8 +12,8 @@ extension RaindropsList {
                 .toolbar {
                     ToolbarItemGroup {
                         if !isPhone {
-                            RaindropsSort(find: find)
-                            RaindropsView(find: find)
+                            RaindropsSortButton(find: find)
+                            RaindropsViewButton(find: find)
                         }
                     }
                 }

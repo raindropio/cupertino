@@ -10,8 +10,14 @@ struct AppScene: View {
             SidebarScreen()
         } detail: { screen in
             switch screen {
-            case .browse(let find): BrowseScreen(find: router.bind(find))
-            case .none: Text("bla")
+            case .browse(let find):
+                BrowseScreen(find: router.bind(find))
+                
+            case .open(let raindrop):
+                OpenScreen(raindrop: raindrop)
+                
+            case .none:
+                Text("bla")
             }
         }
             .collectionActions()

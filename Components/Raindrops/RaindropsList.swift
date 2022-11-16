@@ -12,7 +12,7 @@ struct RaindropsList<H: View>: View {
     
     func action(_ id: Raindrop.ID) {
         if let raindrop = raindrops.state.item(id) {
-            
+            app.open(raindrop)
         }
     }
     
