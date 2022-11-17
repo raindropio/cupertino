@@ -17,24 +17,16 @@ public struct PreviewSystems {
         return components.url!
     }
     
-    public static func articleUrl(_ url: URL, options: Option...) -> URL {
+    public static func articleUrl(_ url: URL, options: Options = .init()) -> URL {
         var components = URLComponents()
         components.scheme = "https"
         components.host = Self.host
         components.path = "/article/\(base64(url))"
         
-        components.queryItems = options.flatMap { $0.rawValue }
+        components.queryItems = options.query
         components.fragment = components.query
         components.queryItems = .init()
         
         return components.url!
-    }
-    
-    public static func isEmbedUrl(_ url: URL?) -> Bool {
-        url?.pathComponents.first == "embed"
-    }
-    
-    public static func isArticleUrl(_ url: URL?) -> Bool {
-        url?.pathComponents.first == "article"
     }
 }

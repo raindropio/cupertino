@@ -1,4 +1,5 @@
 import SwiftUI
+import WebKit
 
 public class WebPage: ObservableObject {
     let webView = RDWebView()
@@ -37,7 +38,11 @@ public class WebPage: ObservableObject {
         return webView.underPageBackgroundColor.isLight ? ColorScheme.light : ColorScheme.dark
     }
     
-    public init() {
+    public init(_ url: URL? = nil) {
+        if let url {
+            webView.load(.init(url: url))
+        }
+        
         webView.publisher(for: \.url)
             .assign(to: &$_url)
         

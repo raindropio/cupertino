@@ -17,39 +17,23 @@ extension RDWebView: WKNavigationDelegate {
     func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
         if let webView = webView as? RDWebView {
             webView.error = nil
-            
-            #if canImport(UIKit)
-            webView.scrollView.refreshControl?.endRefreshing()
-            
-            if webView.scrollView.contentOffset.y <= 0 && webView.prefersHiddenToolbars {
-                webView.prefersHiddenToolbars = false
-            }
-            #endif
         }
     }
     
     //error loading
     func webView(_ webView: WKWebView, didFail navigation: WKNavigation!, withError error: Error) {
         if let webView = webView as? RDWebView {
-            webView.error = error
-            
-            #if canImport(UIKit)
-            webView.scrollView.refreshControl?.endRefreshing()
-            
-            if webView.scrollView.contentOffset.y <= 0 && webView.prefersHiddenToolbars {
-                webView.prefersHiddenToolbars = false
+            if (error as NSError).code != NSURLErrorCancelled {
+                webView.error = error
             }
-            #endif
         }
     }
     
     func webView(_ webView: WKWebView, didFailProvisionalNavigation navigation: WKNavigation!, withError error: Error) {
         if let webView = webView as? RDWebView {
-            webView.error = error
-            
-            #if canImport(UIKit)
-            webView.scrollView.refreshControl?.endRefreshing()
-            #endif
+            if (error as NSError).code != NSURLErrorCancelled {
+                webView.error = error
+            }
         }
     }
 }

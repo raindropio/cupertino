@@ -5,11 +5,11 @@ import UI
 //MARK: - Available pages
 enum AppRoute: NavigationPane {
     case browse(FindBy)
-    case open(Raindrop)
+    case preview(Raindrop, PreviewScreen.Mode? = nil)
     
     var appearance: NavigationPaneAppearance {
         switch self {
-        case .open(_): return .fullScreen
+        case .preview(_,_): return .fullScreen
         default: return .automatic
         }
     }
@@ -45,8 +45,8 @@ extension AppRouter {
         push(.browse(.init(collection)))
     }
     
-    func open(_ raindrop: Raindrop) {
-        push(.open(raindrop))
+    func preview(_ raindrop: Raindrop, _ mode: PreviewScreen.Mode? = nil) {
+        push(.preview(raindrop, mode))
     }
 }
 

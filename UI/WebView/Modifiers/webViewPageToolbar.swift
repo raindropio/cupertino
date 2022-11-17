@@ -4,6 +4,10 @@ public extension View {
     func webViewPageToolbar(_ page: WebPage) -> some View {
         modifier(WebViewPageToolbar(page: page))
     }
+    
+    func webViewPageToolbar(_ page: WebPage, overrideURL: URL?) -> some View {
+        modifier(WebViewPageToolbar(page: page, overrideURL: overrideURL))
+    }
 }
 
 struct WebViewPageToolbar: ViewModifier {
@@ -11,6 +15,7 @@ struct WebViewPageToolbar: ViewModifier {
     @Environment(\.verticalSizeClass) private var verticalSizeClass
     
     @ObservedObject var page: WebPage
+    var overrideURL: URL?
     
     private var portrait: Bool {
         verticalSizeClass == .regular && horizontalSizeClass == .compact
@@ -18,6 +23,10 @@ struct WebViewPageToolbar: ViewModifier {
             
     private var toolbarItemPlacement: ToolbarItemPlacement {
         portrait ? .bottomBar : .automatic
+    }
+    
+    var currentURL: URL {
+        overrideURL ?? page.url ?? .init(string: "about:blank")!
     }
     
     func body(content: Content) -> some View {
@@ -42,14 +51,14 @@ struct WebViewPageToolbar: ViewModifier {
                 }
                 
                 ToolbarItemGroup(placement: toolbarItemPlacement) {
-                    ShareLink(item: page.url ?? .init(string: "about:blank")!)
+                    ShareLink(item: currentURL)
                         .disabled(page.url == nil)
                     
                     Spacer()
                 }
                 
                 ToolbarItem(placement: toolbarItemPlacement) {
-                    Link(destination: page.url ?? .init(string: "about:blank")!) {
+                    Link(destination: currentURL) {
                         Image(systemName: "safari")
                     }
                         .disabled(page.url == nil)

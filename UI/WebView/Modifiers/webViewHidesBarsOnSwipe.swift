@@ -1,28 +1,31 @@
 import SwiftUI
 
 public extension View {
-    func webViewHidesBarsOnSwipe(_ page: WebPage, enabled: Bool = true) -> some View {
-        modifier(WebViewHidesBarsOnSwipe(page: page, enabled: enabled))
+    func webViewHidesBarsOnSwipe(_ page: WebPage) -> some View {
+        modifier(WebViewHidesBarsOnSwipe(page: page))
     }
 }
 
 struct WebViewHidesBarsOnSwipe: ViewModifier {
+    @Environment(\.colorScheme) private var colorScheme
     @ObservedObject var page: WebPage
-    var enabled: Bool
 
     func body(content: Content) -> some View {
-        let hide = enabled && page.prefersHiddenToolbars
-        
         content
-            .toolbar(hide ? .hidden : .automatic, for: .navigationBar, .bottomBar, .tabBar)
-            .animation(.default, value: hide)
+            .toolbarBackground(
+                page.colorScheme != nil && page.colorScheme != colorScheme ? .visible : .automatic,
+                for: .navigationBar, .bottomBar, .tabBar
+            )
+            .toolbar(
+                page.prefersHiddenToolbars ? .hidden : .automatic,
+                for: .navigationBar, .bottomBar, .tabBar
+            )
+            .animation(.default, value: page.prefersHiddenToolbars)
             .overlay(alignment: .topLeading) {
-                if enabled {
-                    Color(page.underPageBackgroundColor)
-                        .overlay(.bar)
-                        .frame(height: 0)
-                        .opacity(hide ? 1 : 0)
-                }
+                Color(page.underPageBackgroundColor)
+                    .overlay(.bar)
+                    .frame(height: 0)
+                    .opacity(page.prefersHiddenToolbars ? 1 : 0)
             }
     }
 }

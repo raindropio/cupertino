@@ -1,4 +1,5 @@
 import WebKit
+import Combine
 
 /*
  Features:
@@ -9,6 +10,8 @@ import WebKit
  - JS window.open, etc just loads as is
  */
 class RDWebView: WKWebView {
+    private var cancelables = Set<AnyCancellable>()
+    
     @objc dynamic var error: Error?
     @objc dynamic var prefersHiddenToolbars: Bool = false
 
@@ -36,12 +39,30 @@ class RDWebView: WKWebView {
         #if canImport(UIKit)
         scrollView.refreshControl = refreshControl
         refreshControl.addTarget(self, action: #selector(self.reload), for: .valueChanged)
+        publisher(for: \.underPageBackgroundColor)
+            .sink { [weak self] in self?.refreshControl.overrideUserInterfaceStyle = ($0?.isLight ?? true) ? .light : .dark }
+            .store(in: &cancelables)
         #endif
         
         //scroll view
         scrollView.delegate = self
         scrollView.insetsLayoutMarginsFromSafeArea = false
         scrollView.contentInsetAdjustmentBehavior = .always
+        
+        //end loading
+        publisher(for: \.isLoading)
+            .dropFirst()
+            .filter { !$0 }
+            .sink { [weak self] _ in
+                #if canImport(UIKit)
+                self?.refreshControl.endRefreshing()
+                #endif
+                
+                if ((self?.scrollView.contentOffset.y ?? 0) <= 0), self?.prefersHiddenToolbars == true {
+                    self?.prefersHiddenToolbars = false
+                }
+            }
+            .store(in: &cancelables)
     }
     
     required init?(coder: NSCoder) {

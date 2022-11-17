@@ -15,7 +15,7 @@ struct WebViewProgressBar: ViewModifier {
                 ProgressView(value: page.progress)
                     .progressViewStyle(.simpleHorizontal)
                     .opacity(page.isLoading ? 1 : 0)
-                    .animation(.default.delay(0.3), value: page.isLoading)
+                    .animation(.default.delay(page.isLoading ? 0.3 : 0), value: page.isLoading)
             }
     }
 }

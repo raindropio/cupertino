@@ -13,7 +13,6 @@ public struct WebView {
 extension WebView: View {
     public var body: some View {
         Proxy(page: page)
-//            .ignoresSafeArea()
             .ignoresSafeArea(.container, edges: .all)
             .task(id: url) { page.url = url }
     }

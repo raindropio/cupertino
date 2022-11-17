@@ -48,10 +48,30 @@ extension EmptyState: View {
     }
 }
 
+extension EmptyState where A == EmptyView {
+    public init(
+        _ title: String,
+        icon: @escaping () -> I
+    ) {
+        self.title = title
+        self.icon = icon
+    }
+}
+
+extension EmptyState where A == EmptyView {
+    public init(
+        message: String,
+        icon: @escaping () -> I
+    ) {
+        self.message = message
+        self.icon = icon
+    }
+}
+
 extension EmptyState where I == EmptyView {
     public init(
-        _ title: String = "",
-        message: String = "",
+        _ title: String,
+        message: String,
         actions: @escaping () -> A
     ) {
         self.title = title
@@ -62,8 +82,8 @@ extension EmptyState where I == EmptyView {
 
 extension EmptyState where A == EmptyView {
     public init(
-        _ title: String = "",
-        message: String = "",
+        _ title: String,
+        message: String,
         icon: @escaping () -> I
     ) {
         self.title = title

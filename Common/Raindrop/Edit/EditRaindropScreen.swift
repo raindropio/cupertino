@@ -1,10 +1,14 @@
 import SwiftUI
 import API
 
-struct EditRaindropScreen: View {
+public struct EditRaindropScreen: View {
     @State var raindrop: Raindrop
     
-    var body: some View {
+    public init(raindrop: Raindrop) {
+        self._raindrop = State(initialValue: raindrop)
+    }
+    
+    public var body: some View {
         Form {
             TextField("Title", text: $raindrop.title)
         }
