@@ -3,7 +3,7 @@ import API
 import UI
 
 struct PreviewScreen: View {
-    @AppStorage(PreviewSystems.Options.StorageKey) private var options = PreviewSystems.Options()
+    @AppStorage(ReaderOptions.StorageKey) private var options = ReaderOptions()
     @Environment(\.colorScheme) private var colorScheme
     
     var raindrop: Raindrop
@@ -17,8 +17,8 @@ struct PreviewScreen: View {
     var body: some View {
         let page = WebPage({
             switch mode {
-            case .article: return PreviewSystems.articleUrl(raindrop.link, options: options)
-            case .embed: return PreviewSystems.embedUrl(raindrop.link)
+            case .article: return Rest.previewArticle(raindrop.link, options: options)
+            case .embed: return Rest.previewEmbed(raindrop.link)
             case .cache: return Rest.raindropCacheLink(raindrop.id)
             case .raw: return raindrop.link
             }

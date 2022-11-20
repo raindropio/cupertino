@@ -8,7 +8,7 @@ extension Raindrop {
         public init(_ url: URL? = nil) {
             self.original = url
             if let url {
-                self.best = Render.asImageUrl(url, options: .maxDeviceSize)
+                self.best = Rest.renderImage(url, options: .maxDeviceSize)
             }
         }
         

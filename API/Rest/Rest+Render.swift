@@ -1,19 +1,17 @@
 import Foundation
 
-struct Render {
-    static let host = "rdl.ink"
-    
-    static func asImageUrl(_ url: URL, options: Option...) -> URL {
-        guard url.host() != Self.host else { return url }
+extension Rest {
+    public static func renderImage(_ url: URL, options: RenderOption...) -> URL {
+        guard url.host() != base.render.host() else { return url }
         
         var components = URLComponents()
         components.scheme = "https"
-        components.host = Self.host
+        components.host = base.render.host()
         components.path = "/render"
         
         components.queryItems =
-            Option.format().rawValue
-            + Option.dpr().rawValue
+            RenderOption.format().rawValue
+            + RenderOption.dpr().rawValue
             + options.flatMap { $0.rawValue }
             + [.init(name: "url", value: url.absoluteString)]
         
@@ -21,15 +19,15 @@ struct Render {
         return imageUrl
     }
     
-    static func asFaviconUrl(_ host: String, options: Option...) -> URL? {
+    public static func renderFavicon(_ host: String, options: RenderOption...) -> URL? {
         var components = URLComponents()
         components.scheme = "https"
-        components.host = Self.host
+        components.host = base.render.host()
         components.path = "/favicon/\(host)"
         
         components.queryItems =
-            Option.format().rawValue
-            + Option.dpr().rawValue
+            RenderOption.format().rawValue
+            + RenderOption.dpr().rawValue
             + options.flatMap { $0.rawValue }
         
         guard let imageUrl = components.url else { return nil }

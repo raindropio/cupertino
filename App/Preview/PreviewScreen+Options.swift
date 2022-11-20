@@ -4,19 +4,21 @@ import UI
 
 extension PreviewScreen {
     struct Options: View {
-        @AppStorage(PreviewSystems.Options.StorageKey) private var options = PreviewSystems.Options()
+        @AppStorage(ReaderOptions.StorageKey) private var options = ReaderOptions()
 
         var body: some View {
             Form {
                 Picker("Theme", selection: $options.theme) {
-                    ForEach(PreviewSystems.Options.Theme.allCases, id: \.rawValue) {
+                    ForEach(ReaderOptions.Theme.allCases, id: \.rawValue) {
                         Text($0.rawValue)
+                            .tag($0)
                     }
                 }
                 
                 Picker("Font", selection: $options.fontFamily) {
-                    ForEach(PreviewSystems.Options.FontFamily.allCases, id: \.rawValue) {
+                    ForEach(ReaderOptions.FontFamily.allCases, id: \.rawValue) {
                         Text($0.rawValue)
+                            .tag($0)
                     }
                 }
                 

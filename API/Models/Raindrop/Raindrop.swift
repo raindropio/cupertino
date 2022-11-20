@@ -21,7 +21,7 @@ public struct Raindrop: Identifiable, Hashable {
     
     public var favicon: URL? {
         if let host = link.host() {
-            return Render.asFaviconUrl(host, options: .width(48), .height(48))
+            return Rest.renderFavicon(host, options: .width(48), .height(48))
         } else {
             return nil
         }

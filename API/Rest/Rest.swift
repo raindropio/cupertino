@@ -1,7 +1,13 @@
 import Foundation
 
 public actor Rest: FetchDelegate {
-    static let base = URL(string: "https://api.raindrop.io/v1/")!
+    static let base = Base()
+    
+    struct Base {
+        var api = URL(string: "https://api.raindrop.io/v1/")!
+        var preview = URL(string: "https://preview.systems/")!
+        var render = URL(string: "https://rdl.ink/")!
+    }
     
     let decoder: JSONDecoder = {
         let decoder = JSONDecoder()
@@ -15,7 +21,7 @@ public actor Rest: FetchDelegate {
         return decoder
     }()
     
-    let fetch = Fetch(base)
+    let fetch = Fetch(base.api)
     
     public init() {
         fetch.setDelegate(self)
