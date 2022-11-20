@@ -14,11 +14,15 @@ let package = Package(
         ),
     ],
     dependencies: [
+        .package(path: "API"),
+        .package(path: "UI")
     ],
     targets: [
         .target(
             name: "Common",
             dependencies: [
+                .byName(name: "API"),
+                .byName(name: "UI")
             ],
             path: ""
         )

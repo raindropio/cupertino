@@ -1,6 +1,7 @@
 import SwiftUI
 import API
 import UI
+import Common
 
 struct BrowseList<H: View>: View {
     @EnvironmentObject private var collections: CollectionsStore
@@ -46,6 +47,7 @@ extension BrowseList where H == EmptyView {
 extension BrowseList { fileprivate struct Memorized: View {
     @EnvironmentObject private var dispatch: Dispatcher
     @State private var selection = Set<Raindrop.ID>()
+    @State private var edit: Raindrop?
 
     var find: FindBy
     var header: () -> H
@@ -58,7 +60,7 @@ extension BrowseList { fileprivate struct Memorized: View {
             layout,
             selection: $selection,
             action: action,
-            contextMenu: Menus.init
+            contextMenu: { Menus(selection: $0, edit: $edit) }
         ) {
             header()
 
@@ -69,7 +71,8 @@ extension BrowseList { fileprivate struct Memorized: View {
             Section {
                 BrowseItems(
                     find: find,
-                    view: view
+                    view: view,
+                    edit: $edit
                 )
             } footer: {
                 BrowseLoadMore(find: find)
@@ -84,5 +87,10 @@ extension BrowseList { fileprivate struct Memorized: View {
                 try? await dispatch(RaindropsAction.load(find))
             }
             .modifier(Toolbar(find: find))
+            .sheet(item: $edit) { item in
+                NavigationStack {
+                    EditRaindropScreen(raindrop: item)
+                }
+            }
     }
 }}

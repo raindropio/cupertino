@@ -21,8 +21,8 @@
 		760C9E492923C735001CB755 /* GlobalSearch.swift in Sources */ = {isa = PBXBuildFile; fileRef = 760C9E222923C735001CB755 /* GlobalSearch.swift */; };
 		760C9E4A2923C735001CB755 /* GlobalSearch+Suggestions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 760C9E232923C735001CB755 /* GlobalSearch+Suggestions.swift */; };
 		760C9E4B2923C735001CB755 /* GlobalSearch+Scopes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 760C9E242923C735001CB755 /* GlobalSearch+Scopes.swift */; };
-		760E7D8F28842D20008B603D /* API in Frameworks */ = {isa = PBXBuildFile; productRef = 760E7D8E28842D20008B603D /* API */; };
 		76143B0228842C85006A7508 /* UI in Frameworks */ = {isa = PBXBuildFile; productRef = 76143B0128842C85006A7508 /* UI */; };
+		76460FA7292A6E3B00C21ACE /* API in Frameworks */ = {isa = PBXBuildFile; productRef = 76460FA6292A6E3B00C21ACE /* API */; };
 		764B908A292519BF00CBD767 /* Common in Frameworks */ = {isa = PBXBuildFile; productRef = 764B9089292519BF00CBD767 /* Common */; };
 		767AC1132925173900766998 /* SidebarScreen+GlobalSearch.swift in Sources */ = {isa = PBXBuildFile; fileRef = 767AC1122925173900766998 /* SidebarScreen+GlobalSearch.swift */; };
 		7685A195286868AC00A4BC3C /* App.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7685A194286868AC00A4BC3C /* App.swift */; };
@@ -86,8 +86,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				76460FA7292A6E3B00C21ACE /* API in Frameworks */,
 				76143B0228842C85006A7508 /* UI in Frameworks */,
-				760E7D8F28842D20008B603D /* API in Frameworks */,
 				764B908A292519BF00CBD767 /* Common in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -227,8 +227,8 @@
 			name = Raindrop;
 			packageProductDependencies = (
 				76143B0128842C85006A7508 /* UI */,
-				760E7D8E28842D20008B603D /* API */,
 				764B9089292519BF00CBD767 /* Common */,
+				76460FA6292A6E3B00C21ACE /* API */,
 			);
 			productName = cupertino;
 			productReference = 7685A191286868AC00A4BC3C /* Raindrop.app */;
@@ -528,13 +528,13 @@
 /* End XCConfigurationList section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		760E7D8E28842D20008B603D /* API */ = {
-			isa = XCSwiftPackageProductDependency;
-			productName = API;
-		};
 		76143B0128842C85006A7508 /* UI */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = UI;
+		};
+		76460FA6292A6E3B00C21ACE /* API */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = API;
 		};
 		764B9089292519BF00CBD767 /* Common */ = {
 			isa = XCSwiftPackageProductDependency;

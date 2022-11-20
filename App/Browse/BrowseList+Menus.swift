@@ -6,9 +6,13 @@ extension BrowseList {
     struct Menus: View {
         @EnvironmentObject private var r: RaindropsStore
         var selection: Set<Raindrop.ID>
+        @Binding var edit: Raindrop?
         
         var body: some View {
-            Memorized(items: selection.compactMap(r.state.item))
+            Memorized(
+                items: selection.compactMap(r.state.item),
+                edit: $edit
+            )
         }
     }
 }
@@ -17,6 +21,7 @@ extension BrowseList.Menus {
     struct Memorized: View {
         @EnvironmentObject private var app: AppRouter
         var items: [Raindrop]
+        @Binding var edit: Raindrop?
         
         var body: some View {
             if items.count == 1, let item = items.first {
@@ -32,12 +37,12 @@ extension BrowseList.Menus {
                 
                 ShareLink(item: item.link)
                 
-                Button {
-                } label: {
+                Button { edit = item } label: {
                     Label("Edit", systemImage: "pencil")
                 }
 
                 Button(role: .destructive) {
+                    
                 } label: {
                     Label("Delete", systemImage: "trash")
                 }

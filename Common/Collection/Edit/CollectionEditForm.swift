@@ -2,7 +2,7 @@ import SwiftUI
 import UI
 import API
 
-struct CollectionEditForm: View {
+struct CollectionFields: View {
     @EnvironmentObject private var collections: CollectionsStore
     @Binding var collection: UserCollection
     

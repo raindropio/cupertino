@@ -10,7 +10,7 @@ struct CreateCollectionScreen: View {
 
     var body: some View {
         Form {
-            CollectionEditForm(collection: $collection)
+            CollectionFields(collection: $collection)
         }
             .navigationTitle("New collection")
             #if os(iOS)

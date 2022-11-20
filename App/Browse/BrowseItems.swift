@@ -8,7 +8,8 @@ struct BrowseItems: View {
 
     var find: FindBy
     var view: CollectionView
-    
+    @Binding var edit: Raindrop?
+
     var body: some View {
         if r.state.isEmpty(find) {
             Empty(find: find)
@@ -16,7 +17,8 @@ struct BrowseItems: View {
             Memorized(
                 find: find,
                 items: r.state.items(find),
-                view: view
+                view: view,
+                edit: $edit
             )
         }
     }
@@ -29,6 +31,7 @@ extension BrowseItems {
         var find: FindBy
         var items: [Raindrop]
         var view: CollectionView
+        @Binding var edit: Raindrop?
         
         var body: some View {
             DataSource(items) { item in
@@ -39,13 +42,13 @@ extension BrowseItems {
                         }
                     }
                     .swipeActions(edge: .trailing) {
-                        Button {
-                        } label: {
+                        Button { edit = item } label: {
                             Label("Edit", systemImage: "pencil")
                         }
                             .tint(.blue)
 
                         Button {
+                            
                         } label: {
                             Label("Delete", systemImage: "trash")
                         }

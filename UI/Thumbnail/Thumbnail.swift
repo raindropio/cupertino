@@ -45,21 +45,25 @@ public struct Thumbnail {
     public init(
         _ url: URL? = nil,
         width: Double,
-        aspectRatio: Double? = nil
+        aspectRatio: Double? = nil,
+        cornerRadius: Double = 0
     ) {
         self.url = url
         self.width = width
         self.aspectRatio = aspectRatio
+        self.cornerRadius = cornerRadius
     }
     
     public init(
         _ url: URL? = nil,
         height: Double,
-        aspectRatio: Double? = nil
+        aspectRatio: Double? = nil,
+        cornerRadius: Double = 0
     ) {
         self.url = url
         self.height = height
         self.aspectRatio = aspectRatio
+        self.cornerRadius = cornerRadius
     }
 }
 
