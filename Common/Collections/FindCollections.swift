@@ -33,6 +33,7 @@ extension FindCollections {
                 Section("\(user.count) collections") {
                     ForEach(user) { item in
                         UserCollectionRow(item, withLocation: true)
+                            .badge(item.count)
                             .id(item.id)
                     }
                 }

@@ -2,7 +2,7 @@ import Foundation
 
 public struct RecentState: ReduxState {
     @Cached("res-search") var search = [String]()
-    @Cached("res-tags") var tags = [String]()
+    @Cached("res-tags") public var tags = [String]()
     
     public init() { }
 }

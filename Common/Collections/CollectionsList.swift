@@ -12,10 +12,12 @@ public struct CollectionsList<C: View> {
     
     public init(
         selection: Binding<Int?>,
+        matching: CollectionsListMatching = .all,
         searchable: Bool = true,
         custom: @escaping () -> C
     ) {
         self._selection = selection
+        self.matching = matching
         self.searchable = searchable
         self.custom = custom
     }
@@ -69,15 +71,21 @@ extension CollectionsList: View {
     }
 }
 
-enum CollectionsListMatching {
+public enum CollectionsListMatching {
     case all
     case nestable
     case insertable
 }
 
 extension CollectionsList where C == EmptyView {
-    public init(selection: Binding<Int?>) {
-        _selection = selection
-        custom = nil
+    public init(
+        selection: Binding<Int?>,
+        matching: CollectionsListMatching = .all,
+        searchable: Bool = true
+    ) {
+        self._selection = selection
+        self.matching = matching
+        self.searchable = searchable
+        self.custom = nil
     }
 }

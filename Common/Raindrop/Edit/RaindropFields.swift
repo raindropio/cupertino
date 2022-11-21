@@ -4,45 +4,45 @@ import UI
 
 struct RaindropFields: View {
     @EnvironmentObject private var f: FiltersStore
+    
     @Binding var raindrop: Raindrop
-
+    @FocusState var focus: FocusField?
+    
     var body: some View {
-        NavigationLink {
-            
-        } label: {
-            Thumbnail(raindrop.cover?.best, height: 128, cornerRadius: 3)
-                .frame(height: 128)
-                .frame(maxWidth: .infinity)
-        }
-            .clearSection()
+        CoverPicker(selection: $raindrop.cover, media: raindrop.media)
         
         Section {
             TextField("Title", text: $raindrop.title, axis: .vertical)
+                .preventLineBreaks(text: $raindrop.title)
+                .focused($focus, equals: .title)
                 .fontWeight(.semibold)
                 .lineLimit(5)
+                .onSubmit {
+                    focus = nil
+                }
             
             TextField("Description", text: $raindrop.excerpt, axis: .vertical)
+                .focused($focus, equals: .excerpt)
                 .lineLimit(2...5)
         }
         
         Section {
+            CollectionPicker(
+                id: $raindrop.collection,
+                matching: .insertable,
+                prompt: "Select collection"
+            )
+            
             Label {
-                MultiPicker("Tags", selection: $raindrop.tags) {
-                    Text($0)
-                } suggestions: { filter in
-                    Section("Other") {
-                        ForEach(f.state.tags()) {
-                            Text($0.title)
-                                .tag($0.title)
-                        }
-                    }
-                }
+                TagsPicker($raindrop.tags)
+                    .tokenFieldStyle(.menu)
             } icon: {
                 Image(systemName: "number")
             }
             
             Label {
                 TextField("URL", value: $raindrop.link, format: .url)
+                    .focused($focus, equals: .link)
                     .keyboardType(.URL)
                     .textContentType(.URL)
                     .textInputAutocapitalization(.never)
@@ -57,5 +57,15 @@ struct RaindropFields: View {
             }
         }
             .listItemTint(.secondary)
+    }
+}
+
+extension RaindropFields {
+    enum FocusField {
+        case title
+        case excerpt
+        case collection
+        case tags
+        case link
     }
 }

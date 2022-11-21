@@ -14,7 +14,6 @@ struct SystemCollectionRow: View {
             } icon: {
                 CollectionIcon(collection)
             }
-                .badge(collection.count)
         }
     }
 }

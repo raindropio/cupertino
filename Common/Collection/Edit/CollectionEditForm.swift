@@ -7,13 +7,7 @@ struct CollectionFields: View {
     @Binding var collection: UserCollection
     
     var body: some View {
-        NavigationLink {
-            IconPicker(selection: $collection.cover)
-        } label: {
-            Thumbnail(collection.cover, width: 64, height: 64)
-                .frame(maxWidth: .infinity)
-        }
-            .clearSection()
+        IconPicker(selection: $collection.cover)
 
         Section {
             TextField("Title", text: $collection.title)

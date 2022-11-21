@@ -12,19 +12,20 @@ public struct UserCollectionRow: View {
     
     public var body: some View {
         Label {
-            if withLocation {
-                CollectionLocation(collection: collection)
+            HStack(spacing: 0) {
+                if withLocation {
+                    CollectionLocation(collection: collection)
+                        .lineLimit(1)
+                        .truncationMode(.head)
+                        .foregroundStyle(.secondary)
+                }
+                
+                Text(collection.title+" ")
                     .lineLimit(1)
-                    .truncationMode(.head)
-                    .foregroundStyle(.secondary)
+                    .layoutPriority(1)
             }
-            
-            Text(collection.title+" ")
-                .lineLimit(1)
-                .layoutPriority(1)
         } icon: {
             CollectionIcon(collection)
         }
-            .badge(collection.count)
     }
 }

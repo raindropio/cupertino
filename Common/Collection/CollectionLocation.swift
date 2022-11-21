@@ -22,7 +22,7 @@ extension CollectionLocation {
                     location
                         .map { $0.title }
                         .joined(separator: " / ")
-                )
+                ) + Text(" / ")
             }
         }
     }

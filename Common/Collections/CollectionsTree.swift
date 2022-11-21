@@ -45,6 +45,7 @@ extension CollectionsTree {
                             reorder: reorder
                         ) { collection in
                             UserCollectionRow(collection)
+                                .badge(collection.count)
                                 .swipeActions {
                                     Button {
                                         action(.edit(collection))
