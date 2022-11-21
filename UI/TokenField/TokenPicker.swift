@@ -40,8 +40,11 @@ extension TokenPicker {
     }
     
     func submit() {
-        if !search.isEmpty, !contains(search) {
-            add(search)
+        if !search.isEmpty {
+            search
+                .split(separator: ",")
+                .map { String($0) }
+                .forEach(add)
         }
         
         search = ""
@@ -83,12 +86,6 @@ extension TokenPicker: View {
     
     var body: some View {
         List {
-            if !search.isEmpty, !contains(search) {
-                Button(action: submit) {
-                    Label(search, systemImage: "plus")
-                }
-            }
-            
             if !filtered(recent).isEmpty {
                 Section {
                     ForEach(
@@ -104,66 +101,43 @@ extension TokenPicker: View {
                         Spacer()
                         
                         Button("Select all") {
-                            _ = recent.map(add)
+                            _ = filtered(recent).map(add)
                         }
                             .controlSize(.small)
-                            .buttonStyle(.bordered)
-                            .tint(.secondary)
                     }
                 }
             }
             
             ForEach(
-                filtered(suggestions.data),
+                filtered(suggestions.data).filter { !recent.contains($0.rawValue) },
                 content: render
             )
                 .foregroundColor(.primary)
         }
-            .scrollDismissesKeyboard(.interactively)
-            .modifier(Bubbles {
-                ForEach(
-                    searched(value),
-                    id: \.self,
-                    content: render
-                )
-            })
-            .animation(.default, value: value)
             .animation(.default, value: search)
-            .searchable(text: $search, placement: .navigationBarDrawer(displayMode: .always))
-            .onChange(of: value) { _ in search = "" }
-            .onSubmit(of: .search, submit)
-    }
-}
-
-struct Bubbles<B: RandomAccessCollection, BV: View>: ViewModifier where B.Element: Hashable {
-    var items: ForEach<B, B.Element, BV>
-    
-    init(items: () -> ForEach<B, B.Element, BV>) {
-        self.items = items()
-    }
-    
-    var selected: some View {
-        WStack(alignment: .leading) { items }
-            .buttonStyle(.bordered)
-            .buttonBorderShape(.capsule)
-            .tint(.accentColor)
-    }
-    
-    func body(content: Content) -> some View {
-        content
-            .toolbarBackground(.hidden, for: .navigationBar)
-            .safeAreaInset(edge: .top) {
-                VStack(spacing: 0) {
-                    if !items.data.isEmpty {
-                        selected
-                            .scenePadding([.horizontal, .bottom])
-                            .frame(maxWidth: .infinity, alignment: .leading)
+            .filterable(text: $search, icon: "plus", prompt: "Add tag") {
+                if !searched(value).isEmpty {
+                    ScrollView(.horizontal, showsIndicators: false) {
+                        LazyHStack {
+                            ForEach(
+                                searched(value),
+                                id: \.self,
+                                content: render
+                            )
+                        }
+                            .frame(height: 36)
+                            .scenePadding([.horizontal, .top])
                     }
-                    
-                    Divider().opacity(0.5)
+                        .buttonStyle(.borderedProminent)
+                        .buttonBorderShape(.capsule)
+                        .tint(.accentColor)
+                        .frame(maxWidth: .infinity, alignment: .leading)
+                        
                 }
-                    .background(.bar)
             }
-            .animation(.default, value: items.data.isEmpty)
+            .animation(.default, value: value)
+            .onChange(of: value) { _ in search = "" }
+            .onChange(of: search) { if $0.contains(",") { submit() } }
+            .onSubmit(submit)
     }
 }

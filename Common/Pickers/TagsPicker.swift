@@ -16,7 +16,7 @@ struct TagsPicker: View {
         Memorized(
             value: $value,
             recent: r.state.tags,
-            suggestions: f.state.tags().map(Suggestion.init)
+            suggestions: f.state.tags().compactMap(Suggestion.init)
         )
     }
 }
@@ -39,8 +39,14 @@ extension TagsPicker {
     struct Suggestion: RawRepresentable, Identifiable {
         var filter: Filter
         
-        init(_ filter: Filter) {
-            self.filter = filter
+        init?(_ filter: Filter) {
+            switch filter.kind {
+            case .tag(_):
+                self.filter = filter
+                return
+            default: break
+            }
+            return nil
         }
         
         init?(rawValue: String) {

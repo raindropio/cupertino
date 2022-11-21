@@ -64,7 +64,6 @@ extension ImagePicker: View {
             }
         }
             .ignoresSafeArea(.keyboard)
-            .scrollDismissesKeyboard(.immediately)
     }
 }
 

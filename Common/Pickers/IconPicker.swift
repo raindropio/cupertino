@@ -25,14 +25,6 @@ extension IconPicker {
         @Binding var selection: URL?
         @SceneStorage("select-icon-filter") private var filter = ""
         
-        var searchPlacement: SearchFieldPlacement {
-            #if os(iOS)
-            .navigationBarDrawer(displayMode: .always)
-            #else
-            .automatic
-            #endif
-        }
-        
         var body: some View {
             ImagePicker(
                 icons.state.filtered(filter),
@@ -44,7 +36,7 @@ extension IconPicker {
                 #if os(iOS)
                 .navigationBarTitleDisplayMode(.inline)
                 #endif
-                .searchable(text: $filter, debounce: 0.5, placement: searchPlacement)
+                .filterable(text: $filter)
                 .toolbar {
                     ToolbarItem(placement: .destructiveAction) {
                         Button("Reset") {

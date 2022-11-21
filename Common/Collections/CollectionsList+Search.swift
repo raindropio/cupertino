@@ -9,12 +9,7 @@ extension CollectionsList {
         func body(content: Content) -> some View {
             if enabled {
                 content
-                    .searchable(text: $search, placement: .navigationBarDrawer(displayMode: .always), prompt: "Find collection")
-                    #if canImport(UIKit)
-                    .autocorrectionDisabled()
-                    .textInputAutocapitalization(.never)
-                    .keyboardType(.webSearch)
-                    #endif
+                    .filterable(text: $search, prompt: "Search collection", autoFocus: false)
             } else {
                 content
             }
