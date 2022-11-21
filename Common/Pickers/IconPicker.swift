@@ -9,7 +9,17 @@ struct IconPicker: View {
         NavigationLink {
             Page(selection: $selection)
         } label: {
-            Thumbnail(selection, width: 64, height: 64)
+            Group {
+                if let selection {
+                    Thumbnail(selection, width: 64, height: 64)
+                } else {
+                    Button("Select icon") {}
+                        .buttonStyle(.bordered)
+                        .buttonBorderShape(.capsule)
+                        .tint(.secondary)
+                        .allowsHitTesting(false)
+                }
+            }
                 .frame(maxWidth: .infinity)
         }
             .clearSection()
@@ -39,7 +49,7 @@ extension IconPicker {
                 .filterable(text: $filter)
                 .toolbar {
                     ToolbarItem(placement: .destructiveAction) {
-                        Button("Reset") {
+                        Button("None") {
                             selection = nil
                         }
                     }

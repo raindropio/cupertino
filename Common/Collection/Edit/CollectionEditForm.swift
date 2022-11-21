@@ -17,15 +17,12 @@ struct CollectionFields: View {
                 .lineLimit(2...)
         }
         
-        Section {
-            NavigationLink {
-                
-            } label: {
-                LabeledContent("Location") {
-                    CollectionLocation(collection: collection)
-                        .lineLimit(1)
-                        .truncationMode(.head)
-                }
+        Section("Parent") {
+            CollectionPicker(
+                id: $collection.parent,
+                matching: .nestable
+            ) {
+                Text("None").foregroundStyle(.secondary)
             }
         }
     }

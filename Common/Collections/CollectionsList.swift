@@ -27,16 +27,18 @@ extension CollectionsList: View {
     public var body: some View {
         List(selection: $selection) {
             if search.isEmpty {
-                Section {
-                    if matching == .all {
-                        SystemCollectionRow(id: 0)
-                            .tag(0)
+                if matching != .nestable {
+                    Section {
+                        if matching == .all {
+                            SystemCollectionRow(id: 0)
+                                .tag(0)
+                        }
+                        if matching != .nestable {
+                            SystemCollectionRow(id: -1)
+                                .tag(-1)
+                        }
+                        custom?()
                     }
-                    if matching != .nestable {
-                        SystemCollectionRow(id: -1)
-                            .tag(-1)
-                    }
-                    custom?()
                 }
                 
                 CollectionsTree()
