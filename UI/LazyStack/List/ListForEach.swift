@@ -11,8 +11,12 @@ extension ListForEach: View {
         if let reorder = reorder,
            indexSet.count == 1,
            let array = data as? [D.Element],
-           let first = indexSet.first {
-            reorder(array[first].id, to)
+           let first = indexSet.first,
+            first != to {
+            reorder(
+                array[first].id,
+                first < to ? to - 1 : to
+            )
         }
     }
     
@@ -23,5 +27,6 @@ extension ListForEach: View {
                 .infiniteScrollElement($0.id)
         }
             .onMove(perform: performReorder)
+            .moveDisabled(reorder == nil)
     }
 }

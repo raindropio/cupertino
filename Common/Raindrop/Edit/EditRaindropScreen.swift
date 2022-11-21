@@ -2,6 +2,7 @@ import SwiftUI
 import API
 
 public struct EditRaindropScreen: View {
+    @EnvironmentObject private var dispatch: Dispatcher
     @Environment(\.dismiss) private var dismiss
 
     @State var raindrop: Raindrop
@@ -22,6 +23,9 @@ public struct EditRaindropScreen: View {
                         dismiss()
                     }
                 }
+            }
+            .onDisappear {
+                dispatch.sync(RaindropsAction.update(raindrop))
             }
     }
 }

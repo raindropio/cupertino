@@ -5,7 +5,7 @@ public struct Raindrop: Identifiable, Hashable {
     public var link: URL
     public var title: String
     public var excerpt = ""
-    public var collection: Int?
+    public var collection: Int
     public var cover: Cover?
     public var media = [Media]()
     public var type: `Type` = .link
@@ -18,6 +18,7 @@ public struct Raindrop: Identifiable, Hashable {
     public var duplicate: Raindrop.ID?
     public var file: File?
     public var cache: Cache?
+    public var order: Int?
     
     public var favicon: URL? {
         if let host = link.host() {

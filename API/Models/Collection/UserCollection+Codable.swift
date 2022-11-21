@@ -21,7 +21,7 @@ extension UserCollection: Codable, EncodableWithConfiguration {
         case creatorRef
     }
     
-    public enum DecodeConfiguration {
+    public enum EncodeConfiguration {
         case all
         case modified(from: UserCollection)
         case new
@@ -53,7 +53,7 @@ extension UserCollection: Codable, EncodableWithConfiguration {
         try encode(to: encoder, configuration: .all)
     }
     
-    public func encode(to encoder: Encoder, configuration: DecodeConfiguration) throws {
+    public func encode(to encoder: Encoder, configuration: EncodeConfiguration) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
         
         //all

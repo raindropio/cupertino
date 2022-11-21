@@ -18,6 +18,7 @@ struct BrowseItems: View {
                 find: find,
                 items: r.state.items(find),
                 view: view,
+                sort: r.state.sort(find),
                 edit: $edit
             )
         }
@@ -31,35 +32,49 @@ extension BrowseItems {
         var find: FindBy
         var items: [Raindrop]
         var view: CollectionView
+        var sort: SortBy
         @Binding var edit: Raindrop?
         
-        var body: some View {
-            DataSource(items) { item in
-                RaindropRow(item, view: view)
-                    .swipeActions(edge: .leading) {
-                        Link(destination: item.link) {
-                            Label("Open", systemImage: "safari")
-                        }
+        func reorder(_ id: Raindrop.ID, _ order: Int) {
+            dispatch.sync(RaindropsAction.reorder(id, order: order))
+        }
+        
+        func loadMore() async {
+            try? await dispatch(RaindropsAction.more(find))
+        }
+        
+        func render(_ item: Raindrop) -> some View {
+            RaindropRow(item, view: view)
+                .swipeActions(edge: .leading) {
+                    Link(destination: item.link) {
+                        Label("Open", systemImage: "safari")
                     }
-                    .swipeActions(edge: .trailing) {
-                        Button { edit = item } label: {
-                            Label("Edit", systemImage: "pencil")
-                        }
-                            .tint(.blue)
+                }
+                .swipeActions(edge: .trailing) {
+                    Button { edit = item } label: {
+                        Label("Edit", systemImage: "pencil")
+                    }
+                        .tint(.blue)
 
-                        Button {
-                            
-                        } label: {
-                            Label("Delete", systemImage: "trash")
-                        }
-                            .tint(.red)
+                    Button {
                         
-                        ShareLink(item: item.link)
+                    } label: {
+                        Label("Delete", systemImage: "trash")
                     }
-                    .id(item.id)
-            } loadMore: {
-                try? await dispatch(RaindropsAction.more(find))
-            }
+                        .tint(.red)
+                    
+                    ShareLink(item: item.link)
+                }
+                .id(item.id)
+        }
+        
+        var body: some View {
+            DataSource(
+                items,
+                content: render,
+                reorder: sort == .sort ? reorder : nil,
+                loadMore: loadMore
+            )
         }
     }
 }

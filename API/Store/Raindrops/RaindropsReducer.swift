@@ -36,9 +36,23 @@ public actor RaindropsReducer: Reducer {
         case .create(let item):
             return A.createMany([item])
             
+        //Update
+        case .update(let modified):
+            return try await update(state: &state, modified: modified)
+            
+        case .updated(let raindrop):
+            updated(state: &state, raindrop: raindrop)
+            
         //Many
         case .createMany(let items):
-            try await createMany(state: &state, items: items)
+            return try await createMany(state: &state, items: items)
+            
+        case .createdMany(let items):
+            createdMany(state: &state, items: items)
+            
+        //Shorthands
+        case .reorder(let id, let order):
+            return reorder(state: &state, id: id, order: order)
         }
         return nil
     }

@@ -26,12 +26,41 @@ extension Rest {
     }
 }
 
+//MARK: - Create raindrop
+extension Rest {
+    public func raindropCreate(raindrop: Raindrop) async throws -> Raindrop {
+        let res: ItemResponse<Raindrop> = try await fetch.post(
+            "raindrop",
+            body: raindrop,
+            configuration: .new
+        )
+        return res.item
+    }
+}
+
 //MARK: - Create many
 extension Rest {
     public func raindropsCreate(
         _ raindrops: [Raindrop]
     ) async throws -> [Raindrop] {
-        []
+        let res: ItemsResponse<Raindrop> = try await fetch.post(
+            "raindrops",
+            body: ItemsRequest(items: raindrops),
+            configuration: .new
+        )
+        return res.items
+    }
+}
+
+//MARK: - Update raindrop
+extension Rest {
+    public func raindropUpdate(original: Raindrop, modified: Raindrop) async throws -> Raindrop {
+        let res: ItemResponse<Raindrop> = try await fetch.put(
+            "raindrop/\(original.id)",
+            body: modified,
+            configuration: .modified(from: original)
+        )
+        return res.item
     }
 }
 
@@ -51,6 +80,18 @@ extension Rest {
         case removeTags
         case reparse
         case important(Bool)
+    }
+}
+
+//MARK: - Delete raindrop
+extension Rest {
+    public func raindropDelete(id: Raindrop.ID) async throws {
+        let res: ResultResponse = try await fetch.delete(
+            "raindrop/\(id)"
+        )
+        if !res.result {
+            throw RestError.unknown("server just ignored")
+        }
     }
 }
 

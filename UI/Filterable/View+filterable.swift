@@ -66,15 +66,17 @@ struct FilterableModifier<H: View>: ViewModifier {
     }
     
     func body(content: Content) -> some View {
-        content.safeAreaInset(edge: .bottom) {
+        VStack(spacing: 0) {
+            content
+            
             VStack(spacing: 0) {
                 header?()
                 
                 HStack(spacing: 0) {
                     field
                     cancel
+                        .animation(.default, value: focused)
                 }
-                    .animation(.default, value: focused)
                     .scenePadding()
             }
                 .frame(maxWidth: .infinity)

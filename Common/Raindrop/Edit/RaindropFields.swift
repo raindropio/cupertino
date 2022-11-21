@@ -46,6 +46,7 @@ struct RaindropFields: View {
                     .keyboardType(.URL)
                     .textContentType(.URL)
                     .textInputAutocapitalization(.never)
+                    .truncationMode(.head)
                     .disableAutocorrection(true)
             } icon: {
                 Image(systemName: "globe")
@@ -55,6 +56,7 @@ struct RaindropFields: View {
                 Label("Favorite", systemImage: "heart")
                     .symbolVariant(raindrop.important ? .fill : .none)
             }
+                .listItemTint(raindrop.important ? Filter.Kind.important.color : .secondary)
         }
             .listItemTint(.secondary)
     }

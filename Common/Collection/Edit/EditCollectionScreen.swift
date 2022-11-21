@@ -9,32 +9,17 @@ struct EditCollectionScreen: View {
     @Environment(\.dismiss) private var dismiss
     @State var collection: UserCollection
     
-    @State private var askDelete = false
-
     var body: some View {
         Form {
             CollectionFields(collection: $collection)
             
             if collection.access.level >= .member {
-                Button(role: .destructive) {
-                    askDelete = true
+                ActionButton(role: .destructive) {
+                    try await dispatch(CollectionsAction.delete(collection.id))
+                    dismiss()
                 } label: {
-                    Text("Delete")
-                        .frame(maxWidth: .infinity)
+                    Text("Delete collection").frame(maxWidth: .infinity)
                 }
-                    .clearSection()
-                    .confirmationDialog("Are you sure?", isPresented: $askDelete) {
-                        Button(role: .destructive) {
-                            Task {
-                                do {
-                                    try await dispatch(CollectionsAction.delete(collection.id))
-                                    dismiss()
-                                } catch {}
-                            }
-                        } label: {
-                            Text("Delete collection")
-                        }
-                    }
             }
         }
             .navigationTitle("Edit collection")

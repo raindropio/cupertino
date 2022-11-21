@@ -48,10 +48,16 @@ public enum RaindropsAction: ReduxAction {
     case more(FindBy)
     case moreLoad(FindBy)
     case moreLoaded(FindBy, Int, [Raindrop], Int)
-    //single
+    //create
     case create(Raindrop) // -> createMany
+    //update
+    case update(Raindrop)
+    case updated(Raindrop)
     //multi
     case createMany([Raindrop])
+    case createdMany([Raindrop])
+    //shorthands
+    case reorder(Raindrop.ID, order: Int)
 }
 
 public enum FiltersAction: ReduxAction {
