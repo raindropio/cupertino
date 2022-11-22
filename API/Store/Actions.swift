@@ -53,6 +53,10 @@ public enum RaindropsAction: ReduxAction {
     //update
     case update(Raindrop)
     case updated(Raindrop)
+    //delete
+    case delete(Raindrop.ID) // -> deleteMany
+    case deleteMany(Rest.RaindropsPick)
+    case deletedMany(Rest.RaindropsPick)
     //multi
     case createMany([Raindrop])
     case createdMany([Raindrop])

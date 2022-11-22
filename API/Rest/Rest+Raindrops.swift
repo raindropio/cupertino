@@ -67,7 +67,6 @@ extension Rest {
 //MARK: - Update many
 extension Rest {
     public func raindropsUpdate(
-        _ find: FindBy,
         pick: RaindropsPick,
         operation: RaindropsUpdateOperation
     ) async throws -> Int {
@@ -98,10 +97,35 @@ extension Rest {
 //MARK: - Remove many
 extension Rest {
     public func raindropsDelete(
-        _ find: FindBy,
         pick: RaindropsPick
     ) async throws -> Int {
-        0
+        switch pick {
+        case .all(let find):
+            let res: ModifiedResponse = try await fetch.delete(
+                "raindrops/\(find.collectionId)",
+                query: find.query
+            )
+            return res.modified
+            
+        case .some(let ids):
+            guard !ids.isEmpty else { return 0 }
+            
+            let res: ModifiedResponse = try await fetch.delete(
+                "raindrops/0",
+                body: IdsRequest(ids: ids)
+            )
+            
+            //maybe it's permanent remove request?
+            if res.modified == 0 {
+                let retry: ModifiedResponse = try await fetch.delete(
+                    "raindrops/-99",
+                    body: IdsRequest(ids: ids)
+                )
+                return retry.modified
+            }
+            
+            return res.modified
+        }
     }
 }
 
@@ -113,8 +137,8 @@ extension Rest {
 
 //MARK: - Etc
 extension Rest {
-    public enum RaindropsPick {
-        case all
-        case ids([Raindrop.ID])
+    public enum RaindropsPick: Equatable {
+        case all(FindBy)
+        case some([Raindrop.ID])
     }
 }

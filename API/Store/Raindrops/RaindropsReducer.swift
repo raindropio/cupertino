@@ -32,7 +32,7 @@ public actor RaindropsReducer: Reducer {
         case .moreLoaded(let find, let page, let items, let total):
             moreLoaded(state: &state, find: find, page: page, items: items, total: total)
             
-        //Single
+        //Create
         case .create(let item):
             return A.createMany([item])
             
@@ -43,7 +43,18 @@ public actor RaindropsReducer: Reducer {
         case .updated(let raindrop):
             updated(state: &state, raindrop: raindrop)
             
-        //Many
+        //Delete
+        case .delete(let id):
+            return A.deleteMany(.some([id]))
+            
+        //Delete Many
+        case .deleteMany(let pick):
+            return try await deleteMany(state: &state, pick: pick)
+            
+        case .deletedMany(let pick):
+            deletedMany(state: &state, pick: pick)
+            
+        //Create Many
         case .createMany(let items):
             return try await createMany(state: &state, items: items)
             

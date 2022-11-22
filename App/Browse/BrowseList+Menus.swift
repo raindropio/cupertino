@@ -19,7 +19,9 @@ extension BrowseList {
 
 extension BrowseList.Menus {
     struct Memorized: View {
+        @EnvironmentObject private var dispatch: Dispatcher
         @EnvironmentObject private var app: AppRouter
+        
         var items: [Raindrop]
         @Binding var edit: Raindrop?
         
@@ -42,7 +44,7 @@ extension BrowseList.Menus {
                 }
 
                 Button(role: .destructive) {
-                    
+                    dispatch.sync(RaindropsAction.delete(item.id))
                 } label: {
                     Label("Delete", systemImage: "trash")
                 }

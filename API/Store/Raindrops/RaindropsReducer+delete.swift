@@ -1,0 +1,44 @@
+extension RaindropsReducer {
+    func deleteMany(state: inout S, pick: Rest.RaindropsPick) async throws -> ReduxAction? {
+        //make sure to not remove entirely all!
+        switch pick {
+        case .all(let find):
+            if find.collectionId == 0 && !find.isSearching {
+                return nil
+            }
+        default: break
+        }
+        
+        let count = try await rest.raindropsDelete(pick: pick)
+        if count > 0 {
+            return A.deletedMany(pick)
+        }
+        return nil
+    }
+    
+    func deletedMany(state: inout S, pick: Rest.RaindropsPick) {
+        let touched = state.pickItems(pick: pick)
+        var modified = [Raindrop]()
+        
+        for item in touched {
+            //permanent remove
+            if item.collection == -99 {
+                state.items.removeValue(forKey: item.id)
+                for (find, _) in state.segments {
+                    state.segments[find]?.ids.removeAll { $0 == item.id }
+                }
+            }
+            //move to trash
+            else {
+                state.items[item.id]?.collection = -99
+                if let item = state.items[item.id] {
+                    modified.append(item)
+                }
+            }
+        }
+        
+        if !modified.isEmpty {
+            state.updateSegments(modified)
+        }
+    }
+}

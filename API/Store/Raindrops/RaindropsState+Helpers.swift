@@ -25,8 +25,7 @@ extension RaindropsState {
                 }
                 //remove
                 else if contains {
-                    let ids = segments[find]?.ids.filter { $0 != item.id } ?? []
-                    segments[find]?.ids = ids
+                    segments[find]?.ids.removeAll { $0 == item.id }
                 }
             }
         }
@@ -47,6 +46,16 @@ extension RaindropsState {
                     )
                 }
             }
+        }
+    }
+    
+    func pickItems(pick: Rest.RaindropsPick) -> [Raindrop] {
+        switch pick {
+        case .some(let ids):
+            return ids.compactMap { items[$0] }
+            
+        case .all(let find):
+            return items(find)
         }
     }
 }

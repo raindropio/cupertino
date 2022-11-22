@@ -56,8 +56,8 @@ extension BrowseItems {
                     }
                         .tint(.blue)
 
-                    Button {
-                        
+                    Button(role: .destructive) {
+                        dispatch.sync(RaindropsAction.delete(item.id))
                     } label: {
                         Label("Delete", systemImage: "trash")
                     }
