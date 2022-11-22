@@ -21,11 +21,13 @@ extension RaindropsState {
                 if shouldBeIn {
                     if !contains {
                         segments[find]?.ids.insert(item.id, at: 0)
+                        segments[find]?.total += 1
                     }
                 }
                 //remove
                 else if contains {
                     segments[find]?.ids.removeAll { $0 == item.id }
+                    segments[find]?.total -= 1
                 }
             }
         }
@@ -49,7 +51,7 @@ extension RaindropsState {
         }
     }
     
-    func pickItems(pick: Rest.RaindropsPick) -> [Raindrop] {
+    func pickItems(pick: RaindropsPick) -> [Raindrop] {
         switch pick {
         case .some(let ids):
             return ids.compactMap { items[$0] }

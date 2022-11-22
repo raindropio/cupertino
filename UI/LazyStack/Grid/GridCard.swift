@@ -1,6 +1,6 @@
 import SwiftUI
 
-struct GridCard<Element: Identifiable & Transferable> {
+struct GridCard<Element: Identifiable> {
     @EnvironmentObject private var model: LazyStackModel<Element.ID>
     #if canImport(UIKit)
     @Environment(\.editMode) private var editMode

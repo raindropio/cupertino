@@ -9,7 +9,7 @@ extension CollectionsList {
         func body(content: Content) -> some View {
             if enabled {
                 content
-                    .filterable(text: $search, prompt: "Search collection", autoFocus: false)
+                    .filterable(text: $search, autoFocus: false)
             } else {
                 content
             }

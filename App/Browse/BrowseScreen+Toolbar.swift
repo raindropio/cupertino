@@ -1,6 +1,7 @@
 import SwiftUI
 import API
 import Common
+import UI
 
 extension BrowseScreen {
     struct Toolbar: ViewModifier {
@@ -31,6 +32,8 @@ extension BrowseScreen.Toolbar {
                 .toolbar {
                     ToolbarItem(placement: .primaryAction) {
                         Menu {
+                            EditButton("Select")
+                            
                             if let user = collection as? UserCollection {
                                 UserCollectionMenu(user)
                             }

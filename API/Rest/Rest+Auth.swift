@@ -2,8 +2,12 @@ import Foundation
 
 //MARK: - Login
 extension Rest {
-    public func authLogin(form: AuthLoginForm) async throws {
-        let res: ResultResponse = try await fetch.post("auth/email/login", body: form)
+    public func authLogin(_ body: AuthLoginRequest) async throws {
+        let res: ResultResponse = try await fetch.post(
+            "auth/email/login",
+            body: body
+        )
+        
         guard res.result == true
         else { throw RestError.unauthorized }
     }

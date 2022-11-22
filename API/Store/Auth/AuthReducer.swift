@@ -8,8 +8,8 @@ public actor AuthReducer: Reducer {
     
     public func reduce(state: inout S, action: A) async throws -> ReduxAction? {
         switch action {
-            case .login(let form):
-                try await login(state: &state, form: form)
+            case .login(let body):
+                try await login(state: &state, body: body)
                 
             case .logout:
                 try await logout(state: &state)

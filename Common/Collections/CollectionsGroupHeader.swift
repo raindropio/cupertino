@@ -15,7 +15,7 @@ struct CollectionsGroupHeader: View {
         dispatch.sync(CollectionsAction.toggleMany)
     }
     
-    func sortAll(_ by: UpdateCollectionsForm.Sort) {
+    func sortAll(_ by: UpdateCollectionsRequest.Sort) {
         dispatch.sync(CollectionsAction.reorderMany(by))
     }
     

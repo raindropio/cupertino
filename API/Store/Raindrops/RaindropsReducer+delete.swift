@@ -1,5 +1,5 @@
 extension RaindropsReducer {
-    func deleteMany(state: inout S, pick: Rest.RaindropsPick) async throws -> ReduxAction? {
+    func deleteMany(state: inout S, pick: RaindropsPick) async throws -> ReduxAction? {
         //make sure to not remove entirely all!
         switch pick {
         case .all(let find):
@@ -16,7 +16,7 @@ extension RaindropsReducer {
         return nil
     }
     
-    func deletedMany(state: inout S, pick: Rest.RaindropsPick) {
+    func deletedMany(state: inout S, pick: RaindropsPick) {
         let touched = state.pickItems(pick: pick)
         var modified = [Raindrop]()
         

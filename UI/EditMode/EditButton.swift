@@ -1,15 +1,15 @@
 import SwiftUI
 
 #if os(iOS)
-public struct EditButton<Label> : View where Label : View {
+public struct EditButton<L> : View where L : View {
     @Environment(\.editMode) private var editMode
-    var label: (EditMode) -> Label
+    var label: (EditMode) -> L
     
-    public init(_ label: @escaping (EditMode) -> Label) {
+    public init(_ label: @escaping (EditMode) -> L) {
         self.label = label
     }
     
-    public init(_ label: @escaping () -> Label) {
+    public init(_ label: @escaping () -> L) {
         self.label = { _ in label() }
     }
     
@@ -24,6 +24,14 @@ public struct EditButton<Label> : View where Label : View {
             }
         } label: {
             label(editMode?.wrappedValue ?? .inactive)
+        }
+    }
+}
+
+extension EditButton where L == Label<Text, Image> {
+    public init<S>(_ title: S) where S : StringProtocol {
+        self.label = { _ in
+            Label(title, systemImage: "checkmark.circle")
         }
     }
 }

@@ -42,7 +42,7 @@ extension IconPicker {
                 width: 48, height: 48
             )
                 .equatable()
-                .navigationTitle("Select icon")
+                .navigationTitle("Icon")
                 #if os(iOS)
                 .navigationBarTitleDisplayMode(.inline)
                 #endif

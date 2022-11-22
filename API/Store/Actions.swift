@@ -1,7 +1,7 @@
 //TODO: Support debounce
 
 public enum AuthAction: ReduxAction {
-    case login(AuthLoginForm)
+    case login(AuthLoginRequest)
     case logout
 }
 
@@ -16,7 +16,7 @@ public enum CollectionsAction: ReduxAction {
     //update
     case update(UserCollection, original: UserCollection? = nil)
     case updated(UserCollection)
-    case updateMany(UpdateCollectionsForm)
+    case updateMany(UpdateCollectionsRequest)
     //delete
     case delete(UserCollection.ID)
     case deleted(UserCollection.ID)
@@ -25,7 +25,7 @@ public enum CollectionsAction: ReduxAction {
     case groupsUpdated([CGroup])
     //shorthands
     case reorder(UserCollection.ID, parent: UserCollection.ID?, order: Int)
-    case reorderMany(UpdateCollectionsForm.Sort)
+    case reorderMany(UpdateCollectionsRequest.Sort)
     case setView(Int, CollectionView)
     case toggle(UserCollection.ID)
     case toggleMany
@@ -53,15 +53,17 @@ public enum RaindropsAction: ReduxAction {
     //update
     case update(Raindrop)
     case updated(Raindrop)
+    case updateMany(RaindropsPick, UpdateRaindropsRequest)
+    case updatedMany(RaindropsPick, UpdateRaindropsRequest)
     //delete
     case delete(Raindrop.ID) // -> deleteMany
-    case deleteMany(Rest.RaindropsPick)
-    case deletedMany(Rest.RaindropsPick)
+    case deleteMany(RaindropsPick)
+    case deletedMany(RaindropsPick)
     //multi
     case createMany([Raindrop])
     case createdMany([Raindrop])
     //shorthands
-    case reorder(Raindrop.ID, order: Int)
+    case reorder(Raindrop.ID, to: Int? = nil, order: Int)
 }
 
 public enum FiltersAction: ReduxAction {

@@ -23,7 +23,6 @@ extension ListForEach: View {
     var body: some View {
         ForEach(data) {
             content($0)
-                .draggable($0)
                 .infiniteScrollElement($0.id)
         }
             .onMove(perform: performReorder)

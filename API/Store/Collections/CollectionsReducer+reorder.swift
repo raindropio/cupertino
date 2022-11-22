@@ -11,7 +11,7 @@ extension CollectionsReducer {
 }
 
 extension CollectionsReducer {
-    func reorderMany(state: inout S, by: UpdateCollectionsForm.Sort) -> ReduxAction? {
+    func reorderMany(state: inout S, by: UpdateCollectionsRequest.Sort) -> ReduxAction? {
         return A.updateMany(
             .init(sort: by)
         )

@@ -33,8 +33,8 @@ public actor CollectionsReducer: Reducer {
         case .updated(let collection):
             return updated(state: &state, collection: collection)
             
-        case .updateMany(let form):
-            return try await updateMany(state: &state, form: form)
+        case .updateMany(let body):
+            return try await updateMany(state: &state, body: body)
             
         //delete
         case .delete(let id):
@@ -94,7 +94,7 @@ public actor CollectionsReducer: Reducer {
         //Raindrops
         if let action = action as? RaindropsAction {
             switch action {
-            case .createdMany(_), .updated(_), .deletedMany(_):
+            case .createdMany(_), .updated(_), .updatedMany(_, _), .deletedMany(_):
                 return A.reload
                 
             default: break

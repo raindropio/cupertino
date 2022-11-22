@@ -44,7 +44,7 @@ extension BrowseItems {
         }
         
         func render(_ item: Raindrop) -> some View {
-            RaindropRow(item, view: view)
+            BrowseItem(item, view: view)
                 .swipeActions(edge: .leading) {
                     Link(destination: item.link) {
                         Label("Open", systemImage: "safari")
@@ -65,7 +65,7 @@ extension BrowseItems {
                     
                     ShareLink(item: item.link)
                 }
-                .id(item.id)
+                .draggable(item)
         }
         
         var body: some View {

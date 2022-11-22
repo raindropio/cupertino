@@ -87,10 +87,6 @@ extension BrowseList { fileprivate struct Memorized: View {
                 try? await dispatch(RaindropsAction.load(find))
             }
             .modifier(Toolbar(find: find))
-            .sheet(item: $edit) { item in
-                NavigationStack {
-                    EditRaindropScreen(raindrop: item)
-                }
-            }
+            .sheet(item: $edit, content: EditRaindropStack.init)
     }
 }}

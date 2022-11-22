@@ -24,7 +24,7 @@ struct AuthViewEmail: View {
     @EnvironmentObject private var auth: AuthStore
     @EnvironmentObject private var dispatch: Dispatcher
     
-    @State private var form = AuthLoginForm()
+    @State private var form = AuthLoginRequest()
     @State private var loading = false
     @State private var error: Error?
     

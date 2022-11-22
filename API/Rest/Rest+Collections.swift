@@ -67,10 +67,10 @@ extension Rest {
 
 //MARK: - Update many collection
 extension Rest {
-    public func collectionUpdateMany(_ form: UpdateCollectionsForm) async throws {
+    public func collectionUpdateMany(_ body: UpdateCollectionsRequest) async throws {
         let _: ResultResponse = try await fetch.put(
             "collections",
-            body: form
+            body: body
         )
     }
 }

@@ -1,4 +1,4 @@
-public struct UpdateCollectionsForm: Encodable {
+public struct UpdateCollectionsRequest: Encodable {
     var expanded: Bool?
     var sort: Sort?
     

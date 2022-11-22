@@ -23,7 +23,14 @@ extension CollectionPicker where Prompt == Label<Text, Image> {
     }
     
     init(id: Binding<Int>, matching: CollectionsListMatching, prompt: String = "") {
-        self._id = .init { id.wrappedValue } set: { id.wrappedValue = $0 ?? -1 }
+        self._id = .init {
+            id.wrappedValue
+        } set: {
+            let newValue = $0 ?? -1
+            if newValue != id.wrappedValue {
+                id.wrappedValue = newValue
+            }
+        }
         self.matching = matching
         self.prompt = { Label(prompt, systemImage: "folder") }
     }

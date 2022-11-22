@@ -29,6 +29,7 @@ extension BrowseNested {
                             } label: {
                                 UserCollectionRow(item)
                             }
+                                .dropRaindrop(to: item)
                         }
                     }
                         .scenePadding(.horizontal)

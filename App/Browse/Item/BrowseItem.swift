@@ -2,43 +2,43 @@ import SwiftUI
 import API
 import UI
 
-public struct RaindropRow: View {
+struct BrowseItem: View {
     var raindrop: Raindrop
     var view: CollectionView
     
-    public init(_ raindrop: Raindrop, view: CollectionView) {
+    init(_ raindrop: Raindrop, view: CollectionView) {
         self.raindrop = raindrop
         self.view = view
     }
 
-    public var body: some View {
+    var body: some View {
         switch view {
         case .list:
             HStack(alignment: .top, spacing: 14) {
                 Thumbnail(raindrop.cover?.best, width: 80, height: 60, cornerRadius: 3)
                     .padding(.top, 8)
-                RaindropDetails(raindrop: raindrop)
+                Details(raindrop: raindrop)
             }
             
         case .simple:
             HStack(alignment: .top, spacing: 14) {
                 Thumbnail(raindrop.favicon, width: 20, height: 20, cornerRadius: 3)
                     .padding(.top, 8)
-                RaindropDetails(raindrop: raindrop)
+                Details(raindrop: raindrop)
             }
             
         case .grid:
             VStack(alignment: .leading, spacing: 0) {
                 Thumbnail(raindrop.cover?.best, width: 250, aspectRatio: 1.333)
                     .frame(maxWidth: .infinity)
-                RaindropDetails(raindrop: raindrop, vertical: true)
+                Details(raindrop: raindrop, vertical: true)
             }
             
         case .masonry:
             VStack(alignment: .leading, spacing: 0) {
                 Thumbnail(raindrop.cover?.best, width: 250)
                     .frame(maxWidth: .infinity)
-                RaindropDetails(raindrop: raindrop, vertical: true)
+                Details(raindrop: raindrop, vertical: true)
             }
         }
     }

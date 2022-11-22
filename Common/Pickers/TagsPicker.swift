@@ -22,7 +22,7 @@ struct TagsPicker: View {
 }
 
 extension TagsPicker {
-    struct Memorized: View {
+    fileprivate struct Memorized: View {
         @Binding var value: [String]
         var recent: [String]
         var suggestions: [Suggestion]
@@ -36,7 +36,7 @@ extension TagsPicker {
         }
     }
     
-    struct Suggestion: RawRepresentable, Identifiable {
+    fileprivate struct Suggestion: RawRepresentable, Identifiable {
         var filter: Filter
         
         init?(_ filter: Filter) {

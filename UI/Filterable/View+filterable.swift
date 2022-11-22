@@ -3,8 +3,8 @@ import SwiftUI
 public extension View {
     func filterable(
         text: Binding<String>,
-        icon: String = "magnifyingglass",
-        prompt: String = "Search",
+        icon: String = "line.3.horizontal.decrease.circle",
+        prompt: String = "Filter",
         autoFocus: Bool = true
     ) -> some View {
         modifier(FilterableModifier(text: text, icon: icon, prompt: prompt, autoFocus: autoFocus))
@@ -12,8 +12,8 @@ public extension View {
     
     func filterable<H: View>(
         text: Binding<String>,
-        icon: String = "magnifyingglass",
-        prompt: String = "Search",
+        icon: String = "line.3.horizontal.decrease.circle",
+        prompt: String = "Filter",
         autoFocus: Bool = true,
         @ViewBuilder header: @escaping () -> H
     ) -> some View {
@@ -70,17 +70,19 @@ struct FilterableModifier<H: View>: ViewModifier {
             content
             
             VStack(spacing: 0) {
+                Divider().opacity(0.5)
+
                 header?()
                 
                 HStack(spacing: 0) {
                     field
                     cancel
-                        .animation(.default, value: focused)
                 }
                     .scenePadding()
+                    .animation(.default, value: focused)
             }
                 .frame(maxWidth: .infinity)
-                .background(.regularMaterial)
+                .background(.bar)
                 ._onButtonGesture(pressing: nil) {
                     focused = true
                 }

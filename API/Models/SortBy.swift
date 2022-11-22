@@ -45,7 +45,7 @@ extension SortBy: CaseIterable {
     }
     
     public static func someCases(for findBy: FindBy) -> [SortBy] {
-        (
+        var cases: [SortBy] = (
             findBy.search.isEmpty ?
                 findBy.collectionId != 0 ? [.sort] : []
                 : [.score]
@@ -56,6 +56,13 @@ extension SortBy: CaseIterable {
             .title(.asc),
             .title(.desc),
         ]
+        
+        //score is bad for non text search
+        if findBy.isSearching, findBy.text.isEmpty {
+            cases.move(fromOffsets: [1], toOffset: 0)
+        }
+        
+        return cases
     }
 }
 

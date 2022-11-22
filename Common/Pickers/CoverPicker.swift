@@ -32,7 +32,7 @@ extension CoverPicker {
                 width: 80, height: 60
             )
                 .equatable()
-                .navigationTitle("Select cover")
+                .navigationTitle("Cover")
                 #if os(iOS)
                 .navigationBarTitleDisplayMode(.inline)
                 #endif

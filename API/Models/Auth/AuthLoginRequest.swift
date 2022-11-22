@@ -1,4 +1,4 @@
-public struct AuthLoginForm: Encodable {
+public struct AuthLoginRequest: Encodable {
     public var email: String
     public var password: String
     
