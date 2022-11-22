@@ -16,28 +16,32 @@ struct BrowseNested: View {
 extension BrowseNested {
     struct Memorized: View {
         @EnvironmentObject private var app: AppRouter
-        
         var items: [UserCollection]
+        
+        func item(_ collection: UserCollection) -> some View {
+            Button {
+                app.browse(collection)
+            } label: {
+                UserCollectionRow(collection)
+            }
+                .dropRaindrop(to: collection)
+                .contextMenu {
+                    UserCollectionMenu(collection)
+                }
+        }
         
         var body: some View {
             if !items.isEmpty {
                 ScrollView(.horizontal, showsIndicators: false) {
                     LazyHStack(spacing: 12) {
-                        ForEach(items) { item in
-                            Button {
-                                app.browse(item)
-                            } label: {
-                                UserCollectionRow(item)
-                            }
-                                .dropRaindrop(to: item)
-                        }
+                        ForEach(items, content: item)
                     }
                         .scenePadding(.horizontal)
                 }
                     .buttonStyle(.bordered)
                     .foregroundStyle(.primary)
-                    .clearSection()
                     .padding(.vertical, 8)
+                    .clearSection()
             }
         }
     }

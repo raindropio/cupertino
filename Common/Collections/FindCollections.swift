@@ -34,6 +34,7 @@ extension FindCollections {
                     ForEach(user) { item in
                         UserCollectionRow(item, withLocation: true)
                             .badge(item.count)
+                            .dropRaindrop(to: item)
                             .id(item.id)
                     }
                 }

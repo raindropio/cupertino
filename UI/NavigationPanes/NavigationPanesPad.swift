@@ -143,13 +143,6 @@ fileprivate extension NavigationPanes {
             content.fullScreenCover(isPresented: isPresented) {
                 NavigationStack {
                     detail(first)
-                        .toolbar {
-                            ToolbarItem(placement: .navigation) {
-                                Button(action: close) {
-                                    Image(systemName: "xmark")
-                                }
-                            }
-                        }
                 }
             }
         }

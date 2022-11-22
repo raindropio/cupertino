@@ -52,7 +52,7 @@ struct FilterableModifier<H: View>: ViewModifier {
     
     @ViewBuilder
     var cancel: some View {
-        if focused {
+        if focused || !text.isEmpty {
             Button("Cancel") {
                 text = ""
                 focused = false
