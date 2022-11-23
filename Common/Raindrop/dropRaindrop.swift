@@ -32,7 +32,7 @@ struct DropRaindropToCollectionModifier: ViewModifier {
             .dropDestination(for: Raindrop.self) { items, _ in
                 dispatch.sync(
                     RaindropsAction.updateMany(
-                        .some(items.map { $0.id }),
+                        .some(Set(items.map { $0.id })),
                         .moveTo(collectionId)
                     )
                 )

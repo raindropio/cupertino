@@ -2,17 +2,17 @@ import SwiftUI
 import API
 import UI
 
-struct TagsPicker: View {
+public struct TagsPicker: View {
     @EnvironmentObject private var f: FiltersStore
     @EnvironmentObject private var r: RecentStore
     
     @Binding var value: [String]
     
-    init(_ value: Binding<[String]>) {
+    public init(_ value: Binding<[String]>) {
         self._value = value
     }
 
-    var body: some View {
+    public var body: some View {
         Memorized(
             value: $value,
             recent: r.state.tags,

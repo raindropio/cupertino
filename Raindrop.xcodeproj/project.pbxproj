@@ -29,6 +29,14 @@
 		767EB460292CC0C40018EE8F /* BrowseItem+Buttons.swift in Sources */ = {isa = PBXBuildFile; fileRef = 767EB45D292CC0C40018EE8F /* BrowseItem+Buttons.swift */; };
 		767EB461292CC0C40018EE8F /* BrowseItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 767EB45E292CC0C40018EE8F /* BrowseItem.swift */; };
 		767EB463292CC19C0018EE8F /* BrowseItem+FilterButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 767EB462292CC19C0018EE8F /* BrowseItem+FilterButton.swift */; };
+		767EB468292E14450018EE8F /* BrowseBulk.swift in Sources */ = {isa = PBXBuildFile; fileRef = 767EB467292E14450018EE8F /* BrowseBulk.swift */; };
+		767EB46A292E15E70018EE8F /* BrowseBulk+title.swift in Sources */ = {isa = PBXBuildFile; fileRef = 767EB469292E15E70018EE8F /* BrowseBulk+title.swift */; };
+		767EB46C292E17B90018EE8F /* BrowseBulk+ToggleAll.swift in Sources */ = {isa = PBXBuildFile; fileRef = 767EB46B292E17B90018EE8F /* BrowseBulk+ToggleAll.swift */; };
+		767EB46E292E1A2F0018EE8F /* BrowseBulk+Done.swift in Sources */ = {isa = PBXBuildFile; fileRef = 767EB46D292E1A2F0018EE8F /* BrowseBulk+Done.swift */; };
+		767EB470292E1C6A0018EE8F /* BrowseBulk+Move.swift in Sources */ = {isa = PBXBuildFile; fileRef = 767EB46F292E1C6A0018EE8F /* BrowseBulk+Move.swift */; };
+		767EB472292E44980018EE8F /* BrowseBulk+AddTags.swift in Sources */ = {isa = PBXBuildFile; fileRef = 767EB471292E44980018EE8F /* BrowseBulk+AddTags.swift */; };
+		767EB474292E467F0018EE8F /* BrowseBulk+Delete.swift in Sources */ = {isa = PBXBuildFile; fileRef = 767EB473292E467F0018EE8F /* BrowseBulk+Delete.swift */; };
+		767EB476292E47F80018EE8F /* BrowseBulk+More.swift in Sources */ = {isa = PBXBuildFile; fileRef = 767EB475292E47F80018EE8F /* BrowseBulk+More.swift */; };
 		7685A195286868AC00A4BC3C /* App.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7685A194286868AC00A4BC3C /* App.swift */; };
 		7685A199286868AD00A4BC3C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7685A198286868AD00A4BC3C /* Assets.xcassets */; };
 		76864FBD291EA059000B9B45 /* SidebarScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76864FB5291EA059000B9B45 /* SidebarScreen.swift */; };
@@ -69,6 +77,14 @@
 		767EB45D292CC0C40018EE8F /* BrowseItem+Buttons.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "BrowseItem+Buttons.swift"; sourceTree = "<group>"; };
 		767EB45E292CC0C40018EE8F /* BrowseItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BrowseItem.swift; sourceTree = "<group>"; };
 		767EB462292CC19C0018EE8F /* BrowseItem+FilterButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "BrowseItem+FilterButton.swift"; sourceTree = "<group>"; };
+		767EB467292E14450018EE8F /* BrowseBulk.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BrowseBulk.swift; sourceTree = "<group>"; };
+		767EB469292E15E70018EE8F /* BrowseBulk+title.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "BrowseBulk+title.swift"; sourceTree = "<group>"; };
+		767EB46B292E17B90018EE8F /* BrowseBulk+ToggleAll.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "BrowseBulk+ToggleAll.swift"; sourceTree = "<group>"; };
+		767EB46D292E1A2F0018EE8F /* BrowseBulk+Done.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "BrowseBulk+Done.swift"; sourceTree = "<group>"; };
+		767EB46F292E1C6A0018EE8F /* BrowseBulk+Move.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "BrowseBulk+Move.swift"; sourceTree = "<group>"; };
+		767EB471292E44980018EE8F /* BrowseBulk+AddTags.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "BrowseBulk+AddTags.swift"; sourceTree = "<group>"; };
+		767EB473292E467F0018EE8F /* BrowseBulk+Delete.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "BrowseBulk+Delete.swift"; sourceTree = "<group>"; };
+		767EB475292E47F80018EE8F /* BrowseBulk+More.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "BrowseBulk+More.swift"; sourceTree = "<group>"; };
 		7685A191286868AC00A4BC3C /* Raindrop.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Raindrop.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7685A194286868AC00A4BC3C /* App.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = App.swift; sourceTree = "<group>"; };
 		7685A198286868AD00A4BC3C /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -116,6 +132,7 @@
 		767AC107292511CF00766998 /* Browse */ = {
 			isa = PBXGroup;
 			children = (
+				767EB466292E14180018EE8F /* Bulk */,
 				767EB45B292CC0B20018EE8F /* Item */,
 				76864FB7291EA059000B9B45 /* BrowseScreen.swift */,
 				760C9DFB2923C732001CB755 /* BrowseScreen+Toolbar.swift */,
@@ -168,6 +185,21 @@
 				767EB462292CC19C0018EE8F /* BrowseItem+FilterButton.swift */,
 			);
 			path = Item;
+			sourceTree = "<group>";
+		};
+		767EB466292E14180018EE8F /* Bulk */ = {
+			isa = PBXGroup;
+			children = (
+				767EB467292E14450018EE8F /* BrowseBulk.swift */,
+				767EB469292E15E70018EE8F /* BrowseBulk+title.swift */,
+				767EB46B292E17B90018EE8F /* BrowseBulk+ToggleAll.swift */,
+				767EB46D292E1A2F0018EE8F /* BrowseBulk+Done.swift */,
+				767EB46F292E1C6A0018EE8F /* BrowseBulk+Move.swift */,
+				767EB471292E44980018EE8F /* BrowseBulk+AddTags.swift */,
+				767EB473292E467F0018EE8F /* BrowseBulk+Delete.swift */,
+				767EB475292E47F80018EE8F /* BrowseBulk+More.swift */,
+			);
+			path = Bulk;
 			sourceTree = "<group>";
 		};
 		7685A188286868AC00A4BC3C = {
@@ -306,6 +338,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				7694CA072926629C00BD81A0 /* PreviewScreen+Options.swift in Sources */,
+				767EB46C292E17B90018EE8F /* BrowseBulk+ToggleAll.swift in Sources */,
 				76864FBF291EA059000B9B45 /* BrowseScreen.swift in Sources */,
 				760C9E312923C735001CB755 /* BrowseList+Toolbar.swift in Sources */,
 				767EB461292CC0C40018EE8F /* BrowseItem.swift in Sources */,
@@ -317,12 +350,15 @@
 				767EB460292CC0C40018EE8F /* BrowseItem+Buttons.swift in Sources */,
 				760C9E2D2923C735001CB755 /* BrowseList+Menus.swift in Sources */,
 				76BFE371291E9F6B00DE9DB2 /* AuthScene.swift in Sources */,
+				767EB46E292E1A2F0018EE8F /* BrowseBulk+Done.swift in Sources */,
+				767EB472292E44980018EE8F /* BrowseBulk+AddTags.swift in Sources */,
 				7694C9F429253A0D00BD81A0 /* PreviewScreen+Toolbar.swift in Sources */,
 				767AC1132925173900766998 /* SidebarScreen+GlobalSearch.swift in Sources */,
 				760C9E302923C735001CB755 /* BrowseSortButton.swift in Sources */,
 				7694CA032926527E00BD81A0 /* PreviewScreen+Title.swift in Sources */,
 				76BFE372291E9F6B00DE9DB2 /* SettingsScene.swift in Sources */,
 				760C9E322923C735001CB755 /* BrowseLoadMore.swift in Sources */,
+				767EB476292E47F80018EE8F /* BrowseBulk+More.swift in Sources */,
 				760C9E2F2923C735001CB755 /* BrowseList.swift in Sources */,
 				767EB463292CC19C0018EE8F /* BrowseItem+FilterButton.swift in Sources */,
 				7694CA0529265B5000BD81A0 /* PreviewScreen+Action.swift in Sources */,
@@ -330,14 +366,18 @@
 				760C9E352923C735001CB755 /* BrowseViewButton.swift in Sources */,
 				760C9E2E2923C735001CB755 /* BrowseStatusBar.swift in Sources */,
 				7694C9F72926110A00BD81A0 /* PreviewScreen.swift in Sources */,
+				767EB46A292E15E70018EE8F /* BrowseBulk+title.swift in Sources */,
 				76BFE36F291E9F6B00DE9DB2 /* AppRouter.swift in Sources */,
+				767EB470292E1C6A0018EE8F /* BrowseBulk+Move.swift in Sources */,
 				760C9E342923C735001CB755 /* BrowseItems.swift in Sources */,
 				76BFE36E291E9F6B00DE9DB2 /* AppScene.swift in Sources */,
+				767EB468292E14450018EE8F /* BrowseBulk.swift in Sources */,
 				760C9E492923C735001CB755 /* GlobalSearch.swift in Sources */,
 				7685A195286868AC00A4BC3C /* App.swift in Sources */,
 				760C9E2A2923C735001CB755 /* BrowseScreen+Toolbar.swift in Sources */,
 				76BFE370291E9F6B00DE9DB2 /* SettingsRouter.swift in Sources */,
 				767EB45F292CC0C40018EE8F /* BrowseItem+Details.swift in Sources */,
+				767EB474292E467F0018EE8F /* BrowseBulk+Delete.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

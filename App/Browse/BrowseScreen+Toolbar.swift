@@ -24,22 +24,25 @@ extension BrowseScreen {
 extension BrowseScreen.Toolbar {
     struct Memorized: ViewModifier {
         @Environment(\.horizontalSizeClass) private var sizeClass
+        @Environment(\.editMode) private var editMode
         var collection: any CollectionType
         
         func body(content: Content) -> some View {
             content
                 .navigationTitle(collection.title)
                 .toolbar {
-                    ToolbarItem(placement: .primaryAction) {
-                        Menu {
-                            EditButton("Select")
-                            
-                            if let user = collection as? UserCollection {
-                                UserCollectionMenu(user)
+                    if editMode?.wrappedValue == .inactive {
+                        ToolbarItem(placement: .primaryAction) {
+                            Menu {
+                                EditButton("Select")
+                                
+                                if let user = collection as? UserCollection {
+                                    UserCollectionMenu(user)
+                                }
+                            } label: {
+                                Label(collection.title, systemImage: "ellipsis.circle.fill")
+                                    .symbolRenderingMode(.hierarchical)
                             }
-                        } label: {
-                            Label(collection.title, systemImage: "ellipsis.circle.fill")
-                                .symbolRenderingMode(.hierarchical)
                         }
                     }
                 }

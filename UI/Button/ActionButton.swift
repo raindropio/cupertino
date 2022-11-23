@@ -1,27 +1,25 @@
 import SwiftUI
 
-public struct ActionButton<Label: View> {
+public struct ActionButton<L: View> {
     @State private var loading = false
     @State private var error: Error?
-    @State private var confirm = false
     
     var role: ButtonRole?
     var action: () async throws -> Void
-    var label: () -> Label
+    var label: () -> L
     
     public init(
         role: ButtonRole? = nil,
         action: @escaping () async throws -> Void,
-        label: @escaping () -> Label
+        label: @escaping () -> L
     ) {
         self.role = role
         self.action = action
         self.label = label
-        self.confirm = false
     }
 }
 
-extension ActionButton where Label == Text {
+extension ActionButton where L == Text {
     public init<S>(
         _ title: S,
         role: ButtonRole? = nil,
@@ -32,7 +30,6 @@ extension ActionButton where Label == Text {
         }
         self.role = role
         self.action = action
-        self.confirm = false
     }
 }
 
@@ -49,32 +46,37 @@ extension ActionButton {
 }
 
 extension ActionButton: View {
-    public var body: some View {
-        Button(role: role) {
-            if role == .destructive {
-                confirm = true
-            } else {
+    func button() -> some View {
+        Button(
+            role: role,
+            action: {
                 Task { await press() }
+            },
+            label: status
+        )
+    }
+    
+    func status() -> some View {
+        ZStack {
+            label()
+                .opacity(loading ? 0 : 1)
+            
+            if loading {
+                ProgressView().progressViewStyle(.circular)
             }
-        } label: {
-            ZStack {
-                label()
-                    .opacity(loading ? 0 : 1)
-                
-                if loading {
-                    ProgressView().progressViewStyle(.circular)
-                }
+        }
+    }
+    
+    public var body: some View {
+        Group {
+            if role == .destructive {
+                ConfirmButton(role: role, actions: button, label: status)
+            } else {
+                button()
             }
         }
             .disabled(loading)
             .animation(.easeInOut(duration: 0.2), value: loading)
-            .confirmationDialog("Are you sure?", isPresented: $confirm) {
-                Button(role: .destructive) {
-                    Task { await press() }
-                } label: {
-                    label()
-                }
-            }
             .alert(
                 "Error",
                 isPresented: .init { error != nil } set: { if !$0 { error = nil } }

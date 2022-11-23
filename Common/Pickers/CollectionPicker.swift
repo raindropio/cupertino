@@ -36,10 +36,18 @@ extension CollectionPicker where Prompt == Label<Text, Image> {
     }
 }
 
+extension CollectionPicker where Prompt == EmptyView {
+    init(id: Binding<Int?>, matching: CollectionsListMatching) {
+        self._id = id
+        self.matching = matching
+        self.prompt = { EmptyView() }
+    }
+}
+
 extension CollectionPicker: View {
     public var body: some View {
         NavigationLink {
-            Page(id: $id, matching: matching)
+            Screen(id: $id, matching: matching)
                 .navigationTitle("Collection")
         } label: {
             if let id, let collection = c.state.user[id] {
@@ -54,13 +62,18 @@ extension CollectionPicker: View {
 }
 
 extension CollectionPicker {
-    struct Page: View {
+    public struct Screen: View {
         @Environment(\.dismiss) private var dismiss
         
         @Binding var id: Int?
         var matching: CollectionsListMatching = .all
         
-        var body: some View {
+        public init(id: Binding<Int?>, matching: CollectionsListMatching) {
+            self._id = id
+            self.matching = matching
+        }
+        
+        public var body: some View {
             CollectionsList(selection: $id, matching: matching, searchable: true)
                 .collectionActions()
                 .onChange(of: id) { _ in

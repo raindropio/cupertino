@@ -33,6 +33,7 @@ fileprivate struct SearchBarModifier: ViewModifier {
     var scopeBarActivation: UISearchController.ScopeBarActivation
     var tokenBackgroundColor: Color? = nil
     
+    @Environment(\.editMode) private var editMode
     @State private var controller: UISearchController?
     @State private var showToolbarButton = true
     
@@ -52,7 +53,10 @@ fileprivate struct SearchBarModifier: ViewModifier {
             .toolbar {
                 ToolbarItem {
                     SearchButton(controller: $controller)
-                        .opacity(showToolbarButton ? 1 : 0)
+                        .opacity(
+                            (editMode?.wrappedValue.isEditing == false) &&
+                            showToolbarButton ? 1 : 0
+                        )
                 }
             }
             .onChange(of: controller) {

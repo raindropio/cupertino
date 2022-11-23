@@ -1,6 +1,7 @@
 import SwiftUI
 
 struct TokenPicker<S: RawRepresentable<String> & Identifiable, SV: View> {
+    @Namespace private var animation
     @State private var search = ""
     
     @Binding var value: [String]
@@ -74,6 +75,7 @@ extension TokenPicker: View {
         } label: {
             Text(val)
         }
+            .transition(.move(edge: .trailing).combined(with: .opacity))
     }
     
     func render(_ suggestion: S) -> some View {
@@ -81,6 +83,36 @@ extension TokenPicker: View {
             toggle(suggestion.rawValue)
         } label: {
             suggestions.content(suggestion)
+        }
+    }
+    
+    @ViewBuilder
+    func selected() -> some View {
+        if !searched(value).isEmpty {
+            ScrollView(.horizontal, showsIndicators: false) {
+                ScrollViewReader { proxy in
+                    LazyHStack {
+                        ForEach(
+                            searched(value),
+                            id: \.self,
+                            content: render
+                        )
+                    }
+                        .frame(height: 36)
+                        .scenePadding([.horizontal, .top])
+                        .onChange(of: searched(value)) {
+                            if let last = $0.last {
+                                withAnimation {
+                                    proxy.scrollTo(last, anchor: .trailing)
+                                }
+                            }
+                        }
+                }
+            }
+                .buttonStyle(.borderedProminent)
+                .buttonBorderShape(.capsule)
+                .tint(.accentColor)
+                .frame(maxWidth: .infinity, alignment: .leading)
         }
     }
     
@@ -114,28 +146,8 @@ extension TokenPicker: View {
             )
                 .foregroundColor(.primary)
         }
-            .animation(.default, value: search)
-            .filterable(text: $search, icon: "plus", prompt: "Add tag") {
-                if !searched(value).isEmpty {
-                    ScrollView(.horizontal, showsIndicators: false) {
-                        LazyHStack {
-                            ForEach(
-                                searched(value),
-                                id: \.self,
-                                content: render
-                            )
-                        }
-                            .frame(height: 36)
-                            .scenePadding([.horizontal, .top])
-                    }
-                        .buttonStyle(.borderedProminent)
-                        .buttonBorderShape(.capsule)
-                        .tint(.accentColor)
-                        .frame(maxWidth: .infinity, alignment: .leading)
-                        
-                }
-            }
-            .animation(.default, value: value)
+            .filterable(text: $search, icon: "plus", prompt: "Add tag", header: selected)
+            .animation(.easeInOut(duration: 0.3), value: searched(value))
             .onChange(of: value) { _ in search = "" }
             .onChange(of: search) { if $0.contains(",") { submit() } }
             .onSubmit(submit)

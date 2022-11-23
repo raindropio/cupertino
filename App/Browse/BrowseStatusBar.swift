@@ -3,6 +3,8 @@ import UI
 import API
 
 struct BrowseStatusBar: View {
+    @Environment(\.editMode) private var editMode
+
     var find: FindBy
 
     var body: some View {
@@ -23,6 +25,7 @@ struct BrowseStatusBar: View {
         }
             .scenePadding(.horizontal)
             .clearSection()
+            .disabled(editMode?.wrappedValue == .active)
     }
 }
 
@@ -32,13 +35,16 @@ extension BrowseStatusBar {
         var find: FindBy
         
         var body: some View {
+            let total = raindrops.state.total(find)
+            
             (
-                Text(raindrops.state.total(find), format: .number) +
+                Text(total, format: .number) +
                 Text(" bookmarks")
             )
             .lineLimit(1)
             .fontWeight(.medium)
             .foregroundStyle(.secondary)
+            .opacity(total > 0 ? 1 : 0)
         }
     }
 }

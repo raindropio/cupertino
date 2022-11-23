@@ -34,7 +34,7 @@ extension Rest {
             guard !ids.isEmpty else { return 0 }
             
             let body = IdsCombineRequest(
-                ids: ids,
+                ids: Array(ids),
                 combine: operation
             )
             

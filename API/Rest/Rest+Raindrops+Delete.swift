@@ -26,7 +26,7 @@ extension Rest {
         case .some(let ids):
             guard !ids.isEmpty else { return 0 }
             
-            let body = IdsRequest(ids: ids)
+            let body = IdsRequest(ids: Array(ids))
             let res: ModifiedResponse = try await fetch.delete("raindrops/0", body: body)
             
             //maybe it's permanent remove request?

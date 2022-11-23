@@ -15,7 +15,9 @@ struct BrowseNested: View {
 
 extension BrowseNested {
     struct Memorized: View {
+        @Environment(\.editMode) private var editMode
         @EnvironmentObject private var app: AppRouter
+        
         var items: [UserCollection]
         
         func item(_ collection: UserCollection) -> some View {
@@ -42,6 +44,7 @@ extension BrowseNested {
                     .foregroundStyle(.primary)
                     .padding(.vertical, 8)
                     .clearSection()
+                    .disabled(editMode?.wrappedValue == .active)
             }
         }
     }
