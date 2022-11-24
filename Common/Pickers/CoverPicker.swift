@@ -4,14 +4,18 @@ import API
 
 struct CoverPicker: View {
     @Environment(\.dismiss) private var dismiss
-    @Binding var selection: Raindrop.Cover?
+    @Binding var selection: URL?
     var media: [Raindrop.Media]
     
     var body: some View {
         NavigationLink {
             Page(selection: $selection, media: media)
         } label: {
-            Thumbnail(selection?.best, height: 96, cornerRadius: 3)
+            Thumbnail(
+                Rest.renderImage(selection, options: .maxDeviceSize),
+                height: 96,
+                cornerRadius: 3
+            )
                 .frame(height: 96)
                 .frame(maxWidth: .infinity)
         }
@@ -22,13 +26,13 @@ struct CoverPicker: View {
 extension CoverPicker {
     struct Page: View {
         @Environment(\.dismiss) private var dismiss
-        @Binding var selection: Raindrop.Cover?
+        @Binding var selection: URL?
         var media: [Raindrop.Media]
         
         var body: some View {
             ImagePicker(
-                media.compactMap { $0.link?.original },
-                selection: .init { selection?.original } set: { selection = .init($0) },
+                media.compactMap { $0.link },
+                selection: $selection,
                 width: 80, height: 60
             )
                 .equatable()

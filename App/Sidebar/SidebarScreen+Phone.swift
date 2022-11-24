@@ -3,22 +3,22 @@ import API
 import UI
 
 extension SidebarScreen {
-    struct OptionalGlobalSearch<C: View>: View {
+    struct Phone: ViewModifier {
         @State private var find = FindBy()
-        var content: () -> C
-        
-        var body: some View {
+
+        func body(content: Content) -> some View {
             if isPhone {
                 Group {
                     if find.isSearching {
                         BrowseList(find: find)
                     } else {
-                        content()
+                        content
                     }
                 }
+                    .addAction()
                     .globalSearch(find: $find)
             } else {
-                content()
+                content
             }
         }
     }

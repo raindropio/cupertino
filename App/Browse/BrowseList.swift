@@ -60,7 +60,7 @@ extension BrowseList { fileprivate struct Memorized: View {
             layout,
             selection: $selection,
             action: action,
-            contextMenu: { Menus(selection: $0, edit: $edit) }
+            contextMenu: { Menus(ids: $0, selection: $selection, edit: $edit) }
         ) {
             header()
 

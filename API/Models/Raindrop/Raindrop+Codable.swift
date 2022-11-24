@@ -31,16 +31,16 @@ extension Raindrop: Codable, EncodableWithConfiguration {
     public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
 
-        id = try container.decode(Swift.type(of: id), forKey: ._id)
+        id = (try? container.decode(Swift.type(of: id), forKey: ._id)) ?? 0
         title = try container.decode(Swift.type(of: title), forKey: .title)
         excerpt = (try? container.decode(Swift.type(of: excerpt), forKey: .excerpt)) ?? ""
         link = (try? container.decode(Swift.type(of: link), forKey: .link)) ?? URL(string: "http://incorrect.url")!
-        cover = try container.decode(Swift.type(of: cover), forKey: .cover)
+        cover = try? container.decode(Swift.type(of: cover), forKey: .cover)
         media = (try? container.decode(Swift.type(of: media), forKey: .media)) ?? []
         type = (try? container.decode(Swift.type(of: type), forKey: .type)) ?? .link
-        tags = try container.decode(Swift.type(of: tags), forKey: .tags)
-        created = try container.decode(Swift.type(of: created), forKey: .created)
-        lastUpdate = try container.decode(Swift.type(of: lastUpdate), forKey: .lastUpdate)
+        tags = (try? container.decode(Swift.type(of: tags), forKey: .tags)) ?? []
+        created = (try? container.decode(Swift.type(of: created), forKey: .created)) ?? .init()
+        lastUpdate = (try? container.decode(Swift.type(of: lastUpdate), forKey: .lastUpdate)) ?? .init()
         creatorRef = try? container.decode(Swift.type(of: creatorRef), forKey: .creatorRef)
         important = (try? container.decode(Swift.type(of: important), forKey: .important)) ?? false
         broken = (try? container.decode(Swift.type(of: broken), forKey: .broken)) ?? false

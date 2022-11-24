@@ -13,8 +13,10 @@ public struct CreateCollectionStack {
         self._collection = State(
             initialValue: {
                 switch location {
-                case .parent(let parent): return .new(parent: parent)
-                case .group(_): return .new()
+                case .parent(let parent):
+                    return .new(parent: parent > 0 ? parent : nil)
+                case .group(_):
+                    return .new()
                 }
             }()
         )

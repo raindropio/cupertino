@@ -8,12 +8,11 @@ struct SidebarScreen: View {
     @EnvironmentObject private var settings: SettingsRouter
 
     var body: some View {
-        OptionalGlobalSearch {
-            CollectionsList(
-                selection: $app.sidebarSelection,
-                searchable: false
-            )
-        }
+        CollectionsList(
+            selection: $app.sidebarSelection,
+            searchable: false
+        )
+            .modifier(Phone())
             .navigationTitle("Collections")
             .navigationBarTitleDisplayMode(isPhone ? .automatic : .inline)
             .toolbar {

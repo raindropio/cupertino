@@ -32,6 +32,10 @@ public actor RaindropsReducer: Reducer {
         case .moreLoaded(let find, let page, let items, let total):
             moreLoaded(state: &state, find: find, page: page, items: items, total: total)
             
+        //Add
+        case .add(let url, let collection):
+            return try await add(state: &state, url: url, collection: collection)
+            
         //Create
         case .create(let item):
             return A.createMany([item])

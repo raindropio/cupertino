@@ -1,3 +1,5 @@
+import Foundation
+
 //TODO: Support debounce
 
 public enum AuthAction: ReduxAction {
@@ -48,6 +50,8 @@ public enum RaindropsAction: ReduxAction {
     case more(FindBy)
     case moreLoad(FindBy)
     case moreLoaded(FindBy, Int, [Raindrop], Int)
+    //add url
+    case add(URL, collection: Int? = nil) // -> create
     //create
     case create(Raindrop) // -> createMany
     //update

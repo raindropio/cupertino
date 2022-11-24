@@ -36,14 +36,6 @@ extension CollectionPicker where Prompt == Label<Text, Image> {
     }
 }
 
-extension CollectionPicker where Prompt == EmptyView {
-    init(id: Binding<Int?>, matching: CollectionsListMatching) {
-        self._id = id
-        self.matching = matching
-        self.prompt = { EmptyView() }
-    }
-}
-
 extension CollectionPicker: View {
     public var body: some View {
         NavigationLink {

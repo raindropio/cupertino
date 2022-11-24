@@ -47,6 +47,7 @@ extension CollectionsReducer {
         }
 
         //user collections
+        state.user = .init()
         user.forEach {
             state.user[$0.id] = $0
         }

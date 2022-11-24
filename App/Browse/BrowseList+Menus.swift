@@ -5,12 +5,14 @@ import UI
 extension BrowseList {
     struct Menus: View {
         @EnvironmentObject private var r: RaindropsStore
-        var selection: Set<Raindrop.ID>
+        var ids: Set<Raindrop.ID>
+        @Binding var selection: Set<Raindrop.ID>
         @Binding var edit: Raindrop?
         
         var body: some View {
             Memorized(
-                items: selection.compactMap(r.state.item),
+                items: ids.compactMap(r.state.item),
+                selection: $selection,
                 edit: $edit
             )
         }
@@ -21,8 +23,10 @@ extension BrowseList.Menus {
     struct Memorized: View {
         @EnvironmentObject private var dispatch: Dispatcher
         @EnvironmentObject private var app: AppRouter
+        @Environment(\.editMode) private var editMode
         
         var items: [Raindrop]
+        @Binding var selection: Set<Raindrop.ID>
         @Binding var edit: Raindrop?
         
         var body: some View {
@@ -37,16 +41,27 @@ extension BrowseList.Menus {
 //                    Label("Preview", systemImage: "eyeglasses")
 //                }
                 
-                ShareLink(item: item.link)
-                
-                Button { edit = item } label: {
-                    Label("Edit", systemImage: "pencil")
-                }
-
-                Button(role: .destructive) {
-                    dispatch.sync(RaindropsAction.delete(item.id))
+                Button {
+                    withAnimation {
+                        editMode?.wrappedValue = .active
+                        selection.insert(item.id)
+                    }
                 } label: {
-                    Label("Delete", systemImage: "trash")
+                    Label("Select", systemImage: "checkmark.circle")
+                }
+                                
+                Section {
+                    Button { edit = item } label: {
+                        Label("Edit", systemImage: "pencil")
+                    }
+                    
+                    ShareLink(item: item.link)
+
+                    Button(role: .destructive) {
+                        dispatch.sync(RaindropsAction.delete(item.id))
+                    } label: {
+                        Label("Delete", systemImage: "trash")
+                    }
                 }
             }
         }

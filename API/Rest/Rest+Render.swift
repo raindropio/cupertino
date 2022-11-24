@@ -1,7 +1,8 @@
 import Foundation
 
 extension Rest {
-    public static func renderImage(_ url: URL, options: RenderOption...) -> URL {
+    public static func renderImage(_ url: URL?, options: RenderOption...) -> URL? {
+        guard let url else { return nil }
         guard url.host() != base.render.host() else { return url }
         
         var components = URLComponents()

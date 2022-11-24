@@ -3,6 +3,6 @@ import Foundation
 extension Raindrop {
     public struct Media: Codable, Equatable, Hashable {
         var type = "image"
-        public var link: Cover?
+        public var link: URL?
     }
 }

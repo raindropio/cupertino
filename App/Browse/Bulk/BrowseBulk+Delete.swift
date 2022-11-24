@@ -18,8 +18,11 @@ extension BrowseBulk {
         }
         
         var body: some View {
-            ConfirmButton(role: .destructive) {
-                Button("Delete \(BrowseBulk.title(pick))", role: .destructive, action: delete)
+            Menu {
+                Button(role: .destructive, action: delete) {
+                    Label("Delete \(BrowseBulk.title(pick))", systemImage: "trash")
+                }
+                    .labelStyle(.titleAndIcon)
             } label: {
                 Label("Delete", systemImage: "trash")
             }

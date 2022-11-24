@@ -12,10 +12,15 @@ struct BrowseItem: View {
     }
 
     var body: some View {
+        let cover = Rest.renderImage(
+            raindrop.cover ?? raindrop.link,
+            options: .maxDeviceSize
+        )
+        
         switch view {
         case .list:
             HStack(alignment: .top, spacing: 14) {
-                Thumbnail(raindrop.cover?.best, width: 80, height: 60, cornerRadius: 3)
+                Thumbnail(cover, width: 80, height: 60, cornerRadius: 3)
                     .padding(.top, 8)
                 Details(raindrop: raindrop)
             }
@@ -29,14 +34,14 @@ struct BrowseItem: View {
             
         case .grid:
             VStack(alignment: .leading, spacing: 0) {
-                Thumbnail(raindrop.cover?.best, width: 250, aspectRatio: 1.333)
+                Thumbnail(cover, width: 250, aspectRatio: 1.333)
                     .frame(maxWidth: .infinity)
                 Details(raindrop: raindrop, vertical: true)
             }
             
         case .masonry:
             VStack(alignment: .leading, spacing: 0) {
-                Thumbnail(raindrop.cover?.best, width: 250)
+                Thumbnail(cover, width: 250)
                     .frame(maxWidth: .infinity)
                 Details(raindrop: raindrop, vertical: true)
             }

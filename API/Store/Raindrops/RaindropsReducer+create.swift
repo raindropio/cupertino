@@ -5,6 +5,11 @@ extension RaindropsReducer {
     }
     
     func createdMany(state: inout S, items: [Raindrop]) {
-        
+        state.updateSegments(
+            items.compactMap {
+                state.items[$0.id] = $0
+                return state.items[$0.id]
+            }
+        )
     }
 }
