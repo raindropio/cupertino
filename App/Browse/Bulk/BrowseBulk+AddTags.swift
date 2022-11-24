@@ -22,11 +22,6 @@ extension BrowseBulk {
             }
         }
         
-        //helpers
-        private var title: String {
-            "Add tags for \(BrowseBulk.title(pick))"
-        }
-        
         var body: some View {
             Button {
                 select = true
@@ -37,10 +32,11 @@ extension BrowseBulk {
                 NavigationStack {
                     TagsPicker($tags)
                         .tokenFieldStyle(.inline)
-                        .navigationTitle(title)
+                        .navigationBarTitleDisplayMode(.inline)
                         .toolbar {
                             ToolbarItem(placement: .confirmationAction) {
-                                Button("Save", action: add)
+                                Button("Add \(tags.count) tags for \(BrowseBulk.title(pick))", action: add)
+                                    .disabled(tags.isEmpty)
                             }
                             
                             ToolbarItem(placement: .cancellationAction) {

@@ -93,17 +93,11 @@ extension BrowseBulk { fileprivate struct Memorized: ViewModifier {
                         More(pick: pick, action: action)
                     }
                         .labelStyle(.titleOnly)
-                        .disabled(loading || selection.isEmpty)
+                        .disabled(selection.isEmpty)
                 }
             }
         }
-        .sheet(isPresented: $loading) {
-            ProgressView()
-                .progressViewStyle(.circular)
-                .tint(.accentColor)
-                .presentationDetents([.height(100)])
-                .interactiveDismissDisabled()
-        }
+        .disabled(loading)
         //on error
         .alert(isPresented: isFailed, error: error) {}
     }

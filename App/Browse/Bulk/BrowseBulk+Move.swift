@@ -24,16 +24,6 @@ extension BrowseBulk {
             self.to = nil
         }
         
-        //helpers
-        private var title: String {
-            "Move \(BrowseBulk.title(pick))"
-        }
-        
-        private var confirm: Binding<Bool> {
-            .init { to != nil }
-            set: { if !$0 { to = nil } }
-        }
-        
         var body: some View {            
             Button {
                 select = true
@@ -45,16 +35,19 @@ extension BrowseBulk {
                 NavigationStack {
                     CollectionsList(selection: $to, matching: .insertable, searchable: true)
                         .collectionActions()
-                        .navigationTitle(title)
+                        .navigationBarTitleDisplayMode(.inline)
                         .toolbar {
+                            ToolbarItem(placement: .confirmationAction) {
+                                Button("Move \(BrowseBulk.title(pick)) to \(c.state.title(to ?? -1))", action: move)
+                                    .lineLimit(1)
+                                    .disabled(to == nil)
+                            }
+                            
                             ToolbarItem(placement: .cancellationAction) {
                                 Button("Cancel") {
                                     select = false
                                 }
                             }
-                        }
-                        .confirmationDialog("Are you sure?", isPresented: confirm, titleVisibility: .visible) {
-                            Button("\(title) to \(c.state.title(to ?? -1))", action: move)
                         }
                 }
                     .frame(idealWidth: 600, idealHeight: 800)
