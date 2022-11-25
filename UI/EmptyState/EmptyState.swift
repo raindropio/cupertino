@@ -10,7 +10,7 @@ public struct EmptyState<I: View, A: View> {
         _ title: String = "",
         message: String = "",
         icon: @escaping () -> I,
-        actions: @escaping () -> A
+        @ViewBuilder actions: @escaping () -> A
     ) {
         self.title = title
         self.message = message
@@ -31,17 +31,23 @@ extension EmptyState: View {
             }
             
             VStack(spacing: 10) {
-                Text(title)
-                    .font(.title)
-                    .fontWeight(.bold)
+                if !title.isEmpty {
+                    Text(title)
+                        .font(.title)
+                        .fontWeight(.bold)
+                }
                 
-                Text(message)
-                    .foregroundStyle(.secondary)
-                    .multilineTextAlignment(.center)
+                if !message.isEmpty {
+                    Text(message)
+                        .foregroundStyle(.secondary)
+                        .multilineTextAlignment(.center)
+                }
             }
             
             if let actions {
                 actions()
+                    .buttonStyle(.bordered)
+                    .tint(.accentColor)
             }
         }
             .padding()

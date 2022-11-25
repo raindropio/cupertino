@@ -51,6 +51,10 @@ public actor RaindropsReducer: Reducer {
         case .delete(let id):
             return A.deleteMany(.some([id]))
             
+        //Upload
+        case .uploadFiles(let files, let collection, let completed, let failed):
+            return try await uploadFiles(state: &state, files: files, collection: collection, completed: completed, failed: failed)
+            
         //Delete Many
         case .deleteMany(let pick):
             return try await deleteMany(state: &state, pick: pick)

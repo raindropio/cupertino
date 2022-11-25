@@ -9,7 +9,7 @@ struct BrowseScreen: View {
         BrowseList(find: find) {
             BrowseNested(find: find)
         }
-            .addAction(to: find.collectionId)
+            .addFab(to: find.collectionId)
             .globalSearch(find: $find)
             .modifier(Toolbar(find: find))
             #if os(iOS)

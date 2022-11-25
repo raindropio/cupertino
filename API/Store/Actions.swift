@@ -1,4 +1,4 @@
-import Foundation
+import SwiftUI
 
 //TODO: Support debounce
 
@@ -63,6 +63,8 @@ public enum RaindropsAction: ReduxAction {
     case delete(Raindrop.ID) // -> deleteMany
     case deleteMany(RaindropsPick)
     case deletedMany(RaindropsPick)
+    //upload
+    case uploadFiles([URL], collection: Int? = nil, completed: Binding<Set<URL>>? = nil, failed: Binding<Set<URL>>? = nil)
     //multi
     case createMany([Raindrop])
     case createdMany([Raindrop])

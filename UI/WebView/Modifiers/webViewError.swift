@@ -21,8 +21,6 @@ struct WebViewError: ViewModifier {
                             Button(action: page.reload) {
                                 Label("Reload", systemImage: "arrow.clockwise")
                             }
-                                .buttonStyle(.bordered)
-                                .tint(.accentColor)
                         }
                             .frame(maxWidth: .infinity, maxHeight: .infinity)
                             .background(.background)

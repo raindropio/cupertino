@@ -2,12 +2,12 @@ import SwiftUI
 import UI
 
 extension View {
-    func addAction(to collection: Int? = nil) -> some View {
-        modifier(AddActionModified(collection: collection))
+    func addFab(to collection: Int? = nil) -> some View {
+        modifier(AddFabModified(collection: collection))
     }
 }
 
-struct AddActionModified: ViewModifier {
+fileprivate struct AddFabModified: ViewModifier {
     #if canImport(UIKit)
     @Environment(\.editMode) private var editMode
     #endif

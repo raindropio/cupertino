@@ -2,45 +2,39 @@ import SwiftUI
 import API
 import UI
 
-public struct AddURLStack {
+public struct AddLinkStack {
     @EnvironmentObject private var dispatch: Dispatcher
     @Environment(\.dismiss) private var dismiss
     @FocusState private var focused: Bool
     
-    @State var url: String = ""
+    @State var link: String = ""
     @State var collection: Int
     
-    public init(_ url: String = "", collection: Int? = nil) {
-        self._url = .init(initialValue: url)
+    public init(_ link: String = "", collection: Int? = nil) {
+        self._link = .init(initialValue: link)
         self._collection = .init(initialValue: collection ?? -1)
     }
 }
 
-extension AddURLStack: View {
-    @ViewBuilder
-    private var createButton: some View {
-        let parsed = URL.detect(from: url)
-
-        ActionButton("Create") {
-            if let parsed {
-                try await dispatch(
-                    RaindropsAction.add(
-                        parsed,
-                        collection: collection
-                    )
+extension AddLinkStack: View {
+    private func submit() async throws {
+        if let url = URL.detect(from: link) {
+            try await dispatch(
+                RaindropsAction.add(
+                    url,
+                    collection: collection
                 )
-            }
-            
-            dismiss()
+            )
         }
-            .disabled(parsed == nil)
+        
+        dismiss()
     }
     
     public var body: some View {
         NavigationStack {
             Form {
                 Section("URL") {
-                    TextField("", text: $url, prompt: Text("https://"))
+                    TextField("", text: $link, prompt: Text("https://"))
                         .focused($focused)
                 }
                 
@@ -50,19 +44,20 @@ extension AddURLStack: View {
             }
                 .onAppear {
                     //get from pasteboard
-                    if url.isEmpty, let paste = UIPasteboard.general.url {
-                        url = paste.absoluteString
+                    if link.isEmpty, let paste = UIPasteboard.general.url {
+                        link = paste.absoluteString
                     }
                     //focus on field by default
                     focused = true
                 }
-                .navigationTitle("New bookmark")
+                .navigationTitle("Add link")
                 #if os(iOS)
                 .navigationBarTitleDisplayMode(.inline)
                 #endif
                 .toolbar {
                     ToolbarItem(placement: .confirmationAction) {
-                        createButton
+                        ActionButton("Create", action: submit)
+                            .disabled(URL.detect(from: link) == nil)
                     }
                     
                     ToolbarItem(placement: .cancellationAction) {

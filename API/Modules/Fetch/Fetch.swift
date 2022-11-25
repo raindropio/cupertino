@@ -109,6 +109,18 @@ extension Fetch {
         
         return try decode(data: data)
     }
+    
+    func put<T: Decodable>(
+        _ path: String,
+        query: [URLQueryItem]? = nil,
+        formData: FormData
+    ) async throws -> T {
+        let (data, _) = try await request(
+            try urlRequest(path, method: "PUT", query: query, formData: formData)
+        )
+        
+        return try decode(data: data)
+    }
 }
 
 //MARK: - Delete
@@ -207,7 +219,21 @@ extension Fetch {
         var req = try urlRequest(path, method: method, query: query)
         req.httpBody = try delegate.encoder.encode(body, configuration: configuration)
         req.addValue("application/json", forHTTPHeaderField: "Content-Type")
-//        print(String(data: try delegate.encoder.encode(body, configuration: configuration), encoding: .utf8)!)
+        return req
+    }
+    
+    func urlRequest(
+        _ path: String,
+        method: String,
+        query: [URLQueryItem]? = nil,
+        formData: FormData
+    ) throws -> URLRequest {
+        var req = try urlRequest(path, method: method, query: query)
+        
+        let boundary = "Boundary-\(NSUUID().uuidString)"
+        req.httpBody = try formData.encode(boundary)
+        req.addValue("multipart/form-data; boundary=\(boundary)", forHTTPHeaderField: "Content-Type")
+        
         return req
     }
 }
