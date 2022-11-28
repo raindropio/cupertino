@@ -4,6 +4,7 @@ public actor Rest: FetchDelegate {
     static let base = Base()
     
     struct Base {
+        var root = URL(string: "https://raindrop.io/")!
         var api = URL(string: "https://api.raindrop.io/v1/")!
         var preview = URL(string: "https://preview.systems/")!
         var render = URL(string: "https://rdl.ink/")!

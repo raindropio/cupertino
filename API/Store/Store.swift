@@ -13,8 +13,16 @@ public actor Store: ReduxStore {
     @MainActor public var recent = RecentStore()
     @MainActor public var user = UserStore()
 
-    @MainActor public init() {
+    @MainActor public init(keychain: String) {
         dispatcher.store = self
+        
+        //restore keychain
+        Task {
+            try? await dispatch(
+                AuthAction.restore(keychain: keychain),
+                store: \.auth
+            )
+        }
     }
     
     public func dispatch(_ some: Any) async throws {

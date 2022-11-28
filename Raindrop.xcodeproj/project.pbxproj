@@ -48,10 +48,10 @@
 		7694CA0529265B5000BD81A0 /* PreviewScreen+Action.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7694CA0429265B5000BD81A0 /* PreviewScreen+Action.swift */; };
 		7694CA072926629C00BD81A0 /* PreviewScreen+Options.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7694CA062926629C00BD81A0 /* PreviewScreen+Options.swift */; };
 		76B16BD02930E6EB00032D7D /* Share.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76B16BCF2930E6EB00032D7D /* Share.swift */; };
-		76B16BD22930E8F600032D7D /* ExtensionService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76B16BD12930E8F600032D7D /* ExtensionService.swift */; };
 		76B16BD42930F34D00032D7D /* API in Frameworks */ = {isa = PBXBuildFile; productRef = 76B16BD32930F34D00032D7D /* API */; };
 		76B16BD62930F43900032D7D /* Share.js in Resources */ = {isa = PBXBuildFile; fileRef = 76B16BD52930F43900032D7D /* Share.js */; };
-		76B16BD92930FDE000032D7D /* NSExtensionContext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76B16BD82930FDE000032D7D /* NSExtensionContext.swift */; };
+		76B16BE02934BB0D00032D7D /* Common in Frameworks */ = {isa = PBXBuildFile; productRef = 76B16BDF2934BB0D00032D7D /* Common */; };
+		76B16BE22934BB0F00032D7D /* UI in Frameworks */ = {isa = PBXBuildFile; productRef = 76B16BE12934BB0F00032D7D /* UI */; };
 		76BFE36E291E9F6B00DE9DB2 /* AppScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76BFE369291E9F6B00DE9DB2 /* AppScene.swift */; };
 		76BFE36F291E9F6B00DE9DB2 /* AppRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76BFE36A291E9F6B00DE9DB2 /* AppRouter.swift */; };
 		76BFE370291E9F6B00DE9DB2 /* SettingsRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76BFE36B291E9F6B00DE9DB2 /* SettingsRouter.swift */; };
@@ -60,9 +60,13 @@
 		76D8805B292E6E8200D43AD9 /* addFab.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76D8805A292E6E8200D43AD9 /* addFab.swift */; };
 		76D8805F292E7ADD00D43AD9 /* AddStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76D8805E292E7ADD00D43AD9 /* AddStack.swift */; };
 		76D88065292FA6BB00D43AD9 /* AddStack+Home.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76D88064292FA6BB00D43AD9 /* AddStack+Home.swift */; };
-		76D880DF2930E1FB00D43AD9 /* ShareViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76D880DE2930E1FB00D43AD9 /* ShareViewController.swift */; };
+		76D880DF2930E1FB00D43AD9 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76D880DE2930E1FB00D43AD9 /* ViewController.swift */; };
 		76D880E22930E1FB00D43AD9 /* Share.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 76D880E02930E1FB00D43AD9 /* Share.storyboard */; };
 		76D880E62930E1FB00D43AD9 /* Share.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = 76D880DC2930E1FB00D43AD9 /* Share.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		76F282B52934C24B00D00363 /* ExtensionUI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76F282B42934C24B00D00363 /* ExtensionUI.swift */; };
+		76F282B72934C25400D00363 /* ExtensionService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76F282B62934C25400D00363 /* ExtensionService.swift */; };
+		76F282BA2934C43200D00363 /* NoAuth.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76F282B92934C43200D00363 /* NoAuth.swift */; };
+		76F282BC2934C76A00D00363 /* SaveItems.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76F282BB2934C76A00D00363 /* SaveItems.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -134,9 +138,7 @@
 		7694CA0429265B5000BD81A0 /* PreviewScreen+Action.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PreviewScreen+Action.swift"; sourceTree = "<group>"; };
 		7694CA062926629C00BD81A0 /* PreviewScreen+Options.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PreviewScreen+Options.swift"; sourceTree = "<group>"; };
 		76B16BCF2930E6EB00032D7D /* Share.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Share.swift; sourceTree = "<group>"; };
-		76B16BD12930E8F600032D7D /* ExtensionService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtensionService.swift; sourceTree = "<group>"; };
 		76B16BD52930F43900032D7D /* Share.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = Share.js; sourceTree = "<group>"; };
-		76B16BD82930FDE000032D7D /* NSExtensionContext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NSExtensionContext.swift; sourceTree = "<group>"; };
 		76B16BDA29310D9500032D7D /* Share.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Share.entitlements; sourceTree = "<group>"; };
 		76BFE369291E9F6B00DE9DB2 /* AppScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppScene.swift; sourceTree = "<group>"; };
 		76BFE36A291E9F6B00DE9DB2 /* AppRouter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppRouter.swift; sourceTree = "<group>"; };
@@ -147,9 +149,13 @@
 		76D8805E292E7ADD00D43AD9 /* AddStack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddStack.swift; sourceTree = "<group>"; };
 		76D88064292FA6BB00D43AD9 /* AddStack+Home.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AddStack+Home.swift"; sourceTree = "<group>"; };
 		76D880DC2930E1FB00D43AD9 /* Share.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = Share.appex; sourceTree = BUILT_PRODUCTS_DIR; };
-		76D880DE2930E1FB00D43AD9 /* ShareViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShareViewController.swift; sourceTree = "<group>"; };
+		76D880DE2930E1FB00D43AD9 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		76D880E12930E1FB00D43AD9 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Share.storyboard; sourceTree = "<group>"; };
 		76D880E32930E1FB00D43AD9 /* Share.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Share.plist; sourceTree = "<group>"; };
+		76F282B42934C24B00D00363 /* ExtensionUI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtensionUI.swift; sourceTree = "<group>"; };
+		76F282B62934C25400D00363 /* ExtensionService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtensionService.swift; sourceTree = "<group>"; };
+		76F282B92934C43200D00363 /* NoAuth.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoAuth.swift; sourceTree = "<group>"; };
+		76F282BB2934C76A00D00363 /* SaveItems.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SaveItems.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -168,6 +174,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				76B16BD42930F34D00032D7D /* API in Frameworks */,
+				76B16BE22934BB0F00032D7D /* UI in Frameworks */,
+				76B16BE02934BB0D00032D7D /* Common in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -319,12 +327,22 @@
 			path = Preview;
 			sourceTree = "<group>";
 		};
-		76B16BD72930FDAC00032D7D /* Extensions */ = {
+		76B16BE32934BC3300032D7D /* Modules */ = {
 			isa = PBXGroup;
 			children = (
-				76B16BD82930FDE000032D7D /* NSExtensionContext.swift */,
+				76B16BE42934BC4700032D7D /* ExtensionUI */,
 			);
-			path = Extensions;
+			path = Modules;
+			sourceTree = "<group>";
+		};
+		76B16BE42934BC4700032D7D /* ExtensionUI */ = {
+			isa = PBXGroup;
+			children = (
+				76F282B42934C24B00D00363 /* ExtensionUI.swift */,
+				76F282B62934C25400D00363 /* ExtensionService.swift */,
+				76D880DE2930E1FB00D43AD9 /* ViewController.swift */,
+			);
+			path = ExtensionUI;
 			sourceTree = "<group>";
 		};
 		76D88059292E6E5A00D43AD9 /* Add */ = {
@@ -340,16 +358,24 @@
 		76D880DD2930E1FB00D43AD9 /* Share */ = {
 			isa = PBXGroup;
 			children = (
-				76B16BD72930FDAC00032D7D /* Extensions */,
+				76F282B82934C41D00D00363 /* Views */,
+				76B16BE32934BC3300032D7D /* Modules */,
 				76B16BCF2930E6EB00032D7D /* Share.swift */,
-				76B16BD12930E8F600032D7D /* ExtensionService.swift */,
-				76D880DE2930E1FB00D43AD9 /* ShareViewController.swift */,
 				76D880E02930E1FB00D43AD9 /* Share.storyboard */,
 				76D880E32930E1FB00D43AD9 /* Share.plist */,
 				76B16BDA29310D9500032D7D /* Share.entitlements */,
 				76B16BD52930F43900032D7D /* Share.js */,
 			);
 			path = Share;
+			sourceTree = "<group>";
+		};
+		76F282B82934C41D00D00363 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				76F282BB2934C76A00D00363 /* SaveItems.swift */,
+				76F282B92934C43200D00363 /* NoAuth.swift */,
+			);
+			path = Views;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -394,6 +420,8 @@
 			name = Share;
 			packageProductDependencies = (
 				76B16BD32930F34D00032D7D /* API */,
+				76B16BDF2934BB0D00032D7D /* Common */,
+				76B16BE12934BB0F00032D7D /* UI */,
 			);
 			productName = share;
 			productReference = 76D880DC2930E1FB00D43AD9 /* Share.appex */;
@@ -407,7 +435,7 @@
 			attributes = {
 				BuildIndependentTargetsInParallel = 1;
 				LastSwiftUpdateCheck = 1410;
-				LastUpgradeCheck = 1400;
+				LastUpgradeCheck = 1410;
 				TargetAttributes = {
 					7685A190286868AC00A4BC3C = {
 						CreatedOnToolsVersion = 14.0;
@@ -514,10 +542,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				76D880DF2930E1FB00D43AD9 /* ShareViewController.swift in Sources */,
+				76F282B52934C24B00D00363 /* ExtensionUI.swift in Sources */,
+				76D880DF2930E1FB00D43AD9 /* ViewController.swift in Sources */,
 				76B16BD02930E6EB00032D7D /* Share.swift in Sources */,
-				76B16BD22930E8F600032D7D /* ExtensionService.swift in Sources */,
-				76B16BD92930FDE000032D7D /* NSExtensionContext.swift in Sources */,
+				76F282B72934C25400D00363 /* ExtensionService.swift in Sources */,
+				76F282BA2934C43200D00363 /* NoAuth.swift in Sources */,
+				76F282BC2934C76A00D00363 /* SaveItems.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -576,6 +606,7 @@
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				COPY_PHASE_STRIP = NO;
+				DEAD_CODE_STRIPPING = YES;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
@@ -634,6 +665,7 @@
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				COPY_PHASE_STRIP = NO;
+				DEAD_CODE_STRIPPING = YES;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
@@ -659,9 +691,12 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = App/App.entitlements;
+				CODE_SIGN_IDENTITY = "-";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "Apple Development";
 				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "-";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				DEAD_CODE_STRIPPING = YES;
 				DEVELOPMENT_ASSET_PATHS = "";
 				DEVELOPMENT_TEAM = 7459JWM5TY;
 				ENABLE_HARDENED_RUNTIME = YES;
@@ -700,8 +735,11 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = App/App.entitlements;
+				CODE_SIGN_IDENTITY = "-";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				DEAD_CODE_STRIPPING = YES;
 				DEVELOPMENT_ASSET_PATHS = "";
 				DEVELOPMENT_TEAM = 7459JWM5TY;
 				ENABLE_HARDENED_RUNTIME = YES;
@@ -737,6 +775,7 @@
 		76D880E82930E1FB00D43AD9 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				APPLICATION_EXTENSION_API_ONLY = YES;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
 				CODE_SIGN_ENTITLEMENTS = Share/Share.entitlements;
 				CODE_SIGN_STYLE = Automatic;
@@ -766,6 +805,7 @@
 		76D880E92930E1FB00D43AD9 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				APPLICATION_EXTENSION_API_ONLY = YES;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
 				CODE_SIGN_ENTITLEMENTS = Share/Share.entitlements;
 				CODE_SIGN_STYLE = Automatic;
@@ -841,6 +881,14 @@
 		76B16BD32930F34D00032D7D /* API */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = API;
+		};
+		76B16BDF2934BB0D00032D7D /* Common */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = Common;
+		};
+		76B16BE12934BB0F00032D7D /* UI */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = UI;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

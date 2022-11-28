@@ -1,24 +1,23 @@
 import SwiftUI
 import API
+import Common
 
 struct Share: View {
-    @StateObject private var store = Store()
-    @StateObject var `extension`: ExtensionService
+    @StateObject private var store = Store(keychain: "7459JWM5TY.secrets")
     
     var body: some View {
-        List {
-            if let raindrop = `extension`.raindrop {
-                Section("Raindrop") {
-                    Link(raindrop.link.absoluteString, destination: raindrop.link)
-                    Text(raindrop.title)
-                }
-            }
-            
-            Section("Files") {
-                ForEach(Array(`extension`.files), id: \.self) {
-                    Text($0.absoluteString)
-                }
-            }
-        }
+        AuthGroup(
+            authorized: SaveItems.init,
+            notAuthorized: NoAuth.init
+        )
+            .environmentObject(store.dispatcher)
+            .environmentObject(store.auth)
+            .environmentObject(store.collections)
+            .environmentObject(store.filters)
+            .environmentObject(store.icons)
+            .environmentObject(store.raindrops)
+            .environmentObject(store.filters)
+            .environmentObject(store.recent)
+            .environmentObject(store.user)
     }
 }

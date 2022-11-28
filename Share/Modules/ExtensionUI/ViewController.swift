@@ -1,14 +1,13 @@
 import SwiftUI
 import UIKit
 
-class ShareViewController: UIViewController {
+class ShareViewController: UIViewController {    
     override func viewDidLoad() {
         super.viewDidLoad()
 
         //SwiftUI
-        let ui = UIHostingController(rootView: Share(
-            extension: .init(self.extensionContext)
-        ))
+        let ui = UIHostingController(rootView: ExtensionUI(service: .init(self.extensionContext)))
+        ui.sheetPresentationController?.largestUndimmedDetentIdentifier = .medium
         ui.view.backgroundColor = .clear
         addChild(ui)
         ui.view.translatesAutoresizingMaskIntoConstraints = false
