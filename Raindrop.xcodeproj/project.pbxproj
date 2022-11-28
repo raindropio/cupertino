@@ -47,6 +47,11 @@
 		7694CA032926527E00BD81A0 /* PreviewScreen+Title.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7694CA022926527E00BD81A0 /* PreviewScreen+Title.swift */; };
 		7694CA0529265B5000BD81A0 /* PreviewScreen+Action.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7694CA0429265B5000BD81A0 /* PreviewScreen+Action.swift */; };
 		7694CA072926629C00BD81A0 /* PreviewScreen+Options.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7694CA062926629C00BD81A0 /* PreviewScreen+Options.swift */; };
+		76B16BD02930E6EB00032D7D /* Share.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76B16BCF2930E6EB00032D7D /* Share.swift */; };
+		76B16BD22930E8F600032D7D /* ExtensionService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76B16BD12930E8F600032D7D /* ExtensionService.swift */; };
+		76B16BD42930F34D00032D7D /* API in Frameworks */ = {isa = PBXBuildFile; productRef = 76B16BD32930F34D00032D7D /* API */; };
+		76B16BD62930F43900032D7D /* Share.js in Resources */ = {isa = PBXBuildFile; fileRef = 76B16BD52930F43900032D7D /* Share.js */; };
+		76B16BD92930FDE000032D7D /* NSExtensionContext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76B16BD82930FDE000032D7D /* NSExtensionContext.swift */; };
 		76BFE36E291E9F6B00DE9DB2 /* AppScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76BFE369291E9F6B00DE9DB2 /* AppScene.swift */; };
 		76BFE36F291E9F6B00DE9DB2 /* AppRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76BFE36A291E9F6B00DE9DB2 /* AppRouter.swift */; };
 		76BFE370291E9F6B00DE9DB2 /* SettingsRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76BFE36B291E9F6B00DE9DB2 /* SettingsRouter.swift */; };
@@ -55,7 +60,34 @@
 		76D8805B292E6E8200D43AD9 /* addFab.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76D8805A292E6E8200D43AD9 /* addFab.swift */; };
 		76D8805F292E7ADD00D43AD9 /* AddStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76D8805E292E7ADD00D43AD9 /* AddStack.swift */; };
 		76D88065292FA6BB00D43AD9 /* AddStack+Home.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76D88064292FA6BB00D43AD9 /* AddStack+Home.swift */; };
+		76D880DF2930E1FB00D43AD9 /* ShareViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76D880DE2930E1FB00D43AD9 /* ShareViewController.swift */; };
+		76D880E22930E1FB00D43AD9 /* Share.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 76D880E02930E1FB00D43AD9 /* Share.storyboard */; };
+		76D880E62930E1FB00D43AD9 /* Share.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = 76D880DC2930E1FB00D43AD9 /* Share.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 /* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		76D880E42930E1FB00D43AD9 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 7685A189286868AC00A4BC3C /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 76D880DB2930E1FB00D43AD9;
+			remoteInfo = share;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		76D880E72930E1FB00D43AD9 /* Embed Foundation Extensions */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 13;
+			files = (
+				76D880E62930E1FB00D43AD9 /* Share.appex in Embed Foundation Extensions */,
+			);
+			name = "Embed Foundation Extensions";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		760C9DF52923C731001CB755 /* BrowseNested.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BrowseNested.swift; sourceTree = "<group>"; };
@@ -101,6 +133,11 @@
 		7694CA022926527E00BD81A0 /* PreviewScreen+Title.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PreviewScreen+Title.swift"; sourceTree = "<group>"; };
 		7694CA0429265B5000BD81A0 /* PreviewScreen+Action.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PreviewScreen+Action.swift"; sourceTree = "<group>"; };
 		7694CA062926629C00BD81A0 /* PreviewScreen+Options.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PreviewScreen+Options.swift"; sourceTree = "<group>"; };
+		76B16BCF2930E6EB00032D7D /* Share.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Share.swift; sourceTree = "<group>"; };
+		76B16BD12930E8F600032D7D /* ExtensionService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtensionService.swift; sourceTree = "<group>"; };
+		76B16BD52930F43900032D7D /* Share.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = Share.js; sourceTree = "<group>"; };
+		76B16BD82930FDE000032D7D /* NSExtensionContext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NSExtensionContext.swift; sourceTree = "<group>"; };
+		76B16BDA29310D9500032D7D /* Share.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Share.entitlements; sourceTree = "<group>"; };
 		76BFE369291E9F6B00DE9DB2 /* AppScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppScene.swift; sourceTree = "<group>"; };
 		76BFE36A291E9F6B00DE9DB2 /* AppRouter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppRouter.swift; sourceTree = "<group>"; };
 		76BFE36B291E9F6B00DE9DB2 /* SettingsRouter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsRouter.swift; sourceTree = "<group>"; };
@@ -109,6 +146,10 @@
 		76D8805A292E6E8200D43AD9 /* addFab.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = addFab.swift; sourceTree = "<group>"; };
 		76D8805E292E7ADD00D43AD9 /* AddStack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddStack.swift; sourceTree = "<group>"; };
 		76D88064292FA6BB00D43AD9 /* AddStack+Home.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AddStack+Home.swift"; sourceTree = "<group>"; };
+		76D880DC2930E1FB00D43AD9 /* Share.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = Share.appex; sourceTree = BUILT_PRODUCTS_DIR; };
+		76D880DE2930E1FB00D43AD9 /* ShareViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShareViewController.swift; sourceTree = "<group>"; };
+		76D880E12930E1FB00D43AD9 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Share.storyboard; sourceTree = "<group>"; };
+		76D880E32930E1FB00D43AD9 /* Share.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Share.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -119,6 +160,14 @@
 				76460FA7292A6E3B00C21ACE /* API in Frameworks */,
 				76143B0228842C85006A7508 /* UI in Frameworks */,
 				764B908A292519BF00CBD767 /* Common in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		76D880D92930E1FB00D43AD9 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				76B16BD42930F34D00032D7D /* API in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -212,6 +261,7 @@
 			isa = PBXGroup;
 			children = (
 				7685A1A428687C6000A4BC3C /* App */,
+				76D880DD2930E1FB00D43AD9 /* Share */,
 				767AC1162925196F00766998 /* Common */,
 				7685A1AC286880F600A4BC3C /* API */,
 				7639A6AE286889DB00A76FE9 /* UI */,
@@ -224,6 +274,7 @@
 			isa = PBXGroup;
 			children = (
 				7685A191286868AC00A4BC3C /* Raindrop.app */,
+				76D880DC2930E1FB00D43AD9 /* Share.appex */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -268,6 +319,14 @@
 			path = Preview;
 			sourceTree = "<group>";
 		};
+		76B16BD72930FDAC00032D7D /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				76B16BD82930FDE000032D7D /* NSExtensionContext.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
 		76D88059292E6E5A00D43AD9 /* Add */ = {
 			isa = PBXGroup;
 			children = (
@@ -276,6 +335,21 @@
 				76D8805A292E6E8200D43AD9 /* addFab.swift */,
 			);
 			path = Add;
+			sourceTree = "<group>";
+		};
+		76D880DD2930E1FB00D43AD9 /* Share */ = {
+			isa = PBXGroup;
+			children = (
+				76B16BD72930FDAC00032D7D /* Extensions */,
+				76B16BCF2930E6EB00032D7D /* Share.swift */,
+				76B16BD12930E8F600032D7D /* ExtensionService.swift */,
+				76D880DE2930E1FB00D43AD9 /* ShareViewController.swift */,
+				76D880E02930E1FB00D43AD9 /* Share.storyboard */,
+				76D880E32930E1FB00D43AD9 /* Share.plist */,
+				76B16BDA29310D9500032D7D /* Share.entitlements */,
+				76B16BD52930F43900032D7D /* Share.js */,
+			);
+			path = Share;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -288,10 +362,12 @@
 				7685A18D286868AC00A4BC3C /* Sources */,
 				7685A18E286868AC00A4BC3C /* Frameworks */,
 				7685A18F286868AC00A4BC3C /* Resources */,
+				76D880E72930E1FB00D43AD9 /* Embed Foundation Extensions */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				76D880E52930E1FB00D43AD9 /* PBXTargetDependency */,
 			);
 			name = Raindrop;
 			packageProductDependencies = (
@@ -303,6 +379,26 @@
 			productReference = 7685A191286868AC00A4BC3C /* Raindrop.app */;
 			productType = "com.apple.product-type.application";
 		};
+		76D880DB2930E1FB00D43AD9 /* Share */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 76D880EA2930E1FB00D43AD9 /* Build configuration list for PBXNativeTarget "Share" */;
+			buildPhases = (
+				76D880D82930E1FB00D43AD9 /* Sources */,
+				76D880D92930E1FB00D43AD9 /* Frameworks */,
+				76D880DA2930E1FB00D43AD9 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = Share;
+			packageProductDependencies = (
+				76B16BD32930F34D00032D7D /* API */,
+			);
+			productName = share;
+			productReference = 76D880DC2930E1FB00D43AD9 /* Share.appex */;
+			productType = "com.apple.product-type.app-extension";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -310,11 +406,14 @@
 			isa = PBXProject;
 			attributes = {
 				BuildIndependentTargetsInParallel = 1;
-				LastSwiftUpdateCheck = 1400;
+				LastSwiftUpdateCheck = 1410;
 				LastUpgradeCheck = 1400;
 				TargetAttributes = {
 					7685A190286868AC00A4BC3C = {
 						CreatedOnToolsVersion = 14.0;
+					};
+					76D880DB2930E1FB00D43AD9 = {
+						CreatedOnToolsVersion = 14.1;
 					};
 				};
 			};
@@ -334,6 +433,7 @@
 			projectRoot = "";
 			targets = (
 				7685A190286868AC00A4BC3C /* Raindrop */,
+				76D880DB2930E1FB00D43AD9 /* Share */,
 			);
 		};
 /* End PBXProject section */
@@ -344,6 +444,15 @@
 			buildActionMask = 2147483647;
 			files = (
 				7685A199286868AD00A4BC3C /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		76D880DA2930E1FB00D43AD9 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				76D880E22930E1FB00D43AD9 /* Share.storyboard in Resources */,
+				76B16BD62930F43900032D7D /* Share.js in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -401,7 +510,37 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		76D880D82930E1FB00D43AD9 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				76D880DF2930E1FB00D43AD9 /* ShareViewController.swift in Sources */,
+				76B16BD02930E6EB00032D7D /* Share.swift in Sources */,
+				76B16BD22930E8F600032D7D /* ExtensionService.swift in Sources */,
+				76B16BD92930FDE000032D7D /* NSExtensionContext.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		76D880E52930E1FB00D43AD9 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 76D880DB2930E1FB00D43AD9 /* Share */;
+			targetProxy = 76D880E42930E1FB00D43AD9 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		76D880E02930E1FB00D43AD9 /* Share.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				76D880E12930E1FB00D43AD9 /* Base */,
+			);
+			name = Share.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
 		7685A19E286868AD00A4BC3C /* Debug */ = {
@@ -516,6 +655,7 @@
 		7685A1A1286868AD00A4BC3C /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = App/App.entitlements;
@@ -531,6 +671,7 @@
 				INFOPLIST_KEY_CFBundleDisplayName = Raindrop.io;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.productivity";
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "Upload photos to Raindrop.io (only after user select particular image)";
 				"INFOPLIST_KEY_UILaunchScreen_Generation[sdk=iphoneos*]" = YES;
 				"INFOPLIST_KEY_UILaunchScreen_Generation[sdk=iphonesimulator*]" = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
@@ -540,10 +681,12 @@
 				"LD_RUNPATH_SEARCH_PATHS[sdk=macosx*]" = "@executable_path/../Frameworks";
 				MACOSX_DEPLOYMENT_TARGET = 13.0;
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = io.raindrop.cupertino;
+				PRODUCT_BUNDLE_IDENTIFIER = io.raindrop.ios;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = auto;
-				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator macosx";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -553,6 +696,7 @@
 		7685A1A2286868AD00A4BC3C /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = App/App.entitlements;
@@ -567,6 +711,7 @@
 				INFOPLIST_KEY_CFBundleDisplayName = Raindrop.io;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.productivity";
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "Upload photos to Raindrop.io (only after user select particular image)";
 				"INFOPLIST_KEY_UILaunchScreen_Generation[sdk=iphoneos*]" = YES;
 				"INFOPLIST_KEY_UILaunchScreen_Generation[sdk=iphonesimulator*]" = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
@@ -576,15 +721,75 @@
 				"LD_RUNPATH_SEARCH_PATHS[sdk=macosx*]" = "@executable_path/../Frameworks";
 				MACOSX_DEPLOYMENT_TARGET = 13.0;
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = io.raindrop.cupertino;
-				"PRODUCT_BUNDLE_IDENTIFIER[sdk=iphoneos*]" = io.raindrop.ios;
+				PRODUCT_BUNDLE_IDENTIFIER = io.raindrop.ios;
 				"PRODUCT_BUNDLE_IDENTIFIER[sdk=macosx*]" = io.raindrop.safari;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = auto;
-				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator macosx";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		76D880E82930E1FB00D43AD9 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CODE_SIGN_ENTITLEMENTS = Share/Share.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 7459JWM5TY;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = share/Share.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = Raindrop.io;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				IPHONEOS_DEPLOYMENT_TARGET = 16.1;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = io.raindrop.ios.share;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		76D880E92930E1FB00D43AD9 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CODE_SIGN_ENTITLEMENTS = Share/Share.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 7459JWM5TY;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = share/Share.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = Raindrop.io;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				IPHONEOS_DEPLOYMENT_TARGET = 16.1;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = io.raindrop.ios.share;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
 			};
 			name = Release;
 		};
@@ -609,6 +814,15 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
+		76D880EA2930E1FB00D43AD9 /* Build configuration list for PBXNativeTarget "Share" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				76D880E82930E1FB00D43AD9 /* Debug */,
+				76D880E92930E1FB00D43AD9 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 /* End XCConfigurationList section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -623,6 +837,10 @@
 		764B9089292519BF00CBD767 /* Common */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = Common;
+		};
+		76B16BD32930F34D00032D7D /* API */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = API;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

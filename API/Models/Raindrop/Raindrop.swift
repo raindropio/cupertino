@@ -34,3 +34,9 @@ public struct Raindrop: Identifiable, Hashable {
             nil
     }
 }
+
+extension Raindrop {
+    public static func new(link: URL) -> Self {
+        .init(id: 0, link: link, title: "")
+    }
+}

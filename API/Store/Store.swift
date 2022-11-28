@@ -35,5 +35,3 @@ public actor Store: ReduxStore {
         }
     }
 }
-
-
