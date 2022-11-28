@@ -1,6 +1,6 @@
 import SwiftUI
 
-extension UISheetPresentationController.Detent.Identifier {
+public extension UISheetPresentationController.Detent.Identifier {
     static func fraction(_ value: CGFloat) -> Self {
         .init("Fraction:\(String(format: "%.1f", value))")
     }

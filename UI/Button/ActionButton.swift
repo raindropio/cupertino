@@ -11,7 +11,7 @@ public struct ActionButton<L: View> {
     public init(
         role: ButtonRole? = nil,
         action: @escaping () async throws -> Void,
-        label: @escaping () -> L
+        @ViewBuilder label: @escaping () -> L
     ) {
         self.role = role
         self.action = action

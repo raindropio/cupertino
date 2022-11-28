@@ -71,6 +71,8 @@ public enum RaindropsAction: ReduxAction {
     case createdMany([Raindrop])
     //shorthands
     case reorder(Raindrop.ID, to: Int? = nil, order: Int)
+    //helpers
+    case find(Binding<Raindrop>)
 }
 
 public enum FiltersAction: ReduxAction {

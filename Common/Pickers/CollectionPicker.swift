@@ -2,6 +2,7 @@ import SwiftUI
 import API
 
 public struct CollectionPicker<Prompt: View> {
+    @EnvironmentObject private var dispatch: Dispatcher
     @EnvironmentObject private var c: CollectionsStore
     
     @Binding var id: Int?
@@ -50,6 +51,9 @@ extension CollectionPicker: View {
                 prompt()
             }
         }
+            .task(priority: .background) {
+                try? await dispatch(CollectionsAction.load)
+            }
     }
 }
 

@@ -41,7 +41,7 @@ extension CreateCollectionStack: View {
                     }
                     
                     ToolbarItem(placement: .cancellationAction) {
-                        Button("Cancel") { dismiss() }
+                        Button("Cancel", action: dismiss.callAsFunction)
                     }
                 }
         }

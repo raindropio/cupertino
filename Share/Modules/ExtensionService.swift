@@ -3,14 +3,37 @@ import UniformTypeIdentifiers
 
 final class ExtensionService: ObservableObject {
     @Published var loading = false
-    @Published var preprocessed: NSDictionary?
-    @Published var items = Set<URL>()
+    private var preprocessed: NSDictionary?
+    private var items = Set<URL>()
     
     private weak var context: NSExtensionContext?
     
     init(_ context: NSExtensionContext? = nil) {
         self.context = context
         Task.detached(priority: .background, operation: load)
+    }
+    
+    func decoded<T: Decodable>() -> T? {
+        if let preprocessed {
+            let data = try? JSONSerialization.data(withJSONObject: preprocessed)
+            if let data {
+                return try? JSONDecoder().decode(T.self, from: data)
+            }
+        }
+        return nil
+    }
+    
+    func webURL() -> URL? {
+        items.first {
+            $0.scheme?.hasPrefix("http") == true
+        }
+    }
+    
+    func filesURL() -> [URL]? {
+        let files = items.filter {
+            $0.scheme == "file"
+        }
+        return files.isEmpty ? nil : Array(files)
     }
     
     func close() {

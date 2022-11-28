@@ -3,6 +3,7 @@ import API
 import UI
 
 public struct TagsPicker: View {
+    @EnvironmentObject private var dispatch: Dispatcher
     @EnvironmentObject private var f: FiltersStore
     @EnvironmentObject private var r: RecentStore
     
@@ -18,6 +19,9 @@ public struct TagsPicker: View {
             recent: r.state.tags,
             suggestions: f.state.tags().compactMap(Suggestion.init)
         )
+            .task(priority: .background) {
+                try? await dispatch(FiltersAction.reload())
+            }
     }
 }
 

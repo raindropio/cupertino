@@ -19,3 +19,20 @@ extension Rest {
         return (res.items, res.count ?? 0)
     }
 }
+
+extension Rest {
+    public func raindropFind(link: URL) async throws -> Raindrop? {
+        let exists: IdsResponse<Raindrop.ID> = try await fetch.get(
+            "import/url/exists",
+            query: [
+                .init(name: "url", value: link.absoluteString)
+            ]
+        )
+        guard let id = exists.ids.first else { return nil }
+        
+        let res: ItemResponse<Raindrop> = try await fetch.get(
+            "raindrop/\(id)"
+        )
+        return res.item
+    }
+}

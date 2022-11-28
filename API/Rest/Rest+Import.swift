@@ -1,6 +1,6 @@
 import Foundation
 
-//MARK: - Get
+//MARK: - Parse URL
 extension Rest {
     public func importUrlParse(_ url: URL) async throws -> Raindrop {
         let res: ItemResponse<Raindrop> = try await fetch.get(

@@ -12,7 +12,7 @@ struct CoverPicker: View {
             Page(selection: $selection, media: media)
         } label: {
             Thumbnail(
-                Rest.renderImage(selection, options: .maxDeviceSize),
+                selection,//Rest.renderImage(selection, options: .maxDeviceSize),
                 height: 96,
                 cornerRadius: 3
             )
