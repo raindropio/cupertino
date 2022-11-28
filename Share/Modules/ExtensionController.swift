@@ -1,7 +1,8 @@
 import SwiftUI
 import UIKit
 
-class ShareViewController: UIViewController {    
+@objc(ExtensionController)
+class ExtensionController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 

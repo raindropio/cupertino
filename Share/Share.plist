@@ -37,10 +37,15 @@
 				).@count == $extensionItem.attachments.@count
 				).@count &gt; 0</string>
 		</dict>
-		<key>NSExtensionMainStoryboard</key>
-		<string>Share</string>
+		<key>NSExtensionPrincipalClass</key>
+		<string>ExtensionController</string>
 		<key>NSExtensionPointIdentifier</key>
 		<string>com.apple.share-services</string>
+	</dict>
+	<key>NSAppTransportSecurity</key>
+	<dict>
+		<key>NSAllowsArbitraryLoads</key>
+		<true/>
 	</dict>
 </dict>
 </plist>

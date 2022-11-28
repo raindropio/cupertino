@@ -60,8 +60,7 @@
 		76D8805B292E6E8200D43AD9 /* addFab.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76D8805A292E6E8200D43AD9 /* addFab.swift */; };
 		76D8805F292E7ADD00D43AD9 /* AddStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76D8805E292E7ADD00D43AD9 /* AddStack.swift */; };
 		76D88065292FA6BB00D43AD9 /* AddStack+Home.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76D88064292FA6BB00D43AD9 /* AddStack+Home.swift */; };
-		76D880DF2930E1FB00D43AD9 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76D880DE2930E1FB00D43AD9 /* ViewController.swift */; };
-		76D880E22930E1FB00D43AD9 /* Share.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 76D880E02930E1FB00D43AD9 /* Share.storyboard */; };
+		76D880DF2930E1FB00D43AD9 /* ExtensionController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76D880DE2930E1FB00D43AD9 /* ExtensionController.swift */; };
 		76D880E62930E1FB00D43AD9 /* Share.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = 76D880DC2930E1FB00D43AD9 /* Share.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		76F282B52934C24B00D00363 /* ExtensionUI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76F282B42934C24B00D00363 /* ExtensionUI.swift */; };
 		76F282B72934C25400D00363 /* ExtensionService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76F282B62934C25400D00363 /* ExtensionService.swift */; };
@@ -149,8 +148,7 @@
 		76D8805E292E7ADD00D43AD9 /* AddStack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddStack.swift; sourceTree = "<group>"; };
 		76D88064292FA6BB00D43AD9 /* AddStack+Home.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AddStack+Home.swift"; sourceTree = "<group>"; };
 		76D880DC2930E1FB00D43AD9 /* Share.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = Share.appex; sourceTree = BUILT_PRODUCTS_DIR; };
-		76D880DE2930E1FB00D43AD9 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
-		76D880E12930E1FB00D43AD9 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Share.storyboard; sourceTree = "<group>"; };
+		76D880DE2930E1FB00D43AD9 /* ExtensionController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtensionController.swift; sourceTree = "<group>"; };
 		76D880E32930E1FB00D43AD9 /* Share.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Share.plist; sourceTree = "<group>"; };
 		76F282B42934C24B00D00363 /* ExtensionUI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtensionUI.swift; sourceTree = "<group>"; };
 		76F282B62934C25400D00363 /* ExtensionService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtensionService.swift; sourceTree = "<group>"; };
@@ -330,19 +328,11 @@
 		76B16BE32934BC3300032D7D /* Modules */ = {
 			isa = PBXGroup;
 			children = (
-				76B16BE42934BC4700032D7D /* ExtensionUI */,
-			);
-			path = Modules;
-			sourceTree = "<group>";
-		};
-		76B16BE42934BC4700032D7D /* ExtensionUI */ = {
-			isa = PBXGroup;
-			children = (
 				76F282B42934C24B00D00363 /* ExtensionUI.swift */,
 				76F282B62934C25400D00363 /* ExtensionService.swift */,
-				76D880DE2930E1FB00D43AD9 /* ViewController.swift */,
+				76D880DE2930E1FB00D43AD9 /* ExtensionController.swift */,
 			);
-			path = ExtensionUI;
+			path = Modules;
 			sourceTree = "<group>";
 		};
 		76D88059292E6E5A00D43AD9 /* Add */ = {
@@ -361,7 +351,6 @@
 				76F282B82934C41D00D00363 /* Views */,
 				76B16BE32934BC3300032D7D /* Modules */,
 				76B16BCF2930E6EB00032D7D /* Share.swift */,
-				76D880E02930E1FB00D43AD9 /* Share.storyboard */,
 				76D880E32930E1FB00D43AD9 /* Share.plist */,
 				76B16BDA29310D9500032D7D /* Share.entitlements */,
 				76B16BD52930F43900032D7D /* Share.js */,
@@ -479,7 +468,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				76D880E22930E1FB00D43AD9 /* Share.storyboard in Resources */,
 				76B16BD62930F43900032D7D /* Share.js in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -543,7 +531,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				76F282B52934C24B00D00363 /* ExtensionUI.swift in Sources */,
-				76D880DF2930E1FB00D43AD9 /* ViewController.swift in Sources */,
+				76D880DF2930E1FB00D43AD9 /* ExtensionController.swift in Sources */,
 				76B16BD02930E6EB00032D7D /* Share.swift in Sources */,
 				76F282B72934C25400D00363 /* ExtensionService.swift in Sources */,
 				76F282BA2934C43200D00363 /* NoAuth.swift in Sources */,
@@ -560,17 +548,6 @@
 			targetProxy = 76D880E42930E1FB00D43AD9 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
-
-/* Begin PBXVariantGroup section */
-		76D880E02930E1FB00D43AD9 /* Share.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				76D880E12930E1FB00D43AD9 /* Base */,
-			);
-			name = Share.storyboard;
-			sourceTree = "<group>";
-		};
-/* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
 		7685A19E286868AD00A4BC3C /* Debug */ = {
