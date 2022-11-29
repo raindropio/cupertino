@@ -65,7 +65,9 @@ extension BrowseItems {
                     
                     ShareLink(item: item.link)
                 }
-                .draggable(item)
+                .onDrag {
+                    item.itemProvider
+                }
         }
         
         var body: some View {

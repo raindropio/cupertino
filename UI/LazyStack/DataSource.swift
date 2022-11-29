@@ -1,6 +1,6 @@
 import SwiftUI
 
-public struct DataSource<D: RandomAccessCollection, C: View> where D.Element: Identifiable & Transferable {
+public struct DataSource<D: RandomAccessCollection, C: View> where D.Element: Identifiable {
     @Environment(\.lazyStackLayout) private var layout
     
     let data: D

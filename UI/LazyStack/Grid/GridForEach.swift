@@ -1,6 +1,6 @@
 import SwiftUI
 
-struct GridForEach<D: RandomAccessCollection, C: View> where D.Element: Identifiable & Transferable {
+struct GridForEach<D: RandomAccessCollection, C: View> where D.Element: Identifiable {
     let data: D
     let content: (D.Element) -> C
     

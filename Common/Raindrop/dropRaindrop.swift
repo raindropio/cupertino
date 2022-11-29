@@ -1,5 +1,6 @@
 import SwiftUI
 import API
+import UniformTypeIdentifiers
 
 public extension View {
     func dropRaindrop(to collectionId: Int) -> some View {
@@ -7,11 +8,11 @@ public extension View {
     }
     
     func dropRaindrop(to collection: UserCollection) -> some View {
-        modifier(DropRaindropToCollectionModifier(collectionId: collection.id))
+        dropRaindrop(to: collection.id)
     }
     
     func dropRaindrop(to collection: SystemCollection) -> some View {
-        modifier(DropRaindropToCollectionModifier(collectionId: collection.id))
+        dropRaindrop(to: collection.id)
     }
 }
 
@@ -21,6 +22,19 @@ struct DropRaindropToCollectionModifier: ViewModifier {
     
     var collectionId: Int
     
+    func onDrop(_ items: [NSItemProvider]) -> Bool {
+        Task {
+            let items = items
+            try? await dispatch(
+                RaindropsAction.updateMany(
+                    .some(await Raindrop.getData(items)),
+                    .moveTo(collectionId)
+                )
+            )
+        }
+        return true
+    }
+    
     func body(content: Content) -> some View {
         content
             .background {
@@ -29,16 +43,6 @@ struct DropRaindropToCollectionModifier: ViewModifier {
                         .frame(maxWidth: .infinity, maxHeight: .infinity)
                 }
             }
-            .dropDestination(for: Raindrop.self) { items, _ in
-                dispatch.sync(
-                    RaindropsAction.updateMany(
-                        .some(Set(items.map { $0.id })),
-                        .moveTo(collectionId)
-                    )
-                )
-                return true
-            } isTargeted: {
-                isTargeted = $0
-            }
+            .onDrop(of: [UTType.raindrop], isTargeted: $isTargeted, perform: onDrop)
     }
 }

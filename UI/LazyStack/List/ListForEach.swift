@@ -1,6 +1,6 @@
 import SwiftUI
 
-struct ListForEach<D: RandomAccessCollection, C: View> where D.Element: Identifiable & Transferable {
+struct ListForEach<D: RandomAccessCollection, C: View> where D.Element: Identifiable {
     let data: D
     let reorder: ((D.Element.ID, Int) -> Void)?
     let content: (D.Element) -> C
