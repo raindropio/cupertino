@@ -23,8 +23,6 @@ extension RaindropStack {
     }
     
     private func commit() async throws {
-        loading = true
-        defer { loading = false }
         try await dispatch(isNew ? RaindropsAction.create(raindrop) : RaindropsAction.update(raindrop))
         dismiss()
     }

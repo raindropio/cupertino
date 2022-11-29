@@ -3,6 +3,7 @@ import Foundation
 fileprivate let keychainKeyName = "cookies"
 
 extension AuthReducer {
+    @MainActor
     func restore() {
         let query = [
             kSecClass: kSecClassGenericPassword,

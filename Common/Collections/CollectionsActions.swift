@@ -19,9 +19,9 @@ struct CollectionActions: ViewModifier {
                 service(nil)
             }
             //create
-            .sheet(item: $service.createItem, content: CreateCollectionStack.init)
+            .sheet(item: $service.createItem, content: CollectionStack.init)
             //edit
-            .sheet(item: $service.editItem, content: EditCollectionStack.init)
+            .sheet(item: $service.editItem, content: CollectionStack.init)
             //delete
             .confirmationDialog(
                 "Are you sure?",
@@ -39,7 +39,7 @@ struct CollectionActions: ViewModifier {
 
 //MARK: - Helpers
 fileprivate extension CollectionActionsStore {
-    var createItem: CreateCollectionStack.Location? {
+    var createItem: CollectionStack.NewLocation? {
         get {
             if case .create(let location) = self.ask {
                 return location

@@ -66,6 +66,8 @@
 		76F282B72934C25400D00363 /* ExtensionService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76F282B62934C25400D00363 /* ExtensionService.swift */; };
 		76F282BA2934C43200D00363 /* NoAuth.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76F282B92934C43200D00363 /* NoAuth.swift */; };
 		76F282BC2934C76A00D00363 /* SaveItems.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76F282BB2934C76A00D00363 /* SaveItems.swift */; };
+		76F282BE29360ACE00D00363 /* AddStack+NewLink.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76F282BD29360ACE00D00363 /* AddStack+NewLink.swift */; };
+		76F282C329360CB400D00363 /* AddStack+FromApps.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76F282C229360CB400D00363 /* AddStack+FromApps.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -154,6 +156,8 @@
 		76F282B62934C25400D00363 /* ExtensionService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtensionService.swift; sourceTree = "<group>"; };
 		76F282B92934C43200D00363 /* NoAuth.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoAuth.swift; sourceTree = "<group>"; };
 		76F282BB2934C76A00D00363 /* SaveItems.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SaveItems.swift; sourceTree = "<group>"; };
+		76F282BD29360ACE00D00363 /* AddStack+NewLink.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AddStack+NewLink.swift"; sourceTree = "<group>"; };
+		76F282C229360CB400D00363 /* AddStack+FromApps.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AddStack+FromApps.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -338,9 +342,11 @@
 		76D88059292E6E5A00D43AD9 /* Add */ = {
 			isa = PBXGroup;
 			children = (
+				76D8805A292E6E8200D43AD9 /* addFab.swift */,
 				76D8805E292E7ADD00D43AD9 /* AddStack.swift */,
 				76D88064292FA6BB00D43AD9 /* AddStack+Home.swift */,
-				76D8805A292E6E8200D43AD9 /* addFab.swift */,
+				76F282BD29360ACE00D00363 /* AddStack+NewLink.swift */,
+				76F282C229360CB400D00363 /* AddStack+FromApps.swift */,
 			);
 			path = Add;
 			sourceTree = "<group>";
@@ -514,6 +520,7 @@
 				76BFE36F291E9F6B00DE9DB2 /* AppRouter.swift in Sources */,
 				767EB470292E1C6A0018EE8F /* BrowseBulk+Move.swift in Sources */,
 				760C9E342923C735001CB755 /* BrowseItems.swift in Sources */,
+				76F282BE29360ACE00D00363 /* AddStack+NewLink.swift in Sources */,
 				76BFE36E291E9F6B00DE9DB2 /* AppScene.swift in Sources */,
 				767EB468292E14450018EE8F /* BrowseBulk.swift in Sources */,
 				760C9E492923C735001CB755 /* GlobalSearch.swift in Sources */,
@@ -522,6 +529,7 @@
 				76D8805B292E6E8200D43AD9 /* addFab.swift in Sources */,
 				76BFE370291E9F6B00DE9DB2 /* SettingsRouter.swift in Sources */,
 				767EB45F292CC0C40018EE8F /* BrowseItem+Details.swift in Sources */,
+				76F282C329360CB400D00363 /* AddStack+FromApps.swift in Sources */,
 				767EB474292E467F0018EE8F /* BrowseBulk+Delete.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

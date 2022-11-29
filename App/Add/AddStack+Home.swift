@@ -32,17 +32,17 @@ extension AddStack.Home: View {
             .tint(.blue)
         
         MediaPicker(selection: mapFiles, matching: [.images, .videos]) {
-            Label("Photo", systemImage: "photo")
+            Label("Photos", systemImage: "photo")
         }
             .tint(.green)
         
         DocumentPicker(selection: mapFiles, matching: [.item]) {
-            Label("File", systemImage: "doc")
+            Label("Files", systemImage: "doc")
         }
             .tint(.indigo)
         
-        NavigationLink {} label: {
-            Label("Save from apps", systemImage: "puzzlepiece.extension")
+        NavigationLink(destination: FromApps.init) {
+            Label("Add from apps", systemImage: "puzzlepiece.extension")
         }
             .tint(.secondary)
     }
@@ -58,7 +58,7 @@ extension AddStack.Home: View {
                 .buttonStyle(.gallery)
                 .symbolVariant(.fill)
                 .scenePadding()
-                .navigationTitle("New")
+                .navigationTitle("Add")
                 #if os(iOS)
                 .navigationBarTitleDisplayMode(.inline)
                 #endif

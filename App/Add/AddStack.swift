@@ -18,10 +18,10 @@ struct AddStack: View {
                 Home(add: $add)
                 
             case .link(let string):
-                AddLinkStack(string, collection: collection)
+                NewLink(string, collection: collection)
                 
             case .collection:
-                CreateCollectionStack(collection != nil ? .parent(collection!) : .group())
+                CollectionStack(collection != nil ? .parent(collection!) : .group())
                 
             case .files(let files):
                 UploadFilesStack(files, collection: collection)

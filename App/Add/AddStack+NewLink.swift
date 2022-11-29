@@ -2,21 +2,23 @@ import SwiftUI
 import API
 import UI
 
-public struct AddLinkStack {
-    @EnvironmentObject private var dispatch: Dispatcher
-    @Environment(\.dismiss) private var dismiss
-    @FocusState private var focused: Bool
-    
-    @State var link: String = ""
-    var collection: Int
-    
-    public init(_ link: String = "", collection: Int? = nil) {
-        self._link = .init(initialValue: link)
-        self.collection = collection ?? -1
+extension AddStack {
+    struct NewLink {
+        @EnvironmentObject private var dispatch: Dispatcher
+        @Environment(\.dismiss) private var dismiss
+        @FocusState private var focused: Bool
+        
+        @State var link: String = ""
+        var collection: Int
+        
+        init(_ link: String = "", collection: Int? = nil) {
+            self._link = .init(initialValue: link)
+            self.collection = collection ?? -1
+        }
     }
 }
 
-extension AddLinkStack: View {
+extension AddStack.NewLink: View {
     private var isValid: Bool {
         URL.detect(from: link) != nil
     }
@@ -53,12 +55,12 @@ extension AddLinkStack: View {
                         .focused($focused)
                 }
                 
-                SubmitButton("Create")
+                SubmitButton("Add")
                     .disabled(!isValid)
             }
                 .onAppear(perform: start)
                 .onSubmit(submit)
-                .navigationTitle("Add link")
+                .navigationTitle("New link")
                 #if os(iOS)
                 .navigationBarTitleDisplayMode(.inline)
                 #endif

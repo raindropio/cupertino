@@ -4,6 +4,7 @@ public actor AuthReducer: Reducer {
     
     let rest = Rest()
     
+    @MainActor
     public init() {
         restore()
     }

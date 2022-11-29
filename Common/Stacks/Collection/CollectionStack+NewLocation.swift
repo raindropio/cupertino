@@ -1,7 +1,7 @@
 import API
 
-extension CreateCollectionStack {
-    public enum Location: Identifiable {
+extension CollectionStack {
+    public enum NewLocation: Identifiable {
         case group(CGroup? = nil)
         case parent(UserCollection.ID)
         
