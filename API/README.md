@@ -1,5 +1,8 @@
 # API
 
+### Get started
+- Make sure to specify correct constants in `Constants.swift`
+
 ### Folders structure
 - Models: All public models
 - Modules

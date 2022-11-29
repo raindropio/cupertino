@@ -4,13 +4,12 @@ public actor AuthReducer: Reducer {
     
     let rest = Rest()
     
-    public init() {}
+    public init() {
+        restore()
+    }
     
     public func reduce(state: inout S, action: A) async throws -> ReduxAction? {
         switch action {
-        case .restore(let keychain):
-            restore(state: &state, keychain: keychain)
-            
         case .login(let body):
             try await login(state: &state, body: body)
             
@@ -25,7 +24,7 @@ public actor AuthReducer: Reducer {
             switch action {
             //user successfully reloaded, so persit cookies to keychain
             case .reloaded(_):
-                persist(state: &state)
+                persist()
                 
             default:
                 break

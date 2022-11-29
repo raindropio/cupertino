@@ -3,7 +3,6 @@ import SwiftUI
 //TODO: Support debounce
 
 public enum AuthAction: ReduxAction {
-    case restore(keychain: String)
     case login(AuthLoginRequest)
     case logout
 }

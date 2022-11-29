@@ -3,7 +3,7 @@ import API
 import Common
 
 struct Share: View {
-    @StateObject private var store = Store(keychain: "7459JWM5TY.secrets")
+    @StateObject private var store = Store()
     
     var body: some View {
         AuthGroup(

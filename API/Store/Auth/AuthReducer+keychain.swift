@@ -3,15 +3,13 @@ import Foundation
 fileprivate let keychainKeyName = "cookies"
 
 extension AuthReducer {
-    func restore(state: inout S, keychain: String) {
-        state.keychain = keychain
-        
+    func restore() {
         let query = [
             kSecClass: kSecClassGenericPassword,
             kSecAttrAccount: keychainKeyName,
             kSecReturnData: kCFBooleanTrue!,
             kSecMatchLimit: kSecMatchLimitOne,
-            kSecAttrAccessGroup: keychain
+            kSecAttrAccessGroup: Constants.keychainGroupName
         ] as CFDictionary
         
         //get data from keychain
@@ -29,9 +27,7 @@ extension AuthReducer {
         }
     }
     
-    func persist(state: inout S) {
-        guard let keychain = state.keychain else { return }
-        
+    func persist() {
         //get all cookies for Rest API
         let cookies = (HTTPCookieStorage.shared.cookies ?? []).filter {
             $0.domain.contains(Rest.base.root.host()!) ||
@@ -48,7 +44,7 @@ extension AuthReducer {
             kSecClass: kSecClassGenericPassword,
             kSecAttrAccount: keychainKeyName,
             kSecValueData: data,
-            kSecAttrAccessGroup: keychain
+            kSecAttrAccessGroup: Constants.keychainGroupName
         ] as CFDictionary
         SecItemDelete(query)
         SecItemAdd(query, nil)

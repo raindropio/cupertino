@@ -14,8 +14,8 @@ extension Cached {
         private var fileUrl: URL
         
         init(_ key: String) {
-            fileUrl = FileManager.default.urls(for: .cachesDirectory, in: .userDomainMask).first!
-                .appendingPathComponent("\(key).json", isDirectory: false)
+            fileUrl = FileManager.default.containerURL(forSecurityApplicationGroupIdentifier: Constants.appGroupName)!
+                .appendingPathComponent("Library/Caches/\(key).json", isDirectory: false)
             
             publisher
                 .subscribe(on: DispatchQueue.global(qos: .background))

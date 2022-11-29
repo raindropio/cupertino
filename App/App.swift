@@ -4,7 +4,7 @@ import Common
 
 @main
 struct RaindropApp: App {
-    @StateObject private var store = Store(keychain: "7459JWM5TY.secrets")
+    @StateObject private var store = Store()
 
     var body: some Scene {
         WindowGroup {
