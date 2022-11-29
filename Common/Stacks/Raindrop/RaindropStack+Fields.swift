@@ -43,13 +43,8 @@ extension RaindropStack.Fields: View {
             }
 
             Label {
-                TextField("URL", value: $raindrop.link, format: .url)
+                URLField("URL", value: $raindrop.link)
                     .focused($focus, equals: .link)
-                    .keyboardType(.URL)
-                    .textContentType(.URL)
-                    .textInputAutocapitalization(.never)
-                    .truncationMode(.head)
-                    .disableAutocorrection(true)
             } icon: {
                 Image(systemName: "globe")
             }
