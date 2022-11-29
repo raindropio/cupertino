@@ -2,14 +2,21 @@ import SwiftUI
 
 public struct SubmitButton<Label>: View where Label: View {
     @Environment(\.onSubmitAction) private var onSubmitAction
-    @ViewBuilder var label: () -> Label
+    @ViewBuilder private var label: () -> Label
     
     public init(label: @escaping () -> Label) {
         self.label = label
     }
 
     public var body: some View {
-        Button(action: onSubmitAction, label: label)
+        Button(action: onSubmitAction) {
+            label()
+                .frame(minHeight: 32)
+                .frame(maxWidth: .infinity)
+        }
+            .buttonStyle(.borderedProminent)
+            .fontWeight(.semibold)
+            .clearSection()
     }
 }
 

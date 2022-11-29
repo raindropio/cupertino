@@ -11,9 +11,9 @@ struct SaveItems: View {
                 .presentationDetents([.height(100)])
                 .presentationUndimmed(.height(100))
         } else if let raindrop: Raindrop = service.decoded() {
-            CreateRaindropStack(raindrop)
+            RaindropStack(raindrop)
         } else if let webURL = service.webURL() {
-            CreateRaindropStack(webURL)
+            RaindropStack(webURL)
         } else if let files = service.filesURL() {
             UploadFilesStack(files)
         }

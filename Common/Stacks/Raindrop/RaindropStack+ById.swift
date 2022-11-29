@@ -1,7 +1,7 @@
 import SwiftUI
 import API
 
-extension EditRaindropStack {
+extension RaindropStack {
     public struct ById: View {
         @EnvironmentObject private var r: RaindropsStore
         private var id: Raindrop.ID
@@ -14,7 +14,7 @@ extension EditRaindropStack {
             let raindrop = r.state.item(id)
             
             if let raindrop {
-                EditRaindropStack(raindrop)
+                RaindropStack(raindrop)
             }
         }
     }

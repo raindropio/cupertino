@@ -17,7 +17,7 @@ extension PreviewScreen {
             }
                 .buttonStyle(.bordered)
                 .popover(isPresented: $edit) {
-                    EditRaindropStack(raindrop)
+                    RaindropStack(raindrop)
                         .frame(idealWidth: 400, idealHeight: 600)
                 }
         }
