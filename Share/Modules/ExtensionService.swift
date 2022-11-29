@@ -85,7 +85,6 @@ extension ExtensionService {
                     _ = await MainActor.run {
                         items.insert(item)
                     }
-                    return
                 }
                 //text
                 else if let item: String = await attachment.getItem(UTType.text.identifier),
@@ -93,14 +92,12 @@ extension ExtensionService {
                     _ = await MainActor.run {
                         URL.detect(from: item).forEach { items.insert($0) }
                     }
-                    return
                 }
                 //file url
                 else if let item: URL = await attachment.getItem(UTType.fileURL.identifier, UTType.image.identifier, UTType.video.identifier, UTType.movie.identifier, UTType.audio.identifier, UTType.pdf.identifier) {
                     _ = await MainActor.run {
                         items.insert(item)
                     }
-                    return
                 }
                 //image data (usually screenshot)
                 else if let item: UIImage = await attachment.getItem(UTType.image.identifier) {
