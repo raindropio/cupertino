@@ -19,6 +19,7 @@ extension Raindrop: Codable, EncodableWithConfiguration {
         case duplicate
         case file
         case cache
+        case pleaseParse
         case order
     }
     
@@ -46,6 +47,7 @@ extension Raindrop: Codable, EncodableWithConfiguration {
         broken = (try? container.decode(Swift.type(of: broken), forKey: .broken)) ?? false
         duplicate = try? container.decode(Swift.type(of: duplicate), forKey: .duplicate)
         file = try? container.decode(Swift.type(of: file), forKey: .file)
+        pleaseParse = try? container.decode(Swift.type(of: pleaseParse), forKey: .pleaseParse)
         cache = try? container.decode(Swift.type(of: cache), forKey: .cache)
                 
         if let collectionContainer = try? container.nestedContainer(keyedBy: MongoRef<Int>.CodingKeys.self, forKey: .collection) {
@@ -120,6 +122,10 @@ extension Raindrop: Codable, EncodableWithConfiguration {
         
         if compare?.collection != collection {
             try container.encode(MongoRef<Int>(collection), forKey: .collection)
+        }
+        
+        if compare?.pleaseParse != pleaseParse {
+            try container.encode(pleaseParse, forKey: .pleaseParse)
         }
         
         if compare?.order != order {

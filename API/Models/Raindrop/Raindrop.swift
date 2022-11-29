@@ -18,6 +18,7 @@ public struct Raindrop: Identifiable, Hashable {
     public var duplicate: Raindrop.ID?
     public var file: File?
     public var cache: Cache?
+    public var pleaseParse: PleaseParse?
     public var order: Int?
     
     public var favicon: URL? {
@@ -37,6 +38,6 @@ public struct Raindrop: Identifiable, Hashable {
 
 extension Raindrop {
     public static func new(link: URL) -> Self {
-        .init(id: 0, link: link, title: "")
+        .init(id: 0, link: link, title: "", pleaseParse: .init())
     }
 }
