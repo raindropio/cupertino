@@ -54,7 +54,6 @@ struct AuthViewEmail: View {
             #endif
             .safeAreaInset(edge: .bottom) {
                 SubmitButton("Sign in")
-                    .buttonStyle(.submit)
                     .controlSize(.large)
                     .padding()
                     .disabled(!form.isValid)

@@ -53,9 +53,7 @@ extension RaindropStack: View {
                 .disabled(loading)
                 .opacity(loading ? 0.7 : 1)
                 .submitLabel(.done)
-                .onSubmit {
-                    Task { try? await commit() }
-                }
+                .onSubmit(commit)
                 .navigationTitle(isNew ? "New bookmark" : "Edit bookmark")
                 .navigationBarTitleDisplayMode(.inline)
                 .toolbar {
