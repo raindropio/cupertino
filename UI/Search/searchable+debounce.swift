@@ -50,7 +50,7 @@ fileprivate struct SearchableTokensDebounceModifier<C: RandomAccessCollection & 
     
     func body(content: Content) -> some View {
         content
-            .searchable(
+            .backport.searchable(
                 text: $temp,
                 tokens: $tokens,
                 placement: placement,

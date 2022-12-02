@@ -11,6 +11,6 @@ public struct SafariView: View {
         PlatformSafariView(url: url)
             .ignoresSafeArea()
             .navigationBarTitleDisplayMode(.inline)
-            .toolbarRole(.editor)
+            .backport.toolbarRole(.editor)
     }
 }

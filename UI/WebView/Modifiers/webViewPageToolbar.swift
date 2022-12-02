@@ -51,7 +51,7 @@ struct WebViewPageToolbar: ViewModifier {
                 }
                 
                 ToolbarItemGroup(placement: toolbarItemPlacement) {
-                    ShareLink(item: currentURL)
+                    Backport.ShareLink(item: currentURL)
                         .disabled(page.url == nil)
                     
                     Spacer()

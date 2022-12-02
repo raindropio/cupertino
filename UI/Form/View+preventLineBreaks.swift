@@ -1,6 +1,6 @@
 import SwiftUI
 
-public extension TextField {
+public extension View {
     func preventLineBreaks(text: Binding<String>) -> some View {
         modifier(PreventLineBreaksModifier(text: text))
     }
@@ -14,7 +14,7 @@ struct PreventLineBreaksModifier: ViewModifier {
         content
             .onChange(of: text) {
                 if $0.contains("\n") {
-                    text = text.replacing("\n", with: "", maxReplacements: .max)
+                    text = text.replacingOccurrences(of: "\n", with: "")
                     onSubmitAction()
                 }
             }

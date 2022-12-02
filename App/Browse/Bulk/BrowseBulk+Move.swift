@@ -32,7 +32,7 @@ extension BrowseBulk {
             }
             //select
             .sheet(isPresented: $select) {
-                NavigationStack {
+                NavigationView {
                     CollectionsList(selection: $to, matching: .insertable, searchable: true)
                         .collectionActions()
                         .navigationBarTitleDisplayMode(.inline)
@@ -50,6 +50,7 @@ extension BrowseBulk {
                             }
                         }
                 }
+                    .navigationViewStyle(.stack)
                     .frame(idealWidth: 600, idealHeight: 800)
             }
         }

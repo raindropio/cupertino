@@ -31,9 +31,15 @@ extension LazyStack: View {
             switch layout {
             case .list:
                 List(selection: $selection, content: content)
-                    .contextMenu(forSelectionType: ID.self, menu: contextMenu) {
+                    .backport.contextMenu(forSelectionType: ID.self, menu: contextMenu) {
                         if let id = $0.first {
                             action?(id)
+                        }
+                    }
+                    .backport.deprecated {
+                        $0.task {
+                            model.action = action
+                            model.contextMenu = { AnyView(contextMenu($0)) }
                         }
                     }
                 
@@ -63,4 +69,3 @@ extension LazyStack: View {
             .environmentObject(model)
     }
 }
-

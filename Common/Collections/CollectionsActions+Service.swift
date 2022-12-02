@@ -17,6 +17,5 @@ extension CollectionActionsStore {
     enum Ask {
         case create(CollectionStack.NewLocation = .group())
         case edit(UserCollection)
-        case delete(UserCollection)
     }
 }

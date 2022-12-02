@@ -1,5 +1,6 @@
 import SwiftUI
 import API
+import UI
 
 extension CollectionsList {
     struct Menus: ViewModifier {
@@ -7,7 +8,7 @@ extension CollectionsList {
 
         func body(content: Content) -> some View {
             content
-                .contextMenu(forSelectionType: Int.self) { selection in
+                .backport.contextMenu(forSelectionType: Int.self) { selection in
                     if let id = selection.first,
                         let collection = collections.state.user[id] {
                         UserCollectionMenu(collection)

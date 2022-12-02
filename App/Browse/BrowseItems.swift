@@ -63,7 +63,7 @@ extension BrowseItems {
                     }
                         .tint(.red)
                     
-                    ShareLink(item: item.link)
+                    Backport.ShareLink(item: item.link)
                 }
                 .onDrag {
                     item.itemProvider

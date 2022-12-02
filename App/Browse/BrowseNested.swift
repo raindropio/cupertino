@@ -39,6 +39,7 @@ extension BrowseNested {
                         ForEach(items, content: item)
                     }
                         .scenePadding(.horizontal)
+                        .frame(height: 38)
                 }
                     .buttonStyle(.bordered)
                     .foregroundStyle(.primary)

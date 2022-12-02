@@ -3,16 +3,9 @@ import API
 import UI
 
 //MARK: - Available pages
-enum AppRoute: NavigationPane {
+enum AppRoute: Hashable {
     case browse(FindBy)
     case preview(Raindrop, PreviewScreen.Mode? = nil)
-    
-    var appearance: NavigationPaneAppearance {
-        switch self {
-        case .preview(_,_): return .fullScreen
-        default: return .automatic
-        }
-    }
 }
 
 //MARK: - Service

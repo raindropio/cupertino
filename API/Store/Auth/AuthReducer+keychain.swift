@@ -31,8 +31,8 @@ extension AuthReducer {
     func persist() {
         //get all cookies for Rest API
         let cookies = (HTTPCookieStorage.shared.cookies ?? []).filter {
-            $0.domain.contains(Rest.base.root.host()!) ||
-            $0.domain.contains(Rest.base.api.host()!)
+            $0.domain.contains(Rest.base.root.host!) ||
+            $0.domain.contains(Rest.base.api.host!)
         }
         guard !cookies.isEmpty else { return }
         

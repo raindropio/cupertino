@@ -11,7 +11,7 @@ extension BrowseBulk {
                     editMode?.wrappedValue = .inactive
                 }
             }
-                .fontWeight(.semibold)
+                .font(.headline)
         }
     }
 }

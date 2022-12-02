@@ -36,7 +36,7 @@ extension UploadFilesStack {
 
 extension UploadFilesStack: View {
     public var body: some View {
-        NavigationStack {
+        NavigationView {
             ProgressView(
                 value: Double(completed.count),
                 total: Double(files.count)
@@ -67,6 +67,7 @@ extension UploadFilesStack: View {
                     }
                 }
         }
+            .navigationViewStyle(.stack)
             //start uploading
             .task(id: files, priority: .background, upload)
             //auto close when complete all

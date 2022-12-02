@@ -22,18 +22,6 @@ struct CollectionActions: ViewModifier {
             .sheet(item: $service.createItem, content: CollectionStack.init)
             //edit
             .sheet(item: $service.editItem, content: CollectionStack.init)
-            //delete
-            .confirmationDialog(
-                "Are you sure?",
-                isPresented: $service.deletePresented,
-                presenting: service.deleteItem
-            ) { collection in
-                Button(role: .destructive) {
-                    dispatch.sync(CollectionsAction.delete(collection.id))
-                } label: {
-                    Text("Delete \(collection.title)")
-                }
-            }
     }
 }
 
@@ -60,32 +48,6 @@ fileprivate extension CollectionActionsStore {
         }
         set {
             callAsFunction(newValue != nil ? .edit(newValue!) : nil)
-        }
-    }
-    
-    var deletePresented: Bool {
-        get {
-            if case .delete(_) = self.ask {
-                return true
-            }
-            return false
-        }
-        set {
-            if !newValue {
-                callAsFunction(nil)
-            }
-        }
-    }
-    
-    var deleteItem: UserCollection? {
-        get {
-            if case .delete(let collection) = self.ask {
-                return collection
-            }
-            return nil
-        }
-        set {
-            callAsFunction(newValue != nil ? .delete(newValue!) : nil)
         }
     }
 }

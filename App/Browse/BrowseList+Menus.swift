@@ -55,7 +55,7 @@ extension BrowseList.Menus {
                         Label("Edit", systemImage: "pencil")
                     }
                     
-                    ShareLink(item: item.link)
+                    Backport.ShareLink(item: item.link)
 
                     Button(role: .destructive) {
                         dispatch.sync(RaindropsAction.delete(item.id))

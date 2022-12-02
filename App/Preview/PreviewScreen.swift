@@ -49,7 +49,7 @@ extension PreviewScreen {
                 .webViewProgressBar(page)
                 .webViewPageToolbar(page, overrideURL: !page.canGoBack ? raindrop.link : nil)
                 .webViewHidesBarsOnSwipe(page)
-                .toolbarRole(.editor)
+                .backport.toolbarRole(.editor)
                 .modifier(Title(page: page, mode: mode, raindrop: raindrop))
                 .modifier(Action(page: page, raindrop: raindrop))
                 .modifier(Toolbar(page: page, mode: $mode, raindrop: raindrop))

@@ -27,9 +27,9 @@ struct AddStack: View {
                 UploadFilesStack(files, collection: collection)
             }
         }
-        .frame(idealWidth: 400, idealHeight: 340)
-        .presentationDetents([.medium, .large])
-        .presentationDragIndicator(.hidden)
+        .frame(idealWidth: 400, idealHeight: 450)
+        .backport.presentationDetents([.medium, .large])
+        .backport.presentationDragIndicator(.hidden)
         .transition(.opacity)
         .animation(.easeInOut(duration: 0.2), value: add)
     }

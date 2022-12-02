@@ -7,7 +7,7 @@ struct AppScene: View {
     @StateObject private var router = AppRouter()
     
     var body: some View {
-        NavigationPanes(path: $router.path) {
+        SplitView(path: $router.path) {
             SidebarScreen()
         } detail: { screen in
             switch screen {
@@ -16,11 +16,9 @@ struct AppScene: View {
                 
             case .preview(let raindrop, let mode):
                 PreviewScreen(raindrop: raindrop, mode: mode)
-                
-            case .none:
-                Text("bla")
             }
         }
+            .navigationSplitViewConfiguration(sidebarMin: 400)
             .collectionActions()
             .environmentObject(router)
     }

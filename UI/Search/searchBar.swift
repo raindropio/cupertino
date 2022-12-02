@@ -9,7 +9,7 @@ public extension View {
         cancelable: Bool? = nil,
         clearable: Bool? = nil,
         autoReturnKey: Bool? = nil,
-        scopeBarActivation: UISearchController.ScopeBarActivation = .automatic,
+        scopeBarActivation: ScopeBarActivation = .automatic,
         tokenBackgroundColor: Color? = nil
     ) -> some View {
         modifier(SearchBarModifier(
@@ -24,13 +24,13 @@ public extension View {
     }
 }
 
-fileprivate struct SearchBarModifier: ViewModifier {    
+fileprivate struct SearchBarModifier: ViewModifier {
     var withToolbar: Bool?
     var withButton: Bool?
     var cancelable: Bool?
     var clearable: Bool?
     var autoReturnKey: Bool?
-    var scopeBarActivation: UISearchController.ScopeBarActivation
+    var scopeBarActivation: ScopeBarActivation
     var tokenBackgroundColor: Color? = nil
     
     @Environment(\.editMode) private var editMode
@@ -60,7 +60,9 @@ fileprivate struct SearchBarModifier: ViewModifier {
                 }
             }
             .onChange(of: controller) {
-                $0?.scopeBarActivation = scopeBarActivation
+                if #available(iOS 16.0, *) {
+                    $0?.scopeBarActivation = scopeBarActivation.uiKit()
+                }
                    
                 if let withToolbar {
                     $0?.hidesNavigationBarDuringPresentation = !withToolbar
@@ -99,13 +101,32 @@ fileprivate struct SearchBarModifier: ViewModifier {
                 }
             }
             .onChange(of: scopeBarActivation) {
-                controller?.scopeBarActivation = $0
+                if #available(iOS 16.0, *) {
+                    controller?.scopeBarActivation = $0.uiKit()
+                }
             }
             .onChange(of: tokenBackgroundColor) {
                 if let tokenBackgroundColor = $0 {
                     controller?.searchBar.searchTextField.tokenBackgroundColor = UIColor(tokenBackgroundColor)
                 }
             }
+    }
+}
+
+public enum ScopeBarActivation: Int {
+    case automatic = 0
+    case manual = 1
+    case onTextEntry = 2
+    case onSearchActivation = 3
+    
+    @available(iOS 16.0, *)
+    func uiKit() -> UISearchController.ScopeBarActivation {
+        switch self {
+        case .automatic: return .automatic
+        case .manual: return .manual
+        case .onTextEntry: return .onTextEntry
+        case .onSearchActivation: return .onSearchActivation
+        }
     }
 }
 #endif

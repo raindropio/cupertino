@@ -14,18 +14,18 @@ extension RaindropStack.Fields: View {
         CoverPicker(selection: $raindrop.cover, media: raindrop.media)
         
         Section {
-            TextField("Title", text: $raindrop.title, axis: .vertical)
+            Backport.TextField("Title", text: $raindrop.title, axis: .vertical)
                 .preventLineBreaks(text: $raindrop.title)
                 .focused($focus, equals: .title)
-                .fontWeight(.semibold)
+                .font(.headline)
                 .lineLimit(5)
                 .onSubmit {
                     focus = nil
                 }
 
-            TextField("Description", text: $raindrop.excerpt, axis: .vertical)
+            Backport.TextField("Description", text: $raindrop.excerpt, axis: .vertical)
                 .focused($focus, equals: .excerpt)
-                .lineLimit(2...5)
+                .backport.lineLimit(2...5)
         }
 
         Section {

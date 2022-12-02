@@ -6,11 +6,12 @@ struct SettingsScene: View {
     @EnvironmentObject private var dispatch: Dispatcher
     
     var body: some View {
-        NavigationStack(path: $settings.path) {
+        NavigationView {
             Button("Logout") {
                 dispatch.sync(AuthAction.logout)
             }
         }
+        .navigationViewStyle(.stack)
     }
 }
 

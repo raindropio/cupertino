@@ -1,9 +1,11 @@
 import SwiftUI
 
+@available(iOS 16.0, *)
 public extension LabeledContentStyle where Self == AutomaticLabeledContentStyle {
     static var fix: LabeledContentStyleFix { LabeledContentStyleFix() }
 }
 
+@available(iOS 16.0, *)
 public struct LabeledContentStyleFix: LabeledContentStyle {
     public func makeBody(configuration: Configuration) -> some View {
         HStack {
@@ -15,6 +17,7 @@ public struct LabeledContentStyleFix: LabeledContentStyle {
     }
 }
 
+@available(iOS 16.0, *)
 extension HorizontalAlignment {
     private enum ControlAlignment: AlignmentID {
         static func defaultValue(in context: ViewDimensions) -> CGFloat {

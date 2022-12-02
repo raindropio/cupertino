@@ -12,11 +12,11 @@ struct WebViewHidesBarsOnSwipe: ViewModifier {
 
     func body(content: Content) -> some View {
         content
-            .toolbarBackground(
+            .backport.toolbarBackground(
                 page.colorScheme != nil && page.colorScheme != colorScheme ? .visible : .automatic,
                 for: .navigationBar, .bottomBar, .tabBar
             )
-            .toolbar(
+            .backport.toolbar(
                 page.prefersHiddenToolbars ? .hidden : .automatic,
                 for: .navigationBar, .bottomBar, .tabBar
             )

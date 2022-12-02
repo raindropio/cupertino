@@ -23,7 +23,7 @@ public struct SubmitButton<Label>: View where Label: View {
                 .frame(maxWidth: .infinity)
         }
             .buttonStyle(.borderedProminent)
-            .fontWeight(.semibold)
+            .font(.headline)
             .clearSection()
     }
 }

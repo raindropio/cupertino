@@ -15,12 +15,21 @@ extension BrowseItem {
         }
         
         var body: some View {
-            Menu {
-                Label("Find \(filter.title.localizedLowercase)", systemImage: filter.systemImage)
-                    .labelStyle(.titleAndIcon)
-                    .searchCompletion(filter)
-            } label: {
-                FilterRow(filter)
+            Group {
+                if #available(iOS 16, *) {
+                    Menu {
+                        Label("Find \(filter.title.localizedLowercase)", systemImage: filter.systemImage)
+                            .labelStyle(.titleAndIcon)
+                            .backport.searchCompletion(filter)
+                    } label: {
+                        FilterRow(filter)
+                    }
+                } else {
+                    Button {} label: {
+                        FilterRow(filter)
+                    }
+                        .allowsHitTesting(false)
+                }
             }
                 .tint(filter.color)
         }

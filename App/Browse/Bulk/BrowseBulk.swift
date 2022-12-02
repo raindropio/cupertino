@@ -67,33 +67,35 @@ extension BrowseBulk { fileprivate struct Memorized: ViewModifier {
                     .navigationTitle(BrowseBulk.title(pick))
             }
         }
-        .toolbar {
+        .overlay {
             if isEditing {
-                //select all
-                ToolbarItem(placement: .automatic) {
-                    ToggleAll(find: find, selection: $selection)
-                        .labelStyle(.titleOnly)
-                }
-                
-                //done
-                ToolbarItemGroup(placement: isSearching ? .bottomBar : .cancellationAction) {
-                    Done()
-                    Spacer()
-                }
-                
-                //actions
-                ToolbarItemGroup(placement: .bottomBar) {
-                    Group {
-                        Move(pick: pick, action: action)
-                        Spacer()
-                        AddTags(pick: pick, action: action)
-                        Spacer()
-                        Delete(pick: pick, action: action)
-                        Spacer()
-                        More(pick: pick, action: action)
+                Color.clear.toolbar {
+                    //select all
+                    ToolbarItem(placement: .automatic) {
+                        ToggleAll(find: find, selection: $selection)
+                            .labelStyle(.titleOnly)
                     }
-                        .labelStyle(.titleOnly)
-                        .disabled(selection.isEmpty)
+                    
+                    //done
+                    ToolbarItemGroup(placement: isSearching ? .bottomBar : .cancellationAction) {
+                        Done()
+                        Spacer()
+                    }
+                    
+                    //actions
+                    ToolbarItemGroup(placement: .bottomBar) {
+                        Group {
+                            Move(pick: pick, action: action)
+                            Spacer()
+                            AddTags(pick: pick, action: action)
+                            Spacer()
+                            Delete(pick: pick, action: action)
+                            Spacer()
+                            More(pick: pick, action: action)
+                        }
+                            .labelStyle(.titleOnly)
+                            .disabled(selection.isEmpty)
+                    }
                 }
             }
         }

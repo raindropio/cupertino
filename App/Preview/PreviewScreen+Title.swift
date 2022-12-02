@@ -10,7 +10,7 @@ extension PreviewScreen {
         
         var title: String {
             if page.canGoBack {
-                return page.title ?? page.url?.host() ?? ""
+                return page.title ?? page.url?.host ?? ""
             } else {
                 switch mode {
                 case .article: return "Reader"

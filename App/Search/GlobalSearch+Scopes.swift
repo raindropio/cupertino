@@ -13,7 +13,7 @@ extension GlobalSearch {
                         back = find.collectionId
                     }
                 }
-                .searchScopes($find.collectionId) {
+                .backport.searchScopes($find.collectionId) {
                     if let back {
                         Text("Everywhere").tag(0)
                         CollectionTitle(id: back).tag(back)

@@ -94,7 +94,7 @@ struct CollectionsGroupHeader: View {
                     .padding(.trailing, 16)
                     #endif
             }
-                .fontWeight(.medium)
+                .font(.headline)
         }
             .buttonStyle(.borderless)
             .menuIndicator(.hidden)

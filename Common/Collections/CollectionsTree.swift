@@ -42,13 +42,6 @@ extension CollectionsTree {
                         Label("Edit", systemImage: "pencil")
                     }
                         .tint(.blue)
-
-                    Button {
-                        action(.delete(collection))
-                    } label: {
-                        Label("Delete", systemImage: "trash")
-                    }
-                        .tint(.red)
                 }
                 .swipeActions(edge: .leading) {
                     Button {

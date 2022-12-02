@@ -71,7 +71,14 @@ fileprivate struct WithSearchController: UIViewControllerRepresentable {
                 .removeDuplicates { ($0.height == 0) == ($1.height == 0) }
                 .sink { [weak controller] in
                     if let controller {
-                        let isVisible = controller.searchBarPlacement == .inline || !controller.searchBar.isHidden && ($0.height != 0)
+                        let isInline: Bool = {
+                            if #available(iOS 16.0, *) {
+                                return controller.searchBarPlacement == .inline
+                            } else {
+                                return false
+                            }
+                        }()
+                        let isVisible = isInline || !controller.searchBar.isHidden && ($0.height != 0)
                         self.onVisibilityChange(controller, isVisible)
                     }
                 }
@@ -83,10 +90,12 @@ fileprivate struct WithSearchController: UIViewControllerRepresentable {
             
             if let navigationItem = parent?.navigationItem,
                 let searchController = navigationItem.searchController {
-                if firstTime {
-                    if navigationItem.hidesSearchBarWhenScrolling && searchController.searchBarPlacement != .inline {
-                        searchController.searchBar.isHidden = true
-                        firstTime = false
+                if #available(iOS 16.0, *) {
+                    if firstTime {
+                        if navigationItem.hidesSearchBarWhenScrolling && searchController.searchBarPlacement != .inline {
+                            searchController.searchBar.isHidden = true
+                            firstTime = false
+                        }
                     }
                 }
                 
@@ -98,9 +107,13 @@ fileprivate struct WithSearchController: UIViewControllerRepresentable {
         override func viewDidAppear(_ animated: Bool) {
             super.viewDidAppear(animated)
                         
-            if let searchController = parent?.navigationItem.searchController,
-               searchController.searchBarPlacement != .inline {
-                searchController.searchBar.isHidden = false
+            if let searchController = parent?.navigationItem.searchController {
+                if #available(iOS 16.0, *) {
+                    if searchController.searchBarPlacement != .inline {
+                        searchController.searchBar.isHidden = false
+                    }
+                }
+                
                 onDidAppear(searchController)
             }
         }

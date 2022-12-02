@@ -2,7 +2,6 @@ import SwiftUI
 import PhotosUI
 
 public struct MediaPicker<L: View> {
-    @State private var items = [PhotosPickerItem]()
     @State private var loading = false
     
     @Binding var selection: [URL]
@@ -21,39 +20,35 @@ public struct MediaPicker<L: View> {
 }
 
 extension MediaPicker: View {
-    @Sendable
-    private func convert() async {
-        loading = true
-        defer { loading = false }
-        
-        var selection = [URL]()
-        for item in items {
-            //TODO: HEIF doesn't work
-            if let data = try? await item.loadTransferable(type: Data.self) {
-                let url = FileManager.default.temporaryDirectory.appendingPathComponent(UUID().uuidString)
-                if (try? data.write(to: url)) != nil {
-                    selection.append(url)
-                }
+    private func content() -> some View {
+        ZStack {
+            label()
+                .opacity(loading ? 0 : 1)
+            
+            if loading {
+                ProgressView().progressViewStyle(.circular)
             }
         }
-        self.selection = selection
     }
     
     public var body: some View {
-        PhotosPicker(
-            selection: $items,
-            matching: .any(of: matching)
-        ) {
-            ZStack {
-                label()
-                    .opacity(loading ? 0 : 1)
-                
-                if loading {
-                    ProgressView().progressViewStyle(.circular)
-                }
+        Group {
+            if #available(iOS 16, *) {
+                Modern(
+                    selection: $selection,
+                    loading: $loading,
+                    matching: .any(of: matching),
+                    label: content
+                )
+            } else {
+                Deprecated(
+                    selection: $selection,
+                    loading: $loading,
+                    matching: .any(of: matching),
+                    label: content
+                )
             }
         }
-            .task(id: items, priority: .background, convert)
             .disabled(loading)
             .animation(.default, value: loading)
     }

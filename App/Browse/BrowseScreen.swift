@@ -13,7 +13,7 @@ struct BrowseScreen: View {
             .globalSearch(find: $find)
             .modifier(Toolbar(find: find))
             #if os(iOS)
-            .toolbarRole(isPhone ? .automatic : .browser)
+            .backport.toolbarRole(isPhone ? .automatic : .browser)
             #endif
     }
 }

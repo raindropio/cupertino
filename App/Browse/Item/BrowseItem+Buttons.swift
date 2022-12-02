@@ -4,6 +4,14 @@ import UI
 
 extension BrowseItem {
     struct Buttons: View {
+        private static let verticalGap: Double = {
+            if #available(iOS 16, *) {
+                return 4
+            } else {
+                return 0
+            }
+        }()
+        
         var raindrop: Raindrop
         
         var body: some View {
@@ -30,7 +38,7 @@ extension BrowseItem {
                     .buttonStyle(.bordered)
                     .labelStyle(.iconOnly)
                     .controlSize(.small)
-                    .padding(.vertical, 4)
+                    .padding(.vertical, Self.verticalGap)
             }
         }
     }

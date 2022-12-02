@@ -7,7 +7,7 @@ struct AuthScene: View {
     @EnvironmentObject private var auth: AuthStore
     
     var body: some View {
-        NavigationStack {
+        NavigationView {
             List {
                 NavigationLink {
                     AuthViewEmail()
@@ -17,6 +17,7 @@ struct AuthScene: View {
             }
                 .navigationTitle("Welcome")
         }
+            .navigationViewStyle(.stack)
     }
 }
 

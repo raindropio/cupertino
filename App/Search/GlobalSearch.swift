@@ -28,8 +28,8 @@ struct GlobalSearch: ViewModifier {
             .textInputAutocapitalization(.never)
             .keyboardType(.webSearch)
             #endif
-            .modifier(Scopes(find: $find))
             .modifier(Suggestions(find: $find))
+            .modifier(Scopes(find: $find))
     }
     
     #if os(iOS)

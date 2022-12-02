@@ -42,11 +42,7 @@ extension GlobalSearch.Suggestions {
         
         func body(content: Content) -> some View {
             content
-//                .animation(
-//                    .default.speed(1),
-//                    value: recent.count + collections.count + completion.count + simple.count + tags.count
-//                )
-                .searchSuggestions {
+                .backport.searchSuggestions {
                     Group {
                         FindCollections(find: find)
                         Recent(items: recent)
@@ -71,7 +67,7 @@ extension GlobalSearch.Suggestions {
                     ForEach(items) {
                         FilterRow($0)
                             .equatable()
-                            .searchCompletion($0)
+                            .backport.searchCompletion($0)
                     }
                 }
             }
@@ -89,7 +85,7 @@ extension GlobalSearch.Suggestions {
                 Section {
                     ForEach(items, id: \.self) {
                         Label($0, systemImage: "clock.arrow.circlepath")
-                            .searchCompletion($0)
+                            .backport.searchCompletion($0)
                     }
                 } header: {
                     if !items.isEmpty {

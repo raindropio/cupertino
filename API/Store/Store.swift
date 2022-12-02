@@ -20,7 +20,7 @@ public actor Store: ReduxStore {
     public func dispatch(_ some: Any) async throws {
         do {
             #if DEBUG
-            try await dispatch(some, store: \.log)
+//            try await dispatch(some, store: \.log)
             #endif
             try await dispatch(some, store: \.auth)
             try await dispatch(some, store: \.raindrops)

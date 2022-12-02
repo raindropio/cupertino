@@ -48,7 +48,7 @@ extension AddStack.Home: View {
     }
     
     var body: some View {
-        NavigationStack {
+        NavigationView {
             LazyVGrid(
                 columns: Self.columns,
                 spacing: Self.columns.first!.spacing,
@@ -68,5 +68,6 @@ extension AddStack.Home: View {
                     }
                 }
         }
+            .navigationViewStyle(.stack)
     }
 }

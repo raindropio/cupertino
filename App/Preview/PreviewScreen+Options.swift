@@ -26,7 +26,7 @@ extension PreviewScreen {
                     Text("Size")
                 }
             }
-                .presentationDetents([.medium])
+                .backport.presentationDetents([.medium])
         }
     }
 }

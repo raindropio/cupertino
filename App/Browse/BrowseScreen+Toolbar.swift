@@ -31,8 +31,8 @@ extension BrowseScreen.Toolbar {
             content
                 .navigationTitle(collection.title)
                 .toolbar {
-                    if editMode?.wrappedValue == .inactive {
-                        ToolbarItem(placement: .primaryAction) {
+                    ToolbarItem(placement: .primaryAction) {
+                        if editMode?.wrappedValue == .inactive {
                             Menu {
                                 EditButton("Select")
                                 

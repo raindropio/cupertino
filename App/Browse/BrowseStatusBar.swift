@@ -8,7 +8,11 @@ struct BrowseStatusBar: View {
     var find: FindBy
 
     var body: some View {
-        LabeledContent {
+        HStack {
+            Total(find: find)
+            
+            Spacer()
+            
             HStack {
                 BrowseSortButton(find: find)
                     .labelStyle(.titleOnly)
@@ -18,12 +22,11 @@ struct BrowseStatusBar: View {
             }
                 .labelsHidden()
                 .pickerStyle(.menu)
+                .imageScale(.large)
                 .lineLimit(1)
                 .layoutPriority(1)
-        } label: {
-            Total(find: find)
         }
-            .scenePadding(.horizontal)
+            .scenePadding(.leading)
             .clearSection()
             .disabled(editMode?.wrappedValue == .active)
     }
@@ -42,7 +45,7 @@ extension BrowseStatusBar {
                 Text(" bookmarks")
             )
             .lineLimit(1)
-            .fontWeight(.medium)
+            .font(.headline)
             .foregroundStyle(.secondary)
             .opacity(total > 0 ? 1 : 0)
         }

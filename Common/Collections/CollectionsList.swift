@@ -1,5 +1,6 @@
 import SwiftUI
 import API
+import UI
 
 public struct CollectionsList<C: View> {
     @EnvironmentObject private var dispatch: Dispatcher
@@ -60,6 +61,7 @@ extension CollectionsList: View {
             .modifier(Animation())
             .listStyle(.insetGrouped)
             .headerProminence(.increased)
+            .backport.listSelectionFix()
             #endif
             //features
             .modifier(Menus())

@@ -48,7 +48,7 @@ extension AddStack.NewLink: View {
     }
     
     public var body: some View {
-        NavigationStack {
+        NavigationView {
             Form {
                 Section("URL") {
                     TextField("", text: $link, prompt: Text("https://"))
@@ -70,5 +70,6 @@ extension AddStack.NewLink: View {
                     }
                 }
         }
+            .navigationViewStyle(.stack)
     }
 }

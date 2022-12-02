@@ -21,18 +21,28 @@ extension BrowseViewButton {
         var view: CollectionView
         
         var body: some View {
-            Picker(
-                "View",
-                selection: .init(get: {
-                    view
-                }, set: { view in
-                    dispatch.sync(CollectionsAction.setView(find.collectionId, view))
-                })
-            ) {
-                ForEach(CollectionView.allCases) {
-                    Label($0.title, systemImage: $0.systemImage)
-                        .tag($0)
+            Menu {
+                Group {
+                    Picker(
+                        "View",
+                        selection: .init(get: {
+                            view
+                        }, set: { view in
+                            dispatch.sync(CollectionsAction.setView(find.collectionId, view))
+                        })
+                    ) {
+                        ForEach(CollectionView.allCases) {
+                            Label($0.title, systemImage: $0.systemImage)
+                                .tag($0)
+                        }
+                    }
+                        .pickerStyle(.inline)
                 }
+                    .labelStyle(.titleAndIcon)
+            } label: {
+                Label(view.title, systemImage: view.systemImage)
+                    .foregroundStyle(.tint)
+                    .frame(minWidth: 54, maxHeight: .infinity)
             }
                 .symbolVariant(.fill)
         }

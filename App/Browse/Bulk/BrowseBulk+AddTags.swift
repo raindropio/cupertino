@@ -29,7 +29,7 @@ extension BrowseBulk {
                 Label("Add tags", systemImage: "number")
             }
             .sheet(isPresented: $select) {
-                NavigationStack {
+                NavigationView {
                     TagsPicker($tags)
                         .tokenFieldStyle(.inline)
                         .navigationBarTitleDisplayMode(.inline)
@@ -46,6 +46,7 @@ extension BrowseBulk {
                             }
                         }
                 }
+                    .navigationViewStyle(.stack)
                     .frame(idealWidth: 600, idealHeight: 800)
             }
         }

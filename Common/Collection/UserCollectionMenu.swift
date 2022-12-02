@@ -3,6 +3,7 @@ import API
 
 public struct UserCollectionMenu: View {
     @EnvironmentObject private var action: CollectionActionsStore
+    @EnvironmentObject private var dispatch: Dispatcher
 
     var collection: UserCollection
     
@@ -30,11 +31,16 @@ public struct UserCollectionMenu: View {
             } label: {
                 Label("Share", systemImage: "square.and.arrow.up")
             }
-
-            Button(role: .destructive) {
-                action(.delete(collection))
+            
+            Menu {
+                Button(role: .destructive) {
+                    dispatch.sync(CollectionsAction.delete(collection.id))
+                } label: {
+                    Label("Delete \(collection.title)", systemImage: "trash")
+                }
             } label: {
                 Label("Delete", systemImage: "trash")
+                    .tint(.red)
             }
         }
     }

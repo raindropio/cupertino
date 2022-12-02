@@ -11,7 +11,6 @@ extension GridScrollView: View {
                 .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .leading)
         }
             .frame(maxWidth: .infinity, maxHeight: .infinity)
-            .scrollContentBackground(.hidden)
             .background(Color.groupedBackground)
             .modifier(ColumnsReader())
     }

@@ -29,7 +29,7 @@ struct FabStyleModifier: ViewModifier {
     
     func body(content: Content) -> some View {
         content
-            .fontWeight(.medium)
+            .font(.headline)
             .foregroundColor(.white)
             .imageScale(.large)
             .frame(width: 56 + size, height: 56 + size)

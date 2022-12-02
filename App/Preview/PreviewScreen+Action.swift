@@ -29,8 +29,7 @@ extension PreviewScreen {
             }
                 .buttonStyle(.borderedProminent)
                 .popover(isPresented: $create) {
-                    NavigationStack {
-                    }
+                    
                 }
         }
 
@@ -49,7 +48,7 @@ extension PreviewScreen {
                         .transition(.opacity)
                         .animation(.default, value: saved)
                         .tint(.accentColor)
-                        .fontWeight(.semibold)
+                        .font(.headline)
                         .controlSize(.small)
                 }
             }

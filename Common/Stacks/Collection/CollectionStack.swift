@@ -49,7 +49,7 @@ extension CollectionStack {
 
 extension CollectionStack: View {
     public var body: some View {
-        NavigationStack {
+        NavigationView {
             Form {
                 Fields(collection: $collection, focus: $focus)
                 
@@ -71,6 +71,7 @@ extension CollectionStack: View {
                     }
                 }
         }
+            .navigationViewStyle(.stack)
             //focus on title for new
             .onAppear {
                 if isNew {

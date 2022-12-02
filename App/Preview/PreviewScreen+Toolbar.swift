@@ -12,39 +12,37 @@ extension PreviewScreen {
 
         func body(content: Content) -> some View {
             content
-                .toolbar {
+                .backport.toolbarTitleMenu {
                     if !page.canGoBack {
-                        ToolbarTitleMenu {
-                            if mode == .article {
-                                Button {
-                                    showOptions = true
-                                } label: {
-                                    Label("Font & style", systemImage: "textformat.alt")
-                                }
-                                
-                                Divider()
-                            } else if raindrop.type == .link {
-                                Button {
-                                    mode = .article
-                                } label: {
-                                    Label("Show Reader", systemImage: "eyeglasses")
-                                }
+                        if mode == .article {
+                            Button {
+                                showOptions = true
+                            } label: {
+                                Label("Font & style", systemImage: "textformat.alt")
                             }
                             
-                            if mode != .cache, raindrop.file == nil {
-                                Button {
-                                    mode = .cache
-                                } label: {
-                                    Label("Show permanent copy", systemImage: "clock.arrow.circlepath")
-                                }
+                            Divider()
+                        } else if raindrop.type == .link {
+                            Button {
+                                mode = .article
+                            } label: {
+                                Label("Show Reader", systemImage: "eyeglasses")
                             }
-                            
-                            if mode != .raw {
-                                Button {
-                                    mode = .raw
-                                } label: {
-                                    Label("Show original", systemImage: "safari")
-                                }
+                        }
+                        
+                        if mode != .cache, raindrop.file == nil {
+                            Button {
+                                mode = .cache
+                            } label: {
+                                Label("Show permanent copy", systemImage: "clock.arrow.circlepath")
+                            }
+                        }
+                        
+                        if mode != .raw {
+                            Button {
+                                mode = .raw
+                            } label: {
+                                Label("Show original", systemImage: "safari")
                             }
                         }
                     }

@@ -3,11 +3,11 @@ import Foundation
 extension Rest {
     public static func renderImage(_ url: URL?, options: RenderOption...) -> URL? {
         guard let url else { return nil }
-        guard url.host() != base.render.host() else { return url }
+        guard url.host != base.render.host else { return url }
         
         var components = URLComponents()
         components.scheme = "https"
-        components.host = base.render.host()
+        components.host = base.render.host
         components.path = "/render"
         
         components.queryItems =
@@ -23,7 +23,7 @@ extension Rest {
     public static func renderFavicon(_ host: String, options: RenderOption...) -> URL? {
         var components = URLComponents()
         components.scheme = "https"
-        components.host = base.render.host()
+        components.host = base.render.host
         components.path = "/favicon/\(host)"
         
         components.queryItems =

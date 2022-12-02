@@ -16,12 +16,12 @@ extension CollectionStack.Fields: View {
         Section {
             TextField("Title", text: $collection.title)
                 .focused(focus, equals: .title)
-                .fontWeight(.semibold)
+                .font(.headline)
             
-            TextField("Description", text: $collection.description, axis: .vertical)
+            Backport.TextField("Description", text: $collection.description, axis: .vertical)
                 .preventLineBreaks(text: $collection.description)
                 .focused(focus, equals: .description)
-                .lineLimit(2...)
+                .backport.lineLimit(2...)
         }
         
         Section("Parent") {
