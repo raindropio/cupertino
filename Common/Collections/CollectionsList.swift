@@ -32,12 +32,12 @@ extension CollectionsList: View {
                     Section {
                         if matching == .all {
                             SystemCollectionRow(id: 0)
-                                .tag(0)
+                                .backport.tag(0)
                         }
                         if matching != .nestable {
                             SystemCollectionRow(id: -1)
                                 .dropRaindrop(to: -1)
-                                .tag(-1)
+                                .backport.tag(-1)
                         }
                         custom?()
                     }
@@ -49,7 +49,7 @@ extension CollectionsList: View {
                     Section {
                         SystemCollectionRow(id: -99)
                             .dropRaindrop(to: -99)
-                            .tag(-99)
+                            .backport.tag(-99)
                     }
                 }
             } else {
@@ -61,7 +61,7 @@ extension CollectionsList: View {
             .modifier(Animation())
             .listStyle(.insetGrouped)
             .headerProminence(.increased)
-            .backport.listSelectionFix()
+            .backport.listSelectionFix($selection)
             #endif
             //features
             .modifier(Menus())

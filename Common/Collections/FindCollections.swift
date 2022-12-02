@@ -1,5 +1,6 @@
 import SwiftUI
 import API
+import UI
 
 public struct FindCollections: View {
     @EnvironmentObject private var collections: CollectionsStore
@@ -35,7 +36,7 @@ extension FindCollections {
                         UserCollectionRow(item, withLocation: true)
                             .badge(item.count)
                             .dropRaindrop(to: item)
-                            .id(item.id)
+                            .backport.tag(item.id)
                     }
                 }
             }
