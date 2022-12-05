@@ -26,7 +26,7 @@ public struct CollectionsList<C: View> {
 
 extension CollectionsList: View {
     public var body: some View {
-        List(selection: $selection) {
+        Backport.List(selection: $selection) {
             if search.isEmpty {
                 if matching != .nestable {
                     Section {
@@ -61,7 +61,6 @@ extension CollectionsList: View {
             .modifier(Animation())
             .listStyle(.insetGrouped)
             .headerProminence(.increased)
-            .backport.listSelectionFix($selection)
             #endif
             //features
             .modifier(Menus())

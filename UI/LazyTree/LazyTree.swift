@@ -119,6 +119,7 @@ extension LazyTree: View {
             }
                 .padding(.leading, leaf.level * 32)
                 .transition(.move(edge: .bottom))
+                .backport.tag(leaf.id)
         }
             .onMove { onMove($0, $1) }
     }

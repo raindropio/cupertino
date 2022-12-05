@@ -1,30 +1,34 @@
 import SwiftUI
 
 public extension Backport where Wrapped: View {
-    @ViewBuilder func tag<V: Hashable>(_ tag: V) -> some View {
+    @ViewBuilder func tag<T: Hashable>(_ tag: T) -> some View {
         if #available(iOS 16, *) {
             content.tag(tag)
         } else {
             content
-                .environment(\.backportTag, tag)
+                .modifier(ListSelectionModifier(tag: tag))
                 .tag(tag)
         }
     }
 }
 
-struct BackportTagKey: EnvironmentKey {
-    static let defaultValue: AnyHashable? = nil
-}
-
-extension EnvironmentValues {
-    var backportTag: AnyHashable? {
-        get {
-            self[BackportTagKey.self]
+extension Backport {
+    struct ListSelectionModifier<T: Hashable>: ViewModifier {
+        @Environment(\.backportListSelection) @Binding private var backportListSelection
+        var tag: T
+        
+        var background: Optional<Color> {
+            backportListSelection == (tag as AnyHashable) ? .gray.opacity(0.5) : nil
         }
-        set {
-            if self[BackportTagKey.self] != newValue {
-                self[BackportTagKey.self] = newValue
-            }
+        
+        func body(content: Content) -> some View {
+            content
+                .frame(maxWidth: .infinity, alignment: .leading)
+                .contentShape(Rectangle())
+                ._onButtonGesture(pressing: nil) {
+                    backportListSelection = tag
+                }
+                .listRowBackground(background)
         }
     }
 }

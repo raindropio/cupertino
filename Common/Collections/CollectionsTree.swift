@@ -51,7 +51,6 @@ extension CollectionsTree {
                     }
                         .tint(.indigo)
                 }
-                .backport.tag(collection.id)
         }
         
         var body: some View {

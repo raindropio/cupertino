@@ -12,9 +12,9 @@ extension ListItemDeprecated: ViewModifier {
             content
         } else {
             content
-                ._onButtonGesture {
-                    model.touch(element.id, down: $0)
-                } perform: {
+                .frame(maxWidth: .infinity, alignment: .leading)
+                .contentShape(Rectangle())
+                ._onButtonGesture(pressing: nil) {
                     model.tap(element.id)
                 }
                 .contextMenu {
