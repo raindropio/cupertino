@@ -23,8 +23,8 @@ extension ListForEach: View {
     var body: some View {
         ForEach(data) {
             content($0)
-                .modifier(ListItemDeprecated(element: $0))
                 .infiniteScrollElement($0.id)
+                .backport.tag($0.id)
         }
             .onMove(perform: performReorder)
             .moveDisabled(reorder == nil)

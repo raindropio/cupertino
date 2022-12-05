@@ -49,7 +49,7 @@ extension BrowseBulk { fileprivate struct Memorized: ViewModifier {
     }
     
     private var isEditing: Bool {
-        editMode?.wrappedValue.isEditing ?? false
+        editMode?.wrappedValue == .active
     }
     
     private var isFailed: Binding<Bool> {
@@ -57,7 +57,7 @@ extension BrowseBulk { fileprivate struct Memorized: ViewModifier {
         set: { if !$0 { error = nil } }
     }
     
-    func body(content: Content) -> some View {
+    func body(content: Content) -> some View {        
         content
         .navigationBarBackButtonHidden(isEditing)
         //title

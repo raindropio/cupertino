@@ -14,7 +14,7 @@ extension GridCard: ViewModifier {
         let isSelected = model.isSelected(element.id)
         
         #if canImport(UIKit)
-        let isEditing = editMode?.wrappedValue.isEditing ?? false
+        let isEditing = editMode?.wrappedValue == .active
         #else
         let isEditing = false
         #endif

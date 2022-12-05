@@ -36,12 +36,6 @@ extension LazyStack: View {
                             action?(id)
                         }
                     }
-                    .backport.deprecated {
-                        $0.task {
-                            model.action = action
-                            model.contextMenu = { AnyView(contextMenu($0)) }
-                        }
-                    }
                 
             case .grid(_, _):
                 GridScrollView {

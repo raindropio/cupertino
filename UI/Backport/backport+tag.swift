@@ -6,28 +6,43 @@ public extension Backport where Wrapped: View {
             content.tag(tag)
         } else {
             content
-                .modifier(ListSelectionModifier(tag: tag))
+                .modifier(ListTagModifier(tag: tag))
                 .tag(tag)
         }
     }
 }
 
 extension Backport {
-    struct ListSelectionModifier<T: Hashable>: ViewModifier {
+    struct ListTagModifier<T: Hashable>: ViewModifier {
+        @Environment(\.editMode) private var editMode
         @Environment(\.backportListSelection) @Binding private var backportListSelection
+        @Environment(\.backportListPrimaryAction) private var backportListPrimaryAction
+        @State private var pressing = false
+        
         var tag: T
         
         var background: Optional<Color> {
-            backportListSelection == (tag as AnyHashable) ? .gray.opacity(0.5) : nil
+            pressing || backportListSelection == (tag as AnyHashable) ? .gray.opacity(0.35) : nil
+        }
+        
+        func onPress() {
+            if let backportListPrimaryAction {
+                backportListPrimaryAction(tag)
+            } else {
+                backportListSelection = tag
+            }
+        }
+        
+        func onPressing(_ pressing: Bool) {
+            self.pressing = pressing
         }
         
         func body(content: Content) -> some View {
             content
                 .frame(maxWidth: .infinity, alignment: .leading)
                 .contentShape(Rectangle())
-                ._onButtonGesture(pressing: nil) {
-                    backportListSelection = tag
-                }
+                ._onButtonGesture(pressing: onPressing, perform: onPress)
+                .allowsHitTesting(editMode?.wrappedValue != .active)
                 .listRowBackground(background)
         }
     }

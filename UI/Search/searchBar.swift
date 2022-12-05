@@ -54,7 +54,7 @@ fileprivate struct SearchBarModifier: ViewModifier {
                 ToolbarItem {
                     SearchButton(controller: $controller)
                         .opacity(
-                            (editMode?.wrappedValue.isEditing == false) &&
+                            (editMode?.wrappedValue != .active) &&
                             showToolbarButton ? 1 : 0
                         )
                 }
