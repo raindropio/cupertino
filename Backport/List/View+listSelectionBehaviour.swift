@@ -1,0 +1,53 @@
+import SwiftUI
+
+public extension View {
+    func listSelectionBehaviour<S: Hashable>(selection: Binding<S?>) -> some View {
+        modifier(SingleSelectionModifier(selection: selection))
+    }
+    
+    func listSelectionBehaviour<S: Hashable>(selection: Binding<Set<S>>) -> some View {
+        modifier(MultiSelectionModifier(selection: selection))
+    }
+}
+
+//MARK: - Single
+fileprivate struct SingleSelectionModifier<S: Hashable>: ViewModifier {
+    @EnvironmentObject private var service: ListBehaviourService<S>
+    @Binding var selection: S?
+    
+    func body(content: Content) -> some View {
+        content
+            .task(id: selection) {
+                if let selection {
+                    service.selection = .init([selection])
+                } else {
+                    service.selection = .init()
+                }
+            }
+            .task(id: service.selection) {
+                if let first = service.selection.first {
+                    selection = first
+                } else {
+                    selection = nil
+                }
+            }
+    }
+}
+
+//MARK: - Multi
+fileprivate struct MultiSelectionModifier<S: Hashable>: ViewModifier {
+    @EnvironmentObject private var service: ListBehaviourService<S>
+    @Binding var selection: Set<S>
+    
+    func body(content: Content) -> some View {
+        content
+            .task(id: selection) { service.selection = selection }
+            .task(id: service.selection) { selection = service.selection }
+    }
+}
+
+class ListBehaviourService<S: Hashable>: ObservableObject {
+    @Published var selection = Set<S>()
+    var primaryAction: ((Set<S>) -> Void)?
+    var menu: ((Set<S>) -> AnyView)?
+}
