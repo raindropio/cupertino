@@ -13,6 +13,8 @@ public extension View {
 //MARK: - Single
 fileprivate struct SingleSelectionModifier<S: Hashable>: ViewModifier {
     @EnvironmentObject private var service: ListBehaviourService<S>
+    @Environment(\.editMode) private var editMode
+
     @Binding var selection: S?
     
     func body(content: Content) -> some View {
@@ -31,18 +33,32 @@ fileprivate struct SingleSelectionModifier<S: Hashable>: ViewModifier {
                     selection = nil
                 }
             }
+            //reset selection on exit edit
+            .onChange(of: editMode?.wrappedValue) {
+                if $0 == .inactive {
+                    selection = nil
+                }
+            }
     }
 }
 
 //MARK: - Multi
 fileprivate struct MultiSelectionModifier<S: Hashable>: ViewModifier {
     @EnvironmentObject private var service: ListBehaviourService<S>
+    @Environment(\.editMode) private var editMode
+
     @Binding var selection: Set<S>
-    
+
     func body(content: Content) -> some View {
         content
             .task(id: selection) { service.selection = selection }
             .task(id: service.selection) { selection = service.selection }
+            //reset selection on exit edit
+            .onChange(of: editMode?.wrappedValue) {
+                if $0 == .inactive {
+                    selection = .init()
+                }
+            }
     }
 }
 

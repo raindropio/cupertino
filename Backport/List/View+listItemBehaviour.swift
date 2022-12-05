@@ -9,6 +9,8 @@ public extension View {
 fileprivate struct ItemBehaviour<T: Hashable> {
     @EnvironmentObject private var service: ListBehaviourService<T>
     @Environment(\.editMode) private var editMode
+    @Environment(\.defaultMinListRowHeight) private var defaultMinListRowHeight
+    @Environment(\.colorScheme) private var colorScheme
     @State private var isPressing = false
 
     var tag: T
@@ -19,8 +21,16 @@ extension ItemBehaviour {
         service.selection.contains(tag)
     }
     
+    private var isHighlighted: Bool {
+        isPressing || isSelected
+    }
+    
     private var background: Optional<Color> {
-        isPressing || isSelected ? .gray.opacity(0.35) : nil
+        isHighlighted ? .accentColor : nil
+    }
+    
+    private var foreground: Optional<Color> {
+        isHighlighted ? .white : nil
     }
 }
 
@@ -28,7 +38,13 @@ extension ItemBehaviour {
     private func onPress() {
         let selection = Set([tag])
         
-        if let primaryAction = service.primaryAction {
+        if editMode?.wrappedValue == .active {
+            if service.selection.contains(tag) {
+                service.selection.remove(tag)
+            } else {
+                service.selection.insert(tag)
+            }
+        } else if let primaryAction = service.primaryAction {
             primaryAction(selection)
         } else {
             service.selection = selection
@@ -52,11 +68,13 @@ extension ItemBehaviour: ViewModifier {
             .contentShape(Rectangle())
             //tapping
             ._onButtonGesture(pressing: onPressing, perform: onPress)
-            .allowsHitTesting(editMode?.wrappedValue != .active)
             //menu
             .contextMenu(menuItems: menuItems)
             //background
+            .opacity(isSelected ? 0.8 : 1)
             .background(background)
+            .foregroundColor(foreground)
             .listRowBackground(background)
+            .environment(\.colorScheme, isHighlighted ? .dark : colorScheme)
     }
 }

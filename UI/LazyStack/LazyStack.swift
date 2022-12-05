@@ -1,8 +1,7 @@
 import SwiftUI
+import Backport
 
 public struct LazyStack<Content: View, ID: Hashable, Menu: View> {
-    @StateObject private var model = LazyStackModel<ID>()
-    
     var layout: LazyStackLayout
     @Binding var selection: Set<ID>
     var action: ((ID) -> Void)?
@@ -26,40 +25,25 @@ public struct LazyStack<Content: View, ID: Hashable, Menu: View> {
 }
 
 extension LazyStack: View {
+    private func itemTap(_ selection: Set<ID>) {
+        if let id = selection.first {
+            action?(id)
+        }
+    }
+    
     public var body: some View {
         Group {
             switch layout {
             case .list:
-                List(selection: $selection, content: content)
-                    .backport.contextMenu(forSelectionType: ID.self, menu: contextMenu) {
-                        if let id = $0.first {
-                            action?(id)
-                        }
-                    }
+                Backport.List(selection: $selection, content: content)
+                    .backport.contextMenu(forSelectionType: ID.self, menu: contextMenu, primaryAction: itemTap)
                 
             case .grid(_, _):
-                GridScrollView {
-                    content()
-                        #if canImport(UIKit)
-                        .innerEditMode {
-                            model.isEditing = $0.isEditing
-                            
-                            //reset selection on edit mode exit
-                            if $0 == .inactive {
-                                selection = .init()
-                            }
-                        }
-                        #endif
-                }
-                    .task {
-                        model.action = action
-                        model.contextMenu = { AnyView(contextMenu($0)) }
-                    }
+                GridScrollView(content: content)
+                    .listSelectionBehaviour(selection: $selection)
+                    .listContextMenuBehaviour(forSelectionType: ID.self, menu: contextMenu, primaryAction: itemTap)
             }
         }
-            .task(id: selection) { model.selection = selection }
-            .task(id: model.selection) { selection = model.selection }
             .environment(\.lazyStackLayout, layout)
-            .environmentObject(model)
     }
 }

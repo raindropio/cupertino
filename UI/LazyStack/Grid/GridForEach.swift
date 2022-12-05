@@ -24,8 +24,10 @@ extension GridForEach: View {
     var body: some View {
         ForEach(data) { element in
             content(element)
-                .modifier(GridCard(element: element))
                 .infiniteScrollElement(element.id)
+                .listItemBehaviour(element.id)
+                .background(Color.secondaryGroupedBackground)
+                .clipShape(RoundedRectangle(cornerRadius: 5))
         }
     }
 }

@@ -7,7 +7,11 @@ public extension Backport where Wrapped == Any {
         selection: Binding<S?>,
         @ViewBuilder content: @escaping () -> C
     ) -> some View {
-        _SingleList(selection: selection, content: content)
+        if #available(iOS 16, *) {
+            SwiftUI.List(selection: selection, content: content)
+        } else {
+            _BackportSingleList(selection: selection, content: content)
+        }
     }
 
     @ViewBuilder
@@ -15,10 +19,14 @@ public extension Backport where Wrapped == Any {
         selection: Binding<Set<S>>,
         @ViewBuilder content: @escaping () -> C
     ) -> some View {
-        _MultiList(selection: selection, content: content)
+        if #available(iOS 16, *) {
+            SwiftUI.List(selection: selection, content: content)
+        } else {
+            _BackportMultiList(selection: selection, content: content)
+        }
     }
 
-    private struct _SingleList<S: Hashable, C: View>: View {
+    private struct _BackportSingleList<S: Hashable, C: View>: View {
         @Binding var selection: S?
         @ViewBuilder var content: () -> C
 
@@ -28,7 +36,7 @@ public extension Backport where Wrapped == Any {
         }
     }
 
-    private struct _MultiList<S: Hashable, C: View>: View {
+    private struct _BackportMultiList<S: Hashable, C: View>: View {
         @Binding var selection: Set<S>
         @ViewBuilder var content: () -> C
 
