@@ -13,6 +13,7 @@ let package = Package(
             targets: ["UI"]),
     ],
     dependencies: [
+        .package(path: "Backport"),
         .package(
             url: "https://github.com/kean/Nuke.git",
             from: "11.3.1"
@@ -22,6 +23,7 @@ let package = Package(
         .target(
             name: "UI",
             dependencies: [
+                .byName(name: "Backport"),
                 .product(name: "NukeUI", package: "Nuke")
             ],
             path: ""

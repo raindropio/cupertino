@@ -1,6 +1,7 @@
 import SwiftUI
 
 public extension Backport where Wrapped: View {
+    @available(iOS, deprecated: 16.0)
     @ViewBuilder func toolbarRole(_ role: Backport.ToolbarRole) -> some View {
         if #available(iOS 16, *) {
             content.toolbarRole(role.convert())
@@ -9,6 +10,7 @@ public extension Backport where Wrapped: View {
         }
     }
     
+    @available(iOS, deprecated: 16.0)
     @ViewBuilder
     func toolbar(_ visibility: SwiftUI.Visibility, for bars: Backport.ToolbarPlacement...) -> some View {
         if #available(iOS 16, *) {
@@ -23,6 +25,7 @@ public extension Backport where Wrapped: View {
         }
     }
     
+    @available(iOS, deprecated: 16.0)
     @ViewBuilder
     func toolbarBackground(_ visibility: SwiftUI.Visibility, for bars: Backport.ToolbarPlacement...) -> some View {
         if #available(iOS 16, *) {

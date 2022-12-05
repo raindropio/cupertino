@@ -1,4 +1,5 @@
 import SwiftUI
+import Backport
 
 public struct SafariView: View {
     let url: URL

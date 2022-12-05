@@ -54,7 +54,7 @@ fileprivate struct AutoGrowTextEditor: View {
             
             if text.isEmpty {
                 Text(prompt)
-                    .foregroundColor(.tertiaryLabel)
+                    .opacity(0.3)
                     .allowsHitTesting(false)
                     #if os(iOS)
                     .padding(.vertical, verticalOffset)

@@ -1,6 +1,7 @@
 import SwiftUI
 
 public extension Backport where Wrapped: View {
+    @available(iOS, deprecated: 16.0)
     @ViewBuilder
     func lineLimit(_ limit: PartialRangeFrom<Int>) -> some View {
         if #available(iOS 16, *) {
@@ -11,6 +12,7 @@ public extension Backport where Wrapped: View {
         }
     }
     
+    @available(iOS, deprecated: 16.0)
     @ViewBuilder
     func lineLimit(_ limit: ClosedRange<Int>) -> some View {
         if #available(iOS 16, *) {

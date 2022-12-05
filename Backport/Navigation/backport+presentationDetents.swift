@@ -1,6 +1,7 @@
 import SwiftUI
 
 public extension Backport where Wrapped: View {
+    @available(iOS, deprecated: 16.0)
     @ViewBuilder func presentationDetents(_ detents: Set<PresentationDetent>) -> some View {
         if #available(iOS 16, *) {
             content.presentationDetents(Set(detents.map { $0.native }))
@@ -11,6 +12,7 @@ public extension Backport where Wrapped: View {
 }
 
 public extension Backport where Wrapped: View {
+    @available(iOS, deprecated: 16.0)
     @ViewBuilder func presentationDragIndicator(_ visibility: SwiftUI.Visibility) -> some View {
         if #available(iOS 16, *) {
             content.presentationDragIndicator(visibility)
@@ -20,6 +22,7 @@ public extension Backport where Wrapped: View {
     }
 }
 
+@available(iOS, deprecated: 16.0)
 extension Backport {
     public enum PresentationDetent: Hashable {
         case medium

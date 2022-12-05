@@ -1,6 +1,7 @@
 import SwiftUI
 import UI
 import API
+import Backport
 
 extension CollectionStack {
     struct Fields {

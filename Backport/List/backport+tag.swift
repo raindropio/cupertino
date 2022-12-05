@@ -28,6 +28,7 @@ extension Backport {
         func onPress() {
             if let backportListPrimaryAction {
                 backportListPrimaryAction(tag)
+                backportListSelection = nil
             } else {
                 backportListSelection = tag
             }

@@ -1,4 +1,5 @@
 import SwiftUI
+import Backport
 
 public extension View {
     func webViewPageToolbar(_ page: WebPage) -> some View {

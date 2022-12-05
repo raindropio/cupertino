@@ -1,6 +1,7 @@
 import SwiftUI
 import API
 import UI
+import Backport
 
 public struct CollectionsList<C: View> {
     @EnvironmentObject private var dispatch: Dispatcher

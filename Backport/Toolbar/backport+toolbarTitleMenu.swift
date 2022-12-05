@@ -1,6 +1,7 @@
 import SwiftUI
 
 public extension Backport where Wrapped: View {
+    @available(iOS, deprecated: 16.0)
     @ViewBuilder func toolbarTitleMenu<C: View>(@ViewBuilder _ menu: () -> C) -> some View {
         if #available(iOS 16, *) {
             content.toolbarTitleMenu(content: menu)
