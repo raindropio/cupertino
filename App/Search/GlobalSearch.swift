@@ -9,6 +9,7 @@ extension View {
 }
 
 struct GlobalSearch: ViewModifier {
+    @EnvironmentObject private var dispatch: Dispatcher
     @Environment(\.horizontalSizeClass) private var sizeClass
     @Binding var find: FindBy
     
@@ -21,14 +22,20 @@ struct GlobalSearch: ViewModifier {
                 tokens: $find.filters,
                 placement: searchPlacement,
                 token: FilterRow.init
-            )
+            ) {
+                Suggestions(find: $find)
+            }
+            .task(id: find, priority: .background) {
+                try? await dispatch(
+                    FiltersAction.reload(find),
+                    RecentAction.reload(find)
+                )
+            }
             #if canImport(UIKit)
-            .searchBar(withButton: true, scopeBarActivation: .onSearchActivation)
             .autocorrectionDisabled()
             .textInputAutocapitalization(.never)
             .keyboardType(.webSearch)
             #endif
-            .modifier(Suggestions(find: $find))
             .modifier(Scopes(find: $find))
     }
     

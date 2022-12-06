@@ -65,19 +65,19 @@ struct CollectionsGroupHeader: View {
                     Divider()
                     
                     Button(action: toggle) {
-                        Label("Hide", systemImage: "eye.slash")
+                        Label("Hide group", systemImage: "eye.slash")
                     }
                     
                     Button {
                         askRename = true
                     } label: {
-                        Label("Rename", systemImage: "pencil")
+                        Label("Rename group", systemImage: "pencil")
                     }
                     
                     Button(role: .destructive) {
                         askRemove = true
                     } label: {
-                        Label("Remove", systemImage: "trash")
+                        Label("Delete group", systemImage: "trash")
                     }
                 } label: {
                     Image(systemName: "ellipsis")

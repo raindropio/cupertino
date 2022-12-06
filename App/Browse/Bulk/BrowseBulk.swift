@@ -71,7 +71,7 @@ extension BrowseBulk { fileprivate struct Memorized: ViewModifier {
             if isEditing {
                 Color.clear.toolbar {
                     //select all
-                    ToolbarItem(placement: .automatic) {
+                    ToolbarItem(placement: .navigationBarTrailing) {
                         ToggleAll(find: find, selection: $selection)
                             .labelStyle(.titleOnly)
                     }

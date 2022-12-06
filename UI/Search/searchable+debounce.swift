@@ -9,15 +9,16 @@ public extension View {
         modifier(SearchableDebounceModifier(text: text, debounce: debounce, placement: placement))
     }
     
-    func searchable<C: RandomAccessCollection & RangeReplaceableCollection & Equatable, T: View>(
+    func searchable<C: RandomAccessCollection & RangeReplaceableCollection & Equatable, T: View, S: View>(
         text: Binding<String>,
         debounce: Double,
         tokens: Binding<C>,
         placement: SearchFieldPlacement = .automatic,
         prompt: Text? = nil,
-        token: @escaping (C.Element) -> T
+        token: @escaping (C.Element) -> T,
+        @ViewBuilder suggestions: @escaping () -> S
     ) -> some View where C.Element : Identifiable {
-        modifier(SearchableTokensDebounceModifier(text: text, debounce: debounce, tokens: tokens, placement: placement, prompt: prompt, token: token))
+        modifier(SearchableTokensDebounceModifier(text: text, debounce: debounce, tokens: tokens, placement: placement, prompt: prompt, token: token, suggestions: suggestions))
     }
 }
 
@@ -38,7 +39,7 @@ fileprivate struct SearchableDebounceModifier: ViewModifier {
     }
 }
 
-fileprivate struct SearchableTokensDebounceModifier<C: RandomAccessCollection & RangeReplaceableCollection & Equatable, T: View>: ViewModifier where C.Element : Identifiable {
+fileprivate struct SearchableTokensDebounceModifier<C: RandomAccessCollection & RangeReplaceableCollection & Equatable, T: View, S: View>: ViewModifier where C.Element : Identifiable {
     @State private var temp = ""
     
     @Binding var text: String
@@ -47,6 +48,7 @@ fileprivate struct SearchableTokensDebounceModifier<C: RandomAccessCollection & 
     var placement: SearchFieldPlacement
     var prompt: Text?
     var token: (C.Element) -> T
+    var suggestions: () -> S
     
     func body(content: Content) -> some View {
         content
@@ -55,7 +57,8 @@ fileprivate struct SearchableTokensDebounceModifier<C: RandomAccessCollection & 
                 tokens: $tokens,
                 placement: placement,
                 prompt: prompt,
-                token: token
+                token: token,
+                suggestions: suggestions
             )
             .modifier(DebounceSearchText(text: $text, temp: $temp, debounce: debounce))
     }

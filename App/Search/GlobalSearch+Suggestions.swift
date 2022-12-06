@@ -4,54 +4,65 @@ import UI
 import Common
 
 extension GlobalSearch {
-    struct Suggestions: ViewModifier {
-        @EnvironmentObject private var dispatch: Dispatcher
+    struct Suggestions: View {
+        @EnvironmentObject private var c: CollectionsStore
         @EnvironmentObject private var f: FiltersStore
         @EnvironmentObject private var r: RecentStore
         
         @Binding var find: FindBy
         
-        func body(content: Content) -> some View {
-            content
-                .task(id: find, priority: .background) {
-                    try? await dispatch(
-                        FiltersAction.reload(find),
-                        RecentAction.reload(find)
-                    )
-                }
-                .modifier(
-                    Memorized(
-                        find: find,
-                        recent: r.state.search(find),
-                        completion: f.state.completion(find),
-                        simple: f.state.simple(find),
-                        tags: f.state.tags(find)
-                    )
-                )
+        var body: some View {
+            Memorized(
+                find: find,
+                collections: (find.collectionId == 0 && find.filters.isEmpty) ? c.state.find(find.text) : [],
+                recent: r.state.search(find),
+                completion: f.state.completion(find),
+                simple: f.state.simple(find),
+                tags: f.state.tags(find)
+            )
         }
     }
 }
 
 extension GlobalSearch.Suggestions {
-    fileprivate struct Memorized: ViewModifier {        
+    fileprivate struct Memorized: View {
         var find: FindBy
+        var collections: [UserCollection]
         var recent: [String]
         var completion: [Filter]
         var simple: [Filter]
         var tags: [Filter]
         
-        func body(content: Content) -> some View {
-            content
-                .backport.searchSuggestions {
-                    Group {
-                        FindCollections(find: find)
-                        Recent(items: recent)
-                        Segment(title: "Suggestions", items: completion)
-                        Segment(title: "Filters", items: simple)
-                        Segment(title: "\(tags.count) tags", items: tags)
+        var body: some View {
+            Group {
+                Collections(items: collections)
+                Recent(items: recent)
+                Segment(title: "Suggestions", items: completion)
+                Segment(title: "Filters", items: simple)
+                Segment(title: "\(tags.count) tags", items: tags)
+            }
+                .labelStyle(.searchSuggestion)
+        }
+    }
+}
+
+extension GlobalSearch.Suggestions {
+    fileprivate struct Collections: View {
+        @EnvironmentObject private var app: AppRouter
+        var items: [UserCollection]
+        
+        var body: some View {
+            if !items.isEmpty {
+                Section("Found \(items.count) collections") {
+                    ForEach(items) { item in
+                        Button {
+                            app.browse(item)
+                        } label: {
+                            UserCollectionRow(item, withLocation: true)
+                        }
                     }
-                        .labelStyle(.searchSuggestion)
                 }
+            }
         }
     }
 }

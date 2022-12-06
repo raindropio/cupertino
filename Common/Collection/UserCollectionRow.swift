@@ -27,5 +27,6 @@ public struct UserCollectionRow: View {
         } icon: {
             CollectionIcon(collection)
         }
+            .badge(collection.count)
     }
 }

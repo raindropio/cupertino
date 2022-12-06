@@ -33,7 +33,6 @@ extension CollectionsTree {
         
         func item(_ collection: UserCollection) -> some View {
             UserCollectionRow(collection)
-                .badge(collection.count)
                 .dropRaindrop(to: collection)
                 .swipeActions(edge: .trailing) {
                     Button {

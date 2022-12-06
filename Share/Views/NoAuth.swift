@@ -10,7 +10,7 @@ struct NoAuth: View {
         } actions: {
             Button("OK", action: dismiss.callAsFunction)
         }
-            .presentationDetents([.medium])
+            .backport.presentationDetents([.medium])
             .presentationUndimmed(.medium)
     }
 }

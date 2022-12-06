@@ -20,34 +20,12 @@ extension SplitView {
             NavigationView {
                 master()
                 
-                Group {
-                    if let selected = path.first {
-                        detail(selected)
-                    }
+                if let selected = path.first {
+                    detail(selected)
+                        .modifier(Sequence(path: $path, level: 1, detail: detail))
                 }
             }
                 .navigationViewStyle(.columns)
-                .fullScreenCover(isPresented: isModalPresented) {
-                    NavigationView {
-                        if path.count > 1 {
-                            detail(path[1])
-                                .toolbar {
-                                    ToolbarItem(placement: .cancellationAction) {
-                                        Button {
-                                            isModalPresented.wrappedValue = false
-                                        } label: {
-                                            Image(systemName: "chevron.left")
-                                                .font(.headline)
-                                                .frame(width: 88, height: 44, alignment: .leading)
-                                                .contentShape(Rectangle())
-                                        }
-                                        .offset(x: -8)
-                                    }
-                                }
-                                .modifier(Sequence(path: $path, level: 2, detail: detail))
-                        }
-                    }
-                }
         }
     }
 }

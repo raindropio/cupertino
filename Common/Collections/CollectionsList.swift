@@ -54,7 +54,7 @@ extension CollectionsList: View {
                     }
                 }
             } else {
-                FindCollections(search: search)
+                Find(search: search)
             }
         }
             //appearance

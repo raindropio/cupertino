@@ -8,7 +8,7 @@ struct SaveItems: View {
     var body: some View {
         if service.loading {
             ProgressView().progressViewStyle(.circular)
-                .presentationDetents([.height(100)])
+                .backport.presentationDetents([.height(100)])
                 .presentationUndimmed(.height(100))
         } else if let raindrop: Raindrop = service.decoded() {
             RaindropStack(raindrop)

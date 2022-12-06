@@ -48,8 +48,10 @@ extension RaindropStack: View {
                 Fields(raindrop: $raindrop)
                 Footer(raindrop: $raindrop, loading: $loading)
             }
+                .animation(nil, value: [loading, isNew])
                 .disabled(loading)
                 .opacity(loading ? 0.7 : 1)
+                .animation(.default, value: [loading, isNew])
                 .submitLabel(.done)
                 .onSubmit(commit)
                 .navigationTitle(isNew ? "New bookmark" : "Edit bookmark")
@@ -59,8 +61,6 @@ extension RaindropStack: View {
                         Button(isNew ? "Cancel" : "Done", action: dismiss.callAsFunction)
                     }
                 }
-                .animation(.default, value: loading)
-                .animation(.default, value: isNew)
         }
             .navigationViewStyle(.stack)
             //prevent drag to dismiss for new items
