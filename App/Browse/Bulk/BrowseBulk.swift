@@ -12,12 +12,14 @@ struct BrowseBulk {
 
 extension BrowseBulk: ViewModifier {
     func body(content: Content) -> some View {
-        content.modifier(Memorized(
-            find:           find,
-            selection:      $selection,
-            isSearching:    isSearching,
-            pick:           selection.count == r.state.items(find).count ? .all(find): .some(selection)
-        ))
+        content.modifier(
+            Memorized(
+                find:           find,
+                selection:      $selection,
+                isSearching:    isSearching,
+                pick:           selection.count == r.state.items(find).count ? .all(find): .some(selection)
+            )
+        )
     }
 }
 
@@ -57,7 +59,7 @@ extension BrowseBulk { fileprivate struct Memorized: ViewModifier {
         set: { if !$0 { error = nil } }
     }
     
-    func body(content: Content) -> some View {        
+    func body(content: Content) -> some View {
         content
         .navigationBarBackButtonHidden(isEditing)
         //title

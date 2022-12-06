@@ -45,5 +45,6 @@ extension LazyStack: View {
             }
         }
             .environment(\.lazyStackLayout, layout)
+            .fixEditMode()
     }
 }
