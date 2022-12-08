@@ -22,7 +22,6 @@ extension FabStack {
         var body: some View {
             URLField("https://", value: $url)
                 .autoFocus()
-                .submitLabel(.send)
                 .toolbar {
                     ToolbarItem(placement: .confirmationAction) {
                         Button("Done", action: saveUrl)

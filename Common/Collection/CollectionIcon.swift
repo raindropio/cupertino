@@ -16,6 +16,8 @@ struct CollectionIcon<C: CollectionType>: View {
         } else {
             Image(systemName: systemImage)
                 .imageScale(.large)
+                .symbolVariant(.fill)
+                .symbolRenderingMode(.hierarchical)
         }
     }
 }

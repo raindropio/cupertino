@@ -2,6 +2,7 @@ import Foundation
 
 public struct IconsState: ReduxState {
     @Cached("ico-icons") var icons = [String: [URL]]()
+    var loading = [String: Bool]()
     
     public init() {}
     
@@ -11,5 +12,9 @@ public struct IconsState: ReduxState {
     
     public func filtered(_ string: String) -> [URL] {
         icons[filterKey(string)] ?? .init()
+    }
+    
+    public func loading(_ string: String) -> Bool {
+        loading[filterKey(string)] ?? false
     }
 }

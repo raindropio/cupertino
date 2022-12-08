@@ -10,14 +10,15 @@ fileprivate struct SearchFocusedModifier: ViewModifier {
     @State private var searchController: UISearchController?
     @Binding var condition: Bool
     
-    @Sendable
-    func setFocus() async {
+    @MainActor
+    func setFocus() {
         guard let searchController else { return }
-        guard await searchController.searchBar.isFirstResponder != condition else { return }
+        guard searchController.searchBar.isFirstResponder != condition else { return }
+
         if condition {
-            await searchController.searchBar.becomeFirstResponder()
+            searchController.searchBar.searchTextField.becomeFirstResponder()
         } else {
-            await searchController.searchBar.resignFirstResponder()
+            searchController.searchBar.searchTextField.resignFirstResponder()
         }
     }
     
@@ -34,7 +35,7 @@ fileprivate struct SearchFocusedModifier: ViewModifier {
                     condition = false
                 }
             }
-            .task(id: condition, setFocus)
-            .task(id: searchController, setFocus)
+            .task(id: condition) { setFocus() }
+            .task(id: searchController) { setFocus() }
     }
 }

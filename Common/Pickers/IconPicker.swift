@@ -30,23 +30,37 @@ extension IconPicker {
     struct Page: View {
         @Environment(\.dismiss) private var dismiss
         
-        @EnvironmentObject private var icons: IconsStore
+        @EnvironmentObject private var i: IconsStore
         @EnvironmentObject private var dispatch: Dispatcher
         @Binding var selection: URL?
-        @SceneStorage("select-icon-filter") private var filter = ""
+        @SceneStorage("select-icon-filter") private var search = ""
+        
+        var isLoading: Bool {
+            i.state.loading(search)
+        }
+        
+        var icons: [URL] {
+            i.state.filtered(search)
+        }
         
         var body: some View {
             ImagePicker(
-                icons.state.filtered(filter),
+                icons,
                 selection: $selection,
                 width: 48, height: 48
             )
                 .equatable()
+                .overlay {
+                    if isLoading {
+                        ProgressView().progressViewStyle(.circular)
+                    }
+                }
+                .animation(.default, value: isLoading)
                 .navigationTitle("Icon")
                 #if os(iOS)
                 .navigationBarTitleDisplayMode(.inline)
                 #endif
-                .filterable(text: $filter)
+                .searchable(text: $search, debounce: 0.3, placement: .navigationBarDrawer(displayMode: .always))
                 .toolbar {
                     ToolbarItem(placement: .destructiveAction) {
                         Button("None") {
@@ -54,8 +68,8 @@ extension IconPicker {
                         }
                     }
                 }
-                .task(id: filter, priority: .background) {
-                    try? await dispatch(IconsAction.reload(filter))
+                .task(id: search, priority: .background) {
+                    try? await dispatch(IconsAction.load(search))
                 }
                 .onChange(of: selection) { _ in
                     dismiss()

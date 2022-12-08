@@ -1,4 +1,5 @@
 import SwiftUI
+import API
 import UI
 import UniformTypeIdentifiers
 import Common
@@ -21,34 +22,51 @@ struct FabStack: View {
                     Button {
                         kind = .collection
                     } label: {
-                        Label("Collection", systemImage: "folder").tint(.primary)
+                        Label {
+                            Text("Collection").foregroundColor(.primary)
+                        } icon: {
+                            Image(systemName: "folder").imageScale(.large)
+                        }
                     }
                         .listItemTint(.blue)
                     
                     Button {
                         kind = .media
                     } label: {
-                        Label("Photo & Video", systemImage: "photo").tint(.primary)
+                        Label {
+                            Text("Photos or videos").foregroundColor(.primary)
+                        } icon: {
+                            Image(systemName: "photo").imageScale(.large)
+                        }
                     }
-                        .listItemTint(.green)
+                        .listItemTint(Filter.Kind.type(.image).color)
                     
                     Button {
                         kind = .document
                     } label: {
-                        Label("Files", systemImage: "doc").tint(.primary)
+                        Label {
+                            Text("Files").foregroundColor(.primary)
+                        } icon: {
+                            Image(systemName: "doc").imageScale(.large)
+                        }
                     }
-                        .listItemTint(.indigo)
+                        .listItemTint(Filter.Kind.type(.document).color)
                 }
                 
                 Section {
                     NavigationLink(destination: Extension.init) {
-                        Label("Add from apps", systemImage: "puzzlepiece.extension")
+                        Label {
+                            Text("Add from apps")
+                        } icon: {
+                            Image(systemName: "puzzlepiece.extension").imageScale(.large)
+                        }
                     }
                         .tint(.secondary)
                 }
             }
+                .environment(\.defaultMinListRowHeight, 46)
+                .submitLabel(.done)
                 .symbolVariant(.fill)
-                .imageScale(.large)
                 .navigationTitle("Add")
                 .navigationBarTitleDisplayMode(.inline)
                 .toolbar {

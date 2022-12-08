@@ -37,7 +37,9 @@ public enum CollectionsAction: ReduxAction {
 }
 
 public enum IconsAction: ReduxAction {
-    case reload(String = "")
+    case load(String = "")
+    case reload(String)
+    case reloaded(String, [URL])
 }
 
 public enum RaindropsAction: ReduxAction {
