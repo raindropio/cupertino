@@ -28,10 +28,12 @@ struct AutoFocus<C: View>: UIViewControllerRepresentable {
         override init(rootView: C) {
             super.init(rootView: rootView)
             view.backgroundColor = .clear
+            view.isOpaque = false
         }
         
         override func viewWillLayoutSubviews() {
             super.viewWillLayoutSubviews()
+            
             if condition, !focused, let child = view.subviews.first?.subviews.first {
                 focused = true
                 DispatchQueue.main.async {

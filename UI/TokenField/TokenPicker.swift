@@ -1,8 +1,11 @@
 import SwiftUI
+import Backport
 
 struct TokenPicker<S: RawRepresentable<String> & Identifiable, SV: View> {
     @Namespace private var animation
+    @Environment(\.dismiss) private var dismiss
     @State private var search = ""
+    @State private var focused = true
     
     @Binding var value: [String]
     var recent: [String]
@@ -46,9 +49,14 @@ extension TokenPicker {
                 .split(separator: ",")
                 .map { String($0) }
                 .forEach(add)
+            
+            search = ""
+            withAnimation {
+                focused = true
+            }
+        } else {
+            dismiss()
         }
-        
-        search = ""
     }
 }
 
@@ -75,7 +83,7 @@ extension TokenPicker: View {
         } label: {
             Text(val)
         }
-            .transition(.move(edge: .trailing).combined(with: .opacity))
+            .matchedGeometryEffect(id: val, in: animation)
     }
     
     func render(_ suggestion: S) -> some View {
@@ -84,11 +92,12 @@ extension TokenPicker: View {
         } label: {
             suggestions.content(suggestion)
         }
+            .matchedGeometryEffect(id: suggestion.rawValue, in: animation)
     }
     
     @ViewBuilder
     func selected() -> some View {
-        if !searched(value).isEmpty {
+        VStack(spacing: 0) {
             ScrollView(.horizontal, showsIndicators: false) {
                 ScrollViewReader { proxy in
                     LazyHStack {
@@ -98,58 +107,73 @@ extension TokenPicker: View {
                             content: render
                         )
                     }
-                        .frame(height: 36)
-                        .scenePadding([.horizontal, .top])
-                        .onChange(of: searched(value)) {
-                            if let last = $0.last {
-                                withAnimation {
-                                    proxy.scrollTo(last, anchor: .trailing)
-                                }
+                    .frame(height: 36)
+                    .scenePadding([.horizontal, .bottom])
+                    .onChange(of: searched(value)) {
+                        if let last = $0.last {
+                            withAnimation {
+                                proxy.scrollTo(last, anchor: .trailing)
                             }
                         }
-                }
-            }
-                .buttonStyle(.borderedProminent)
-                .buttonBorderShape(.capsule)
-                .tint(.accentColor)
-                .frame(maxWidth: .infinity, alignment: .leading)
-        }
-    }
-    
-    var body: some View {
-        List {
-            if !filtered(recent).isEmpty {
-                Section {
-                    ForEach(
-                        filtered(recent),
-                        id: \.self,
-                        content: render
-                    )
-                        .foregroundColor(.primary)
-                } header: {
-                    HStack {
-                        Text("Recent")
-                        
-                        Spacer()
-                        
-                        Button("Select all") {
-                            _ = filtered(recent).map(add)
-                        }
-                            .controlSize(.small)
                     }
                 }
             }
+            .buttonStyle(.borderedProminent)
+            .buttonBorderShape(.capsule)
+            .tint(.accentColor)
+            .opacity(searched(value).isEmpty ? 0 : 1)
+            .frame(maxHeight: searched(value).isEmpty ? 0 : nil)
             
-            ForEach(
-                filtered(suggestions.data).filter { !recent.contains($0.rawValue) },
-                content: render
-            )
-                .foregroundColor(.primary)
+            Divider().opacity(0.5)
         }
-            .filterable(text: $search, icon: "plus", prompt: "Add tag", header: selected)
-            .animation(.easeInOut(duration: 0.3), value: searched(value))
+        .frame(maxWidth: .infinity, alignment: .leading)
+        .background(.background)
+    }
+    
+    var body: some View {
+        VStack(spacing: 0) {
+            selected()
+            
+            List {
+                Section {
+                    if !filtered(recent).isEmpty {
+                        ForEach(
+                            filtered(recent),
+                            id: \.self,
+                            content: render
+                        )
+                        .foregroundColor(.primary)
+                    }
+                } header: {
+                    if !filtered(recent).isEmpty {
+                        HStack {
+                            Text("Recent")
+                            
+                            Spacer()
+                            
+                            Button("Select all") {
+                                _ = filtered(recent).map(add)
+                            }
+                                .controlSize(.small)
+                        }
+                    }
+                }
+                
+                ForEach(
+                    filtered(suggestions.data).filter { !recent.contains($0.rawValue) },
+                    content: render
+                )
+                    .foregroundColor(.primary)
+            }
+        }
+            //search
+            .searchable(text: $search, placement: .navigationBarDrawer(displayMode: .always), prompt: "Add tag")
+            .searchFocused($focused)
+            .searchBar(withToolbar: true, cancelable: false, autoReturnKey: false)
+            .backport.scrollDismissesKeyboard(.never)
+            .animation(.default, value: searched(value))
             .onChange(of: value) { _ in search = "" }
             .onChange(of: search) { if $0.contains(",") { submit() } }
-            .onSubmit(submit)
+            .onSubmit(of: .search, submit)
     }
 }
