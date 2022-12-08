@@ -6,6 +6,7 @@ extension FabStack {
         var body: some View {
             EmptyState("Add from apps") {
                 Image(systemName: "puzzlepiece.extension")
+                    .foregroundStyle(.indigo)
             } actions: {
                 Button("Install extension") {
                     

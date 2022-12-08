@@ -49,6 +49,7 @@ extension AddStack: View {
                     if isCompleteAll {
                         EmptyState("Done") {
                             Image(systemName: "checkmark.icloud")
+                                .foregroundStyle(.green)
                         }
                     } else {
                         ProgressView(

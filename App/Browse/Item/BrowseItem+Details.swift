@@ -4,6 +4,7 @@ import UI
 
 extension BrowseItem {
     struct Details: View {
+        var find: FindBy
         var raindrop: Raindrop
         var vertical = false
         
@@ -18,7 +19,7 @@ extension BrowseItem {
                         .lineLimit(3)
                 }
                 
-                Buttons(raindrop: raindrop)
+                Buttons(find: find, raindrop: raindrop)
                 
                 if vertical {
                     Spacer(minLength: 0)

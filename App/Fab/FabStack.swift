@@ -22,44 +22,28 @@ struct FabStack: View {
                     Button {
                         kind = .collection
                     } label: {
-                        Label {
-                            Text("Collection").foregroundColor(.primary)
-                        } icon: {
-                            Image(systemName: "folder").imageScale(.large)
-                        }
+                        Label("Collection", systemImage: "folder").tint(.primary)
                     }
                         .listItemTint(.blue)
                     
                     Button {
                         kind = .media
                     } label: {
-                        Label {
-                            Text("Photos or videos").foregroundColor(.primary)
-                        } icon: {
-                            Image(systemName: "photo").imageScale(.large)
-                        }
+                        Label("Photos or videos", systemImage: "photo").tint(.primary)
                     }
                         .listItemTint(Filter.Kind.type(.image).color)
                     
                     Button {
                         kind = .document
                     } label: {
-                        Label {
-                            Text("Files").foregroundColor(.primary)
-                        } icon: {
-                            Image(systemName: "doc").imageScale(.large)
-                        }
+                        Label("Files", systemImage: "doc").tint(.primary)
                     }
                         .listItemTint(Filter.Kind.type(.document).color)
                 }
                 
                 Section {
                     NavigationLink(destination: Extension.init) {
-                        Label {
-                            Text("Add from apps")
-                        } icon: {
-                            Image(systemName: "puzzlepiece.extension").imageScale(.large)
-                        }
+                        Label("Add from apps", systemImage: "puzzlepiece.extension")
                     }
                         .tint(.secondary)
                 }
@@ -71,7 +55,7 @@ struct FabStack: View {
                 .navigationBarTitleDisplayMode(.inline)
                 .toolbar {
                     ToolbarItem(placement: .cancellationAction) {
-                        Button("Cancel", action: dismiss.callAsFunction)
+                        Button("Cancel", role: .cancel, action: dismiss.callAsFunction)
                     }
                 }
         }

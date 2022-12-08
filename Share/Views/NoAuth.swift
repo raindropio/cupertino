@@ -7,8 +7,9 @@ struct NoAuth: View {
     var body: some View {
         EmptyState("Login required", message: "Please open Raindrop.io app to get started") {
             Image(systemName: "person.crop.circle")
+                .foregroundStyle(.yellow)
         } actions: {
-            Button("OK", action: dismiss.callAsFunction)
+            Button("OK", role: .cancel, action: dismiss.callAsFunction)
         }
             .backport.presentationDetents([.medium])
             .presentationUndimmed(.medium)

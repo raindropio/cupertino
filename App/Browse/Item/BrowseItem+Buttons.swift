@@ -12,11 +12,16 @@ extension BrowseItem {
             }
         }()
         
+        var find: FindBy
         var raindrop: Raindrop
         
         var body: some View {
             if raindrop.important || raindrop.broken || raindrop.duplicate != nil || !raindrop.tags.isEmpty {
                 WStack(spacingX: 8, spacingY: 8) {
+                    if raindrop.collection != find.collectionId {
+                        
+                    }
+                    
                     if raindrop.important {
                         FilterButton(kind: .important)
                             .buttonStyle(.borderedProminent)
@@ -33,7 +38,7 @@ extension BrowseItem {
                     ForEach(raindrop.tags, id: \.self) { tag in
                         FilterButton(kind: .tag(tag))
                     }
-                    .labelStyle(.titleOnly)
+                        .labelStyle(.titleOnly)
                 }
                     .buttonStyle(.bordered)
                     .labelStyle(.iconOnly)

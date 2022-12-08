@@ -18,8 +18,13 @@ struct FixEditModeModifier: ViewModifier {
 
 public extension View {
     /// On iPad when share sheet is presented editMode is reseted to inactive, usually breaking List selection state
+    @ViewBuilder
     func fixEditMode() -> some View {
-        modifier(FixEditModeModifier())
+        if isPhone {
+            self
+        } else {
+            modifier(FixEditModeModifier())
+        }
     }
 }
 #endif

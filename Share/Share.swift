@@ -7,7 +7,7 @@ struct Share: View {
     
     var body: some View {
         AuthGroup(
-            authorized: SaveItems.init,
+            authorized: Receive.init,
             notAuthorized: NoAuth.init
         )
             .environmentObject(store.dispatcher)

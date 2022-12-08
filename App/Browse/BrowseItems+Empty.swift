@@ -44,6 +44,7 @@ extension BrowseItems.Empty {
                 case .error:
                     EmptyState("Error") {
                         Image(systemName: "exclamationmark.triangle")
+                            .foregroundStyle(.red)
                     } actions: {
                         Button("Try again") {
                             dispatch.sync(RaindropsAction.load(find))
@@ -53,6 +54,7 @@ extension BrowseItems.Empty {
                 case .notFound:
                     EmptyState("Not found") {
                         Image(systemName: "exclamationmark.triangle")
+                            .foregroundStyle(.yellow)
                     }
                 }
             }

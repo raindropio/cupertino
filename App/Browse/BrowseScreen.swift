@@ -14,6 +14,7 @@ struct BrowseScreen: View {
             .modifier(Toolbar(find: find))
             #if os(iOS)
             .backport.toolbarRole(isPhone ? .automatic : .browser)
+            .fixEditMode()
             #endif
     }
 }

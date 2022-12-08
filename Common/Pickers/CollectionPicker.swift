@@ -9,7 +9,7 @@ public struct CollectionPicker<Prompt: View> {
     var matching: CollectionsListMatching = .all
     var prompt: () -> Prompt
     
-    init(id: Binding<Int?>, matching: CollectionsListMatching, prompt: @escaping () -> Prompt) {
+    public init(id: Binding<Int?>, matching: CollectionsListMatching, prompt: @escaping () -> Prompt) {
         self._id = id
         self.matching = matching
         self.prompt = prompt
@@ -17,13 +17,13 @@ public struct CollectionPicker<Prompt: View> {
 }
 
 extension CollectionPicker where Prompt == Label<Text, Image> {
-    init(id: Binding<Int?>, matching: CollectionsListMatching, prompt: String = "") {
+    public init(id: Binding<Int?>, matching: CollectionsListMatching, prompt: String = "") {
         self._id = id
         self.matching = matching
         self.prompt = { Label(prompt, systemImage: "folder") }
     }
     
-    init(id: Binding<Int>, matching: CollectionsListMatching, prompt: String = "") {
+    public init(id: Binding<Int>, matching: CollectionsListMatching, prompt: String = "") {
         self._id = .init {
             id.wrappedValue
         } set: {
@@ -58,16 +58,11 @@ extension CollectionPicker: View {
 }
 
 extension CollectionPicker {
-    public struct Screen: View {
+    struct Screen: View {
         @Environment(\.dismiss) private var dismiss
         
         @Binding var id: Int?
         var matching: CollectionsListMatching = .all
-        
-        public init(id: Binding<Int?>, matching: CollectionsListMatching) {
-            self._id = id
-            self.matching = matching
-        }
         
         public var body: some View {
             CollectionsList(selection: $id, matching: matching, searchable: true)

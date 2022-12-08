@@ -51,7 +51,7 @@ extension BrowseItems {
         }
         
         func render(_ item: Raindrop) -> some View {
-            BrowseItem(item, view: view)
+            BrowseItem(find: find, raindrop: item, view: view)
                 .swipeActions(edge: .leading) {
                     Link(destination: item.link) {
                         Label("Open", systemImage: "safari")

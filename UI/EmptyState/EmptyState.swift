@@ -21,7 +21,7 @@ public struct EmptyState<I: View, A: View> {
 
 extension EmptyState: View {
     public var body: some View {
-        VStack(spacing: 20) {
+        VStack(spacing: 24) {
             if let icon {
                 icon()
                     .symbolVariant(.fill)
@@ -30,7 +30,7 @@ extension EmptyState: View {
                     .foregroundStyle(.secondary)
             }
             
-            VStack(spacing: 10) {
+            VStack(spacing: 12) {
                 if !title.isEmpty {
                     Text(title)
                         .font(.title)
@@ -47,6 +47,7 @@ extension EmptyState: View {
             if let actions {
                 actions()
                     .buttonStyle(.bordered)
+                    .buttonBorderShape(.capsule)
                     .tint(.accentColor)
             }
         }
