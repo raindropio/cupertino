@@ -50,8 +50,6 @@ public enum RaindropsAction: ReduxAction {
     case more(FindBy)
     case moreLoad(FindBy)
     case moreLoaded(FindBy, Int, [Raindrop], Int)
-    //add url
-    case add(URL, collection: Int? = nil) // -> create
     //create
     case create(Raindrop) // -> createMany
     //update
@@ -63,8 +61,8 @@ public enum RaindropsAction: ReduxAction {
     case delete(Raindrop.ID) // -> deleteMany
     case deleteMany(RaindropsPick)
     case deletedMany(RaindropsPick)
-    //upload
-    case uploadFiles([URL], collection: Int? = nil, completed: Binding<Set<URL>>? = nil, failed: Binding<Set<URL>>? = nil)
+    //add web url or file url
+    case add(Set<URL>, collection: Int? = nil, completed: Binding<Set<URL>>? = nil, failed: Binding<Set<URL>>? = nil)
     //multi
     case createMany([Raindrop])
     case createdMany([Raindrop])

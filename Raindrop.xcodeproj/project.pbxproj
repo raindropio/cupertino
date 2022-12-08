@@ -59,17 +59,16 @@
 		76BFE370291E9F6B00DE9DB2 /* SettingsRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76BFE36B291E9F6B00DE9DB2 /* SettingsRouter.swift */; };
 		76BFE371291E9F6B00DE9DB2 /* AuthScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76BFE36C291E9F6B00DE9DB2 /* AuthScene.swift */; };
 		76BFE372291E9F6B00DE9DB2 /* SettingsScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76BFE36D291E9F6B00DE9DB2 /* SettingsScene.swift */; };
-		76D8805B292E6E8200D43AD9 /* addFab.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76D8805A292E6E8200D43AD9 /* addFab.swift */; };
-		76D8805F292E7ADD00D43AD9 /* AddStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76D8805E292E7ADD00D43AD9 /* AddStack.swift */; };
-		76D88065292FA6BB00D43AD9 /* AddStack+Home.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76D88064292FA6BB00D43AD9 /* AddStack+Home.swift */; };
 		76D880DF2930E1FB00D43AD9 /* ExtensionController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76D880DE2930E1FB00D43AD9 /* ExtensionController.swift */; };
 		76D880E62930E1FB00D43AD9 /* Share.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = 76D880DC2930E1FB00D43AD9 /* Share.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		76F05F0C293F89EF003CCD75 /* fab.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76F05F0B293F89EF003CCD75 /* fab.swift */; };
+		76F05F0E293F8A9E003CCD75 /* FabStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76F05F0D293F8A9E003CCD75 /* FabStack.swift */; };
+		76F05F12293F95DC003CCD75 /* FabStack+Web.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76F05F11293F95DC003CCD75 /* FabStack+Web.swift */; };
+		76F05F142940A26F003CCD75 /* FabStack+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76F05F132940A26F003CCD75 /* FabStack+Extension.swift */; };
 		76F282B52934C24B00D00363 /* ExtensionUI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76F282B42934C24B00D00363 /* ExtensionUI.swift */; };
 		76F282B72934C25400D00363 /* ExtensionService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76F282B62934C25400D00363 /* ExtensionService.swift */; };
 		76F282BA2934C43200D00363 /* NoAuth.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76F282B92934C43200D00363 /* NoAuth.swift */; };
 		76F282BC2934C76A00D00363 /* SaveItems.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76F282BB2934C76A00D00363 /* SaveItems.swift */; };
-		76F282BE29360ACE00D00363 /* AddStack+NewLink.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76F282BD29360ACE00D00363 /* AddStack+NewLink.swift */; };
-		76F282C329360CB400D00363 /* AddStack+FromApps.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76F282C229360CB400D00363 /* AddStack+FromApps.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -149,18 +148,17 @@
 		76BFE36B291E9F6B00DE9DB2 /* SettingsRouter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsRouter.swift; sourceTree = "<group>"; };
 		76BFE36C291E9F6B00DE9DB2 /* AuthScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuthScene.swift; sourceTree = "<group>"; };
 		76BFE36D291E9F6B00DE9DB2 /* SettingsScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsScene.swift; sourceTree = "<group>"; };
-		76D8805A292E6E8200D43AD9 /* addFab.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = addFab.swift; sourceTree = "<group>"; };
-		76D8805E292E7ADD00D43AD9 /* AddStack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddStack.swift; sourceTree = "<group>"; };
-		76D88064292FA6BB00D43AD9 /* AddStack+Home.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AddStack+Home.swift"; sourceTree = "<group>"; };
 		76D880DC2930E1FB00D43AD9 /* Share.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = Share.appex; sourceTree = BUILT_PRODUCTS_DIR; };
 		76D880DE2930E1FB00D43AD9 /* ExtensionController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtensionController.swift; sourceTree = "<group>"; };
 		76D880E32930E1FB00D43AD9 /* Share.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Share.plist; sourceTree = "<group>"; };
+		76F05F0B293F89EF003CCD75 /* fab.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = fab.swift; sourceTree = "<group>"; };
+		76F05F0D293F8A9E003CCD75 /* FabStack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FabStack.swift; sourceTree = "<group>"; };
+		76F05F11293F95DC003CCD75 /* FabStack+Web.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "FabStack+Web.swift"; sourceTree = "<group>"; };
+		76F05F132940A26F003CCD75 /* FabStack+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "FabStack+Extension.swift"; sourceTree = "<group>"; };
 		76F282B42934C24B00D00363 /* ExtensionUI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtensionUI.swift; sourceTree = "<group>"; };
 		76F282B62934C25400D00363 /* ExtensionService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtensionService.swift; sourceTree = "<group>"; };
 		76F282B92934C43200D00363 /* NoAuth.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoAuth.swift; sourceTree = "<group>"; };
 		76F282BB2934C76A00D00363 /* SaveItems.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SaveItems.swift; sourceTree = "<group>"; };
-		76F282BD29360ACE00D00363 /* AddStack+NewLink.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AddStack+NewLink.swift"; sourceTree = "<group>"; };
-		76F282C229360CB400D00363 /* AddStack+FromApps.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AddStack+FromApps.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -298,9 +296,9 @@
 		7685A1A428687C6000A4BC3C /* App */ = {
 			isa = PBXGroup;
 			children = (
-				76D88059292E6E5A00D43AD9 /* Add */,
 				767AC1102925148D00766998 /* Auth */,
 				767AC107292511CF00766998 /* Browse */,
+				76F05F0A293F89D4003CCD75 /* Fab */,
 				7694C9F5292610F700BD81A0 /* Preview */,
 				760C9E212923C735001CB755 /* Search */,
 				767AC111292514C500766998 /* Sidebar */,
@@ -345,18 +343,6 @@
 			path = Modules;
 			sourceTree = "<group>";
 		};
-		76D88059292E6E5A00D43AD9 /* Add */ = {
-			isa = PBXGroup;
-			children = (
-				76D8805A292E6E8200D43AD9 /* addFab.swift */,
-				76D8805E292E7ADD00D43AD9 /* AddStack.swift */,
-				76D88064292FA6BB00D43AD9 /* AddStack+Home.swift */,
-				76F282BD29360ACE00D00363 /* AddStack+NewLink.swift */,
-				76F282C229360CB400D00363 /* AddStack+FromApps.swift */,
-			);
-			path = Add;
-			sourceTree = "<group>";
-		};
 		76D880DD2930E1FB00D43AD9 /* Share */ = {
 			isa = PBXGroup;
 			children = (
@@ -368,6 +354,17 @@
 				76B16BD52930F43900032D7D /* Share.js */,
 			);
 			path = Share;
+			sourceTree = "<group>";
+		};
+		76F05F0A293F89D4003CCD75 /* Fab */ = {
+			isa = PBXGroup;
+			children = (
+				76F05F0B293F89EF003CCD75 /* fab.swift */,
+				76F05F0D293F8A9E003CCD75 /* FabStack.swift */,
+				76F05F11293F95DC003CCD75 /* FabStack+Web.swift */,
+				76F05F132940A26F003CCD75 /* FabStack+Extension.swift */,
+			);
+			path = Fab;
 			sourceTree = "<group>";
 		};
 		76F282B82934C41D00D00363 /* Views */ = {
@@ -498,7 +495,6 @@
 				76864FBF291EA059000B9B45 /* BrowseScreen.swift in Sources */,
 				760C9E312923C735001CB755 /* BrowseList+Toolbar.swift in Sources */,
 				767EB461292CC0C40018EE8F /* BrowseItem.swift in Sources */,
-				76D88065292FA6BB00D43AD9 /* AddStack+Home.swift in Sources */,
 				760C9E4B2923C735001CB755 /* GlobalSearch+Scopes.swift in Sources */,
 				760C9E252923C735001CB755 /* BrowseNested.swift in Sources */,
 				76864FBD291EA059000B9B45 /* SidebarScreen.swift in Sources */,
@@ -511,33 +507,33 @@
 				767EB472292E44980018EE8F /* BrowseBulk+AddTags.swift in Sources */,
 				7694C9F429253A0D00BD81A0 /* PreviewScreen+Toolbar.swift in Sources */,
 				767AC1132925173900766998 /* SidebarScreen+Phone.swift in Sources */,
+				76F05F12293F95DC003CCD75 /* FabStack+Web.swift in Sources */,
 				760C9E302923C735001CB755 /* BrowseSortButton.swift in Sources */,
+				76F05F142940A26F003CCD75 /* FabStack+Extension.swift in Sources */,
 				7694CA032926527E00BD81A0 /* PreviewScreen+Title.swift in Sources */,
 				76BFE372291E9F6B00DE9DB2 /* SettingsScene.swift in Sources */,
 				760C9E322923C735001CB755 /* BrowseLoadMore.swift in Sources */,
+				76F05F0E293F8A9E003CCD75 /* FabStack.swift in Sources */,
 				767EB476292E47F80018EE8F /* BrowseBulk+More.swift in Sources */,
+				76F05F0C293F89EF003CCD75 /* fab.swift in Sources */,
 				760C9E2F2923C735001CB755 /* BrowseList.swift in Sources */,
 				767EB463292CC19C0018EE8F /* BrowseItem+FilterButton.swift in Sources */,
 				7694CA0529265B5000BD81A0 /* PreviewScreen+Action.swift in Sources */,
 				760C9E4A2923C735001CB755 /* GlobalSearch+Suggestions.swift in Sources */,
 				760C9E352923C735001CB755 /* BrowseViewButton.swift in Sources */,
-				76D8805F292E7ADD00D43AD9 /* AddStack.swift in Sources */,
 				760C9E2E2923C735001CB755 /* BrowseStatusBar.swift in Sources */,
 				7694C9F72926110A00BD81A0 /* PreviewScreen.swift in Sources */,
 				767EB46A292E15E70018EE8F /* BrowseBulk+title.swift in Sources */,
 				76BFE36F291E9F6B00DE9DB2 /* AppRouter.swift in Sources */,
 				767EB470292E1C6A0018EE8F /* BrowseBulk+Move.swift in Sources */,
 				760C9E342923C735001CB755 /* BrowseItems.swift in Sources */,
-				76F282BE29360ACE00D00363 /* AddStack+NewLink.swift in Sources */,
 				76BFE36E291E9F6B00DE9DB2 /* AppScene.swift in Sources */,
 				767EB468292E14450018EE8F /* BrowseBulk.swift in Sources */,
 				760C9E492923C735001CB755 /* GlobalSearch.swift in Sources */,
 				7685A195286868AC00A4BC3C /* App.swift in Sources */,
 				760C9E2A2923C735001CB755 /* BrowseScreen+Toolbar.swift in Sources */,
-				76D8805B292E6E8200D43AD9 /* addFab.swift in Sources */,
 				76BFE370291E9F6B00DE9DB2 /* SettingsRouter.swift in Sources */,
 				767EB45F292CC0C40018EE8F /* BrowseItem+Details.swift in Sources */,
-				76F282C329360CB400D00363 /* AddStack+FromApps.swift in Sources */,
 				767EB474292E467F0018EE8F /* BrowseBulk+Delete.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

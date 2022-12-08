@@ -2,13 +2,13 @@ import SwiftUI
 import CoreHaptics
 
 public extension ButtonStyle where Self == FabButtonStyle {
-    static var fab: Self {
+    static var floatingActionButton: Self {
         return .init()
     }
 }
 
 public extension MenuStyle where Self == FabMenuButtonStyle {
-    static var fab: Self {
+    static var floatingActionButton: Self {
         return .init()
     }
 }

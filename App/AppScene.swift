@@ -20,6 +20,7 @@ struct AppScene: View {
         }
             .navigationSplitViewConfiguration(sidebarMin: 400)
             .collectionActions()
+            .dropProvider()
             .environmentObject(router)
     }
 }

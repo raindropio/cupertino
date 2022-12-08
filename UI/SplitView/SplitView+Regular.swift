@@ -6,26 +6,37 @@ extension SplitView {
         var master: () -> S
         @ViewBuilder var detail: (P) -> D
         
-        var isModalPresented: Binding<Bool> {
+        var subPath: Binding<[P]> {
             .init {
-                path.count > 1
+                path.count >= 1 ? [P].init(path[1...]) : []
             } set: {
-                if !$0 {
-                    path.removeLast(path.count - 1)
-                }
+                path = (path.first != nil ? [path.first!] : []) + $0
             }
         }
         
         var body: some View {
-            NavigationView {
-                master()
-                
-                if let selected = path.first {
-                    detail(selected)
-                        .modifier(Sequence(path: $path, level: 1, detail: detail))
+            if #available(iOS 16, *) {
+                NavigationSplitView(sidebar: master) {
+                    NavigationStack(path: subPath) {
+                        Group {
+                            if let selected = path.first {
+                                detail(selected)
+                            }
+                        }
+                            .navigationDestination(for: P.self, destination: detail)
+                    }
                 }
+            } else {
+                NavigationView {
+                    master()
+                    
+                    if let selected = path.first {
+                        detail(selected)
+                            .modifier(Sequence(path: $path, level: 1, detail: detail))
+                    }
+                }
+                    .navigationViewStyle(.columns)
             }
-                .navigationViewStyle(.columns)
         }
     }
 }

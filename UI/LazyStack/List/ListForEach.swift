@@ -1,8 +1,11 @@
 import SwiftUI
+import UniformTypeIdentifiers
 
 struct ListForEach<D: RandomAccessCollection, C: View> where D.Element: Identifiable {
     let data: D
     let reorder: ((D.Element.ID, Int) -> Void)?
+    let insert: ((Int, [NSItemProvider]) -> Void)?
+    let insertOf: [UTType]
     let content: (D.Element) -> C
 }
 
@@ -27,6 +30,7 @@ extension ListForEach: View {
                 .backport.tag($0.id)
         }
             .onMove(perform: performReorder)
+            .onInsert(of: insertOf, perform: insert ?? { _,_ in })
             .moveDisabled(reorder == nil)
     }
 }

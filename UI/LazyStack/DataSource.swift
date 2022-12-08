@@ -1,4 +1,5 @@
 import SwiftUI
+import UniformTypeIdentifiers
 
 public struct DataSource<D: RandomAccessCollection, C: View> where D.Element: Identifiable {
     @Environment(\.lazyStackLayout) private var layout
@@ -6,17 +7,23 @@ public struct DataSource<D: RandomAccessCollection, C: View> where D.Element: Id
     let data: D
     let content: (D.Element) -> C
     let reorder: ((D.Element.ID, Int) -> Void)?
+    let insert: ((Int, [NSItemProvider]) -> Void)?
+    let insertOf: [UTType]
     let loadMore: () async -> Void
     
     public init(
         _ data: D,
         content: @escaping (D.Element) -> C,
         reorder: ((D.Element.ID, Int) -> Void)? = nil,
+        insert: ((Int, [NSItemProvider]) -> Void)? = nil,
+        insertOf: [UTType] = [],
         loadMore: @escaping () async -> Void
     ) {
         self.data = data
         self.content = content
         self.reorder = reorder
+        self.insert = insert
+        self.insertOf = insertOf
         self.loadMore = loadMore
     }
 }
@@ -25,18 +32,18 @@ extension DataSource: View {
     public var body: some View {
         switch layout {
         case .list:
-            ListForEach(data: data, reorder: reorder, content: content)
+            ListForEach(data: data, reorder: reorder, insert: insert, insertOf: insertOf, content: content)
                 .infiniteScroll(data, action: loadMore)
             
         case .grid(let width, let staggered):
             Group {
                 if staggered {
                     GridStaggered(data, width) { group in
-                        GridForEach(group, content: content)
+                        GridForEach(data: group, insert: insert, insertOf: insertOf, content: content)
                     }
                 } else {
                     GridColumns(width) {
-                        GridForEach(data, content: content)
+                        GridForEach(data: data, insert: insert, insertOf: insertOf, content: content)
                     }
                 }
             }

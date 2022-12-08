@@ -2,18 +2,15 @@ import SwiftUI
 
 #if canImport(UIKit)
 struct FixEditModeModifier: ViewModifier {
-    @Environment(\.isPresented) private var isPresented
     @Environment(\.editMode) private var em
     @State private var editMode = EditMode.inactive
     
     func body(content: Content) -> some View {
         content
             .environment(\.editMode, $editMode)
-            .task(id: em?.wrappedValue) {
-                if isPresented {
-                    withAnimation {
-                        editMode = em?.wrappedValue ?? .inactive
-                    }
+            .task(id: em?.wrappedValue, debounce: 0.1) {
+                withAnimation {
+                    editMode = em?.wrappedValue ?? .inactive
                 }
             }
     }

@@ -24,7 +24,7 @@ extension CollectionsList.Find {
                 Section("Found \(user.count) collections") {
                     ForEach(user) { item in
                         UserCollectionRow(item, withLocation: true)
-                            .dropRaindrop(to: item)
+                            .dropConsumer(to: item)
                             .backport.tag(item.id)
                     }
                 }

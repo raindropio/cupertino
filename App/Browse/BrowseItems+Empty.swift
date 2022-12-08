@@ -27,49 +27,39 @@ extension BrowseItems.Empty {
             Group {
                 switch status {
                 case .idle:
-                    GroupBox {
-                        if find.isSearching {
-                            Text("Nothing found")
-                                .frame(maxWidth: .infinity)
-
-                        } else {
-                            Text("Empty")
-                                .frame(maxWidth: .infinity)
-                            
-                            Button("Create bookmark") {
-                                
-                            }
+                    if find.isSearching {
+                        EmptyState("Nothing found") {
+                            Image(systemName: "magnifyingglass")
+                        }
+                    } else {
+                        EmptyState("Empty") {
+                            Image(systemName: "star")
                         }
                     }
-                        .clearSection()
-                        .scenePadding()
                 
                 case .loading:
                     ProgressView()
                         .progressViewStyle(.circular)
-                        .frame(maxWidth: .infinity)
                     
                 case .error:
-                    GroupBox {
-                        Text("Error")
-                            .frame(maxWidth: .infinity)
-
+                    EmptyState("Error") {
+                        Image(systemName: "exclamationmark.triangle")
+                    } actions: {
                         Button("Try again") {
                             dispatch.sync(RaindropsAction.load(find))
                         }
                     }
-                        .clearSection()
-                        .scenePadding()
                     
                 case .notFound:
-                    GroupBox {
-                        Text("Not found")
-                            .frame(maxWidth: .infinity)
+                    EmptyState("Not found") {
+                        Image(systemName: "exclamationmark.triangle")
                     }
-                        .clearSection()
-                        .scenePadding()
                 }
             }
+                .frame(maxWidth: .infinity, maxHeight: .infinity)
+                .scenePadding()
+                .padding(.vertical, 100)
+                .clearSection()
                 .transition(.opacity)
         }
     }

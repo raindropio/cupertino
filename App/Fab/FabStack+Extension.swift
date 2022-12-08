@@ -1,8 +1,8 @@
 import SwiftUI
 import UI
 
-//extension AddStack {
-    struct FromApps: View {
+extension FabStack {
+    struct Extension: View {
         var body: some View {
             EmptyState("Add from apps") {
                 Image(systemName: "puzzlepiece.extension")
@@ -13,4 +13,4 @@ import UI
             }
         }
     }
-//}
+}

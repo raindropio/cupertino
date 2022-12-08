@@ -1,16 +1,11 @@
 import SwiftUI
+import UniformTypeIdentifiers
 
 struct GridForEach<D: RandomAccessCollection, C: View> where D.Element: Identifiable {
     let data: D
+    let insert: ((Int, [NSItemProvider]) -> Void)?
+    let insertOf: [UTType]
     let content: (D.Element) -> C
-    
-    init(
-        _ data: D,
-        content: @escaping (D.Element) -> C
-    ) {
-        self.data = data
-        self.content = content
-    }
 }
 
 extension GridForEach: View {
@@ -28,6 +23,13 @@ extension GridForEach: View {
                 .listItemBehaviour(element.id)
                 .background(Color.secondaryGroupedBackground)
                 .clipShape(RoundedRectangle(cornerRadius: 5))
+                .onDrop(of: insertOf, isTargeted: .constant(insert != nil)) {
+                    if let insert {
+                        insert(getIndex(element) ?? 0, $0)
+                        return true
+                    }
+                    return false
+                }
         }
     }
 }

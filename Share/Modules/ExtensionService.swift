@@ -2,15 +2,14 @@ import SwiftUI
 import UniformTypeIdentifiers
 
 final class ExtensionService: ObservableObject {
-    @Published var loading = false
-    private var preprocessed: NSDictionary?
-    private var items = Set<URL>()
-    
     private weak var context: NSExtensionContext?
+    
+    var preprocessed: NSDictionary?
+    var items = [NSItemProvider]()
     
     init(_ context: NSExtensionContext? = nil) {
         self.context = context
-        Task.detached(priority: .background, operation: load)
+        self.load()
     }
     
     func decoded<T: Decodable>() -> T? {
@@ -23,48 +22,13 @@ final class ExtensionService: ObservableObject {
         return nil
     }
     
-    func webURL() -> URL? {
-        items.first {
-            $0.scheme?.hasPrefix("http") == true
-        }
-    }
-    
-    func filesURL() -> [URL]? {
-        let files = items.filter {
-            $0.scheme == "file"
-        }
-        return files.isEmpty ? nil : Array(files)
-    }
-    
     func close() {
         context?.completeRequest(returningItems: context?.inputItems ?? [])
     }
 }
 
 extension ExtensionService {
-    @Sendable
-    private func load() async {
-        await MainActor.run {
-            preprocessed = nil
-            items = .init()
-            loading = true
-        }
-        
-        await parseAttachments()
-        
-        await MainActor.run {
-            //prefer web urls
-            let webUrls = items.filter { $0.scheme?.hasPrefix("http") == true }
-            if !webUrls.isEmpty {
-                items = webUrls
-            }
-            
-            loading = false
-        }
-    }
-    
-    @Sendable
-    private func parseAttachments() async {
+    private func load() {
         guard let context else { return }
         
         for input in context.inputItems {
@@ -73,67 +37,23 @@ extension ExtensionService {
                         
             for attachment in attachments {
                 //preprocessed javascript
-                if let item: NSDictionary = await attachment.getItem(UTType.propertyList.identifier),
-                    let result = item[NSExtensionJavaScriptPreprocessingResultsKey] {
-                    _ = await MainActor.run {
-                        preprocessed = result as? NSDictionary
-                    }
+                if attachment.hasItemConformingToTypeIdentifier(UTType.propertyList.identifier) {
+                    loadPreprocessed(attachment)
                     return
                 }
-                //web url
-                else if let item: URL = await attachment.getItem(UTType.url.identifier) {
-                    _ = await MainActor.run {
-                        items.insert(item)
-                    }
-                }
-                //text
-                else if let item: String = await attachment.getItem(UTType.text.identifier),
-                    !URL.detect(from: item).isEmpty {
-                    _ = await MainActor.run {
-                        URL.detect(from: item).forEach { items.insert($0) }
-                    }
-                }
-                //file url
-                else if let item: URL = await attachment.getItem(UTType.fileURL.identifier, UTType.image.identifier, UTType.video.identifier, UTType.movie.identifier, UTType.audio.identifier, UTType.pdf.identifier) {
-                    _ = await MainActor.run {
-                        items.insert(item)
-                    }
-                }
-                //image data (usually screenshot)
-                else if let item: UIImage = await attachment.getItem(UTType.image.identifier) {
-                    let url = FileManager.default.temporaryDirectory
-                        .appendingPathComponent(attachment.suggestedName ?? UUID().uuidString)
-                        .appendingPathExtension("png")
-                    if (try? item.pngData()?.write(to: url)) != nil {
-                        _ = await MainActor.run {
-                            items.insert(url)
-                        }
-                    }
-                }
-                //pdf data (usually screenshot)
-                else if let item: Data = await attachment.getItem(UTType.pdf.identifier) {
-                    let url = FileManager.default.temporaryDirectory
-                        .appendingPathComponent(attachment.suggestedName ?? UUID().uuidString)
-                        .appendingPathExtension("pdf")
-                    if (try? item.write(to: url)) != nil {
-                        _ = await MainActor.run {
-                            items.insert(url)
-                        }
-                    }
+                else {
+                    items.append(attachment)
                 }
             }
         }
     }
-}
-
-fileprivate extension NSItemProvider {
-    func getItem<T>(_ typeIdentifier: String...) async -> T? {
-        for id in typeIdentifier {
-            if hasItemConformingToTypeIdentifier(id) {
-                let item = (try? await loadItem(forTypeIdentifier: id)) as? T
-                return item
+    
+    private func loadPreprocessed(_ attachment: NSItemProvider) {
+        attachment.loadItem(forTypeIdentifier: UTType.propertyList.identifier) { item, error in
+            if let item = item as? NSDictionary,
+               let result = item[NSExtensionJavaScriptPreprocessingResultsKey] as? NSDictionary {
+                self.preprocessed = result
             }
         }
-        return nil
     }
 }

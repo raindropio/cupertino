@@ -6,8 +6,9 @@ struct BrowseSortButton: View {
     var find: FindBy
     
     var body: some View {
-        Memorized(find: find, sort: raindrops.state.sort(find))
-            .disabled(raindrops.state.isEmpty(find))
+        if !raindrops.state.isEmpty(find) {
+            Memorized(find: find, sort: raindrops.state.sort(find))
+        }
     }
 }
 

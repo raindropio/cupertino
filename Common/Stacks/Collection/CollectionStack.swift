@@ -6,7 +6,6 @@ public struct CollectionStack {
     @EnvironmentObject private var dispatch: Dispatcher
     @Environment(\.dismiss) private var dismiss
     @State private var collection: UserCollection
-    @FocusState var focus: FocusField?
     
     public init(_ collection: UserCollection) {
         self._collection = State(initialValue: collection)
@@ -51,7 +50,7 @@ extension CollectionStack: View {
     public var body: some View {
         NavigationView {
             Form {
-                Fields(collection: $collection, focus: $focus)
+                Fields(collection: $collection)
                 
                 if isNew {
                     SubmitButton("Create")
@@ -72,12 +71,6 @@ extension CollectionStack: View {
                 }
         }
             .navigationViewStyle(.stack)
-            //focus on title for new
-            .onAppear {
-                if isNew {
-                    focus = .title
-                }
-            }
             //auto-save for existing collection
             .onDisappear(perform: saveOnClose)
     }

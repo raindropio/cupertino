@@ -18,6 +18,7 @@ extension RaindropStack.Fields: View {
             Backport.TextField("Title", text: $raindrop.title, axis: .vertical)
                 .preventLineBreaks(text: $raindrop.title)
                 .focused($focus, equals: .title)
+                .autoFocus(focus == .title)
                 .font(.headline)
                 .lineLimit(5)
                 .onSubmit {
@@ -26,6 +27,7 @@ extension RaindropStack.Fields: View {
 
             Backport.TextField("Description", text: $raindrop.excerpt, axis: .vertical)
                 .focused($focus, equals: .excerpt)
+                .autoFocus(focus == .excerpt)
                 .backport.lineLimit(2...5)
         }
 
@@ -46,6 +48,7 @@ extension RaindropStack.Fields: View {
             Label {
                 URLField("URL", value: $raindrop.link)
                     .focused($focus, equals: .link)
+                    .autoFocus(focus == .link)
             } icon: {
                 Image(systemName: "globe")
             }

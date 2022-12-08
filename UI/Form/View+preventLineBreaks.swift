@@ -18,5 +18,6 @@ struct PreventLineBreaksModifier: ViewModifier {
                     onSubmitAction()
                 }
             }
+            .transaction { $0.animation = nil }
     }
 }

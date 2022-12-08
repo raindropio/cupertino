@@ -33,7 +33,7 @@ extension CollectionsTree {
         
         func item(_ collection: UserCollection) -> some View {
             UserCollectionRow(collection)
-                .dropRaindrop(to: collection)
+                .dropConsumer(to: collection)
                 .swipeActions(edge: .trailing) {
                     Button {
                         action(.edit(collection))

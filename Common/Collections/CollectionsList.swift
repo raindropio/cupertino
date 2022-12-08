@@ -37,7 +37,7 @@ extension CollectionsList: View {
                         }
                         if matching != .nestable {
                             SystemCollectionRow(id: -1)
-                                .dropRaindrop(to: -1)
+                                .dropConsumer(to: -1)
                                 .backport.tag(-1)
                         }
                         custom?()
@@ -49,7 +49,7 @@ extension CollectionsList: View {
                 if matching == .all {
                     Section {
                         SystemCollectionRow(id: -99)
-                            .dropRaindrop(to: -99)
+                            .dropConsumer(to: -99)
                             .backport.tag(-99)
                     }
                 }

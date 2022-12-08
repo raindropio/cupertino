@@ -1,9 +1,67 @@
-import Foundation
+import SwiftUI
 
 extension RaindropsReducer {
-    func add(state: inout S, url: URL, collection: Int?) async throws -> ReduxAction? {
-        var raindrop = try await rest.importUrlParse(url)
-        raindrop.collection = collection ?? -1
-        return A.create(raindrop)
+    func add(state: inout S, urls: Set<URL>, collection: Int?, completed: Binding<Set<URL>>?, failed: Binding<Set<URL>>?) async throws -> ReduxAction? {
+        //nothing to add
+        guard !urls.isEmpty
+        else { return nil }
+        
+        var newRaindrops = [Raindrop]()
+
+        let chunks = urls
+            .filter { !(completed?.wrappedValue ?? []).contains($0) }
+            .chunked(into: 10)
+        
+        for chunk in chunks {
+            newRaindrops += await withTaskGroup(of: Raindrop?.self) { [self] group in
+                for url in chunk {
+                    group.addTask {
+                        do {
+                            var raindrop: Raindrop
+                            
+                            //file
+                            if url.isFileURL {
+                                raindrop = try await self.rest.raindropUploadFile(
+                                    file: url,
+                                    collection: collection
+                                )
+                            }
+                            //web url
+                            else {
+                                var item = try? await self.rest.importUrlParse(url)
+                                if item == nil {
+                                    item = .new(link: url)
+                                }
+                                if let collection {
+                                    item?.collection = collection
+                                }
+                                raindrop = try await self.rest.raindropCreate(raindrop: item!)
+                            }
+                            
+                            completed?.wrappedValue.insert(url)
+                            return raindrop
+                        } catch {
+                            failed?.wrappedValue.insert(url)
+                            return nil
+                        }
+                    }
+                }
+                
+                var raindrops = [Raindrop]()
+                for await raindrop in group {
+                    if let raindrop {
+                        raindrops.append(raindrop)
+                    }
+                }
+                
+                return raindrops
+            }
+        }
+        
+        //can't add anything
+        guard !newRaindrops.isEmpty
+        else { throw RestError.invalid("cant add") }
+        
+        return A.createdMany(newRaindrops)
     }
 }

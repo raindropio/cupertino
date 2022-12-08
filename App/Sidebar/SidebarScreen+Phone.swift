@@ -15,7 +15,7 @@ extension SidebarScreen {
                         content
                     }
                 }
-                    .addFab()
+                    .fab()
                     .globalSearch(find: $find)
             } else {
                 content

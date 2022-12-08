@@ -26,7 +26,7 @@ extension BrowseNested {
             } label: {
                 UserCollectionRow(collection)
             }
-                .dropRaindrop(to: collection)
+                .dropConsumer(to: collection)
                 .contextMenu {
                     UserCollectionMenu(collection)
                 }

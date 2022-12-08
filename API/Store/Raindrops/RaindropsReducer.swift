@@ -32,10 +32,6 @@ public actor RaindropsReducer: Reducer {
         case .moreLoaded(let find, let page, let items, let total):
             moreLoaded(state: &state, find: find, page: page, items: items, total: total)
             
-        //Add
-        case .add(let url, let collection):
-            return try await add(state: &state, url: url, collection: collection)
-            
         //Create
         case .create(let item):
             return A.createMany([item])
@@ -51,9 +47,9 @@ public actor RaindropsReducer: Reducer {
         case .delete(let id):
             return A.deleteMany(.some([id]))
             
-        //Upload
-        case .uploadFiles(let files, let collection, let completed, let failed):
-            return try await uploadFiles(state: &state, files: files, collection: collection, completed: completed, failed: failed)
+        //Add web url or file urls
+        case .add(let urls, let collection, let completed, let failed):
+            return try await add(state: &state, urls: urls, collection: collection, completed: completed, failed: failed)
             
         //Delete Many
         case .deleteMany(let pick):

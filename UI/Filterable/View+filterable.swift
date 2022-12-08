@@ -37,6 +37,7 @@ struct FilterableModifier<H: View>: ViewModifier {
             
             TextField(prompt, text: $text)
                 .focused($focused)
+                .autoFocus(autoFocus)
                 .autocorrectionDisabled()
                 .textInputAutocapitalization(.never)
                 .keyboardType(.webSearch)
@@ -91,11 +92,6 @@ struct FilterableModifier<H: View>: ViewModifier {
                 }
         }
             .interactiveDismissDisabled(focused)
-            .onAppear {
-                if autoFocus {
-                    focused = true
-                }
-            }
     }
 }
 

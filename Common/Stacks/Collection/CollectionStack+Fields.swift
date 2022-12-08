@@ -6,7 +6,6 @@ import Backport
 extension CollectionStack {
     struct Fields {
         @Binding var collection: UserCollection
-        var focus: FocusState<FocusField?>.Binding
     }
 }
 
@@ -16,12 +15,11 @@ extension CollectionStack.Fields: View {
 
         Section {
             TextField("Title", text: $collection.title)
-                .focused(focus, equals: .title)
+                .autoFocus()
                 .font(.headline)
             
             Backport.TextField("Description", text: $collection.description, axis: .vertical)
                 .preventLineBreaks(text: $collection.description)
-                .focused(focus, equals: .description)
                 .backport.lineLimit(2...)
         }
         

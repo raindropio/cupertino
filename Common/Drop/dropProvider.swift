@@ -1,0 +1,56 @@
+import SwiftUI
+import API
+import Backport
+import UniformTypeIdentifiers
+
+public extension View {
+    func dropProvider() -> some View {
+        modifier(DropProviderModifier())
+    }
+}
+
+fileprivate struct DropProviderModifier: ViewModifier {
+    @EnvironmentObject private var dispatch: Dispatcher
+
+    @State private var urls = Set<URL>()
+    @State private var collection = -1
+    
+    func onDrop(_ items: [NSItemProvider], _ collection: Int) {
+        let raindrops = items.filter {
+            $0.hasItemConformingToTypeIdentifier(UTType.raindrop.identifier)
+        }
+        
+        //only raindrops
+        if !raindrops.isEmpty {
+            Task {
+                try? await dispatch(
+                    RaindropsAction.updateMany(
+                        .some(await Raindrop.getData(raindrops)),
+                        .moveTo(collection)
+                    )
+                )
+            }
+        }
+        //other nsitems
+        else {
+            self.collection = collection
+            //make sure to get urls right away, otherwise OS kills nsitems in short time
+            Task {
+                self.urls = await items.getURLs(addTypes)
+            }
+        }
+    }
+    
+    func body(content: Content) -> some View {
+        content
+            .environment(\.drop, onDrop)
+            .sheet(
+                isPresented:
+                    .init { !urls.isEmpty }
+                    set: { if !$0 { urls = .init() } }
+            ) {
+                AddStack(urls, to: collection)
+                    .backport.presentationDetents([.height(200)])
+            }
+    }
+}

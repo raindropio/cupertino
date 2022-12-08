@@ -8,8 +8,9 @@ struct BrowseViewButton: View {
     var find: FindBy
     
     var body: some View {
-        Memorized(find: find, view: collections.state.view(find.collectionId))
-            .disabled(raindrops.state.isEmpty(find))
+        if !raindrops.state.isEmpty(find) {
+            Memorized(find: find, view: collections.state.view(find.collectionId))
+        }
     }
 }
 

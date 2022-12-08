@@ -14,6 +14,7 @@ struct BrowseItems: View {
     var body: some View {
         if r.state.isEmpty(find) {
             Empty(find: find)
+                .dropConsumer(to: find)
         } else {
             Memorized(
                 find: find,
@@ -29,6 +30,7 @@ struct BrowseItems: View {
 extension BrowseItems {
     fileprivate struct Memorized: View {
         @EnvironmentObject private var dispatch: Dispatcher
+        @Environment(\.drop) private var drop
         
         var find: FindBy
         var items: [Raindrop]
@@ -38,6 +40,10 @@ extension BrowseItems {
         
         func reorder(_ id: Raindrop.ID, _ order: Int) {
             dispatch.sync(RaindropsAction.reorder(id, order: order))
+        }
+        
+        func insert(_ order: Int, _ items: [NSItemProvider]) {
+            drop?(items, find.collectionId)
         }
         
         func loadMore() async {
@@ -76,6 +82,8 @@ extension BrowseItems {
                 items,
                 content: render,
                 reorder: sort == .sort ? reorder : nil,
+                insert: insert,
+                insertOf: find.isSearching ? [] : addTypes,
                 loadMore: loadMore
             )
         }
