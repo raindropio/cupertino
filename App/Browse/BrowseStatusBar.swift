@@ -1,6 +1,7 @@
 import SwiftUI
 import UI
 import API
+import Backport
 
 struct BrowseStatusBar: View {
     @Environment(\.editMode) private var editMode
@@ -45,7 +46,7 @@ extension BrowseStatusBar {
                 Text(" bookmarks")
             )
             .lineLimit(1)
-            .font(.headline)
+            .backport.fontWeight(.semibold)
             .foregroundStyle(.secondary)
             .opacity(total > 0 ? 1 : 0)
         }

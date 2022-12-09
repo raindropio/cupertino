@@ -8,7 +8,7 @@ public struct FilterRow: View, Equatable {
         self.filter = filter
     }
     
-    public var body: some View {
+    public var body: some View {        
         Label(filter.title, systemImage: filter.systemImage)
             .lineLimit(1)
             .symbolVariant(.fill)

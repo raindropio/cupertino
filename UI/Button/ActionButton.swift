@@ -62,7 +62,7 @@ extension ActionButton: View {
                 .opacity(loading ? 0 : 1)
             
             if loading {
-                ProgressView().progressViewStyle(.circular)
+                ProgressView()
             }
         }
     }

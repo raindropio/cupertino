@@ -15,6 +15,7 @@ struct SystemCollectionRow: View {
                 CollectionIcon(collection)
             }
                 .badge(collection.count)
+                .listItemTint(collection.color)
         }
     }
 }

@@ -16,7 +16,7 @@ extension CollectionStack.Fields: View {
         Section {
             TextField("Title", text: $collection.title)
                 .autoFocus()
-                .font(.headline)
+                .backport.fontWeight(.semibold)
             
             Backport.TextField("Description", text: $collection.description, axis: .vertical)
                 .preventLineBreaks(text: $collection.description)

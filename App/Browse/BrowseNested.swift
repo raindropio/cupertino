@@ -27,9 +27,6 @@ extension BrowseNested {
                 UserCollectionRow(collection)
             }
                 .dropConsumer(to: collection)
-                .contextMenu {
-                    UserCollectionMenu(collection)
-                }
         }
         
         var body: some View {

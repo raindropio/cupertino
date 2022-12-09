@@ -2,6 +2,7 @@ import SwiftUI
 import API
 import UI
 import Common
+import Backport
 
 extension PreviewScreen {
     struct Action: ViewModifier {
@@ -48,7 +49,7 @@ extension PreviewScreen {
                         .transition(.opacity)
                         .animation(.default, value: saved)
                         .tint(.accentColor)
-                        .font(.headline)
+                        .backport.fontWeight(.semibold)
                         .controlSize(.small)
                 }
             }

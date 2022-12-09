@@ -29,7 +29,7 @@ extension CollectionsList.Empty {
                 ZStack {
                     switch status {
                     case .loading:
-                        ProgressView().progressViewStyle(.circular)
+                        ProgressView()
                         
                     case .error:
                         VStack {

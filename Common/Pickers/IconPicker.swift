@@ -52,7 +52,7 @@ extension IconPicker {
                 .equatable()
                 .overlay {
                     if isLoading {
-                        ProgressView().progressViewStyle(.circular)
+                        ProgressView()
                     }
                 }
                 .animation(.default, value: isLoading)

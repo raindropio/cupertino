@@ -1,6 +1,7 @@
 import SwiftUI
 import API
 import UI
+import Backport
 
 struct CollectionsGroupHeader: View {
     @EnvironmentObject private var dispatch: Dispatcher
@@ -94,7 +95,7 @@ struct CollectionsGroupHeader: View {
                     .padding(.trailing, 16)
                     #endif
             }
-                .font(.headline)
+                .backport.fontWeight(.semibold)
         }
             .buttonStyle(.borderless)
             .menuIndicator(.hidden)

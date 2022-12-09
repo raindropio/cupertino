@@ -18,7 +18,7 @@ extension RaindropStack.Fields: View {
             Backport.TextField("Title", text: $raindrop.title, axis: .vertical)
                 .preventLineBreaks(text: $raindrop.title)
                 .focused($focus, equals: .title)
-                .font(.headline)
+                .backport.fontWeight(.semibold)
                 .lineLimit(5)
                 .onSubmit {
                     focus = nil

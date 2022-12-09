@@ -40,13 +40,13 @@ extension CollectionsTree {
                     } label: {
                         Label("Edit", systemImage: "pencil")
                     }
-                        .tint(.blue)
+                        .tint(.accentColor)
                 }
                 .swipeActions(edge: .leading) {
                     Button {
                         action(.create(.parent(collection.id)))
                     } label: {
-                        Label("Create collection", systemImage: "plus.rectangle.on.folder")
+                        Label("Create collection", systemImage: "plus")
                     }
                         .tint(.indigo)
                 }

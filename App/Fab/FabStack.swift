@@ -80,7 +80,7 @@ struct FabStack: View {
             } else {
                 AddDetect(items) { loading, urls in
                     if loading {
-                        ProgressView().progressViewStyle(.circular)
+                        ProgressView()
                     } else {
                         AddStack(urls, to: collection)
                     }

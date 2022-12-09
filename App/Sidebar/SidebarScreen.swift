@@ -11,7 +11,16 @@ struct SidebarScreen: View {
         CollectionsList(
             selection: $app.sidebarSelection,
             searchable: false
-        )
+        ) {
+            Label {
+                Text("Filters & Tags")
+            } icon: {
+                Image(systemName: "circle.grid.2x2")
+                    .imageScale(.large)
+            }
+                .listItemTint(.indigo)
+                .backport.tag(-2)
+        }
             .modifier(Phone())
             .navigationTitle("Collections")
             .navigationBarTitleDisplayMode(isPhone ? .automatic : .inline)

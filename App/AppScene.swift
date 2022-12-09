@@ -16,6 +16,9 @@ struct AppScene: View {
                 
             case .preview(let raindrop, let mode):
                 PreviewScreen(raindrop: raindrop, mode: mode)
+                
+            case .filters:
+                FiltersScreen()
             }
         }
             .navigationSplitViewConfiguration(sidebarMin: 400)

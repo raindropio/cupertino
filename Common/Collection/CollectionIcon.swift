@@ -1,6 +1,7 @@
 import SwiftUI
 import API
 import UI
+import Backport
 
 struct CollectionIcon<C: CollectionType>: View {
     var cover: URL?
@@ -16,8 +17,7 @@ struct CollectionIcon<C: CollectionType>: View {
         } else {
             Image(systemName: systemImage)
                 .imageScale(.large)
-                .symbolVariant(.fill)
-                .symbolRenderingMode(.hierarchical)
+                .backport.fontWeight(.light)
         }
     }
 }

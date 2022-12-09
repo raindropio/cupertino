@@ -1,4 +1,4 @@
-import Foundation
+import SwiftUI
 
 public struct SystemCollection: CollectionType {
     public var id: Int
@@ -20,6 +20,14 @@ public struct SystemCollection: CollectionType {
         case -1: return "tray"
         case -99: return "trash"
         default: return "folder"
+        }
+    }
+    
+    public var color: Color? {
+        switch id {
+        case -1: return .green
+        case -99: return .secondary
+        default: return nil
         }
     }
     

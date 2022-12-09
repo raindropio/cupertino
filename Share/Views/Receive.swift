@@ -15,7 +15,7 @@ struct Receive: View {
                 Group {
                     //loading
                     if loading {
-                        ProgressView().progressViewStyle(.circular)
+                        ProgressView()
                     }
                     //nothing found
                     else if urls.isEmpty {

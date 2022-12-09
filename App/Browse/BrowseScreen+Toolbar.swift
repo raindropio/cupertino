@@ -13,7 +13,7 @@ extension BrowseScreen {
         func body(content: Content) -> some View {
             if let collection: any CollectionType = c.state.user[find.collectionId] ?? c.state.system[find.collectionId] {
                 content
-                    .modifier(Memorized(collection: collection))
+                    .modifier(Memorized(find: find, collection: collection))
             } else {
                 content
             }
@@ -25,11 +25,25 @@ extension BrowseScreen.Toolbar {
     struct Memorized: ViewModifier {
         @Environment(\.horizontalSizeClass) private var sizeClass
         @Environment(\.editMode) private var editMode
+        
+        var find: FindBy
         var collection: any CollectionType
+        
+        var title: String {
+            collection.title + {
+                if find.filters.count == 1, let filter = find.filters.first {
+                    switch filter.kind {
+                    case .tag(_): return " (by tag)"
+                    default: return " (filtered)"
+                    }
+                }
+                return ""
+            }()
+        }
         
         func body(content: Content) -> some View {
             content
-                .navigationTitle(collection.title)
+                .navigationTitle(title)
                 .toolbar {
                     ToolbarItem(placement: .primaryAction) {
                         if editMode?.wrappedValue != .active {

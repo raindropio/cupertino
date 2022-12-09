@@ -34,7 +34,7 @@ extension BrowseLoadMore {
                             Label("Load more", systemImage: "arrow.clockwise")
                             
                         case .loading:
-                            ProgressView().progressViewStyle(.circular)
+                            ProgressView()
                             
                         case .notFound:
                             Text("That's all folks!")

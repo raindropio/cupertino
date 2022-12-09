@@ -6,6 +6,7 @@ import UI
 enum AppRoute: Hashable {
     case browse(FindBy)
     case preview(Raindrop, PreviewScreen.Mode? = nil)
+    case filters
 }
 
 //MARK: - Service
@@ -47,13 +48,18 @@ extension AppRouter {
 extension AppRouter {
     var sidebarSelection: Int? {
         get {
-            if let screen = path.first, case .browse(let find) = screen {
-                return find.collectionId
+            switch path.first {
+            case .browse(let find): return find.collectionId
+            case .filters: return -2
+            default: return nil
             }
-            return nil
         } set {
             if let collectionId = newValue {
-                path = [.browse(.init(collectionId))]
+                if collectionId == -2 {
+                    path = [.filters]
+                } else {
+                    path = [.browse(.init(collectionId))]
+                }
             } else {
                 path = []
             }

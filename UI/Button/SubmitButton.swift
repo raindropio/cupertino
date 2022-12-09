@@ -1,4 +1,5 @@
 import SwiftUI
+import Backport
 
 public struct SubmitButton<Label>: View where Label: View {
     @Environment(\.onSubmitAction) private var onSubmitAction
@@ -16,14 +17,14 @@ public struct SubmitButton<Label>: View where Label: View {
                     .opacity(submitting ? 0 : 1)
                 
                 if submitting {
-                    ProgressView().progressViewStyle(.circular)
+                    ProgressView()
                 }
             }
                 .frame(minHeight: 32)
                 .frame(maxWidth: .infinity)
         }
             .buttonStyle(.borderedProminent)
-            .font(.headline)
+            .backport.fontWeight(.semibold)
             .clearSection()
     }
 }

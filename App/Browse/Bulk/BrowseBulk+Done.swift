@@ -1,5 +1,6 @@
 import SwiftUI
 import API
+import Backport
 
 extension BrowseBulk {
     struct Done: View {
@@ -11,7 +12,7 @@ extension BrowseBulk {
                     editMode?.wrappedValue = .inactive
                 }
             }
-                .font(.headline)
+                .backport.fontWeight(.semibold)
         }
     }
 }

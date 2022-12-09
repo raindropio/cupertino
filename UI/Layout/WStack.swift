@@ -30,7 +30,9 @@ extension WStack: View {
                 content()
             }
         } else {
-            LazyHStack(alignment: alignment.vertical, spacing: spacingX, content: content)
+            ScrollView(.horizontal, showsIndicators: false) {
+                LazyHStack(alignment: alignment.vertical, spacing: spacingX, content: content)
+            }
                 .clipped()
         }
     }
