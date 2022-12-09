@@ -3,6 +3,7 @@ import API
 
 extension FiltersEditMode {
     enum Action: Hashable, Identifiable {
+        case rename(Filter)
         case merge(Set<Filter>)
         case delete(Set<Filter>)
         

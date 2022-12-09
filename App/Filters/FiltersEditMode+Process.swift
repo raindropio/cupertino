@@ -16,6 +16,8 @@ extension FiltersEditMode.Process {
         NavigationView {
             Group {
                 switch action {
+                case .rename(let filter):
+                    Rename(filter: filter)
                 case .merge(let selection):
                     Merge(selection: selection)
                 case .delete(let selection):
@@ -35,9 +37,41 @@ extension FiltersEditMode.Process {
 }
 
 extension FiltersEditMode.Process {
+    struct Rename: View {
+        @State private var newName: String = ""
+        var filter: Filter
+        
+        private func submit() async {
+            guard newName.isEmpty else { return }
+        }
+        
+        var body: some View {
+            Form {
+                Section {
+                    TextField("New name", text: $newName)
+                        .autoFocus()
+                }
+                
+                SubmitButton("Rename")
+                    .disabled(newName.isEmpty)
+            }
+                .navigationTitle("New name")
+                .onSubmit(submit)
+                .onAppear {
+                    newName = filter.title
+                }
+        }
+    }
+}
+
+extension FiltersEditMode.Process {
     struct Merge: View {
         @State private var newName: String = ""
         var selection: Set<Filter>
+        
+        private func submit() async {
+            guard newName.isEmpty else { return }
+        }
         
         var body: some View {
             Form {
@@ -47,8 +81,10 @@ extension FiltersEditMode.Process {
                 }
                 
                 SubmitButton("Merge \(selection.count) tags")
+                    .disabled(newName.isEmpty)
             }
                 .navigationTitle("New name")
+                .onSubmit(submit)
                 .onAppear {
                     newName = selection.first?.title ?? ""
                 }
