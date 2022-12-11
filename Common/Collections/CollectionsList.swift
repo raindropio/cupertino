@@ -29,19 +29,17 @@ extension CollectionsList: View {
     public var body: some View {
         Backport.List(selection: $selection) {
             if search.isEmpty {
-                if matching != .nestable {
-                    Section {
-                        if matching == .all {
-                            SystemCollectionRow(id: 0)
-                                .backport.tag(0)
-                        }
-                        if matching != .nestable {
-                            SystemCollectionRow(id: -1)
-                                .dropConsumer(to: -1)
-                                .backport.tag(-1)
-                        }
-                        custom?()
+                Section {
+                    if matching == .all {
+                        SystemCollectionRow(id: 0)
+                            .backport.tag(0)
                     }
+                    if matching != .nestable {
+                        SystemCollectionRow(id: -1)
+                            .dropConsumer(to: -1)
+                            .backport.tag(-1)
+                    }
+                    custom?()
                 }
                 
                 CollectionsTree()

@@ -46,26 +46,6 @@ extension AppRouter {
 
 //MARK: - Helpers
 extension AppRouter {
-    var sidebarSelection: Int? {
-        get {
-            switch path.first {
-            case .browse(let find): return find.collectionId
-            case .filters: return -2
-            default: return nil
-            }
-        } set {
-            if let collectionId = newValue {
-                if collectionId == -2 {
-                    path = [.filters]
-                } else {
-                    path = [.browse(.init(collectionId))]
-                }
-            } else {
-                path = []
-            }
-        }
-    }
-    
     func bind(_ find: FindBy) -> Binding<FindBy> {
         .init {
             find
