@@ -80,7 +80,8 @@ public enum FiltersAction: ReduxAction {
     case toggleSimple
     case toggleTags
     case saveConfig
-    
+    case update(Set<Filter>, newName: String)
+    case delete(Set<Filter>)
 }
 
 public enum RecentAction: ReduxAction {

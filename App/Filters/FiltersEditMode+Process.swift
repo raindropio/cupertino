@@ -38,11 +38,16 @@ extension FiltersEditMode.Process {
 
 extension FiltersEditMode.Process {
     struct Rename: View {
+        @Environment(\.dismiss) private var dismiss
+        @EnvironmentObject private var dispatch: Dispatcher
         @State private var newName: String = ""
+        
         var filter: Filter
         
-        private func submit() async {
-            guard newName.isEmpty else { return }
+        private func submit() async throws {
+            guard !newName.isEmpty else { return }
+            try await dispatch(FiltersAction.update([filter], newName: newName))
+            dismiss()
         }
         
         var body: some View {
@@ -66,11 +71,16 @@ extension FiltersEditMode.Process {
 
 extension FiltersEditMode.Process {
     struct Merge: View {
+        @Environment(\.dismiss) private var dismiss
+        @EnvironmentObject private var dispatch: Dispatcher
         @State private var newName: String = ""
+        
         var selection: Set<Filter>
         
-        private func submit() async {
-            guard newName.isEmpty else { return }
+        private func submit() async throws {
+            guard !newName.isEmpty else { return }
+            try await dispatch(FiltersAction.update(selection, newName: newName))
+            dismiss()
         }
         
         var body: some View {
@@ -94,11 +104,21 @@ extension FiltersEditMode.Process {
 
 extension FiltersEditMode.Process {
     struct Delete: View {
+        @Environment(\.dismiss) private var dismiss
+        @EnvironmentObject private var dispatch: Dispatcher
         var selection: Set<Filter>
+        
+        @Sendable
+        private func delete() async {
+            guard !selection.isEmpty else { return }
+            try? await dispatch(FiltersAction.delete(selection))
+            dismiss()
+        }
         
         var body: some View {
             ProgressView()
                 .interactiveDismissDisabled()
+                .task(id: selection, delete)
         }
     }
 }

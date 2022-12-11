@@ -22,6 +22,12 @@ public actor FiltersReducer: Reducer {
             
         case .saveConfig:
             try await saveConfig(state: &state)
+            
+        case .update(let filters, let newName):
+            return try await update(state: &state, filters: filters, newName: newName)
+            
+        case .delete(let filters):
+            return try await delete(state: &state, filters: filters)
         }
         return nil
     }

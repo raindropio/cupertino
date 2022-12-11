@@ -95,3 +95,43 @@ extension Rest {
         }
     }
 }
+
+//MARK: - Tags update
+extension Rest {
+    public func tagsUpdate(_ tags: Set<String>, newName: String) async throws {
+        guard
+            !tags.isEmpty,
+            !newName.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty
+        else {
+            throw RestError.invalid()
+        }
+        
+        let _: ResultResponse = try await fetch.put(
+            "tags",
+            body: TagsUpdateRequest(tags: tags, replace: newName)
+        )
+    }
+    
+    fileprivate struct TagsUpdateRequest: Encodable {
+        var tags: Set<String>
+        var replace: String
+    }
+}
+
+//MARK: - Tags delete
+extension Rest {
+    public func tagsDelete(_ tags: Set<String>) async throws {
+        guard !tags.isEmpty else {
+            throw RestError.invalid()
+        }
+        
+        let _: ResultResponse = try await fetch.delete(
+            "tags",
+            body: TagsDeleteRequest(tags: tags)
+        )
+    }
+    
+    fileprivate struct TagsDeleteRequest: Encodable {
+        var tags: Set<String>
+    }
+}
