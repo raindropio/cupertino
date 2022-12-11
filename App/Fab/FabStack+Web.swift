@@ -21,6 +21,7 @@ extension FabStack {
         
         var body: some View {
             URLField("https://", value: $url)
+                .onSubmit(saveUrl)
                 .autoFocus()
                 .toolbar {
                     ToolbarItem(placement: .confirmationAction) {
@@ -28,7 +29,6 @@ extension FabStack {
                             .disabled(url == nil)
                     }
                 }
-                .onSubmit(saveUrl)
                 .onAppear(perform: onAppear)
         }
     }

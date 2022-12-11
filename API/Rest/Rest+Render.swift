@@ -11,8 +11,7 @@ extension Rest {
         components.path = "/render"
         
         components.queryItems =
-            RenderOption.format().rawValue
-            + RenderOption.dpr().rawValue
+            RenderOption.dpr().rawValue
             + options.flatMap { $0.rawValue }
             + [.init(name: "url", value: url.absoluteString)]
         
@@ -27,8 +26,7 @@ extension Rest {
         components.path = "/favicon/\(host)"
         
         components.queryItems =
-            RenderOption.format().rawValue
-            + RenderOption.dpr().rawValue
+            RenderOption.dpr().rawValue
             + options.flatMap { $0.rawValue }
         
         guard let imageUrl = components.url else { return nil }

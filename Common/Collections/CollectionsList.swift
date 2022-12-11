@@ -69,7 +69,7 @@ extension CollectionsList: View {
             .refreshable {
                 try? await dispatch(CollectionsAction.load)
             }
-            .task(priority: .background) {
+            .reload {
                 try? await dispatch(CollectionsAction.load)
             }
     }

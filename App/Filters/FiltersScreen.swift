@@ -42,6 +42,9 @@ extension FiltersScreen {
                 .refreshable {
                     try? await dispatch(FiltersAction.reload())
                 }
+                .reload {
+                    try? await dispatch(FiltersAction.reload())
+                }
                 .searchable(text: $search, placement: .navigationBarDrawer(displayMode: .always))
                 .onChange(of: search) { _ in selection = .init() }
                 .navigationTitle("Filters & Tags")

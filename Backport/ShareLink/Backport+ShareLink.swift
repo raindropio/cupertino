@@ -16,11 +16,18 @@ public extension Backport where Wrapped == Any {
 
 extension Backport.ShareLink: View {
     public var body: some View {
-        Button { show = true } label: {
-            Image(systemName: "square.and.arrow.up")
-        }
-        .sheet(isPresented: $show) {
-            PlatformShareLink(item: item)
+        if #available(iOS 16, *) {
+            SwiftUI.ShareLink(item: item)
+        } else {
+            Button { show = true } label: {
+                Image(systemName: "square.and.arrow.up")
+            }
+                .sheet(isPresented: $show) {
+                    PlatformShareLink(item: item)
+                        .ignoresSafeArea()
+                        .backport.presentationDetents([.medium, .large])
+                        .backport.presentationDragIndicator(.hidden)
+                }
         }
     }
 }

@@ -2,7 +2,6 @@ import SwiftUI
 import Backport
 
 struct TokenPicker<S: RawRepresentable<String> & Identifiable, SV: View> {
-    @Namespace private var animation
     @Environment(\.dismiss) private var dismiss
     @State private var search = ""
     @State private var focused = true
@@ -83,7 +82,6 @@ extension TokenPicker: View {
         } label: {
             Text(val)
         }
-            .matchedGeometryEffect(id: val, in: animation)
     }
     
     func render(_ suggestion: S) -> some View {
@@ -92,7 +90,6 @@ extension TokenPicker: View {
         } label: {
             suggestions.content(suggestion)
         }
-            .matchedGeometryEffect(id: suggestion.rawValue, in: animation)
     }
     
     @ViewBuilder

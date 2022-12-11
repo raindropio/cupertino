@@ -5,7 +5,7 @@ import AppKit
 #endif
 
 public enum RenderOption {
-    case format(Format = .avif)
+    case format(Format)
     case maxDeviceSize
     case width(Double)
     case height(Double)

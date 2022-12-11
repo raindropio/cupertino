@@ -51,7 +51,7 @@ extension CollectionPicker: View {
                 prompt()
             }
         }
-            .task(priority: .background) {
+            .reload {
                 try? await dispatch(CollectionsAction.load)
             }
     }

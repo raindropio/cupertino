@@ -19,7 +19,7 @@ public struct TagsPicker: View {
             recent: r.state.tags,
             suggestions: f.state.tags().compactMap(Suggestion.init)
         )
-            .task(priority: .background) {
+            .reload {
                 try? await dispatch(FiltersAction.reload())
             }
     }
