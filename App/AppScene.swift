@@ -14,8 +14,8 @@ struct AppScene: View {
             case .browse(let find):
                 BrowseScreen(find: router.bind(find))
                 
-            case .preview(let raindrop, let mode):
-                PreviewScreen(raindrop: raindrop, mode: mode)
+            case .preview(let id, let mode):
+                PreviewScreen(id: id, mode: mode)
                 
             case .filters:
                 FiltersScreen()

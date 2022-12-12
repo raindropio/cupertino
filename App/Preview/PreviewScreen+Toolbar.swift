@@ -12,6 +12,8 @@ extension PreviewScreen {
 
         func body(content: Content) -> some View {
             content
+                .backport.toolbar(page.prefersHiddenToolbars ? .hidden : .automatic, for: .navigationBar, .tabBar, .bottomBar)
+                .animation(.default, value: page.prefersHiddenToolbars)
                 .backport.toolbarTitleMenu {
                     if !page.canGoBack {
                         if mode == .article {

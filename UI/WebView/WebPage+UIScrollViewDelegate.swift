@@ -1,8 +1,7 @@
-#if canImport(UIKit)
 import UIKit
 
-extension RDWebView: UIScrollViewDelegate {
-    func scrollViewWillEndDragging(
+extension WebPage: UIScrollViewDelegate {
+    public func scrollViewWillEndDragging(
         _ scrollView: UIScrollView,
         withVelocity velocity: CGPoint,
         targetContentOffset: UnsafeMutablePointer<CGPoint>
@@ -22,9 +21,8 @@ extension RDWebView: UIScrollViewDelegate {
         }
     }
     
-    func scrollViewShouldScrollToTop(_ scrollView: UIScrollView) -> Bool {
+    public func scrollViewShouldScrollToTop(_ scrollView: UIScrollView) -> Bool {
         prefersHiddenToolbars = false
         return true
     }
 }
-#endif

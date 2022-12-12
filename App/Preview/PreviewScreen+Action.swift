@@ -6,52 +6,38 @@ import Backport
 
 extension PreviewScreen {
     struct Action: ViewModifier {
+        @EnvironmentObject private var dispatch: Dispatcher
+        @State private var edit = false
+        
         @ObservedObject var page: WebPage
         var raindrop: Raindrop
-        
-        @State private var edit = false
-        @State private var create = false
         
         var editButton: some View {
             Button { edit = true } label: {
                 Text("Edit").padding(1)
             }
                 .buttonStyle(.bordered)
-                .popover(isPresented: $edit) {
-                    RaindropStack(raindrop)
-                        .frame(idealWidth: 400, idealHeight: 600)
-                }
+                .tint(.accentColor)
+                .backport.fontWeight(.semibold)
+                .controlSize(.small)
         }
         
-        var createButton: some View {
-            Button{ create = true } label: {
-                Label("Add", systemImage: "star.fill").padding(1)
-                    .labelStyle(.titleAndIcon)
-            }
-                .buttonStyle(.borderedProminent)
-                .popover(isPresented: $create) {
-                    
-                }
-        }
-
         func body(content: Content) -> some View {
-            let saved = !page.canGoBack || page.url == raindrop.link
-            
-            content.toolbar {
+            content
+            .toolbar {
                 ToolbarItem(placement: .primaryAction) {
                     Group {
-                        if saved {
+                        if !page.canGoBack {
                             editButton
-                        } else {
-                            createButton
+                                .transition(.opacity)
                         }
                     }
-                        .transition(.opacity)
-                        .animation(.default, value: saved)
-                        .tint(.accentColor)
-                        .backport.fontWeight(.semibold)
-                        .controlSize(.small)
+                        .animation(.default, value: page.canGoBack)
                 }
+            }
+            .sheet(isPresented: $edit) {
+                RaindropStack(raindrop)
+                    .frame(idealWidth: 400, idealHeight: 600)
             }
         }
     }

@@ -21,8 +21,8 @@ extension Raindrop {
             case .article: return "square.text.square"
             case .image: return "photo"
             case .audio: return "music.note"
-            case .video: return "play.circle"
-            case .document: return "doc"
+            case .video: return "play.square"
+            case .document: return "book"
             }
         }
         

@@ -5,16 +5,13 @@ import Common
 
 struct BrowseList<H: View>: View {
     @EnvironmentObject private var collections: CollectionsStore
-    @EnvironmentObject private var raindrops: RaindropsStore
     @EnvironmentObject private var app: AppRouter
 
     var find: FindBy
     var header: () -> H
     
     func action(_ id: Raindrop.ID) {
-        if let raindrop = raindrops.state.item(id) {
-            app.preview(raindrop)
-        }
+        app.preview(id)
     }
     
     var body: some View {

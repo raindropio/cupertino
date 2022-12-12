@@ -12,21 +12,28 @@ extension FiltersScreen {
         var body: some View {
             Section {} header: {
                 if !items.isEmpty && editMode?.wrappedValue != .active {
-                    WStack {
+                    LazyVGrid(
+                        columns: [.init(
+                            .adaptive(minimum: 140),
+                            spacing: 16
+                        )],
+                        spacing: 16
+                    ) {
                         ForEach(items) { filter in
                             Button {
                                 app.browse(filter)
                             } label: {
                                 FilterRow(filter)
+                                    .frame(height: 32)
+                                    .frame(maxWidth: .infinity, alignment: .leading)
                             }
                                 .tint(filter.color.opacity(0.7))
                                 .foregroundStyle(filter.color)
                         }
                     }
-                        .id(items.count) //wstack baggy
+                        .id(items.count)
                         .font(.body)
                         .buttonStyle(.bordered)
-                        .buttonBorderShape(.capsule)
                         .textCase(.none)
                         .clearSection()
                         .padding(.top, 8)

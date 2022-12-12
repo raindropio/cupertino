@@ -30,15 +30,10 @@ extension BrowseScreen.Toolbar {
         var collection: any CollectionType
         
         var title: String {
-            collection.title + {
-                if find.filters.count == 1, let filter = find.filters.first {
-                    switch filter.kind {
-                    case .tag(_): return " (by tag)"
-                    default: return " (filtered)"
-                    }
-                }
-                return ""
-            }()
+            if find.collectionId == 0, find.isSearching {
+                return "Search"
+            }
+            return collection.title
         }
         
         func body(content: Content) -> some View {

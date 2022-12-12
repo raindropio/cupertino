@@ -1,85 +1,70 @@
 import SwiftUI
 import WebKit
 
-public class WebPage: ObservableObject {
-    let webView = RDWebView()
-    
-    @Published private var _url: URL?
-    public var url: URL? {
-        get { _url }
-        set {
-            if let url = newValue {
-                webView.load(.init(url: url))
-            }
+public class WebPage: NSObject, ObservableObject {
+    weak var view: WKWebView? {
+        didSet {
+            oldValue?.navigationDelegate = nil
+            oldValue?.uiDelegate = nil
+            oldValue?.scrollView.delegate = nil
+            view?.navigationDelegate = self
+            view?.uiDelegate = self
+            view?.scrollView.delegate = self
         }
     }
     
-    //nav
-    @Published public var isLoading = false
+    @Published public var wait = true
     @Published public var progress: Double = 0
     @Published public var error: Error?
+    @Published public var title: String?
+    @Published public var current: URL?
     @Published public var canGoBack = false
     @Published public var canGoForward = false
-    
-    //some
-    @Published public var title: String?
-    
-    //appearance
     @Published public var prefersHiddenToolbars = false
-    @Published public var underPageBackgroundColor: UIColor = .clear
+
+    func load(_ url: URL?) {
+        Task {
+            await MainActor.run {
+                self.wait = true
+            }
+        }
+        view?.load(.init(url: url ?? URL(string: "about:blank")!))
+    }
     
-    public var colorScheme: ColorScheme? {
-        //do not set any color scheme for file viewer
-        switch webView.url?.pathExtension {
-        case "pdf": return nil
-        default: break
+    @MainActor
+    func changed() {
+        current = view?.url
+        
+        //title
+        if let title = view?.title, (!title.isEmpty || error != nil) {
+            self.title = title
         }
         
-        return webView.underPageBackgroundColor.isLight ? ColorScheme.light : ColorScheme.dark
-    }
-    
-    public init(_ url: URL? = nil) {
-        if let url {
-            webView.load(.init(url: url))
+        //navigation
+        progress = view?.estimatedProgress ?? 0
+        canGoBack = view?.canGoBack ?? false
+        canGoForward = view?.canGoForward ?? false
+        
+        //page color
+        let pageStyle: UIUserInterfaceStyle = (view?.underPageBackgroundColor.isLight ?? false) ? .light : .dark
+        
+        //refresh control
+        view?.scrollView.refreshControl?.overrideUserInterfaceStyle = pageStyle
+        if view?.isLoading == false {
+            view?.scrollView.refreshControl?.endRefreshing()
         }
         
-        webView.publisher(for: \.url)
-            .assign(to: &$_url)
+        //hidden toolbars
+        if ((view?.scrollView.contentOffset.y ?? 0) <= 0), prefersHiddenToolbars == true {
+            prefersHiddenToolbars = false
+        }
         
-        webView.publisher(for: \.isLoading)
-            .assign(to: &$isLoading)
-        
-        webView.publisher(for: \.estimatedProgress)
-            .assign(to: &$progress)
-        
-        webView.publisher(for: \.error)
-            .assign(to: &$error)
-        
-        webView.publisher(for: \.canGoBack)
-            .assign(to: &$canGoBack)
-        
-        webView.publisher(for: \.canGoForward)
-            .assign(to: &$canGoForward)
-        
-        webView.publisher(for: \.title)
-            .assign(to: &$title)
-        
-        webView.publisher(for: \.prefersHiddenToolbars)
-            .assign(to: &$prefersHiddenToolbars)
-        
-        webView.publisher(for: \.underPageBackgroundColor)
-            .assign(to: &$underPageBackgroundColor)
-    }
-    
-    public func reload() {
-        webView.reload()
-    }
-    
-    public func goBack() {
-        webView.goBack()
-    }
-    
-    public func goForward() {
-        webView.goForward()
+        //fix white splash
+        if wait {
+            let hidden = !(view?.canGoBack ?? false) && (view?.estimatedProgress ?? 0) < 0.5
+            if !hidden {
+                wait = false
+            }
+        }
     }
 }

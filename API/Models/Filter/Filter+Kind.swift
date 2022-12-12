@@ -49,9 +49,9 @@ extension Filter {
             case .important: return "heart"
             case .type(let type): return type.systemImage
             case .created(_): return "calendar"
-            case .highlights: return "pencil.tip.crop.circle"
-            case .broken: return "exclamationmark.triangle"
-            case .duplicate: return "square.on.square"
+            case .highlights: return "eraser"
+            case .broken: return "exclamationmark.square"
+            case .duplicate: return "square.2.layers.3d.top.filled"
             case .notag: return "circlebadge.2"
             case .file: return "doc"
             case .tag(_): return "number"
