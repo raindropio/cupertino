@@ -1,70 +1,69 @@
 import SwiftUI
 import WebKit
+import Combine
 
 public class WebPage: NSObject, ObservableObject {
+    private var cancellable: AnyCancellable?
+    
     weak var view: WKWebView? {
         didSet {
+            guard oldValue != view else { return }
+            
             oldValue?.navigationDelegate = nil
             oldValue?.uiDelegate = nil
             oldValue?.scrollView.delegate = nil
-            view?.navigationDelegate = self
-            view?.uiDelegate = self
-            view?.scrollView.delegate = self
+            
+            cancellable = nil
+            if let view {
+                view.navigationDelegate = self
+                view.uiDelegate = self
+                view.scrollView.delegate = self
+                
+                cancellable = Publishers.MergeMany(
+                    view.publisher(for: \.estimatedProgress).removeDuplicates().map({ _ in }).eraseToAnyPublisher(),
+                    view.publisher(for: \.isLoading).removeDuplicates().map({ _ in }).eraseToAnyPublisher(),
+                    view.publisher(for: \.canGoBack).removeDuplicates().map({ _ in }).eraseToAnyPublisher(),
+                    view.publisher(for: \.canGoForward).removeDuplicates().map({ _ in }).eraseToAnyPublisher(),
+                    view.publisher(for: \.title).removeDuplicates().map({ _ in }).eraseToAnyPublisher()
+                )
+                    .sink(receiveValue: changed)
+            }
         }
     }
     
-    @Published public var wait = true
-    @Published public var progress: Double = 0
+    public var url: URL? {
+        get {
+            view?.url
+        }
+        set {
+            guard newValue != url else { return }
+            view?.load(.init(url: newValue ?? URL(string: "about:blank")!))
+        }
+    }
+    
     @Published public var error: Error?
-    @Published public var title: String?
-    @Published public var current: URL?
-    @Published public var canGoBack = false
-    @Published public var canGoForward = false
     @Published public var prefersHiddenToolbars = false
-
-    func load(_ url: URL?) {
+    
+    private func changed() {
         Task {
             await MainActor.run {
-                self.wait = true
+                objectWillChange.send()
             }
         }
-        view?.load(.init(url: url ?? URL(string: "about:blank")!))
+    }
+}
+
+extension WebPage {
+    public var progress: Double { view?.estimatedProgress ?? 0 }
+    public var canGoBack: Bool { view?.canGoBack ?? false }
+    public var canGoForward: Bool { view?.canGoForward ?? false }
+    public var title: String? { view?.title }
+    public var rendered: Bool {
+        //TODO: better logic
+        canGoBack || canGoForward || progress >= 0.5
     }
     
-    @MainActor
-    func changed() {
-        current = view?.url
-        
-        //title
-        if let title = view?.title, (!title.isEmpty || error != nil) {
-            self.title = title
-        }
-        
-        //navigation
-        progress = view?.estimatedProgress ?? 0
-        canGoBack = view?.canGoBack ?? false
-        canGoForward = view?.canGoForward ?? false
-        
-        //page color
-        let pageStyle: UIUserInterfaceStyle = (view?.underPageBackgroundColor.isLight ?? false) ? .light : .dark
-        
-        //refresh control
-        view?.scrollView.refreshControl?.overrideUserInterfaceStyle = pageStyle
-        if view?.isLoading == false {
-            view?.scrollView.refreshControl?.endRefreshing()
-        }
-        
-        //hidden toolbars
-        if ((view?.scrollView.contentOffset.y ?? 0) <= 0), prefersHiddenToolbars == true {
-            prefersHiddenToolbars = false
-        }
-        
-        //fix white splash
-        if wait {
-            let hidden = !(view?.canGoBack ?? false) && (view?.estimatedProgress ?? 0) < 0.5
-            if !hidden {
-                wait = false
-            }
-        }
-    }
+    public func reload() { view?.reload() }
+    public func goBack() { view?.goBack() }
+    public func goForward() { view?.goForward() }
 }

@@ -1,55 +1,69 @@
 import SwiftUI
 import API
 import UI
+import Backport
 
 extension PreviewScreen {
-    struct Toolbar: ViewModifier {
-        @ObservedObject var page: WebPage
-        @Binding var mode: Mode
-        var raindrop: Raindrop
+    struct Toolbar {
+        @Environment(\.horizontalSizeClass) private var horizontalSizeClass
+        @Environment(\.verticalSizeClass) private var verticalSizeClass
         
-        @State private var showOptions = false
+        @ObservedObject var page: WebPage
+        var raindrop: Raindrop?
+    }
+}
 
-        func body(content: Content) -> some View {
-            content
-                .backport.toolbar(page.prefersHiddenToolbars ? .hidden : .automatic, for: .navigationBar, .tabBar, .bottomBar)
-                .animation(.default, value: page.prefersHiddenToolbars)
-                .backport.toolbarTitleMenu {
-                    if !page.canGoBack {
-                        if mode == .article {
-                            Button {
-                                showOptions = true
-                            } label: {
-                                Label("Font & style", systemImage: "textformat.alt")
-                            }
-                            
-                            Divider()
-                        } else if raindrop.type == .link {
-                            Button {
-                                mode = .article
-                            } label: {
-                                Label("Show Reader", systemImage: "eyeglasses")
-                            }
-                        }
-                        
-                        if mode != .cache, raindrop.file == nil {
-                            Button {
-                                mode = .cache
-                            } label: {
-                                Label("Show permanent copy", systemImage: "clock.arrow.circlepath")
-                            }
-                        }
-                        
-                        if mode != .raw {
-                            Button {
-                                mode = .raw
-                            } label: {
-                                Label("Show original", systemImage: "safari")
-                            }
-                        }
+extension PreviewScreen.Toolbar {
+    private var portrait: Bool {
+        verticalSizeClass == .regular && horizontalSizeClass == .compact
+    }
+            
+    private var toolbarItemPlacement: ToolbarItemPlacement {
+        portrait ? .bottomBar : .automatic
+    }
+    
+    private var url: URL? {
+        (page.canGoBack ? page.url : nil) ?? raindrop?.link
+    }
+}
+
+extension PreviewScreen.Toolbar: ViewModifier {
+    func body(content: Content) -> some View {
+        content
+        .toolbar {
+            ToolbarItemGroup(placement: toolbarItemPlacement) {
+                Button(action: page.goBack) {
+                    Image(systemName: "chevron.left")
+                }
+                    .disabled(!page.canGoBack)
+                
+                Spacer()
+            }
+            
+            ToolbarItemGroup(placement: toolbarItemPlacement) {
+                Button(action: page.goForward) {
+                    Image(systemName: "chevron.right")
+                }
+                    .disabled(!page.canGoForward)
+                
+                Spacer()
+            }
+            
+            ToolbarItemGroup(placement: toolbarItemPlacement) {
+                if let url {
+                    Backport.ShareLink(item: url)
+                    
+                    Spacer()
+                }
+            }
+            
+            ToolbarItem(placement: toolbarItemPlacement) {
+                if let url {
+                    Link(destination: url) {
+                        Image(systemName: "safari")
                     }
                 }
-                .sheet(isPresented: $showOptions, content: Options.init)
+            }
         }
     }
 }

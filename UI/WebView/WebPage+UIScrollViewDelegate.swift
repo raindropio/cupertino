@@ -1,6 +1,12 @@
 import UIKit
 
 extension WebPage: UIScrollViewDelegate {
+    public func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
+        if scrollView.contentOffset.y <= 0, prefersHiddenToolbars == true {
+            prefersHiddenToolbars = false
+        }
+    }
+    
     public func scrollViewWillEndDragging(
         _ scrollView: UIScrollView,
         withVelocity velocity: CGPoint,

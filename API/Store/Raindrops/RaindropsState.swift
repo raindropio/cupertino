@@ -14,4 +14,12 @@ extension RaindropsState {
     public func item(_ id: Raindrop.ID) -> Raindrop? {
         items[id]
     }
+    
+    public func item(_ url: URL) -> Raindrop? {
+        items.first {
+            $0.value.link == url
+        }.map {
+            $0.value
+        }
+    }
 }

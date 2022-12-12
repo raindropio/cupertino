@@ -12,9 +12,13 @@ public struct WebView {
 }
 
 extension WebView: View {
-    var id: String {
+    private var id: String {
         guard let url else { return "" }
         return "\(url.host ?? "")\(url.path)"
+    }
+    
+    private var show: Bool {
+        page.rendered && page.error == nil
     }
     
     public var body: some View {
@@ -22,7 +26,7 @@ extension WebView: View {
             //recreate webview when url change (fragment is ignored)
             .id(id)
             .ignoresSafeArea()
-            .opacity(page.wait ? 0 : 1)
+            .opacity(show ? 1 : 0)
             //progress bar
             .overlay(alignment: .topLeading) {
                 ProgressBar(value: page.progress)
@@ -30,10 +34,10 @@ extension WebView: View {
             //fix transparent navigation bar background
             .overlay(alignment: .topLeading) {
                 Color.clear.overlay(.thickMaterial).overlay(.background.opacity(0.4)).frame(height: 0)
-                    .opacity(page.wait ? 0 : 1)
+                    .opacity(show ? 1 : 0)
             }
             //animation
-            .animation(.default, value: page.wait)
+            .animation(.default, value: show)
             //allow back webview navigation
             .popGesture(!page.canGoBack)
     }
@@ -52,7 +56,7 @@ extension WebView {
             //create webview
             let view = NativeWebView()
             context.coordinator.view = view
-            context.coordinator.load(url)
+            context.coordinator.url = url
             
             //behaviour
             view.allowsBackForwardNavigationGestures = true

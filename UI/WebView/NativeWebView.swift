@@ -1,6 +1,9 @@
 import WebKit
+import Combine
 
 class NativeWebView: WKWebView {
+    private var cancelables = Set<AnyCancellable>()
+
     override init(frame: CGRect, configuration: WKWebViewConfiguration) {
         //reuse cookies
         let cookies = HTTPCookieStorage.shared.cookies ?? []
@@ -15,6 +18,10 @@ class NativeWebView: WKWebView {
         #if canImport(UIKit)
         scrollView.refreshControl = .init()
         scrollView.refreshControl?.addTarget(self, action: #selector(self.reload), for: .valueChanged)
+        
+        publisher(for: \.underPageBackgroundColor)
+            .sink { [weak self] in self?.scrollView.refreshControl?.overrideUserInterfaceStyle = ($0?.isLight ?? true) ? .light : .dark }
+            .store(in: &cancelables)
         #endif
     }
     

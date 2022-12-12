@@ -7,36 +7,46 @@ import Backport
 extension PreviewScreen {
     struct Action: ViewModifier {
         @EnvironmentObject private var dispatch: Dispatcher
-        @State private var edit = false
+        @State private var show = false
         
         @ObservedObject var page: WebPage
-        var raindrop: Raindrop
+        var raindrop: Raindrop?
         
-        var editButton: some View {
-            Button { edit = true } label: {
-                Text("Edit").padding(1)
+        func actionButton() -> some View {
+            Group {
+                if raindrop != nil {
+                    Button("Edit") { show = true }
+                        .buttonStyle(.bordered)
+
+                } else {
+                    Button { show = true } label: {
+                        Label("Add", systemImage: "plus")
+                    }
+                        .buttonStyle(.borderedProminent)
+                }
             }
-                .buttonStyle(.bordered)
+                .labelStyle(.titleAndIcon)
+                .controlSize(.small)
                 .tint(.accentColor)
                 .backport.fontWeight(.semibold)
-                .controlSize(.small)
         }
         
         func body(content: Content) -> some View {
             content
             .toolbar {
-                ToolbarItem(placement: .primaryAction) {
-                    Group {
-                        if !page.canGoBack {
-                            editButton
-                                .transition(.opacity)
-                        }
-                    }
-                        .animation(.default, value: page.canGoBack)
-                }
+                ToolbarItem(
+                    placement: .primaryAction,
+                    content: actionButton
+                )
             }
-            .sheet(isPresented: $edit) {
-                RaindropStack(raindrop)
+            .sheet(isPresented: $show) {
+                Group {
+                    if let raindrop {
+                        RaindropStack(raindrop)
+                    } else if let url = page.url {
+                        RaindropStack(url)
+                    }
+                }
                     .frame(idealWidth: 400, idealHeight: 600)
             }
         }

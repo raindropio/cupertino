@@ -2,45 +2,52 @@ import SwiftUI
 import API
 import UI
 
-struct PreviewScreen: View {
+struct PreviewScreen {
     @EnvironmentObject private var r: RaindropsStore
+    @StateObject private var page = WebPage()
+    @AppStorage(ReaderOptions.StorageKey) private var reader = ReaderOptions()
 
     var id: Raindrop.ID
     var mode: Mode?
+}
 
-    var body: some View {
-        if let raindrop = r.state.item(id) {
-            Memorized(
-                raindrop: raindrop,
-                mode: mode ?? .init(raindrop)
-            )
+extension PreviewScreen {
+    private var raindrop: Raindrop? {
+        if !page.canGoBack {
+            return r.state.item(id)
+        } else if let url = page.url {
+            return r.state.item(url)
+        }
+        return nil
+    }
+    
+    private var startMode: Mode {
+        if let mode { return mode }
+        if let raindrop = r.state.item(id) { return .init(raindrop) }
+        return .raw
+    }
+    
+    private var startURL: URL? {
+        guard let raindrop = r.state.item(id) else { return nil }
+        
+        switch startMode {
+        case .article: return Rest.previewArticle(raindrop.link, options: reader)
+        case .embed: return Rest.previewEmbed(raindrop.link)
+        case .cache: return Rest.raindropCacheLink(raindrop.id)
+        case .raw: return raindrop.link
         }
     }
 }
 
-extension PreviewScreen {
-    struct Memorized: View {
-        @AppStorage(ReaderOptions.StorageKey) private var options = ReaderOptions()
-        @StateObject private var page = WebPage()
-
-        var raindrop: Raindrop
-        @State var mode: Mode
-
-        var body: some View {
-            let url: URL = {
-                switch mode {
-                case .article: return Rest.previewArticle(raindrop.link, options: options)
-                case .embed: return Rest.previewEmbed(raindrop.link)
-                case .cache: return Rest.raindropCacheLink(raindrop.id)
-                case .raw: return raindrop.link
-                }
-            }()
-
-            WebView(page, url: url)
-                .backport.toolbarRole(.editor)
-                .modifier(Title(page: page, mode: mode, raindrop: raindrop))
-                .modifier(Action(page: page, raindrop: raindrop))
-                .modifier(Toolbar(page: page, mode: $mode, raindrop: raindrop))
-        }
+extension PreviewScreen: View {
+    var body: some View {
+        WebView(page, url: startURL)
+            .backport.toolbarRole(.editor)
+            .backport.toolbar(page.prefersHiddenToolbars ? .hidden : .automatic, for: .navigationBar, .tabBar, .bottomBar)
+            .animation(.default, value: page.prefersHiddenToolbars)
+            .modifier(PageError(page: page))
+            .modifier(Action(page: page, raindrop: raindrop))
+            .modifier(Title(page: page, mode: mode ?? startMode, raindrop: raindrop))
+            .modifier(Toolbar(page: page, raindrop: raindrop))
     }
 }

@@ -2,8 +2,8 @@ import SwiftUI
 import API
 import UI
 
-extension PreviewScreen {
-    struct Options: View {
+extension PreviewScreen.Title {
+    struct Reader: View {
         @AppStorage(ReaderOptions.StorageKey) private var options = ReaderOptions()
 
         var body: some View {

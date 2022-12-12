@@ -32,15 +32,23 @@ extension BrowseList.Menus {
         
         var body: some View {
             if items.count == 1, let item = items.first {
-                Link(destination: item.link) {
-                    Label("Open", systemImage: "safari")
+                Section {
+                    Link(destination: item.link) {
+                        Label("Open", systemImage: "safari")
+                    }
+                    
+                    Button {
+                        app.preview(item.id)
+                    } label: {
+                        Label("Preview", systemImage: "eyeglasses")
+                    }
+                    
+                    Button {
+                        app.preview(item.id, .cache)
+                    } label: {
+                        Label("Permanent copy", systemImage: "clock.arrow.circlepath")
+                    }
                 }
-                
-//                Button {
-//
-//                } label: {
-//                    Label("Preview", systemImage: "eyeglasses")
-//                }
                 
                 Button {
                     withAnimation {
