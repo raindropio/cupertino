@@ -49,7 +49,7 @@ extension Filter {
             case .important: return "heart"
             case .type(let type): return type.systemImage
             case .created(_): return "calendar"
-            case .highlights: return "eraser"
+            case .highlights: return "pencil.tip.crop.circle"
             case .broken: return "exclamationmark.square"
             case .duplicate: return "square.2.layers.3d.top.filled"
             case .notag: return "circlebadge.2"

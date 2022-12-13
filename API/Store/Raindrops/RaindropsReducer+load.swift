@@ -42,7 +42,7 @@ extension RaindropsReducer {
         let oldIds = state[find].ids
         let newIds = items.map(\.id)
 
-        if oldIds.count < newIds.count || oldIds[0..<newIds.count] != newIds[0..<newIds.count] {
+        if state[find].total != total || oldIds.count < newIds.count || oldIds[0..<newIds.count] != newIds[0..<newIds.count] {
             state[find].ids = newIds
             state[find].page = 0
         }

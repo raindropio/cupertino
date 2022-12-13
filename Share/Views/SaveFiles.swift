@@ -11,6 +11,7 @@ struct SaveFiles: View {
         Group {
             if let collection {
                 AddStack(urls, to: collection)
+                    .backport.presentationDetents([.medium])
             } else {
                 NavigationView {
                     CollectionsList(selection: $collection, matching: .insertable, searchable: true)

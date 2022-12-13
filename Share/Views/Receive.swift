@@ -20,7 +20,6 @@ struct Receive: View {
                     //nothing found
                     else if urls.isEmpty {
                         NothingFound()
-                            .backport.presentationDetents([.medium])
                     }
                     //web url
                     else if let first = urls.first, !first.isFileURL {
@@ -29,7 +28,6 @@ struct Receive: View {
                     //files
                     else {
                         SaveFiles(urls: urls)
-                            .backport.presentationDetents([.medium])
                     }
                 }
                     .presentationUndimmed(.medium)

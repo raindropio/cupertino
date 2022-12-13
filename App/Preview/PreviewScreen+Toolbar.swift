@@ -50,6 +50,14 @@ extension PreviewScreen.Toolbar: ViewModifier {
             }
             
             ToolbarItemGroup(placement: toolbarItemPlacement) {
+                Button {} label: {
+                    Image(systemName: Filter.Kind.highlights.systemImage)
+                }
+                
+                Spacer()
+            }
+            
+            ToolbarItemGroup(placement: toolbarItemPlacement) {
                 if let url {
                     Backport.ShareLink(item: url)
                     

@@ -24,13 +24,13 @@ extension Array where Element == NSItemProvider {
             }
             //detect url's from text
             else if matching.contains(.url),
-                let text: String = try? await item.loadObject(.text),
+                let text: String = await item.getItem(.text),
                 !URL.detect(from: text).isEmpty {
                 URL.detect(from: text).forEach { urls.insert($0) }
             }
             //image data
             else if matching.contains(.image),
-                let image: UIImage = await item.getItem(UTType.image),
+                let image: UIImage = await item.getItem(.image),
                 let url = image.pngData()?.tempFile(item.suggestedName, ext: "png"){
                 urls.insert(url)
             }
