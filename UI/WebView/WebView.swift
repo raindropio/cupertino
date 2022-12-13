@@ -33,15 +33,13 @@ extension WebView: View {
             }
             //fix transparent navigation bar background
             .overlay(alignment: .topLeading) {
-                Group {
-                    if let background = page.toolbarBackground {
-                        Rectangle().fill(.bar).overlay(background)
-                    } else {
-                        Color.clear.overlay(.bar)
-                    }
-                }
+                Color.white
+                    .overlay(
+                        .regularMaterial
+                        .opacity(show && (page.toolbarBackground == nil || page.prefersHiddenToolbars) ? 1 : 0)
+                    )
+                    .overlay(page.toolbarBackground)
                     .frame(height: 0)
-                    .opacity(show ? 1 : 0)
             }
             //animation
             .animation(.default, value: show)
