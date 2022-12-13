@@ -12,7 +12,8 @@ extension PreviewScreen {
         var raindrop: Raindrop?
 
         func body(content: Content) -> some View {
-            content.overlay {
+            content
+            .overlay {
                 Group {
                     if let error = page.error {
                         EmptyState("Error", message: error.localizedDescription) {

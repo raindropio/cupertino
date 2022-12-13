@@ -3,14 +3,17 @@ import SwiftUI
 
 extension ReaderOptions {
     public enum Theme: String, CaseIterable, Codable {
+        case system = ""
         case day
         case night
         case sunset
         
-        public var colorScheme: ColorScheme {
+        public var systemImage: String {
             switch self {
-            case .day, .sunset: return .light
-            case .night: return .dark
+            case .system: return "circle.lefthalf.filled"
+            case .day: return "sun.min"
+            case .night: return "moon"
+            case .sunset: return "sun.and.horizon"
             }
         }
     }

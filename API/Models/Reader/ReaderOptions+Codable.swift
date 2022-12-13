@@ -11,15 +11,13 @@ extension ReaderOptions: Codable {
     public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         
-        solidBackground = try container.decode(type(of: solidBackground), forKey: .solidBackground)
-        theme = try? container.decode(type(of: theme), forKey: .theme)
-        fontFamily = try? container.decode(type(of: fontFamily), forKey: .fontFamily)
+        theme = (try? container.decode(type(of: theme), forKey: .theme)) ?? .system
+        fontFamily = (try? container.decode(type(of: fontFamily), forKey: .fontFamily)) ?? .sans
         fontSize = try container.decode(type(of: fontSize), forKey: .fontSize)
     }
     
     public func encode(to encoder: Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
-        try container.encode(solidBackground, forKey: .solidBackground)
         try container.encode(theme, forKey: .theme)
         try container.encode(fontFamily, forKey: .fontFamily)
         try container.encode(fontSize, forKey: .fontSize)

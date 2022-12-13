@@ -35,19 +35,11 @@ extension PreviewScreen.Title: ViewModifier {
         .navigationBarTitleDisplayMode(.inline)
         .backport.toolbarTitleMenu {
             if !page.canGoBack {
-                if mode == .article {
-                    Button {
-                        showOptions = true
-                    } label: {
-                        Label("Font & style", systemImage: "textformat.alt")
-                    }
-                    
-                    Divider()
-                } else if raindrop?.type == .link {
+                if mode != .article, raindrop?.type == .link {
                     Button {
                         app.replace(.preview(raindrop!.id, .article))
                     } label: {
-                        Label("Show Reader", systemImage: "eyeglasses")
+                        Label("Show reader", systemImage: "eyeglasses")
                     }
                 }
                 
@@ -68,6 +60,17 @@ extension PreviewScreen.Title: ViewModifier {
                 }
             }
         }
-        .sheet(isPresented: $showOptions, content: Reader.init)
+        .toolbar {
+            ToolbarItem {
+                if !page.canGoBack, mode == .article {
+                    Button {
+                        showOptions = true
+                    } label: {
+                        Label("Font & style", systemImage: "textformat.alt")
+                    }
+                        .popover(isPresented: $showOptions, content: Reader.init)
+                }
+            }
+        }
     }
 }
