@@ -22,6 +22,7 @@ extension PreviewScreen.Title {
         switch mode {
         case .article: return "Reader"
         case .cache: return "Permanent copy"
+        case .embed: return (raindrop?.type ?? .link).single
         default: return raindrop?.link.host ?? ""
         }
     }

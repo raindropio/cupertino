@@ -5,12 +5,6 @@ class NativeWebView: WKWebView {
     private var cancelables = Set<AnyCancellable>()
 
     override init(frame: CGRect, configuration: WKWebViewConfiguration) {
-        //reuse cookies
-        let cookies = HTTPCookieStorage.shared.cookies ?? []
-        for cookie in cookies {
-            configuration.websiteDataStore.httpCookieStore.setCookie(cookie)
-        }
-        
         //init
         super.init(frame: frame, configuration: configuration)
         

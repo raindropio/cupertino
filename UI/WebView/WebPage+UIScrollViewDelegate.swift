@@ -2,7 +2,7 @@ import UIKit
 
 extension WebPage: UIScrollViewDelegate {
     public func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
-        if scrollView.contentOffset.y <= 0, prefersHiddenToolbars == true {
+        if prefersHiddenToolbars == true, scrollView.contentOffset.y <= 0 {
             prefersHiddenToolbars = false
         }
     }

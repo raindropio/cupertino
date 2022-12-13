@@ -3,7 +3,7 @@ import Foundation
 extension Rest {
     public static func previewEmbed(_ url: URL) -> URL {
         .init(
-            string: "embed/\(url.absoluteString.base64 ?? "")",
+            string: "embed/\(url.absoluteString.base64 ?? "")?platform=ios",
             relativeTo: base.preview
         )!
     }

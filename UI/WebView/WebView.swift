@@ -53,8 +53,18 @@ extension WebView {
         }
         
         func makeUIView(context: Context) -> NativeWebView {
+            //configuration
+            let configuration = WKWebViewConfiguration()
+            configuration.mediaTypesRequiringUserActionForPlayback = .audio
+            
+            //reuse cookies
+            let cookies = HTTPCookieStorage.shared.cookies ?? []
+            for cookie in cookies {
+                configuration.websiteDataStore.httpCookieStore.setCookie(cookie)
+            }
+            
             //create webview
-            let view = NativeWebView()
+            let view = NativeWebView(frame: .zero, configuration: configuration)
             context.coordinator.view = view
             context.coordinator.url = url
             
@@ -68,10 +78,8 @@ extension WebView {
         
         func updateUIView(_ view: NativeWebView, context: Context) {
             //update url fragment
-            if view.url?.fragment != url?.fragment, view.url?.path == url?.path {
-                Task {
-                    try? await view.evaluateJavaScript("location.hash=\"\(url?.fragment ?? "")\"")
-                }
+            if view.url?.fragment != url?.fragment, view.url?.path == url?.path, let string = url?.absoluteString {
+                view.evaluateJavaScript("window.location.replace('\(string)'); true")
             }
         }
         

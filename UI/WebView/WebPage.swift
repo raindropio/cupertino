@@ -37,7 +37,10 @@ public class WebPage: NSObject, ObservableObject {
         }
         set {
             guard newValue != url else { return }
-            view?.load(.init(url: newValue ?? URL(string: "about:blank")!))
+            view?.load(.init(
+                url: newValue ?? URL(string: "about:blank")!,
+                cachePolicy: .reloadRevalidatingCacheData
+            ))
         }
     }
     

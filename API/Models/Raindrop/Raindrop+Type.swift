@@ -15,6 +15,17 @@ extension Raindrop {
             }
         }
         
+        public var single: String {
+            switch self {
+            case .link: return "Link"
+            case .article: return "Article"
+            case .image: return "Image"
+            case .video: return "Video"
+            case .audio: return "Audio"
+            case .document: return "Document"
+            }
+        }
+        
         public var systemImage: String {
             switch self {
             case .link: return "link"

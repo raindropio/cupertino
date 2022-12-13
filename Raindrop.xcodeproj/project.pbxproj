@@ -70,6 +70,7 @@
 		76D880E62930E1FB00D43AD9 /* Share.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = 76D880DC2930E1FB00D43AD9 /* Share.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		76ECFDFC2947727000DF15C9 /* PreviewScreen+Toolbar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76ECFDFB2947727000DF15C9 /* PreviewScreen+Toolbar.swift */; };
 		76ECFDFE2947848500DF15C9 /* PreviewScreen+PageError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76ECFDFD2947848500DF15C9 /* PreviewScreen+PageError.swift */; };
+		76ECFE002948793B00DF15C9 /* PreviewScreen+CacheError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76ECFDFF2948793B00DF15C9 /* PreviewScreen+CacheError.swift */; };
 		76F05F0C293F89EF003CCD75 /* fab.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76F05F0B293F89EF003CCD75 /* fab.swift */; };
 		76F05F0E293F8A9E003CCD75 /* FabStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76F05F0D293F8A9E003CCD75 /* FabStack.swift */; };
 		76F05F12293F95DC003CCD75 /* FabStack+Web.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76F05F11293F95DC003CCD75 /* FabStack+Web.swift */; };
@@ -169,6 +170,7 @@
 		76D880E32930E1FB00D43AD9 /* Share.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Share.plist; sourceTree = "<group>"; };
 		76ECFDFB2947727000DF15C9 /* PreviewScreen+Toolbar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PreviewScreen+Toolbar.swift"; sourceTree = "<group>"; };
 		76ECFDFD2947848500DF15C9 /* PreviewScreen+PageError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PreviewScreen+PageError.swift"; sourceTree = "<group>"; };
+		76ECFDFF2948793B00DF15C9 /* PreviewScreen+CacheError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PreviewScreen+CacheError.swift"; sourceTree = "<group>"; };
 		76F05F0B293F89EF003CCD75 /* fab.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = fab.swift; sourceTree = "<group>"; };
 		76F05F0D293F8A9E003CCD75 /* FabStack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FabStack.swift; sourceTree = "<group>"; };
 		76F05F11293F95DC003CCD75 /* FabStack+Web.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "FabStack+Web.swift"; sourceTree = "<group>"; };
@@ -362,6 +364,7 @@
 				7694CA062926629C00BD81A0 /* PreviewScreen+Title+Reader.swift */,
 				76ECFDFB2947727000DF15C9 /* PreviewScreen+Toolbar.swift */,
 				76ECFDFD2947848500DF15C9 /* PreviewScreen+PageError.swift */,
+				76ECFDFF2948793B00DF15C9 /* PreviewScreen+CacheError.swift */,
 			);
 			path = Preview;
 			sourceTree = "<group>";
@@ -540,6 +543,7 @@
 				760C9E332923C735001CB755 /* BrowseItems+Empty.swift in Sources */,
 				767EB460292CC0C40018EE8F /* BrowseItem+Buttons.swift in Sources */,
 				760C9E2D2923C735001CB755 /* BrowseList+Menus.swift in Sources */,
+				76ECFE002948793B00DF15C9 /* PreviewScreen+CacheError.swift in Sources */,
 				76BFE371291E9F6B00DE9DB2 /* AuthScene.swift in Sources */,
 				767EB46E292E1A2F0018EE8F /* BrowseBulk+Done.swift in Sources */,
 				767EB472292E44980018EE8F /* BrowseBulk+AddTags.swift in Sources */,

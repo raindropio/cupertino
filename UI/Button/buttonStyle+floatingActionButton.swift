@@ -14,7 +14,7 @@ public extension MenuStyle where Self == FabMenuButtonStyle {
     }
 }
 
-struct FabStyleModifier: ViewModifier {
+fileprivate struct FabStyleModifier: ViewModifier {
     @Environment(\.controlSize) private var controlSize
     
     var isPressed = false

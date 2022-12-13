@@ -43,10 +43,12 @@ extension BrowseList.Menus {
                         Label("Preview", systemImage: "eyeglasses")
                     }
                     
-                    Button {
-                        app.preview(item.id, .cache)
-                    } label: {
-                        Label("Permanent copy", systemImage: "clock.arrow.circlepath")
+                    if item.file == nil {
+                        Button {
+                            app.preview(item.id, .cache)
+                        } label: {
+                            Label("Permanent copy", systemImage: "clock.arrow.circlepath")
+                        }
                     }
                 }
                 
