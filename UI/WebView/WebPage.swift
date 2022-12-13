@@ -24,7 +24,8 @@ public class WebPage: NSObject, ObservableObject {
                     view.publisher(for: \.isLoading).removeDuplicates().map({ _ in }).eraseToAnyPublisher(),
                     view.publisher(for: \.canGoBack).removeDuplicates().map({ _ in }).eraseToAnyPublisher(),
                     view.publisher(for: \.canGoForward).removeDuplicates().map({ _ in }).eraseToAnyPublisher(),
-                    view.publisher(for: \.title).removeDuplicates().map({ _ in }).eraseToAnyPublisher()
+                    view.publisher(for: \.title).removeDuplicates().map({ _ in }).eraseToAnyPublisher(),
+                    view.publisher(for: \.underPageBackgroundColor).removeDuplicates().map({ _ in }).eraseToAnyPublisher()
                 )
                     .sink(receiveValue: changed)
             }
@@ -64,6 +65,12 @@ extension WebPage {
     public var rendered: Bool {
         //TODO: better logic
         canGoBack || canGoForward || progress >= 0.5
+    }
+    public var toolbarBackground: Color? {
+        guard let color = view?.underPageBackgroundColor, let viewStyle = view?.traitCollection.userInterfaceStyle else { return nil }
+        let pageStyle: UIUserInterfaceStyle = color.isLight ? .light : .dark
+        guard viewStyle == pageStyle else { return nil }
+        return Color(color)
     }
     
     public func reload() { view?.reload() }

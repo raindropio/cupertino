@@ -4,6 +4,7 @@ import UI
 
 extension RaindropStack {
     struct Footer: View {
+        @EnvironmentObject private var dispatch: Dispatcher
         @Environment(\.dismiss) private var dismiss
         @Binding var raindrop: Raindrop
         @Binding var loading: Bool
@@ -14,15 +15,17 @@ extension RaindropStack {
         
         @ViewBuilder
         var removeExisting: some View {
-            if raindrop.collection != -99 {
-                ConfirmButton(role: .destructive) {
-                    Button("Move bookmark to Trash", role: .destructive) {
-                        raindrop.collection = -99
-                        dismiss()
-                    }
-                } label: {
-                    Text("Delete").frame(maxWidth: .infinity)
+            ConfirmButton(role: .destructive) {
+                Button(
+                    raindrop.collection == -99 ? "Delete permanently" : "Move bookmark to Trash",
+                    role: .destructive
+                ) {
+                    raindrop.collection = -99
+                    dispatch.sync(RaindropsAction.delete(raindrop.id))
+                    dismiss()
                 }
+            } label: {
+                Text("Delete").frame(maxWidth: .infinity)
             }
             
             Section {} footer: {

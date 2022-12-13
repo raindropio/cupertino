@@ -66,7 +66,7 @@ extension PreviewScreen.Title: ViewModifier {
                     Button {
                         showOptions = true
                     } label: {
-                        Label("Font & style", systemImage: "textformat.alt")
+                        Label("Font & style", systemImage: "textformat.size")
                     }
                         .popover(isPresented: $showOptions, content: Reader.init)
                 }

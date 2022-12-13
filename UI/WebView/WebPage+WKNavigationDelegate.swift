@@ -31,12 +31,12 @@ extension WebPage: WKNavigationDelegate {
     
     //error
     public func webView(_ webView: WKWebView, didFail navigation: WKNavigation!, withError error: Error) {
+        guard (error as NSError).code != NSURLErrorCancelled else { return }
         self.error = error
         webView.scrollView.refreshControl?.endRefreshing()
     }
     
     public func webView(_ webView: WKWebView, didFailProvisionalNavigation navigation: WKNavigation!, withError error: Error) {
-        guard (error as NSError).code != NSURLErrorCancelled else { return }
         self.webView(webView, didFail: navigation, withError: error)
     }
 }

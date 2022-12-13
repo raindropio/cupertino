@@ -33,7 +33,14 @@ extension WebView: View {
             }
             //fix transparent navigation bar background
             .overlay(alignment: .topLeading) {
-                Color.clear.overlay(.thickMaterial).overlay(.background.opacity(0.4)).frame(height: 0)
+                Group {
+                    if let background = page.toolbarBackground {
+                        Rectangle().fill(.bar).overlay(background)
+                    } else {
+                        Color.clear.overlay(.bar)
+                    }
+                }
+                    .frame(height: 0)
                     .opacity(show ? 1 : 0)
             }
             //animation

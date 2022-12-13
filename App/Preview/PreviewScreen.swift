@@ -41,14 +41,21 @@ extension PreviewScreen {
 
 extension PreviewScreen: View {
     var body: some View {
-        WebView(page, url: startURL)
-            .backport.toolbarRole(.editor)
-            .backport.toolbar(page.prefersHiddenToolbars ? .hidden : .automatic, for: .navigationBar, .tabBar, .bottomBar)
-            .animation(.default, value: page.prefersHiddenToolbars)
-            .modifier(PageError(page: page, raindrop: raindrop))
-            .modifier(CacheError(page: page, mode: mode ?? startMode, raindrop: raindrop))
-            .modifier(Action(page: page, raindrop: raindrop))
-            .modifier(Title(page: page, mode: mode ?? startMode, raindrop: raindrop))
-            .modifier(Toolbar(page: page, raindrop: raindrop))
+        if let startURL {
+            WebView(page, url: startURL)
+                .backport.toolbarRole(.editor)
+                .backport.toolbar(page.prefersHiddenToolbars ? .hidden : .automatic, for: .navigationBar, .tabBar, .bottomBar)
+                .animation(.default, value: page.prefersHiddenToolbars)
+                .modifier(PageError(page: page, raindrop: raindrop))
+                .modifier(CacheError(page: page, mode: mode ?? startMode, raindrop: raindrop))
+                .modifier(Action(page: page, raindrop: raindrop))
+                .modifier(Title(page: page, mode: mode ?? startMode, raindrop: raindrop))
+                .modifier(Toolbar(page: page, raindrop: raindrop))
+        } else {
+            EmptyState("Not found") {
+                Image(systemName: "exclamationmark.triangle")
+                    .foregroundColor(.yellow)
+            }
+        }
     }
 }
