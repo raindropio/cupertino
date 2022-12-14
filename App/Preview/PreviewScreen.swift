@@ -44,7 +44,6 @@ extension PreviewScreen: View {
     var body: some View {
         if let startURL {
             WebView(page, url: startURL)
-                .animation(.default, value: page.prefersHiddenToolbars)
                 .modifier(PageError(page: page, raindrop: raindrop))
                 .modifier(CacheError(page: page, mode: mode ?? startMode, raindrop: raindrop))
                 .modifier(Action(page: page, raindrop: raindrop))

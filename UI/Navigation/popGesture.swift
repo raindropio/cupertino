@@ -1,13 +1,19 @@
 import SwiftUI
 
 public extension View {
-    func popGesture(_ isEnabled: Bool = true) -> some View {
-        overlay(PopGesture(isEnabled: isEnabled).opacity(0))
+    func popGesture(_ mode: PopGestureMode = .automatic) -> some View {
+        overlay(PopGesture(mode: mode).opacity(0))
     }
 }
 
+public enum PopGestureMode {
+    case automatic
+    case always
+    case never
+}
+
 fileprivate struct PopGesture: UIViewControllerRepresentable {
-    var isEnabled: Bool
+    var mode: PopGestureMode
     
     func makeUIViewController(context: Context) -> VC {
         .init(self)
@@ -31,14 +37,16 @@ extension PopGesture {
         func update(_ base: PopGesture) {
             self.base = base
             
-            if base.isEnabled {
+            switch base.mode {
+            case .automatic:
                 restore()
-            } else {
-                disable()
+                
+            case .never, .always:
+                replace()
             }
         }
         
-        func disable() {
+        func replace() {
             if defaultGestureRecognizerDelegate == nil {
                 defaultGestureRecognizerDelegate = parent?.navigationController?.interactivePopGestureRecognizer?.delegate
             }
@@ -71,7 +79,11 @@ extension PopGesture {
         }
         
         func gestureRecognizerShouldBegin(_ gestureRecognizer: UIGestureRecognizer) -> Bool {
-            return false
+            switch base.mode {
+            case .always: return true
+            case .never: return false
+            case .automatic: return true
+            }
         }
     }
 }

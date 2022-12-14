@@ -1,6 +1,8 @@
 import SwiftUI
 import WebKit
 
+let processPool = WKProcessPool()
+
 public struct WebView {
     @ObservedObject var page: WebPage
     private var url: URL?
@@ -40,11 +42,19 @@ extension WebView: View {
                     )
                     .overlay(page.toolbarBackground)
                     .frame(height: 0)
+                    .animation(nil, value: page.prefersHiddenToolbars)
             }
             //animation
-            .animation(.default, value: show)
+            .animation(.easeInOut(duration: 0.3), value: show)
             //allow back webview navigation
-            .popGesture(!page.canGoBack)
+            .popGesture({
+                if page.canGoBack {
+                    return .never
+                } else if page.prefersHiddenToolbars {
+                    return .always
+                }
+                return .automatic
+            }())
     }
 }
 
@@ -60,6 +70,7 @@ extension WebView {
         func makeUIView(context: Context) -> NativeWebView {
             //configuration
             let configuration = WKWebViewConfiguration()
+            configuration.processPool = processPool
             configuration.mediaTypesRequiringUserActionForPlayback = .audio
             
             //reuse cookies

@@ -40,7 +40,7 @@ public class WebPage: NSObject, ObservableObject {
             guard newValue != url else { return }
             view?.load(.init(
                 url: newValue ?? URL(string: "about:blank")!,
-                cachePolicy: .reloadRevalidatingCacheData
+                cachePolicy: .returnCacheDataElseLoad //.reloadRevalidatingCacheData
             ))
         }
     }
@@ -63,8 +63,8 @@ extension WebPage {
     public var canGoForward: Bool { view?.canGoForward ?? false }
     public var title: String? { view?.title }
     public var rendered: Bool {
-        //TODO: better logic
-        canGoBack || canGoForward || progress >= 0.5
+        //TODO: better logic (for next page navigation)
+        canGoBack || canGoForward || progress >= 0.4
     }
     public var colorScheme: ColorScheme {
         view?.underPageBackgroundColor.isLight == true ? .light : .dark

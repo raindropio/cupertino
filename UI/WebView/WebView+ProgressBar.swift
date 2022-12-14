@@ -11,7 +11,7 @@ extension WebView {
                 .scaleEffect(x: value, anchor: .leading)
                 .animation(.spring(), value: value)
                 .opacity(value < 1 ? 1 : 0)
-                .animation(.default.delay(value < 1 ? 0.3 : 0), value: value)
+                .animation(.default, value: value)
         }
     }
 }

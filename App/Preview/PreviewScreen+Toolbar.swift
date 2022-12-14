@@ -34,6 +34,7 @@ extension PreviewScreen.Toolbar: ViewModifier {
         content
         .backport.toolbarRole(.editor)
         .backport.toolbar(page.prefersHiddenToolbars && !showHighlights ? .hidden : .automatic, for: .navigationBar, .tabBar, .bottomBar)
+        .animation(.default, value: page.prefersHiddenToolbars)
         .toolbar {
             ToolbarItemGroup(placement: toolbarItemPlacement) {
                 Button(action: page.goBack) {
