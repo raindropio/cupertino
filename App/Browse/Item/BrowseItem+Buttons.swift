@@ -16,7 +16,7 @@ extension BrowseItem {
         var raindrop: Raindrop
         
         var body: some View {
-            if raindrop.important || raindrop.broken || raindrop.duplicate != nil || !raindrop.tags.isEmpty {
+            if raindrop.important || !raindrop.highlights.isEmpty || raindrop.broken || raindrop.duplicate != nil || !raindrop.tags.isEmpty {
                 WStack(spacingX: 8, spacingY: 8) {
                     if raindrop.collection != find.collectionId {
                         
@@ -25,6 +25,12 @@ extension BrowseItem {
                     if raindrop.important {
                         FilterButton(kind: .important)
                             .buttonStyle(.borderedProminent)
+                    }
+                    
+                    if !raindrop.highlights.isEmpty {
+                        FilterButton(kind: .highlights)
+                            .buttonStyle(.borderedProminent)
+                            .labelStyle(.titleOnly)
                     }
                     
                     if raindrop.broken {

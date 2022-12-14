@@ -6,6 +6,7 @@ struct PreviewScreen {
     @EnvironmentObject private var r: RaindropsStore
     @StateObject private var page = WebPage()
     @AppStorage(ReaderOptions.StorageKey) private var reader = ReaderOptions()
+    @State private var showHighlights = false
 
     var id: Raindrop.ID
     var mode: Mode?
@@ -43,14 +44,13 @@ extension PreviewScreen: View {
     var body: some View {
         if let startURL {
             WebView(page, url: startURL)
-                .backport.toolbarRole(.editor)
-                .backport.toolbar(page.prefersHiddenToolbars ? .hidden : .automatic, for: .navigationBar, .tabBar, .bottomBar)
                 .animation(.default, value: page.prefersHiddenToolbars)
                 .modifier(PageError(page: page, raindrop: raindrop))
                 .modifier(CacheError(page: page, mode: mode ?? startMode, raindrop: raindrop))
                 .modifier(Action(page: page, raindrop: raindrop))
                 .modifier(Title(page: page, mode: mode ?? startMode, raindrop: raindrop))
-                .modifier(Toolbar(page: page, raindrop: raindrop))
+                .modifier(Toolbar(page: page, raindrop: raindrop, showHighlights: $showHighlights))
+                .modifier(Highlights(page: page, raindrop: raindrop, showHighlights: $showHighlights))
         } else {
             EmptyState("Not found") {
                 Image(systemName: "exclamationmark.triangle")

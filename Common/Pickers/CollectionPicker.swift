@@ -45,8 +45,10 @@ extension CollectionPicker: View {
         } label: {
             if let id, let collection = c.state.user[id] {
                 UserCollectionRow(collection, withLocation: true)
+                    .badge(0)
             } else if let id, id < 0 {
                 SystemCollectionRow(id: id)
+                    .badge(0)
             } else {
                 prompt()
             }

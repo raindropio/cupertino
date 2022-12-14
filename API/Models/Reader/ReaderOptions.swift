@@ -10,14 +10,11 @@ public struct ReaderOptions {
     
     public var query: [URLQueryItem] {
         var items: [URLQueryItem] = [
-            .init(name: "font-size", value: "\(fontSize)")
+            .init(name: "font-size", value: "\(fontSize)"),
+            .init(name: "solid-bg", value: theme == .system ? "false" : "true")
         ]
         
         items.append(.init(name: "theme", value: "\(theme)"))
-        if theme != .system {
-            items.append(.init(name: "solid-bg", value: "true"))
-        }
-        
         items.append(.init(name: "font-family", value: "\(fontFamily)"))
         
         return items

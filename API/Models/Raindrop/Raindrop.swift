@@ -10,6 +10,7 @@ public struct Raindrop: Identifiable, Hashable {
     public var media = [Media]()
     public var type: `Type` = .link
     public var tags = [String]()
+    public var highlights = [Highlight]()
     public var created = Date()
     public var lastUpdate = Date()
     public var creatorRef: CreatorRef?

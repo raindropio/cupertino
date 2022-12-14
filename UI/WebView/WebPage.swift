@@ -66,6 +66,9 @@ extension WebPage {
         //TODO: better logic
         canGoBack || canGoForward || progress >= 0.5
     }
+    public var colorScheme: ColorScheme {
+        view?.underPageBackgroundColor.isLight == true ? .light : .dark
+    }
     public var toolbarBackground: Color? {
         guard let color = view?.underPageBackgroundColor, let viewStyle = view?.traitCollection.userInterfaceStyle else { return nil }
         let pageStyle: UIUserInterfaceStyle = color.isLight ? .light : .dark

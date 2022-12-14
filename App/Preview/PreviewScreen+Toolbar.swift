@@ -2,6 +2,7 @@ import SwiftUI
 import API
 import UI
 import Backport
+import Common
 
 extension PreviewScreen {
     struct Toolbar {
@@ -10,6 +11,7 @@ extension PreviewScreen {
         
         @ObservedObject var page: WebPage
         var raindrop: Raindrop?
+        @Binding var showHighlights: Bool
     }
 }
 
@@ -30,6 +32,8 @@ extension PreviewScreen.Toolbar {
 extension PreviewScreen.Toolbar: ViewModifier {
     func body(content: Content) -> some View {
         content
+        .backport.toolbarRole(.editor)
+        .backport.toolbar(page.prefersHiddenToolbars && !showHighlights ? .hidden : .automatic, for: .navigationBar, .tabBar, .bottomBar)
         .toolbar {
             ToolbarItemGroup(placement: toolbarItemPlacement) {
                 Button(action: page.goBack) {
@@ -50,9 +54,10 @@ extension PreviewScreen.Toolbar: ViewModifier {
             }
             
             ToolbarItemGroup(placement: toolbarItemPlacement) {
-                Button {} label: {
+                Toggle(isOn: $showHighlights) {
                     Image(systemName: Filter.Kind.highlights.systemImage)
                 }
+                    .toggleStyle(.button)
                 
                 Spacer()
             }

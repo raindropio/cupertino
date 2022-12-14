@@ -42,6 +42,14 @@ extension RaindropStack.Fields: View {
             } icon: {
                 Image(systemName: "number")
             }
+            
+            NavigationLink {
+                HighlightsList(raindrop: $raindrop)
+                    .navigationTitle(Filter.Kind.highlights.title)
+            } label: {
+                Label(Filter.Kind.highlights.title, systemImage: Filter.Kind.highlights.systemImage)
+                    .badge(raindrop.highlights.count > 3 ? "3+" : "\(raindrop.highlights.count)")
+            }
 
             Label {
                 URLField("URL", value: $raindrop.link)
