@@ -4,27 +4,24 @@ import UI
 
 extension PreviewScreen {
     struct Title {
+        @EnvironmentObject private var page: WebPage
         @EnvironmentObject private var app: AppRouter
         @State private var showOptions = false
 
-        @ObservedObject var page: WebPage
         var mode: Mode
-        var raindrop: Raindrop?
     }
 }
 
 extension PreviewScreen.Title {
     private var title: String {
-        if page.canGoBack {
-            return page.url?.host ?? ""
-        }
-        
         switch mode {
         case .article: return "Reader"
         case .cache: return "Permanent copy"
-        case .embed: return (raindrop?.type ?? .link).single
-        default: return raindrop?.link.host ?? ""
+        case .embed: return "Preview"
+        default: break
         }
+        
+        return page.url?.host ?? ""
     }
 }
 
@@ -34,18 +31,18 @@ extension PreviewScreen.Title: ViewModifier {
         .navigationTitle(title)
         .navigationBarTitleDisplayMode(.inline)
         .backport.toolbarTitleMenu {
-            if !page.canGoBack {
-                if mode != .article, raindrop?.type == .link {
+            if let url = page.url {
+                if mode != .article && mode != .embed {
                     Button {
-                        app.replace(.preview(raindrop!.id, .article))
+                        app.replace(.preview(url, .article))
                     } label: {
                         Label("Show reader", systemImage: "eyeglasses")
                     }
                 }
                 
-                if mode != .cache, raindrop?.file == nil {
+                if mode != .cache {
                     Button {
-                        app.replace(.preview(raindrop!.id, .cache))
+                        app.replace(.preview(url, .cache))
                     } label: {
                         Label("Show permanent copy", systemImage: "clock.arrow.circlepath")
                     }
@@ -53,7 +50,7 @@ extension PreviewScreen.Title: ViewModifier {
                 
                 if mode != .raw {
                     Button {
-                        app.replace(.preview(raindrop!.id, .raw))
+                        app.replace(.preview(url, .raw))
                     } label: {
                         Label("Show original", systemImage: "safari")
                     }
@@ -62,7 +59,7 @@ extension PreviewScreen.Title: ViewModifier {
         }
         .toolbar {
             ToolbarItem {
-                if !page.canGoBack, mode == .article {
+                if mode == .article {
                     Button {
                         showOptions = true
                     } label: {

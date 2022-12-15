@@ -74,6 +74,12 @@ public enum RaindropsAction: ReduxAction {
     case find(Binding<Raindrop>)
 }
 
+public enum HighlightsAction: ReduxAction {
+    case add(URL, Raindrop.Highlight)
+    case update(URL, Raindrop.Highlight)
+    case delete(URL, Raindrop.Highlight.ID)
+}
+
 public enum FiltersAction: ReduxAction {
     case reload(FindBy = .init())
     case reloaded(FindBy, [Filter], FiltersConfig?)

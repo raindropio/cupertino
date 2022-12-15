@@ -47,7 +47,7 @@ extension Raindrop.Highlight: Codable {
     public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         
-        id = try container.decode(type(of: text), forKey: ._id)
+        id = (try? container.decode(type(of: text), forKey: ._id)) ?? ""
         text = try container.decodeIfPresent(type(of: text), forKey: .text) ?? ""
         note = try container.decodeIfPresent(type(of: note), forKey: .note) ?? ""
         created = (try? container.decode(type(of: created), forKey: .created)) ?? .init()

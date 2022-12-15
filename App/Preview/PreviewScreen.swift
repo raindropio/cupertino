@@ -1,60 +1,49 @@
 import SwiftUI
 import API
 import UI
+import Common
 
 struct PreviewScreen {
     @EnvironmentObject private var r: RaindropsStore
     @StateObject private var page = WebPage()
     @AppStorage(ReaderOptions.StorageKey) private var reader = ReaderOptions()
-    @State private var showHighlights = false
+    @State private var highlightsList = false
 
-    var id: Raindrop.ID
-    var mode: Mode?
+    var url: URL
+    var mode: Mode
 }
 
 extension PreviewScreen {
-    private var raindrop: Raindrop? {
-        if !page.canGoBack {
-            return r.state.item(id)
-        } else if let url = page.url {
-            return r.state.item(url)
+    private var rewrite: URL {
+        switch mode {
+        case .article:
+            return Rest.previewArticle(url, options: reader)
+        case .embed:
+            return Rest.previewEmbed(url)
+        case .cache:
+            if let id = r.state.item(url)?.id {
+                return Rest.raindropCacheLink(id)
+            }
+        case .raw: break
         }
-        return nil
+        return url
     }
     
-    private var startMode: Mode {
-        if let mode { return mode }
-        if let raindrop = r.state.item(id) { return .init(raindrop) }
-        return .raw
-    }
-    
-    private var startURL: URL? {
-        guard let raindrop = r.state.item(id) else { return nil }
-        
-        switch startMode {
-        case .article: return Rest.previewArticle(raindrop.link, options: reader)
-        case .embed: return Rest.previewEmbed(raindrop.link)
-        case .cache: return Rest.raindropCacheLink(raindrop.id)
-        case .raw: return raindrop.link
-        }
+    private var currentMode: Mode {
+        //TODO: rewrite to not use cangoback, just compare REAL url with rewrite url
+        page.canGoBack ? .raw : mode
     }
 }
 
 extension PreviewScreen: View {
     var body: some View {
-        if let startURL {
-            WebView(page, url: startURL)
-                .modifier(PageError(page: page, raindrop: raindrop))
-                .modifier(CacheError(page: page, mode: mode ?? startMode, raindrop: raindrop))
-                .modifier(Action(page: page, raindrop: raindrop))
-                .modifier(Title(page: page, mode: mode ?? startMode, raindrop: raindrop))
-                .modifier(Toolbar(page: page, raindrop: raindrop, showHighlights: $showHighlights))
-                .modifier(Highlights(page: page, raindrop: raindrop, showHighlights: $showHighlights))
-        } else {
-            EmptyState("Not found") {
-                Image(systemName: "exclamationmark.triangle")
-                    .foregroundColor(.yellow)
-            }
-        }
+        WebView(page, url: rewrite, canonical: url)
+            .modifier(PageError())
+            .modifier(CacheError(mode: currentMode))
+            .modifier(Action())
+            .modifier(Title(mode: currentMode))
+            .modifier(Toolbar(highlightsList: $highlightsList))
+            .modifier(WebHighlights())
+            .environmentObject(page)
     }
 }

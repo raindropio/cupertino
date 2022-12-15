@@ -34,10 +34,10 @@ public class WebPage: NSObject, ObservableObject {
     
     public var url: URL? {
         get {
-            view?.url
+            (view?.canGoBack == false ? canonical : nil) ?? view?.url
         }
         set {
-            guard newValue != url else { return }
+            guard newValue?.absoluteURL != view?.url?.absoluteURL else { return }
             view?.load(.init(
                 url: newValue ?? URL(string: "about:blank")!,
                 cachePolicy: .returnCacheDataElseLoad //.reloadRevalidatingCacheData
@@ -45,6 +45,7 @@ public class WebPage: NSObject, ObservableObject {
         }
     }
     
+    public var canonical: URL?
     @Published public var error: Error?
     @Published public var prefersHiddenToolbars = false
     
@@ -79,4 +80,7 @@ extension WebPage {
     public func reload() { view?.reload() }
     public func goBack() { view?.goBack() }
     public func goForward() { view?.goForward() }
+    
+    @MainActor
+    public func evaluateJavaScript(_ string: String) async throws { try await view?.evaluateJavaScript(string) }
 }

@@ -6,12 +6,11 @@ import Common
 
 extension PreviewScreen {
     struct Toolbar {
+        @EnvironmentObject private var page: WebPage
         @Environment(\.horizontalSizeClass) private var horizontalSizeClass
         @Environment(\.verticalSizeClass) private var verticalSizeClass
         
-        @ObservedObject var page: WebPage
-        var raindrop: Raindrop?
-        @Binding var showHighlights: Bool
+        @Binding var highlightsList: Bool
     }
 }
 
@@ -23,17 +22,13 @@ extension PreviewScreen.Toolbar {
     private var toolbarItemPlacement: ToolbarItemPlacement {
         portrait ? .bottomBar : .automatic
     }
-    
-    private var url: URL? {
-        (page.canGoBack ? page.url : nil) ?? raindrop?.link
-    }
 }
 
 extension PreviewScreen.Toolbar: ViewModifier {
     func body(content: Content) -> some View {
         content
         .backport.toolbarRole(.editor)
-        .backport.toolbar(page.prefersHiddenToolbars && !showHighlights ? .hidden : .automatic, for: .navigationBar, .tabBar, .bottomBar)
+        .backport.toolbar(page.prefersHiddenToolbars && !highlightsList ? .hidden : .automatic, for: .navigationBar, .tabBar, .bottomBar)
         .animation(.default, value: page.prefersHiddenToolbars)
         .toolbar {
             ToolbarItemGroup(placement: toolbarItemPlacement) {
@@ -55,7 +50,7 @@ extension PreviewScreen.Toolbar: ViewModifier {
             }
             
             ToolbarItemGroup(placement: toolbarItemPlacement) {
-                Toggle(isOn: $showHighlights) {
+                Toggle(isOn: $highlightsList) {
                     Image(systemName: Filter.Kind.highlights.systemImage)
                 }
                     .toggleStyle(.button)
@@ -64,7 +59,7 @@ extension PreviewScreen.Toolbar: ViewModifier {
             }
             
             ToolbarItemGroup(placement: toolbarItemPlacement) {
-                if let url {
+                if let url = page.url {
                     Backport.ShareLink(item: url)
                     
                     Spacer()
@@ -72,7 +67,7 @@ extension PreviewScreen.Toolbar: ViewModifier {
             }
             
             ToolbarItem(placement: toolbarItemPlacement) {
-                if let url {
+                if let url = page.url {
                     Link(destination: url) {
                         Image(systemName: "safari")
                     }

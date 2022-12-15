@@ -38,14 +38,14 @@ extension BrowseList.Menus {
                     }
                     
                     Button {
-                        app.preview(item.id)
+                        app.preview(item.link)
                     } label: {
                         Label("Preview", systemImage: "eyeglasses")
                     }
                     
                     if item.file == nil {
                         Button {
-                            app.preview(item.id, .cache)
+                            app.preview(item.link, .cache)
                         } label: {
                             Label("Permanent copy", systemImage: "clock.arrow.circlepath")
                         }

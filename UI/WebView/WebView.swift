@@ -6,10 +6,12 @@ let processPool = WKProcessPool()
 public struct WebView {
     @ObservedObject var page: WebPage
     private var url: URL?
+    private var canonical: URL?
     
-    public init(_ page: WebPage, url: URL? = nil) {
+    public init(_ page: WebPage, url: URL? = nil, canonical: URL? = nil) {
         self.page = page
         self.url = url
+        self.canonical = canonical
     }
 }
 
@@ -24,7 +26,7 @@ extension WebView: View {
     }
     
     public var body: some View {
-        Holder(page: page, url: url)
+        Holder(page: page, url: url, canonical: canonical)
             //recreate webview when url change (fragment is ignored)
             .id(id)
             .ignoresSafeArea()
@@ -62,6 +64,7 @@ extension WebView {
     struct Holder: UIViewRepresentable {
         @ObservedObject var page: WebPage
         var url: URL?
+        var canonical: URL?
         
         func makeCoordinator() -> WebPage {
             page
@@ -82,17 +85,21 @@ extension WebView {
             //create webview
             let view = NativeWebView(frame: .zero, configuration: configuration)
             context.coordinator.view = view
+            context.coordinator.canonical = canonical
             context.coordinator.url = url
             
             //behaviour
             view.allowsBackForwardNavigationGestures = true
-            view.scrollView.insetsLayoutMarginsFromSafeArea = false
-            view.scrollView.contentInsetAdjustmentBehavior = .always
+            view.scrollView.contentInsetAdjustmentBehavior = .automatic
             
             return view
         }
         
         func updateUIView(_ view: NativeWebView, context: Context) {
+            if context.coordinator.canonical != canonical {
+                context.coordinator.canonical = canonical
+            }
+
             //update url fragment
             if view.url?.fragment != url?.fragment, view.url?.path == url?.path, let string = url?.absoluteString {
                 view.evaluateJavaScript("window.location.replace('\(string)'); true")

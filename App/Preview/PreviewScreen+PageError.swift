@@ -6,10 +6,8 @@ import Backport
 
 extension PreviewScreen {
     struct PageError: ViewModifier {
+        @EnvironmentObject private var page: WebPage
         @EnvironmentObject private var app: AppRouter
-
-        @ObservedObject var page: WebPage
-        var raindrop: Raindrop?
 
         func body(content: Content) -> some View {
             content
@@ -23,10 +21,10 @@ extension PreviewScreen {
                             Button(action: page.reload) {
                                 Label("Reload", systemImage: "arrow.clockwise")
                             }
-                                                        
-                            if let id = raindrop?.id, raindrop?.cache != nil {
+
+                            if let url = page.url {
                                 Button {
-                                    app.replace(.preview(id, .cache))
+                                    app.replace(.preview(url, .cache))
                                 } label: {
                                     Label("Open permanent copy", systemImage: "clock.arrow.circlepath")
                                 }

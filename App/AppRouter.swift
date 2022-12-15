@@ -5,7 +5,7 @@ import UI
 //MARK: - Available pages
 enum AppRoute: Hashable {
     case browse(FindBy)
-    case preview(Raindrop.ID, PreviewScreen.Mode? = nil)
+    case preview(URL, PreviewScreen.Mode = .raw)
     case filters
 }
 
@@ -39,8 +39,8 @@ extension AppRouter {
         push(.browse(.init(collection)))
     }
     
-    func preview(_ id: Raindrop.ID, _ mode: PreviewScreen.Mode? = nil) {
-        push(.preview(id, mode))
+    func preview(_ url: URL, _ mode: PreviewScreen.Mode = .raw) {
+        push(.preview(url, mode))
     }
 }
 

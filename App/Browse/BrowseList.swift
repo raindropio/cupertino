@@ -4,18 +4,20 @@ import UI
 import Common
 
 struct BrowseList<H: View>: View {
-    @EnvironmentObject private var collections: CollectionsStore
+    @EnvironmentObject private var r: RaindropsStore
+    @EnvironmentObject private var c: CollectionsStore
     @EnvironmentObject private var app: AppRouter
 
     var find: FindBy
     var header: () -> H
     
     func action(_ id: Raindrop.ID) {
-        app.preview(id)
+        guard let raindrop = r.state.item(id) else { return }
+        app.preview(raindrop.link, .init(raindrop))
     }
     
     var body: some View {
-        let view = collections.state.view(find.collectionId)
+        let view = c.state.view(find.collectionId)
         let layout: LazyStackLayout = {
             switch view {
             case .list, .simple: return .list
