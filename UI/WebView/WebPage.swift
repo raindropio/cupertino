@@ -4,6 +4,7 @@ import Combine
 
 public class WebPage: NSObject, ObservableObject {
     private var cancellable: AnyCancellable?
+    private var history: [URL : WebRequest] = [:]
     
     weak var view: WKWebView? {
         didSet {
@@ -13,6 +14,7 @@ public class WebPage: NSObject, ObservableObject {
             oldValue?.uiDelegate = nil
             oldValue?.scrollView.delegate = nil
             
+            history = .init()
             cancellable = nil
             if let view {
                 view.navigationDelegate = self
@@ -20,6 +22,7 @@ public class WebPage: NSObject, ObservableObject {
                 view.scrollView.delegate = self
                 
                 cancellable = Publishers.MergeMany(
+                    view.publisher(for: \.url).removeDuplicates().map({ _ in }).eraseToAnyPublisher(),
                     view.publisher(for: \.estimatedProgress).removeDuplicates().map({ _ in }).eraseToAnyPublisher(),
                     view.publisher(for: \.isLoading).removeDuplicates().map({ _ in }).eraseToAnyPublisher(),
                     view.publisher(for: \.canGoBack).removeDuplicates().map({ _ in }).eraseToAnyPublisher(),
@@ -32,20 +35,31 @@ public class WebPage: NSObject, ObservableObject {
         }
     }
     
-    public var url: URL? {
-        get {
-            (view?.canGoBack == false ? canonical : nil) ?? view?.url
+    @MainActor
+    public func load(_ request: WebRequest) async {
+        guard self.request != request else { return }
+                
+        //update url fragment only
+        if self.request?.url.fragment != request.url.fragment, self.request?.url.path == request.url.path {
+            _ = try? await view?.evaluateJavaScript("window.location.replace('\(request.url.absoluteString)'); true")
         }
-        set {
-            guard newValue?.absoluteURL != view?.url?.absoluteURL else { return }
-            view?.load(.init(
-                url: newValue ?? URL(string: "about:blank")!,
-                cachePolicy: .returnCacheDataElseLoad //.reloadRevalidatingCacheData
-            ))
+        //full reload
+        else {
+            view?.load(request.urlRequest)
+            history[request.url.absoluteURL] = request
         }
     }
     
-    public var canonical: URL?
+    public var url: URL? {
+        request?.canonical ?? request?.url ?? view?.url
+    }
+    
+    public var request: WebRequest? {
+        guard let initialURL = view?.backForwardList.currentItem?.initialURL
+        else { return nil }
+        return history[initialURL]
+    }
+    
     @Published public var error: Error?
     @Published public var prefersHiddenToolbars = false
     

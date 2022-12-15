@@ -7,12 +7,14 @@ extension PreviewScreen {
         @EnvironmentObject private var page: WebPage
         @EnvironmentObject private var app: AppRouter
         @State private var showOptions = false
-
-        var mode: Mode
     }
 }
 
 extension PreviewScreen.Title {
+    private var mode: PreviewScreen.Mode {
+        page.request?.attribute as? PreviewScreen.Mode ?? .raw
+    }
+    
     private var title: String {
         switch mode {
         case .article: return "Reader"
@@ -31,30 +33,22 @@ extension PreviewScreen.Title: ViewModifier {
         .navigationTitle(title)
         .navigationBarTitleDisplayMode(.inline)
         .backport.toolbarTitleMenu {
-            if let url = page.url {
-                if mode != .article && mode != .embed {
-                    Button {
-                        app.replace(.preview(url, .article))
-                    } label: {
-                        Label("Show reader", systemImage: "eyeglasses")
+            Picker(
+                "",
+                selection: .init {
+                    mode
+                } set: {
+                    if let url = page.url {
+                        app.replace(.preview(url, $0))
                     }
                 }
-                
-                if mode != .cache {
-                    Button {
-                        app.replace(.preview(url, .cache))
-                    } label: {
-                        Label("Show permanent copy", systemImage: "clock.arrow.circlepath")
-                    }
-                }
-                
-                if mode != .raw {
-                    Button {
-                        app.replace(.preview(url, .raw))
-                    } label: {
-                        Label("Show original", systemImage: "safari")
-                    }
-                }
+            ) {
+                Label("Reader", systemImage: "eyeglasses")
+                    .tag(PreviewScreen.Mode.article)
+                Label("Permanent copy", systemImage: "clock.arrow.circlepath")
+                    .tag(PreviewScreen.Mode.cache)
+                Label("Original page", systemImage: "safari")
+                    .tag(PreviewScreen.Mode.raw)
             }
         }
         .toolbar {

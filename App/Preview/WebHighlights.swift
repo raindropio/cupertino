@@ -26,8 +26,8 @@ extension WebHighlights: ViewModifier {
     private func sendChanges() async {
         guard ready != nil, page.progress == 1 else { return }
         
-        try! await send(.config(.init(enabled: true, nav: true, pro: true)))
-        try! await send(.apply(raindrop?.highlights ?? []))
+        try? await send(.config(.init(enabled: true, nav: true, pro: true)))
+        try? await send(.apply(raindrop?.highlights ?? []))
     }
     
     private func react(_ event: Event) async {

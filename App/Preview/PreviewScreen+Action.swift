@@ -31,11 +31,10 @@ extension PreviewScreen.Action {
                 if id != nil {
                     Button("Edit") { show = true }
                         .buttonStyle(.bordered)
-                } else {
+                } else if url != nil {
                     Button { show = true } label: {
                         Label("Add", systemImage: "plus")
                     }
-                        .disabled(url == nil)
                         .buttonStyle(.borderedProminent)
                 }
             }

@@ -14,36 +14,47 @@ struct PreviewScreen {
 }
 
 extension PreviewScreen {
-    private var rewrite: URL {
-        switch mode {
-        case .article:
-            return Rest.previewArticle(url, options: reader)
-        case .embed:
-            return Rest.previewEmbed(url)
-        case .cache:
-            if let id = r.state.item(url)?.id {
-                return Rest.raindropCacheLink(id)
+    private var request: WebRequest {
+        let rewrite = {
+            switch mode {
+            case .article:
+                return Rest.previewArticle(url, options: reader)
+            case .embed:
+                return Rest.previewEmbed(url)
+            case .cache:
+                if let id = r.state.item(url)?.id {
+                    return Rest.raindropCacheLink(id)
+                }
+            case .raw: break
             }
-        case .raw: break
-        }
-        return url
+            return url
+        }()
+        
+        return .init(
+            rewrite,
+            canonical: url,
+            caching: .returnCacheDataElseLoad,
+            attribute: mode
+        )
     }
     
-    private var currentMode: Mode {
-        //TODO: rewrite to not use cangoback, just compare REAL url with rewrite url
-        page.canGoBack ? .raw : mode
+    @Sendable
+    private func load() async {
+        await page.load(request)
     }
 }
 
 extension PreviewScreen: View {
     var body: some View {
-        WebView(page, url: rewrite, canonical: url)
-            .modifier(PageError())
-            .modifier(CacheError(mode: currentMode))
+        WebView(page)
+            .id(request)
+            .task(id: request, load)
+            .modifier(Title())
             .modifier(Action())
-            .modifier(Title(mode: currentMode))
             .modifier(Toolbar(highlightsList: $highlightsList))
             .modifier(WebHighlights())
+            .modifier(PageError())
+            .modifier(CacheError())
             .environmentObject(page)
     }
 }

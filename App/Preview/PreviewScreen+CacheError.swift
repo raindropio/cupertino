@@ -9,12 +9,14 @@ extension PreviewScreen {
         @EnvironmentObject private var page: WebPage
         @EnvironmentObject private var app: AppRouter
         @EnvironmentObject private var r: RaindropsStore
-
-        var mode: Mode
         
         var raindrop: Raindrop? {
             guard let url = page.url else { return nil }
             return r.state.item(url)
+        }
+        
+        private var mode: PreviewScreen.Mode {
+            page.request?.attribute as? PreviewScreen.Mode ?? .raw
         }
 
         func body(content: Content) -> some View {
