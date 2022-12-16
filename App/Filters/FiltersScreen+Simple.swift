@@ -10,34 +10,17 @@ extension FiltersScreen {
         var items: [Filter]
 
         var body: some View {
-            Section {} header: {
-                if !items.isEmpty && editMode?.wrappedValue != .active {
-                    LazyVGrid(
-                        columns: [.init(
-                            .adaptive(minimum: 140),
-                            spacing: 16
-                        )],
-                        spacing: 16
-                    ) {
-                        ForEach(items) { filter in
-                            Button {
-                                app.browse(filter)
-                            } label: {
-                                FilterRow(filter)
-                                    .frame(height: 32)
-                                    .frame(maxWidth: .infinity, alignment: .leading)
-                            }
-                                .tint(filter.color.opacity(0.7))
-                                .foregroundStyle(filter.color)
+            if !items.isEmpty && editMode?.wrappedValue != .active {
+                GroupBox {
+                    ForEach(items) { filter in
+                        Button {
+                            app.browse(filter)
+                        } label: {
+                            FilterRow(filter)
                         }
                     }
-                        .id(items.count)
-                        .font(.body)
-                        .buttonStyle(.bordered)
-                        .textCase(.none)
-                        .clearSection()
-                        .padding(.top, 8)
                 }
+                    .groupBoxStyle(.board)
             }
         }
     }
