@@ -22,6 +22,10 @@ extension PreviewScreen.Toolbar {
     private var toolbarItemPlacement: ToolbarItemPlacement {
         portrait ? .bottomBar : .automatic
     }
+    
+    private var mode: PreviewScreen.Mode {
+        page.request?.attribute as? PreviewScreen.Mode ?? .raw
+    }
 }
 
 extension PreviewScreen.Toolbar: ViewModifier {
@@ -31,6 +35,20 @@ extension PreviewScreen.Toolbar: ViewModifier {
         .backport.toolbar(page.prefersHiddenToolbars && !highlightsList ? .hidden : .automatic, for: .navigationBar, .tabBar, .bottomBar)
         .animation(.default, value: page.prefersHiddenToolbars)
         .toolbar {
+            ToolbarItem {
+                if mode == .article {
+                    Reader()
+                    Spacer()
+                }
+            }
+            
+            ToolbarItem(placement: .primaryAction) {
+                Toggle(isOn: $highlightsList) {
+                    Image(systemName: Filter.Kind.highlights.systemImage)
+                }
+                    .toggleStyle(.button)
+            }
+            
             ToolbarItemGroup(placement: toolbarItemPlacement) {
                 Button(action: page.goBack) {
                     Image(systemName: "chevron.left")
@@ -50,11 +68,7 @@ extension PreviewScreen.Toolbar: ViewModifier {
             }
             
             ToolbarItemGroup(placement: toolbarItemPlacement) {
-                Toggle(isOn: $highlightsList) {
-                    Image(systemName: Filter.Kind.highlights.systemImage)
-                }
-                    .toggleStyle(.button)
-                
+                Action()
                 Spacer()
             }
             

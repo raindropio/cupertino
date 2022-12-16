@@ -38,7 +38,7 @@ extension WebView: View {
                     .animation(nil, value: page.prefersHiddenToolbars)
             }
             //animation
-            .animation(.easeInOut(duration: 0.3), value: show)
+            .animation(.default, value: show)
             //dialogs
             .modifier(Dialogs(page: page))
             //allow back webview navigation

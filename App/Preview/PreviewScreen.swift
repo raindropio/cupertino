@@ -43,7 +43,6 @@ extension PreviewScreen: View {
     var body: some View {        
         WebView(page, request: request)
             .modifier(Title())
-            .modifier(Action())
             .modifier(Toolbar(highlightsList: $highlightsList))
             .modifier(WebHighlights())
             .modifier(PageError())

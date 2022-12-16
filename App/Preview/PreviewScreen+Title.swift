@@ -6,7 +6,6 @@ extension PreviewScreen {
     struct Title {
         @EnvironmentObject private var page: WebPage
         @EnvironmentObject private var app: AppRouter
-        @State private var showOptions = false
     }
 }
 
@@ -49,18 +48,6 @@ extension PreviewScreen.Title: ViewModifier {
                     .tag(PreviewScreen.Mode.cache)
                 Label("Original page", systemImage: "safari")
                     .tag(PreviewScreen.Mode.raw)
-            }
-        }
-        .toolbar {
-            ToolbarItem {
-                if mode == .article {
-                    Button {
-                        showOptions = true
-                    } label: {
-                        Label("Font & style", systemImage: "textformat.size")
-                    }
-                        .popover(isPresented: $showOptions, content: Reader.init)
-                }
             }
         }
     }

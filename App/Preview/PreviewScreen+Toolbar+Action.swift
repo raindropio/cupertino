@@ -4,8 +4,8 @@ import UI
 import Common
 import Backport
 
-extension PreviewScreen {
-    struct Action: ViewModifier {
+extension PreviewScreen.Toolbar {
+    struct Action: View {
         @EnvironmentObject private var page: WebPage
         @EnvironmentObject private var r: RaindropsStore
                 
@@ -14,24 +14,23 @@ extension PreviewScreen {
             return r.state.item(url)?.id
         }
         
-        func body(content: Content) -> some View {
-            content.modifier(Memorized(id: id, url: page.url))
+        var body: some View {
+            Memorized(id: id, url: page.url)
         }
     }
 }
 
-extension PreviewScreen.Action {
-    fileprivate struct Memorized: ViewModifier {
+extension PreviewScreen.Toolbar.Action {
+    fileprivate struct Memorized: View {
         @State private var show = false
         var id: Raindrop.ID?
         var url: URL?
         
-        func actionButton() -> some View {
+        var actionButton: some View {
             Group {
-                if id != nil || url == nil {
+                if id != nil {
                     Button("Edit") { show = true }
                         .buttonStyle(.bordered)
-                        .disabled(url == nil)
                 } else {
                     Button { show = true } label: {
                         Label("Add", systemImage: "plus")
@@ -40,20 +39,14 @@ extension PreviewScreen.Action {
                 }
             }
                 .labelStyle(.titleAndIcon)
-                .controlSize(.small)
+                .buttonBorderShape(.capsule)
                 .tint(.accentColor)
                 .backport.fontWeight(.semibold)
         }
         
-        func body(content: Content) -> some View {
-            content
-            .toolbar {
-                ToolbarItem(
-                    placement: .primaryAction,
-                    content: actionButton
-                )
-            }
-            .sheet(isPresented: $show) {
+        var body: some View {
+            actionButton
+            .popover(isPresented: $show) {
                 Group {
                     if let id {
                         RaindropStack.ById(id)
