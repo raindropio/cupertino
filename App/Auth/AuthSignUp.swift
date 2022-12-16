@@ -1,0 +1,72 @@
+import SwiftUI
+import API
+import UI
+import Backport
+
+struct AuthSignUp: View {
+    @Environment(\.dismiss) private var dismiss
+    @EnvironmentObject private var auth: AuthStore
+    @EnvironmentObject private var dispatch: Dispatcher
+    @State private var form = AuthSignUpRequest()
+    
+    enum Focus: CaseIterable { case name, email, password }
+    @FocusState private var focus: Focus?
+    
+    @Sendable
+    private func submit() async throws {
+        if form.email.isEmpty {
+            focus = .email
+        }
+        else if form.password.isEmpty {
+            focus = .password
+        } else if form.isValid {
+//            try await dispatch(AuthAction.login(form))
+        } else {
+            focus = .name
+        }
+    }
+
+    var body: some View {
+        Form {
+            Section {
+                TextField("Username", text: $form.name)
+                    #if canImport(UIKit)
+                    .autocapitalization(.none)
+                    .autocorrectionDisabled()
+                    .textContentType(.username)
+                    .keyboardType(.asciiCapable)
+                    .submitLabel(.next)
+                    #endif
+                    .autoFocus()
+                    .focused($focus, equals: .name)
+                
+                TextField("Email", text: $form.email)
+                    #if canImport(UIKit)
+                    .autocapitalization(.none)
+                    .autocorrectionDisabled()
+                    .textContentType(.emailAddress)
+                    .keyboardType(.emailAddress)
+                    .submitLabel(.next)
+                    #endif
+                    .focused($focus, equals: .email)
+                
+                SecureField("Password", text: $form.password)
+                    .submitLabel(.done)
+                    .focused($focus, equals: .password)
+            } footer: {
+                Text("By clicking on 'Sign up' above, you are agreeing to the [Terms of Service](https://help.raindrop.io/terms) and [Privacy Policy](https://help.raindrop.io/privacy)")
+            }
+            
+            SubmitButton("Sign up")
+                .disabled(!form.isValid)
+        }
+            .onSubmit(submit)
+            .navigationTitle("Create an account")
+            .navigationBarTitleDisplayMode(.inline)
+            .toolbar {
+                ToolbarItem(placement: .cancellationAction) {
+                    Button("Cancel", role: .cancel, action: dismiss.callAsFunction)
+                }
+            }
+    }
+}

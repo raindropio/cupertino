@@ -52,6 +52,10 @@
 		76864FBD291EA059000B9B45 /* SidebarScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76864FB5291EA059000B9B45 /* SidebarScreen.swift */; };
 		76864FBF291EA059000B9B45 /* BrowseScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76864FB7291EA059000B9B45 /* BrowseScreen.swift */; };
 		768CA1EF294C7CB600AD7E62 /* PreviewScreen+Toolbar+Reader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 768CA1EE294C7CB600AD7E62 /* PreviewScreen+Toolbar+Reader.swift */; };
+		768CA1F7294CC10900AD7E62 /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 768CA1F6294CC10900AD7E62 /* StoreKit.framework */; };
+		768CA1F9294CC15600AD7E62 /* AuthSplash.swift in Sources */ = {isa = PBXBuildFile; fileRef = 768CA1F8294CC15600AD7E62 /* AuthSplash.swift */; };
+		768CA1FB294CC17800AD7E62 /* AuthSignIn.swift in Sources */ = {isa = PBXBuildFile; fileRef = 768CA1FA294CC17800AD7E62 /* AuthSignIn.swift */; };
+		768CA1FD294CCD5800AD7E62 /* AuthSignUp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 768CA1FC294CCD5800AD7E62 /* AuthSignUp.swift */; };
 		7694C9F429253A0D00BD81A0 /* PreviewScreen+Title.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7694C9F329253A0D00BD81A0 /* PreviewScreen+Title.swift */; };
 		7694C9F72926110A00BD81A0 /* PreviewScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7694C9F62926110A00BD81A0 /* PreviewScreen.swift */; };
 		7694CA012926335700BD81A0 /* PreviewScreen+Mode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7694CA002926335700BD81A0 /* PreviewScreen+Mode.swift */; };
@@ -156,6 +160,10 @@
 		76864FB5291EA059000B9B45 /* SidebarScreen.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SidebarScreen.swift; sourceTree = "<group>"; };
 		76864FB7291EA059000B9B45 /* BrowseScreen.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BrowseScreen.swift; sourceTree = "<group>"; };
 		768CA1EE294C7CB600AD7E62 /* PreviewScreen+Toolbar+Reader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PreviewScreen+Toolbar+Reader.swift"; sourceTree = "<group>"; };
+		768CA1F6294CC10900AD7E62 /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
+		768CA1F8294CC15600AD7E62 /* AuthSplash.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthSplash.swift; sourceTree = "<group>"; };
+		768CA1FA294CC17800AD7E62 /* AuthSignIn.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthSignIn.swift; sourceTree = "<group>"; };
+		768CA1FC294CCD5800AD7E62 /* AuthSignUp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthSignUp.swift; sourceTree = "<group>"; };
 		7694C9F329253A0D00BD81A0 /* PreviewScreen+Title.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PreviewScreen+Title.swift"; sourceTree = "<group>"; };
 		7694C9F62926110A00BD81A0 /* PreviewScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreviewScreen.swift; sourceTree = "<group>"; };
 		7694CA002926335700BD81A0 /* PreviewScreen+Mode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PreviewScreen+Mode.swift"; sourceTree = "<group>"; };
@@ -194,6 +202,7 @@
 			files = (
 				76460FA7292A6E3B00C21ACE /* API in Frameworks */,
 				76143B0228842C85006A7508 /* UI in Frameworks */,
+				768CA1F7294CC10900AD7E62 /* StoreKit.framework in Frameworks */,
 				7616B009293DE7F9001E26F1 /* Backport in Frameworks */,
 				764B908A292519BF00CBD767 /* Common in Frameworks */,
 			);
@@ -270,6 +279,9 @@
 			isa = PBXGroup;
 			children = (
 				76BFE36C291E9F6B00DE9DB2 /* AuthScene.swift */,
+				768CA1F8294CC15600AD7E62 /* AuthSplash.swift */,
+				768CA1FA294CC17800AD7E62 /* AuthSignIn.swift */,
+				768CA1FC294CCD5800AD7E62 /* AuthSignUp.swift */,
 			);
 			path = Auth;
 			sourceTree = "<group>";
@@ -356,6 +368,7 @@
 		7685A1AD2868810D00A4BC3C /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				768CA1F6294CC10900AD7E62 /* StoreKit.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -546,6 +559,7 @@
 				76ECFE0C294B1B5700DF15C9 /* WebHighlights+Event.swift in Sources */,
 				760DD3092943249500103C9E /* FiltersEditMode.swift in Sources */,
 				760C9E4B2923C735001CB755 /* GlobalSearch+Scopes.swift in Sources */,
+				768CA1FB294CC17800AD7E62 /* AuthSignIn.swift in Sources */,
 				760C9E252923C735001CB755 /* BrowseNested.swift in Sources */,
 				76ECFDFC2947727000DF15C9 /* PreviewScreen+Toolbar.swift in Sources */,
 				76864FBD291EA059000B9B45 /* SidebarScreen.swift in Sources */,
@@ -584,6 +598,7 @@
 				760DD312294335EB00103C9E /* FiltersEditMode+Action.swift in Sources */,
 				760DD303294244FD00103C9E /* FiltersScreen.swift in Sources */,
 				767EB470292E1C6A0018EE8F /* BrowseBulk+Move.swift in Sources */,
+				768CA1F9294CC15600AD7E62 /* AuthSplash.swift in Sources */,
 				760C9E342923C735001CB755 /* BrowseItems.swift in Sources */,
 				76BFE36E291E9F6B00DE9DB2 /* AppScene.swift in Sources */,
 				767EB468292E14450018EE8F /* BrowseBulk.swift in Sources */,
@@ -593,6 +608,7 @@
 				76BFE370291E9F6B00DE9DB2 /* SettingsRouter.swift in Sources */,
 				767EB45F292CC0C40018EE8F /* BrowseItem+Details.swift in Sources */,
 				767EB474292E467F0018EE8F /* BrowseBulk+Delete.swift in Sources */,
+				768CA1FD294CCD5800AD7E62 /* AuthSignUp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

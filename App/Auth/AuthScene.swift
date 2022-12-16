@@ -1,91 +1,37 @@
 import SwiftUI
 import API
 import UI
+import Backport
 import AuthenticationServices
 
 struct AuthScene: View {
     @EnvironmentObject private var auth: AuthStore
-    
-    var body: some View {
-        NavigationView {
-            List {
-                NavigationLink {
-                    AuthViewEmail()
-                } label: {
-                    Label("Email", systemImage: "envelope")
-                }
-            }
-                .navigationTitle("Welcome")
-        }
-            .navigationViewStyle(.stack)
-    }
-}
+    @State private var signIn = false
+    @State private var signUp = false
 
-struct AuthViewEmail: View {
-    @EnvironmentObject private var auth: AuthStore
-    @EnvironmentObject private var dispatch: Dispatcher
-    
-    @State private var form = AuthLoginRequest()
-    @State private var loading = false
-    @State private var error: Error?
-    
-    enum Focus: CaseIterable { case email, password }
-    @FocusState private var focus: Focus?
-    
     var body: some View {
-        Form {
-            Section {
-                TextField("Email/name", text: $form.email)
-                    #if canImport(UIKit)
-                    .autocapitalization(.none)
-                    .autocorrectionDisabled()
-                    .textContentType(.username)
-                    .keyboardType(.emailAddress)
-                    .submitLabel(.next)
-                    #endif
-                    .focused($focus, equals: .email)
-                
-                SecureField("Password", text: $form.password)
-                    .submitLabel(.done)
-                    .focused($focus, equals: .password)
-            }
-        }
-            #if os(macOS)
-            .defaultFocus($focus, .email, priority: .userInitiated)
-            #endif
-            .safeAreaInset(edge: .bottom) {
-                SubmitButton("Sign in")
-                    .controlSize(.large)
-                    .padding()
-                    .disabled(!form.isValid)
-            }
-            .disabled(loading)
-//            .alert(error)
-            .onSubmit {
-                if form.password.isEmpty {
-                    focus = .password
-                } else if form.isValid {
-                    Task {
-                        loading = true
-                        error = nil
+        VStack(spacing: 0) {
+            AuthSplash()
+            
+            ControlGroup {
+                Button("Sign in") { signIn = true }
+                    .buttonStyle(.bordered)
+                    .tint(.accentColor)
 
-                        do {
-                            try await dispatch(AuthAction.login(form))
-                        } catch {
-                            self.error = error
-                        }
-                        
-                        loading = false
-                    }
-                } else {
-                    focus = .email
-                }
+                Button("Sign up") { signUp = true }
+                    .buttonStyle(.borderedProminent)
+                    .backport.fontWeight(.semibold)
             }
-            .onAppear {
-                focus = .email
+                .controlGroupStyle(.navigation)
+                .controlSize(.large)
+        }
+            .sheet(isPresented: $signIn) {
+                Backport.NavigationStack(content: AuthSignIn.init)
+                    .backport.presentationDetents([.height(260)])
             }
-            .navigationTitle("Login")
-            .animation(.default, value: loading)
-            .animation(.default, value: form.isValid)
+            .sheet(isPresented: $signUp) {
+                Backport.NavigationStack(content: AuthSignUp.init)
+                    .backport.presentationDetents([.height(330)])
+            }
     }
 }
