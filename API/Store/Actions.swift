@@ -75,9 +75,9 @@ public enum RaindropsAction: ReduxAction {
 }
 
 public enum HighlightsAction: ReduxAction {
-    case add(URL, Raindrop.Highlight)
-    case update(URL, Raindrop.Highlight)
-    case delete(URL, Raindrop.Highlight.ID)
+    case create(URL, Highlight)
+    case update(Highlight)
+    case delete(Highlight.ID)
 }
 
 public enum FiltersAction: ReduxAction {

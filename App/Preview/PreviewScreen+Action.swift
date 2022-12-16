@@ -28,10 +28,11 @@ extension PreviewScreen.Action {
         
         func actionButton() -> some View {
             Group {
-                if id != nil {
+                if id != nil || url == nil {
                     Button("Edit") { show = true }
                         .buttonStyle(.bordered)
-                } else if url != nil {
+                        .disabled(url == nil)
+                } else {
                     Button { show = true } label: {
                         Label("Add", systemImage: "plus")
                     }

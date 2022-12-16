@@ -22,13 +22,13 @@ public class WebPage: NSObject, ObservableObject {
                 view.scrollView.delegate = self
                 
                 cancellable = Publishers.MergeMany(
-                    view.publisher(for: \.url).removeDuplicates().map({ _ in }).eraseToAnyPublisher(),
                     view.publisher(for: \.estimatedProgress).removeDuplicates().map({ _ in }).eraseToAnyPublisher(),
                     view.publisher(for: \.isLoading).removeDuplicates().map({ _ in }).eraseToAnyPublisher(),
                     view.publisher(for: \.canGoBack).removeDuplicates().map({ _ in }).eraseToAnyPublisher(),
                     view.publisher(for: \.canGoForward).removeDuplicates().map({ _ in }).eraseToAnyPublisher(),
                     view.publisher(for: \.title).removeDuplicates().map({ _ in }).eraseToAnyPublisher(),
-                    view.publisher(for: \.underPageBackgroundColor).removeDuplicates().map({ _ in }).eraseToAnyPublisher()
+                    view.publisher(for: \.underPageBackgroundColor).removeDuplicates().map({ _ in }).eraseToAnyPublisher(),
+                    view.backForwardList.publisher(for: \.currentItem).removeDuplicates().map({ _ in }).eraseToAnyPublisher()
                 )
                     .sink(receiveValue: changed)
             }
@@ -36,17 +36,18 @@ public class WebPage: NSObject, ObservableObject {
     }
     
     @MainActor
-    public func load(_ request: WebRequest) async {
+    public func load(_ request: WebRequest) {
         guard self.request != request else { return }
                 
         //update url fragment only
         if self.request?.url.fragment != request.url.fragment, self.request?.url.path == request.url.path {
-            _ = try? await view?.evaluateJavaScript("window.location.replace('\(request.url.absoluteString)'); true")
+            view?.evaluateJavaScript("window.location.replace('\(request.url.absoluteString)'); true")
         }
         //full reload
         else {
             view?.load(request.urlRequest)
             history[request.url.absoluteURL] = request
+            changed()
         }
     }
     
@@ -56,13 +57,18 @@ public class WebPage: NSObject, ObservableObject {
     
     public var request: WebRequest? {
         guard let initialURL = view?.backForwardList.currentItem?.initialURL
-        else { return nil }
+        else { return history.first?.value }
         return history[initialURL]
     }
     
     @Published public var error: Error?
     @Published public var prefersHiddenToolbars = false
     
+    //dialogs
+    @Published var alert: Alert?
+    @Published var confirm: Confirm?
+    @Published var prompt: Prompt?
+
     private func changed() {
         Task {
             await MainActor.run {
@@ -97,4 +103,25 @@ extension WebPage {
     
     @MainActor
     public func evaluateJavaScript(_ string: String) async throws { try await view?.evaluateJavaScript(string) }
+}
+
+extension WebPage {
+    struct Alert {
+        var title: String?
+        var message: String = ""
+        var callback: () -> Void
+    }
+    
+    struct Confirm {
+        var title: String?
+        var message: String = ""
+        var callback: (Bool) -> Void
+    }
+    
+    struct Prompt {
+        var title: String?
+        var message: String = ""
+        var defaultValue: String?
+        var callback: (String?) -> Void
+    }
 }

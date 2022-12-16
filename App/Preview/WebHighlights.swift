@@ -40,11 +40,12 @@ extension WebHighlights: ViewModifier {
             
         //add new
         case .add(let highlight):
-            try? await dispatch(HighlightsAction.add(url, highlight))
+            try? await dispatch(HighlightsAction.create(url, highlight))
             
         //updated
         case .update(let updated):
-            guard var highlight = raindrop?.highlights.first (where: { $0.id == updated._id }) else { return }
+            guard var highlight = raindrop?.highlights.first (where: { $0.id == updated._id })
+            else { return }
             
             if let text = updated.text {
                 highlight.text = text
@@ -56,11 +57,11 @@ extension WebHighlights: ViewModifier {
                 highlight.color = color
             }
             
-            try? await dispatch(HighlightsAction.update(url, highlight))
+            try? await dispatch(HighlightsAction.update(highlight))
             
         //removed
         case .remove(let removed):
-            try? await dispatch(HighlightsAction.delete(url, removed._id))
+            try? await dispatch(HighlightsAction.delete(removed._id))
             
         case .unknown:
             break

@@ -31,6 +31,17 @@ extension Fetch {
                 
         return try decode(data: data)
     }
+    
+    func get(
+        _ path: String,
+        query: [URLQueryItem]? = nil
+    ) async throws -> String? {
+        let (data, _) = try await request(
+            try urlRequest(path, method: "GET", query: query)
+        )
+                
+        return String(bytes: data, encoding: .utf8)
+    }
 }
 
 //MARK: - Post

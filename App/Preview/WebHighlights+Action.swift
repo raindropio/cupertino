@@ -3,8 +3,8 @@ import API
 extension WebHighlights {
     enum Action {
         case config(Config)
-        case apply([Raindrop.Highlight])
-        case scrollTo(Raindrop.Highlight.ID)
+        case apply([Highlight])
+        case scrollTo(Highlight.ID)
         
         struct Config: Encodable {
             var enabled: Bool = true

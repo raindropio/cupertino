@@ -4,7 +4,7 @@ import Backport
 
 struct HighlightEditRow: View {
     @State private var selectColor = false
-    @Binding var highlight: Raindrop.Highlight
+    @Binding var highlight: Highlight
     
     var body: some View {
         VStack(spacing: 4) {
@@ -22,7 +22,7 @@ struct HighlightEditRow: View {
                     selectColor.toggle()
                 }
                 .confirmationDialog("Highlight color", isPresented: $selectColor, titleVisibility: .visible) {
-                    ForEach(Raindrop.HighlightColor.bestCases, id: \.rawValue) { color in
+                    ForEach(Highlight.Color.bestCases, id: \.rawValue) { color in
                         Button(color.rawValue.capitalized, role: color == .red ? .destructive : nil) {
                             highlight.color = color
                         }

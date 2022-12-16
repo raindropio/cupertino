@@ -84,6 +84,21 @@ public actor RaindropsReducer: Reducer {
     
     //MARK: - Other actions
     public func reduce(state: inout S, action: ReduxAction) async throws -> ReduxAction? {
+        //MARK: - Highlights
+        if let action = action as? HighlightsAction {
+            switch action {
+            case .create(let url, let highlight):
+                return try await addHighlight(state: &state, url: url, highlight: highlight)
+                
+            case .update(let highlight):
+                return try await updateHighlight(state: &state, highlight: highlight)
+                
+            case .delete(let highlightId):
+                return try await deleteHighlight(state: &state, highlightId: highlightId)
+            }
+        }
+        
+        //MARK: - Auth
         if let action = action as? AuthAction {
             switch action {
             case .logout:

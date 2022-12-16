@@ -4,15 +4,15 @@ extension WebHighlights {
     enum Event {
         case unknown
         case ready
-        case add(Raindrop.Highlight)
+        case add(Highlight)
         case update(Updated)
         case remove(Updated)
         
         struct Updated: Decodable {
-            var _id: Raindrop.Highlight.ID
+            var _id: Highlight.ID
             var text: String?
             var note: String?
-            var color: Raindrop.HighlightColor?
+            var color: Highlight.Color?
         }
     }
 }
@@ -34,7 +34,7 @@ extension WebHighlights.Event: Decodable {
             return
             
         case "RDH_ADD":
-            let highlight = try? container.decode(Raindrop.Highlight.self, forKey: .payload)
+            let highlight = try? container.decode(Highlight.self, forKey: .payload)
             if let highlight {
                 self = .add(highlight)
                 return

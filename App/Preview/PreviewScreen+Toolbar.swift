@@ -59,19 +59,17 @@ extension PreviewScreen.Toolbar: ViewModifier {
             }
             
             ToolbarItemGroup(placement: toolbarItemPlacement) {
-                if let url = page.url {
-                    Backport.ShareLink(item: url)
-                    
-                    Spacer()
-                }
+                Backport.ShareLink(item: page.url ?? .init(string: "about:blank")!)
+                    .disabled(page.url == nil)
+                
+                Spacer()
             }
             
             ToolbarItem(placement: toolbarItemPlacement) {
-                if let url = page.url {
-                    Link(destination: url) {
-                        Image(systemName: "safari")
-                    }
+                Link(destination: page.url ?? .init(string: "about:blank")!) {
+                    Image(systemName: "safari")
                 }
+                    .disabled(page.url == nil)
             }
         }
     }

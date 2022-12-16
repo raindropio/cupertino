@@ -48,7 +48,7 @@ extension RaindropStack.Fields: View {
                     .navigationTitle(Filter.Kind.highlights.title)
             } label: {
                 Label(Filter.Kind.highlights.title, systemImage: Filter.Kind.highlights.systemImage)
-                    .badge(raindrop.highlights.count > 3 ? "3+" : "\(raindrop.highlights.count)")
+                    .badge(raindrop.highlights.count)
             }
 
             Label {

@@ -1,40 +1,4 @@
-import SwiftUI
-
-extension Raindrop {
-    public struct Highlight: Identifiable, Equatable, Hashable {
-        public var id: String
-        public var text: String
-        public var note: String = ""
-        public var created = Date()
-        public var color: HighlightColor = .yellow
-        public var creatorRef: CreatorRef?
-    }
-    
-    public enum HighlightColor: String, Codable {
-        case blue, brown, cyan, gray, green, indigo, orange, pink, purple, red, teal, yellow
-        
-        public static let bestCases: [Self] = [.yellow, .blue, .green, .red]
-        
-        public var ui: Color {
-            switch self {
-            case .blue: return .blue
-            case .brown: return .brown
-            case .cyan: return .cyan
-            case .gray: return .gray
-            case .green: return .green
-            case .indigo: return .indigo
-            case .orange: return .orange
-            case .pink: return .pink
-            case .purple: return .purple
-            case .red: return .red
-            case .teal: return .teal
-            case .yellow: return .yellow
-            }
-        }
-    }
-}
-
-extension Raindrop.Highlight: Codable {
+extension Highlight: Codable {
     enum CodingKeys: String, CodingKey {
         case _id
         case text

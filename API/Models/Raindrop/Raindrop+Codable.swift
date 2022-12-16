@@ -119,6 +119,7 @@ extension Raindrop: Codable, EncodableWithConfiguration {
         }
         
         if compare?.highlights != highlights {
+            //TODO: send only changed for .modified configuration
             try container.encode(highlights, forKey: .highlights)
         }
 

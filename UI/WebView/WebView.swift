@@ -5,9 +5,11 @@ let processPool = WKProcessPool()
 
 public struct WebView {
     @ObservedObject var page: WebPage
+    var request: WebRequest
     
-    public init(_ page: WebPage) {
+    public init(_ page: WebPage, request: WebRequest) {
         self.page = page
+        self.request = request
     }
 }
 
@@ -17,7 +19,7 @@ extension WebView: View {
     }
     
     public var body: some View {
-        Holder(page: page)
+        Holder(page: page, request: request)
             .ignoresSafeArea()
             .opacity(show ? 1 : 0.01)
             //progress bar
@@ -37,6 +39,8 @@ extension WebView: View {
             }
             //animation
             .animation(.easeInOut(duration: 0.3), value: show)
+            //dialogs
+            .modifier(Dialogs(page: page))
             //allow back webview navigation
             .popGesture({
                 if page.canGoBack {
@@ -51,7 +55,10 @@ extension WebView: View {
 
 extension WebView {
     struct Holder: UIViewRepresentable {
+        @StateObject private var prev = Prev()
+
         @ObservedObject var page: WebPage
+        var request: WebRequest
         
         func makeCoordinator() -> WebPage {
             page
@@ -72,6 +79,8 @@ extension WebView {
             //create webview
             let view = NativeWebView(frame: .zero, configuration: configuration)
             context.coordinator.view = view
+            context.coordinator.load(request)
+            prev.request = request
             
             //behaviour
             view.allowsBackForwardNavigationGestures = true
@@ -81,6 +90,14 @@ extension WebView {
         }
         
         func updateUIView(_ view: NativeWebView, context: Context) {
+            if prev.request?.url.absoluteURL != request.url.absoluteURL {
+                context.coordinator.load(request)
+                prev.request = request
+            }
+        }
+        
+        class Prev: ObservableObject {
+            var request: WebRequest?
         }
     }
 }

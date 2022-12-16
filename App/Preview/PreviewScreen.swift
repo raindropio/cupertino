@@ -37,18 +37,11 @@ extension PreviewScreen {
             attribute: mode
         )
     }
-    
-    @Sendable
-    private func load() async {
-        await page.load(request)
-    }
 }
 
 extension PreviewScreen: View {
-    var body: some View {
-        WebView(page)
-            .id(request)
-            .task(id: request, load)
+    var body: some View {        
+        WebView(page, request: request)
             .modifier(Title())
             .modifier(Action())
             .modifier(Toolbar(highlightsList: $highlightsList))
