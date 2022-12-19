@@ -1,38 +1,43 @@
 import SwiftUI
 import AuthenticationServices
 import API
+import UI
 
 extension AuthContinueWith {
     struct JWT: View {
+        @StateObject private var webAuth = WebAuth()
+        
         var action: (_ action: AuthAction) -> Void
+        
+        private func start(_ provider: Rest.AuthNativeProvider) {
+            Task {
+                let callbackUrl = try? await webAuth(
+                    Rest.authJWTStart(provider, deeplink: URL(string: "rnio://jwt")!),
+                    scheme: "rnio"
+                )
+                
+                guard let callbackUrl else { return }
+                action(.jwt(callbackUrl))
+            }
+        }
         
         var body: some View {
             Menu {
                 Button("Continue with") {}.disabled(true)
                 
-                Button {
-                    
-                } label: {
+                Button { start(.google) } label: {
                     Label("Google", systemImage: "g.circle.fill")
                 }
-                    .tint(.red)
-                    .labelStyle(.iconOnly)
                 
-                Button {
-                    
-                } label: {
+                Button { start(.facebook) } label: {
                     Label("Facebook", image: "facebook-circle-fill")
                 }
                 
-                Button {
-                    
-                } label: {
+                Button { start(.twitter) } label: {
                     Label("Twitter", image: "twitter-fill")
                 }
                 
-                Button {
-                    
-                } label: {
+                Button { start(.vkontakte) } label: {
                     Label("VK", image: "vk-fill")
                 }
             } label: {

@@ -2,12 +2,11 @@ import SwiftUI
 
 #if canImport(UIKit)
 public extension View {
-    func presentationBackground<S: ShapeStyle>(_ style: S) -> some View {
+    func presentationBackground(_ visibility: Visibility) -> some View {
         overlay {
             PresentationTransparentBackground()
                 .opacity(0)
         }
-        .background(style)
     }
 }
 

@@ -7,6 +7,7 @@ public enum AuthAction: ReduxAction {
     case login(AuthLoginRequest)
     case logout
     case apple(ASAuthorization)
+    case jwt(URL)
 }
 
 public enum CollectionsAction: ReduxAction {

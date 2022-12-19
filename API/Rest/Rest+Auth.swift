@@ -63,3 +63,67 @@ extension Rest {
         }
     }
 }
+
+//MARK: - Native
+extension Rest {
+    public enum AuthNativeProvider: String {
+        case google, facebook, twitter, vkontakte
+    }
+    
+    /// returns URL that can be opened in web browser, after success makes redirect to **deeplink** with JWT token. Then this deeplink can be used in `authJWTEnd` method
+    /// deeplink example: rnio://jwt
+    public static func authJWTStart(_ provider: AuthNativeProvider, deeplink: URL) -> URL {
+        //deeplink redirect url
+        var redirect = URLComponents()
+        redirect.path = "auth/jwt"
+        redirect.queryItems = [
+            URLQueryItem(
+                name: "done_uri",
+                value: deeplink.absoluteString
+            )
+        ]
+        
+        //main url
+        var main = URLComponents()
+        main.path = "auth/\(provider)"
+        main.queryItems = [
+            URLQueryItem(
+                name: "redirect",
+                value: redirect.url(relativeTo: Self.base.api)!.absoluteString
+            )
+        ]
+        
+        return main.url(relativeTo: Self.base.api)!
+    }
+}
+
+//MARK: - JWT Token
+extension Rest {
+    public func authJWTEnd(_ callbackUrl: URL) async throws {
+        guard
+            let components = URLComponents(url: callbackUrl, resolvingAgainstBaseURL: false),
+            let queryItems = components.queryItems,
+            let token = queryItems.first(where: { item in item.name == "token" }),
+            let tokenString = token.value
+        else {
+            throw RestError.invalid("callback url doesn't have token")
+        }
+        
+        do {
+            let _: ResultResponse = try await fetch.post(
+                "auth/jwt",
+                body: JWTTokenBody(token: tokenString)
+            )
+        }
+        catch RestError.unauthorized {
+            return
+        }
+        catch {
+            throw error
+        }
+    }
+    
+    fileprivate struct JWTTokenBody: Codable {
+        var token: String
+    }
+}

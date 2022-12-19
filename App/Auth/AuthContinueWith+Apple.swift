@@ -4,6 +4,7 @@ import API
 
 extension AuthContinueWith {
     struct Apple: View {
+        @Environment(\.isEnabled) private var isEnabled
         var action: (_ action: AuthAction) -> Void
         
         private static func configureApple(_ config: ASAuthorizationAppleIDRequest ) {
@@ -22,6 +23,7 @@ extension AuthContinueWith {
                 onRequest: Self.configureApple,
                 onCompletion: appleAuth
             )
+                .opacity(isEnabled ? 1 : 0.4)
         }
     }
 }

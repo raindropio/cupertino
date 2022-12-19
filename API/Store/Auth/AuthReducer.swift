@@ -19,6 +19,9 @@ public actor AuthReducer: Reducer {
             
         case .apple(let authorization):
             try await apple(state: &state, authorization: authorization)
+            
+        case .jwt(let callbackUrl):
+            try await jwt(state: &state, callbackUrl: callbackUrl)
         }
         return nil
     }
