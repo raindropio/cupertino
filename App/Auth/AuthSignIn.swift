@@ -1,7 +1,6 @@
 import SwiftUI
 import API
 import UI
-import Backport
 
 struct AuthSignIn: View {
     @Environment(\.dismiss) private var dismiss
@@ -14,12 +13,12 @@ struct AuthSignIn: View {
     
     @Sendable
     private func submit() async throws {
-        if form.password.isEmpty {
+        if form.email.isEmpty {
+            focus = .email
+        } else if form.password.isEmpty {
             focus = .password
         } else if form.isValid {
             try await dispatch(AuthAction.login(form))
-        } else {
-            focus = .email
         }
     }
 
@@ -30,11 +29,11 @@ struct AuthSignIn: View {
                     #if canImport(UIKit)
                     .autocapitalization(.none)
                     .autocorrectionDisabled()
-                    .textContentType(.username)
                     .keyboardType(.emailAddress)
                     .submitLabel(.next)
                     #endif
                     .autoFocus()
+                    .textContentType(.username)
                     .focused($focus, equals: .email)
                 
                 SecureField("Password", text: $form.password)
@@ -44,6 +43,8 @@ struct AuthSignIn: View {
             
             SubmitButton("Sign in")
                 .disabled(!form.isValid)
+            
+            AuthContinueWith()
         }
             .onSubmit(submit)
             .navigationBarTitleDisplayMode(.inline)

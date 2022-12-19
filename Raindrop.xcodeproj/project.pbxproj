@@ -56,6 +56,9 @@
 		768CA1F9294CC15600AD7E62 /* AuthSplash.swift in Sources */ = {isa = PBXBuildFile; fileRef = 768CA1F8294CC15600AD7E62 /* AuthSplash.swift */; };
 		768CA1FB294CC17800AD7E62 /* AuthSignIn.swift in Sources */ = {isa = PBXBuildFile; fileRef = 768CA1FA294CC17800AD7E62 /* AuthSignIn.swift */; };
 		768CA1FD294CCD5800AD7E62 /* AuthSignUp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 768CA1FC294CCD5800AD7E62 /* AuthSignUp.swift */; };
+		768CA1FF2950420D00AD7E62 /* AuthContinueWith.swift in Sources */ = {isa = PBXBuildFile; fileRef = 768CA1FE2950420D00AD7E62 /* AuthContinueWith.swift */; };
+		768CA20129505A6E00AD7E62 /* AuthContinueWith+Apple.swift in Sources */ = {isa = PBXBuildFile; fileRef = 768CA20029505A6E00AD7E62 /* AuthContinueWith+Apple.swift */; };
+		768CA20329505AD600AD7E62 /* AuthContinueWith+JWT.swift in Sources */ = {isa = PBXBuildFile; fileRef = 768CA20229505AD600AD7E62 /* AuthContinueWith+JWT.swift */; };
 		7694C9F429253A0D00BD81A0 /* PreviewScreen+Title.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7694C9F329253A0D00BD81A0 /* PreviewScreen+Title.swift */; };
 		7694C9F72926110A00BD81A0 /* PreviewScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7694C9F62926110A00BD81A0 /* PreviewScreen.swift */; };
 		7694CA012926335700BD81A0 /* PreviewScreen+Mode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7694CA002926335700BD81A0 /* PreviewScreen+Mode.swift */; };
@@ -164,6 +167,9 @@
 		768CA1F8294CC15600AD7E62 /* AuthSplash.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthSplash.swift; sourceTree = "<group>"; };
 		768CA1FA294CC17800AD7E62 /* AuthSignIn.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthSignIn.swift; sourceTree = "<group>"; };
 		768CA1FC294CCD5800AD7E62 /* AuthSignUp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthSignUp.swift; sourceTree = "<group>"; };
+		768CA1FE2950420D00AD7E62 /* AuthContinueWith.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthContinueWith.swift; sourceTree = "<group>"; };
+		768CA20029505A6E00AD7E62 /* AuthContinueWith+Apple.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AuthContinueWith+Apple.swift"; sourceTree = "<group>"; };
+		768CA20229505AD600AD7E62 /* AuthContinueWith+JWT.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AuthContinueWith+JWT.swift"; sourceTree = "<group>"; };
 		7694C9F329253A0D00BD81A0 /* PreviewScreen+Title.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PreviewScreen+Title.swift"; sourceTree = "<group>"; };
 		7694C9F62926110A00BD81A0 /* PreviewScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreviewScreen.swift; sourceTree = "<group>"; };
 		7694CA002926335700BD81A0 /* PreviewScreen+Mode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PreviewScreen+Mode.swift"; sourceTree = "<group>"; };
@@ -282,6 +288,9 @@
 				768CA1F8294CC15600AD7E62 /* AuthSplash.swift */,
 				768CA1FA294CC17800AD7E62 /* AuthSignIn.swift */,
 				768CA1FC294CCD5800AD7E62 /* AuthSignUp.swift */,
+				768CA1FE2950420D00AD7E62 /* AuthContinueWith.swift */,
+				768CA20029505A6E00AD7E62 /* AuthContinueWith+Apple.swift */,
+				768CA20229505AD600AD7E62 /* AuthContinueWith+JWT.swift */,
 			);
 			path = Auth;
 			sourceTree = "<group>";
@@ -560,11 +569,13 @@
 				760DD3092943249500103C9E /* FiltersEditMode.swift in Sources */,
 				760C9E4B2923C735001CB755 /* GlobalSearch+Scopes.swift in Sources */,
 				768CA1FB294CC17800AD7E62 /* AuthSignIn.swift in Sources */,
+				768CA1FF2950420D00AD7E62 /* AuthContinueWith.swift in Sources */,
 				760C9E252923C735001CB755 /* BrowseNested.swift in Sources */,
 				76ECFDFC2947727000DF15C9 /* PreviewScreen+Toolbar.swift in Sources */,
 				76864FBD291EA059000B9B45 /* SidebarScreen.swift in Sources */,
 				7694CA012926335700BD81A0 /* PreviewScreen+Mode.swift in Sources */,
 				760C9E332923C735001CB755 /* BrowseItems+Empty.swift in Sources */,
+				768CA20329505AD600AD7E62 /* AuthContinueWith+JWT.swift in Sources */,
 				767EB460292CC0C40018EE8F /* BrowseItem+Buttons.swift in Sources */,
 				760C9E2D2923C735001CB755 /* BrowseList+Menus.swift in Sources */,
 				76ECFE002948793B00DF15C9 /* PreviewScreen+CacheError.swift in Sources */,
@@ -594,6 +605,7 @@
 				7694C9F72926110A00BD81A0 /* PreviewScreen.swift in Sources */,
 				760DD30F2943351700103C9E /* FiltersScreen+Tags.swift in Sources */,
 				767EB46A292E15E70018EE8F /* BrowseBulk+title.swift in Sources */,
+				768CA20129505A6E00AD7E62 /* AuthContinueWith+Apple.swift in Sources */,
 				76BFE36F291E9F6B00DE9DB2 /* AppRouter.swift in Sources */,
 				760DD312294335EB00103C9E /* FiltersEditMode+Action.swift in Sources */,
 				760DD303294244FD00103C9E /* FiltersScreen.swift in Sources */,

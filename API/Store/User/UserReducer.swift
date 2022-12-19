@@ -20,7 +20,7 @@ public actor UserReducer: Reducer {
     public func reduce(state: inout S, action: ReduxAction) async throws -> ReduxAction? {
         if let action = action as? AuthAction {
             switch action {
-            case .login(_):
+            case .login(_), .apple(_):
                 return try await reload(state: &state)
                 
             case .logout:

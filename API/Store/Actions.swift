@@ -1,10 +1,12 @@
 import SwiftUI
+import AuthenticationServices
 
 //TODO: Support debounce
 
 public enum AuthAction: ReduxAction {
     case login(AuthLoginRequest)
     case logout
+    case apple(ASAuthorization)
 }
 
 public enum CollectionsAction: ReduxAction {

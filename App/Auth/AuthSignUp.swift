@@ -1,7 +1,6 @@
 import SwiftUI
 import API
 import UI
-import Backport
 
 struct AuthSignUp: View {
     @Environment(\.dismiss) private var dismiss
@@ -14,15 +13,14 @@ struct AuthSignUp: View {
     
     @Sendable
     private func submit() async throws {
-        if form.email.isEmpty {
+        if form.name.isEmpty {
+            focus = .name
+        } else if form.email.isEmpty {
             focus = .email
-        }
-        else if form.password.isEmpty {
+        } else if form.password.isEmpty {
             focus = .password
         } else if form.isValid {
 //            try await dispatch(AuthAction.login(form))
-        } else {
-            focus = .name
         }
     }
 
@@ -59,6 +57,8 @@ struct AuthSignUp: View {
             
             SubmitButton("Sign up")
                 .disabled(!form.isValid)
+            
+            AuthContinueWith()
         }
             .onSubmit(submit)
             .navigationTitle("Create an account")

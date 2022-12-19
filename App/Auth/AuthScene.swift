@@ -1,8 +1,6 @@
 import SwiftUI
 import API
-import UI
 import Backport
-import AuthenticationServices
 
 struct AuthScene: View {
     @EnvironmentObject private var auth: AuthStore
@@ -14,24 +12,28 @@ struct AuthScene: View {
             AuthSplash()
             
             ControlGroup {
-                Button("Sign in") { signIn = true }
+                Button { signIn = true } label: {
+                    Text("Sign in").frame(maxWidth: .infinity).frame(height: 32)
+                }
                     .buttonStyle(.bordered)
                     .tint(.accentColor)
 
-                Button("Sign up") { signUp = true }
+                Button { signUp = true } label: {
+                    Text("Sign up").frame(maxWidth: .infinity).frame(height: 32)
+                }
                     .buttonStyle(.borderedProminent)
-                    .backport.fontWeight(.semibold)
             }
                 .controlGroupStyle(.navigation)
-                .controlSize(.large)
+                .backport.fontWeight(.medium)
+                .scenePadding()
         }
             .sheet(isPresented: $signIn) {
                 Backport.NavigationStack(content: AuthSignIn.init)
-                    .backport.presentationDetents([.height(260)])
+                    .backport.presentationDetents([.height(380)])
             }
             .sheet(isPresented: $signUp) {
                 Backport.NavigationStack(content: AuthSignUp.init)
-                    .backport.presentationDetents([.height(330)])
             }
+            .environmentObject(auth)
     }
 }

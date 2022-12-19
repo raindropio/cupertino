@@ -16,6 +16,9 @@ public actor AuthReducer: Reducer {
             
         case .logout:
             try await logout(state: &state)
+            
+        case .apple(let authorization):
+            try await apple(state: &state, authorization: authorization)
         }
         return nil
     }
