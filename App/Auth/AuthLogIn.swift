@@ -2,7 +2,7 @@ import SwiftUI
 import API
 import UI
 
-struct AuthSignIn: View {
+struct AuthLogIn: View {
     @Environment(\.dismiss) private var dismiss
     @EnvironmentObject private var auth: AuthStore
     @EnvironmentObject private var dispatch: Dispatcher
@@ -45,15 +45,13 @@ struct AuthSignIn: View {
                 .disabled(!form.isValid)
             
             AuthContinueWith()
+                .opacity(form.isEmpty ? 1 : 0)
+                .animation(.default, value: form.isEmpty)
         }
             .onSubmit(submit)
             .navigationBarTitleDisplayMode(.inline)
+            .navigationTitle("Welcome back")
             .toolbar {
-                ToolbarItem(placement: .principal) {
-                    Image(systemName: "person.badge.key.fill")
-                        .foregroundStyle(.tertiary)
-                        .font(.title3)
-                }
                 ToolbarItem(placement: .cancellationAction) {
                     Button("Cancel", role: .cancel, action: dismiss.callAsFunction)
                 }

@@ -59,6 +59,8 @@ struct AuthSignUp: View {
                 .disabled(!form.isValid)
             
             AuthContinueWith()
+                .opacity(form.isEmpty ? 1 : 0)
+                .animation(.default, value: form.isEmpty)
         }
             .onSubmit(submit)
             .navigationTitle("Create an account")

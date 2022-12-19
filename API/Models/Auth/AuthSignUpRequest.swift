@@ -12,4 +12,8 @@ public struct AuthSignUpRequest: Encodable {
     public var isValid: Bool {
         !name.isEmpty && !email.isEmpty && !password.isEmpty
     }
+    
+    public var isEmpty: Bool {
+        name.isEmpty && email.isEmpty && password.isEmpty
+    }
 }
