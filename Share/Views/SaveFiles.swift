@@ -1,6 +1,7 @@
 import SwiftUI
 import API
 import Common
+import Backport
 
 struct SaveFiles: View {
     @Environment(\.dismiss) private var dismiss
@@ -13,7 +14,7 @@ struct SaveFiles: View {
                 AddStack(urls, to: collection)
                     .backport.presentationDetents([.medium])
             } else {
-                NavigationView {
+                Backport.NavigationStack {
                     CollectionsList(selection: $collection, matching: .insertable, searchable: true)
                         .collectionActions()
                         .navigationTitle("Where to save")

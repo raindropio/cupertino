@@ -1,4 +1,5 @@
 import SwiftUI
+import Backport
 
 extension SplitView {
     struct Compact: View {
@@ -13,11 +14,10 @@ extension SplitView {
                         .navigationDestination(for: P.self, destination: detail)
                 }
             } else {
-                NavigationView {
+                Backport.NavigationStack {
                     master()
                         .modifier(Sequence(path: $path, detail: detail))
                 }
-                    .navigationViewStyle(.stack)
             }
         }
     }

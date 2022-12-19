@@ -3,6 +3,7 @@ import API
 import UI
 import UniformTypeIdentifiers
 import Common
+import Backport
 
 struct FabStack: View {
     @Environment(\.dismiss) private var dismiss
@@ -12,7 +13,7 @@ struct FabStack: View {
     var collection: Int
     
     var home: some View {
-        NavigationView {
+        Backport.NavigationStack {
             Form {
                 Section("URL") {
                     Web(items: $items)

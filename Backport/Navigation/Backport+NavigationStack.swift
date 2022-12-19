@@ -11,7 +11,7 @@ public extension Backport where Wrapped == Any {
         
         public var body: some View {
             if #available(iOS 16, *) {
-                SwiftUI.NavigationView(content: content)
+                SwiftUI.NavigationStack(root: content)
             } else {
                 SwiftUI.NavigationView(content: content)
                     .navigationViewStyle(.stack)

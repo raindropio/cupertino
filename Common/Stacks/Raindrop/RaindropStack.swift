@@ -1,6 +1,7 @@
 import SwiftUI
 import API
 import UI
+import Backport
 
 public struct RaindropStack {
     @EnvironmentObject private var dispatch: Dispatcher
@@ -43,7 +44,7 @@ extension RaindropStack {
 
 extension RaindropStack: View {
     public var body: some View {
-        NavigationView {
+        Backport.NavigationStack {
             Form {
                 Fields(raindrop: $raindrop)
                 Footer(raindrop: $raindrop, loading: $loading)
@@ -62,7 +63,6 @@ extension RaindropStack: View {
                     }
                 }
         }
-            .navigationViewStyle(.stack)
             //prevent drag to dismiss for new items
             .interactiveDismissDisabled(isNew)
             //find bookmark for new

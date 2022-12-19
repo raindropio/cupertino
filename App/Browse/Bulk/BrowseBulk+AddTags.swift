@@ -1,6 +1,7 @@
 import SwiftUI
 import API
 import Common
+import Backport
 
 extension BrowseBulk {
     struct AddTags: View {
@@ -29,7 +30,7 @@ extension BrowseBulk {
                 Label("Add tags", systemImage: "number")
             }
             .sheet(isPresented: $select) {
-                NavigationView {
+                Backport.NavigationStack {
                     TagsPicker($tags)
                         .tokenFieldStyle(.inline)
                         .navigationBarTitleDisplayMode(.inline)
@@ -46,7 +47,6 @@ extension BrowseBulk {
                             }
                         }
                 }
-                    .navigationViewStyle(.stack)
                     .frame(idealWidth: 600, idealHeight: 800)
             }
         }

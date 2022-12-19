@@ -33,10 +33,6 @@ extension AuthContinueWith: View {
                 Apple(action: process)
                 JWT(action: process)
             }
-        } header: {
-            Divider()
-                .padding(.bottom)
-                .padding(.vertical)
         }
             .clearSection()
             .disabled(loading)

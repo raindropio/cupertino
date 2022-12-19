@@ -36,6 +36,7 @@ extension AuthSplash {
                 .multilineTextAlignment(.center)
                 .scenePadding([.horizontal, .bottom])
                 .offset(y: -32)
+                .frame(maxWidth: 500)
         }
     }
 }

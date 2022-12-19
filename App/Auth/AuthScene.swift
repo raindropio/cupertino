@@ -31,6 +31,7 @@ struct AuthScene: View {
                     .buttonBorderShape(.capsule)
                     .scenePadding()
                     .scenePadding(.horizontal)
+                    .frame(maxWidth: 500)
                 
                 Text("We keep your [data safe](https://help.raindrop.io/about#privacy), never sold.\nNo limits. [Starting from $0](https://raindrop.io/pro/buy).")
                     .foregroundStyle(.secondary)
@@ -55,7 +56,7 @@ struct AuthScene: View {
                 }
                 .sheet(isPresented: $logIn) {
                     Backport.NavigationStack(content: AuthLogIn.init)
-                        .backport.presentationDetents([.height(380)])
+                        .backport.presentationDetents([.height(360)])
                 }
                 .sheet(isPresented: $signUp) {
                     Backport.NavigationStack(content: AuthSignUp.init)

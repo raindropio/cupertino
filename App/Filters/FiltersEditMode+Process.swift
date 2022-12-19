@@ -13,7 +13,7 @@ extension FiltersEditMode {
 
 extension FiltersEditMode.Process {
     var body: some View {
-        NavigationView {
+        Backport.NavigationStack {
             Group {
                 switch action {
                 case .rename(let filter):

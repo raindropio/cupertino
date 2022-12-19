@@ -18,7 +18,7 @@ struct AuthSplash: View {
             }
             
             Slide(
-                title: "Organize with Collections & Tags",
+                title: "Organize with Collections, Filters & Tags",
                 colors: [.pink, .orange]
             ) {
                 Image(systemName: "folder")

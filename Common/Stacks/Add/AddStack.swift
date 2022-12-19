@@ -43,7 +43,7 @@ extension AddStack {
 
 extension AddStack: View {
     public var body: some View {
-        NavigationView {
+        Backport.NavigationStack {
             VStack {
                 Group {
                     if isCompleteAll {
@@ -83,7 +83,6 @@ extension AddStack: View {
                 }
         }
             .animation(.default, value: isCompleteAll)
-            .navigationViewStyle(.stack)
             .interactiveDismissDisabled(!isCompleteAll)
             //start uploading
             .task(id: urls, priority: .background, upload)

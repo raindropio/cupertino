@@ -1,6 +1,7 @@
 import SwiftUI
 import API
 import Common
+import Backport
 
 extension BrowseBulk {
     struct Move: View {
@@ -32,7 +33,7 @@ extension BrowseBulk {
             }
             //select
             .sheet(isPresented: $select) {
-                NavigationView {
+                Backport.NavigationStack {
                     CollectionsList(selection: $to, matching: .insertable, searchable: true)
                         .collectionActions()
                         .navigationBarTitleDisplayMode(.inline)
@@ -50,7 +51,6 @@ extension BrowseBulk {
                             }
                         }
                 }
-                    .navigationViewStyle(.stack)
                     .frame(idealWidth: 600, idealHeight: 800)
             }
         }

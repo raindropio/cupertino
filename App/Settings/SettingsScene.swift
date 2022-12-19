@@ -1,17 +1,17 @@
 import SwiftUI
 import API
+import Backport
 
 struct SettingsScene: View {
     @EnvironmentObject private var settings: SettingsRouter
     @EnvironmentObject private var dispatch: Dispatcher
     
     var body: some View {
-        NavigationView {
+        Backport.NavigationStack {
             Button("Logout") {
                 dispatch.sync(AuthAction.logout)
             }
         }
-        .navigationViewStyle(.stack)
     }
 }
 
