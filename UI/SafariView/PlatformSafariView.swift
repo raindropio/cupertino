@@ -2,22 +2,28 @@ import SwiftUI
 import SafariServices
 
 struct PlatformSafariView: UIViewControllerRepresentable {
-    let url: URL
+    var url: URL
+    var button: SafariActivityButton? = nil
     
     func makeCoordinator() -> Coordinator {
         .init()
     }
 
-    func makeUIViewController(context: Context) -> RDSafariViewController {
-        let configuration = RDSafariViewController.Configuration()
-        //TODO: configuration.activityButton = .init(templateImage: UIImage(systemName: "sun.max")!, extensionIdentifier: "com.bundle.extension")
+    func makeUIViewController(context: Context) -> SFSafariViewController {
+        let configuration = SFSafariViewController.Configuration()
+        if let button {
+            configuration.activityButton = .init(
+                templateImage: UIImage(systemName: button.systemImage)!,
+                extensionIdentifier: button.extensionIdentifier
+            )
+        }
 
-        let controller = RDSafariViewController(url: url, configuration: configuration)
+        let controller = SFSafariViewController(url: url, configuration: configuration)
         controller.delegate = context.coordinator
         return controller
     }
 
-    func updateUIViewController(_ uiViewController: RDSafariViewController, context: Context) {
+    func updateUIViewController(_ safariView: SFSafariViewController, context: Context) {
         context.coordinator.environment = context.environment
     }
     

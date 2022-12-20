@@ -1,17 +1,10 @@
 import SwiftUI
-import Backport
 
-public struct SafariView: View {
-    let url: URL
-    
-    public init(url: URL) {
-        self.url = url
-    }
-
-    public var body: some View {
-        PlatformSafariView(url: url)
-            .ignoresSafeArea()
-            .navigationBarTitleDisplayMode(.inline)
-            .backport.toolbarRole(.editor)
+public extension View {
+    func safariView(isPresented: Binding<Bool>, url: URL, button: SafariActivityButton? = nil) -> some View {
+        sheet(isPresented: isPresented) {
+            PlatformSafariView(url: url, button: button)
+                .ignoresSafeArea()
+        }
     }
 }

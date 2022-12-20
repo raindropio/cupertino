@@ -1,6 +1,7 @@
 import SwiftUI
 import API
 import Backport
+import UI
 
 struct AuthScene: View {
     @EnvironmentObject private var auth: AuthStore
@@ -46,7 +47,7 @@ struct AuthScene: View {
                     }
                     
                     ToolbarItem {
-                        Link(destination: URL(string: "https://help.raindrop.io")!) {
+                        SafariLink(destination: URL(string: "https://help.raindrop.io")!) {
                             Label("Help", systemImage: "questionmark.circle.fill")
                                 .symbolRenderingMode(.hierarchical)
                                 .font(.title3)

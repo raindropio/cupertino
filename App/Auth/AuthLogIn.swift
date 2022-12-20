@@ -25,20 +25,24 @@ struct AuthLogIn: View {
     var body: some View {
         Form {
             Section {
-                TextField("Email/name", text: $form.email)
+                TextField("Email", text: $form.email, prompt: Text("Email or username"))
                     #if canImport(UIKit)
                     .autocapitalization(.none)
                     .autocorrectionDisabled()
+                    .textContentType(.username)
                     .keyboardType(.emailAddress)
                     .submitLabel(.next)
                     #endif
-                    .autoFocus()
-                    .textContentType(.username)
                     .focused($focus, equals: .email)
                 
-                SecureField("Password", text: $form.password)
-                    .submitLabel(.done)
-                    .focused($focus, equals: .password)
+                HStack(spacing: 0) {
+                    SecureField("Password", text: $form.password)
+                        .submitLabel(.done)
+                        .focused($focus, equals: .password)
+                    
+                    SafariLink("Forgot?", destination: URL(string: "https://app.raindrop.io/account/lost")!)
+                        .font(.callout)
+                }
             }
             
             SubmitButton("Sign in")
@@ -48,6 +52,7 @@ struct AuthLogIn: View {
                 .opacity(form.isEmpty ? 1 : 0)
                 .animation(.default, value: form.isEmpty)
         }
+            .onAppear { focus = .email } //autoFocus modifier breaks autofill
             .onSubmit(submit)
             .navigationBarTitleDisplayMode(.inline)
             .navigationTitle("Welcome back")

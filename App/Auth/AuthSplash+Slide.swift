@@ -3,6 +3,8 @@ import Backport
 
 extension AuthSplash {
     struct Slide<I: View, D: View>: View {
+        @State private var anim = true
+        
         var title: String
         var colors: [Color]
         var icon: () -> I
@@ -21,12 +23,16 @@ extension AuthSplash {
                         .font(.largeTitle)
                 }
                     .foregroundStyle(
-                        LinearGradient(
+                        .linearGradient(
                             colors: colors,
-                            startPoint: .topLeading,
-                            endPoint: .bottomTrailing
+                            startPoint: anim ? .topLeading : .bottomTrailing,
+                            endPoint: anim ? .bottomTrailing : .topTrailing
                         )
                     )
+                    .hueRotation(.degrees(anim ? -30 : 30))
+                    .animation(.easeInOut(duration: 3).repeatForever(), value: anim)
+                    .onAppear { anim = false }
+                    .onDisappear { anim = true }
                 
                 description()
                     .font(.title3)

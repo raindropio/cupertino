@@ -53,7 +53,7 @@ struct AuthSplash: View {
                 Text("Access your bookmarks seamlessly across all your devices\n\n")
             }
         }
-            .tabViewStyle(.page)
+            .tabViewStyle(.page(indexDisplayMode: .always))
             .indexViewStyle(.page(backgroundDisplayMode: colorScheme == .light ? .always : .never))
     }
 }
