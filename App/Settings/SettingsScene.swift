@@ -1,17 +1,27 @@
 import SwiftUI
-import API
 import Backport
 
 struct SettingsScene: View {
     @EnvironmentObject private var settings: SettingsRouter
-    @EnvironmentObject private var dispatch: Dispatcher
-    
+    @AppStorage("theme") private var theme: PreferredTheme = .default
+
     var body: some View {
-        Backport.NavigationStack {
-            Button("Logout") {
-                dispatch.sync(AuthAction.logout)
-            }
+        Backport.NavigationStack(path: $settings.path) {
+            SettingsHome()
+                .backport.navigationDestination(for: SettingsRoute.self) {
+                    switch $0 {
+                    case .account:
+                        SettingsWebApp(subpage: .account)
+                    case .backups:
+                        SettingsWebApp(subpage: .backups)
+                    case .import:
+                        SettingsWebApp(subpage: .import)
+                    case .subscription:
+                        SettingsSubscription()
+                    }
+                }
         }
+            .preferredColorScheme(theme.colorScheme)
     }
 }
 

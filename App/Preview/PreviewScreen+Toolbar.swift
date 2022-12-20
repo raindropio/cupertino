@@ -35,14 +35,12 @@ extension PreviewScreen.Toolbar: ViewModifier {
         .backport.toolbar(page.prefersHiddenToolbars && !highlightsList ? .hidden : .automatic, for: .navigationBar, .tabBar, .bottomBar)
         .animation(.default, value: page.prefersHiddenToolbars)
         .toolbar {
-            ToolbarItem {
+            ToolbarItemGroup(placement: .navigationBarTrailing) {
                 if mode == .article {
                     Reader()
                     Spacer()
                 }
-            }
-            
-            ToolbarItem(placement: .primaryAction) {
+                
                 Toggle(isOn: $highlightsList) {
                     Image(systemName: Filter.Kind.highlights.systemImage)
                 }

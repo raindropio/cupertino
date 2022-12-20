@@ -56,11 +56,11 @@ struct AuthScene: View {
                     }
                 }
                 .sheet(isPresented: $logIn) {
-                    Backport.NavigationStack(content: AuthLogIn.init)
+                    Backport.NavigationStack(root: AuthLogIn.init)
                         .backport.presentationDetents([.height(360)])
                 }
                 .sheet(isPresented: $signUp) {
-                    Backport.NavigationStack(content: AuthSignUp.init)
+                    Backport.NavigationStack(root: AuthSignUp.init)
                 }
         }
             .environmentObject(auth)

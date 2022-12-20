@@ -35,14 +35,16 @@ struct AuthLogIn: View {
                     #endif
                     .focused($focus, equals: .email)
                 
-                HStack(spacing: 0) {
-                    SecureField("Password", text: $form.password)
-                        .submitLabel(.done)
-                        .focused($focus, equals: .password)
-                    
-                    SafariLink("Forgot?", destination: URL(string: "https://app.raindrop.io/account/lost")!)
-                        .font(.callout)
-                }
+                SecureField("Password", text: $form.password)
+                    .submitLabel(.done)
+                    .focused($focus, equals: .password)
+                    .safeAreaInset(edge: .trailing) {
+                        GroupBox {
+                            SafariLink("Forgot?", destination: URL(string: "https://app.raindrop.io/account/lost")!)
+                                .font(.callout)
+                                .padding(-10)
+                        }
+                    }
             }
             
             SubmitButton("Sign in")

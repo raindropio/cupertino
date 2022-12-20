@@ -43,10 +43,10 @@ struct FabStack: View {
                 }
                 
                 Section {
-                    NavigationLink(destination: Extension.init) {
-                        Label("Add from apps", systemImage: "puzzlepiece.extension")
+                    SafariLink(destination: URL(string: "https://help.raindrop.io/mobile-app#save-from-browser")!) {
+                        Label("Add from apps", systemImage: "puzzlepiece.extension").tint(.primary)
                     }
-                        .tint(.secondary)
+                        .listItemTint(.secondary)
                 }
             }
                 .environment(\.defaultMinListRowHeight, 46)

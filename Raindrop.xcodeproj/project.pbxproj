@@ -32,6 +32,12 @@
 		76143B0228842C85006A7508 /* UI in Frameworks */ = {isa = PBXBuildFile; productRef = 76143B0128842C85006A7508 /* UI */; };
 		7616B009293DE7F9001E26F1 /* Backport in Frameworks */ = {isa = PBXBuildFile; productRef = 7616B008293DE7F9001E26F1 /* Backport */; };
 		7616B00B293DE7FF001E26F1 /* Backport in Frameworks */ = {isa = PBXBuildFile; productRef = 7616B00A293DE7FF001E26F1 /* Backport */; };
+		76292CE42951A4D7000E16AA /* SettingsHome.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76292CE32951A4D7000E16AA /* SettingsHome.swift */; };
+		76292CE82951B413000E16AA /* SettingsWebApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76292CE72951B413000E16AA /* SettingsWebApp.swift */; };
+		76292CEA2951B86F000E16AA /* SettingsSubscription.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76292CE92951B86F000E16AA /* SettingsSubscription.swift */; };
+		76292CEC2951BC52000E16AA /* SettingsBrowser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76292CEB2951BC52000E16AA /* SettingsBrowser.swift */; };
+		76292CEE2951BF65000E16AA /* SettingsTheme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76292CED2951BF65000E16AA /* SettingsTheme.swift */; };
+		76292CF02951C7D2000E16AA /* SettingsLogout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76292CEF2951C7D2000E16AA /* SettingsLogout.swift */; };
 		76460FA7292A6E3B00C21ACE /* API in Frameworks */ = {isa = PBXBuildFile; productRef = 76460FA6292A6E3B00C21ACE /* API */; };
 		764B908A292519BF00CBD767 /* Common in Frameworks */ = {isa = PBXBuildFile; productRef = 764B9089292519BF00CBD767 /* Common */; };
 		767AC1132925173900766998 /* SidebarScreen+Phone.swift in Sources */ = {isa = PBXBuildFile; fileRef = 767AC1122925173900766998 /* SidebarScreen+Phone.swift */; };
@@ -85,7 +91,6 @@
 		76F05F0C293F89EF003CCD75 /* fab.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76F05F0B293F89EF003CCD75 /* fab.swift */; };
 		76F05F0E293F8A9E003CCD75 /* FabStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76F05F0D293F8A9E003CCD75 /* FabStack.swift */; };
 		76F05F12293F95DC003CCD75 /* FabStack+Web.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76F05F11293F95DC003CCD75 /* FabStack+Web.swift */; };
-		76F05F142940A26F003CCD75 /* FabStack+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76F05F132940A26F003CCD75 /* FabStack+Extension.swift */; };
 		76F282B52934C24B00D00363 /* ExtensionUI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76F282B42934C24B00D00363 /* ExtensionUI.swift */; };
 		76F282B72934C25400D00363 /* ExtensionService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76F282B62934C25400D00363 /* ExtensionService.swift */; };
 		76F282BA2934C43200D00363 /* NoAuth.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76F282B92934C43200D00363 /* NoAuth.swift */; };
@@ -140,6 +145,12 @@
 		760DD30D294334EA00103C9E /* FiltersScreen+Tags.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "FiltersScreen+Tags.swift"; sourceTree = "<group>"; };
 		760DD310294335DE00103C9E /* FiltersEditMode+Action.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "FiltersEditMode+Action.swift"; sourceTree = "<group>"; };
 		7616B007293DE71D001E26F1 /* Backport */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = Backport; sourceTree = "<group>"; };
+		76292CE32951A4D7000E16AA /* SettingsHome.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsHome.swift; sourceTree = "<group>"; };
+		76292CE72951B413000E16AA /* SettingsWebApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsWebApp.swift; sourceTree = "<group>"; };
+		76292CE92951B86F000E16AA /* SettingsSubscription.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsSubscription.swift; sourceTree = "<group>"; };
+		76292CEB2951BC52000E16AA /* SettingsBrowser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsBrowser.swift; sourceTree = "<group>"; };
+		76292CED2951BF65000E16AA /* SettingsTheme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsTheme.swift; sourceTree = "<group>"; };
+		76292CEF2951C7D2000E16AA /* SettingsLogout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsLogout.swift; sourceTree = "<group>"; };
 		7639A6AE286889DB00A76FE9 /* UI */ = {isa = PBXFileReference; lastKnownFileType = text; path = UI; sourceTree = SOURCE_ROOT; };
 		765F0DDB287EE0FB001E34CA /* App.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = App.plist; sourceTree = "<group>"; };
 		767AC1122925173900766998 /* SidebarScreen+Phone.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SidebarScreen+Phone.swift"; sourceTree = "<group>"; };
@@ -196,7 +207,6 @@
 		76F05F0B293F89EF003CCD75 /* fab.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = fab.swift; sourceTree = "<group>"; };
 		76F05F0D293F8A9E003CCD75 /* FabStack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FabStack.swift; sourceTree = "<group>"; };
 		76F05F11293F95DC003CCD75 /* FabStack+Web.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "FabStack+Web.swift"; sourceTree = "<group>"; };
-		76F05F132940A26F003CCD75 /* FabStack+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "FabStack+Extension.swift"; sourceTree = "<group>"; };
 		76F282B42934C24B00D00363 /* ExtensionUI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtensionUI.swift; sourceTree = "<group>"; };
 		76F282B62934C25400D00363 /* ExtensionService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtensionService.swift; sourceTree = "<group>"; };
 		76F282B92934C43200D00363 /* NoAuth.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoAuth.swift; sourceTree = "<group>"; };
@@ -279,6 +289,12 @@
 			children = (
 				76BFE36B291E9F6B00DE9DB2 /* SettingsRouter.swift */,
 				76BFE36D291E9F6B00DE9DB2 /* SettingsScene.swift */,
+				76292CE32951A4D7000E16AA /* SettingsHome.swift */,
+				76292CE92951B86F000E16AA /* SettingsSubscription.swift */,
+				76292CEB2951BC52000E16AA /* SettingsBrowser.swift */,
+				76292CED2951BF65000E16AA /* SettingsTheme.swift */,
+				76292CEF2951C7D2000E16AA /* SettingsLogout.swift */,
+				76292CE72951B413000E16AA /* SettingsWebApp.swift */,
 			);
 			path = Settings;
 			sourceTree = "<group>";
@@ -432,7 +448,6 @@
 				76F05F0B293F89EF003CCD75 /* fab.swift */,
 				76F05F0D293F8A9E003CCD75 /* FabStack.swift */,
 				76F05F11293F95DC003CCD75 /* FabStack+Web.swift */,
-				76F05F132940A26F003CCD75 /* FabStack+Extension.swift */,
 			);
 			path = Fab;
 			sourceTree = "<group>";
@@ -564,6 +579,7 @@
 			files = (
 				76ECFE0D294B1B5700DF15C9 /* WebHighlights.swift in Sources */,
 				760DD30C2943301A00103C9E /* FiltersEditMode+Process.swift in Sources */,
+				76292CEE2951BF65000E16AA /* SettingsTheme.swift in Sources */,
 				767EB46C292E17B90018EE8F /* BrowseBulk+ToggleAll.swift in Sources */,
 				76864FBF291EA059000B9B45 /* BrowseScreen.swift in Sources */,
 				760C9E312923C735001CB755 /* BrowseList+Toolbar.swift in Sources */,
@@ -576,15 +592,18 @@
 				768CA1FF2950420D00AD7E62 /* AuthContinueWith.swift in Sources */,
 				760C9E252923C735001CB755 /* BrowseNested.swift in Sources */,
 				76ECFDFC2947727000DF15C9 /* PreviewScreen+Toolbar.swift in Sources */,
+				76292CE42951A4D7000E16AA /* SettingsHome.swift in Sources */,
 				76864FBD291EA059000B9B45 /* SidebarScreen.swift in Sources */,
 				7694CA012926335700BD81A0 /* PreviewScreen+Mode.swift in Sources */,
 				760C9E332923C735001CB755 /* BrowseItems+Empty.swift in Sources */,
+				76292CE82951B413000E16AA /* SettingsWebApp.swift in Sources */,
 				768CA20329505AD600AD7E62 /* AuthContinueWith+JWT.swift in Sources */,
 				767EB460292CC0C40018EE8F /* BrowseItem+Buttons.swift in Sources */,
 				760C9E2D2923C735001CB755 /* BrowseList+Menus.swift in Sources */,
 				76ECFE002948793B00DF15C9 /* PreviewScreen+CacheError.swift in Sources */,
 				768CA1EF294C7CB600AD7E62 /* PreviewScreen+Toolbar+Reader.swift in Sources */,
 				76BFE371291E9F6B00DE9DB2 /* AuthScene.swift in Sources */,
+				76292CF02951C7D2000E16AA /* SettingsLogout.swift in Sources */,
 				767EB46E292E1A2F0018EE8F /* BrowseBulk+Done.swift in Sources */,
 				767EB472292E44980018EE8F /* BrowseBulk+AddTags.swift in Sources */,
 				7694C9F429253A0D00BD81A0 /* PreviewScreen+Title.swift in Sources */,
@@ -592,13 +611,14 @@
 				767AC1132925173900766998 /* SidebarScreen+Phone.swift in Sources */,
 				76F05F12293F95DC003CCD75 /* FabStack+Web.swift in Sources */,
 				760C9E302923C735001CB755 /* BrowseSortButton.swift in Sources */,
-				76F05F142940A26F003CCD75 /* FabStack+Extension.swift in Sources */,
 				76BFE372291E9F6B00DE9DB2 /* SettingsScene.swift in Sources */,
+				76292CEC2951BC52000E16AA /* SettingsBrowser.swift in Sources */,
 				760C9E322923C735001CB755 /* BrowseLoadMore.swift in Sources */,
 				76F05F0E293F8A9E003CCD75 /* FabStack.swift in Sources */,
 				767EB476292E47F80018EE8F /* BrowseBulk+More.swift in Sources */,
 				76ECFE0E294B1B5700DF15C9 /* WebHighlights+Action.swift in Sources */,
 				76F05F0C293F89EF003CCD75 /* fab.swift in Sources */,
+				76292CEA2951B86F000E16AA /* SettingsSubscription.swift in Sources */,
 				760C9E2F2923C735001CB755 /* BrowseList.swift in Sources */,
 				760DD3062943129E00103C9E /* FiltersScreen+Simple.swift in Sources */,
 				767EB463292CC19C0018EE8F /* BrowseItem+FilterButton.swift in Sources */,

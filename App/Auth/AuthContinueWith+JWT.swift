@@ -6,6 +6,7 @@ import UI
 extension AuthContinueWith {
     struct JWT: View {
         @StateObject private var webAuth = WebAuth()
+        @Environment(\.defaultMinListRowHeight) private var height
         
         var action: (_ action: AuthAction) -> Void
         
@@ -43,10 +44,12 @@ extension AuthContinueWith {
             } label: {
                 Image(systemName: "ellipsis")
                     .backport.fontWeight(.bold)
-                    .frame(width: 22, height: 32)
+                    .foregroundColor(.secondary)
+                    .frame(width: height, height: height)
+                    .background(.secondary.opacity(0.15))
+                    .clipShape(RoundedRectangle(cornerRadius: 8))
             }
-                .tint(.black)
-                .buttonStyle(.borderedProminent)
+                .tint(.primary)
         }
     }
 }

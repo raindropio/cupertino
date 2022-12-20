@@ -10,17 +10,19 @@ extension FiltersScreen {
         var items: [Filter]
 
         var body: some View {
-            if !items.isEmpty && editMode?.wrappedValue != .active {
-                GroupBox {
-                    ForEach(items) { filter in
-                        Button {
-                            app.browse(filter)
-                        } label: {
-                            FilterRow(filter)
+            Section {
+                if !items.isEmpty && editMode?.wrappedValue != .active {
+                    GroupBox {
+                        ForEach(items) { filter in
+                            Button {
+                                app.browse(filter)
+                            } label: {
+                                FilterRow(filter)
+                            }
                         }
                     }
+                        .groupBoxStyle(.board)
                 }
-                    .groupBoxStyle(.board)
             }
         }
     }

@@ -21,7 +21,7 @@ public extension Backport where Wrapped: View {
                 .toolbar(visibility, for: bars.contains(.tabBar) ? .tabBar : nil)
         } else {
             content
-                .navigationBarHidden(visibility == .hidden && (bars.contains(.automatic) || bars.contains(.navigationBar)))
+                .overlay(ToolbarVisibility(visibility: visibility, bars: bars).opacity(0))
         }
     }
     

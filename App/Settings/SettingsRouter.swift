@@ -13,5 +13,8 @@ class SettingsRouter: ObservableObject {
 }
 
 enum SettingsRoute {
-    case about
+    case account
+    case subscription
+    case backups
+    case `import`
 }

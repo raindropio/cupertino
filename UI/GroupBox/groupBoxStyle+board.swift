@@ -11,7 +11,7 @@ public struct BoardGroupBoxStyle: GroupBoxStyle {
         GroupBox {
             LazyVGrid(
                 columns: [.init(
-                    .adaptive(minimum: 85),
+                    .adaptive(minimum: 90),
                     spacing: 0
                 )],
                 spacing: 0
@@ -31,20 +31,21 @@ struct BoardLabelStyle: LabelStyle {
     @Environment(\.isEnabled) private var isEnabled
     
     public func makeBody(configuration: Configuration) -> some View {
-        VStack {
+        VStack(spacing: 8) {
             ZStack {
                 RoundedRectangle(cornerRadius: 12, style: .continuous)
                     .fill(.tint.opacity(0.15))
-                    .frame(width: 40, height: 40)
+                    .frame(width: 48, height: 48)
                 
                 configuration.icon
                     .foregroundStyle(.tint)
                     .symbolVariant(.fill)
+                    .imageScale(.large)
             }
             
             configuration.title
                 .foregroundColor(.primary)
-                .font(.footnote)
+                .font(.subheadline)
         }
             .frame(maxWidth: .infinity, maxHeight: .infinity)
             .padding(.vertical, 10)

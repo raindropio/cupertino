@@ -16,7 +16,7 @@ struct UserRow<U: UserType>: View {
             Text(user?.name ?? "Unknown")
         } icon: {
             if let avatar = user?.avatar {
-                Thumbnail(avatar, width: width, height: width, cornerRadius: width)
+                Thumbnail(avatar, width: width, height: width)
             } else {
                 Image(systemName: "person.crop.circle")
                     .symbolRenderingMode(.hierarchical)

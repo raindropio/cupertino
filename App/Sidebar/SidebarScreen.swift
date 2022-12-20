@@ -54,9 +54,13 @@ extension SidebarScreen: View {
             .navigationBarTitleDisplayMode(isPhone ? .automatic : .inline)
             .toolbar {
                 ToolbarItem(placement: .cancellationAction) {
-                    Button(action: {
+                    Button {
                         settings.open()
-                    }, label: MeLabel.init)
+                    } label: {
+                        MeLabel()
+                            .labelStyle(.iconOnly)
+                            .clipShape(Circle())
+                    }
                 }
             }
     }

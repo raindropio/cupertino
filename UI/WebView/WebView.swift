@@ -6,10 +6,12 @@ let processPool = WKProcessPool()
 public struct WebView {
     @ObservedObject var page: WebPage
     var request: WebRequest
+    var userAgent: String?
     
-    public init(_ page: WebPage, request: WebRequest) {
+    public init(_ page: WebPage, request: WebRequest, userAgent: String? = nil) {
         self.page = page
         self.request = request
+        self.userAgent = userAgent
     }
 }
 
@@ -19,7 +21,7 @@ extension WebView: View {
     }
     
     public var body: some View {
-        Holder(page: page, request: request)
+        Holder(page: page, request: request, userAgent: userAgent)
             .ignoresSafeArea()
             .opacity(show ? 1 : 0.01)
             //progress bar
@@ -59,6 +61,7 @@ extension WebView {
 
         @ObservedObject var page: WebPage
         var request: WebRequest
+        var userAgent: String?
         
         func makeCoordinator() -> WebPage {
             page
@@ -69,6 +72,7 @@ extension WebView {
             let configuration = WKWebViewConfiguration()
             configuration.processPool = processPool
             configuration.mediaTypesRequiringUserActionForPlayback = .audio
+            configuration.applicationNameForUserAgent = userAgent
             
             //reuse cookies
             let cookies = HTTPCookieStorage.shared.cookies ?? []
