@@ -1,5 +1,6 @@
 import SwiftUI
 import AuthenticationServices
+import StoreKit
 
 //TODO: Support debounce
 
@@ -97,6 +98,17 @@ public enum RecentAction: ReduxAction {
     case reload(FindBy = .init())
     case clearSearch
     case clearTags
+}
+
+public enum SubscriptionAction: ReduxAction {
+    case load
+    case reload
+    case reloaded(Subscription)
+    case products
+    case purchase(User.ID, StoreKit.Product)
+    case purchasing(User.ID, StoreKit.Product)
+    case purchased(StoreKit.Transaction)
+    case restore
 }
 
 public enum UserAction: ReduxAction {

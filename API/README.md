@@ -9,5 +9,6 @@
     - Cached: Propery wrapper to persist data in cache (file storage)
     - Fetch: Library to interact with HTTP API's'
     - Render: Library to generate image URL (resize, screenshot, favicon)
+    - SKReceipt: Function to get StoreKit receipt
 - Rest: Methods to interact with Raindrop.io REST API
 - Store: SwiftUI optimized Redux-like store with actions/reducers/state

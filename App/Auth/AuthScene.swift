@@ -63,6 +63,5 @@ struct AuthScene: View {
                     Backport.NavigationStack(root: AuthSignUp.init)
                 }
         }
-            .environmentObject(auth)
     }
 }

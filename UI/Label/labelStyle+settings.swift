@@ -10,17 +10,9 @@ public struct SettingsLabelStyle: LabelStyle {
         Label {
             configuration.title
         } icon: {
-            ZStack {
-                Image(systemName: "square")
-                    .font(.system(size: 32))
-                    .symbolVariant(.fill)
-
-                configuration.icon
-                    .foregroundColor(.white)
-                    .font(.system(size: 18))
-                    .backport.fontWeight(.semibold)
-                    .clipShape(RoundedRectangle(cornerRadius: 4))
-            }
+            configuration.icon
+                .symbolVariant(.fill)
+                .imageScale(.large)
         }
     }
 }

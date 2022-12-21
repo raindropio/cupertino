@@ -24,6 +24,7 @@ struct RaindropApp: App {
                 .environmentObject(store.raindrops)
                 .environmentObject(store.filters)
                 .environmentObject(store.recent)
+                .environmentObject(store.subscription)
                 .environmentObject(store.user)
         }
     }

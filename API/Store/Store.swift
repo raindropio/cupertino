@@ -11,6 +11,7 @@ public actor Store: ReduxStore {
     @MainActor public var icons = IconsStore()
     @MainActor public var raindrops = RaindropsStore()
     @MainActor public var recent = RecentStore()
+    @MainActor public var subscription = SubscriptionStore()
     @MainActor public var user = UserStore()
 
     @MainActor public init() {
@@ -28,6 +29,7 @@ public actor Store: ReduxStore {
             try await dispatch(some, store: \.filters)
             try await dispatch(some, store: \.icons)
             try await dispatch(some, store: \.recent)
+            try await dispatch(some, store: \.subscription)
             try await dispatch(some, store: \.user)
         } catch {
             try await dispatch(error)

@@ -59,7 +59,6 @@ extension SidebarScreen: View {
                     } label: {
                         MeLabel()
                             .labelStyle(.iconOnly)
-                            .clipShape(Circle())
                     }
                 }
             }

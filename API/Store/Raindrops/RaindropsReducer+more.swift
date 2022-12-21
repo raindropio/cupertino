@@ -17,11 +17,13 @@ extension RaindropsReducer {
             
             return A.moreLoaded(find, page, items, total)
         }
-        catch RestError.notFound {
+        catch RestError.notFound, RestError.forbidden, RestError.unauthorized {
             state[find].more = .notFound
         }
         catch is CancellationError {
+            state[find].more = .idle
             state[find].validMore()
+            return nil
         }
         catch {
             state[find].more = .error

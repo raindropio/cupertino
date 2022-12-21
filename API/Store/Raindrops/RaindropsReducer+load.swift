@@ -18,15 +18,16 @@ extension RaindropsReducer {
             let (items, total) = try await rest.raindropsGet(find, sort: sort)
             return A.reloaded(find, items, total)
         }
-        catch RestError.notFound {
+        catch RestError.notFound, RestError.forbidden, RestError.unauthorized {
             state[find] = .init()
             state[find].status = .notFound
         }
         catch is CancellationError {
+            state[find].status = .idle
             state[find].validMore()
+            return nil
         }
         catch {
-            state[find] = .init()
             state[find].status = .error
             throw error
         }

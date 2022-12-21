@@ -42,7 +42,7 @@ extension Rest {
             let codeString = String(data: code, encoding: .utf8),
             let fullName = credentials.fullName
         else {
-            throw RestError.invalid("can't get apple sign in credentials")
+            throw RestError.appleAuthCredentialsInvalid
         }
         
         do {
@@ -106,7 +106,7 @@ extension Rest {
             let token = queryItems.first(where: { item in item.name == "token" }),
             let tokenString = token.value
         else {
-            throw RestError.invalid("callback url doesn't have token")
+            throw RestError.jwtAuthCallbackURLInvalid
         }
         
         do {
