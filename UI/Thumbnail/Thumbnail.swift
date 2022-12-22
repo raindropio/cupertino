@@ -121,7 +121,7 @@ extension Thumbnail: View {
         //aspect ratio
         else if let aspectRatio {
             base
-                .aspectRatio(aspectRatio, contentMode: .fit)
+                .aspectRatio(aspectRatio, contentMode: .fill)
         }
         //downsampled
         else {
@@ -129,7 +129,7 @@ extension Thumbnail: View {
                 .onSuccess(saveAspectRatio)
                 .aspectRatio(
                     url != nil ? Self.cacheAspect[url!] : 2,
-                    contentMode: .fit
+                    contentMode: .fill
                 )
                 .tag(reload)
         }
