@@ -91,6 +91,11 @@ struct FabStack: View {
             .transition(.opacity)
             .animation(.default, value: kind)
             .animation(.default, value: items.count)
+            .backport.presentationDetents(
+                items.isEmpty ? [.large] : [.height(300), .large],
+                selection: .constant(items.isEmpty ? .large : .height(300))
+            )
+            .backport.presentationDragIndicator(.hidden)
     }
 }
 

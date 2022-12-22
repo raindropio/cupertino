@@ -1,45 +1,25 @@
 import SwiftUI
 
-@available(iOS, deprecated: 16.0)
+/// EVEN ON iOS 16 native version is buggy! so usign custom implementation
 public extension Backport where Wrapped == Any {
-    struct ShareLink {
-        @State private var show = false
-        private var item: URL
-        
-        public init(
-            item: URL
-        ) {
-            self.item = item
-        }
+    @ViewBuilder
+    static func ShareLink(item: URL) -> some View {
+        _ShareLink(item: item)
     }
 }
 
-extension Backport.ShareLink: View {
-    public var body: some View {
-        if #available(iOS 16, *) {
-            SwiftUI.ShareLink(item: item)
-        } else {
-            Button { show = true } label: {
-                Image(systemName: "square.and.arrow.up")
-            }
-                .sheet(isPresented: $show) {
-                    PlatformShareLink(item: item)
-                        .ignoresSafeArea()
-                        .backport.presentationDetents([.medium, .large])
-                        .backport.presentationDragIndicator(.hidden)
-                }
-        }
-    }
-}
-
-fileprivate struct PlatformShareLink: UIViewControllerRepresentable {
+fileprivate struct _ShareLink: View {
     var item: URL
     
-    func makeUIViewController(context: Context) -> UIActivityViewController {
-        let controller = UIActivityViewController(activityItems: [item], applicationActivities: nil)
-        return controller
+    private func present() {
+        //make sure to present activity like this, swiftui .sheet will not work if included inside Menu
+        let av = UIActivityViewController(activityItems: [item], applicationActivities: nil)
+        UIApplication.shared.connectedScenes.compactMap { $0 as? UIWindowScene }.first?.windows.first?.rootViewController?.present(av, animated: true, completion: nil)
     }
     
-    func updateUIViewController(_ uiViewController: UIActivityViewController, context: Context) {
+    var body: some View {
+        Button(action: present) {
+            Label("Share", systemImage: "square.and.arrow.up")
+        }
     }
 }

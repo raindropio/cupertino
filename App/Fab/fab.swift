@@ -8,18 +8,23 @@ extension View {
 }
 
 fileprivate struct FabModifier: ViewModifier {
-    @State private var show = false
+    @Environment(\.editMode) private var editMode
+    @Environment(\.isSearching) private var isSearching
+
+    @State private var present = false
     var collection: Int
     
     func body(content: Content) -> some View {
         content
-            .floatingActionButton {
+            .floatingActionButton(
+                hide: editMode?.wrappedValue == .active || isSearching
+            ) {
                 Button {
-                    show = true
+                    present.toggle()
                 } label: {
                     Image(systemName: "plus")
                 }
-                    .popover(isPresented: $show) {
+                    .popover(isPresented: $present) {
                         FabStack(collection: collection)
                             .frame(idealWidth: 400, idealHeight: 500)
                     }

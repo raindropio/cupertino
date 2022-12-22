@@ -64,7 +64,6 @@ extension CollectionsList: View {
             //features
             .modifier(Menus())
             .modifier(Search(enabled: searchable, search: $search))
-            .overlay(content: Empty.init)
             //reload
             .refreshable {
                 try? await dispatch(CollectionsAction.load)

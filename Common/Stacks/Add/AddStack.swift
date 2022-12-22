@@ -52,14 +52,18 @@ extension AddStack: View {
                                 .foregroundStyle(.green)
                         }
                     } else {
-                        ProgressView(
-                            value: Double(completed.count),
-                            total: Double(urls.count)
-                        ) {
-                            Text(Double(completed.count) / Double(urls.count), format: .percent)
-                            + Text(" complete")
+                        if urls.count == 1 {
+                            ProgressView()
+                        } else {
+                            ProgressView(
+                                value: Double(completed.count),
+                                total: Double(urls.count)
+                            ) {
+                                Text(Double(completed.count) / Double(urls.count), format: .percent)
+                                + Text(" complete")
+                            }
+                                .frame(width: 256)
                         }
-                        .frame(width: 256)
                     }
                 }
                     .transition(.scale(scale: 1.1).combined(with: .opacity))

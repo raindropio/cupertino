@@ -36,12 +36,14 @@ extension BrowseBulk {
                 Backport.NavigationStack {
                     CollectionsList(selection: $to, matching: .insertable, searchable: true)
                         .collectionActions()
+                        .navigationTitle("Select collection")
                         .navigationBarTitleDisplayMode(.inline)
                         .toolbar {
-                            ToolbarItem(placement: .confirmationAction) {
-                                Button("Move \(BrowseBulk.title(pick)) to \(c.state.title(to ?? -1))", action: move)
-                                    .lineLimit(1)
-                                    .disabled(to == nil)
+                            ToolbarItem(placement: .bottomBar) {
+                                if let to {
+                                    Button("Move \(BrowseBulk.title(pick)) to \(c.state.title(to))", action: move)
+                                        .backport.fontWeight(.semibold)
+                                }
                             }
                             
                             ToolbarItem(placement: .cancellationAction) {

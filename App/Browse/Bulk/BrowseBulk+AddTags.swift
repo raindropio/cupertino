@@ -33,11 +33,14 @@ extension BrowseBulk {
                 Backport.NavigationStack {
                     TagsPicker($tags)
                         .tokenFieldStyle(.inline)
+                        .navigationTitle("Select tags")
                         .navigationBarTitleDisplayMode(.inline)
                         .toolbar {
-                            ToolbarItem(placement: .confirmationAction) {
-                                Button("Add \(tags.count) tags for \(BrowseBulk.title(pick))", action: add)
-                                    .disabled(tags.isEmpty)
+                            ToolbarItem(placement: .bottomBar) {
+                                if !tags.isEmpty {
+                                    Button("Add \(tags.count) tags for \(BrowseBulk.title(pick))", action: add)
+                                        .backport.fontWeight(.semibold)
+                                }
                             }
                             
                             ToolbarItem(placement: .cancellationAction) {

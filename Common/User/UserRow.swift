@@ -19,7 +19,7 @@ struct UserRow<U: UserType>: View {
                 Thumbnail(avatar, width: width, height: width, cornerRadius: width)
             } else {
                 Image(systemName: "person.crop.circle")
-                    .symbolRenderingMode(.hierarchical)
+                    .symbolVariant(.fill)
             }
         }
     }

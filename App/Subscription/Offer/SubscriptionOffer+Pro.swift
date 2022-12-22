@@ -19,6 +19,8 @@ extension SubscriptionOffer {
                     Text("Starting from **\(s.state.lowestDisplayPrice)/month**. Enabled on all platforms. Cancel anytime.")
                         .font(.callout)
                         .foregroundStyle(.secondary)
+                        .backport.contentTransition(.numericText())
+                        .animation(.default, value: s.state.lowestDisplayPrice)
                 }
                     .scenePadding(.horizontal)
                     .frame(maxWidth: .infinity)

@@ -1,8 +1,6 @@
 import SwiftUI
 
 public struct ImagePicker {
-    @Namespace private var local
-    
     var data: [URL]
     @Binding var selection: URL?
     var width: Double?
@@ -13,7 +11,6 @@ public struct ImagePicker {
     public init(
         _ data: [URL],
         selection: Binding<URL?>,
-        namespace: Namespace.ID? = nil,
         width: Double,
         height: Double
     ) {
@@ -21,35 +18,6 @@ public struct ImagePicker {
         self._selection = selection
         self.width = width
         self.height = height
-        self.namespace = namespace
-    }
-    
-    public init(
-        _ data: [URL],
-        selection: Binding<URL?>,
-        namespace: Namespace.ID? = nil,
-        width: Double,
-        aspectRatio: Double? = nil
-    ) {
-        self.data = data
-        self._selection = selection
-        self.width = width
-        self.aspectRatio = aspectRatio
-        self.namespace = namespace
-    }
-    
-    public init(
-        _ data: [URL],
-        selection: Binding<URL?>,
-        namespace: Namespace.ID? = nil,
-        height: Double,
-        aspectRatio: Double? = nil
-    ) {
-        self.data = data
-        self._selection = selection
-        self.height = height
-        self.aspectRatio = aspectRatio
-        self.namespace = namespace
     }
 }
 
@@ -66,7 +34,6 @@ extension ImagePicker: View {
                         aspectRatio: aspectRatio
                     )
                         .equatable()
-                        .matchedGeometryEffect(id: url, in: namespace ?? local)
                         .onTapGesture {
                             selection = url
                         }

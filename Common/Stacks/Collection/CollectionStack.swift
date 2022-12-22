@@ -56,7 +56,7 @@ extension CollectionStack: View {
                 if isNew {
                     SubmitButton("Create")
                 } else if collection.access.level >= .member {
-                    ActionButton(role: .destructive, action: delete) {
+                    ActionButton(message: "This action will delete collection and all nested collections.\nBookmarks will be moved to Trash.", role: .destructive, action: delete) {
                         Text("Delete collection").frame(maxWidth: .infinity)
                     }
                 }

@@ -5,14 +5,17 @@ public struct ActionButton<L: View> {
     @State private var error: Error?
     
     var role: ButtonRole?
+    var message: String = ""
     var action: () async throws -> Void
     var label: () -> L
     
     public init(
+        message: String = "",
         role: ButtonRole? = nil,
         action: @escaping () async throws -> Void,
         @ViewBuilder label: @escaping () -> L
     ) {
+        self.message = message
         self.role = role
         self.action = action
         self.label = label
@@ -22,9 +25,11 @@ public struct ActionButton<L: View> {
 extension ActionButton where L == Text {
     public init<S>(
         _ title: S,
+        message: String = "",
         role: ButtonRole? = nil,
         action: @escaping () async throws -> Void
     ) where S : StringProtocol {
+        self.message = message
         self.label = {
             Text(title)
         }
@@ -70,7 +75,7 @@ extension ActionButton: View {
     public var body: some View {
         Group {
             if role == .destructive {
-                ConfirmButton(role: role, actions: button, label: status)
+                ConfirmButton(message: message, role: role, actions: button, label: status)
             } else {
                 button()
             }

@@ -15,7 +15,7 @@ extension BrowseBulk {
                 Group {
                     //remove tags
                     Menu {
-                        Button("Confirm") {
+                        Button("Confirm", role: .destructive) {
                             action {
                                 try await dispatch(RaindropsAction.updateMany(pick, .removeTags))
                             }

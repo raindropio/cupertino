@@ -3,7 +3,7 @@ import SwiftUI
 extension ImagePicker {
     struct Columns<C: View>: View {
         var width: Double?
-        var content: () -> C
+        @ViewBuilder var content: () -> C
         
         var body: some View {
             LazyVGrid(

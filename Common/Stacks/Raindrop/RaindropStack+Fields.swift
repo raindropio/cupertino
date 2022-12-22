@@ -12,7 +12,11 @@ extension RaindropStack {
 
 extension RaindropStack.Fields: View {
     var body: some View {
-        CoverPicker(selection: $raindrop.cover, media: raindrop.media)
+        CoverPicker(
+            url: raindrop.link,
+            selection: $raindrop.cover,
+            media: $raindrop.media
+        )
         
         Section {
             Backport.TextField("Title", text: $raindrop.title, axis: .vertical)

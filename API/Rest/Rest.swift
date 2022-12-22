@@ -1,13 +1,13 @@
 import Foundation
 
 public actor Rest: FetchDelegate {
-    static let base = Base()
+    public static let base = Base()
     
-    struct Base {
-        var root = URL(string: "https://raindrop.io/")!
-        var api = URL(string: "https://api.raindrop.io/v1/")!
-        var preview = URL(string: "https://preview.systems/")!
-        var render = URL(string: "https://rdl.ink/")!
+    public struct Base {
+        public var root = URL(string: "https://raindrop.io/")!
+        public var api = URL(string: "https://api.raindrop.io/v1/")!
+        public var preview = URL(string: "https://preview.systems/")!
+        public var render = URL(string: "https://rdl.ink/")!
     }
     
     let decoder: JSONDecoder = {

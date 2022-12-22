@@ -31,7 +31,14 @@ extension CollectionsReducer {
     //MARK: - 3
     func reloaded(state: inout S, groups: [CGroup], system: [SystemCollection], user: [UserCollection]) {
         state.status = .idle
-        state.groups = groups
+        state.groups = groups.map {
+            var group = $0
+            //keep only existings collections
+            group.collections = group.collections.filter { id in
+                user.contains { $0.id == id }
+            }
+            return group
+        }
         
         //create default groups
         if state.groups.isEmpty {

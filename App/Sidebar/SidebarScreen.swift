@@ -43,6 +43,7 @@ extension SidebarScreen: View {
             } icon: {
                 Image(systemName: "circle.grid.2x2")
                     .imageScale(.large)
+                    .symbolVariant(.fill)
             }
                 .listItemTint(.indigo)
                 .backport.tag(-2)

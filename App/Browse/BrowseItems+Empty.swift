@@ -39,7 +39,6 @@ extension BrowseItems.Empty {
                 
                 case .loading:
                     ProgressView()
-                        .progressViewStyle(.circular)
                     
                 case .error:
                     EmptyState("Error") {

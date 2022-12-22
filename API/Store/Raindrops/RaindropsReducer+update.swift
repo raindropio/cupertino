@@ -21,13 +21,6 @@ extension RaindropsReducer {
 
 extension RaindropsReducer {
     func updateMany(state: inout S, pick: RaindropsPick, operation: UpdateRaindropsRequest) async throws -> ReduxAction? {
-        //make sure to not update entirely all!
-        switch pick {
-        case .all(let find):
-            if find.collectionId == 0 && !find.isSearching { return nil }
-        default: break
-        }
-        
         let count = try await rest.raindropsUpdate(pick: pick, operation: operation)
         if count > 0 {
             return A.updatedMany(pick, operation)
@@ -47,7 +40,7 @@ extension RaindropsReducer {
                     
                 case .addTags(let tags):
                     tags.forEach {
-                        if state.items[id]?.tags.contains($0) ?? false {
+                        if !(state.items[id]?.tags.contains($0) ?? false) {
                             state.items[id]?.tags.append($0)
                         }
                     }

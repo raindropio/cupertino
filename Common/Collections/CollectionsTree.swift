@@ -69,7 +69,10 @@ extension CollectionsTree {
                             .transition(.move(edge: .bottom))
                     }
                 } header: {
-                    CollectionsGroupHeader(group: groups[index])
+                    CollectionsGroupHeader(
+                        group: groups[index],
+                        single: groups.count == 1
+                    )
                 }
                     #if os(macOS)
                     .collapsible(false)

@@ -103,7 +103,11 @@ extension Raindrop: Codable, EncodableWithConfiguration {
         }
         
         if compare?.cover != cover {
-            try container.encode(cover, forKey: .cover)
+            if cover?.host == Rest.base.render.host {
+                try container.encode("<screenshot>", forKey: .cover)
+            } else {
+                try container.encode(cover, forKey: .cover)
+            }
         }
         
         if compare?.media != media {

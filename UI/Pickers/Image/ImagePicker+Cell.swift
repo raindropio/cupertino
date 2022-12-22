@@ -14,19 +14,22 @@ extension ImagePicker {
                     Thumbnail(
                         url,
                         width: width,
-                        height: height
+                        height: height,
+                        cornerRadius: 4
                     )
                 } else if let width {
                     Thumbnail(
                         url,
                         width: width,
-                        aspectRatio: aspectRatio
+                        aspectRatio: aspectRatio,
+                        cornerRadius: 4
                     )
                 } else if let height {
                     Thumbnail(
                         url,
                         height: height,
-                        aspectRatio: aspectRatio
+                        aspectRatio: aspectRatio,
+                        cornerRadius: 4
                     )
                 }
             }

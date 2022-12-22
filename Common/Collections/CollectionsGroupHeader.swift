@@ -11,6 +11,7 @@ struct CollectionsGroupHeader: View {
     @State private var askRemove = false
     
     var group: CGroup
+    var single = false
     
     func collapseAll() {
         dispatch.sync(CollectionsAction.toggleMany)
@@ -51,34 +52,39 @@ struct CollectionsGroupHeader: View {
             
             if !group.hidden {
                 Menu {
-                    Button(action: collapseAll) {
-                        Label("Expand/collapse all", systemImage: "chevron.down.square")
+                    Group {
+                        Button(action: collapseAll) {
+                            Label("Expand/collapse all", systemImage: "chevron.down.square")
+                        }
+                        
+                        Menu {
+                            Button("By name (A-Z)") { sortAll(.titleAsc) }
+                            Button("By name (Z-A)") { sortAll(.titleDesc) }
+                            Button("By count") { sortAll(.countDesc) }
+                        } label: {
+                            Label("Sort all", systemImage: "arrow.up.arrow.down")
+                        }
                     }
+                        .disabled(group.collections.isEmpty)
                     
-                    Menu {
-                        Button("By name (A-Z)") { sortAll(.titleAsc) }
-                        Button("By name (Z-A)") { sortAll(.titleDesc) }
-                        Button("By count") { sortAll(.countDesc) }
-                    } label: {
-                        Label("Sort all", systemImage: "textformat")
-                    }
-                    
-                    Divider()
-                    
-                    Button(action: toggle) {
-                        Label("Hide group", systemImage: "eye.slash")
-                    }
-                    
-                    Button {
-                        askRename = true
-                    } label: {
-                        Label("Rename group", systemImage: "pencil")
-                    }
-                    
-                    Button(role: .destructive) {
-                        askRemove = true
-                    } label: {
-                        Label("Delete group", systemImage: "trash")
+                    if !single {
+                        Divider()
+                        
+                        Button(action: toggle) {
+                            Label("Hide group", systemImage: "eye.slash")
+                        }
+                        
+                        Button {
+                            askRename = true
+                        } label: {
+                            Label("Rename group", systemImage: "pencil")
+                        }
+                        
+                        Button(role: .destructive) {
+                            askRemove = true
+                        } label: {
+                            Label("Delete group", systemImage: "trash")
+                        }
                     }
                 } label: {
                     Image(systemName: "ellipsis")

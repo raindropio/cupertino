@@ -1,14 +1,5 @@
 extension RaindropsReducer {
     func deleteMany(state: inout S, pick: RaindropsPick) async throws -> ReduxAction? {
-        //make sure to not remove entirely all!
-        switch pick {
-        case .all(let find):
-            if find.collectionId == 0 && !find.isSearching {
-                return nil
-            }
-        default: break
-        }
-        
         let count = try await rest.raindropsDelete(pick: pick)
         if count > 0 {
             return A.deletedMany(pick)
