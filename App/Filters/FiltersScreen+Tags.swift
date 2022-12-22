@@ -28,9 +28,17 @@ extension FiltersScreen {
         }
 
         var body: some View {
-            Section {
-                ForEach(items) { tag in
-                    if tag.kind != .notag {
+            if items.isEmpty {
+                EmptyState("No tags") {
+                    Image(systemName: "number")
+                } actions: {
+                    SafariLink("Learn more", destination: URL(string: "https://help.raindrop.io/tags")!)
+                }
+                    .frame(maxWidth: .infinity)
+                    .clearSection()
+            } else {
+                Section {
+                    ForEach(items) { tag in
                         FilterRow(tag)
                             .badge(tag.count)
                             .swipeActions {
@@ -39,10 +47,10 @@ extension FiltersScreen {
                             }
                             .backport.tag(tag)
                     }
-                }
-            } header: {
-                if !items.isEmpty {
-                    Text("\(items.count) tags")
+                } header: {
+                    if !items.isEmpty {
+                        Text("\(items.count) tags")
+                    }
                 }
             }
         }

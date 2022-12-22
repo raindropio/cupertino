@@ -78,16 +78,21 @@ extension ProFeatures {
         
         var body: some View {
             Label {
-                VStack(alignment: .leading, spacing: 16) {
+                HStack(alignment: .top) {
                     VStack(alignment: .leading, spacing: 8) {
                         Text(title)
                             .font(.headline)
                         
                         Text(description)
                     }
+                        .frame(maxWidth: .infinity, alignment: .leading)
                     
-                    SafariLink("Learn more", destination: link)
-                        .font(.callout)
+                    SafariLink(destination: link) {
+                        Text(Image(systemName: "arrow.up.forward"))
+                            .imageScale(.small)
+                            .backport.fontWeight(.semibold)
+                    }
+                        .foregroundStyle(.tertiary)
                 }
                     .padding(.vertical, 8)
             } icon: {

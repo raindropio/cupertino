@@ -8,6 +8,16 @@ public struct FiltersConfig: Codable, Equatable {
         case tagsHidden = "tags_hide"
         case tagsSort = "tags_sort"
     }
+    
+    public init() {}
+    
+    public init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        
+        simpleHidden = (try? container.decode(type(of: simpleHidden), forKey: .simpleHidden)) ?? false
+        tagsHidden = (try? container.decode(type(of: tagsHidden), forKey: .tagsHidden)) ?? false
+        tagsSort = (try? container.decode(type(of: tagsSort), forKey: .tagsSort)) ?? .title
+    }
 }
 
 extension FiltersConfig {

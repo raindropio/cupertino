@@ -19,7 +19,7 @@ struct FiltersScreen: View {
         Memorized(
             search: $search,
             simple: searched(f.state.simple()),
-            tags: searched(f.state.tags())
+            tags: searched(f.state.tags().filter { $0.kind != .notag })
         )
             .animation(.default, value: search)
     }

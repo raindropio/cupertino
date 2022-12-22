@@ -3,15 +3,9 @@ import StoreKit
 
 func getSKReceipt() async throws -> String {
     //refresh
-    let _: Bool = try await withCheckedThrowingContinuation { continuation in
-        let _ = ReceiptRefresher { error in
-            if let error {
-                continuation.resume(throwing: error)
-            } else {
-                continuation.resume(returning: true)
-            }
-        }
-    }
+    var refresher: ReceiptRefresher? = .init()
+    try await refresher?.refresh()
+    refresher = nil
     
     //read from file
     if let appStoreReceiptURL = Bundle.main.appStoreReceiptURL,
@@ -24,28 +18,33 @@ func getSKReceipt() async throws -> String {
 }
 
 fileprivate class ReceiptRefresher: NSObject, SKRequestDelegate {
-    var callback: ((Error?) -> Void)? = nil
+    private var request: SKReceiptRefreshRequest
+    private var continuation: CheckedContinuation<Void, Error>?
     
-    init(callback: @escaping (Error?) -> Void) {
-        self.callback = callback
+    override init() {
+        request = SKReceiptRefreshRequest(receiptProperties: nil)
         super.init()
-        
-        let request = SKReceiptRefreshRequest(receiptProperties: nil)
         request.delegate = self
-        request.start()
+    }
+    
+    func refresh() async throws {
+        try await withCheckedThrowingContinuation { continuation in
+            self.continuation = continuation
+            request.start()
+        }
     }
     
     func requestDidFinish(_ request: SKRequest) {
-        if request is SKReceiptRefreshRequest {
-            callback?(nil)
-            callback = nil
-        }
+        continuation?.resume()
+        request.cancel()
     }
     
     func request(_ request: SKRequest, didFailWithError error: Error) {
         if request is SKReceiptRefreshRequest {
-            callback?(error)
-            callback = nil
+            //refresh can end with error even if refresh is complete
+            continuation?.resume()
+        } else {
+            continuation?.resume(throwing: error)
         }
     }
 }

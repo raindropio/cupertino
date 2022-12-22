@@ -12,7 +12,7 @@ extension Rest {
 extension Rest {
     public func subscriptionRestore(receipt: String) async throws {
         let res: RestoreResponse = try await fetch.post(
-            "user/subscription",
+            "user/subscription/apple_restore",
             body: RestoreRequest(receipt: receipt)
         )
         

@@ -8,6 +8,7 @@ extension SubscriptionReducer {
     func reload(state: inout S) async throws -> ReduxAction? {
         do {
             let subscription = try await rest.subscriptionGet()
+            guard subscription.status != .unknown else { return nil }
             return A.reloaded(subscription)
         }
         catch is CancellationError {
