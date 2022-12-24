@@ -51,9 +51,7 @@ extension CollectionsState {
                 KeyPathComparator(\.title)
             ])
     }
-}
-
-extension CollectionsState {
+    
     public var isEmpty: Bool {
         user.isEmpty && !system.contains { $0.1.count > 0 }
     }
@@ -61,25 +59,5 @@ extension CollectionsState {
     public var expandedCount: Int {
         groups.filter { $0.hidden }.count +
         user.filter { $0.value.expanded }.count
-    }
-}
-
-extension CollectionsState {
-    mutating func removeFromGroups(_ id: UserCollection.ID) {
-        groups = groups.map {
-            var group = $0
-            group.collections = group.collections.filter { $0 != id }
-            return group
-        }
-    }
-    
-    //set correct `sort` value for siblings
-    mutating func fixSiblings(of collection: UserCollection) {
-        if let parent = collection.parent {
-            let siblings = childrens(of: parent).filter { $0.id != collection.id }
-            for (i, sibling) in siblings.enumerated() {
-                user[sibling.id]?.sort = i >= (collection.sort ?? 0) ? i + 1 : i
-            }
-        }
     }
 }

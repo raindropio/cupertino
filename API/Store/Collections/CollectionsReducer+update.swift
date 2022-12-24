@@ -23,52 +23,9 @@ extension CollectionsReducer {
     
     //MARK: - Receive updated/created collection from server
     func updated(state: inout S, collection: UserCollection) -> ReduxAction? {
-        let original = state.user[collection.id]
         state.user[collection.id] = collection
-        
-        //reorder or change of a parent happen
-        if (
-            original?.parent != collection.parent ||
-            original?.sort != collection.sort
-        ) {
-            //become nested
-            if collection.parent != nil {
-                //reorder siblings (set correct `sort` value)
-                state.fixSiblings(of: collection)
-                
-                //remove from groups (server should do this by itself, just to make sure)
-                state.removeFromGroups(collection.id)
-                
-                return A.saveGroups
-            }
-            
-            //become root
-            if collection.parent == nil {
-                //originally belonged to group
-                var groupIndex = 0
-                if let original, let inGroup = state.location(of: original) {
-                    groupIndex = state.groups.firstIndex(of: inGroup) ?? 0
-                }
-                
-                //remove from groups (just to prevent duplicates)
-                state.removeFromGroups(collection.id)
-                
-                //insert to specific position inside group
-                if let sort = collection.sort {
-                    state.groups[groupIndex].collections
-                        .insert(
-                            collection.id,
-                            at: max(0, min(sort, state.groups[groupIndex].collections.count))
-                        )
-                } else {
-                    state.groups[groupIndex].collections
-                        .append(collection.id)
-                }
-                
-                return A.saveGroups
-            }
-        }
-        
-        return nil
+        state.reordered(collection.id)
+        state.clean()
+        return A.saveGroups
     }
 }

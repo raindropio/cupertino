@@ -8,12 +8,8 @@ extension CollectionsReducer {
     }
     
     func deleted(state: inout S, id: UserCollection.ID) -> ReduxAction? {
-        //remove collection item
         state.user[id] = nil
-        
-        //remove from groups
-        state.removeFromGroups(id)
-        
+        state.clean()
         return A.saveGroups
     }
 }
@@ -25,6 +21,7 @@ extension CollectionsReducer {
         else { return nil }
         
         state.groups.remove(at: index)
+        state.clean()
         
         return A.saveGroups
     }

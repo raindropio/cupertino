@@ -31,19 +31,7 @@ extension CollectionsReducer {
     //MARK: - 3
     func reloaded(state: inout S, groups: [CGroup], system: [SystemCollection], user: [UserCollection]) {
         state.status = .idle
-        state.groups = groups.map {
-            var group = $0
-            //keep only existings collections
-            group.collections = group.collections.filter { id in
-                user.contains { $0.id == id }
-            }
-            return group
-        }
-        
-        //create default groups
-        if state.groups.isEmpty {
-            state.groups = [.blank]
-        }
+        state.groups = groups
         
         //update system
         system.forEach {
@@ -59,21 +47,6 @@ extension CollectionsReducer {
             state.user[$0.id] = $0
         }
 
-        //out of groups fix
-        state.user
-            .filter { u in
-                u.value.parent == nil &&
-                !state.groups.contains { $0.collections.contains(u.value.id) }
-            }
-            .forEach {
-                state.groups[state.groups.indices.first!].collections.append($0.key)
-            }
-        
-        //sort value fix
-        for group in groups {
-            for (index, id) in group.collections.enumerated() {
-                state.user[id]?.sort = index
-            }
-        }
+        state.clean()
     }
 }
