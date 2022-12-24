@@ -100,9 +100,8 @@ extension UserCollection: Codable, EncodableWithConfiguration {
             try container.encode(view, forKey: .view)
         }
         
-        if compare?.sort != sort {
-            try container.encode(sort, forKey: .sort)
-        }
+        //always send sort!
+        try container.encode(sort, forKey: .sort)
         
         if compare?.cover != cover {
             try container.encode(cover != nil ? [cover] : [], forKey: .cover)

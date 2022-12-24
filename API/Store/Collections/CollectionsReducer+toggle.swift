@@ -5,6 +5,7 @@ extension CollectionsReducer {
         
         //update in place (faster)
         state.user[id]!.expanded = !state.user[id]!.expanded
+        state.animation = .init()
         
         return A.update(state.user[id]!, original: original)
     }
@@ -14,6 +15,7 @@ extension CollectionsReducer {
         else { return nil }
         
         state.groups[index].hidden = !state.groups[index].hidden
+        state.animation = .init()
         
         return A.saveGroups
     }

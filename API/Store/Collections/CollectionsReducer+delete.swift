@@ -10,6 +10,8 @@ extension CollectionsReducer {
     func deleted(state: inout S, id: UserCollection.ID) -> ReduxAction? {
         state.user[id] = nil
         state.clean()
+        state.animation = .init()
+
         return A.saveGroups
     }
 }

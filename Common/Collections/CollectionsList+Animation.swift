@@ -7,7 +7,7 @@ extension CollectionsList {
         
         func body(content: Content) -> some View {
             content
-                .animation(.default, value: collections.state.expandedCount)
+                .animation(.default, value: collections.state.animation)
         }
     }
 }

@@ -26,6 +26,9 @@ extension CollectionsReducer {
         state.user[collection.id] = collection
         state.reordered(collection.id)
         state.clean()
+        
+        state.animation = .init()
+        
         return A.saveGroups
     }
 }

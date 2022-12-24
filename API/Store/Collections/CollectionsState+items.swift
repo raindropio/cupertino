@@ -51,13 +51,4 @@ extension CollectionsState {
                 KeyPathComparator(\.title)
             ])
     }
-    
-    public var isEmpty: Bool {
-        user.isEmpty && !system.contains { $0.1.count > 0 }
-    }
-    
-    public var expandedCount: Int {
-        groups.filter { $0.hidden }.count +
-        user.filter { $0.value.expanded }.count
-    }
 }
