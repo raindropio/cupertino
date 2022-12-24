@@ -3,16 +3,11 @@ import Nuke
 import NukeUI
 
 public struct Thumbnail {
-    #if os(macOS)
-    @Environment(\.displayScale) private var displayScale
-    #else
-    private var displayScale = 1.0
-    #endif
     @State private var reload: UUID?
     
     var url: URL?
-    var width: Double?
-    var height: Double?
+    var width: CGFloat?
+    var height: CGFloat?
     var aspectRatio: Double?
     var cornerRadius: Double = 0
     
@@ -68,26 +63,20 @@ public struct Thumbnail {
 }
 
 extension Thumbnail: View {
-    var resize: ImageProcessors.Resize {
+    var resize: ImageProcessors.Resize? {
         if let width, let height {
             return .init(
-                size: .init(width: width * displayScale, height: height * displayScale),
-                contentMode: .aspectFill,
-                crop: true
-            )
-        } else if let width {
-            return .init(width: width * displayScale)
-        } else if let height {
-            return .init(height: height * displayScale)
-        } else {
-            let w = Double(Int(width ?? (height ?? 0) / (aspectRatio ?? 1)))
-            let h = Double(Int(height ?? (width ?? 0) / (aspectRatio ?? 1)))
-            return .init(
-                size: .init(width: w * displayScale, height: h * displayScale),
+                size: .init(width: width, height: height),
+                unit: .points,
                 contentMode: .aspectFit,
                 crop: true
             )
+        } else if let width {
+            return .init(width: width, unit: .points)
+        } else if let height {
+            return .init(height: height, unit: .points)
         }
+        return nil
     }
     
     var roundedCorner: ImageProcessors.RoundedCorners {
@@ -106,7 +95,7 @@ extension Thumbnail: View {
     var base: LazyImage<NukeUI.Image> {
         LazyImage(url: url)
             .animation(nil)
-            .processors([resize, roundedCorner])
+            .processors((resize != nil ? [resize!] : []) + [roundedCorner])
             .pipeline(Self.pipeline)
             .priority(.veryLow)
     }
@@ -115,13 +104,15 @@ extension Thumbnail: View {
         //fixed size
         if let width, let height {
             base
-                .frame(width: width, height: height)
+                .frame(idealWidth: width, idealHeight: height)
                 .fixedSize()
         }
         //aspect ratio
         else if let aspectRatio {
-            base
-                .aspectRatio(aspectRatio, contentMode: .fill)
+            ZStack {
+                base.layoutPriority(-1)
+                Color.clear.aspectRatio(aspectRatio, contentMode: .fit).frame(maxWidth: .infinity)
+            }
         }
         //downsampled
         else {
@@ -129,8 +120,9 @@ extension Thumbnail: View {
                 .onSuccess(saveAspectRatio)
                 .aspectRatio(
                     url != nil ? Self.cacheAspect[url!] : 2,
-                    contentMode: .fill
+                    contentMode: .fit
                 )
+                .frame(height: height)
                 .tag(reload)
         }
     }

@@ -30,15 +30,13 @@ struct BrowseItem: View {
             
         case .grid:
             VStack(alignment: .leading, spacing: 0) {
-                Thumbnail(cover, width: 250, aspectRatio: 1.333)
-                    .frame(maxWidth: .infinity)
+                Thumbnail(cover, width: 250, aspectRatio: 1.5)
                 Details(find: find, raindrop: raindrop, vertical: true)
             }
             
         case .masonry:
             VStack(alignment: .leading, spacing: 0) {
                 Thumbnail(cover, width: 250)
-                    .frame(maxWidth: .infinity)
                 Details(find: find, raindrop: raindrop, vertical: true)
             }
         }
