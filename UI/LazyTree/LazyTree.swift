@@ -8,7 +8,7 @@ public struct LazyTree<I: Identifiable & Equatable, C: View> {
     //key path's
     var parent: KeyPath<I, I.ID?>
     var expanded: KeyPath<I, Bool>
-    var sort: KeyPath<I, Int>
+    var sort: KeyPath<I, Int?>
     
     //actions
     public typealias ToggleClosue = (I.ID) -> Void
@@ -25,7 +25,7 @@ public struct LazyTree<I: Identifiable & Equatable, C: View> {
         items: [I.ID : I],
         parent: KeyPath<I, I.ID?>,
         expanded: KeyPath<I, Bool>,
-        sort: KeyPath<I, Int>,
+        sort: KeyPath<I, Int?>,
         toggle: @escaping ToggleClosue,
         reorder: @escaping ReorderClosue,
         content: @escaping (I) -> C
@@ -69,7 +69,7 @@ extension LazyTree {
     func childrens(_ parentId: I.ID, level: Double) -> [Leaf] {
         items
             .filter { $0.value[keyPath: parent] == parentId }
-            .sorted(by: { $0.value[keyPath: sort] < $1.value[keyPath: sort] })
+            .sorted(by: { ($0.value[keyPath: sort] ?? 0) < ($1.value[keyPath: sort] ?? 0) })
             .flatMap { branch($0.value, level: level) }
     }
 }

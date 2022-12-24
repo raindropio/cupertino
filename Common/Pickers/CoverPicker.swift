@@ -17,6 +17,7 @@ struct CoverPicker: View {
                 height: 96,
                 cornerRadius: 3
             )
+                .scaledToFit()
                 .frame(height: 96)
                 .frame(maxWidth: .infinity)
         }

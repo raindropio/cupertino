@@ -68,5 +68,12 @@ extension CollectionsReducer {
             .forEach {
                 state.groups[state.groups.indices.first!].collections.append($0.key)
             }
+        
+        //sort value fix
+        for group in groups {
+            for (index, id) in group.collections.enumerated() {
+                state.user[id]?.sort = index
+            }
+        }
     }
 }

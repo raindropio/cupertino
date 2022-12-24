@@ -78,7 +78,7 @@ extension CollectionsState {
         if let parent = collection.parent {
             let siblings = childrens(of: parent).filter { $0.id != collection.id }
             for (i, sibling) in siblings.enumerated() {
-                user[sibling.id]?.sort = i >= collection.sort ? i + 1 : i
+                user[sibling.id]?.sort = i >= (collection.sort ?? 0) ? i + 1 : i
             }
         }
     }

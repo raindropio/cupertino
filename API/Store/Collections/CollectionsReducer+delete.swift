@@ -7,16 +7,14 @@ extension CollectionsReducer {
         return A.deleted(id)
     }
     
-    func deleted(state: inout S, id: UserCollection.ID) {
+    func deleted(state: inout S, id: UserCollection.ID) -> ReduxAction? {
         //remove collection item
         state.user[id] = nil
         
         //remove from groups
-        state.groups = state.groups.map {
-            var group = $0
-            group.collections = group.collections.filter { $0 != id }
-            return group
-        }
+        state.removeFromGroups(id)
+        
+        return A.saveGroups
     }
 }
 

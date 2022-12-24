@@ -16,7 +16,7 @@ public struct UserCollection: CollectionType {
     public var `public` = false
     public var expanded = false
     public var view = CollectionView.list
-    public var sort = 0
+    public var sort: Int? = nil
     public var access = CollectionAccess()
     public var collaborators: String?
     public var creatorRef: CreatorRef?

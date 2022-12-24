@@ -24,7 +24,7 @@ public actor CollectionsReducer: Reducer {
             return try await create(state: &state, draft: collection)
             
         case .created(let collection):
-            return created(state: &state, collection: collection)
+            return updated(state: &state, collection: collection)
         
         //update
         case .update(let collection, let original):
@@ -41,7 +41,7 @@ public actor CollectionsReducer: Reducer {
             return try await delete(state: &state, id: id)
             
         case .deleted(let id):
-            deleted(state: &state, id: id)
+            return deleted(state: &state, id: id)
             
         //groups
         case .saveGroups:

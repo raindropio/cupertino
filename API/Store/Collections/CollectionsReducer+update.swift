@@ -21,7 +21,7 @@ extension CollectionsReducer {
         }
     }
     
-    //MARK: - Receive updated collection from server
+    //MARK: - Receive updated/created collection from server
     func updated(state: inout S, collection: UserCollection) -> ReduxAction? {
         let original = state.user[collection.id]
         state.user[collection.id] = collection
@@ -54,11 +54,16 @@ extension CollectionsReducer {
                 state.removeFromGroups(collection.id)
                 
                 //insert to specific position inside group
-                state.groups[groupIndex].collections
-                    .insert(
-                        collection.id,
-                        at: max(0, min(collection.sort, state.groups[groupIndex].collections.count))
-                    )
+                if let sort = collection.sort {
+                    state.groups[groupIndex].collections
+                        .insert(
+                            collection.id,
+                            at: max(0, min(sort, state.groups[groupIndex].collections.count))
+                        )
+                } else {
+                    state.groups[groupIndex].collections
+                        .append(collection.id)
+                }
                 
                 return A.saveGroups
             }

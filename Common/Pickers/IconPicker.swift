@@ -20,6 +20,7 @@ struct IconPicker: View {
                         .allowsHitTesting(false)
                 }
             }
+                .frame(height: 64)
                 .frame(maxWidth: .infinity)
         }
             .clearSection()
@@ -33,7 +34,7 @@ extension IconPicker {
         @EnvironmentObject private var i: IconsStore
         @EnvironmentObject private var dispatch: Dispatcher
         @Binding var selection: URL?
-        @SceneStorage("select-icon-filter") private var search = ""
+        @State private var search = ""
         
         var isLoading: Bool {
             i.state.loading(search)

@@ -41,7 +41,7 @@ extension UserCollection: Codable, EncodableWithConfiguration {
         `public` = (try? container.decode(type(of: `public`), forKey: .public)) ?? false
         expanded = (try? container.decode(type(of: expanded), forKey: .expanded)) ?? false
         view = (try? container.decode(type(of: view), forKey: .view)) ?? .list
-        sort = (try? container.decode(type(of: sort), forKey: .sort)) ?? 0
+        sort = try? container.decode(type(of: sort), forKey: .sort)
         access = (try? container.decode(type(of: access), forKey: .access)) ?? .init()
         creatorRef = try? container.decode(type(of: creatorRef), forKey: .creatorRef)
         cover = (try? container.decodeIfPresent([URL].self, forKey: .cover))?.first
