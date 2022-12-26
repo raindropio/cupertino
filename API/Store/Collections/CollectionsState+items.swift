@@ -12,6 +12,14 @@ extension CollectionsState {
             .sorted(using: KeyPathComparator(\.sort))
     }
     
+    public func childrensRecursive(of id: UserCollection.ID) -> [UserCollection] {
+        var found = childrens(of: id)
+        for c in found {
+            found += childrensRecursive(of: c.id)
+        }
+        return found
+    }
+    
     public func location(of collection: UserCollection) -> [UserCollection] {
         guard
             let parentId = collection.parent,

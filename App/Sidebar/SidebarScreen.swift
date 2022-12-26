@@ -6,6 +6,7 @@ import Common
 struct SidebarScreen {
     @EnvironmentObject private var app: AppRouter
     @EnvironmentObject private var settings: SettingsRouter
+    @Environment(\.editMode) private var editMode
     
     @State private var selection = Set<FindBy>()
 }
@@ -19,6 +20,9 @@ extension SidebarScreen {
     }
     
     func selectionChange(_ selection: Set<FindBy>) {
+        guard editMode?.wrappedValue != .active
+        else { return }
+                
         if let first = selection.first {
             app.path = [.browse(first)]
         } else {

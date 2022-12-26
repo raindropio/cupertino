@@ -38,10 +38,14 @@ public actor CollectionsReducer: Reducer {
             
         //delete
         case .delete(let id):
-            return try await delete(state: &state, id: id)
+            return A.deleteMany([id], nested: true)
             
-        case .deleted(let id):
-            return deleted(state: &state, id: id)
+        case .deleteMany(let ids, let nested):
+            return try await deleteMany(state: &state, ids: ids, nested: nested)
+            
+        //merge
+        case .merge(let ids, let nested):
+            return try await merge(state: &state, ids: ids, nested: nested)
             
         //groups
         case .saveGroups:

@@ -44,10 +44,7 @@ extension BrowseScreen.Toolbar {
                         if editMode?.wrappedValue != .active {
                             Menu {
                                 EditButton("Select")
-                                
-                                if let user = collection as? UserCollection {
-                                    UserCollectionMenu(user)
-                                }
+                                CollectionsMenu(collection.id)
                             } label: {
                                 Label(collection.title, systemImage: "ellipsis.circle.fill")
                                     .symbolRenderingMode(.hierarchical)

@@ -86,3 +86,34 @@ extension Rest {
         }
     }
 }
+
+//MARK: - Delete collection
+extension Rest {
+    public func collectionDeleteMany(ids: Set<UserCollection.ID>) async throws {
+        let res: ResultResponse = try await fetch.delete(
+            "collections",
+            body: IdsRequest(ids: .init(ids))
+        )
+        if !res.result {
+            throw RestError.unknown("server just ignored")
+        }
+    }
+}
+
+//MARK: - Merge
+extension Rest {
+    public func collectionMerge(ids: Set<UserCollection.ID>, to: UserCollection.ID) async throws {
+        let res: ResultResponse = try await fetch.put(
+            "collections/merge",
+            body: MergeRequest(ids: ids, to: to)
+        )
+        if !res.result {
+            throw RestError.unknown("server just ignored")
+        }
+    }
+    
+    fileprivate struct MergeRequest: Encodable {
+        var ids: Set<UserCollection.ID>
+        var to: UserCollection.ID
+    }
+}

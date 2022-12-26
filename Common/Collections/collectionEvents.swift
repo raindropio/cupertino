@@ -14,7 +14,9 @@ fileprivate struct CollectionEvents: ViewModifier {
     
     @State private var create: CollectionStack.NewLocation?
     @State private var edit: UserCollection?
-    @State private var delete: UserCollection.ID?
+    @State private var merge: Set<UserCollection.ID> = .init()
+    @State private var merging = false
+    @State private var delete: Set<UserCollection.ID> = .init()
     @State private var deleting = false
     
     func body(content: Content) -> some View {
@@ -23,16 +25,32 @@ fileprivate struct CollectionEvents: ViewModifier {
             .environmentObject(event)
             .onReceive(event.create) { create = $0 }
             .onReceive(event.edit) { edit = $0 }
+            .onReceive(event.merge) { merge = $0; merging = true }
             .onReceive(event.delete) { delete = $0; deleting = true }
             //sheets
             .sheet(item: $create, content: CollectionStack.init)
             .sheet(item: $edit, content: CollectionStack.init)
-            .alert("Are you sure?", isPresented: $deleting, presenting: delete) { id in
-                Button("Delete collection", role: .destructive) {
-                    dispatch.sync(CollectionsAction.delete(id))
+            //merge
+            .alert("Are you sure?", isPresented: $merging, presenting: merge) { ids in
+                Button("Merge", role: .destructive) {
+                    dispatch.sync(CollectionsAction.merge(ids, nested: false))
+                }
+                
+                Button("Merge (including nested)", role: .destructive) {
+                    dispatch.sync(CollectionsAction.merge(ids, nested: true))
+                }
+            }
+            //delete
+            .alert("Are you sure?", isPresented: $deleting, presenting: delete) { ids in
+                Button("Delete", role: .destructive) {
+                    dispatch.sync(CollectionsAction.deleteMany(ids, nested: false))
+                }
+                
+                Button("Delete (including nested)", role: .destructive) {
+                    dispatch.sync(CollectionsAction.deleteMany(ids, nested: true))
                 }
             } message: { _ in
-                Text("This action will delete collection and all nested collections.\nBookmarks will be moved to Trash.")
+                Text("Bookmarks will be moved to Trash")
             }
     }
 }
@@ -40,7 +58,8 @@ fileprivate struct CollectionEvents: ViewModifier {
 class CollectionEvent: ObservableObject {
     fileprivate let create: PassthroughSubject<CollectionStack.NewLocation, Never> = PassthroughSubject()
     fileprivate let edit: PassthroughSubject<UserCollection, Never> = PassthroughSubject()
-    fileprivate let delete: PassthroughSubject<UserCollection.ID, Never> = PassthroughSubject()
+    fileprivate let merge: PassthroughSubject<Set<UserCollection.ID>, Never> = PassthroughSubject()
+    fileprivate let delete: PassthroughSubject<Set<UserCollection.ID>, Never> = PassthroughSubject()
 
     func create(_ location: CollectionStack.NewLocation) {
         create.send(location)
@@ -50,7 +69,11 @@ class CollectionEvent: ObservableObject {
         edit.send(collection)
     }
     
-    func delete(_ id: UserCollection.ID) {
-        delete.send(id)
+    func merge(_ ids: Set<UserCollection.ID>) {
+        merge.send(ids)
+    }
+    
+    func delete(_ ids: Set<UserCollection.ID>) {
+        delete.send(ids)
     }
 }

@@ -1,18 +1,20 @@
 extension CollectionsReducer {
-    func delete(state: inout S, id: UserCollection.ID) async throws -> ReduxAction? {
-        guard id > 0 else { return nil }
+    func deleteMany(state: inout S, ids: Set<UserCollection.ID>, nested: Bool) async throws -> ReduxAction? {
+        var targets = Set<UserCollection.ID>()
+        for id in ids {
+            guard id > 0 else { continue }
+            targets.insert(id)
+            if nested {
+                targets.formUnion(
+                    Set(state.childrensRecursive(of: id).map { $0.id })
+                )
+            }
+        }
         
-        try await rest.collectionDelete(id: id)
+        guard !targets.isEmpty else { return nil }
         
-        return A.deleted(id)
-    }
-    
-    func deleted(state: inout S, id: UserCollection.ID) -> ReduxAction? {
-        state.user[id] = nil
-        state.clean()
-        state.animation = .init()
-
-        return A.saveGroups
+        try await rest.collectionDeleteMany(ids: targets)
+        return A.reload
     }
 }
 

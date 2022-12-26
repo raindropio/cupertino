@@ -10,6 +10,7 @@ public struct FilterRow: View, Equatable {
     
     public var body: some View {        
         Label(filter.title, systemImage: filter.systemImage)
+            .symbolVariant(.fill)
             .lineLimit(1)
             .badge(filter.count)
             .tint(filter.color)

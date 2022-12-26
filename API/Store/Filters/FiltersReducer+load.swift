@@ -25,7 +25,7 @@ extension FiltersReducer {
             }
         }
         
-        if state.tags[find] != tags {
+        if state.tags[find]?.count != tags.count {
             state.animation = .init()
         }
                 

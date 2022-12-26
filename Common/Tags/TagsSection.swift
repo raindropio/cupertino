@@ -28,7 +28,7 @@ extension TagsSection where T == FindBy {
 }
 
 extension TagsSection {
-    fileprivate struct Memorized: View {        
+    fileprivate struct Memorized: View {
         var tag: (Filter) -> T
         var items: [Filter]
 
@@ -38,7 +38,7 @@ extension TagsSection {
                     ForEach(items) { item in
                         FilterRow(item)
                             .swipeActions {
-                                TagsMenu([item.title])
+                                TagsMenu(Set([item]))
                             }
                             .backport.tag(tag(item))
                     }

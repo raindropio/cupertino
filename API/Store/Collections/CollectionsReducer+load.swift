@@ -42,6 +42,10 @@ extension CollectionsReducer {
         }
 
         //user collections
+        if state.user.count != user.count {
+            state.animation = .init()
+        }
+        
         state.user = .init()
         user.forEach {
             state.user[$0.id] = $0

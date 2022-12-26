@@ -24,8 +24,10 @@ public enum CollectionsAction: ReduxAction {
     case updated(UserCollection)
     case updateMany(UpdateCollectionsRequest)
     //delete
-    case delete(UserCollection.ID)
-    case deleted(UserCollection.ID)
+    case delete(UserCollection.ID) // -> deleteMany([], nested: true)
+    case deleteMany(Set<UserCollection.ID>, nested: Bool)
+    //merge
+    case merge(Set<UserCollection.ID>, nested: Bool)
     //groups
     case saveGroups
     case groupsUpdated([CGroup])
