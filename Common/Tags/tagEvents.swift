@@ -8,12 +8,13 @@ public extension View {
     }
 }
 
-fileprivate struct TagEvents: ViewModifier {
-    @EnvironmentObject private var dispatch: Dispatcher
+struct TagEvents: ViewModifier {
     @StateObject private var event = TagEvent()
     
     @State private var rename: String?
+    @State private var renaming = false
     @State private var merge: Set<String>?
+    @State private var merging = false
     @State private var delete: Set<String>?
     @State private var deleting = false
     
@@ -21,21 +22,13 @@ fileprivate struct TagEvents: ViewModifier {
         content
             //receive events
             .environmentObject(event)
-            .onReceive(event.rename) { rename = $0 }
-            .onReceive(event.merge) { merge = $0 }
+            .onReceive(event.rename) { rename = $0; renaming = true }
+            .onReceive(event.merge) { merge = $0; merging = true }
             .onReceive(event.delete) { delete = $0; deleting = true }
-            //sheets
-            .sheet(item: $rename, content: TagRenameStack.init)
-            .sheet(item: $merge, content: TagsMergeStack.init)
-            .alert("Are you sure?", isPresented: $deleting, presenting: delete) { tags in
-                Button("Delete \(tags.count) tags", role: .destructive) {
-                    dispatch.sync(FiltersAction.delete(
-                        .init(
-                            tags.map { .init(.tag($0)) }
-                        )
-                    ))
-                }
-            }
+            //alerts
+            .alert("Rename", isPresented: $renaming, presenting: rename, actions: Rename.init)
+            .alert("Merge", isPresented: $merging, presenting: merge, actions: Merge.init)
+            .alert("Are you sure?", isPresented: $deleting, presenting: delete, actions: Delete.init)
     }
 }
 

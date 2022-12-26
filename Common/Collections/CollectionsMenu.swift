@@ -23,7 +23,8 @@ fileprivate struct _CollectionsMenu: View {
 
     var ids: Set<Int>
     
-    var body: some View {
+    @ViewBuilder
+    func user(_ ids: Set<Int>) -> some View {
         if !ids.isEmpty {
             if ids.count == 1, let id = ids.first {
                 if let collection = c.state.user[id] {
@@ -59,5 +60,9 @@ fileprivate struct _CollectionsMenu: View {
             }
                 .tint(.red)
         }
+    }
+    
+    var body: some View {
+        user(ids.filter { $0 > 0 })
     }
 }

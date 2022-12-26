@@ -65,16 +65,16 @@ extension CollectionGroups {
                             } label: {
                                 Label("Sort all", systemImage: "arrow.up.arrow.down")
                             }
+                            
+                            Divider()
                         }
                         .disabled(group.collections.isEmpty)
                         
+                        Button(action: toggle) {
+                            Label("Hide group", systemImage: "eye.slash")
+                        }
+                        
                         if !single {
-                            Divider()
-                            
-                            Button(action: toggle) {
-                                Label("Hide group", systemImage: "eye.slash")
-                            }
-                            
                             Button {
                                 askRename = true
                             } label: {

@@ -47,12 +47,12 @@ fileprivate struct _TagsMenu: View {
                 }
             }
             
-            Button {
+            Button(role: .destructive) {
                 event.delete(tags)
             } label: {
                 Label("Delete", systemImage: "trash")
             }
-            .tint(.red)
+                .tint(.red)
         }
     }
 }

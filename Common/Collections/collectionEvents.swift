@@ -8,8 +8,7 @@ public extension View {
     }
 }
 
-fileprivate struct CollectionEvents: ViewModifier {
-    @EnvironmentObject private var dispatch: Dispatcher
+struct CollectionEvents: ViewModifier {
     @StateObject private var event = CollectionEvent()
     
     @State private var create: CollectionStack.NewLocation?
@@ -27,29 +26,11 @@ fileprivate struct CollectionEvents: ViewModifier {
             .onReceive(event.edit) { edit = $0 }
             .onReceive(event.merge) { merge = $0; merging = true }
             .onReceive(event.delete) { delete = $0; deleting = true }
-            //sheets
+            //sheets/alerts
             .sheet(item: $create, content: CollectionStack.init)
             .sheet(item: $edit, content: CollectionStack.init)
-            //merge
-            .alert("Are you sure?", isPresented: $merging, presenting: merge) { ids in
-                Button("Merge", role: .destructive) {
-                    dispatch.sync(CollectionsAction.merge(ids, nested: false))
-                }
-                
-                Button("Merge (including nested)", role: .destructive) {
-                    dispatch.sync(CollectionsAction.merge(ids, nested: true))
-                }
-            }
-            //delete
-            .alert("Are you sure?", isPresented: $deleting, presenting: delete) { ids in
-                Button("Delete", role: .destructive) {
-                    dispatch.sync(CollectionsAction.deleteMany(ids, nested: false))
-                }
-                
-                Button("Delete (including nested)", role: .destructive) {
-                    dispatch.sync(CollectionsAction.deleteMany(ids, nested: true))
-                }
-            } message: { _ in
+            .alert("Are you sure?", isPresented: $merging, presenting: merge, actions: Merge.init)
+            .alert("Are you sure?", isPresented: $deleting, presenting: delete, actions: Delete.init) { _ in
                 Text("Bookmarks will be moved to Trash")
             }
     }

@@ -1,0 +1,22 @@
+import SwiftUI
+import API
+import Combine
+
+extension TagEvents {
+    struct Delete: View {
+        @EnvironmentObject private var dispatch: Dispatcher
+        var tags: Set<String>
+        
+        func delete() {
+            dispatch.sync(FiltersAction.delete(
+                .init(
+                    tags.map { .init(.tag($0)) }
+                )
+            ))
+        }
+        
+        var body: some View {
+            Button("Delete \(tags.count) tags", role: .destructive, action: delete)
+        }
+    }
+}
