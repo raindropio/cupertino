@@ -11,7 +11,8 @@ public struct FilterRow: View, Equatable {
     public var body: some View {        
         Label(filter.title, systemImage: filter.systemImage)
             .lineLimit(1)
-            .symbolVariant(.fill)
+            .badge(filter.count)
             .tint(filter.color)
+            .listItemTint(filter.color)
     }
 }

@@ -28,5 +28,6 @@ public struct UserCollectionRow: View {
             CollectionIcon(collection)
         }
             .badge(collection.count)
+            .listItemTint(.secondary)
     }
 }

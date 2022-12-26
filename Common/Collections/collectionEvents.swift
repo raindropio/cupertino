@@ -27,8 +27,8 @@ fileprivate struct CollectionEvents: ViewModifier {
             //sheets
             .sheet(item: $create, content: CollectionStack.init)
             .sheet(item: $edit, content: CollectionStack.init)
-            .confirmationDialog("Are you sure?", isPresented: $deleting, presenting: delete) { id in
-                Button("Delete collections", role: .destructive) {
+            .alert("Are you sure?", isPresented: $deleting, presenting: delete) { id in
+                Button("Delete collection", role: .destructive) {
                     dispatch.sync(CollectionsAction.delete(id))
                 }
             } message: { _ in

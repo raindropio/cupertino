@@ -24,6 +24,10 @@ extension FiltersReducer {
             default: simple.append($0)
             }
         }
+        
+        if state.tags[find] != tags {
+            state.animation = .init()
+        }
                 
         state.simple[find] = simple
         state.tags[find] = tags

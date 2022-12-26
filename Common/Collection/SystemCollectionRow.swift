@@ -2,20 +2,20 @@ import SwiftUI
 import API
 
 struct SystemCollectionRow: View {
-    @EnvironmentObject private var collections: CollectionsStore
+    var collection: SystemCollection
     
-    var id: SystemCollection.ID
+    init(_ collection: SystemCollection) {
+        self.collection = collection
+    }
     
     var body: some View {
-        if let collection = collections.state.system[id] {
-            Label {
-                Text(collection.title)
-                    .lineLimit(1)
-            } icon: {
-                CollectionIcon(collection)
-            }
-                .badge(collection.count)
-                .listItemTint(collection.color)
+        Label {
+            Text(collection.title)
+                .lineLimit(1)
+        } icon: {
+            CollectionIcon(collection)
         }
+            .badge(collection.count)
+            .listItemTint(collection.color)
     }
 }

@@ -16,9 +16,6 @@ struct CollectionIcon<C: CollectionType>: View {
             #endif
         } else {
             Image(systemName: systemImage)
-                .imageScale(.large)
-                .symbolVariant(.fill)
-//                .backport.fontWeight(.light)
         }
     }
 }

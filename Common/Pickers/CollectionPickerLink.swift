@@ -28,8 +28,8 @@ fileprivate struct _Label: View {
         if let selection, let collection = c.state.user[selection] {
             UserCollectionRow(collection, withLocation: true)
                 .badge(0)
-        } else if let selection, selection < 0 {
-            SystemCollectionRow(id: selection)
+        } else if let selection, let collection = c.state.system[selection] {
+            SystemCollectionRow(collection)
                 .badge(0)
         } else {
             Text("None")

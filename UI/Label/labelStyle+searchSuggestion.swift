@@ -11,6 +11,7 @@ public struct SearchSuggestionLabelStyle: LabelStyle {
                 .foregroundColor(.primary)
         } icon: {
             configuration.icon
+                .symbolVariant(.fill)
                 .frame(width: 24, height: 24)
         }
     }

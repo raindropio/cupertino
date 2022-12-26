@@ -6,7 +6,6 @@ import Common
 struct SidebarScreen {
     @EnvironmentObject private var app: AppRouter
     @EnvironmentObject private var settings: SettingsRouter
-    @Environment(\.horizontalSizeClass) private var sizeClass
     
     @State private var selection = Set<FindBy>()
 }
@@ -37,7 +36,7 @@ extension SidebarScreen: View {
             .navigationTitle("Collections")
             .navigationBarTitleDisplayMode(isPhone ? .automatic : .inline)
             .toolbar {
-                ToolbarItem(placement: sizeClass == .regular ? .primaryAction : .cancellationAction) {
+                ToolbarItem(placement: isPhone ? .cancellationAction : .primaryAction) {
                     Button {
                         settings.open()
                     } label: {

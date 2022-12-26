@@ -40,6 +40,7 @@ extension _Optional: View {
             .listStyle(.insetGrouped)
             .headerProminence(.increased)
             #endif
+            .labelStyle(.sidebar)
             .collectionsAnimation()
             //search
             .searchable(text: $search)

@@ -76,7 +76,7 @@ struct SettingsHome: View {
         }
             .safeAreaInset(edge: .top) { Color.clear.frame(height: 4) }
             .navigationTitle("Settings")
-            .labelStyle(.settings)
+            .labelStyle(.sidebar)
             .toolbar {
                 ToolbarItem(placement: .confirmationAction) {
                     Button("Done", action: dismiss.callAsFunction)

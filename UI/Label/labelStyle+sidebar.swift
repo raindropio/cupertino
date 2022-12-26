@@ -2,10 +2,10 @@ import SwiftUI
 import Backport
 
 public extension LabelStyle where Self == TitleAndIconLabelStyle {
-    static var settings: SettingsLabelStyle { SettingsLabelStyle() }
+    static var sidebar: SidebarLabelStyle { SidebarLabelStyle() }
 }
 
-public struct SettingsLabelStyle: LabelStyle {
+public struct SidebarLabelStyle: LabelStyle {
     public func makeBody(configuration: Configuration) -> some View {
         Label {
             configuration.title
