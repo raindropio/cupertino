@@ -1,77 +1,77 @@
 import SwiftUI
 import API
+import Backport
 
-public struct CollectionPicker<Prompt: View> {
+public func CollectionPicker(_ selection: Binding<Int?>, system: [Int] = []) -> some View {
+    _Optional(selection: selection, system: system)
+}
+
+public func CollectionPicker(_ selection: Binding<Int>, system: [Int] = []) -> some View {
+    _Strict(selection: selection, system: system)
+}
+
+//MARK: - Main implementation
+fileprivate struct _Optional {
     @EnvironmentObject private var dispatch: Dispatcher
-    @EnvironmentObject private var c: CollectionsStore
-    
-    @Binding var id: Int?
-    var matching: CollectionsListMatching = .all
-    var prompt: () -> Prompt
-    
-    public init(id: Binding<Int?>, matching: CollectionsListMatching, prompt: @escaping () -> Prompt) {
-        self._id = id
-        self.matching = matching
-        self.prompt = prompt
-    }
+    @State private var search = ""
+
+    @Binding var selection: Int?
+    var system: [Int]
 }
 
-extension CollectionPicker where Prompt == Label<Text, Image> {
-    public init(id: Binding<Int?>, matching: CollectionsListMatching, prompt: String = "") {
-        self._id = id
-        self.matching = matching
-        self.prompt = { Label(prompt, systemImage: "folder") }
-    }
-    
-    public init(id: Binding<Int>, matching: CollectionsListMatching, prompt: String = "") {
-        self._id = .init {
-            id.wrappedValue
-        } set: {
-            let newValue = $0 ?? -1
-            if newValue != id.wrappedValue {
-                id.wrappedValue = newValue
-            }
-        }
-        self.matching = matching
-        self.prompt = { Label(prompt, systemImage: "folder") }
-    }
-}
-
-extension CollectionPicker: View {
-    public var body: some View {
-        NavigationLink {
-            Screen(id: $id, matching: matching)
-                .navigationTitle("Collection")
-        } label: {
-            if let id, let collection = c.state.user[id] {
-                UserCollectionRow(collection, withLocation: true)
-                    .badge(0)
-            } else if let id, id < 0 {
-                SystemCollectionRow(id: id)
-                    .badge(0)
+extension _Optional: View {
+    var body: some View {
+        Backport.List(selection: $selection) {
+            if search.isEmpty {
+                if system.contains(-1) {
+                    SystemCollections<Int>(-1)
+                }
+                
+                CollectionGroups<UserCollection.ID>()
+                
+                if system.contains(-99) {
+                    SystemCollections<Int>(-99)
+                }
             } else {
-                prompt()
+                FindCollections(search: search)
             }
         }
+            #if os(iOS)
+            .listStyle(.insetGrouped)
+            .headerProminence(.increased)
+            #endif
+            .collectionsAnimation()
+            //search
+            .searchable(text: $search)
+            //menu
+            .backport.contextMenu(forSelectionType: FindBy.self) { selection in
+                CollectionsMenu(selection)
+            }
+            //reload
+            .refreshable {
+                try? await dispatch(CollectionsAction.load)
+            }
             .reload {
                 try? await dispatch(CollectionsAction.load)
             }
+            .collectionEvents()
     }
 }
 
-extension CollectionPicker {
-    struct Screen: View {
-        @Environment(\.dismiss) private var dismiss
-        
-        @Binding var id: Int?
-        var matching: CollectionsListMatching = .all
-        
-        public var body: some View {
-            CollectionsList(selection: $id, matching: matching, searchable: true)
-                .collectionActions()
-                .onChange(of: id) { _ in
-                    dismiss()
-                }
-        }
+//MARK: - Support non-optional binding
+fileprivate struct _Strict: View {
+    @State private var local: Int?
+    
+    @Binding var selection: Int
+    var system: [Int]
+    
+    var body: some View {
+        _Optional(selection: $local, system: system)
+            .task(id: selection) {
+                local = selection
+            }
+            .onChange(of: local) {
+                selection = $0 ?? -1
+            }
     }
 }

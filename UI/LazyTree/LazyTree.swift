@@ -1,6 +1,6 @@
 import SwiftUI
 
-public struct LazyTree<I: Identifiable & Equatable, C: View> {
+public struct LazyTree<I: Identifiable & Equatable, C: View, T: Hashable> {
     //data
     var root: [I.ID]
     var items: [I.ID: I]
@@ -18,8 +18,33 @@ public struct LazyTree<I: Identifiable & Equatable, C: View> {
     var reorder: ReorderClosue
     
     //content
+    var tag: (I.ID) -> T
     var content: (I) -> C
     
+    public init(
+        root: [I.ID],
+        items: [I.ID : I],
+        parent: KeyPath<I, I.ID?>,
+        expanded: KeyPath<I, Bool>,
+        sort: KeyPath<I, Int?>,
+        toggle: @escaping ToggleClosue,
+        reorder: @escaping ReorderClosue,
+        tag: @escaping (I.ID) -> T,
+        content: @escaping (I) -> C
+    ) {
+        self.root = root
+        self.items = items
+        self.parent = parent
+        self.expanded = expanded
+        self.sort = sort
+        self.toggle = toggle
+        self.reorder = reorder
+        self.tag = tag
+        self.content = content
+    }
+}
+
+extension LazyTree where T == I.ID {
     public init(
         root: [I.ID],
         items: [I.ID : I],
@@ -37,6 +62,7 @@ public struct LazyTree<I: Identifiable & Equatable, C: View> {
         self.sort = sort
         self.toggle = toggle
         self.reorder = reorder
+        self.tag = { $0 }
         self.content = content
     }
 }
@@ -119,7 +145,7 @@ extension LazyTree: View {
             }
                 .padding(.leading, leaf.level * 32)
                 .transition(.move(edge: .bottom))
-                .backport.tag(leaf.id)
+                .backport.tag(tag(leaf.id))
         }
             .onMove { onMove($0, $1) }
     }

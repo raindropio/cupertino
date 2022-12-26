@@ -2,7 +2,7 @@ import SwiftUI
 import API
 
 public struct UserCollectionMenu: View {
-    @EnvironmentObject private var action: CollectionActionsStore
+    @EnvironmentObject private var event: CollectionEvent
     @EnvironmentObject private var dispatch: Dispatcher
 
     var collection: UserCollection
@@ -14,7 +14,7 @@ public struct UserCollectionMenu: View {
     public var body: some View {
         Section {
             Button {
-                action(.create(.parent(collection.id)))
+                event.create(.parent(collection.id))
             } label: {
                 Label("Create collection", systemImage: "plus.rectangle.on.folder")
             }
@@ -22,7 +22,7 @@ public struct UserCollectionMenu: View {
                 
         Section {
             Button {
-                action(.edit(collection))
+                event.edit(collection)
             } label: {
                 Label("Edit", systemImage: "pencil")
             }
@@ -32,15 +32,10 @@ public struct UserCollectionMenu: View {
                 Label("Share", systemImage: "square.and.arrow.up")
             }
             
-            Menu {
-                Button(role: .destructive) {
-                    dispatch.sync(CollectionsAction.delete(collection.id))
-                } label: {
-                    Label("Delete \(collection.title)", systemImage: "trash")
-                }
+            Button(role: .destructive) {
+                event.delete(collection.id)
             } label: {
                 Label("Delete", systemImage: "trash")
-                    .tint(.red)
             }
         }
     }

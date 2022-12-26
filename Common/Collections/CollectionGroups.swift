@@ -2,22 +2,37 @@ import SwiftUI
 import API
 import UI
 
-struct CollectionsTree: View {
+struct CollectionGroups<T: Hashable>: View {
     @EnvironmentObject private var collections: CollectionsStore
-
+    var tag: (Int) -> T
+    
     var body: some View {
         Memorized(
+            tag: tag,
             groups: collections.state.groups,
             user: collections.state.user
         )
     }
 }
 
-extension CollectionsTree {
+extension CollectionGroups where T == Int {
+    init() {
+        self.tag = { $0 }
+    }
+}
+
+extension CollectionGroups where T == FindBy {
+    init() {
+        self.tag = { .init($0) }
+    }
+}
+
+extension CollectionGroups {
     fileprivate struct Memorized: View {
         @EnvironmentObject private var dispatch: Dispatcher
-        @EnvironmentObject private var action: CollectionActionsStore
+        @EnvironmentObject private var event: CollectionEvent
 
+        var tag: (Int) -> T
         var groups: [CGroup]
         var user: [UserCollection.ID: UserCollection]
         
@@ -36,7 +51,7 @@ extension CollectionsTree {
                 .dropConsumer(to: collection)
                 .swipeActions(edge: .trailing) {
                     Button {
-                        action(.edit(collection))
+                        event.edit(collection)
                     } label: {
                         Label("Edit", systemImage: "pencil")
                     }
@@ -44,7 +59,7 @@ extension CollectionsTree {
                 }
                 .swipeActions(edge: .leading) {
                     Button {
-                        action(.create(.parent(collection.id)))
+                        event.create(.parent(collection.id))
                     } label: {
                         Label("Create collection", systemImage: "plus")
                     }
@@ -64,12 +79,13 @@ extension CollectionsTree {
                             sort: \.sort,
                             toggle: toggle,
                             reorder: reorder,
+                            tag: tag,
                             content: item
                         )
                             .transition(.move(edge: .bottom))
                     }
                 } header: {
-                    CollectionsGroupHeader(
+                    Header(
                         group: groups[index],
                         single: groups.count == 1
                     )

@@ -34,11 +34,7 @@ extension RaindropStack.Fields: View {
         }
 
         Section {
-            CollectionPicker(
-                id: $raindrop.collection,
-                matching: .insertable,
-                prompt: "Select collection"
-            )
+            CollectionPickerLink($raindrop.collection, system: [-1, -99])
 
             Label {
                 TagsPicker($raindrop.tags)

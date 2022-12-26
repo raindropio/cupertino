@@ -17,13 +17,10 @@ struct AppScene: View {
                 
             case .preview(let url, let mode):
                 PreviewScreen(url: url, mode: mode)
-                
-            case .filters:
-                FiltersScreen()
             }
         }
             .navigationSplitViewConfiguration(sidebarMin: 400)
-            .collectionActions()
+            .collectionEvents()
             .dropProvider()
             .environmentObject(router)
             .preferredColorScheme(theme.colorScheme)

@@ -2,20 +2,18 @@ import SwiftUI
 import API
 import UI
 
-extension CollectionsList {
-    struct Find: View {
-        @EnvironmentObject private var collections: CollectionsStore
-        var search: String
-        
-        var body: some View {
-            Memorized(
-                user: collections.state.find(search)
-            )
-        }
+struct FindCollections: View {
+    @EnvironmentObject private var c: CollectionsStore
+    var search: String
+    
+    var body: some View {
+        Memorized(
+            user: c.state.find(search)
+        )
     }
 }
 
-extension CollectionsList.Find {
+extension FindCollections {
     fileprivate struct Memorized: View {
         var user: [UserCollection]
         

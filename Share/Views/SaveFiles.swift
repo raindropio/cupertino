@@ -15,8 +15,7 @@ struct SaveFiles: View {
                     .backport.presentationDetents([.medium])
             } else {
                 Backport.NavigationStack {
-                    CollectionsList(selection: $collection, matching: .insertable, searchable: true)
-                        .collectionActions()
+                    CollectionPicker($collection, system: [-1])
                         .navigationTitle("Where to save")
                         .navigationBarTitleDisplayMode(.inline)
                         .toolbar {

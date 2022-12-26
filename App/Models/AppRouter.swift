@@ -6,7 +6,6 @@ import UI
 enum AppRoute: Hashable {
     case browse(FindBy)
     case preview(URL, PreviewScreen.Mode = .raw)
-    case filters
 }
 
 //MARK: - Service

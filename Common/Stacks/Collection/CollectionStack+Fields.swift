@@ -24,12 +24,7 @@ extension CollectionStack.Fields: View {
         }
         
         Section("Parent") {
-            CollectionPicker(
-                id: $collection.parent,
-                matching: .nestable
-            ) {
-                Text("None").foregroundStyle(.secondary)
-            }
+            CollectionPickerLink($collection.parent)
         }
     }
 }
