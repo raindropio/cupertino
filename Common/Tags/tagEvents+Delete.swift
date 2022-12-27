@@ -8,11 +8,7 @@ extension TagEvents {
         var tags: Set<String>
         
         func delete() {
-            dispatch.sync(FiltersAction.delete(
-                .init(
-                    tags.map { .init(.tag($0)) }
-                )
-            ))
+            dispatch.sync(FiltersAction.delete(tags))
         }
         
         var body: some View {

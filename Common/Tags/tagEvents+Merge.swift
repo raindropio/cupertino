@@ -15,10 +15,7 @@ extension TagEvents {
         
         func submit() {
             guard !newName.isEmpty else { return }
-            dispatch.sync(FiltersAction.update(
-                .init(tags.map { .init(.tag($0)) }),
-                newName: newName
-            ))
+            dispatch.sync(FiltersAction.update(tags, newName: newName))
         }
         
         var body: some View {

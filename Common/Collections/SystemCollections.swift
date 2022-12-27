@@ -22,8 +22,7 @@ extension SystemCollections {
         
         var body: some View {
             ForEach(collections) {
-                SystemCollectionRow($0)
-                    .dropConsumer(to: $0.id)
+                SystemCollectionItem($0)
                     .backport.tag(tag($0.id))
             }
         }

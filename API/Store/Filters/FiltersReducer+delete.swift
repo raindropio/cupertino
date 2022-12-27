@@ -1,9 +1,9 @@
 extension FiltersReducer {
-    func delete(state: inout S, filters: Set<Filter>) async throws -> ReduxAction? {
-        guard !filters.isEmpty
+    func delete(state: inout S, tags: Set<String>) async throws -> ReduxAction? {
+        guard !tags.isEmpty
         else { return nil }
         
-        try await rest.tagsDelete(.init(filters.map { $0.title }))
+        try await rest.tagsDelete(tags)
         
         return A.reload()
     }

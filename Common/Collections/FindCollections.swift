@@ -21,8 +21,7 @@ extension FindCollections {
             if !user.isEmpty {
                 Section("Found \(user.count) collections") {
                     ForEach(user) { item in
-                        UserCollectionRow(item, withLocation: true)
-                            .dropConsumer(to: item)
+                        UserCollectionItem(item, withLocation: true)
                             .backport.tag(item.id)
                     }
                 }

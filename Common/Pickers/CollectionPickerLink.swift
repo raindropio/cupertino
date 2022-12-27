@@ -26,10 +26,10 @@ fileprivate struct _Label: View {
     
     var body: some View {
         if let selection, let collection = c.state.user[selection] {
-            UserCollectionRow(collection, withLocation: true)
+            UserCollectionLabel(collection, withLocation: true)
                 .badge(0)
         } else if let selection, let collection = c.state.system[selection] {
-            SystemCollectionRow(collection)
+            SystemCollectionLabel(collection)
                 .badge(0)
         } else {
             Text("None")

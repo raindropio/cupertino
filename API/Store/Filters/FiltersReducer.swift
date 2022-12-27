@@ -14,20 +14,23 @@ public actor FiltersReducer: Reducer {
         case .reloaded(let find, let filters, let config):
             reloaded(state: &state, find: find, filters: filters, config: config)
             
-        case .toggleTags:
+        case .toggle:
             return try await toggleConfig(state: &state, key: \.tagsHidden)
             
         case .toggleSimple:
             return try await toggleConfig(state: &state, key: \.simpleHidden)
             
+        case .sort(let by):
+            return try await sort(state: &state, by: by)
+            
         case .saveConfig:
             try await saveConfig(state: &state)
             
-        case .update(let filters, let newName):
-            return try await update(state: &state, filters: filters, newName: newName)
+        case .update(let tags, let newName):
+            return try await update(state: &state, tags: tags, newName: newName)
             
-        case .delete(let filters):
-            return try await delete(state: &state, filters: filters)
+        case .delete(let tags):
+            return try await delete(state: &state, tags: tags)
         }
         return nil
     }

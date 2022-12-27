@@ -24,7 +24,7 @@ extension BrowseNested {
             Button {
                 app.browse(collection)
             } label: {
-                UserCollectionRow(collection)
+                UserCollectionLabel(collection)
             }
                 .dropConsumer(to: collection)
         }

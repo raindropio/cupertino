@@ -89,11 +89,12 @@ public enum HighlightsAction: ReduxAction {
 public enum FiltersAction: ReduxAction {
     case reload(FindBy = .init())
     case reloaded(FindBy, [Filter], FiltersConfig?)
+    case toggle
     case toggleSimple
-    case toggleTags
+    case sort(FiltersConfig.TagsSort)
     case saveConfig
-    case update(Set<Filter>, newName: String)
-    case delete(Set<Filter>)
+    case update(Set<String>, newName: String)
+    case delete(Set<String>)
 }
 
 public enum RecentAction: ReduxAction {

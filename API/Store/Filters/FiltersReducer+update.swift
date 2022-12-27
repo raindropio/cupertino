@@ -1,11 +1,11 @@
 extension FiltersReducer {
-    func update(state: inout S, filters: Set<Filter>, newName: String) async throws -> ReduxAction? {
+    func update(state: inout S, tags: Set<String>, newName: String) async throws -> ReduxAction? {
         guard
-            !filters.isEmpty,
+            !tags.isEmpty,
             !newName.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty
         else { return nil }
         
-        try await rest.tagsUpdate(.init(filters.map { $0.title }), newName: newName)
+        try await rest.tagsUpdate(tags, newName: newName)
         
         return A.reload()
     }

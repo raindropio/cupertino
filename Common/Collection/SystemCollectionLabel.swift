@@ -1,7 +1,7 @@
 import SwiftUI
 import API
 
-struct SystemCollectionRow: View {
+struct SystemCollectionLabel: View {
     var collection: SystemCollection
     
     init(_ collection: SystemCollection) {

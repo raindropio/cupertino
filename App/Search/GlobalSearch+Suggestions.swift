@@ -58,7 +58,7 @@ extension GlobalSearch.Suggestions {
                         Button {
                             app.browse(item)
                         } label: {
-                            UserCollectionRow(item, withLocation: true)
+                            UserCollectionLabel(item, withLocation: true)
                         }
                     }
                 }

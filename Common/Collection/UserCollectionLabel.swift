@@ -1,7 +1,7 @@
 import SwiftUI
 import API
 
-public struct UserCollectionRow: View {
+public struct UserCollectionLabel: View {
     var collection: UserCollection
     var withLocation = false
     

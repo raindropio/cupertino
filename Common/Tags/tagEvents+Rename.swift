@@ -15,10 +15,7 @@ extension TagEvents {
         
         func submit() {
             guard newName != tag else { return }
-            dispatch.sync(FiltersAction.update(
-                .init([.init(.tag(tag))]),
-                newName: newName
-            ))
+            dispatch.sync(FiltersAction.update([tag], newName: newName))
         }
         
         var body: some View {
