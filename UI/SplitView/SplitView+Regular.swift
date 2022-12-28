@@ -18,18 +18,18 @@ extension SplitView {
             if #available(iOS 16, *) {
                 NavigationSplitView {
                     master()
-                        .detachedEditMode()
+                        .scopeEditMode()
                 } detail: {
                     NavigationStack(path: subPath) {
                         Group {
                             if let selected = path.first {
                                 detail(selected)
-                                    .detachedEditMode()
+                                    .scopeEditMode()
                             }
                         }
                             .navigationDestination(for: P.self) {
                                 detail($0)
-                                    .detachedEditMode()
+                                    .scopeEditMode()
                             }
                     }
                 }

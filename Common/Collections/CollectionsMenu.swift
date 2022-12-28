@@ -26,13 +26,14 @@ fileprivate struct _CollectionsMenu: View {
     
     @ViewBuilder
     func new(_ ids: Set<Int>) -> some View {
-        if ids.count == 1, let id = ids.first, id > 0 {
-            Button { event.create(.parent(id)) } label: {
-                Label("Add", systemImage: "square.grid.3x1.folder.badge.plus")
-            }
-        } else if ids.first(where: { $0 <= 0 }) == nil {
+        if ids.isEmpty {
             Button { event.create(.group()) } label: {
                 Label("New", systemImage: "folder.badge.plus")
+            }
+        }
+        else if ids.count == 1, let id = ids.first, id > 0 {
+            Button { event.create(.parent(id)) } label: {
+                Label("Add", systemImage: "square.grid.3x1.folder.badge.plus")
             }
         }
     }

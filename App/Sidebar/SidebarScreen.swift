@@ -20,13 +20,14 @@ extension SidebarScreen {
     }
     
     func selectionChange(_ selection: Set<FindBy>) {
-        guard editMode?.wrappedValue != .active
+        guard editMode?.wrappedValue == .inactive
         else { return }
-                
-        if let first = selection.first {
-            app.path = [.browse(first)]
-        } else {
+        
+        if selection.isEmpty {
             app.path = []
+        } else if selection.count == 1, let first = selection.first {
+            app.path = [.browse(first)]
+            self.selection = [first]
         }
     }
 }
@@ -37,7 +38,7 @@ extension SidebarScreen: View {
             .task(id: app.path, pathChange)
             .onChange(of: selection, perform: selectionChange)
             .modifier(Phone())
-            .navigationTitle("Collections")
+            .meNavigationTitle()
             .navigationBarTitleDisplayMode(isPhone ? .automatic : .inline)
             .toolbar {
                 ToolbarItem(placement: isPhone ? .cancellationAction : .primaryAction) {
