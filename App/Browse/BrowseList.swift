@@ -88,6 +88,5 @@ extension BrowseList { fileprivate struct Memorized: View {
             .modifier(Toolbar(find: find))
             .modifier(BrowseBulk(find: find, selection: $selection))
             .sheet(item: $edit, content: RaindropStack.init)
-            .fixEditMode()
     }
 }}

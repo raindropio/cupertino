@@ -97,7 +97,8 @@ extension Thumbnail: View {
             .animation(nil)
             .processors((resize != nil ? [resize!] : []) + [roundedCorner])
             .pipeline(Self.pipeline)
-            .priority(.veryLow)
+//            .priority(.veryLow)
+            .onDisappear(.lowerPriority)
     }
     
     public var body: some View {

@@ -7,7 +7,7 @@ struct AppScene: View {
     @StateObject private var router = AppRouter()
     @AppStorage("theme") private var theme: PreferredTheme = .default
 
-    var body: some View {        
+    var body: some View {
         SplitView(path: $router.path) {
             SidebarScreen()
         } detail: { screen in

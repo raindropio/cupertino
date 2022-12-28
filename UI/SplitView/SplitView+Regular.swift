@@ -16,14 +16,21 @@ extension SplitView {
         
         var body: some View {
             if #available(iOS 16, *) {
-                NavigationSplitView(sidebar: master) {
+                NavigationSplitView {
+                    master()
+                        .detachedEditMode()
+                } detail: {
                     NavigationStack(path: subPath) {
                         Group {
                             if let selected = path.first {
                                 detail(selected)
+                                    .detachedEditMode()
                             }
                         }
-                            .navigationDestination(for: P.self, destination: detail)
+                            .navigationDestination(for: P.self) {
+                                detail($0)
+                                    .detachedEditMode()
+                            }
                     }
                 }
             } else {

@@ -11,7 +11,11 @@ extension SplitView {
             if #available(iOS 16, *) {
                 NavigationStack(path: $path) {
                     master()
-                        .navigationDestination(for: P.self, destination: detail)
+                        .detachedEditMode()
+                        .navigationDestination(for: P.self) {
+                            detail($0)
+                                .detachedEditMode()
+                        }
                 }
             } else {
                 Backport.NavigationStack {
