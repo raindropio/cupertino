@@ -29,11 +29,7 @@ struct GroupSection<T: Hashable>: View {
     }
     
     var body: some View {
-        DisclosureSection(
-            group.title,
-            isExpanded: !group.hidden,
-            toggle: toggle
-        ) {
+        DisclosureSection(group.title, isExpanded: !group.hidden, toggle: toggle) {
             LazyTree(
                 root: group.collections,
                 items: items,
@@ -46,9 +42,7 @@ struct GroupSection<T: Hashable>: View {
                 content: UserCollectionItem.init
             )
                 .transition(.move(edge: .bottom))
-        } menu: {
-            GroupMenu(group: group)
-        } action: {
+        } actions: {
             Button(action: add) {
                 Image(systemName: "plus")
             }

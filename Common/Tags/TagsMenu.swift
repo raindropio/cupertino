@@ -26,30 +26,35 @@ func TagsMenu(_ findBy: Set<FindBy>) -> some View {
 
 fileprivate struct _TagsMenu: View {
     @EnvironmentObject private var event: TagEvent
+    @EnvironmentObject private var dispatch: Dispatcher
+
     var tags: Set<String>
     
     var body: some View {
-        if !tags.isEmpty {
-            if let tag = tags.first, tags.count == 1 {
-                Button {
-                    event.rename(tag)
-                } label: {
-                    Label("Rename", systemImage: "pencil")
-                }
-                .tint(.accentColor)
-            }
-            
-            if tags.count > 1 {
-                Button {
-                    event.merge(tags)
-                } label: {
-                    Label("Merge", systemImage: "arrow.triangle.merge")
-                }
-            }
-            
-            Button(role: .destructive) {
-                event.delete(tags)
+        if tags.isEmpty {
+            Menu {
+                Button("By name") { dispatch.sync(FiltersAction.sort(.title)) }
+                Button("By count") { dispatch.sync(FiltersAction.sort(.count)) }
             } label: {
+                Label("Sort tags", systemImage: "number")
+            }
+        }
+        
+        if let tag = tags.first, tags.count == 1 {
+            Button { event.rename(tag) } label: {
+                Label("Rename", systemImage: "pencil")
+            }
+            .tint(.accentColor)
+        }
+        
+        if tags.count > 1 {
+            Button { event.merge(tags) } label: {
+                Label("Merge", systemImage: "arrow.triangle.merge")
+            }
+        }
+            
+        if !tags.isEmpty {
+            Button(role: .destructive) { event.delete(tags) } label: {
                 Label("Delete", systemImage: "trash")
             }
                 .tint(.red)

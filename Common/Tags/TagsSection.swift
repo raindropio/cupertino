@@ -10,8 +10,7 @@ struct TagsSection<T: Hashable>: View {
     var body: some View {
         Memorized(
             tag: tag,
-            items: f.state.tags(),
-            isExpanded: f.state.config.tagsHidden
+            items: f.state.tags()
         )
     }
 }
@@ -30,37 +29,14 @@ extension TagsSection where T == FindBy {
 
 extension TagsSection {
     fileprivate struct Memorized: View {
-        @EnvironmentObject private var dispatch: Dispatcher
+        @AppStorage("tags-expanded") private var isExpanded = true
         
         var tag: (Filter) -> T
         var items: [Filter]
-        var isExpanded: Bool
-        
-        func toggle() {
-            dispatch.sync(FiltersAction.toggle)
-        }
-        
-        func sortByName() {
-            Task {
-                try? await dispatch(FiltersAction.sort(.title))
-                try? await dispatch(FiltersAction.reload())
-            }
-        }
-        
-        func sortByCount() {
-            Task {
-                try? await dispatch(FiltersAction.sort(.count))
-                try? await dispatch(FiltersAction.reload())
-            }
-        }
-
+    
         var body: some View {
             if !items.isEmpty {
-                DisclosureSection(
-                    "Tags",
-                    isExpanded: isExpanded,
-                    toggle: toggle
-                ) {
+                DisclosureSection("Tags", isExpanded: $isExpanded) {
                     ForEach(items) { item in
                         FilterRow(item)
                             .swipeActions {
@@ -68,9 +44,6 @@ extension TagsSection {
                             }
                             .backport.tag(tag(item))
                     }
-                } menu: {
-                    Button("Sort by name", action: sortByName)
-                    Button("Sort by count", action: sortByCount)
                 }
             }
         }

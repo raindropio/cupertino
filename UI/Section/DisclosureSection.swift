@@ -1,97 +1,46 @@
 import SwiftUI
 import Backport
 
-public struct DisclosureSection<C: View, M: View, A: View> {
-    @State private var more = false
-    
-    var label: Text
+//MARK: - Init
+public func DisclosureSection<L: StringProtocol, C: View>(
+    _ label: L,
+    isExpanded: Binding<Bool>,
+    content: @escaping () -> C
+) -> some View {
+    _DisclosureSection(
+        isExpanded: isExpanded.wrappedValue,
+        content: content
+    ) {
+        _SectionHeader(isExpanded: isExpanded, label: Text(label)) {}
+    }
+}
+
+public func DisclosureSection<L: StringProtocol, C: View, A: View>(
+    _ label: L,
+    isExpanded: Bool,
+    toggle: @escaping () -> Void,
+    content: @escaping () -> C,
+    actions: @escaping () -> A
+) -> some View {
+    _DisclosureSection(
+        isExpanded: isExpanded,
+        content: content
+    ) {
+        _SectionHeader(
+            isExpanded: .init { isExpanded } set: { _ in toggle() },
+            label: Text(label),
+            actions: actions
+        )
+    }
+}
+
+//MARK: - Implementation
+fileprivate struct _DisclosureSection<C: View, H: View>: View {
     var isExpanded: Bool
-    var toggle: () -> Void
     var content: () -> C
-    var menu: () -> M
-    var action: () -> A
+    var header: () -> H
     
-    public init<S: StringProtocol>(
-        _ label: S,
-        isExpanded: Bool,
-        toggle: @escaping () -> Void,
-        content: @escaping () -> C,
-        menu: @escaping () -> M,
-        action: @escaping () -> A
-    ) {
-        self.label = Text(label)
-        self.isExpanded = isExpanded
-        self.toggle = toggle
-        self.content = content
-        self.menu = menu
-        self.action = action
-    }
-}
-
-extension DisclosureSection where A == EmptyView {
-    public init<S: StringProtocol>(
-        _ label: S,
-        isExpanded: Bool,
-        toggle: @escaping () -> Void,
-        content: @escaping () -> C,
-        @ViewBuilder menu: @escaping () -> M
-    ) {
-        self.label = Text(label)
-        self.isExpanded = isExpanded
-        self.toggle = toggle
-        self.content = content
-        self.menu = menu
-        self.action = { A() }
-    }
-}
-
-extension DisclosureSection {
-    var toggler: some View {
-        Button(action: toggle) {
-            Label(
-                isExpanded ? "Hide" : "Show",
-                systemImage: isExpanded ? "eye.slash" : "chevron.right"
-            )
-        }
-    }
-    
-    @ViewBuilder
-    func header() -> some View {
-        HStack(spacing: 20) {
-            label
-            
-            Spacer()
-            
-            if isExpanded {
-                action()
-
-                Button {
-                    more.toggle()
-                } label: {
-                    Image(systemName: "ellipsis")
-                }
-                    .tint(.secondary)
-                    .confirmationDialog("Menu", isPresented: $more, titleVisibility: .hidden) {
-                        menu()
-                        
-                        Section {
-                            toggler
-                        }
-                    }
-            }
-            
-            if !isExpanded {
-                toggler
-                    .labelStyle(.iconOnly)
-            }
-        }
-            .backport.fontWeight(.semibold)
-            .imageScale(.large)
-    }
-}
-
-extension DisclosureSection: View {
-    public var body: some View {
+    var body: some View {
         Section(content: {
             if isExpanded {
                 content()
@@ -100,5 +49,38 @@ extension DisclosureSection: View {
             #if os(macOS)
             .collapsible(false)
             #endif
+    }
+}
+
+fileprivate struct _SectionHeader<L: View, A: View>: View {
+    @Binding var isExpanded: Bool
+    var label: L
+    @ViewBuilder var actions: () -> A
+    
+    var body: some View {
+        HStack(spacing: 14) {
+            label
+                ._onButtonGesture(pressing: nil) {
+                    isExpanded.toggle()
+                }
+            
+            Button {
+                isExpanded.toggle()
+            } label: {
+                Image(systemName: "chevron.right")
+                    .imageScale(.small)
+                    .backport.fontWeight(.semibold)
+                    .rotationEffect(.degrees(isExpanded ? 90 : 0))
+            }
+                .tint(.secondary)
+            
+            Spacer()
+            
+            if isExpanded {
+                actions()
+            }
+        }
+            .lineLimit(1)
+            .animation(.default, value: isExpanded)
     }
 }

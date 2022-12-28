@@ -59,4 +59,8 @@ extension CollectionsState {
                 KeyPathComparator(\.title)
             ])
     }
+    
+    public var allCollapsed: Bool {
+        user.first { $0.value.expanded } == nil
+    }
 }

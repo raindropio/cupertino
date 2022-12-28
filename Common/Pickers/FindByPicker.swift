@@ -17,18 +17,25 @@ public struct FindByPicker {
 extension FindByPicker {
     @ViewBuilder
     func contextMenu(_ selection: Set<FindBy>) -> some View {
-        if selection.allSatisfy({ $0.isSearching }) {
-            TagsMenu(selection)
+        if selection.isEmpty {
+            Section { CollectionsMenu(selection) }
+            Section { TagsMenu(selection) }
         } else if selection.allSatisfy({ !$0.isSearching }) {
             CollectionsMenu(selection)
+        } else if selection.allSatisfy({ $0.isSearching }) {
+            TagsMenu(selection)
         }
     }
     
     @ViewBuilder
     func bottomBar() -> some View {
         if editMode?.wrappedValue == .active {
-            contextMenu(selection)
-                .labelStyle(.titleOnly)
+            HStack {
+                contextMenu(selection)
+                    .frame(maxWidth: .infinity)
+                    .labelStyle(.titleOnly)
+            }
+                .frame(maxWidth: .infinity)
         }
     }
 }
@@ -63,15 +70,12 @@ extension FindByPicker: View {
             #endif
             .labelStyle(.sidebar)
             .collectionsAnimation()
-            .filtersAnimation()
+            .tagsAnimation()
             //menu
             .backport.contextMenu(forSelectionType: FindBy.self, menu: contextMenu)
             //toolbar
             .toolbar {
-                ToolbarItem {
-                    EditButton()
-                }
-                
+                ToolbarItem(content: EditButton.init)
                 ToolbarItemGroup(placement: .bottomBar, content: bottomBar)
             }
             //reload

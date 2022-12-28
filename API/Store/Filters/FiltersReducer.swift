@@ -11,20 +11,11 @@ public actor FiltersReducer: Reducer {
         case .reload(let find):
             return try await reload(state: &state, find: find)
             
-        case .reloaded(let find, let filters, let config):
-            reloaded(state: &state, find: find, filters: filters, config: config)
-            
-        case .toggle:
-            return try await toggleConfig(state: &state, key: \.tagsHidden)
-            
-        case .toggleSimple:
-            return try await toggleConfig(state: &state, key: \.simpleHidden)
+        case .reloaded(let find, let filters):
+            reloaded(state: &state, find: find, filters: filters)
             
         case .sort(let by):
             return try await sort(state: &state, by: by)
-            
-        case .saveConfig:
-            try await saveConfig(state: &state)
             
         case .update(let tags, let newName):
             return try await update(state: &state, tags: tags, newName: newName)

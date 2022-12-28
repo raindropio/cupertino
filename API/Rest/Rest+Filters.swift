@@ -2,7 +2,7 @@ import Foundation
 
 //MARK: - Get
 extension Rest {
-    public func filtersGet(_ find: FindBy, tagsSort: FiltersConfig.TagsSort = .title) async throws -> ([Filter], Int) {
+    public func filtersGet(_ find: FindBy, tagsSort: TagsSort = .title) async throws -> ([Filter], Int) {
         let res: FiltersGetResponse = try await fetch.get(
             "filters/\(find.collectionId)",
             query: find.query

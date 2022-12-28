@@ -1,17 +1,10 @@
 extension FiltersReducer {
     func reload(state: inout S, find: FindBy) async throws -> ReduxAction? {
-        var config: FiltersConfig?
-        
-        //reload config only for root
-        if find == .init() {
-            config = try await rest.configGet()
-        }
-        
-        let (filters, _) = try await rest.filtersGet(find, tagsSort: config?.tagsSort ?? .title)
-        return A.reloaded(find, filters, config)
+        let (filters, _) = try await rest.filtersGet(find, tagsSort: state.sort)
+        return A.reloaded(find, filters)
     }
     
-    func reloaded(state: inout S, find: FindBy, filters: [Filter], config: FiltersConfig? = nil) {
+    func reloaded(state: inout S, find: FindBy, filters: [Filter]) {
         var simple = [Filter]()
         var tags = [Filter]()
         var created = [Filter]()
@@ -32,9 +25,5 @@ extension FiltersReducer {
         state.simple[find] = simple
         state.tags[find] = tags
         state.created[find] = created
-        
-        if let config {
-            state.config = config
-        }
     }
 }

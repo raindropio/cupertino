@@ -1,7 +1,7 @@
 extension FiltersReducer {
-    func sort(state: inout S, by: FiltersConfig.TagsSort) async throws -> ReduxAction? {
-        state.config.tagsSort = by
+    func sort(state: inout S, by: TagsSort) async throws -> ReduxAction? {
+        state.sort = by
         state.animation = .init()
-        return A.saveConfig
+        return A.reload()
     }
 }
