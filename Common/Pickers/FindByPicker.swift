@@ -75,7 +75,7 @@ extension FindByPicker: View {
             .backport.contextMenu(forSelectionType: FindBy.self, menu: contextMenu)
             //toolbar
             .toolbar {
-                ToolbarItem(content: EditButton.init)
+                ToolbarItem(placement: .destructiveAction, content: EditButton.init)
                 ToolbarItemGroup(placement: .bottomBar, content: bottomBar)
             }
             //reload

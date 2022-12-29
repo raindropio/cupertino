@@ -96,7 +96,7 @@ extension GlobalSearch.Suggestions {
                 Section {
                     ForEach(items, id: \.self) {
                         Label($0, systemImage: "clock.arrow.circlepath")
-                            .backport.searchCompletion($0)
+                            .searchCompletion($0)
                     }
                 } header: {
                     if !items.isEmpty {

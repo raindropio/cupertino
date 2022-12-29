@@ -5,6 +5,7 @@ import API
 import Backport
 
 struct AuthContinueWith {
+    @Environment(\.dismiss) private var dismiss
     @EnvironmentObject private var a: AuthStore
     @EnvironmentObject private var dispatch: Dispatcher
     @State private var loading = false
@@ -17,6 +18,7 @@ extension AuthContinueWith {
             loading = true
             do {
                 try await dispatch(action)
+                dismiss() //ios15 fix
             } catch {
                 self.error = error
             }

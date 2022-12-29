@@ -25,7 +25,7 @@ struct GlobalSearch: ViewModifier {
             ) {
                 Suggestions(find: $find)
             }
-            .searchBar(withButton: true)
+            .searchBar(withButton: true, scopeBarActivation: .onSearchActivation)
             .task(id: find, priority: .background) {
                 try? await dispatch(
                     FiltersAction.reload(find),

@@ -1,7 +1,7 @@
 import SwiftUI
 
 extension SplitView {
-    struct Sequence: ViewModifier {
+    struct Sequence<D: View>: ViewModifier {
         @Binding var path: [P]
         var level = 0
         @ViewBuilder var detail: (P) -> D

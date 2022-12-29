@@ -6,7 +6,7 @@ extension SplitView {
         @Binding var path: [P]
         var master: () -> S
         @ViewBuilder var detail: (P) -> D
-        
+
         var body: some View {
             if #available(iOS 16, *) {
                 NavigationStack(path: $path) {
@@ -20,7 +20,11 @@ extension SplitView {
             } else {
                 Backport.NavigationStack {
                     master()
-                        .modifier(Sequence(path: $path, detail: detail))
+                        .scopeEditMode()
+                        .modifier(Sequence(path: $path) {
+                            detail($0)
+                                .scopeEditMode()
+                        })
                 }
             }
         }

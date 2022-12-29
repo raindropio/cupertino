@@ -36,10 +36,15 @@ extension SplitView {
             } else {
                 NavigationView {
                     master()
+                        .scopeEditMode()
                     
                     if let selected = path.first {
                         detail(selected)
-                            .modifier(Sequence(path: $path, level: 1, detail: detail))
+                            .scopeEditMode()
+                            .modifier(Sequence(path: $path, level: 1) {
+                                detail($0)
+                                    .scopeEditMode()
+                            })
                     }
                 }
                     .navigationViewStyle(.columns)
