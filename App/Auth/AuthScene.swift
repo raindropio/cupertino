@@ -5,8 +5,8 @@ import UI
 
 struct AuthScene: View {
     @EnvironmentObject private var auth: AuthStore
-    @State private var logIn = false
-    @State private var signUp = false
+    @State private var login = false
+    @State private var signup = false
 
     var body: some View {
         Backport.NavigationStack {
@@ -14,14 +14,14 @@ struct AuthScene: View {
                 AuthSplash()
                 
                 HStack(spacing: 16) {
-                    Button { logIn = true } label: {
+                    Button { login = true } label: {
                         Text("Log In").frame(maxWidth: .infinity).frame(height: 32)
                             .foregroundColor(.primary)
                     }
                         .buttonStyle(.bordered)
                         .tint(.secondary)
                     
-                    Button { signUp = true } label: {
+                    Button { signup = true } label: {
                         Text("Sign Up").frame(maxWidth: .infinity).frame(height: 32)
                             .foregroundStyle(.background)
                     }
@@ -55,12 +55,12 @@ struct AuthScene: View {
                             .tint(.secondary)
                     }
                 }
-                .sheet(isPresented: $logIn) {
+                .sheet(isPresented: $login) {
                     Backport.NavigationStack(root: AuthLogIn.init)
                         .backport.presentationDetents([.height(360)])
                 }
-                .sheet(isPresented: $signUp) {
-                    Backport.NavigationStack(root: AuthSignUp.init)
+                .sheet(isPresented: $signup) {
+                    Backport.NavigationStack(root: AuthSignup.init)
                 }
         }
     }

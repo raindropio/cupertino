@@ -14,6 +14,19 @@ extension Rest {
     }
 }
 
+//MARK: - Sign up
+extension Rest {
+    public func authSignup(_ body: AuthSignupRequest) async throws {
+        let res: ResultResponse = try await fetch.post(
+            "auth/email/signup",
+            body: body
+        )
+        
+        guard res.result == true
+        else { throw RestError.unknown() }
+    }
+}
+
 //MARK: - Logout
 extension Rest {
     public func authLogout() async throws {
@@ -45,22 +58,17 @@ extension Rest {
             throw RestError.appleAuthCredentialsInvalid
         }
         
-        do {
-            let _: ResultResponse = try await fetch.get(
-                "auth/apple/native",
-                query: [
-                    .init(name: "code", value: codeString),
-                    .init(name: "identity_token", value: identityTokenString),
-                    .init(name: "display_name", value: "\(fullName.familyName ?? "") \(fullName.givenName ?? "") \(fullName.middleName ?? "")".trimmingCharacters(in: .whitespacesAndNewlines))
-                ]
-            )
-        }
-        catch RestError.unauthorized {
-            return
-        }
-        catch {
-            throw error
-        }
+        let res: ResultResponse = try await fetch.get(
+            "auth/apple/native",
+            query: [
+                .init(name: "code", value: codeString),
+                .init(name: "identity_token", value: identityTokenString),
+                .init(name: "display_name", value: "\(fullName.familyName ?? "") \(fullName.givenName ?? "") \(fullName.middleName ?? "")".trimmingCharacters(in: .whitespacesAndNewlines))
+            ]
+        )
+        
+        guard res.result == true
+        else { throw RestError.unauthorized }
     }
 }
 
@@ -109,18 +117,13 @@ extension Rest {
             throw RestError.jwtAuthCallbackURLInvalid
         }
         
-        do {
-            let _: ResultResponse = try await fetch.post(
-                "auth/jwt",
-                body: JWTTokenBody(token: tokenString)
-            )
-        }
-        catch RestError.unauthorized {
-            return
-        }
-        catch {
-            throw error
-        }
+        let res: ResultResponse = try await fetch.post(
+            "auth/jwt",
+            body: JWTTokenBody(token: tokenString)
+        )
+        
+        guard res.result == true
+        else { throw RestError.unauthorized }
     }
     
     fileprivate struct JWTTokenBody: Codable {

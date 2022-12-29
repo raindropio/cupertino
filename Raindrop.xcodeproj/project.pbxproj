@@ -70,7 +70,7 @@
 		768CA1F7294CC10900AD7E62 /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 768CA1F6294CC10900AD7E62 /* StoreKit.framework */; };
 		768CA1F9294CC15600AD7E62 /* AuthSplash.swift in Sources */ = {isa = PBXBuildFile; fileRef = 768CA1F8294CC15600AD7E62 /* AuthSplash.swift */; };
 		768CA1FB294CC17800AD7E62 /* AuthLogIn.swift in Sources */ = {isa = PBXBuildFile; fileRef = 768CA1FA294CC17800AD7E62 /* AuthLogIn.swift */; };
-		768CA1FD294CCD5800AD7E62 /* AuthSignUp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 768CA1FC294CCD5800AD7E62 /* AuthSignUp.swift */; };
+		768CA1FD294CCD5800AD7E62 /* AuthSignup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 768CA1FC294CCD5800AD7E62 /* AuthSignup.swift */; };
 		768CA1FF2950420D00AD7E62 /* AuthContinueWith.swift in Sources */ = {isa = PBXBuildFile; fileRef = 768CA1FE2950420D00AD7E62 /* AuthContinueWith.swift */; };
 		768CA20129505A6E00AD7E62 /* AuthContinueWith+Apple.swift in Sources */ = {isa = PBXBuildFile; fileRef = 768CA20029505A6E00AD7E62 /* AuthContinueWith+Apple.swift */; };
 		768CA20329505AD600AD7E62 /* AuthContinueWith+JWT.swift in Sources */ = {isa = PBXBuildFile; fileRef = 768CA20229505AD600AD7E62 /* AuthContinueWith+JWT.swift */; };
@@ -196,7 +196,7 @@
 		768CA1F6294CC10900AD7E62 /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
 		768CA1F8294CC15600AD7E62 /* AuthSplash.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthSplash.swift; sourceTree = "<group>"; };
 		768CA1FA294CC17800AD7E62 /* AuthLogIn.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthLogIn.swift; sourceTree = "<group>"; };
-		768CA1FC294CCD5800AD7E62 /* AuthSignUp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthSignUp.swift; sourceTree = "<group>"; };
+		768CA1FC294CCD5800AD7E62 /* AuthSignup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthSignup.swift; sourceTree = "<group>"; };
 		768CA1FE2950420D00AD7E62 /* AuthContinueWith.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthContinueWith.swift; sourceTree = "<group>"; };
 		768CA20029505A6E00AD7E62 /* AuthContinueWith+Apple.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AuthContinueWith+Apple.swift"; sourceTree = "<group>"; };
 		768CA20229505AD600AD7E62 /* AuthContinueWith+JWT.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AuthContinueWith+JWT.swift"; sourceTree = "<group>"; };
@@ -371,7 +371,7 @@
 				768CA1F8294CC15600AD7E62 /* AuthSplash.swift */,
 				768CA20429506D7A00AD7E62 /* AuthSplash+Slide.swift */,
 				768CA1FA294CC17800AD7E62 /* AuthLogIn.swift */,
-				768CA1FC294CCD5800AD7E62 /* AuthSignUp.swift */,
+				768CA1FC294CCD5800AD7E62 /* AuthSignup.swift */,
 				768CA1FE2950420D00AD7E62 /* AuthContinueWith.swift */,
 				768CA20029505A6E00AD7E62 /* AuthContinueWith+Apple.swift */,
 				768CA20229505AD600AD7E62 /* AuthContinueWith+JWT.swift */,
@@ -720,7 +720,7 @@
 				767EB45F292CC0C40018EE8F /* BrowseItem+Details.swift in Sources */,
 				76292CFE2952F51D000E16AA /* SubscriptionDetails+Help.swift in Sources */,
 				767EB474292E467F0018EE8F /* BrowseBulk+Delete.swift in Sources */,
-				768CA1FD294CCD5800AD7E62 /* AuthSignUp.swift in Sources */,
+				768CA1FD294CCD5800AD7E62 /* AuthSignup.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

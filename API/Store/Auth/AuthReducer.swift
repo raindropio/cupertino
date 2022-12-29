@@ -14,6 +14,9 @@ public actor AuthReducer: Reducer {
         case .login(let body):
             try await login(state: &state, body: body)
             
+        case .signup(let body):
+            return try await signup(state: &state, body: body)
+            
         case .logout:
             try await logout(state: &state)
             

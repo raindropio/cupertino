@@ -2,11 +2,11 @@ import SwiftUI
 import API
 import UI
 
-struct AuthSignUp: View {
+struct AuthSignup: View {
     @Environment(\.dismiss) private var dismiss
     @EnvironmentObject private var auth: AuthStore
     @EnvironmentObject private var dispatch: Dispatcher
-    @State private var form = AuthSignUpRequest()
+    @State private var form = AuthSignupRequest()
     
     enum Focus: CaseIterable { case name, email, password }
     @FocusState private var focus: Focus?
@@ -20,7 +20,7 @@ struct AuthSignUp: View {
         } else if form.password.isEmpty {
             focus = .password
         } else if form.isValid {
-//            try await dispatch(AuthAction.login(form))
+            try await dispatch(AuthAction.signup(form))
             dismiss() //ios15 fix
         }
     }

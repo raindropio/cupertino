@@ -6,6 +6,7 @@ import StoreKit
 
 public enum AuthAction: ReduxAction {
     case login(AuthLoginRequest)
+    case signup(AuthSignupRequest)
     case logout
     case apple(ASAuthorization)
     case jwt(URL)

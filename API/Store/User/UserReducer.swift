@@ -25,6 +25,9 @@ public actor UserReducer: Reducer {
                 
             case .logout:
                 logout(state: &state)
+                
+            case .signup(_):
+                break
             }
         }
         
