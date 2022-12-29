@@ -28,6 +28,10 @@ public struct FindBy: Equatable, Hashable, Codable {
     public init(_ filter: Filter) {
         self.filters = [filter]
     }
+    
+    public init(_ text: String) {
+        self.text = text
+    }
 }
 
 extension FindBy {

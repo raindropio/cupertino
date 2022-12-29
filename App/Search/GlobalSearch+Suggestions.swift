@@ -14,7 +14,6 @@ extension GlobalSearch {
         var body: some View {
             Memorized(
                 find: find,
-                collections: (find.collectionId == 0 && find.filters.isEmpty) ? c.state.find(find.text) : [],
                 recent: r.state.search(find),
                 completion: f.state.completion(find),
                 simple: f.state.simple(find),
@@ -27,7 +26,6 @@ extension GlobalSearch {
 extension GlobalSearch.Suggestions {
     fileprivate struct Memorized: View {
         var find: FindBy
-        var collections: [UserCollection]
         var recent: [String]
         var completion: [Filter]
         var simple: [Filter]
@@ -35,7 +33,6 @@ extension GlobalSearch.Suggestions {
         
         var body: some View {
             Group {
-                Collections(items: collections)
                 Recent(items: recent)
                 if #available(iOS 16, *) {
                     Segment(title: "Suggestions", items: completion)
@@ -44,27 +41,6 @@ extension GlobalSearch.Suggestions {
                 Segment(title: "\(tags.count) tags", items: tags)
             }
                 .labelStyle(.searchSuggestion)
-        }
-    }
-}
-
-extension GlobalSearch.Suggestions {
-    fileprivate struct Collections: View {
-        @EnvironmentObject private var app: AppRouter
-        var items: [UserCollection]
-        
-        var body: some View {
-            if !items.isEmpty {
-                Section("Found \(items.count) collections") {
-                    ForEach(items) { item in
-                        Button {
-                            app.browse(item)
-                        } label: {
-                            UserCollectionLabel(item, withLocation: true)
-                        }
-                    }
-                }
-            }
         }
     }
 }

@@ -33,7 +33,7 @@ extension _Optional: View {
                     SystemCollections<Int>(-99)
                 }
             } else {
-                FindCollections(search: search)
+                FindCollections<Int>(search)
             }
         }
             #if os(iOS)

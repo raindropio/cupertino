@@ -5,6 +5,7 @@ import UI
 //MARK: - Available pages
 enum AppRoute: Hashable {
     case browse(FindBy)
+    case multi
     case preview(URL, PreviewScreen.Mode = .raw)
 }
 

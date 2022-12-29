@@ -36,7 +36,7 @@ fileprivate struct _TagsMenu: View {
                 Button("By name") { dispatch.sync(FiltersAction.sort(.title)) }
                 Button("By count") { dispatch.sync(FiltersAction.sort(.count)) }
             } label: {
-                Label("Sort tags", systemImage: "number")
+                Label("Sort tags", systemImage: "arrow.up.arrow.down.square")
             }
         }
         

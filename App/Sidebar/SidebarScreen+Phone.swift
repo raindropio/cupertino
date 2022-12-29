@@ -4,19 +4,16 @@ import UI
 
 extension SidebarScreen {
     struct Phone: ViewModifier {
-        @State private var find = FindBy()
+        @Binding var search: String
 
         func body(content: Content) -> some View {
             if isPhone {
-                Group {
-                    if find.isSearching {
-                        BrowseList(find: find)
-                    } else {
-                        content
-                    }
-                }
+                content
                     .fab()
-                    .globalSearch(find: $find)
+                    .searchable(text: $search)
+                    .autocorrectionDisabled()
+                    .textInputAutocapitalization(.never)
+                    .keyboardType(.webSearch)
             } else {
                 content
             }

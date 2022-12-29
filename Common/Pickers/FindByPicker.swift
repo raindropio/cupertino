@@ -6,11 +6,14 @@ import Backport
 public struct FindByPicker {
     @EnvironmentObject private var dispatch: Dispatcher
     @Environment(\.editMode) private var editMode
+    @Environment(\.isSearching) private var isSearching
     
     @Binding var selection: Set<FindBy>
+    var search: String
     
-    public init(selection: Binding<Set<FindBy>>) {
+    public init(selection: Binding<Set<FindBy>>, search: String = "") {
         self._selection = selection
+        self.search = search
     }
 }
 
@@ -30,12 +33,10 @@ extension FindByPicker {
     @ViewBuilder
     func bottomBar() -> some View {
         if editMode?.wrappedValue == .active {
-            HStack {
+            ControlGroup {
                 contextMenu(selection)
-                    .frame(maxWidth: .infinity)
-                    .labelStyle(.titleOnly)
             }
-                .frame(maxWidth: .infinity)
+                .controlGroupStyle(.tabs)
         }
     }
 }
@@ -43,30 +44,47 @@ extension FindByPicker {
 extension FindByPicker: View {
     public var body: some View {
         Backport.List(selection: $selection) {
-            Section {
-                if editMode?.wrappedValue != .active {
-                    SystemCollections<FindBy>(0, -1)
-                    
-                    DisclosureGroup {
-                        SimpleFilters<FindBy>()
-                    } label: {
-                        Label("Filters", systemImage: "circle.grid.2x2")
+            if search.isEmpty {
+                Section {
+                    if editMode?.wrappedValue != .active {
+                        SystemCollections<FindBy>(0, -1)
+                        
+                        DisclosureGroup {
+                            SimpleFilters<FindBy>()
+                        } label: {
+                            Label("Filters", systemImage: "circle.grid.2x2")
+                        }
                     }
                 }
-            }
-            
-            CollectionGroups<FindBy>()
-            TagsSection<FindBy>()
-            
-            Section {
-                if editMode?.wrappedValue != .active {
-                    SystemCollections<FindBy>(-99)
+                
+                CollectionGroups<FindBy>()
+                TagsSection<FindBy>()
+                
+                Section {
+                    if editMode?.wrappedValue != .active {
+                        SystemCollections<FindBy>(-99)
+                    }
                 }
+            } else {
+                Section {
+                    if editMode?.wrappedValue != .active {
+                        Label(search, systemImage: "doc.text.magnifyingglass")
+                            .raindropsCountBadge(search)
+                            .backport.tag(FindBy(search))
+                    }
+                } header: {
+                    if editMode?.wrappedValue != .active {
+                        Text("Bookmarks")
+                    }
+                }
+                
+                FindCollections<FindBy>(search)
+                FindTags<FindBy>(search)
             }
         }
             #if os(iOS)
             .listStyle(.insetGrouped)
-            .headerProminence(.increased)
+            .headerProminence(search.isEmpty ? .increased : .standard)
             #endif
             .labelStyle(.sidebar)
             .collectionsAnimation()

@@ -2,13 +2,15 @@ import SwiftUI
 import API
 import UI
 
-struct FindCollections: View {
+struct FindCollections<T: Hashable>: View {
     @EnvironmentObject private var c: CollectionsStore
     var search: String
-    
+    var tag: (Int) -> T
+
     var body: some View {
         Memorized(
-            user: c.state.find(search)
+            user: c.state.find(search),
+            tag: tag
         )
     }
 }
@@ -16,16 +18,35 @@ struct FindCollections: View {
 extension FindCollections {
     fileprivate struct Memorized: View {
         var user: [UserCollection]
-        
+        var tag: (Int) -> T
+
         var body: some View {
-            if !user.isEmpty {
-                Section("Found \(user.count) collections") {
+            Section {
+                if !user.isEmpty {
                     ForEach(user) { item in
                         UserCollectionItem(item, withLocation: true)
-                            .backport.tag(item.id)
+                            .backport.tag(tag(item.id))
                     }
+                }
+            } header: {
+                if !user.isEmpty {
+                    Text("Found \(user.count) collections")
                 }
             }
         }
+    }
+}
+
+extension FindCollections where T == Int {
+    init(_ search: String) {
+        self.search = search
+        self.tag = { $0 }
+    }
+}
+
+extension FindCollections where T == FindBy {
+    init(_ search: String) {
+        self.search = search
+        self.tag = { .init($0) }
     }
 }

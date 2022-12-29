@@ -28,12 +28,12 @@ fileprivate struct _CollectionsMenu: View {
     func new(_ ids: Set<Int>) -> some View {
         if ids.isEmpty {
             Button { event.create(.group()) } label: {
-                Label("New", systemImage: "folder.badge.plus")
+                Label("New", systemImage: "plus")
             }
         }
         else if ids.count == 1, let id = ids.first, id > 0 {
             Button { event.create(.parent(id)) } label: {
-                Label("Add", systemImage: "square.grid.3x1.folder.badge.plus")
+                Label("Add", systemImage: "plus.square.dashed")
             }
         }
     }
@@ -42,14 +42,18 @@ fileprivate struct _CollectionsMenu: View {
     func bulk(_ ids: Set<Int>) -> some View {
         if ids.isEmpty {
             Button { dispatch.sync(CollectionsAction.toggleMany) } label: {
-                Label(c.state.allCollapsed ? "Expand all" : "Collapse all", systemImage: "folder.badge.minus")
+                if c.state.allCollapsed {
+                    Label("Expand all", systemImage: "list.bullet.indent")
+                } else {
+                    Label("Collapse all", systemImage: "list.bullet")
+                }
             }
             
             Menu {
                 Button("By name") { dispatch.sync(CollectionsAction.reorderMany(.titleAsc)) }
                 Button("By count") { dispatch.sync(CollectionsAction.reorderMany(.countDesc)) }
             } label: {
-                Label("Sort collections", systemImage: "folder.badge.gearshape")
+                Label("Sort collections", systemImage: "arrow.up.arrow.down.square")
             }
         }
     }

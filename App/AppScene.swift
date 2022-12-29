@@ -15,6 +15,9 @@ struct AppScene: View {
             case .browse(let find):
                 BrowseScreen(find: router.bind(find))
                 
+            case .multi:
+                Image(systemName: "folder")
+                
             case .preview(let url, let mode):
                 PreviewScreen(url: url, mode: mode)
             }
