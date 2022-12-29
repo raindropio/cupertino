@@ -61,7 +61,7 @@ extension IconPicker {
                 #if os(iOS)
                 .navigationBarTitleDisplayMode(.inline)
                 #endif
-                .searchable(text: $search, debounce: 0.3, placement: .navigationBarDrawer(displayMode: .always))
+                .searchable(text: $search, placement: .navigationBarDrawer(displayMode: .always))
                 .toolbar {
                     ToolbarItem(placement: .destructiveAction) {
                         Button("None") {
@@ -69,7 +69,7 @@ extension IconPicker {
                         }
                     }
                 }
-                .task(id: search, priority: .background) {
+                .task(id: search, priority: .background, debounce: 0.3) {
                     try? await dispatch(IconsAction.load(search))
                 }
                 .onChange(of: selection) { _ in

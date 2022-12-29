@@ -1,6 +1,7 @@
 import SwiftUI
 import API
 import Common
+import Backport
 
 extension View {
     func globalSearch(find: Binding<FindBy>) -> some View {
@@ -11,19 +12,23 @@ extension View {
 struct GlobalSearch: ViewModifier {
     @EnvironmentObject private var dispatch: Dispatcher
     @Environment(\.horizontalSizeClass) private var sizeClass
+    @State private var temp: String = ""
+    
     @Binding var find: FindBy
     
     func body(content: Content) -> some View {
         content
+            //debounce text
+            .task(id: find.text, priority: .background) { temp = find.text }
+            .task(id: temp, priority: .background, debounce: 0.5) { find.text = temp }
             //search bar
-            .searchable(
-                text: $find.text,
-                debounce: 0.3,
+            .backport.searchable(
+                text: $temp,
                 tokens: $find.filters,
                 placement: searchPlacement,
                 token: FilterRow.init
             ) {
-                Suggestions(find: $find)
+                Suggestions(find: find)
             }
             .searchBar(withButton: true, scopeBarActivation: .onSearchActivation)
             .task(id: find, priority: .background) {

@@ -82,7 +82,7 @@ extension BrowseList { fileprivate struct Memorized: View {
             .refreshable {
                 try? await dispatch(RaindropsAction.load(find))
             }
-            .reload(id: find) {
+            .reload(id: find, priority: .background) {
                 try? await dispatch(RaindropsAction.load(find))
             }
             .modifier(Toolbar(find: find))

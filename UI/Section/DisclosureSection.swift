@@ -53,12 +53,14 @@ fileprivate struct _DisclosureSection<C: View, H: View>: View {
 }
 
 fileprivate struct _SectionHeader<L: View, A: View>: View {
+    @Environment(\.headerProminence) private var prominence
+    
     @Binding var isExpanded: Bool
     var label: L
     @ViewBuilder var actions: () -> A
     
     var body: some View {
-        HStack(spacing: 14) {
+        HStack(spacing: 10) {
             label
                 ._onButtonGesture(pressing: nil) {
                     isExpanded.toggle()
@@ -81,6 +83,7 @@ fileprivate struct _SectionHeader<L: View, A: View>: View {
             }
         }
             .lineLimit(1)
+            .imageScale(prominence == .increased ? .large : .medium)
             .animation(.default, value: isExpanded)
     }
 }

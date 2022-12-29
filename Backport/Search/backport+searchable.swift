@@ -17,6 +17,7 @@ public extension Backport where Wrapped: View {
                 .searchSuggestions(suggestions)
         } else {
             content
+                .modifier(ClearOnCancel(text: text))
                 .searchable(
                     text: text,
                     placement: placement.isToolbar ? .navigationBarDrawer : placement, //on ipad toolbar placement buggy
@@ -35,7 +36,7 @@ fileprivate struct SearchableTokens<T: RandomAccessCollection & RangeReplaceable
     
     func convert(_ tokens: T) {
         if !tokens.isEmpty {
-            text += (text.hasSuffix(" ") ? "" : " ") + tokens.map { "\($0)" }.joined(separator: " ") + " "
+            text += ((text.hasSuffix(" ") || text.isEmpty) ? "" : " ") + tokens.map { "\($0)" }.joined(separator: " ") + " "
             self.tokens = .init()
         }
     }
@@ -71,5 +72,18 @@ fileprivate extension SearchFieldPlacement {
     var isToolbar: Bool {
         let str = "\(self)"
         return str.contains("automatic") || str.contains("toolbar")
+    }
+}
+
+fileprivate struct ClearOnCancel: ViewModifier {
+    @Environment(\.isSearching) private var isSearching
+    @Binding var text: String
+
+    func body(content: Content) -> some View {
+        content.onChange(of: isSearching) {
+            if !$0 {
+                text = ""
+            }
+        }
     }
 }

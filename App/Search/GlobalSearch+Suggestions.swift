@@ -9,7 +9,7 @@ extension GlobalSearch {
         @EnvironmentObject private var f: FiltersStore
         @EnvironmentObject private var r: RecentStore
         
-        @Binding var find: FindBy
+        var find: FindBy
         
         var body: some View {
             Memorized(
@@ -37,7 +37,9 @@ extension GlobalSearch.Suggestions {
             Group {
                 Collections(items: collections)
                 Recent(items: recent)
-                Segment(title: "Suggestions", items: completion)
+                if #available(iOS 16, *) {
+                    Segment(title: "Suggestions", items: completion)
+                }
                 Segment(title: "Filters", items: simple)
                 Segment(title: "\(tags.count) tags", items: tags)
             }

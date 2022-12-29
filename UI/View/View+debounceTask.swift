@@ -1,50 +1,36 @@
 import SwiftUI
 
-struct DebouncingTaskViewModifier<ID: Equatable>: ViewModifier {
-    let id: ID
-    let priority: TaskPriority
-    let nanoseconds: UInt64
-    let task: @Sendable () async -> Void
-    
-    init(
+public extension View {
+    @inlinable func task<ID: Equatable>(
         id: ID,
         priority: TaskPriority = .userInitiated,
-        debounce: Double = 0,
-        task: @Sendable @escaping () async -> Void
-    ) {
-        self.id = id
-        self.priority = priority
-        self.nanoseconds = UInt64(1_000_000_000 * debounce)
-        self.task = task
+        debounce: Double,
+        @_inheritActorContext _ action: @escaping @Sendable () async -> Void
+    ) -> some View {
+        task(id: id, priority: priority) {
+            do {
+                if debounce > 0 {
+                    try await Task.sleep(nanoseconds: UInt64(1_000_000_000 * debounce))
+                }
+                await action()
+            } catch {}
+        }
     }
     
-    func body(content: Content) -> some View {
-        content.task(id: id, priority: priority) {
+    /// Debounce task, only happen if id value is non empty
+    @inlinable func task<ID: Equatable>(
+        id: ID,
+        priority: TaskPriority = .userInitiated,
+        debounce: Double,
+        @_inheritActorContext _ action: @escaping @Sendable () async -> Void
+    ) -> some View where ID: Collection {
+        task(id: id, priority: priority) {
             do {
-                try await Task.sleep(nanoseconds: nanoseconds)
-                await task()
-            } catch {
-                // Ignore cancellation
-            }
+                if debounce > 0, !id.isEmpty {
+                    try await Task.sleep(nanoseconds: UInt64(1_000_000_000 * debounce))
+                }
+                await action()
+            } catch {}
         }
     }
 }
-
-public extension View {
-    func task<ID: Equatable>(
-        id: ID,
-        priority: TaskPriority = .userInitiated,
-        debounce: Double = 0,
-        task: @Sendable @escaping () async -> Void
-    ) -> some View {
-        modifier(
-            DebouncingTaskViewModifier(
-                id: id,
-                priority: priority,
-                debounce: debounce,
-                task: task
-            )
-        )
-    }
-}
-
