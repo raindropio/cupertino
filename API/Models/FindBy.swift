@@ -35,7 +35,7 @@ public struct FindBy: Equatable, Hashable, Codable {
 }
 
 extension FindBy {
-    var search: String {
+    public var search: String {
         (filters.map{ $0.description } + [text])
             .joined(separator: " ")
             .trimmingCharacters(in: .whitespacesAndNewlines)

@@ -48,16 +48,11 @@ extension FindByPicker: View {
                 Section {
                     if editMode?.wrappedValue != .active {
                         SystemCollections<FindBy>(0, -1)
-                        
-                        DisclosureGroup {
-                            SimpleFilters<FindBy>()
-                        } label: {
-                            Label("Filters", systemImage: "circle.grid.2x2")
-                        }
+                        FiltersDisclosure<FindBy>()
                     }
                 }
                 
-                CollectionGroups<FindBy>()
+                UserCollections<FindBy>()
                 TagsSection<FindBy>()
                 
                 Section {

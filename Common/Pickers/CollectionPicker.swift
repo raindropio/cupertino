@@ -27,7 +27,7 @@ extension _Optional: View {
                     SystemCollections<Int>(-1)
                 }
                 
-                CollectionGroups<UserCollection.ID>()
+                UserCollections<UserCollection.ID>()
                 
                 if system.contains(-99) {
                     SystemCollections<Int>(-99)

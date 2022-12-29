@@ -2,7 +2,7 @@ import SwiftUI
 import API
 import UI
 
-struct GroupSection<T: Hashable>: View {
+struct CollectionsGroup<T: Hashable>: View {
     @EnvironmentObject private var dispatch: Dispatcher
     @EnvironmentObject private var event: CollectionEvent
 
