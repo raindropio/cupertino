@@ -68,13 +68,9 @@ extension FindByPicker: View {
             } else {
                 Section {
                     if editMode?.wrappedValue != .active {
-                        Label(search, systemImage: "doc.text.magnifyingglass")
+                        Label("Search \(search)", systemImage: "magnifyingglass")
                             .raindropsCountBadge(search)
                             .backport.tag(FindBy(search))
-                    }
-                } header: {
-                    if editMode?.wrappedValue != .active {
-                        Text("Bookmarks")
                     }
                 }
                 

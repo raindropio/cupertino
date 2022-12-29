@@ -21,7 +21,7 @@ fileprivate struct RaindropsCountBadge: ViewModifier {
     
     func body(content: Content) -> some View {
         content
-            .badge(count)
+            .badge(Text(count > 0 ? "\(count) bookmarks" : ""))
             .task(id: find, debounce: 0.5) {
                 try? await dispatch(RaindropsAction.load(find))
             }

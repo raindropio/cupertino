@@ -12,7 +12,7 @@ extension SidebarScreen {
         @Sendable func pathChange() async {
             switch app.path.first {
             case .browse(let find): selection = [find]
-            case .multi: break
+            case .multi(_): break
             default: selection = .init()
             }
         }
@@ -35,7 +35,7 @@ extension SidebarScreen {
                     app.path = [.browse(first)]
                     self.selection = [first]
                 } else {
-                    app.path = [.multi]
+                    app.path = [.multi(selection.count)]
                 }
             }
         }

@@ -15,8 +15,12 @@ struct AppScene: View {
             case .browse(let find):
                 BrowseScreen(find: router.bind(find))
                 
-            case .multi:
-                Image(systemName: "folder")
+            case .multi(let count):
+                EmptyState("\(count) items") {
+                    Image(systemName: "checklist.checked")
+                } actions: {
+                    Button("Cancel") { router.path = [.browse(.init(0))] }
+                }
                 
             case .preview(let url, let mode):
                 PreviewScreen(url: url, mode: mode)

@@ -60,6 +60,12 @@ extension CollectionsState {
             ])
     }
     
+    public func find(_ findBy: FindBy) -> [UserCollection] {
+        find(findBy.search).filter {
+            $0.id != findBy.collectionId
+        }
+    }
+    
     public var allCollapsed: Bool {
         user.first { $0.value.expanded } == nil
     }
