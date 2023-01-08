@@ -30,6 +30,7 @@ struct AppScene: View {
             .collectionEvents()
             .tagEvents()
             .dropProvider()
+            .fancySheet(isPresented: $router.spotlight, content: Spotlight.init)
             .environmentObject(router)
             .preferredColorScheme(theme.colorScheme)
     }

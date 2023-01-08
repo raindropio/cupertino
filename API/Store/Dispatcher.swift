@@ -9,13 +9,17 @@ public actor Dispatcher: ObservableObject {
     }
     
     //run multiple in parallel
-    public func callAsFunction(_ actions: ReduxAction...) async throws {
+    public func callAsFunction(_ actions: [ReduxAction]) async throws {
         try await withThrowingTaskGroup(of: Void.self) { [self] group in
             for action in actions {
                 group.addTask { try await self.store?.dispatch(action) }
             }
             for try await _ in group {}
         }
+    }
+    
+    public func callAsFunction(_ actions: ReduxAction...) async throws {
+        try await callAsFunction(actions)
     }
     
     //sync version

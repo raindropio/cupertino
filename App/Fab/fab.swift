@@ -2,8 +2,8 @@ import SwiftUI
 import UI
 
 extension View {
-    func fab(to collection: Int = -1) -> some View {
-        modifier(FabModifier(collection: collection))
+    func fab(to collection: Int = -1, hidden: Bool = false) -> some View {
+        modifier(FabModifier(collection: collection, hidden: hidden))
     }
 }
 
@@ -13,11 +13,12 @@ fileprivate struct FabModifier: ViewModifier {
 
     @State private var present = false
     var collection: Int
+    var hidden: Bool
     
     func body(content: Content) -> some View {
         content
             .floatingActionButton(
-                hide: editMode?.wrappedValue == .active || isSearching
+                hide: hidden || editMode?.wrappedValue == .active || isSearching
             ) {
                 Button {
                     present.toggle()

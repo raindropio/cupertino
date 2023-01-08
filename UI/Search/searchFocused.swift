@@ -2,40 +2,81 @@ import SwiftUI
 
 public extension View {
     func searchFocused(_ condition: Binding<Bool>) -> some View {
-        modifier(SearchFocusedModifier(condition: condition))
-    }
-}
-
-fileprivate struct SearchFocusedModifier: ViewModifier {
-    @State private var searchController: UISearchController?
-    @Binding var condition: Bool
-    
-    @MainActor
-    func setFocus() {
-        guard let searchController else { return }
-        guard searchController.searchBar.isFirstResponder != condition else { return }
-
-        if condition {
-            searchController.searchBar.searchTextField.becomeFirstResponder()
-        } else {
-            searchController.searchBar.searchTextField.resignFirstResponder()
+        overlay {
+            FocusSearchController(condition: condition.wrappedValue)
+                .opacity(0)
         }
-    }
-    
-    func body(content: Content) -> some View {
-        content
-            .withSearchController($searchController)
             .onReceive(NotificationCenter.default.publisher(for: UITextField.textDidBeginEditingNotification)) {
                 if $0.object is UISearchTextField {
-                    condition = true
+                    condition.wrappedValue = true
                 }
             }
             .onReceive(NotificationCenter.default.publisher(for: UITextField.textDidEndEditingNotification)) {
                 if $0.object is UISearchTextField {
-                    condition = false
+                    condition.wrappedValue = false
                 }
             }
-            .task(id: condition) { setFocus() }
-            .task(id: searchController) { setFocus() }
+    }
+}
+
+fileprivate struct FocusSearchController: UIViewControllerRepresentable {
+    var condition: Bool
+    
+    func makeUIViewController(context: Context) -> VC {
+        .init(self)
+    }
+
+    func updateUIViewController(_ controller: VC, context: Context) {
+        controller.update(self)
+    }
+}
+
+extension FocusSearchController {
+    class VC: UIViewController {
+        var base: FocusSearchController
+        var animate = false
+        
+        init(_ base: FocusSearchController) {
+            self.base = base
+            super.init(nibName: nil, bundle: nil)
+        }
+        
+        required init?(coder: NSCoder) {
+            fatalError("init(coder:) has not been implemented")
+        }
+        
+        @MainActor
+        func update(_ base: FocusSearchController) {
+            self.base = base
+            
+            guard let searchBar = parent?.navigationItem.searchController?.searchBar else { return }
+            guard searchBar.isFirstResponder != base.condition else { return }
+            
+            if base.condition {
+                let animate = animate
+                Task { [weak searchBar] in
+                    if animate {
+                        searchBar?.becomeFirstResponder()
+                    } else {
+                        UIView.performWithoutAnimation {
+                            searchBar?.becomeFirstResponder()
+                        }
+                    }
+                }
+            } else {
+                searchBar.resignFirstResponder()
+            }
+        }
+        
+        override func willMove(toParent parent: UIViewController?) {
+            super.willMove(toParent: parent)
+            update(base)
+        }
+        
+        override func viewDidAppear(_ animated: Bool) {
+            super.viewDidAppear(animated)
+            update(base)
+            animate = true
+        }
     }
 }

@@ -95,7 +95,7 @@ extension Thumbnail: View {
     var base: LazyImage<NukeUI.Image> {
         LazyImage(url: url)
             .animation(nil)
-            .processors((resize != nil ? [resize!] : []) + [roundedCorner])
+            .processors(resize != nil ? [resize!, roundedCorner] : [roundedCorner])
             .pipeline(Self.pipeline)
 //            .priority(.veryLow)
             .onDisappear(.lowerPriority)

@@ -7,7 +7,8 @@ public struct FindByPicker {
     @EnvironmentObject private var dispatch: Dispatcher
     @Environment(\.editMode) private var editMode
     @Environment(\.isSearching) private var isSearching
-    
+    @AppStorage("tags-expanded") private var isExpanded = true
+
     @Binding var selection: Set<FindBy>
     var search: String
     
@@ -48,12 +49,14 @@ extension FindByPicker: View {
                 Section {
                     if editMode?.wrappedValue != .active {
                         SystemCollections<FindBy>(0, -1)
-                        FiltersDisclosure<FindBy>()
                     }
                 }
                 
                 UserCollections<FindBy>()
-                TagsSection<FindBy>()
+                
+                DisclosureSection("Tags", isExpanded: $isExpanded) {
+                    Tags<FindBy>()
+                }
                 
                 Section {
                     if editMode?.wrappedValue != .active {
@@ -70,7 +73,10 @@ extension FindByPicker: View {
                 }
                 
                 FindCollections<FindBy>(search)
-                FindTags<FindBy>(search)
+                
+                Section("Tags") {
+                    Tags<FindBy>(search: search)
+                }
             }
         }
             #if os(iOS)
@@ -84,7 +90,7 @@ extension FindByPicker: View {
             .backport.contextMenu(forSelectionType: FindBy.self, menu: contextMenu)
             //toolbar
             .toolbar {
-                ToolbarItem(placement: .destructiveAction, content: EditButton.init)
+                ToolbarItem(placement: .automatic, content: EditButton.init)
                 ToolbarItemGroup(placement: .bottomBar, content: bottomBar)
             }
             //reload

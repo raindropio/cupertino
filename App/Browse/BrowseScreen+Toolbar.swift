@@ -25,13 +25,14 @@ extension BrowseScreen.Toolbar {
     struct Memorized: ViewModifier {
         @Environment(\.horizontalSizeClass) private var sizeClass
         @Environment(\.editMode) private var editMode
+        @EnvironmentObject private var app: AppRouter
         
         var find: FindBy
         var collection: any CollectionType
         
         var title: String {
-            if find.collectionId == 0, find.isSearching {
-                return "Search"
+            if find.isSearching {
+                return find.search
             }
             return collection.title
         }
@@ -41,6 +42,16 @@ extension BrowseScreen.Toolbar {
                 .navigationTitle(title)
                 .toolbar {
                     ToolbarItem(placement: .primaryAction) {
+                        if sizeClass == .compact {
+                            Button {
+                                app.spotlight = true
+                            } label: {
+                                Image(systemName: "magnifyingglass")
+                            }
+                        }
+                    }
+                    
+                    ToolbarItem {
                         if editMode?.wrappedValue != .active {
                             Menu {
                                 EditButton("Select")

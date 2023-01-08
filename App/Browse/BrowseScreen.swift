@@ -10,7 +10,6 @@ struct BrowseScreen: View {
             BrowseNested(find: find)
         }
             .fab(to: find.collectionId)
-            .globalSearch(find: $find)
             .modifier(Toolbar(find: find))
             #if os(iOS)
             .backport.toolbarRole(isPhone ? .automatic : .browser)

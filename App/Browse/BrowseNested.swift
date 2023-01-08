@@ -9,7 +9,7 @@ struct BrowseNested: View {
     var body: some View {
         Memorized(
             items: find.isSearching ?
-                c.state.find(find) :
+                [] :
                 c.state.childrens(of: find.collectionId)
         )
     }

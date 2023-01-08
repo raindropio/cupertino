@@ -1,6 +1,7 @@
 import SwiftUI
 import API
 import UI
+import Common
 
 extension BrowseItem {
     struct Details: View {
@@ -10,14 +11,8 @@ extension BrowseItem {
         
         var body: some View {
             VStack(alignment: .leading, spacing: 4) {
-                Text(raindrop.title)
-                    .fontWeight(.semibold)
+                RaindropTitleExcerpt(raindrop)
                     .lineLimit(3)
-                
-                if !raindrop.excerpt.isEmpty {
-                    Text(raindrop.excerpt)
-                        .lineLimit(3)
-                }
                 
                 Buttons(find: find, raindrop: raindrop)
                 
@@ -25,21 +20,7 @@ extension BrowseItem {
                     Spacer(minLength: 0)
                 }
                 
-                (
-                    (
-                        raindrop.type != .link ?
-                            Text(Image(systemName: raindrop.type.systemImage)) + Text("\u{00a0}") :
-                            Text("")
-                    )
-                    + Text(raindrop.link.host ?? "")
-                    + Text("\u{00a0}• ")
-                    + Text(raindrop.created, formatter: .shortDateTime)
-                )
-                    .font(.callout)
-                    .foregroundStyle(.secondary)
-                    .lineLimit(2)
-                    .symbolVariant(.fill)
-                    .imageScale(.small)
+                RaindropMeta(raindrop)
             }
                 .frame(maxHeight: .infinity)
                 .padding(vertical ? 12 : 0)

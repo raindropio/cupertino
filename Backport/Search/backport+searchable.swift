@@ -3,26 +3,23 @@ import Combine
 
 public extension Backport where Wrapped: View {
     @available(iOS, deprecated: 16.0)
-    @ViewBuilder func searchable<C: RandomAccessCollection & RangeReplaceableCollection, T: View, S: View>(
+    @ViewBuilder func searchable<C: RandomAccessCollection & RangeReplaceableCollection, T: View>(
         text: Binding<String>,
         tokens: Binding<C>,
         placement: SearchFieldPlacement = .automatic,
         prompt: Text? = nil,
-        token: @escaping (C.Element) -> T,
-        @ViewBuilder suggestions: () -> S
+        token: @escaping (C.Element) -> T
     ) -> some View where C.Element : Identifiable {
         if #available(iOS 16, *) {
             content
                 .searchable(text: text, tokens: tokens, placement: placement, prompt: prompt, token: token)
-                .searchSuggestions(suggestions)
         } else {
             content
                 .modifier(ClearOnCancel(text: text))
                 .searchable(
                     text: text,
                     placement: placement.isToolbar ? .navigationBarDrawer : placement, //on ipad toolbar placement buggy
-                    prompt: prompt,
-                    suggestions: suggestions
+                    prompt: prompt
                 )
                 .modifier(SearchableTokens(text: text, tokens: tokens))
         }

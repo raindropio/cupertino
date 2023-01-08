@@ -17,6 +17,20 @@ public func DisclosureSection<L: StringProtocol, C: View>(
 
 public func DisclosureSection<L: StringProtocol, C: View, A: View>(
     _ label: L,
+    isExpanded: Binding<Bool>,
+    content: @escaping () -> C,
+    actions: @escaping () -> A
+) -> some View {
+    _DisclosureSection(
+        isExpanded: isExpanded.wrappedValue,
+        content: content
+    ) {
+        _SectionHeader(isExpanded: isExpanded, label: Text(label), actions: actions)
+    }
+}
+
+public func DisclosureSection<L: StringProtocol, C: View, A: View>(
+    _ label: L,
     isExpanded: Bool,
     toggle: @escaping () -> Void,
     content: @escaping () -> C,
@@ -74,7 +88,7 @@ fileprivate struct _SectionHeader<L: View, A: View>: View {
                     .backport.fontWeight(.semibold)
                     .rotationEffect(.degrees(isExpanded ? 90 : 0))
             }
-                .tint(.secondary)
+                .tint(.gray)
             
             Spacer()
             

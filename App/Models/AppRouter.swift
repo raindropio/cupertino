@@ -14,6 +14,7 @@ class AppRouter: ObservableObject {
     @Published var path: [AppRoute] = [
         .browse(.init())
     ]
+    @Published var spotlight = false
     
     func push(_ screen: AppRoute) {
         if path.last != screen {
@@ -31,6 +32,10 @@ class AppRouter: ObservableObject {
 
 //MARK: Shorthands
 extension AppRouter {
+    func browse(_ find: FindBy) {
+        push(.browse(find))
+    }
+    
     func browse(_ filter: Filter) {
         push(.browse(.init(filter)))
     }

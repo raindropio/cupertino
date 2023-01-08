@@ -4,15 +4,27 @@ import UI
 import Common
 
 extension SidebarScreen {
-    struct Me: ViewModifier {
+    struct Toolbar: ViewModifier {
+        @EnvironmentObject private var app: AppRouter
         @EnvironmentObject private var settings: SettingsRouter
+        @Environment(\.editMode) private var editMode
 
         func body(content: Content) -> some View {
             content
                 .meNavigationTitle()
                 .navigationBarTitleDisplayMode(isPhone ? .automatic : .inline)
                 .toolbar {
-                    ToolbarItem(placement: isPhone ? .cancellationAction : .primaryAction) {
+                    ToolbarItemGroup(placement: .primaryAction) {
+                        if editMode?.wrappedValue != .active {
+                            Button {
+                                app.spotlight = true
+                            } label: {
+                                Image(systemName: "magnifyingglass")
+                            }
+                        }
+                    }
+                    
+                    ToolbarItem(placement: .cancellationAction) {
                         Button {
                             settings.open()
                         } label: {

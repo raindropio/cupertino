@@ -3,21 +3,21 @@ import API
 import UI
 import Backport
 
-struct UserCollectionItem: View {
+public struct UserCollectionItem: View {
     @EnvironmentObject private var event: CollectionEvent
     var collection: UserCollection
     var withLocation = false
     
-    init(_ collection: UserCollection) {
+    public init(_ collection: UserCollection) {
         self.collection = collection
     }
     
-    init(_ collection: UserCollection, withLocation: Bool = false) {
+    public init(_ collection: UserCollection, withLocation: Bool = false) {
         self.collection = collection
         self.withLocation = withLocation
     }
     
-    var body: some View {
+    public var body: some View {
         UserCollectionLabel(collection, withLocation: withLocation)
             .dropConsumer(to: collection)
             .swipeActions(edge: .trailing) {
