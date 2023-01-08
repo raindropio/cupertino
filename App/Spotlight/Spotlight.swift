@@ -34,11 +34,11 @@ struct Spotlight: View {
             .controlSize(.small)
             .navigationBarTitleDisplayMode(.inline)
             .modifier(Animations(find: find))
-            //search
-            .dismissOnSearchCancel()
-            .modifier(SearchBar(find: $find))
             //react to events
+            .dismissOnSearchCancel()
             .modifier(Events())
+            //search
+            .modifier(SearchBar(find: $find))
             .task(id: find, priority: .background, debounce: 0.3) {
                 previous = find
                 

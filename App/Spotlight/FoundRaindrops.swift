@@ -12,7 +12,7 @@ struct FoundRaindrops: View {
         Section {
             if find.isSearching {
                 Memorized(
-                    status: r.state.status(find),
+                    status: r.state.exists(find) ? r.state.status(find) : .loading,
                     items: r.state.items(find)
                 )
             }

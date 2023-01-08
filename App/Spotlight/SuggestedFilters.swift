@@ -11,7 +11,8 @@ struct SuggestedFilters: View {
     var body: some View {
         Memorized(
             find: $find,
-            items: f.state.simple(find)
+            items: f.state.simple(find),
+            created: f.state.created(find)
         )
     }
 }
@@ -20,10 +21,11 @@ extension SuggestedFilters {
     fileprivate struct Memorized: View {
         @Binding var find: FindBy
         var items: [Filter]
+        var created: [Filter]
         
         var body: some View {
             Section {
-                if !items.isEmpty {
+                if !items.isEmpty && !created.isEmpty {
                     ScrollView(.horizontal, showsIndicators: false) {
                         HStack(spacing: 12) {
                             ForEach(items) { item in
@@ -31,6 +33,20 @@ extension SuggestedFilters {
                                     find.filters.append(item)
                                 } label: {
                                     FilterRow(item)
+                                }
+                            }
+                            
+                            if !created.isEmpty {
+                                Menu {
+                                    ForEach(created) { item in
+                                        Button {
+                                            find.filters.append(item)
+                                        } label: {
+                                            FilterRow(item)
+                                        }
+                                    }
+                                } label: {
+                                    Label("Creation date", systemImage: "calendar")
                                 }
                             }
                         }
