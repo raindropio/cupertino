@@ -43,7 +43,7 @@ extension _Optional: View {
             .labelStyle(.sidebar)
             .collectionsAnimation()
             //search
-            .searchable(text: $search)
+            .searchable(text: $search, placement: .navigationBarDrawer(displayMode: .always))
             //menu
             .backport.contextMenu(forSelectionType: FindBy.self) { selection in
                 CollectionsMenu(selection)

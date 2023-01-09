@@ -64,9 +64,6 @@ extension FancySheet {
             } else {
                 content
                     .clipShape(RoundedRectangle(cornerRadius: 8, style: .continuous))
-                    .overlay(RoundedRectangle(cornerRadius: 8, style: .continuous)
-                        .stroke(.tertiary.opacity(0.3), lineWidth: 1)
-                    )
                     .padding()
             }
         }

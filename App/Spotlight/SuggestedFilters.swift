@@ -88,6 +88,7 @@ extension SuggestedFilters {
                         Image(systemName: "calendar")
                     }
                 }
+                    .tint(Filter.Kind.created("").color)
                     .listItemTint(Filter.Kind.created("").color)
             }
         }

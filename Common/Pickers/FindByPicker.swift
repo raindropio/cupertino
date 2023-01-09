@@ -95,8 +95,7 @@ extension FindByPicker: View {
                             Section { CollectionsMenu() }
                             Section { TagsMenu() }
                         } label: {
-                            Image(systemName: "ellipsis.circle.fill")
-                                .symbolRenderingMode(.hierarchical)
+                            Image(systemName: "ellipsis")
                         }
                     } else {
                         EditButton()

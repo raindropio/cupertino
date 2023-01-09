@@ -43,7 +43,7 @@ struct Spotlight: View {
             .modifier(Events(find: find))
             //search
             .modifier(SearchBar(find: $find))
-            .task(id: find, priority: .background, debounce: 0.3) {
+            .task(id: find, priority: .background, debounce: 0.5) {
                 previous = find
                 
                 try? await dispatch(

@@ -60,8 +60,7 @@ extension BrowseScreen.Toolbar {
                                     CollectionsMenu(collection.id)
                                 }
                             } label: {
-                                Label(collection.title, systemImage: "ellipsis.circle.fill")
-                                    .symbolRenderingMode(.hierarchical)
+                                Label(collection.title, systemImage: "ellipsis")
                             }
                         }
                     }
