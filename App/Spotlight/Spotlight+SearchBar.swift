@@ -13,6 +13,7 @@ extension Spotlight {
                     text: $find.text,
                     tokens: $find.filters,
                     placement: .navigationBarDrawer(displayMode: .always),
+                    prompt: Text("Quick search"),
                     token: FilterRow.init
                 )
                 #if canImport(UIKit)

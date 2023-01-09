@@ -15,7 +15,8 @@ struct Spotlight: View {
                 Group {
                     SuggestedFilters(find: $find)
                     RecentSearches(find: find)
-                    SuggestedTags(find: find)
+                    //TODO: recent collections/bookmarks
+                    SuggestedCompletion(find: find)
                     FoundCollections(find: find)
                 }
                 .listRowSeparator(.hidden, edges: .bottom)
@@ -34,9 +35,12 @@ struct Spotlight: View {
             .controlSize(.small)
             .navigationBarTitleDisplayMode(.inline)
             .modifier(Animations(find: find))
+            //editing
+            .collectionEvents()
+            .tagEvents()
             //react to events
             .dismissOnSearchCancel()
-            .modifier(Events())
+            .modifier(Events(find: find))
             //search
             .modifier(SearchBar(find: $find))
             .task(id: find, priority: .background, debounce: 0.3) {

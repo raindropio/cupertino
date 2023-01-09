@@ -8,38 +8,29 @@ public struct Tags<T: Hashable>: View {
     @EnvironmentObject private var f: FiltersStore
     private var tag: (Filter) -> T
 
-    var find: FindBy
+    var search: String = ""
     
     public var body: some View {
         Memorized(
             tag: tag,
-            items: f.state.tags(find)
+            items: f.state.tags(search)
         )
     }
 }
 
-extension Tags where T == Filter {
-    public init(find: FindBy = .init()) {
-        self.find = find
-        self.tag = { $0 }
-    }
-}
-
 extension Tags where T == String {
-    public init(find: FindBy = .init()) {
-        self.find = find
+    public init() {
         self.tag = { $0.title }
     }
 }
 
 extension Tags where T == FindBy {
-    public init(find: FindBy = .init()) {
-        self.find = find
+    public init() {
         self.tag = { .init($0) }
     }
     
     public init(search: String) {
-        self.find = .init(search)
+        self.search = search
         self.tag = { .init($0) }
     }
 }
@@ -55,7 +46,7 @@ extension Tags {
                 ForEach(items) { item in
                     FilterRow(item)
                         .swipeActions {
-                            TagsMenu(Set([item]))
+                            TagsMenu(item)
                         }
                         .backport.tag(tag(item))
                 }

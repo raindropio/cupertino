@@ -9,6 +9,8 @@ extension Spotlight {
         @EnvironmentObject private var app: AppRouter
         @Environment(\.dismiss) private var dismiss
         @Environment(\.dismissSearch) private var dismissSearch
+        
+        var find: FindBy
 
         func body(content: Content) -> some View {
             content
@@ -23,7 +25,7 @@ extension Spotlight {
                         app.preview(raindrop.link)
                         dismiss()
                         
-                    case .find(let find):
+                    case .find:
                         app.browse(find)
                         dismissSearch()
                     }
@@ -44,6 +46,6 @@ extension SpotlightEvent {
     enum Tap {
         case collection(UserCollection)
         case raindrop(Raindrop)
-        case find(FindBy)
+        case find
     }
 }

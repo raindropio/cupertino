@@ -63,13 +63,13 @@ extension Filter {
             switch self {
             case .important: return .red
             case .type(let type): return type.color
-            case .created(_): return .secondary
+            case .created(_): return .gray
             case .highlights: return .purple
-            case .notag: return .secondary
+            case .notag: return .gray
             case .broken: return .pink
             case .duplicate: return .green
             case .file: return .teal
-            case .tag: return .secondary
+            case .tag: return .gray
             case .raindrop(_): return .blue
             }
         }

@@ -3,33 +3,37 @@ import API
 import Backport
 import Common
 
-struct SuggestedTags: View {
+struct SuggestedCompletion: View {
     @EnvironmentObject private var f: FiltersStore
     var find: FindBy
     
     var body: some View {
         Memorized(
             find: find,
-            items: f.state.tags(find)
+            items: f.state.completion(find)
         )
     }
 }
 
-extension SuggestedTags {
+extension SuggestedCompletion {
     fileprivate struct Memorized: View {
         var find: FindBy
         var items: [Filter]
         
         var body: some View {
             Section {
-                ForEach(items) {
-                    FilterRow($0)
-                        .backport.searchCompletion($0)
+                ForEach(items) { item in
+                    FilterRow(item)
+                        .swipeActions {
+                            TagsMenu(item)
+                        }
+                        .listItemTint(item.color)
+                        .backport.searchCompletion(item)
                 }
             } header: {
                 if !items.isEmpty {
                     HStack {
-                        Text("Tags")
+                        Text("Suggested")
                         
 //                        Spacer()
 //                        

@@ -1,11 +1,11 @@
 import SwiftUI
 import API
 
-func TagsMenu(_ tags: Set<String>) -> some View {
+public func TagsMenu(_ tags: Set<String>) -> some View {
     _TagsMenu(tags: tags)
 }
 
-func TagsMenu(_ filters: Set<Filter>) -> some View {
+public func TagsMenu(_ filters: Set<Filter>) -> some View {
     _TagsMenu(tags: .init(
         filters
             .compactMap {
@@ -17,7 +17,11 @@ func TagsMenu(_ filters: Set<Filter>) -> some View {
     ))
 }
 
-func TagsMenu(_ findBy: Set<FindBy>) -> some View {
+public func TagsMenu(_ filter: Filter) -> some View {
+    TagsMenu([filter])
+}
+
+public func TagsMenu(_ findBy: Set<FindBy>) -> some View {
     TagsMenu(.init(
         findBy.flatMap { $0.filters }
     ))

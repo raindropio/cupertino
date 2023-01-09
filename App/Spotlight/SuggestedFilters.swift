@@ -11,7 +11,8 @@ struct SuggestedFilters: View {
     var body: some View {
         Memorized(
             find: $find,
-            items: f.state.simple(find),
+            tags: f.state.tags(find),
+            simple: f.state.simple(find),
             created: f.state.created(find)
         )
     }
@@ -20,15 +21,30 @@ struct SuggestedFilters: View {
 extension SuggestedFilters {
     fileprivate struct Memorized: View {
         @Binding var find: FindBy
-        var items: [Filter]
+        var tags: [Filter]
+        var simple: [Filter]
         var created: [Filter]
         
         var body: some View {
             Section {
-                if !items.isEmpty && !created.isEmpty {
+                if !tags.isEmpty && !simple.isEmpty && !created.isEmpty {
                     ScrollView(.horizontal, showsIndicators: false) {
                         HStack(spacing: 12) {
-                            ForEach(items) { item in
+                            if !tags.isEmpty {
+                                Menu {
+                                    ForEach(tags) { item in
+                                        Button {
+                                            find.filters.append(item)
+                                        } label: {
+                                            FilterRow(item)
+                                        }
+                                    }
+                                } label: {
+                                    Label("Tags", systemImage: "number")
+                                }
+                            }
+                            
+                            ForEach(simple) { item in
                                 Button {
                                     find.filters.append(item)
                                 } label: {
@@ -48,8 +64,10 @@ extension SuggestedFilters {
                                 } label: {
                                     Label("Creation date", systemImage: "calendar")
                                 }
+                                    .tint(Filter.Kind.created("").color)
                             }
                         }
+                        .transition(.move(edge: .trailing))
                         .scenePadding(.horizontal)
                     }
                     .labelStyle(LS())

@@ -13,12 +13,12 @@ struct FoundRaindrops: View {
             if find.isSearching {
                 Memorized(
                     status: r.state.exists(find) ? r.state.status(find) : .loading,
-                    items: r.state.items(find)
+                    items: Array(r.state.items(find).prefix(Rest.raindropsPerPage))
                 )
             }
         } header: {
             if find.isSearching {
-                Header(find: find)
+                Header()
             }
         }
     }
@@ -66,6 +66,16 @@ extension FoundRaindrops {
                     Single(item: item)
                 }
             }
+            
+            Button {
+                event.tap(.find)
+            } label: {
+                Text("Continue search")
+                    .frame(maxWidth: .infinity)
+                    .foregroundStyle(.tint)
+            }
+            .listRowSeparator(.hidden, edges: .bottom)
+            .listRowSeparator(.visible, edges: .top)
         }
     }
 }
@@ -92,7 +102,6 @@ extension FoundRaindrops {
 extension FoundRaindrops {
     fileprivate struct Header: View {
         @EnvironmentObject private var event: SpotlightEvent
-        var find: FindBy
 
         var body: some View {
             HStack {
@@ -100,10 +109,8 @@ extension FoundRaindrops {
                 
                 Spacer()
                 
-                if find.isSearching {
-                    Button("Show all") {
-                        event.tap(.find(find))
-                    }
+                Button("Show all") {
+                    event.tap(.find)
                 }
             }
         }

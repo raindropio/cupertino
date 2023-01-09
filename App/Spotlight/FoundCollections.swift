@@ -35,7 +35,7 @@ extension FoundCollections {
                 Button {
                     event.tap(.collection(item))
                 } label: {
-                    UserCollectionLabel(item, withLocation: true)
+                    UserCollectionItem(item, withLocation: true)
                 }
             }
         }
