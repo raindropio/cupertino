@@ -50,6 +50,7 @@ extension FoundCollections {
             HStack {
                 Text("Collections")
                 
+                //TODO: more
 //                Spacer()
 //
 //                if find.isSearching {

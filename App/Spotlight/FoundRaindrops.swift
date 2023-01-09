@@ -18,7 +18,9 @@ struct FoundRaindrops: View {
             }
         } header: {
             if find.isSearching {
-                Header()
+                Header(
+                    total: r.state.total(find)
+                )
             }
         }
     }
@@ -102,6 +104,7 @@ extension FoundRaindrops {
 extension FoundRaindrops {
     fileprivate struct Header: View {
         @EnvironmentObject private var event: SpotlightEvent
+        var total: Int
 
         var body: some View {
             HStack {
@@ -109,8 +112,15 @@ extension FoundRaindrops {
                 
                 Spacer()
                 
-                Button("Show all") {
-                    event.tap(.find)
+                if total > 0 {
+                    Button {
+                        event.tap(.find)
+                    } label: {
+                        Text("Show all (") +
+                        Text(total, format: .number) +
+                        Text(")")
+                    }
+                    .backport.contentTransition(.numericText())
                 }
             }
         }

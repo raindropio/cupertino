@@ -33,8 +33,9 @@ extension SuggestedCompletion {
             } header: {
                 if !items.isEmpty {
                     HStack {
-                        Text("Suggested")
+                        Text("Suggestions")
                         
+                        //TODO: more
 //                        Spacer()
 //                        
 //                        if find.isSearching {

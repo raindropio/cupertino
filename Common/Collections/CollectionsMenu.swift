@@ -1,6 +1,10 @@
 import SwiftUI
 import API
 
+public func CollectionsMenu() -> some View {
+    _CollectionsMenu(ids: [])
+}
+
 public func CollectionsMenu(_ id: Int) -> some View {
     _CollectionsMenu(ids: [id])
 }

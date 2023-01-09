@@ -21,23 +21,20 @@ public struct FindByPicker {
 extension FindByPicker {
     @ViewBuilder
     func contextMenu(_ selection: Set<FindBy>) -> some View {
-        if selection.isEmpty {
-            Section { CollectionsMenu(selection) }
-            Section { TagsMenu(selection) }
-        } else if selection.allSatisfy({ !$0.isSearching }) {
-            CollectionsMenu(selection)
-        } else if selection.allSatisfy({ $0.isSearching }) {
-            TagsMenu(selection)
+        if !selection.isEmpty {
+            if selection.allSatisfy({ !$0.isSearching }) {
+                CollectionsMenu(selection)
+            } else if selection.allSatisfy({ $0.isSearching }) {
+                TagsMenu(selection)
+            }
         }
     }
     
     @ViewBuilder
     func bottomBar() -> some View {
         if editMode?.wrappedValue == .active {
-            ControlGroup {
-                contextMenu(selection)
-            }
-                .controlGroupStyle(.tabs)
+            contextMenu(selection)
+                .labelStyle(.titleOnly)
         }
     }
 }
@@ -90,7 +87,22 @@ extension FindByPicker: View {
             .backport.contextMenu(forSelectionType: FindBy.self, menu: contextMenu)
             //toolbar
             .toolbar {
-                ToolbarItem(placement: .automatic, content: EditButton.init)
+                ToolbarItem {
+                    if editMode?.wrappedValue != .active {
+                        Menu {
+                            EditButton("Select")
+                            
+                            Section { CollectionsMenu() }
+                            Section { TagsMenu() }
+                        } label: {
+                            Image(systemName: "ellipsis.circle.fill")
+                                .symbolRenderingMode(.hierarchical)
+                        }
+                    } else {
+                        EditButton()
+                    }
+                }
+                
                 ToolbarItemGroup(placement: .bottomBar, content: bottomBar)
             }
             //reload

@@ -21,7 +21,13 @@ extension FiltersState {
     }
     
     public func tags(_ search: String) -> [Filter] {
-        (tags[.init()] ?? []).filter {
+        let tags = tags[.init()] ?? []
+        
+        if search.isEmpty {
+            return tags
+        }
+        
+        return tags.filter {
             $0.contains(search)
         }
     }

@@ -55,7 +55,10 @@ extension BrowseScreen.Toolbar {
                         if editMode?.wrappedValue != .active {
                             Menu {
                                 EditButton("Select")
-                                CollectionsMenu(collection.id)
+                                
+                                Section {
+                                    CollectionsMenu(collection.id)
+                                }
                             } label: {
                                 Label(collection.title, systemImage: "ellipsis.circle.fill")
                                     .symbolRenderingMode(.hierarchical)

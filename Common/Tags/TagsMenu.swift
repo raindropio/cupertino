@@ -1,6 +1,10 @@
 import SwiftUI
 import API
 
+public func TagsMenu() -> some View {
+    _TagsMenu(tags: .init())
+}
+
 public func TagsMenu(_ tags: Set<String>) -> some View {
     _TagsMenu(tags: tags)
 }
