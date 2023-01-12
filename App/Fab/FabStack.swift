@@ -46,7 +46,7 @@ struct FabStack: View {
                     SafariLink(destination: URL(string: "https://help.raindrop.io/mobile-app#save-from-browser")!) {
                         Label("Add from apps", systemImage: "puzzlepiece.extension").tint(.primary)
                     }
-                        .listItemTint(.secondary)
+                        .listItemTint(.monochrome)
                 }
             }
                 .environment(\.defaultMinListRowHeight, 46)

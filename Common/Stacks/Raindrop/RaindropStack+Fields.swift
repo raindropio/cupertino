@@ -36,13 +36,32 @@ extension RaindropStack.Fields: View {
         Section {
             CollectionPickerLink($raindrop.collection, system: [-1, -99])
 
-            Label {
-                TagsPicker($raindrop.tags)
-                    .tokenFieldStyle(.menu)
-            } icon: {
-                Image(systemName: "number")
+            HStack {
+                Label {
+                    TagsField($raindrop.tags)
+                        .focused($focus, equals: .tags)
+                } icon: {
+                    Image(systemName: "number")
+                }
+                
+                NavigationLink {
+                    TagsPicker($raindrop.tags)
+                        .navigationTitle("\(raindrop.tags.count) tags")
+                        .navigationBarTitleDisplayMode(.inline)
+                } label: {}
+                    .layoutPriority(-1)
             }
             
+            Label {
+                URLField("URL", value: $raindrop.link)
+                    .focused($focus, equals: .link)
+            } icon: {
+                Image(systemName: "globe")
+            }
+        }
+            .listItemTint(.monochrome)
+        
+        Section {
             NavigationLink {
                 HighlightsList(raindrop: $raindrop)
                     .navigationTitle(Filter.Kind.highlights.title)
@@ -50,21 +69,14 @@ extension RaindropStack.Fields: View {
                 Label(Filter.Kind.highlights.title, systemImage: Filter.Kind.highlights.systemImage)
                     .badge(raindrop.highlights.count)
             }
-
-            Label {
-                URLField("URL", value: $raindrop.link)
-                    .focused($focus, equals: .link)
-            } icon: {
-                Image(systemName: "globe")
-            }
-
+            
             Toggle(isOn: $raindrop.important) {
                 Label("Favorite", systemImage: "heart")
                     .symbolVariant(raindrop.important ? .fill : .none)
             }
                 .listItemTint(raindrop.important ? Filter.Kind.important.color : .secondary)
         }
-            .listItemTint(.secondary)
+            .listItemTint(.monochrome)
     }
 }
 

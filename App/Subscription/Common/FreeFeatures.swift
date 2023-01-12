@@ -30,7 +30,7 @@ struct FreeFeatures: View {
                 Label("All essential features", systemImage: "checklist.checked")
             }
         }
-            .listItemTint(.secondary)
+            .listItemTint(.monochrome)
             .symbolVariant(.fill)
     }
 }

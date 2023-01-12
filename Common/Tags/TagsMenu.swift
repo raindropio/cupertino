@@ -5,6 +5,10 @@ public func TagsMenu() -> some View {
     _TagsMenu(tags: .init())
 }
 
+public func TagsMenu(_ tag: String) -> some View {
+    _TagsMenu(tags: [tag])
+}
+
 public func TagsMenu(_ tags: Set<String>) -> some View {
     _TagsMenu(tags: tags)
 }
@@ -62,7 +66,7 @@ fileprivate struct _TagsMenu: View {
         }
             
         if !tags.isEmpty {
-            Button(role: .destructive) { event.delete(tags) } label: {
+            Button { event.delete(tags) } label: {
                 Label("Delete", systemImage: "trash")
             }
                 .tint(.red)

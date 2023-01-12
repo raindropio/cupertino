@@ -23,7 +23,7 @@ struct SubscriptionDetails: View {
                             .badge(Text(renewAt, formatter: .shortDateTime))
                     }
                 }
-                    .listItemTint(.secondary)
+                    .listItemTint(.monochrome)
                 
                 if let payments = subscription.links.payments {
                     SafariLink(destination: payments) {

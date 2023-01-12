@@ -28,6 +28,6 @@ public struct UserCollectionLabel: View {
             CollectionIcon(collection)
         }
             .badge(collection.count)
-            .listItemTint(.secondary)
+            .listItemTint(.monochrome)
     }
 }
