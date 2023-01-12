@@ -47,15 +47,21 @@ extension RaindropStack: View {
         Backport.NavigationStack {
             Form {
                 Fields(raindrop: $raindrop)
-                Footer(raindrop: $raindrop, loading: $loading)
+                
+                if isNew {
+                    SubmitButton("Save")
+                } else {
+                    Dates(raindrop: $raindrop)
+                }
             }
+                .modifier(Actions(raindrop: $raindrop))
                 .animation(nil, value: [loading, isNew])
                 .disabled(loading)
                 .opacity(loading ? 0.7 : 1)
                 .animation(.default, value: [loading, isNew])
                 .submitLabel(.done)
                 .onSubmit(commit)
-                .navigationTitle(isNew ? "New bookmark" : "Edit bookmark")
+                .navigationTitle((isNew ? "New" : "Edit") + " \(raindrop.type.single.localizedLowercase)")
                 .navigationBarTitleDisplayMode(.inline)
                 .toolbar {
                     ToolbarItem(placement: isNew ? .cancellationAction : .confirmationAction) {

@@ -4,7 +4,7 @@ import SwiftUI
 extension Filter {
     public enum Kind: CustomStringConvertible, Equatable, Hashable, Codable {
         case important
-        case type(Raindrop.`Type`)
+        case type(RaindropType)
         case created(String)
         case highlights
         case broken

@@ -8,7 +8,7 @@ public struct Raindrop: Identifiable, Hashable {
     public var collection: Int = -1
     public var cover: URL?
     public var media = [Media]()
-    public var type: `Type` = .link
+    public var type: RaindropType = .link
     public var tags = [String]()
     public var highlights = [Highlight]()
     public var created = Date()

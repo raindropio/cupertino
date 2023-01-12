@@ -32,7 +32,7 @@ extension TagsField {
         var suggestions: [String]
 
         var body: some View {
-            TextTokenField("Tags", value: $value, suggestions: suggestions)
+            TextTokenField("Add tag", value: $value, suggestions: suggestions)
         }
     }
 }

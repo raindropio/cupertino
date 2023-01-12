@@ -9,7 +9,6 @@ public struct Thumbnail {
     var width: CGFloat?
     var height: CGFloat?
     var aspectRatio: Double?
-    var cornerRadius: Double = 0
     
     static var cacheAspect = [URL: CGFloat]()
     static let pipeline: ImagePipeline = {
@@ -28,59 +27,48 @@ public struct Thumbnail {
     public init(
         _ url: URL? = nil,
         width: Double,
-        height: Double,
-        cornerRadius: Double = 0
+        height: Double
     ) {
         self.url = url
         self.width = width
         self.height = height
-        self.cornerRadius = cornerRadius
     }
     
     public init(
         _ url: URL? = nil,
         width: Double,
-        aspectRatio: Double? = nil,
-        cornerRadius: Double = 0
+        aspectRatio: Double? = nil
     ) {
         self.url = url
         self.width = width
         self.aspectRatio = aspectRatio
-        self.cornerRadius = cornerRadius
     }
     
     public init(
         _ url: URL? = nil,
         height: Double,
-        aspectRatio: Double? = nil,
-        cornerRadius: Double = 0
+        aspectRatio: Double? = nil
     ) {
         self.url = url
         self.height = height
         self.aspectRatio = aspectRatio
-        self.cornerRadius = cornerRadius
     }
 }
 
 extension Thumbnail: View {
-    var resize: ImageProcessors.Resize? {
+    var resize: [ImageProcessors.Resize]? {
         if let width, let height {
-            return .init(
+            return [.init(
                 size: .init(width: width, height: height),
                 unit: .points,
-                contentMode: .aspectFit,
                 crop: true
-            )
+            )]
         } else if let width {
-            return .init(width: width, unit: .points)
+            return [.init(width: width, unit: .points)]
         } else if let height {
-            return .init(height: height, unit: .points)
+            return [.init(height: height, unit: .points)]
         }
         return nil
-    }
-    
-    var roundedCorner: ImageProcessors.RoundedCorners {
-        .init(radius: cornerRadius)
     }
     
     func saveAspectRatio(_ result: ImageResponse) {
@@ -95,7 +83,7 @@ extension Thumbnail: View {
     var base: LazyImage<NukeUI.Image> {
         LazyImage(url: url)
             .animation(nil)
-            .processors(resize != nil ? [resize!, roundedCorner] : [roundedCorner])
+            .processors(resize)
             .pipeline(Self.pipeline)
 //            .priority(.veryLow)
             .onDisappear(.lowerPriority)
@@ -105,7 +93,7 @@ extension Thumbnail: View {
         //fixed size
         if let width, let height {
             base
-                .frame(idealWidth: width, idealHeight: height)
+                .frame(width: width, height: height)
                 .fixedSize()
         }
         //aspect ratio
@@ -135,9 +123,9 @@ struct Thumbnail_Previews: PreviewProvider {
     
     static var previews: some View {
         HStack {
-            Thumbnail(url, width: 80, height: 60, cornerRadius: 3)
+            Thumbnail(url, width: 80, height: 60)
             
-            Thumbnail(url, width: 24, height: 24, cornerRadius: 3)
+            Thumbnail(url, width: 24, height: 24)
             
             VStack {
                 Thumbnail(url, width: 250, aspectRatio: 16/9)

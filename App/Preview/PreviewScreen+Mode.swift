@@ -9,7 +9,7 @@ extension PreviewScreen {
         
         init(_ raindrop: Raindrop) {
             switch raindrop.type {
-            case .article:
+            case .article, .book:
                 self = .article
                 
             case .audio, .document, .image, .video:

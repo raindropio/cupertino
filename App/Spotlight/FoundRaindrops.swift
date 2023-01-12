@@ -88,7 +88,8 @@ extension FoundRaindrops {
 
         var body: some View {
             HStack(alignment: .top, spacing: 12) {
-                Thumbnail(item.cover, width: 60, height: 50, cornerRadius: 3)
+                Thumbnail(item.cover, width: 60, height: 50)
+                    .cornerRadius(3)
                 
                 VStack(alignment: .leading, spacing: 3) {
                     RaindropTitleExcerpt(item)

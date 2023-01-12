@@ -12,25 +12,39 @@ extension RaindropStack {
 
 extension RaindropStack.Fields: View {
     var body: some View {
-        CoverPicker(
-            url: raindrop.link,
-            selection: $raindrop.cover,
-            media: $raindrop.media
-        )
-        
         Section {
-            Backport.TextField("Title", text: $raindrop.title, axis: .vertical)
-                .preventLineBreaks(text: $raindrop.title)
-                .focused($focus, equals: .title)
-                .backport.fontWeight(.semibold)
-                .lineLimit(5)
-                .onSubmit {
-                    focus = nil
+            HStack(spacing: 16) {
+                ZStack {
+                    Thumbnail(
+                        Rest.renderImage(raindrop.cover, options: .maxDeviceSize),
+                        width: 56,
+                        height: 48
+                    )
+                        .cornerRadius(3)
+                    
+                    NavigationLink {
+                        CoverPicker(raindrop: $raindrop)
+                    } label: {}
+                        .opacity(0.00001)
+                        .layoutPriority(-1)
                 }
-
+                    .padding(.top, 10)
+                    .frame(maxHeight: .infinity, alignment: .top)
+                
+                Backport.TextField("Title", text: $raindrop.title, axis: .vertical)
+                    .preventLineBreaks(text: $raindrop.title)
+                    .focused($focus, equals: .title)
+                    .backport.fontWeight(.semibold)
+                    .lineLimit(5)
+                    .onSubmit {
+                        focus = nil
+                    }
+                    .frame(maxHeight: .infinity)
+            }
+            
             Backport.TextField("Description", text: $raindrop.excerpt, axis: .vertical)
                 .focused($focus, equals: .excerpt)
-                .backport.lineLimit(2...5)
+                .lineLimit(5)
         }
 
         Section {
@@ -51,32 +65,17 @@ extension RaindropStack.Fields: View {
                 } label: {}
                     .layoutPriority(-1)
             }
-            
-            Label {
-                URLField("URL", value: $raindrop.link)
-                    .focused($focus, equals: .link)
-            } icon: {
-                Image(systemName: "globe")
-            }
         }
             .listItemTint(.monochrome)
         
-        Section {
-            NavigationLink {
-                HighlightsList(raindrop: $raindrop)
-                    .navigationTitle(Filter.Kind.highlights.title)
-            } label: {
-                Label(Filter.Kind.highlights.title, systemImage: Filter.Kind.highlights.systemImage)
-                    .badge(raindrop.highlights.count)
+        if raindrop.file == nil {
+            Section {
+                URLField("URL", value: $raindrop.link)
+                    .focused($focus, equals: .link)
+                    .font(.subheadline)
+                    .foregroundStyle(focus == .link ? .primary : .secondary)
             }
-            
-            Toggle(isOn: $raindrop.important) {
-                Label("Favorite", systemImage: "heart")
-                    .symbolVariant(raindrop.important ? .fill : .none)
-            }
-                .listItemTint(raindrop.important ? Filter.Kind.important.color : .secondary)
         }
-            .listItemTint(.monochrome)
     }
 }
 

@@ -14,32 +14,28 @@ extension ImagePicker {
                     Thumbnail(
                         url,
                         width: width,
-                        height: height,
-                        cornerRadius: 4
+                        height: height
                     )
                 } else if let width {
                     Thumbnail(
                         url,
                         width: width,
-                        aspectRatio: aspectRatio,
-                        cornerRadius: 4
+                        aspectRatio: aspectRatio
                     )
                 } else if let height {
                     Thumbnail(
                         url,
                         height: height,
-                        aspectRatio: aspectRatio,
-                        cornerRadius: 4
+                        aspectRatio: aspectRatio
                     )
                 }
             }
-                .background {
-                    if selected {
-                        RoundedRectangle(cornerRadius: 6, style: .continuous)
-                            .foregroundStyle(.selection)
-                            .scaleEffect(1.2)
-                    }
-                }
+                .cornerRadius(2)
+                .padding(4)
+                .background(selected ? AnyShapeStyle(.selection) : AnyShapeStyle(.clear))
+                .clipShape(
+                    RoundedRectangle(cornerRadius: 6, style: .continuous)
+                )
         }
     }
 }
