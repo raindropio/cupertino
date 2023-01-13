@@ -76,6 +76,11 @@ extension TagsPicker: View {
                 Label {
                     TextField("Add tag", text: $new)
                         .focused($focused)
+                        #if canImport(UIKit)
+                        .autocorrectionDisabled()
+                        .textInputAutocapitalization(.never)
+                        .keyboardType(.webSearch)
+                        #endif
                 } icon: {
                     Button { focused = true } label: {
                         Image(systemName: "plus")
@@ -106,6 +111,12 @@ extension TagsPicker: View {
             .animation(.default, value: selected)
             .animation(.default, value: suggestions)
             .tagEvents()
+            .reload {
+                try? await dispatch(
+                    FiltersAction.reload(),
+                    RecentAction.reload()
+                )
+            }
     }
 }
 

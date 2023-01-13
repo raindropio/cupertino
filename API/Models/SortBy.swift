@@ -8,7 +8,7 @@ public enum SortBy: Hashable, Codable {
     
     public var title: String {
         switch self {
-        case .score: return "By relevance"
+        case .score: return "Best matches"
         case .sort: return "Manually"
         case .created(let order): return order == .desc ? "New first" : "Old first"
         case .title(let order): return order == .desc ? "Title (Z to A)" : "Title (A to Z)"

@@ -19,23 +19,19 @@ public struct RaindropStack {
 }
 
 extension RaindropStack {
-    private var isNew: Bool {
-        raindrop.id == 0
-    }
-    
     private func commit() async throws {
-        try await dispatch(isNew ? RaindropsAction.create(raindrop) : RaindropsAction.update(raindrop))
+        try await dispatch(raindrop.isNew ? RaindropsAction.create(raindrop) : RaindropsAction.update(raindrop))
         dismiss()
     }
     
     private func saveOnClose() {
-        guard !isNew else { return }
+        guard !raindrop.isNew else { return }
         Task { try? await commit() }
     }
     
     @Sendable
     private func findNew() async {
-        guard isNew else { return }
+        guard raindrop.isNew else { return }
         loading = true
         try? await dispatch(RaindropsAction.find($raindrop))
         loading = false
@@ -48,29 +44,29 @@ extension RaindropStack: View {
             Form {
                 Fields(raindrop: $raindrop)
                 
-                if isNew {
+                if raindrop.isNew {
                     SubmitButton("Save")
                 } else {
                     Dates(raindrop: $raindrop)
                 }
             }
                 .modifier(Actions(raindrop: $raindrop))
-                .animation(nil, value: [loading, isNew])
+                .animation(nil, value: [loading, raindrop.isNew])
                 .disabled(loading)
                 .opacity(loading ? 0.7 : 1)
-                .animation(.default, value: [loading, isNew])
+                .animation(.default, value: [loading, raindrop.isNew])
                 .submitLabel(.done)
                 .onSubmit(commit)
-                .navigationTitle((isNew ? "New" : "Edit") + " \(raindrop.type.single.localizedLowercase)")
+                .navigationTitle((raindrop.isNew ? "New" : "Edit") + " \(raindrop.type.single.localizedLowercase)")
                 .navigationBarTitleDisplayMode(.inline)
                 .toolbar {
-                    ToolbarItem(placement: isNew ? .cancellationAction : .confirmationAction) {
-                        Button(isNew ? "Cancel" : "Done", action: dismiss.callAsFunction)
+                    ToolbarItem(placement: raindrop.isNew ? .cancellationAction : .confirmationAction) {
+                        Button(raindrop.isNew ? "Cancel" : "Done", action: dismiss.callAsFunction)
                     }
                 }
         }
             //prevent drag to dismiss for new items
-            .interactiveDismissDisabled(isNew)
+            .interactiveDismissDisabled(raindrop.isNew)
             //find bookmark for new
             .task(priority: .background, findNew)
             //auto-save for existing bookmarks

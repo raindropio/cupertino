@@ -69,8 +69,6 @@ extension BrowseItems {
                         Label("Delete", systemImage: "trash")
                     }
                         .tint(.red)
-                    
-                    Backport.ShareLink(item: item.link)
                 }
                 .onDrag {
                     item.itemProvider

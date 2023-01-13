@@ -5,7 +5,7 @@ extension RaindropsReducer {
         var raindrop = (try await rest.raindropGet(link: url)) ?? .new(link: url)
         raindrop.highlights.append(highlight)
         
-        return raindrop.id > 0 ? A.update(raindrop) : A.create(raindrop)
+        return raindrop.isNew ? A.create(raindrop) : A.update(raindrop)
     }
     
     func updateHighlight(state: inout S, highlight: Highlight) async throws -> ReduxAction? {

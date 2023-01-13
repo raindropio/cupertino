@@ -27,8 +27,8 @@ extension SuggestedCompletion {
                         .swipeActions {
                             TagsMenu(item)
                         }
-                        .listItemTint(item.color)
                         .backport.searchCompletion(item)
+                        .listItemTint(item.color)
                 }
             } header: {
                 if !items.isEmpty {

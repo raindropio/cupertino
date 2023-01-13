@@ -21,7 +21,10 @@ struct TagsField: View {
                 f.state.tags().map { $0.title }.filter { !r.state.tags.contains($0) }
         )
             .reload {
-                try? await dispatch(FiltersAction.reload())
+                try? await dispatch(
+                    FiltersAction.reload(),
+                    RecentAction.reload()
+                )
             }
     }
 }

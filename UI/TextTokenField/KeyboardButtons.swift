@@ -32,28 +32,30 @@ class KeyboardButtons: UIInputView {
 
 extension KeyboardButtons {
     private struct Hosting: View {
+        @Environment(\.hapticFeedback) private var hapticFeedback
+        
         var items: [String] = []
         var onPress: (String) -> Void
-        
+                
         var body: some View {
             ScrollView(.horizontal, showsIndicators: false) {
                 LazyHStack(spacing: 6) {
                     ForEach(items, id: \.self) { item in
                         if item.isEmpty {
-                            Divider()
-                                .padding(.horizontal, 4)
-                                .frame(height: 24)
+                            Rectangle().fill(.quaternary)
+                                .frame(width: 1)
+                                .padding(6)
                         } else {
                             Button(item) {
                                 onPress(item)
+                                hapticFeedback(.rigid)
                             }
                         }
                     }
                     .transition(.scale(scale: 0).combined(with: .opacity))
                 }
                     .buttonStyle(KeyboardButtonStyle())
-                    .padding(.horizontal, 3)
-                    .padding(.vertical, 8)
+                    .padding(8)
             }
             .animation(.spring(), value: items.count)
         }

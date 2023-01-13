@@ -16,16 +16,7 @@ extension RaindropStack.Actions: ViewModifier {
         content
             .toolbar {
                 ToolbarItemGroup(placement: .bottomBar) {
-                    NavigationLink {
-                        HighlightsList(raindrop: $raindrop)
-                            .navigationTitle(Filter.Kind.highlights.title)
-                    } label: {
-                        Label(Filter.Kind.highlights.title, systemImage: Filter.Kind.highlights.systemImage)
-                    }
-                    
-                    Spacer()
-                    
-                    if raindrop.id > 0 {
+                    if !raindrop.isNew {
                         ConfirmButton(role: .destructive) {
                             Button(
                                 raindrop.collection == -99 ? "Delete permanently" : "Move bookmark to Trash",
@@ -39,6 +30,7 @@ extension RaindropStack.Actions: ViewModifier {
                             Label("Delete", systemImage: "trash")
                         }
                             .tint(.red)
+                            .labelStyle(.titleOnly)
                     }
                     
                     Spacer()

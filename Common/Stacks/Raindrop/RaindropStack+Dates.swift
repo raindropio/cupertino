@@ -8,13 +8,13 @@ extension RaindropStack {
 
         var body: some View {
             Section {} header: {
-                    (
-                        Text("Created ") + Text(raindrop.created, formatter: .shortDateTime) + Text("\n") +
-                        Text("Last modified ") + Text(raindrop.lastUpdate, formatter: .shortDateTime)
-                    )
-                    .frame(maxWidth: .infinity)
-                    .multilineTextAlignment(.center)
-                    .textCase(.none)
+                (
+                    Text("Created ") + Text(raindrop.created, formatter: .shortDateTime) + Text("\n") +
+                    Text("Last modified ") + Text(raindrop.lastUpdate, formatter: .shortDateTime)
+                )
+                .frame(maxWidth: .infinity)
+                .multilineTextAlignment(.center)
+                .textCase(.none)
             }
         }
     }

@@ -35,14 +35,20 @@ public struct Raindrop: Identifiable, Hashable {
             Rest.raindropCacheLink(id) :
             nil
     }
+    
+    public var isNew: Bool {
+        id == 0
+    }
 }
 
+//Static
 extension Raindrop {
     public static func new(link: URL) -> Self {
         .init(id: 0, link: link, title: "", pleaseParse: .init())
     }
 }
 
+//Mutating
 extension Raindrop {
     public mutating func enrich(from meta: Self) {
         if title.isEmpty {

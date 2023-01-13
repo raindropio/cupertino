@@ -50,6 +50,7 @@ extension RaindropStack.Fields: View {
         Section {
             CollectionPickerLink($raindrop.collection, system: [-1, -99])
 
+            //tags
             HStack {
                 Label {
                     TagsField($raindrop.tags)
@@ -65,15 +66,39 @@ extension RaindropStack.Fields: View {
                 } label: {}
                     .layoutPriority(-1)
             }
+            
+            //highlights
+            NavigationLink {
+                HighlightsList(raindrop: $raindrop)
+                    .navigationTitle(Filter.Kind.highlights.title)
+            } label: {
+                Label {
+                    Text(Filter.Kind.highlights.title)
+                } icon: {
+                    if raindrop.highlights.isEmpty {
+                        Image(systemName: Filter.Kind.highlights.systemImage)
+                    } else {
+                        Text(raindrop.highlights.count, format: .number)
+                            .circularBadge()
+                    }
+                }
+            }
         }
             .listItemTint(.monochrome)
         
         if raindrop.file == nil {
             Section {
-                URLField("URL", value: $raindrop.link)
-                    .focused($focus, equals: .link)
-                    .font(.subheadline)
-                    .foregroundStyle(focus == .link ? .primary : .secondary)
+                HStack {
+                    Image(systemName: "lock")
+                        .symbolVariant(raindrop.link.scheme != "https" ? .fill.slash : .fill)
+                        .imageScale(.small)
+                        .foregroundColor(.gray)
+                    
+                    URLField("URL", value: $raindrop.link)
+                        .focused($focus, equals: .link)
+                        .font(.subheadline)
+                        .foregroundStyle(focus == .link ? .primary : .secondary)
+                }
             }
         }
     }
