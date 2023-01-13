@@ -1,6 +1,6 @@
 import SwiftUI
 import API
-import Common
+import Features
 import Backport
 
 struct Receive: View {

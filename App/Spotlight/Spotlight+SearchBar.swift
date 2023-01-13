@@ -1,6 +1,6 @@
 import SwiftUI
 import API
-import Common
+import Features
 
 extension Spotlight {
     struct SearchBar: ViewModifier {

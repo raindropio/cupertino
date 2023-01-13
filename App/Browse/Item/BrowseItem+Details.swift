@@ -1,7 +1,7 @@
 import SwiftUI
 import API
 import UI
-import Common
+import Features
 
 extension BrowseItem {
     struct Details: View {

@@ -1,6 +1,6 @@
 import SwiftUI
 import API
-import Common
+import Features
 
 extension BrowseItem {
     struct FilterButton: View {

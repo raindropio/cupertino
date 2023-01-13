@@ -1,7 +1,7 @@
 import SwiftUI
 import UI
 import API
-import Common
+import Features
 import Backport
 
 struct BrowseItems: View {

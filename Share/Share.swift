@@ -1,6 +1,6 @@
 import SwiftUI
 import API
-import Common
+import Features
 
 struct Share: View {
     @StateObject private var store = Store()

@@ -1,6 +1,6 @@
 import SwiftUI
 import API
-import Common
+import Features
 
 struct BrowseNested: View {
     @EnvironmentObject private var c: CollectionsStore

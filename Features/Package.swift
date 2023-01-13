@@ -2,15 +2,15 @@
 import PackageDescription
 
 let package = Package(
-    name: "Common",
+    name: "Features",
     platforms: [
         .macOS("12.0"),
         .iOS("15.0")
     ],
     products: [
         .library(
-            name: "Common",
-            targets: ["Common"]
+            name: "Features",
+            targets: ["Features"]
         ),
     ],
     dependencies: [
@@ -19,7 +19,7 @@ let package = Package(
     ],
     targets: [
         .target(
-            name: "Common",
+            name: "Features",
             dependencies: [
                 .byName(name: "API"),
                 .byName(name: "UI")

@@ -2,7 +2,7 @@ import SwiftUI
 import API
 import UI
 import Backport
-import Common
+import Features
 
 struct SettingsHome: View {
     @EnvironmentObject private var s: SubscriptionStore

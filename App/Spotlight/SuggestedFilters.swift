@@ -2,7 +2,7 @@ import SwiftUI
 import API
 import UI
 import Backport
-import Common
+import Features
 
 struct SuggestedFilters: View {
     @EnvironmentObject private var f: FiltersStore

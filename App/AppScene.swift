@@ -1,7 +1,7 @@
 import SwiftUI
 import API
 import UI
-import Common
+import Features
 
 struct AppScene: View {
     @StateObject private var router = AppRouter()

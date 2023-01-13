@@ -1,7 +1,7 @@
 import SwiftUI
 import API
 import UI
-import Common
+import Features
 
 struct SidebarScreen: View {
     @State private var selection = Set<FindBy>()

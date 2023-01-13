@@ -1,7 +1,7 @@
 import SwiftUI
 import API
 import UI
-import Common
+import Features
 
 struct BrowseList<H: View>: View {
     @EnvironmentObject private var r: RaindropsStore

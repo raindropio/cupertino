@@ -1,7 +1,7 @@
 import SwiftUI
 import API
 import UI
-import Common
+import Features
 
 struct SettingsSubscription: View {
     @EnvironmentObject private var s: SubscriptionStore
