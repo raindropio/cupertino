@@ -31,7 +31,8 @@ struct BrowseList<H: View>: View {
             header: header,
             view: view,
             layout: layout,
-            action: action
+            action: action,
+            animation: r.state.animation
         )
     }
 }
@@ -53,6 +54,7 @@ extension BrowseList { fileprivate struct Memorized: View {
     var view: CollectionView
     var layout: LazyStackLayout
     var action: (Raindrop.ID) -> Void
+    var animation: UUID
 
     var body: some View {
         LazyStack(
@@ -78,6 +80,7 @@ extension BrowseList { fileprivate struct Memorized: View {
             }
         }
             .id(find)
+            .animation(.default, value: animation)
             .listStyle(.plain)
             .refreshable {
                 try? await dispatch(RaindropsAction.load(find))

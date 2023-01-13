@@ -3,7 +3,7 @@ import API
 import UI
 
 struct BrowseScreen: View {
-    @Binding var find: FindBy
+    var find: FindBy
     
     var body: some View {
         BrowseList(find: find) {

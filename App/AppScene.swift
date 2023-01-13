@@ -13,7 +13,7 @@ struct AppScene: View {
         } detail: { screen in
             switch screen {
             case .browse(let find):
-                BrowseScreen(find: router.bind(find))
+                BrowseScreen(find: find)
                 
             case .multi(let count):
                 EmptyState("\(count) items") {

@@ -31,5 +31,7 @@ extension RaindropsReducer {
         if !modified.isEmpty {
             state.updateSegments(modified)
         }
+        
+        state.animation = .init()
     }
 }

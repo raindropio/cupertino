@@ -16,6 +16,7 @@ extension RaindropsReducer {
     func updated(state: inout S, raindrop: Raindrop) {
         state.items[raindrop.id] = raindrop
         state.updateSegments(raindrop)
+        state.animation = .init()
     }
 }
 
@@ -52,5 +53,6 @@ extension RaindropsReducer {
                 return state.items[id]
             }
         )
+        state.animation = .init()
     }
 }

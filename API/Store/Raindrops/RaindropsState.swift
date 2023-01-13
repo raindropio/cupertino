@@ -6,7 +6,8 @@ public struct RaindropsState: ReduxState {
 
     @Cached("rns-items") var items = [Raindrop.ID: Raindrop]()
     @Cached("rns-segments", restore) var segments = Segments()
-    
+    public var animation = UUID()
+
     public init() {}
 }
 

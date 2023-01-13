@@ -48,17 +48,3 @@ extension AppRouter {
         push(.preview(url, mode))
     }
 }
-
-//MARK: - Helpers
-extension AppRouter {
-    func bind(_ find: FindBy) -> Binding<FindBy> {
-        .init {
-            find
-        } set: { [weak self] next in
-            let index = self?.path.firstIndex(of: .browse(find))
-            if let index {
-                self?.path[index] = .browse(next)
-            }
-        }
-    }
-}

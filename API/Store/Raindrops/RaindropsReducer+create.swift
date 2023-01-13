@@ -11,5 +11,6 @@ extension RaindropsReducer {
                 return state.items[$0.id]
             }
         )
+        state.animation = .init()
     }
 }
