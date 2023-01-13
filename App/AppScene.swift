@@ -30,7 +30,25 @@ struct AppScene: View {
             .collectionEvents()
             .tagEvents()
             .dropProvider()
-            .fancySheet(isPresented: $router.spotlight, content: Spotlight.init)
+            .fancySheet(isPresented: $router.spotlight) {
+                Spotlight()
+                    .spotlightEvents {
+                        switch $0 {
+                        case .collection(let collection):
+                            router.browse(collection)
+                            
+                        case .raindrop(let raindrop):
+                            router.preview(raindrop.link)
+                            
+                        case .find(let find):
+                            router.browse(find)
+                            
+                        case .cancel:
+                            break
+                        }
+                        router.spotlight = false
+                    }
+            }
             .environmentObject(router)
             .preferredColorScheme(theme.colorScheme)
     }

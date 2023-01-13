@@ -2,7 +2,6 @@ import SwiftUI
 import API
 import UI
 import Backport
-import Features
 
 struct FoundCollections: View {
     @EnvironmentObject private var c: CollectionsStore
@@ -33,7 +32,7 @@ extension FoundCollections {
         var body: some View {
             ForEach(items) { item in
                 Button {
-                    event.tap(.collection(item))
+                    event.press(.collection(item))
                 } label: {
                     UserCollectionItem(item, withLocation: true)
                 }

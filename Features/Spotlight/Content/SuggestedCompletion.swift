@@ -1,7 +1,6 @@
 import SwiftUI
 import API
 import Backport
-import Features
 
 struct SuggestedCompletion: View {
     @EnvironmentObject private var f: FiltersStore

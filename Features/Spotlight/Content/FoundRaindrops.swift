@@ -2,7 +2,6 @@ import SwiftUI
 import API
 import UI
 import Backport
-import Features
 
 struct FoundRaindrops: View {
     @EnvironmentObject private var r: RaindropsStore
@@ -12,6 +11,7 @@ struct FoundRaindrops: View {
         Section {
             if find.isSearching {
                 Memorized(
+                    find: find,
                     status: r.state.exists(find) ? r.state.status(find) : .loading,
                     items: Array(r.state.items(find).prefix(Rest.raindropsPerPage))
                 )
@@ -19,6 +19,7 @@ struct FoundRaindrops: View {
         } header: {
             if find.isSearching {
                 Header(
+                    find: find,
                     total: r.state.total(find)
                 )
             }
@@ -28,6 +29,7 @@ struct FoundRaindrops: View {
 
 extension FoundRaindrops {
     fileprivate struct Memorized: View {
+        var find: FindBy
         var status: RaindropsState.Segment.Status
         var items: [Raindrop]
         
@@ -49,7 +51,7 @@ extension FoundRaindrops {
                         .disabled(true)
                 }
             } else {
-                Results(items: items)
+                Results(find: find, items: items)
             }
         }
     }
@@ -58,19 +60,20 @@ extension FoundRaindrops {
 extension FoundRaindrops {
     fileprivate struct Results: View {
         @EnvironmentObject private var event: SpotlightEvent
+        var find: FindBy
         var items: [Raindrop]
 
         var body: some View {
             ForEach(items) { item in
                 Button {
-                    event.tap(.raindrop(item))
+                    event.press(.raindrop(item))
                 } label: {
                     Single(item: item)
                 }
             }
             
             Button {
-                event.tap(.find)
+                event.press(.find(find))
             } label: {
                 Text("Continue search")
                     .frame(maxWidth: .infinity)
@@ -105,6 +108,8 @@ extension FoundRaindrops {
 extension FoundRaindrops {
     fileprivate struct Header: View {
         @EnvironmentObject private var event: SpotlightEvent
+        
+        var find: FindBy
         var total: Int
 
         var body: some View {
@@ -115,7 +120,7 @@ extension FoundRaindrops {
                 
                 if total > 0 {
                     Button {
-                        event.tap(.find)
+                        event.press(.find(find))
                     } label: {
                         Text("Show all (") +
                         Text(total, format: .number) +

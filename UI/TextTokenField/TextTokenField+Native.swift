@@ -36,6 +36,8 @@ extension TextTokenField {
             
             //suggestions view
             inputAccessoryView = KeyboardButtons(base.suggestions, onPress: onSuggestionPress)
+            inputAssistantItem.leadingBarButtonGroups = []
+            inputAssistantItem.trailingBarButtonGroups = []
             
             //events
             self.addTarget(self, action: #selector(textFieldDidChange(_:)), for: .editingChanged)

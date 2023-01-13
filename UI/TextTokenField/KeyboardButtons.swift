@@ -33,6 +33,7 @@ class KeyboardButtons: UIInputView {
 extension KeyboardButtons {
     private struct Hosting: View {
         @Environment(\.hapticFeedback) private var hapticFeedback
+        @Environment(\.horizontalSizeClass) private var sizeClass
         
         var items: [String] = []
         var onPress: (String) -> Void
@@ -55,7 +56,8 @@ extension KeyboardButtons {
                     .transition(.scale(scale: 0).combined(with: .opacity))
                 }
                     .buttonStyle(KeyboardButtonStyle())
-                    .padding(8)
+                    .padding(.vertical, sizeClass == .regular ? 12 : 8)
+                    .padding(.horizontal, sizeClass == .regular ? 14 : 8)
             }
             .animation(.spring(), value: items.count)
         }

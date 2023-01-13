@@ -88,17 +88,11 @@ extension RaindropStack.Fields: View {
         
         if raindrop.file == nil {
             Section {
-                HStack {
-                    Image(systemName: "lock")
-                        .symbolVariant(raindrop.link.scheme != "https" ? .fill.slash : .fill)
-                        .imageScale(.small)
-                        .foregroundColor(.gray)
-                    
-                    URLField("URL", value: $raindrop.link)
-                        .focused($focus, equals: .link)
-                        .font(.subheadline)
-                        .foregroundStyle(focus == .link ? .primary : .secondary)
-                }
+                URLField("URL", value: $raindrop.link)
+                    .focused($focus, equals: .link)
+                    .font(.subheadline)
+                    .foregroundStyle(focus == .link ? .primary : .secondary)
+                    .multilineTextAlignment(.center)
             }
         }
     }

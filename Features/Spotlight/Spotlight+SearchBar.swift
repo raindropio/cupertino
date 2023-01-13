@@ -1,12 +1,11 @@
 import SwiftUI
 import API
-import Features
 
 extension Spotlight {
     struct SearchBar: ViewModifier {
-        @State private var focused = true
         @Binding var find: FindBy
-        
+        @Binding var focused: Bool
+
         func body(content: Content) -> some View {
             content
                 .backport.searchable(

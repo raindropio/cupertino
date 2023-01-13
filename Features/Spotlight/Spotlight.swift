@@ -1,15 +1,19 @@
 import SwiftUI
 import API
-import Features
 import Backport
 
 fileprivate var previous: FindBy?
 
-struct Spotlight: View {
+public struct Spotlight {
     @EnvironmentObject private var dispatch: Dispatcher
     @State private var find: FindBy = previous ?? .init()
+    @State private var focused = true
     
-    var body: some View {
+    public init() {}
+}
+
+extension Spotlight: View {
+    public var body: some View {
         List {
             Group {
                 Group {
@@ -38,11 +42,9 @@ struct Spotlight: View {
             //editing
             .collectionEvents()
             .tagEvents()
-            //react to events
-            .dismissOnSearchCancel()
-            .modifier(Events(find: find))
             //search
-            .modifier(SearchBar(find: $find))
+            .modifier(Cancel(focused: $focused))
+            .modifier(SearchBar(find: $find, focused: $focused))
             .task(id: find, priority: .background, debounce: 0.5) {
                 previous = find
                 
