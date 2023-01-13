@@ -1,6 +1,7 @@
 import SwiftUI
 import API
 import UI
+import Common
 
 struct SettingsSubscription: View {
     @EnvironmentObject private var s: SubscriptionStore
@@ -9,7 +10,7 @@ struct SettingsSubscription: View {
     var body: some View {
         Group {
             if let subscription = s.state.current, subscription.status != .deactivated {
-                SubscriptionDetails(subscription: subscription)
+                SubscriptionDetails(subscription)
             } else {
                 SubscriptionOffer()
             }

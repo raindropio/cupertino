@@ -34,7 +34,7 @@ extension BrowseBulk {
             //select
             .sheet(isPresented: $select) {
                 Backport.NavigationStack {
-                    CollectionPicker($to, system: [-1, -99])
+                    CollectionsList($to, system: [-1, -99])
                         .navigationTitle("Select collection")
                         .navigationBarTitleDisplayMode(.inline)
                         .toolbar {

@@ -3,7 +3,7 @@ import Backport
 import API
 import UI
 
-public struct TagsPicker {
+public struct TagsList {
     @EnvironmentObject private var dispatch: Dispatcher
     @EnvironmentObject private var f: FiltersStore
     @State private var new = ""
@@ -16,7 +16,7 @@ public struct TagsPicker {
     }
 }
 
-extension TagsPicker {
+extension TagsList {
     private func add(_ tag: String) {
         guard !tag.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty
         else { return }
@@ -57,7 +57,7 @@ extension TagsPicker {
     }
 }
 
-extension TagsPicker: View {
+extension TagsList: View {
     public var body: some View {
         List {
             Section {

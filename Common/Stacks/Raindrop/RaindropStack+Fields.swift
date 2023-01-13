@@ -48,7 +48,7 @@ extension RaindropStack.Fields: View {
         }
 
         Section {
-            CollectionPickerLink($raindrop.collection, system: [-1, -99])
+            CollectionsPicker($raindrop.collection, system: [-1, -99])
 
             //tags
             HStack {
@@ -60,7 +60,7 @@ extension RaindropStack.Fields: View {
                 }
                 
                 NavigationLink {
-                    TagsPicker($raindrop.tags)
+                    TagsList($raindrop.tags)
                         .navigationTitle("\(raindrop.tags.count) tags")
                         .navigationBarTitleDisplayMode(.inline)
                 } label: {}

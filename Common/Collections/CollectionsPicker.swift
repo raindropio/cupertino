@@ -2,18 +2,18 @@ import SwiftUI
 import API
 import Backport
 
-func CollectionPickerLink(_ selection: Binding<Int?>, system: [Int] = []) -> some View {
+func CollectionsPicker(_ selection: Binding<Int?>, system: [Int] = []) -> some View {
     NavigationLink {
-        CollectionPicker(selection, system: system)
+        CollectionsList(selection, system: system)
             .modifier(_Screen(selection: selection.wrappedValue))
     } label: {
         _Label(selection: selection.wrappedValue)
     }
 }
 
-func CollectionPickerLink(_ selection: Binding<Int>, system: [Int] = []) -> some View {
+func CollectionsPicker(_ selection: Binding<Int>, system: [Int] = []) -> some View {
     NavigationLink {
-        CollectionPicker(selection, system: system)
+        CollectionsList(selection, system: system)
             .modifier(_Screen(selection: selection.wrappedValue))
     } label: {
         _Label(selection: selection.wrappedValue)

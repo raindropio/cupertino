@@ -3,12 +3,14 @@ import API
 import UI
 import Backport
 
-struct SubscriptionOffer: View {
+public struct SubscriptionOffer: View {
     @EnvironmentObject private var dispatch: Dispatcher
     @State private var pro = true
     @State private var purchase = false
     
-    var body: some View {
+    public init() {}
+    
+    public var body: some View {
         List {
             Picker("Plan", selection: $pro) {
                 Text("Free").tag(false)

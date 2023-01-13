@@ -8,7 +8,7 @@ struct SidebarScreen: View {
     @State private var search = ""
     
     var body: some View {
-        FindByPicker(
+        FindByList(
             selection: $selection,
             search: search
         )

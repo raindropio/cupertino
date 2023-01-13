@@ -24,7 +24,7 @@ extension CollectionStack.Fields: View {
         }
         
         Section("Parent") {
-            CollectionPickerLink($collection.parent)
+            CollectionsPicker($collection.parent)
         }
     }
 }

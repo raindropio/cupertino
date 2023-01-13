@@ -2,11 +2,11 @@ import SwiftUI
 import API
 import Backport
 
-public func CollectionPicker(_ selection: Binding<Int?>, system: [Int] = []) -> some View {
+public func CollectionsList(_ selection: Binding<Int?>, system: [Int] = []) -> some View {
     _Optional(selection: selection, system: system)
 }
 
-public func CollectionPicker(_ selection: Binding<Int>, system: [Int] = []) -> some View {
+public func CollectionsList(_ selection: Binding<Int>, system: [Int] = []) -> some View {
     _Strict(selection: selection, system: system)
 }
 

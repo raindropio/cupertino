@@ -31,7 +31,7 @@ extension BrowseBulk {
             }
             .sheet(isPresented: $select) {
                 Backport.NavigationStack {
-                    TagsPicker($tags)
+                    TagsList($tags)
                         .navigationTitle("Add tags")
                         .navigationBarTitleDisplayMode(.inline)
                         .toolbar {

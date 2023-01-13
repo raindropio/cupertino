@@ -3,10 +3,14 @@ import API
 import UI
 import Backport
 
-struct SubscriptionDetails: View {
+public struct SubscriptionDetails: View {
     var subscription: Subscription
     
-    var body: some View {
+    public init(_ subscription: Subscription) {
+        self.subscription = subscription
+    }
+    
+    public var body: some View {
         Form {
             Status(subscription: subscription)
             

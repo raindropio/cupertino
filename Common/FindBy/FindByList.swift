@@ -3,7 +3,7 @@ import API
 import UI
 import Backport
 
-public struct FindByPicker {
+public struct FindByList {
     @EnvironmentObject private var dispatch: Dispatcher
     @Environment(\.editMode) private var editMode
     @Environment(\.isSearching) private var isSearching
@@ -18,7 +18,7 @@ public struct FindByPicker {
     }
 }
 
-extension FindByPicker {
+extension FindByList {
     @ViewBuilder
     func contextMenu(_ selection: Set<FindBy>) -> some View {
         if !selection.isEmpty {
@@ -39,7 +39,7 @@ extension FindByPicker {
     }
 }
 
-extension FindByPicker: View {
+extension FindByList: View {
     public var body: some View {
         Backport.List(selection: $selection) {
             if search.isEmpty {
@@ -61,14 +61,6 @@ extension FindByPicker: View {
                     }
                 }
             } else {
-                Section {
-                    if editMode?.wrappedValue != .active {
-                        Label("Search \(search)", systemImage: "magnifyingglass")
-                            .raindropsCountBadge(search)
-                            .backport.tag(FindBy(search))
-                    }
-                }
-                
                 FindCollections<FindBy>(search)
                 
                 Section("Tags") {
