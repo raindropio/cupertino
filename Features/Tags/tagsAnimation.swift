@@ -2,12 +2,12 @@ import SwiftUI
 import API
 
 extension View {
-    func tagsAnimation() -> some View {
-        modifier(TagsAnimation())
+    func tagAnimations() -> some View {
+        modifier(TagAnimations())
     }
 }
 
-fileprivate struct TagsAnimation: ViewModifier {
+fileprivate struct TagAnimations: ViewModifier {
     @EnvironmentObject private var f: FiltersStore
     @AppStorage("tags-expanded") private var tagsExpanded = true
     

@@ -40,8 +40,8 @@ extension Spotlight: View {
             .navigationBarTitleDisplayMode(.inline)
             .modifier(Animations(find: find))
             //editing
-            .collectionEvents()
-            .tagEvents()
+            .collectionsEvent()
+            .tagsEvent()
             //search
             .modifier(Cancel(focused: $focused))
             .modifier(SearchBar(find: $find, focused: $focused))

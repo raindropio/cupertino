@@ -1,0 +1,42 @@
+import SwiftUI
+import API
+
+public struct SortRaindropsButton: View {
+    @EnvironmentObject private var r: RaindropsStore
+    var find: FindBy
+    
+    public init(_ find: FindBy) {
+        self.find = find
+    }
+    
+    public var body: some View {
+        if !r.state.isEmpty(find) {
+            Memorized(find: find, sort: r.state.sort(find))
+        }
+    }
+}
+
+extension SortRaindropsButton {
+    fileprivate struct Memorized: View {
+        @EnvironmentObject private var dispatch: Dispatcher
+
+        var find: FindBy
+        var sort: SortBy
+        
+        var body: some View {
+            Picker(
+                "Sort",
+                selection: .init(get: {
+                    sort
+                }, set: { by in
+                    dispatch.sync(RaindropsAction.sort(find, by))
+                })
+            ) {
+                ForEach(SortBy.someCases(for: find)) {
+                    Label($0.title, systemImage: $0.systemImage)
+                        .tag($0)
+                }
+            }
+        }
+    }
+}

@@ -11,7 +11,7 @@ extension SidebarScreen {
         
         @Sendable func pathChange() async {
             switch app.path.first {
-            case .browse(let find): selection = [find]
+            case .find(let find): selection = [find]
             case .multi(_): break
             default: selection = .init()
             }
@@ -22,7 +22,7 @@ extension SidebarScreen {
             case .compact:
                 if editMode?.wrappedValue == .inactive {
                     if let first = selection.first {
-                        app.path = [.browse(first)]
+                        app.path = [.find(first)]
                     } else {
                         app.path = []
                     }
@@ -32,7 +32,7 @@ extension SidebarScreen {
                 if selection.isEmpty {
                     app.path = []
                 } else if selection.count == 1, let first = selection.first {
-                    app.path = [.browse(first)]
+                    app.path = [.find(first)]
                     self.selection = [first]
                 } else {
                     app.path = [.multi(selection.count)]

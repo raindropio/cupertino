@@ -110,7 +110,7 @@ extension TagsList: View {
         }
             .animation(.default, value: selected)
             .animation(.default, value: suggestions)
-            .tagEvents()
+            .tagsEvent()
             .reload {
                 try? await dispatch(
                     FiltersAction.reload(),

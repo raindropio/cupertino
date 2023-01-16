@@ -10,6 +10,7 @@ struct Share: View {
             authorized: Receive.init,
             notAuthorized: NoAuth.init
         )
+            .tint(.blue)
             .environmentObject(store.dispatcher)
             .environmentObject(store.auth)
             .environmentObject(store.collections)

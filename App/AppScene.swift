@@ -12,14 +12,14 @@ struct AppScene: View {
             SidebarScreen()
         } detail: { screen in
             switch screen {
-            case .browse(let find):
-                BrowseScreen(find: find)
+            case .find(let find):
+                Finder(find: find)
                 
             case .multi(let count):
                 EmptyState("\(count) items") {
                     Image(systemName: "checklist.checked")
                 } actions: {
-                    Button("Cancel") { router.path = [.browse(.init(0))] }
+                    Button("Cancel") { router.path = [.find(.init(0))] }
                 }
                 
             case .preview(let url, let mode):
@@ -27,21 +27,21 @@ struct AppScene: View {
             }
         }
             .navigationSplitViewConfiguration(sidebarMin: 400)
-            .collectionEvents()
-            .tagEvents()
+            .collectionsEvent()
+            .tagsEvent()
             .dropProvider()
             .fancySheet(isPresented: $router.spotlight) {
                 Spotlight()
                     .spotlightEvents {
                         switch $0 {
                         case .collection(let collection):
-                            router.browse(collection)
+                            router.find(collection)
                             
                         case .raindrop(let raindrop):
                             router.preview(raindrop.link)
                             
                         case .find(let find):
-                            router.browse(find)
+                            router.find(find)
                             
                         case .cancel:
                             break

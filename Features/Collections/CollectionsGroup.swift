@@ -4,7 +4,7 @@ import UI
 
 struct CollectionsGroup<T: Hashable>: View {
     @EnvironmentObject private var dispatch: Dispatcher
-    @EnvironmentObject private var event: CollectionEvent
+    @EnvironmentObject private var event: CollectionsEvent
 
     var group: CGroup
     var items: [UserCollection.ID: UserCollection]

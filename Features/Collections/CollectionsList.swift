@@ -55,7 +55,6 @@ extension _Optional: View {
             .reload {
                 try? await dispatch(CollectionsAction.load)
             }
-            .collectionEvents()
     }
 }
 

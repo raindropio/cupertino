@@ -30,7 +30,7 @@ extension UserCollections where T == FindBy {
 extension UserCollections {
     fileprivate struct Memorized: View {
         @Environment(\.editMode) private var editMode
-        @EnvironmentObject private var event: CollectionEvent
+        @EnvironmentObject private var event: CollectionsEvent
         
         var tag: (Int) -> T
         var groups: [CGroup]

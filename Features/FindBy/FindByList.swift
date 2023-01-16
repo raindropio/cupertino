@@ -29,14 +29,6 @@ extension FindByList {
             }
         }
     }
-    
-    @ViewBuilder
-    func bottomBar() -> some View {
-        if editMode?.wrappedValue == .active {
-            contextMenu(selection)
-                .labelStyle(.titleOnly)
-        }
-    }
 }
 
 extension FindByList: View {
@@ -52,7 +44,7 @@ extension FindByList: View {
                 UserCollections<FindBy>()
                 
                 DisclosureSection("Tags", isExpanded: $isExpanded) {
-                    Tags<FindBy>()
+                    AllTags<FindBy>()
                 }
                 
                 Section {
@@ -64,7 +56,7 @@ extension FindByList: View {
                 FindCollections<FindBy>(search)
                 
                 Section("Tags") {
-                    Tags<FindBy>(search: search)
+                    AllTags<FindBy>(search: search)
                 }
             }
         }
@@ -74,28 +66,9 @@ extension FindByList: View {
             #endif
             .labelStyle(.sidebar)
             .collectionsAnimation()
-            .tagsAnimation()
+            .tagAnimations()
             //menu
             .backport.contextMenu(forSelectionType: FindBy.self, menu: contextMenu)
-            //toolbar
-            .toolbar {
-                ToolbarItem {
-                    if editMode?.wrappedValue != .active {
-                        Menu {
-                            EditButton("Select")
-                            
-                            Section { CollectionsMenu() }
-                            Section { TagsMenu() }
-                        } label: {
-                            Image(systemName: "ellipsis")
-                        }
-                    } else {
-                        EditButton()
-                    }
-                }
-                
-                ToolbarItemGroup(placement: .bottomBar, content: bottomBar)
-            }
             //reload
             .refreshable {
                 try? await dispatch(CollectionsAction.load, FiltersAction.reload())

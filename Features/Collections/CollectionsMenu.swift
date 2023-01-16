@@ -23,7 +23,7 @@ public func CollectionsMenu(_ ids: Set<FindBy>) -> some View {
 
 fileprivate struct _CollectionsMenu: View {
     @EnvironmentObject private var c: CollectionsStore
-    @EnvironmentObject private var event: CollectionEvent
+    @EnvironmentObject private var event: CollectionsEvent
     @EnvironmentObject private var dispatch: Dispatcher
 
     var ids: Set<Int>

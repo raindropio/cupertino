@@ -4,7 +4,7 @@ import UI
 import API
 
 public extension View {
-    func spotlightEvents(_ onPress: @escaping (SpotlightPressed) -> Void) -> some View {
+    func spotlightEvents(onPress: @escaping (SpotlightPressed) -> Void) -> some View {
         modifier(SpotlightEvents(onPress: onPress))
     }
 }

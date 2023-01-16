@@ -5,6 +5,7 @@ import Backport
 func CollectionsPicker(_ selection: Binding<Int?>, system: [Int] = []) -> some View {
     NavigationLink {
         CollectionsList(selection, system: system)
+            .collectionsEvent()
             .modifier(_Screen(selection: selection.wrappedValue))
     } label: {
         _Label(selection: selection.wrappedValue)
@@ -14,6 +15,7 @@ func CollectionsPicker(_ selection: Binding<Int?>, system: [Int] = []) -> some V
 func CollectionsPicker(_ selection: Binding<Int>, system: [Int] = []) -> some View {
     NavigationLink {
         CollectionsList(selection, system: system)
+            .collectionsEvent()
             .modifier(_Screen(selection: selection.wrappedValue))
     } label: {
         _Label(selection: selection.wrappedValue)

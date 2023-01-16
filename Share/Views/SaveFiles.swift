@@ -16,6 +16,7 @@ struct SaveFiles: View {
             } else {
                 Backport.NavigationStack {
                     CollectionsList($collection, system: [-1])
+                        .collectionsEvent()
                         .navigationTitle("Where to save")
                         .navigationBarTitleDisplayMode(.inline)
                         .toolbar {

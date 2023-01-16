@@ -37,7 +37,7 @@ public func TagsMenu(_ findBy: Set<FindBy>) -> some View {
 
 
 fileprivate struct _TagsMenu: View {
-    @EnvironmentObject private var event: TagEvent
+    @EnvironmentObject private var event: TagsEvent
     @EnvironmentObject private var dispatch: Dispatcher
 
     var tags: Set<String>

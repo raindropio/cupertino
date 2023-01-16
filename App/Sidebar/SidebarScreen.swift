@@ -12,7 +12,7 @@ struct SidebarScreen: View {
             selection: $selection,
             search: search
         )
-            .modifier(Toolbar())
+            .modifier(Toolbar(selection: $selection))
             .modifier(Routing(selection: $selection))
             .fab(hidden: !isPhone)
     }

@@ -4,7 +4,7 @@ import UI
 import Backport
 
 public struct UserCollectionItem: View {
-    @EnvironmentObject private var event: CollectionEvent
+    @EnvironmentObject private var event: CollectionsEvent
     var collection: UserCollection
     var withLocation = false
     
