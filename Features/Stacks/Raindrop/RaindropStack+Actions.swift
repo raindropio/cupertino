@@ -3,51 +3,40 @@ import API
 import UI
 
 extension RaindropStack {
-    struct Actions {
+    struct Actions: View {
         @EnvironmentObject private var dispatch: Dispatcher
         @Environment(\.dismiss) private var dismiss
-        @Binding var raindrop: Raindrop
-    }
-}
 
-extension RaindropStack.Actions: ViewModifier {
-    func body(content: Content) -> some View {
-        content
-            .toolbar {
-                ToolbarItemGroup(placement: .bottomBar) {
-                    if !raindrop.isNew {
-                        ConfirmButton(role: .destructive) {
-                            Button(
-                                raindrop.collection == -99 ? "Delete permanently" : "Move bookmark to Trash",
-                                role: .destructive
-                            ) {
-                                raindrop.collection = -99
-                                dispatch.sync(RaindropsAction.delete(raindrop.id))
-                                dismiss()
-                            }
-                        } label: {
-                            Label("Delete", systemImage: "trash")
-                        }
-                            .tint(.red)
-                            .labelStyle(.titleOnly)
+        @Binding var raindrop: Raindrop
+
+        var body: some View {
+            if raindrop.isNew {
+                SubmitButton("Save")
+            } else {
+                ConfirmButton(role: .destructive) {
+                    Button(
+                        raindrop.collection == -99 ? "Delete permanently" : "Move bookmark to Trash",
+                        role: .destructive
+                    ) {
+                        raindrop.collection = -99
+                        dispatch.sync(RaindropsAction.delete(raindrop.id))
+                        dismiss()
                     }
-                    
-                    Spacer()
-                    
-                    Button { raindrop.important.toggle() } label: {
-                        Label("Favorite", systemImage: "heart")
-                            .symbolVariant(raindrop.important ? .fill : .none)
-                    }
-                        .tint(raindrop.important ? .accentColor : nil)
+                } label: {
+                    Text("Delete")
+                        .frame(maxWidth: .infinity)
+                }
+                
+                Section {} header: {
+                    (
+                        Text("Created ") + Text(raindrop.created, formatter: .shortDateTime) + Text("\n") +
+                        Text("Last modified ") + Text(raindrop.lastUpdate, formatter: .shortDateTime)
+                    )
+                    .frame(maxWidth: .infinity)
+                    .multilineTextAlignment(.center)
+                    .textCase(.none)
                 }
             }
-            .toolbarTitleMenu {
-                Picker("Type", selection: $raindrop.type) {
-                    ForEach(RaindropType.allCases, id: \.single) {
-                        Label($0.single, systemImage: $0.systemImage)
-                            .tag($0)
-                    }
-                }
-            }
+        }
     }
 }

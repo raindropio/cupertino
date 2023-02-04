@@ -42,14 +42,9 @@ extension RaindropStack: View {
         NavigationStack {
             Form {
                 Fields(raindrop: $raindrop)
-                
-                if raindrop.isNew {
-                    SubmitButton("Save")
-                } else {
-                    Dates(raindrop: $raindrop)
-                }
+                Actions(raindrop: $raindrop)
             }
-                .modifier(Actions(raindrop: $raindrop))
+                .modifier(Toolbar(raindrop: $raindrop))
                 .animation(nil, value: [loading, raindrop.isNew])
                 .disabled(loading)
                 .opacity(loading ? 0.7 : 1)
@@ -58,11 +53,6 @@ extension RaindropStack: View {
                 .onSubmit(commit)
                 .navigationTitle((raindrop.isNew ? "New" : "Edit") + " \(raindrop.type.single.localizedLowercase)")
                 .navigationBarTitleDisplayMode(.inline)
-                .toolbar {
-                    ToolbarItem(placement: raindrop.isNew ? .cancellationAction : .confirmationAction) {
-                        Button(raindrop.isNew ? "Cancel" : "Done", action: dismiss.callAsFunction)
-                    }
-                }
         }
             //prevent drag to dismiss for new items
             .interactiveDismissDisabled(raindrop.isNew)
