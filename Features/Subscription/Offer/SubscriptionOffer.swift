@@ -1,7 +1,6 @@
 import SwiftUI
 import API
 import UI
-import Backport
 
 public struct SubscriptionOffer: View {
     @EnvironmentObject private var dispatch: Dispatcher
@@ -32,7 +31,7 @@ public struct SubscriptionOffer: View {
                         purchase.toggle()
                     } label: {
                         Text("Subscribe Now")
-                            .backport.fontWeight(.semibold)
+                            .fontWeight(.semibold)
                             .frame(maxWidth: .infinity)
                     }
                         .buttonStyle(.borderedProminent)

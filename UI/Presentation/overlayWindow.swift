@@ -1,5 +1,4 @@
 import SwiftUI
-import Backport
 
 public extension View {
     /// Special kind of sheet
@@ -26,9 +25,9 @@ fileprivate struct Window<C: View>: View {
                         isPresented = false
                     }
                 
-                Backport.NavigationStack {
+                NavigationStack {
                     content()
-                        .backport.scrollContentBackground(.hidden)
+                        .scrollContentBackground(.hidden)
                         .presentationBackground(.hidden)
                 }
                 .presentationBackground(.hidden)

@@ -3,7 +3,6 @@ import API
 import UI
 import UniformTypeIdentifiers
 import Features
-import Backport
 
 struct FabStack: View {
     @Environment(\.dismiss) private var dismiss
@@ -13,7 +12,7 @@ struct FabStack: View {
     var collection: Int
     
     var home: some View {
-        Backport.NavigationStack {
+        NavigationStack {
             Form {
                 Section("URL") {
                     Web(items: $items)
@@ -91,11 +90,11 @@ struct FabStack: View {
             .transition(.opacity)
             .animation(.default, value: kind)
             .animation(.default, value: items.count)
-            .backport.presentationDetents(
+            .presentationDetents(
                 items.isEmpty ? [.large] : [.height(300), .large],
                 selection: .constant(items.isEmpty ? .large : .height(300))
             )
-            .backport.presentationDragIndicator(.hidden)
+            .presentationDragIndicator(.hidden)
     }
 }
 

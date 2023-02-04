@@ -1,7 +1,6 @@
 import SwiftUI
 import API
 import UI
-import Backport
 
 public struct AddStack {
     @Environment(\.dismiss) private var dismiss
@@ -43,7 +42,7 @@ extension AddStack {
 
 extension AddStack: View {
     public var body: some View {
-        Backport.NavigationStack {
+        NavigationStack {
             VStack {
                 Group {
                     if isCompleteAll {

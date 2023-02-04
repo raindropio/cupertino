@@ -1,6 +1,5 @@
 import SwiftUI
 import UI
-import Backport
 
 extension SubscriptionOffer {
     struct Free: View {

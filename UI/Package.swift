@@ -4,8 +4,8 @@ import PackageDescription
 let package = Package(
     name: "UI",
     platforms: [
-        .macOS("12.0"),
-        .iOS("15.0")
+        .macOS("13.0"),
+        .iOS("16.0")
     ],
     products: [
         .library(
@@ -13,7 +13,6 @@ let package = Package(
             targets: ["UI"]),
     ],
     dependencies: [
-        .package(path: "Backport"),
         .package(
             url: "https://github.com/kean/Nuke.git",
             from: "11.3.1"
@@ -23,7 +22,6 @@ let package = Package(
         .target(
             name: "UI",
             dependencies: [
-                .byName(name: "Backport"),
                 .product(name: "NukeUI", package: "Nuke")
             ],
             path: ""

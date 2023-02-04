@@ -36,7 +36,7 @@ extension Finder.Toolbar {
         
         func body(content: Content) -> some View {
             content
-            .backport.toolbarRole(.browser)
+            .toolbarRole(.browser)
             .navigationBarBackButtonHidden(editMode?.wrappedValue == .active)
             .toolbar {
                 ToolbarItemGroup {
@@ -75,7 +75,7 @@ extension Finder.Toolbar {
                 ToolbarItem(placement: .cancellationAction) {
                     if editMode?.wrappedValue == .active {
                         EditButton()
-                            .backport.fontWeight(.semibold)
+                            .fontWeight(.semibold)
                     }
                 }
                 

@@ -8,7 +8,7 @@ extension Spotlight {
 
         func body(content: Content) -> some View {
             content
-                .backport.searchable(
+                .searchable(
                     text: $find.text,
                     tokens: $find.filters,
                     placement: .navigationBarDrawer(displayMode: .always),

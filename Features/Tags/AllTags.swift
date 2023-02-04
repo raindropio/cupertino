@@ -1,7 +1,6 @@
 import SwiftUI
 import API
 import UI
-import Backport
 
 //MARK: - Init
 public struct AllTags<T: Hashable>: View {
@@ -48,7 +47,7 @@ extension AllTags {
                         .swipeActions {
                             TagsMenu(item)
                         }
-                        .backport.tag(tag(item))
+                        .tag(tag(item))
                 }
             }
         }

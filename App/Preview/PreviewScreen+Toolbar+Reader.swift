@@ -2,7 +2,6 @@ import SwiftUI
 import API
 import UI
 import Features
-import Backport
 
 extension PreviewScreen.Toolbar {
     struct Reader {
@@ -46,8 +45,8 @@ extension PreviewScreen.Toolbar.Reader {
             }
                 .pickerStyle(.inline)
         }
-            .backport.presentationDetents([.medium])
-            .backport.presentationDragIndicator(.visible)
+            .presentationDetents([.medium])
+            .presentationDragIndicator(.visible)
             .frame(idealWidth: 300, idealHeight: 400)
     }
 }

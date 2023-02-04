@@ -1,6 +1,5 @@
 import SwiftUI
 import UI
-import Backport
 
 struct FreeFeatures: View {
     var body: some View {
@@ -47,7 +46,7 @@ extension FreeFeatures {
                 SafariLink(destination: url) {
                     Image(systemName: "arrow.up.forward")
                         .imageScale(.small)
-                        .backport.fontWeight(.semibold)
+                        .fontWeight(.semibold)
                 }
             }
         }

@@ -1,7 +1,6 @@
 import SwiftUI
 import API
 import UI
-import Backport
 import Features
 
 struct SettingsHome: View {
@@ -12,11 +11,11 @@ struct SettingsHome: View {
         List {
             Group {
                 Section {
-                    Backport.NavigationLink(value: SettingsRoute.account) {
+                    NavigationLink(value: SettingsRoute.account) {
                         MeLabel()
                     }
                     
-                    Backport.NavigationLink(value: SettingsRoute.subscription) {
+                    NavigationLink(value: SettingsRoute.subscription) {
                         Label("Subscription", systemImage: "bolt")
                             .badge(s.state.current?.plan.title ?? "Free")
                             .tint(.primary)
@@ -36,12 +35,12 @@ struct SettingsHome: View {
                     }
                         .listItemTint(.purple)
                     
-                    Backport.NavigationLink(value: SettingsRoute.import) {
+                    NavigationLink(value: SettingsRoute.import) {
                         Label("Import", systemImage: "square.and.arrow.down").tint(.primary)
                     }
                         .listItemTint(.orange)
                     
-                    Backport.NavigationLink(value: SettingsRoute.backups) {
+                    NavigationLink(value: SettingsRoute.backups) {
                         Label("Backups", systemImage: "clock.arrow.circlepath").tint(.primary)
                     }
                         .listItemTint(.brown)

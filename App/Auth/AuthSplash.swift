@@ -1,5 +1,4 @@
 import SwiftUI
-import Backport
 
 struct AuthSplash: View {
     @Environment(\.colorScheme) private var colorScheme

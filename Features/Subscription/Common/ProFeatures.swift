@@ -90,7 +90,7 @@ extension ProFeatures {
                     SafariLink(destination: link) {
                         Text(Image(systemName: "arrow.up.forward"))
                             .imageScale(.small)
-                            .backport.fontWeight(.semibold)
+                            .fontWeight(.semibold)
                     }
                         .foregroundStyle(.tertiary)
                 }

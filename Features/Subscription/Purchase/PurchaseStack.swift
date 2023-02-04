@@ -1,5 +1,4 @@
 import SwiftUI
-import Backport
 import UI
 import API
 import StoreKit
@@ -14,7 +13,7 @@ struct PurchaseStack: View {
     }
     
     var body: some View {
-        Backport.NavigationStack {
+        NavigationStack {
             Group {
                 if products.isEmpty {
                     ProgressView()
@@ -23,7 +22,7 @@ struct PurchaseStack: View {
                     Products()
                 }
             }
-                .backport.scrollContentBackground(.hidden)
+                .scrollContentBackground(.hidden)
                 .presentationBackground(.hidden)
                 .background(.background.opacity(0.4))
                 .background(.regularMaterial)
@@ -43,7 +42,7 @@ struct PurchaseStack: View {
                     }
                 }
         }
-            .backport.presentationDetents([.height(300)])
+            .presentationDetents([.height(300)])
             .presentationBackground(.hidden)
             .tint(.red)
     }

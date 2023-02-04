@@ -1,6 +1,5 @@
 import SwiftUI
 import API
-import Backport
 
 struct SuggestedCompletion: View {
     @EnvironmentObject private var f: FiltersStore
@@ -26,7 +25,7 @@ extension SuggestedCompletion {
                         .swipeActions {
                             TagsMenu(item)
                         }
-                        .backport.searchCompletion(item)
+                        .searchCompletion(item)
                         .listItemTint(item.color)
                 }
             } header: {

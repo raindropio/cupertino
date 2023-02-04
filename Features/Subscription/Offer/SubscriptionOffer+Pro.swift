@@ -1,7 +1,6 @@
 import SwiftUI
 import UI
 import API
-import Backport
 
 extension SubscriptionOffer {
     struct Pro: View {
@@ -13,13 +12,13 @@ extension SubscriptionOffer {
                 VStack(spacing: 12) {
                     Text("Use Raindrop.io for free or upgrade for **extra features**")
                         .font(.title2)
-                        .backport.fontWeight(.semibold)
+                        .fontWeight(.semibold)
                         .lineSpacing(3)
                     
                     Text("Starting from **\(s.state.lowestDisplayPrice)/month**. Enabled on all platforms. Cancel anytime.")
                         .font(.callout)
                         .foregroundStyle(.secondary)
-                        .backport.contentTransition(.numericText())
+                        .contentTransition(.numericText())
                         .animation(.default, value: s.state.lowestDisplayPrice)
                 }
                     .scenePadding(.horizontal)

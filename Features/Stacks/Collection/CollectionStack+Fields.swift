@@ -1,7 +1,6 @@
 import SwiftUI
 import UI
 import API
-import Backport
 
 extension CollectionStack {
     struct Fields {
@@ -14,16 +13,16 @@ extension CollectionStack.Fields: View {
         Section {
             Label {
                 TextField("Title", text: $collection.title)
-                    .backport.fontWeight(.semibold)
+                    .fontWeight(.semibold)
                     .autoFocus()
             } icon: {
                 IconPicker(collection: $collection)
             }
             
             Label {
-                Backport.TextField("Description", text: $collection.description, axis: .vertical)
+                TextField("Description", text: $collection.description, axis: .vertical)
                     .preventLineBreaks(text: $collection.description)
-                    .backport.lineLimit(2...)
+                    .lineLimit(2...)
             } icon: {
                 Color.clear
             }

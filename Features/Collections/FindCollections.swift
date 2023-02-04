@@ -25,7 +25,7 @@ extension FindCollections {
                 if !user.isEmpty {
                     ForEach(user) { item in
                         UserCollectionItem(item, withLocation: true)
-                            .backport.tag(tag(item.id))
+                            .tag(tag(item.id))
                     }
                 }
             } header: {

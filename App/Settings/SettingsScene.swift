@@ -1,5 +1,4 @@
 import SwiftUI
-import Backport
 import UI
 
 struct SettingsScene: View {
@@ -7,9 +6,9 @@ struct SettingsScene: View {
     @AppStorage("theme") private var theme: PreferredTheme = .default
 
     var body: some View {
-        Backport.NavigationStack(path: $settings.path) {
+        NavigationStack(path: $settings.path) {
             SettingsHome()
-                .backport.navigationDestination(for: SettingsRoute.self) {
+                .navigationDestination(for: SettingsRoute.self) {
                     switch $0 {
                     case .account:
                         SettingsWebApp(subpage: .account)

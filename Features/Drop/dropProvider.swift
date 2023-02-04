@@ -1,6 +1,5 @@
 import SwiftUI
 import API
-import Backport
 import UniformTypeIdentifiers
 
 public extension View {
@@ -50,7 +49,7 @@ fileprivate struct DropProviderModifier: ViewModifier {
                     set: { if !$0 { urls = .init() } }
             ) {
                 AddStack(urls, to: collection)
-                    .backport.presentationDetents([.height(200)])
+                    .presentationDetents([.height(200)])
             }
     }
 }

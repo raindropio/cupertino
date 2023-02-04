@@ -1,7 +1,6 @@
 import SwiftUI
 import API
 import UI
-import Backport
 
 struct FoundRaindrops: View {
     @EnvironmentObject private var r: RaindropsStore
@@ -126,7 +125,7 @@ extension FoundRaindrops {
                         Text(total, format: .number) +
                         Text(")")
                     }
-                    .backport.contentTransition(.numericText())
+                    .contentTransition(.numericText())
                 }
             }
         }

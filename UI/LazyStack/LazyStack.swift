@@ -1,5 +1,4 @@
 import SwiftUI
-import Backport
 
 public struct LazyStack<Content: View, ID: Hashable, Menu: View> {
     var layout: LazyStackLayout
@@ -35,8 +34,8 @@ extension LazyStack: View {
         Group {
             switch layout {
             case .list:
-                Backport.List(selection: $selection, content: content)
-                    .backport.contextMenu(forSelectionType: ID.self, menu: contextMenu, primaryAction: itemTap)
+                List(selection: $selection, content: content)
+                    .contextMenu(forSelectionType: ID.self, menu: contextMenu, primaryAction: itemTap)
                 
             case .grid(_, _):
                 GridScrollView(content: content)

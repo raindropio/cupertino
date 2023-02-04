@@ -43,7 +43,7 @@ extension AuthContinueWith {
                 }
             } label: {
                 Image(systemName: "ellipsis")
-                    .backport.fontWeight(.bold)
+                    .fontWeight(.bold)
                     .foregroundColor(.secondary)
                     .frame(width: height, height: height)
                     .background(.secondary.opacity(0.15))

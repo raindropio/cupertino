@@ -1,6 +1,5 @@
 import SwiftUI
 import API
-import Backport
 
 public func CollectionsList(_ selection: Binding<Int?>, system: [Int] = []) -> some View {
     _Optional(selection: selection, system: system)
@@ -21,7 +20,7 @@ fileprivate struct _Optional {
 
 extension _Optional: View {
     var body: some View {
-        Backport.List(selection: $selection) {
+        List(selection: $selection) {
             if search.isEmpty {
                 if system.contains(-1) {
                     SystemCollections<Int>(-1)
@@ -45,7 +44,7 @@ extension _Optional: View {
             //search
             .searchable(text: $search, placement: .navigationBarDrawer(displayMode: .always))
             //menu
-            .backport.contextMenu(forSelectionType: FindBy.self) { selection in
+            .contextMenu(forSelectionType: FindBy.self) { selection in
                 CollectionsMenu(selection)
             }
             //reload

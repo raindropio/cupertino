@@ -2,7 +2,6 @@ import SwiftUI
 import API
 import UI
 import Features
-import Backport
 
 extension PreviewScreen {
     struct PageError: ViewModifier {
@@ -29,7 +28,7 @@ extension PreviewScreen {
                                     Label("Open permanent copy", systemImage: "clock.arrow.circlepath")
                                 }
                                     .buttonStyle(.borderedProminent)
-                                    .backport.fontWeight(.semibold)
+                                    .fontWeight(.semibold)
                             }
                         }
                     }

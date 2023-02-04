@@ -1,7 +1,6 @@
 import SwiftUI
 import API
 import UI
-import Backport
 
 public struct SubscriptionDetails: View {
     var subscription: Subscription
@@ -57,7 +56,7 @@ public struct SubscriptionDetails: View {
                     SafariLink(destination: manage) {
                         Text("Manage")
                             .frame(maxWidth: .infinity)
-                            .backport.fontWeight(.medium)
+                            .fontWeight(.medium)
                     }
                         .tint(.white)
                         .listRowBackground(Color.accentColor)

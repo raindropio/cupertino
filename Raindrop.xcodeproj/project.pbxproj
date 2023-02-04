@@ -10,8 +10,6 @@
 		760DD2FD2942333D00103C9E /* SaveFiles.swift in Sources */ = {isa = PBXBuildFile; fileRef = 760DD2FC2942333D00103C9E /* SaveFiles.swift */; };
 		760DD2FF294237E900103C9E /* NothingFound.swift in Sources */ = {isa = PBXBuildFile; fileRef = 760DD2FE294237E900103C9E /* NothingFound.swift */; };
 		76143B0228842C85006A7508 /* UI in Frameworks */ = {isa = PBXBuildFile; productRef = 76143B0128842C85006A7508 /* UI */; };
-		7616B009293DE7F9001E26F1 /* Backport in Frameworks */ = {isa = PBXBuildFile; productRef = 7616B008293DE7F9001E26F1 /* Backport */; };
-		7616B00B293DE7FF001E26F1 /* Backport in Frameworks */ = {isa = PBXBuildFile; productRef = 7616B00A293DE7FF001E26F1 /* Backport */; };
 		76292CE42951A4D7000E16AA /* SettingsHome.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76292CE32951A4D7000E16AA /* SettingsHome.swift */; };
 		76292CE82951B413000E16AA /* SettingsWebApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76292CE72951B413000E16AA /* SettingsWebApp.swift */; };
 		76292CEA2951B86F000E16AA /* SettingsSubscription.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76292CE92951B86F000E16AA /* SettingsSubscription.swift */; };
@@ -106,7 +104,6 @@
 		76292CEF2951C7D2000E16AA /* SettingsLogout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsLogout.swift; sourceTree = "<group>"; };
 		76292CF72952F2CB000E16AA /* PreferredBrowser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreferredBrowser.swift; sourceTree = "<group>"; };
 		76292CF92952F2DF000E16AA /* PreferredTheme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreferredTheme.swift; sourceTree = "<group>"; };
-		76292D14295466DD000E16AA /* Backport */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = Backport; sourceTree = "<group>"; };
 		7639A6AE286889DB00A76FE9 /* UI */ = {isa = PBXFileReference; lastKnownFileType = text; path = UI; sourceTree = SOURCE_ROOT; };
 		765F0DDB287EE0FB001E34CA /* App.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = App.plist; sourceTree = "<group>"; };
 		7673C0A9295DD3B8002D4229 /* SidebarScreen+Toolbar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SidebarScreen+Toolbar.swift"; sourceTree = "<group>"; };
@@ -170,7 +167,6 @@
 				76143B0228842C85006A7508 /* UI in Frameworks */,
 				7697437429718A6100322290 /* Features in Frameworks */,
 				768CA1F7294CC10900AD7E62 /* StoreKit.framework in Frameworks */,
-				7616B009293DE7F9001E26F1 /* Backport in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -180,7 +176,6 @@
 			files = (
 				76B16BD42930F34D00032D7D /* API in Frameworks */,
 				76B16BE22934BB0F00032D7D /* UI in Frameworks */,
-				7616B00B293DE7FF001E26F1 /* Backport in Frameworks */,
 				7697437629718A6900322290 /* Features in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -231,7 +226,6 @@
 				767AC1162925196F00766998 /* Features */,
 				7685A1AC286880F600A4BC3C /* API */,
 				7639A6AE286889DB00A76FE9 /* UI */,
-				76292D14295466DD000E16AA /* Backport */,
 				7685A192286868AC00A4BC3C /* Products */,
 				7685A1AD2868810D00A4BC3C /* Frameworks */,
 			);
@@ -390,7 +384,6 @@
 			packageProductDependencies = (
 				76143B0128842C85006A7508 /* UI */,
 				76460FA6292A6E3B00C21ACE /* API */,
-				7616B008293DE7F9001E26F1 /* Backport */,
 				7697437329718A6100322290 /* Features */,
 			);
 			productName = cupertino;
@@ -413,7 +406,6 @@
 			packageProductDependencies = (
 				76B16BD32930F34D00032D7D /* API */,
 				76B16BE12934BB0F00032D7D /* UI */,
-				7616B00A293DE7FF001E26F1 /* Backport */,
 				7697437529718A6900322290 /* Features */,
 			);
 			productName = share;
@@ -692,7 +684,7 @@
 				"INFOPLIST_KEY_UILaunchScreen_Generation[sdk=iphonesimulator*]" = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				LD_RUNPATH_SEARCH_PATHS = "@executable_path/Frameworks";
 				"LD_RUNPATH_SEARCH_PATHS[sdk=macosx*]" = "@executable_path/../Frameworks";
 				MACOSX_DEPLOYMENT_TARGET = 13.0;
@@ -735,7 +727,7 @@
 				"INFOPLIST_KEY_UILaunchScreen_Generation[sdk=iphonesimulator*]" = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				LD_RUNPATH_SEARCH_PATHS = "@executable_path/Frameworks";
 				"LD_RUNPATH_SEARCH_PATHS[sdk=macosx*]" = "@executable_path/../Frameworks";
 				MACOSX_DEPLOYMENT_TARGET = 13.0;
@@ -766,7 +758,7 @@
 				INFOPLIST_FILE = share/Share.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = Raindrop.io;
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
-				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -796,7 +788,7 @@
 				INFOPLIST_FILE = share/Share.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = Raindrop.io;
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
-				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -850,14 +842,6 @@
 		76143B0128842C85006A7508 /* UI */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = UI;
-		};
-		7616B008293DE7F9001E26F1 /* Backport */ = {
-			isa = XCSwiftPackageProductDependency;
-			productName = Backport;
-		};
-		7616B00A293DE7FF001E26F1 /* Backport */ = {
-			isa = XCSwiftPackageProductDependency;
-			productName = Backport;
 		};
 		76460FA6292A6E3B00C21ACE /* API */ = {
 			isa = XCSwiftPackageProductDependency;

@@ -1,7 +1,6 @@
 import SwiftUI
 import API
 import UI
-import Backport
 
 public struct FindByList {
     @EnvironmentObject private var dispatch: Dispatcher
@@ -33,7 +32,7 @@ extension FindByList {
 
 extension FindByList: View {
     public var body: some View {
-        Backport.List(selection: $selection) {
+        List(selection: $selection) {
             if search.isEmpty {
                 Section {
                     if editMode?.wrappedValue != .active {
@@ -68,7 +67,7 @@ extension FindByList: View {
             .collectionsAnimation()
             .tagAnimations()
             //menu
-            .backport.contextMenu(forSelectionType: FindBy.self, menu: contextMenu)
+            .contextMenu(forSelectionType: FindBy.self, menu: contextMenu)
             //reload
             .refreshable {
                 try? await dispatch(CollectionsAction.load, FiltersAction.reload())

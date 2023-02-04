@@ -1,6 +1,5 @@
 import SwiftUI
 import API
-import Backport
 import UI
 
 struct AuthScene: View {
@@ -9,7 +8,7 @@ struct AuthScene: View {
     @State private var signup = false
 
     var body: some View {
-        Backport.NavigationStack {
+        NavigationStack {
             VStack(spacing: 0) {
                 AuthSplash()
                 
@@ -28,7 +27,7 @@ struct AuthScene: View {
                         .buttonStyle(.borderedProminent)
                         .tint(.primary)
                 }
-                    .backport.fontWeight(.medium)
+                    .fontWeight(.medium)
                     .buttonBorderShape(.capsule)
                     .scenePadding()
                     .scenePadding(.horizontal)
@@ -56,11 +55,11 @@ struct AuthScene: View {
                     }
                 }
                 .sheet(isPresented: $login) {
-                    Backport.NavigationStack(root: AuthLogIn.init)
-                        .backport.presentationDetents([.height(360)])
+                    NavigationStack(root: AuthLogIn.init)
+                        .presentationDetents([.height(360)])
                 }
                 .sheet(isPresented: $signup) {
-                    Backport.NavigationStack(root: AuthSignup.init)
+                    NavigationStack(root: AuthSignup.init)
                 }
         }
     }

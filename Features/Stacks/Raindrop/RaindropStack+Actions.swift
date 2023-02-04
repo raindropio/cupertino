@@ -1,7 +1,6 @@
 import SwiftUI
 import API
 import UI
-import Backport
 
 extension RaindropStack {
     struct Actions {
@@ -42,7 +41,7 @@ extension RaindropStack.Actions: ViewModifier {
                         .tint(raindrop.important ? .accentColor : nil)
                 }
             }
-            .backport.toolbarTitleMenu {
+            .toolbarTitleMenu {
                 Picker("Type", selection: $raindrop.type) {
                     ForEach(RaindropType.allCases, id: \.single) {
                         Label($0.single, systemImage: $0.systemImage)

@@ -46,7 +46,7 @@ struct CollectionsGroup<T: Hashable>: View {
             Button(action: add) {
                 Image(systemName: "plus")
             }
-                .backport.fontWeight(.semibold)
+                .fontWeight(.semibold)
         }
     }
 }

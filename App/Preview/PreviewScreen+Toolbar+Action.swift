@@ -2,7 +2,6 @@ import SwiftUI
 import API
 import UI
 import Features
-import Backport
 
 extension PreviewScreen.Toolbar {
     struct Action: View {
@@ -41,7 +40,7 @@ extension PreviewScreen.Toolbar.Action {
                 .labelStyle(.titleAndIcon)
                 .buttonBorderShape(.capsule)
                 .tint(.accentColor)
-                .backport.fontWeight(.semibold)
+                .fontWeight(.semibold)
         }
         
         var body: some View {

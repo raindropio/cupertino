@@ -2,18 +2,17 @@ import SwiftUI
 import API
 import UI
 import Features
-import Backport
 
 struct AppScene: View {
     @StateObject private var router = AppRouter()
     @AppStorage("theme") private var theme: PreferredTheme = .default
 
     var body: some View {
-        Backport.NavigationSplitView(sidebar: SidebarScreen.init) {
-            Backport.NavigationStack {
+        NavigationSplitView(sidebar: SidebarScreen.init) {
+            NavigationStack {
                 if let find = router.find {
                     Finder(find: find)
-                        .backport.navigationDestination(for: UserCollection.self) {
+                        .navigationDestination(for: UserCollection.self) {
                             Finder(find: .init($0))
                         }
                 }
@@ -47,7 +46,7 @@ struct AppScene: View {
                     }
             }
             .fullScreenCover(item: $router.preview) { url in
-                Backport.NavigationStack {
+                NavigationStack {
                     PreviewScreen(url: url, mode: .raw)
                 }
             }

@@ -1,7 +1,6 @@
 import SwiftUI
 import API
 import UI
-import Backport
 
 struct CollectionIcon<C: CollectionType>: View {
     var cover: URL?

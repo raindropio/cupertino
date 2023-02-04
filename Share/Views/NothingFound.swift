@@ -11,6 +11,6 @@ struct NothingFound: View {
         } actions: {
             Button("Cancel", role: .cancel, action: dismiss.callAsFunction)
         }
-            .backport.presentationDetents([.medium])
+            .presentationDetents([.medium])
     }
 }

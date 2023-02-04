@@ -27,7 +27,7 @@ extension ListForEach: View {
         ForEach(data) {
             content($0)
                 .infiniteScrollElement($0.id)
-                .backport.tag($0.id)
+                .tag($0.id)
         }
             .onMove(perform: performReorder)
             .onInsert(of: insertOf, perform: insert ?? { _,_ in })

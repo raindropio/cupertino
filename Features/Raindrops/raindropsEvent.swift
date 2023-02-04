@@ -2,7 +2,6 @@ import SwiftUI
 import Combine
 import UI
 import API
-import Backport
 
 public extension View {
     func raindropsEvent(
@@ -35,12 +34,12 @@ fileprivate struct _Modifier: ViewModifier {
         //sheets/alerts
         .sheet(item: $edit, content: RaindropStack.ById.init)
         .sheet(item: $move) { pick in
-            Backport.NavigationStack {
+            NavigationStack {
                 MoveRaindrops(pick: pick)
             }
         }
         .sheet(item: $addTags) { pick in
-            Backport.NavigationStack {
+            NavigationStack {
                 AddTagsRaindrops(pick: pick)
             }
         }

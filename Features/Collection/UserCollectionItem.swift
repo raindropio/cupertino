@@ -1,7 +1,6 @@
 import SwiftUI
 import API
 import UI
-import Backport
 
 public struct UserCollectionItem: View {
     @EnvironmentObject private var event: CollectionsEvent

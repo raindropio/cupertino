@@ -1,7 +1,6 @@
 import SwiftUI
 import API
 import UI
-import Backport
 import Features
 
 extension PreviewScreen {
@@ -31,8 +30,8 @@ extension PreviewScreen.Toolbar {
 extension PreviewScreen.Toolbar: ViewModifier {
     func body(content: Content) -> some View {
         content
-        .backport.toolbarRole(.editor)
-        .backport.toolbar(page.prefersHiddenToolbars && !highlightsList ? .hidden : .automatic, for: .navigationBar, .tabBar, .bottomBar)
+        .toolbarRole(.editor)
+        .toolbar(page.prefersHiddenToolbars && !highlightsList ? .hidden : .automatic, for: .navigationBar, .tabBar, .bottomBar)
         .animation(.default, value: page.prefersHiddenToolbars)
         .toolbar {
             ToolbarItemGroup(placement: .navigationBarTrailing) {
@@ -71,7 +70,7 @@ extension PreviewScreen.Toolbar: ViewModifier {
             }
             
             ToolbarItemGroup(placement: toolbarItemPlacement) {
-                Backport.ShareLink(item: page.url ?? .init(string: "about:blank")!)
+                ShareLink(item: page.url ?? .init(string: "about:blank")!)
                     .disabled(page.url == nil)
                 
                 Spacer()

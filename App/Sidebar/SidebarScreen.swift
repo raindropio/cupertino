@@ -15,6 +15,6 @@ struct SidebarScreen: View {
             .modifier(Toolbar())
             .fab(hidden: !isPhone)
             .scopeEditMode()
-            .backport.navigationSplitViewColumnWidth(ideal: 450)
+            .navigationSplitViewColumnWidth(ideal: 450)
     }
 }

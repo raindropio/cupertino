@@ -2,7 +2,6 @@ import SwiftUI
 import AuthenticationServices
 import UI
 import API
-import Backport
 
 struct AuthContinueWith {
     @Environment(\.dismiss) private var dismiss

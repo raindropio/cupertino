@@ -25,7 +25,7 @@ extension Finder.Status {
             if total > 0 {
                 HStack {
                     Text("\(total) items")
-                        .backport.fontWeight(.medium)
+                        .fontWeight(.medium)
                         .foregroundStyle(.secondary)
                     
                     Spacer()

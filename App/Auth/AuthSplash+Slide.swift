@@ -1,5 +1,4 @@
 import SwiftUI
-import Backport
 
 extension AuthSplash {
     struct Slide<I: View, D: View>: View {
@@ -19,7 +18,7 @@ extension AuthSplash {
                         .padding(.bottom, 8)
                     
                     Text(title)
-                        .backport.fontWeight(.bold)
+                        .fontWeight(.bold)
                         .font(.largeTitle)
                 }
                     .foregroundStyle(

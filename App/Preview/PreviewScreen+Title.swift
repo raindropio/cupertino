@@ -31,7 +31,7 @@ extension PreviewScreen.Title: ViewModifier {
         content
         .navigationTitle(title)
         .navigationBarTitleDisplayMode(.inline)
-        .backport.toolbarTitleMenu {
+        .toolbarTitleMenu {
             Picker(
                 "",
                 selection: .init {

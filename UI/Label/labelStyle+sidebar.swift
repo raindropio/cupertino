@@ -1,5 +1,4 @@
 import SwiftUI
-import Backport
 
 public extension LabelStyle where Self == TitleAndIconLabelStyle {
     static var sidebar: SidebarLabelStyle { SidebarLabelStyle() }

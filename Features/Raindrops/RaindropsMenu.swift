@@ -1,6 +1,5 @@
 import SwiftUI
 import API
-import Backport
 
 public func RaindropsMenu(_ pick: RaindropsPick = .some([])) -> some View {
     _Menu(pick: pick)
@@ -60,7 +59,7 @@ fileprivate struct _Menu: View {
             }
 
             //share
-            Backport.ShareLink(items: items.map { $0.link })
+            ShareLink(items: items.map { $0.link })
             
             //move
             Button { event.move(pick) } label: {

@@ -1,7 +1,6 @@
 import SwiftUI
 import API
 import UI
-import Backport
 
 public struct CollectionStack {
     @EnvironmentObject private var dispatch: Dispatcher
@@ -49,7 +48,7 @@ extension CollectionStack {
 
 extension CollectionStack: View {
     public var body: some View {
-        Backport.NavigationStack {
+        NavigationStack {
             Form {
                 Fields(collection: $collection)
                 

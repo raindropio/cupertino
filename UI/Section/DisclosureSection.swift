@@ -1,5 +1,4 @@
 import SwiftUI
-import Backport
 
 //MARK: - Init
 public func DisclosureSection<L: StringProtocol, C: View>(
@@ -85,7 +84,7 @@ fileprivate struct _SectionHeader<L: View, A: View>: View {
             } label: {
                 Image(systemName: "chevron.right")
                     .imageScale(.small)
-                    .backport.fontWeight(.semibold)
+                    .fontWeight(.semibold)
                     .rotationEffect(.degrees(isExpanded ? 90 : 0))
             }
                 .tint(.gray)

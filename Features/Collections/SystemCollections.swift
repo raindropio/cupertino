@@ -23,7 +23,7 @@ extension SystemCollections {
         var body: some View {
             ForEach(collections) {
                 SystemCollectionItem($0)
-                    .backport.tag(tag($0.id))
+                    .tag(tag($0.id))
             }
         }
     }

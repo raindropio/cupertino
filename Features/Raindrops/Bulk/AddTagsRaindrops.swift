@@ -1,7 +1,6 @@
 import SwiftUI
 import API
 import UI
-import Backport
 
 struct AddTagsRaindrops: View {
     @Environment(\.dismiss) private var dismiss
@@ -26,7 +25,7 @@ struct AddTagsRaindrops: View {
                 ToolbarItem(placement: .bottomBar) {
                     if !tags.isEmpty {
                         ActionButton("Add \(tags.count) tags for \(pick.title)", action: add)
-                            .backport.fontWeight(.semibold)
+                            .fontWeight(.semibold)
                     }
                 }
                 

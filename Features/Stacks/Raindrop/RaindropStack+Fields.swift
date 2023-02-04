@@ -1,7 +1,6 @@
 import SwiftUI
 import API
 import UI
-import Backport
 
 extension RaindropStack {
     struct Fields {
@@ -31,10 +30,10 @@ extension RaindropStack.Fields: View {
                     .padding(.top, 10)
                     .frame(maxHeight: .infinity, alignment: .top)
                 
-                Backport.TextField("Title", text: $raindrop.title, axis: .vertical)
+                TextField("Title", text: $raindrop.title, axis: .vertical)
                     .preventLineBreaks(text: $raindrop.title)
                     .focused($focus, equals: .title)
-                    .backport.fontWeight(.semibold)
+                    .fontWeight(.semibold)
                     .lineLimit(5)
                     .onSubmit {
                         focus = nil
@@ -42,7 +41,7 @@ extension RaindropStack.Fields: View {
                     .frame(maxHeight: .infinity)
             }
             
-            Backport.TextField("Description", text: $raindrop.excerpt, axis: .vertical)
+            TextField("Description", text: $raindrop.excerpt, axis: .vertical)
                 .focused($focus, equals: .excerpt)
                 .lineLimit(5)
         }

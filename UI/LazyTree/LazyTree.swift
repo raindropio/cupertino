@@ -145,7 +145,7 @@ extension LazyTree: View {
             }
                 .padding(.leading, leaf.level * 32)
                 .transition(.move(edge: .bottom).combined(with: .opacity))
-                .backport.tag(tag(leaf.id))
+                .tag(tag(leaf.id))
         }
             .onMove { onMove($0, $1) }
     }

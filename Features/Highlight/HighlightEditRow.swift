@@ -1,6 +1,5 @@
 import SwiftUI
 import API
-import Backport
 
 struct HighlightEditRow: View {
     @State private var selectColor = false
@@ -29,7 +28,7 @@ struct HighlightEditRow: View {
                     }
                 }
             
-            Backport.TextField("Note", text: $highlight.note, axis: .vertical)
+            TextField("Note", text: $highlight.note, axis: .vertical)
                 .preventLineBreaks(text: $highlight.note)
             
             Text(highlight.created, formatter: .shortDateTime)
@@ -40,6 +39,6 @@ struct HighlightEditRow: View {
                 .padding(.bottom, 4)
         }
             .padding(.vertical, 8)
-            .backport.alignmentGuide(.listRowSeparatorLeading) { _ in 0 }
+            .alignmentGuide(.listRowSeparatorLeading) { _ in 0 }
     }
 }

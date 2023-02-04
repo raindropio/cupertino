@@ -1,7 +1,6 @@
 import SwiftUI
 import API
 import Features
-import Backport
 
 struct Receive: View {
     @EnvironmentObject private var service: ExtensionService
@@ -15,7 +14,7 @@ struct Receive: View {
                     //loading
                     if loading {
                         ProgressView()
-                            .backport.presentationDetents([.medium])
+                            .presentationDetents([.medium])
                     }
                     //nothing found
                     else if urls.isEmpty {

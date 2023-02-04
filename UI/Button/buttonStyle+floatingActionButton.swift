@@ -1,6 +1,5 @@
 import SwiftUI
 import CoreHaptics
-import Backport
 
 public extension ButtonStyle where Self == FabButtonStyle {
     static var floatingActionButton: Self {
@@ -30,7 +29,7 @@ fileprivate struct FabStyleModifier: ViewModifier {
     
     func body(content: Content) -> some View {
         content
-            .backport.fontWeight(.semibold)
+            .fontWeight(.semibold)
             .foregroundColor(.white)
             .imageScale(.large)
             .frame(width: 48 + size, height: 48 + size)
