@@ -17,7 +17,6 @@ extension AuthContinueWith {
             loading = true
             do {
                 try await dispatch(action)
-                dismiss() //ios15 fix
             } catch {
                 self.error = error
             }

@@ -25,15 +25,8 @@ public struct WStack<C: View> {
 
 extension WStack: View {
     public var body: some View {
-        if #available(iOS 16, *) {
-            Modern(alignment: alignment, spacingX: spacingX, spacingY: spacingY, fillLineHeight: fillLineHeight) {
-                content()
-            }
-        } else {
-            ScrollView(.horizontal, showsIndicators: false) {
-                LazyHStack(alignment: alignment.vertical, spacing: spacingX, content: content)
-            }
-                .clipped()
+        Modern(alignment: alignment, spacingX: spacingX, spacingY: spacingY, fillLineHeight: fillLineHeight) {
+            content()
         }
     }
 }

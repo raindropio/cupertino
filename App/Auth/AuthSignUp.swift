@@ -21,7 +21,6 @@ struct AuthSignup: View {
             focus = .password
         } else if form.isValid {
             try await dispatch(AuthAction.signup(form))
-            dismiss() //ios15 fix
         }
     }
 

@@ -6,11 +6,7 @@ struct HighlightsList: View {
     
     var body: some View {
         List {
-            if #available(iOS 16, *) {
-                ForEach($raindrop.highlights, editActions: .delete, content: HighlightEditRow.init)
-            } else {
-                ForEach($raindrop.highlights, content: HighlightEditRow.init)
-            }
+            ForEach($raindrop.highlights, editActions: .delete, content: HighlightEditRow.init)
         }
         .toolbar {
             EditButton()

@@ -87,7 +87,8 @@ fileprivate struct _SectionHeader<L: View, A: View>: View {
                     .fontWeight(.semibold)
                     .rotationEffect(.degrees(isExpanded ? 90 : 0))
             }
-                .tint(.gray)
+                .buttonStyle(.plain)
+                .foregroundColor(.gray)
             
             Spacer()
             
