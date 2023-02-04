@@ -4,16 +4,17 @@ import UI
 import Features
 
 struct SidebarScreen: View {
-    @State private var selection = Set<FindBy>()
+    @EnvironmentObject private var app: AppRouter
     @State private var search = ""
     
     var body: some View {
         FindByList(
-            selection: $selection,
+            selection: $app.find,
             search: search
         )
-            .modifier(Toolbar(selection: $selection))
-            .modifier(Routing(selection: $selection))
+            .modifier(Toolbar())
             .fab(hidden: !isPhone)
+            .scopeEditMode()
+            .backport.navigationSplitViewColumnWidth(ideal: 450)
     }
 }

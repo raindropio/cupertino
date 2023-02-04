@@ -21,7 +21,6 @@
 		76292CF82952F2CB000E16AA /* PreferredBrowser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76292CF72952F2CB000E16AA /* PreferredBrowser.swift */; };
 		76292CFA2952F2DF000E16AA /* PreferredTheme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76292CF92952F2DF000E16AA /* PreferredTheme.swift */; };
 		76460FA7292A6E3B00C21ACE /* API in Frameworks */ = {isa = PBXBuildFile; productRef = 76460FA6292A6E3B00C21ACE /* API */; };
-		7673C0A8295DD338002D4229 /* SidebarScreen+Routing.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7673C0A7295DD338002D4229 /* SidebarScreen+Routing.swift */; };
 		7673C0AA295DD3B8002D4229 /* SidebarScreen+Toolbar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7673C0A9295DD3B8002D4229 /* SidebarScreen+Toolbar.swift */; };
 		7685A195286868AC00A4BC3C /* App.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7685A194286868AC00A4BC3C /* App.swift */; };
 		7685A199286868AD00A4BC3C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7685A198286868AD00A4BC3C /* Assets.xcassets */; };
@@ -110,7 +109,6 @@
 		76292D14295466DD000E16AA /* Backport */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = Backport; sourceTree = "<group>"; };
 		7639A6AE286889DB00A76FE9 /* UI */ = {isa = PBXFileReference; lastKnownFileType = text; path = UI; sourceTree = SOURCE_ROOT; };
 		765F0DDB287EE0FB001E34CA /* App.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = App.plist; sourceTree = "<group>"; };
-		7673C0A7295DD338002D4229 /* SidebarScreen+Routing.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SidebarScreen+Routing.swift"; sourceTree = "<group>"; };
 		7673C0A9295DD3B8002D4229 /* SidebarScreen+Toolbar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SidebarScreen+Toolbar.swift"; sourceTree = "<group>"; };
 		767AC1162925196F00766998 /* Features */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = Features; sourceTree = "<group>"; };
 		7685A191286868AC00A4BC3C /* Raindrop.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Raindrop.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -220,7 +218,6 @@
 			isa = PBXGroup;
 			children = (
 				76864FB5291EA059000B9B45 /* SidebarScreen.swift */,
-				7673C0A7295DD338002D4229 /* SidebarScreen+Routing.swift */,
 				7673C0A9295DD3B8002D4229 /* SidebarScreen+Toolbar.swift */,
 			);
 			path = Sidebar;
@@ -496,7 +493,6 @@
 				768CA1FB294CC17800AD7E62 /* AuthLogIn.swift in Sources */,
 				768CA1FF2950420D00AD7E62 /* AuthContinueWith.swift in Sources */,
 				76ECFDFC2947727000DF15C9 /* PreviewScreen+Toolbar.swift in Sources */,
-				7673C0A8295DD338002D4229 /* SidebarScreen+Routing.swift in Sources */,
 				76292CE42951A4D7000E16AA /* SettingsHome.swift in Sources */,
 				76864FBD291EA059000B9B45 /* SidebarScreen.swift in Sources */,
 				7694CA012926335700BD81A0 /* PreviewScreen+Mode.swift in Sources */,

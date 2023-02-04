@@ -1,6 +1,7 @@
 import SwiftUI
 import API
 import Features
+import Backport
 
 struct Nesteds: View {
     @EnvironmentObject private var c: CollectionsStore
@@ -23,9 +24,7 @@ extension Nesteds {
         var items: [UserCollection]
         
         func item(_ collection: UserCollection) -> some View {
-            Button {
-                app.find(collection)
-            } label: {
+            Backport.NavigationLink(value: collection) {
                 UserCollectionLabel(collection)
             }
                 .dropConsumer(to: collection)

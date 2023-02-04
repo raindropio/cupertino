@@ -8,10 +8,8 @@ extension SidebarScreen {
         @EnvironmentObject private var app: AppRouter
         @EnvironmentObject private var settings: SettingsRouter
         @Environment(\.editMode) private var editMode
-        @Environment(\.splitViewSizeClass) private var sizeClass
+        @Environment(\.containerHorizontalSizeClass) private var sizeClass
         
-        @Binding var selection: Set<FindBy>
-
         func body(content: Content) -> some View {
             content
             .meNavigationTitle()
@@ -37,7 +35,7 @@ extension SidebarScreen {
                         }
                         
                         Menu {
-                            EditButton("Select")
+                            //EditButton("Select")
                             
                             Section { CollectionsMenu() }
                             Section { TagsMenu() }
@@ -45,23 +43,23 @@ extension SidebarScreen {
                             Image(systemName: "ellipsis")
                         }
                     } else {
-                        EditButton()
+                        //EditButton()
                     }
                 }
                 
                 //edit mode
-                ToolbarItemGroup(placement: .bottomBar) {
-                    if !selection.isEmpty, editMode?.wrappedValue == .active {
-                        Group {
-                            if selection.allSatisfy({ !$0.isSearching }) {
-                                CollectionsMenu(selection)
-                            } else if selection.allSatisfy({ $0.isSearching }) {
-                                TagsMenu(selection)
-                            }
-                        }
-                            .labelStyle(.titleOnly)
-                    }
-                }
+//                ToolbarItemGroup(placement: .bottomBar) {
+//                    if !selection.isEmpty, editMode?.wrappedValue == .active {
+//                        Group {
+//                            if selection.allSatisfy({ !$0.isSearching }) {
+//                                CollectionsMenu(selection)
+//                            } else if selection.allSatisfy({ $0.isSearching }) {
+//                                TagsMenu(selection)
+//                            }
+//                        }
+//                            .labelStyle(.titleOnly)
+//                    }
+//                }
             }
         }
     }

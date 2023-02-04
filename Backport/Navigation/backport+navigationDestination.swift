@@ -12,7 +12,7 @@ public extension Backport where Wrapped: View {
 }
 
 fileprivate struct Sequence<V: Hashable, C: View>: ViewModifier {
-    @EnvironmentObject private var service: BackportNavigationService<V>
+    @EnvironmentObject private var service: BackportNavigationService
     var type: V.Type
     var level = 0
     var destination: (V) -> C
@@ -31,8 +31,8 @@ fileprivate struct Sequence<V: Hashable, C: View>: ViewModifier {
         content
             .background(
                 SwiftUI.NavigationLink("", isActive: isPresented) {
-                    if isPresented.wrappedValue {
-                        destination(service.path[level])
+                    if isPresented.wrappedValue, let value = service.path[level] as? V {
+                        destination(value)
                             .modifier(Self(type: type, level: level+1, destination: destination))
                     }
                 }

@@ -23,7 +23,7 @@ extension Finder {
 extension Finder.Toolbar {
     fileprivate struct Memorized: ViewModifier {
         @Environment(\.editMode) private var editMode
-        @Environment(\.splitViewSizeClass) private var sizeClass
+        @Environment(\.containerHorizontalSizeClass) private var sizeClass
         @EnvironmentObject private var app: AppRouter
 
         var find: FindBy

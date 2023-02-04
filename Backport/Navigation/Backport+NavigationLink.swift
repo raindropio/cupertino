@@ -23,7 +23,7 @@ public extension Backport where Wrapped == Any {
 
 extension Backport where Wrapped == Any {
     fileprivate struct NavigationLinkValue<V: Hashable, L: View>: View {
-        @EnvironmentObject private var service: BackportNavigationService<V>
+        @EnvironmentObject private var service: BackportNavigationService
         
         var value: V
         var label: () -> L

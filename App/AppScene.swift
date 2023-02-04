@@ -9,22 +9,19 @@ struct AppScene: View {
     @AppStorage("theme") private var theme: PreferredTheme = .default
 
     var body: some View {
-        SplitView(path: $router.path) {
-            SidebarScreen()
-        } detail: { screen in
-            switch screen {
-            case .find(let find):
-                Finder(find: find)
-                
-            case .multi(let count):
-                EmptyState("\(count) items") {
-                    Image(systemName: "checklist.checked")
-                } actions: {
-                    Button("Cancel") { router.path = [.find(.init(0))] }
+        Backport.NavigationSplitView(sidebar: SidebarScreen.init) {
+            Backport.NavigationStack {
+                if let find = router.find {
+                    Finder(find: find)
+                        .backport.navigationDestination(for: UserCollection.self) {
+                            Finder(find: .init($0))
+                        }
                 }
             }
+                .navigationBarTitleDisplayMode(.large) //fix iphone bug
         }
-            .navigationSplitViewConfiguration(sidebarMin: 400)
+            .navigationSplitViewUnlimitedWidth()
+            .containerSizeClass()
             .collectionsEvent()
             .tagsEvent()
             .dropProvider()
@@ -33,14 +30,14 @@ struct AppScene: View {
                     .spotlightEvents {
                         switch $0 {
                         case .collection(let collection):
-                            router.find(collection)
+                            router.find = .init(collection)
                             router.spotlight = false
                             
                         case .raindrop(let raindrop):
                             router.preview = raindrop.link
                             
                         case .find(let find):
-                            router.find(find)
+                            router.find = find
                             router.spotlight = false
                             
                         case .cancel:

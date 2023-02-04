@@ -9,10 +9,10 @@ public struct FindByList {
     @Environment(\.isSearching) private var isSearching
     @AppStorage("tags-expanded") private var isExpanded = true
 
-    @Binding var selection: Set<FindBy>
+    @Binding var selection: FindBy?
     var search: String
     
-    public init(selection: Binding<Set<FindBy>>, search: String = "") {
+    public init(selection: Binding<FindBy?>, search: String = "") {
         self._selection = selection
         self.search = search
     }

@@ -32,8 +32,9 @@ struct Finder: View {
                     break
                     
                 case .find(let find):
-                    app.find(find)
+                    app.find = find
                 }
             }
+            .scopeEditMode()
     }
 }
