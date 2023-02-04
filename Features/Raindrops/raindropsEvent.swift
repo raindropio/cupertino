@@ -13,10 +13,13 @@ public extension View {
 }
 
 fileprivate struct _Modifier: ViewModifier {
+    @Environment(\.editMode) private var editMode
     @StateObject private var event = RaindropsEvent()
     @State private var edit: Raindrop.ID?
     @State private var move: RaindropsPick?
     @State private var addTags: RaindropsPick?
+    @State private var delete: RaindropsPick?
+    @State private var deleting = false
 
     var onPress: (RaindropsEventPressed) -> Void
     
@@ -28,6 +31,7 @@ fileprivate struct _Modifier: ViewModifier {
         .onReceive(event.edit) { edit = $0 }
         .onReceive(event.move) { move = $0 }
         .onReceive(event.addTags) { addTags = $0 }
+        .onReceive(event.delete) { delete = $0; deleting = true }
         //sheets/alerts
         .sheet(item: $edit, content: RaindropStack.ById.init)
         .sheet(item: $move) { pick in
@@ -39,6 +43,9 @@ fileprivate struct _Modifier: ViewModifier {
             Backport.NavigationStack {
                 AddTagsRaindrops(pick: pick)
             }
+        }
+        .alert("Are you sure?", isPresented: $deleting, presenting: delete, actions: DeleteRaindrops.init) { _ in
+            Text("Bookmarks will be moved to Trash")
         }
     }
 }

@@ -11,16 +11,22 @@ extension CollectionStack {
 
 extension CollectionStack.Fields: View {
     var body: some View {
-        IconPicker(selection: $collection.cover)
-
         Section {
-            TextField("Title", text: $collection.title)
-                .autoFocus()
-                .backport.fontWeight(.semibold)
+            Label {
+                TextField("Title", text: $collection.title)
+                    .backport.fontWeight(.semibold)
+                    .autoFocus()
+            } icon: {
+                IconPicker(collection: $collection)
+            }
             
-            Backport.TextField("Description", text: $collection.description, axis: .vertical)
-                .preventLineBreaks(text: $collection.description)
-                .backport.lineLimit(2...)
+            Label {
+                Backport.TextField("Description", text: $collection.description, axis: .vertical)
+                    .preventLineBreaks(text: $collection.description)
+                    .backport.lineLimit(2...)
+            } icon: {
+                Color.clear
+            }
         }
         
         Section("Parent") {

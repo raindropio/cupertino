@@ -14,14 +14,9 @@ struct DeleteRaindrops: View {
     }
     
     var body: some View {
-        Menu {
-            Button(role: .destructive, action: delete) {
-                Label("Delete \(pick.title)", systemImage: "trash")
-            }
-                .labelStyle(.titleAndIcon)
-        } label: {
-            Label("Delete", systemImage: "trash")
+        Button(role: .destructive, action: delete) {
+            Label("Delete \(pick.title)", systemImage: "trash")
         }
-            .tint(.red)
+            .labelStyle(.titleAndIcon)
     }
 }

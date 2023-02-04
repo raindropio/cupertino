@@ -3,27 +3,20 @@ import UI
 import API
 
 struct IconPicker: View {
-    @Binding var selection: URL?
+    @Binding var collection: UserCollection
 
     var body: some View {
-        NavigationLink {
-            Page(selection: $selection)
-        } label: {
-            Group {
-                if let selection {
-                    Thumbnail(selection, width: 64, height: 64)
-                } else {
-                    Button("Select icon") {}
-                        .buttonStyle(.bordered)
-                        .buttonBorderShape(.capsule)
-                        .tint(.secondary)
-                        .allowsHitTesting(false)
-                }
-            }
-                .frame(height: 64)
-                .frame(maxWidth: .infinity)
+        ZStack {
+            CollectionIcon(collection)
+                .imageScale(.large)
+                .symbolVariant(.fill)
+            
+            NavigationLink {
+                Page(selection: $collection.cover)
+            } label: {}
+                .layoutPriority(-1)
+                .opacity(0.00001)
         }
-            .clearSection()
     }
 }
 
