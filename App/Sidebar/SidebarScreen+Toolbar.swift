@@ -8,6 +8,7 @@ extension SidebarScreen {
         @EnvironmentObject private var app: AppRouter
         @EnvironmentObject private var settings: SettingsRouter
         @Environment(\.editMode) private var editMode
+        @Environment(\.splitViewSizeClass) private var sizeClass
         
         @Binding var selection: Set<FindBy>
 
@@ -27,10 +28,12 @@ extension SidebarScreen {
                 
                 ToolbarItemGroup {
                     if editMode?.wrappedValue != .active {
-                        Button {
-                            app.spotlight = true
-                        } label: {
-                            Image(systemName: "magnifyingglass")
+                        if sizeClass == .compact {
+                            Button {
+                                app.spotlight = true
+                            } label: {
+                                Image(systemName: "magnifyingglass")
+                            }
                         }
                         
                         Menu {

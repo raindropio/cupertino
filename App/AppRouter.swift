@@ -6,7 +6,6 @@ import UI
 enum AppRoute: Hashable {
     case find(FindBy)
     case multi(Int = 0)
-    case preview(URL, PreviewScreen.Mode = .raw)
 }
 
 //MARK: - Service
@@ -15,6 +14,7 @@ class AppRouter: ObservableObject {
         .find(.init())
     ]
     @Published var spotlight = false
+    @Published var preview: URL?
     
     func push(_ screen: AppRoute) {
         if path.last != screen {
@@ -42,9 +42,5 @@ extension AppRouter {
     
     func find(_ collection: UserCollection) {
         push(.find(.init(collection)))
-    }
-    
-    func preview(_ url: URL, _ mode: PreviewScreen.Mode = .raw) {
-        push(.preview(url, mode))
     }
 }

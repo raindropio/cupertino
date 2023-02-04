@@ -24,7 +24,7 @@ extension PreviewScreen {
 
                             if let url = page.url {
                                 Button {
-                                    app.replace(.preview(url, .cache))
+//                                    app.replace(.preview(url, .cache))
                                 } label: {
                                     Label("Open permanent copy", systemImage: "clock.arrow.circlepath")
                                 }

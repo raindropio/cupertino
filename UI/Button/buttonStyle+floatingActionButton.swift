@@ -33,7 +33,7 @@ fileprivate struct FabStyleModifier: ViewModifier {
             .backport.fontWeight(.semibold)
             .foregroundColor(.white)
             .imageScale(.large)
-            .frame(width: 56 + size, height: 56 + size)
+            .frame(width: 48 + size, height: 48 + size)
             .background(.tint)
             .overlay(isPressed ? Color.black.opacity(0.2) : nil)
             .clipShape(Circle())

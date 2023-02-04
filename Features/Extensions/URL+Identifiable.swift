@@ -1,5 +1,5 @@
 import Foundation
 
-extension Int: Identifiable {
+extension URL: Identifiable {
     public var id: Self { self }
 }

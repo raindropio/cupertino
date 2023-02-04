@@ -36,9 +36,9 @@ extension PreviewScreen.Title: ViewModifier {
                 "",
                 selection: .init {
                     mode
-                } set: {
+                } set: { _ in
                     if let url = page.url {
-                        app.replace(.preview(url, $0))
+                        //app.replace(.preview(url, $0))
                     }
                 }
             ) {

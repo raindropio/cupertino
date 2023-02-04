@@ -2,6 +2,7 @@ import SwiftUI
 import API
 import UI
 import Features
+import Backport
 
 struct AppScene: View {
     @StateObject private var router = AppRouter()
@@ -21,33 +22,37 @@ struct AppScene: View {
                 } actions: {
                     Button("Cancel") { router.path = [.find(.init(0))] }
                 }
-                
-            case .preview(let url, let mode):
-                PreviewScreen(url: url, mode: mode)
             }
         }
             .navigationSplitViewConfiguration(sidebarMin: 400)
             .collectionsEvent()
             .tagsEvent()
             .dropProvider()
-            .fancySheet(isPresented: $router.spotlight) {
+            .overlayWindow(isPresented: $router.spotlight) {
                 Spotlight()
                     .spotlightEvents {
                         switch $0 {
                         case .collection(let collection):
                             router.find(collection)
+                            router.spotlight = false
                             
                         case .raindrop(let raindrop):
-                            router.preview(raindrop.link)
+                            router.preview = raindrop.link
                             
                         case .find(let find):
                             router.find(find)
+                            router.spotlight = false
                             
                         case .cancel:
+                            router.spotlight = false
                             break
                         }
-                        router.spotlight = false
                     }
+            }
+            .fullScreenCover(item: $router.preview) { url in
+                Backport.NavigationStack {
+                    PreviewScreen(url: url, mode: .raw)
+                }
             }
             .environmentObject(router)
             .preferredColorScheme(theme.colorScheme)

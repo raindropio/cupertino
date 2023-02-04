@@ -23,6 +23,7 @@ extension Finder {
 extension Finder.Toolbar {
     fileprivate struct Memorized: ViewModifier {
         @Environment(\.editMode) private var editMode
+        @Environment(\.splitViewSizeClass) private var sizeClass
         @EnvironmentObject private var app: AppRouter
 
         var find: FindBy
@@ -44,20 +45,23 @@ extension Finder.Toolbar {
                             selection = .init(pick.isAll ? [] : ids)
                         }
                     } else {
-                        if !isPhone {
+                        if sizeClass == .regular {
                             SortRaindropsButton(find)
                             CustomizeRaindropsButton(find)
-                        } else {
-                            Button {
-                                app.spotlight = true
-                            } label: {
-                                Image(systemName: "magnifyingglass")
-                            }
+                            EditButton("Select")
+                        }
+                                                
+                        Button {
+                            app.spotlight = true
+                        } label: {
+                            Image(systemName: "magnifyingglass")
                         }
                         
                         //more
                         Menu {
-                            EditButton("Select")
+                            if sizeClass == .compact {
+                                EditButton("Select")
+                            }
                             
                             Section {
                                 CollectionsMenu(find.collectionId)
