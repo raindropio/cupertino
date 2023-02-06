@@ -48,7 +48,7 @@ struct AppScene: View {
             }
             .fullScreenCover(item: $router.preview) { url in
                 NavigationStack {
-                    PreviewScreen(url: url, mode: .raw)
+                    PreviewScreen(url: url, mode: .article)
                 }
             }
             .environmentObject(router)

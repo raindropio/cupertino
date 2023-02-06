@@ -59,6 +59,8 @@ public enum RaindropsAction: ReduxAction {
     case more(FindBy)
     case moreLoad(FindBy)
     case moreLoaded(FindBy, Int, [Raindrop], Int)
+    //single
+    case lookup(URL)
     //create
     case create(Raindrop) // -> createMany
     //update
@@ -79,12 +81,6 @@ public enum RaindropsAction: ReduxAction {
     case reorder(Raindrop.ID, to: Int? = nil, order: Int)
     //helpers
     case find(Binding<Raindrop>)
-}
-
-public enum HighlightsAction: ReduxAction {
-    case create(URL, Highlight)
-    case update(Highlight)
-    case delete(Highlight.ID)
 }
 
 public enum FiltersAction: ReduxAction {
