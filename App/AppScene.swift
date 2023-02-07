@@ -9,12 +9,13 @@ struct AppScene: View {
 
     var body: some View {
         NavigationSplitView(sidebar: SidebarScreen.init) {
-            NavigationStack {
+            NavigationStack(path: $router.path) {
                 if let find = router.find {
                     Finder(find: find)
                         .navigationDestination(for: UserCollection.self) {
                             Finder(find: .init($0))
                         }
+                        .navigationDestination(for: Browse.Location.self, destination: Browse.init)
                 }
             }
                 .navigationBarTitleDisplayMode(.large) //fix iphone bug
@@ -34,7 +35,7 @@ struct AppScene: View {
                             router.spotlight = false
                             
                         case .raindrop(let raindrop):
-                            router.preview = raindrop.link
+                            router.browse(raindrop.id)
                             
                         case .find(let find):
                             router.find = find
@@ -45,11 +46,6 @@ struct AppScene: View {
                             break
                         }
                     }
-            }
-            .fullScreenCover(item: $router.preview) { url in
-                NavigationStack {
-                    PreviewScreen(url: url, mode: .article)
-                }
             }
             .environmentObject(router)
             .preferredColorScheme(theme.colorScheme)

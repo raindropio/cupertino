@@ -3,21 +3,14 @@ import UI
 import API
 
 struct WebHighlights {
-    @EnvironmentObject private var page: WebPage
-    @EnvironmentObject private var r: RaindropsStore
     @EnvironmentObject private var dispatch: Dispatcher
     @Environment(\.sendWebMessage) private var _send
-    @State private var loading = false
-    
     private static let channel = "rdh"
     
-    private var raindrop: Raindrop? {
-        guard let url = page.url else { return nil }
-        return r.state.item(url) ?? .new(link: url)
-    }
-}
-
-extension WebHighlights: ViewModifier {
+    @ObservedObject var page: WebPage
+    @Binding var raindrop: Raindrop
+    @Binding var loading: Bool
+    
     private func onMessageFromPage(_ event: Event) async {
         switch event {
         //highlighting script is loaded
@@ -26,8 +19,7 @@ extension WebHighlights: ViewModifier {
             
         //add new
         case .add(let highlight):
-            guard !loading, var raindrop else { return }
-            
+            guard !loading else { return }
             raindrop.highlights.append(highlight)
 
             try? await dispatch(
@@ -36,8 +28,7 @@ extension WebHighlights: ViewModifier {
             
         //updated
         case .update(let updated):
-            guard !loading, var raindrop else { return }
-
+            guard !loading else { return }
             guard let index = raindrop.highlights.firstIndex (where: { $0.id == updated._id })
             else { return }
             
@@ -55,8 +46,7 @@ extension WebHighlights: ViewModifier {
             
         //removed
         case .remove(let removed):
-            guard !loading, var raindrop else { return }
-
+            guard !loading else { return }
             guard let index = raindrop.highlights.firstIndex (where: { $0.id == removed._id })
             else { return }
             
@@ -72,28 +62,21 @@ extension WebHighlights: ViewModifier {
     @Sendable
     private func reload() async {
         guard page.progress == 1 else { return }
-        guard let url = page.url else { return }
         
-        if raindrop?.isNew == true {
-            loading = true
-        }
-        
-        try? await dispatch(RaindropsAction.lookup(url))
         try? await send(.config(.init(enabled: true, nav: true, pro: true)))
-        try? await send(.apply(raindrop?.highlights ?? []))
-        
-        loading = false
+        try? await send(.apply(raindrop.highlights))
     }
     
     private func send(_ action: Action) async throws {
         try await _send(page, channel: Self.channel, message: action)
     }
-    
+}
+
+extension WebHighlights: ViewModifier {
     func body(content: Content) -> some View {
         content
             .onWebMessage(page, channel: Self.channel, receive: onMessageFromPage)
-            .task(id: page.url, reload)
             .task(id: page.progress, reload)
-            .task(id: raindrop?.highlights, reload)
+            .task(id: raindrop.highlights, reload)
     }
 }

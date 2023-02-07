@@ -26,9 +26,11 @@ struct Finder: View {
             .raindropsEvent {
                 switch $0 {
                 case .open(let id), .preview(let id):
+                    app.browse(id)
                     break
                     
                 case .cache(let id):
+                    app.browse(id, mode: .cache)
                     break
                     
                 case .find(let find):

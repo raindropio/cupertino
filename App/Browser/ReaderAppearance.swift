@@ -3,17 +3,12 @@ import API
 import UI
 import Features
 
-extension PreviewScreen.Toolbar {
-    struct Reader {
-        @EnvironmentObject private var page: WebPage
-        @EnvironmentObject private var r: RaindropsStore
-        @AppStorage(ReaderOptions.StorageKey) private var options = ReaderOptions()
-        @State private var showOptions = false
-    }
+struct ReaderAppearance {
+    @AppStorage(ReaderOptions.StorageKey) private var options = ReaderOptions()
 }
 
-extension PreviewScreen.Toolbar.Reader {
-    func popover() -> some View {
+extension ReaderAppearance: View {
+    var body: some View {
         Form {
             Picker("Theme", selection: $options.theme) {
                 ForEach(ReaderOptions.Theme.allCases, id: \.rawValue) {
@@ -48,16 +43,5 @@ extension PreviewScreen.Toolbar.Reader {
             .presentationDetents([.medium])
             .presentationDragIndicator(.visible)
             .frame(idealWidth: 300, idealHeight: 400)
-    }
-}
-
-extension PreviewScreen.Toolbar.Reader: View {
-    var body: some View {
-        Button {
-            showOptions = true
-        } label: {
-            Label("Font & style", systemImage: "textformat.size")
-        }
-            .popover(isPresented: $showOptions, content: popover)
     }
 }

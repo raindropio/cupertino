@@ -3,14 +3,15 @@ import API
 import UI
 import Features
 
-extension PreviewScreen {
+extension Browser {
     struct PageError: ViewModifier {
-        @EnvironmentObject private var page: WebPage
         @EnvironmentObject private var app: AppRouter
 
+        @ObservedObject var page: WebPage
+        @Binding var raindrop: Raindrop
+
         func body(content: Content) -> some View {
-            content
-            .overlay {
+            content.overlay {
                 Group {
                     if let error = page.error {
                         EmptyState("Error", message: error.localizedDescription) {
@@ -21,9 +22,9 @@ extension PreviewScreen {
                                 Label("Reload", systemImage: "arrow.clockwise")
                             }
 
-                            if let url = page.url {
+                            if raindrop.cache != nil {
                                 Button {
-//                                    app.replace(.preview(url, .cache))
+                                    app.browse(raindrop.id, mode: .cache)
                                 } label: {
                                     Label("Open permanent copy", systemImage: "clock.arrow.circlepath")
                                 }

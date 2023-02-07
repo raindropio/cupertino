@@ -1,0 +1,54 @@
+import SwiftUI
+import API
+import UI
+
+extension Browser {
+    struct Title {
+        @EnvironmentObject private var app: AppRouter
+        @ObservedObject var page: WebPage
+        @Binding var raindrop: Raindrop
+    }
+}
+
+extension Browser.Title {
+    private var mode: Browse.Location.Mode {
+        page.request?.attribute as? Browse.Location.Mode ?? .raw
+    }
+    
+    private var title: String {
+        switch mode {
+        case .article: return "Reader"
+        case .cache: return "Permanent copy"
+        case .embed: return "Preview"
+        default: return page.url?.host ?? ""
+        }
+    }
+}
+
+extension Browser.Title: ViewModifier {
+    func body(content: Content) -> some View {
+        content
+        .navigationTitle(title)
+        .navigationBarTitleDisplayMode(.inline)
+        .toolbarTitleMenu {
+            Picker("", selection: .init { mode } set: {
+                if raindrop.isNew {
+                    app.browse(raindrop.link, mode: $0)
+                } else {
+                    app.browse(raindrop.id, mode: $0)
+                }
+            }) {
+                Label("Reader", systemImage: "eyeglasses")
+                    .tag(Browse.Location.Mode.article)
+                
+                if !raindrop.isNew {
+                    Label("Permanent copy", systemImage: "clock.arrow.circlepath")
+                        .tag(Browse.Location.Mode.cache)
+                }
+                
+                Label("Original page", systemImage: "safari")
+                    .tag(Browse.Location.Mode.raw)
+            }
+        }
+    }
+}

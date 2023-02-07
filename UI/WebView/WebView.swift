@@ -4,7 +4,7 @@ import WebKit
 let processPool = WKProcessPool()
 
 public struct WebView {
-    @ObservedObject var page: WebPage
+    @ObservedObject public var page: WebPage
     var request: WebRequest
     var userAgent: String?
     

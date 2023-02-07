@@ -2,7 +2,7 @@ import SwiftUI
 import WebKit
 
 public extension View {
-    func onWebMessage<M: Decodable>(_ page: WebPage, channel: String, receive: @escaping (M) async -> Void) -> some View {
+    func onWebMessage<M: Decodable>(@ObservedObject _ page: WebPage, channel: String, receive: @escaping (M) async -> Void) -> some View {
         modifier(OnWebMessageModifier(page: page, channel: channel, receive: receive))
     }
 }
