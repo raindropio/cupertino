@@ -68,7 +68,7 @@ extension RaindropForm.Fields: View {
             
             //highlights
             NavigationLink {
-                HighlightsList(raindrop: $raindrop)
+                HighlightsList($raindrop)
                     .navigationTitle(Filter.Kind.highlights.title)
             } label: {
                 Label {

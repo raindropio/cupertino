@@ -1,10 +1,14 @@
 import SwiftUI
 import API
 
-struct HighlightsList: View {
+public struct HighlightsList: View {
     @Binding var raindrop: Raindrop
     
-    var body: some View {
+    public init(_ raindrop: Binding<Raindrop>) {
+        self._raindrop = raindrop
+    }
+    
+    public var body: some View {
         List {
             ForEach($raindrop.highlights, editActions: .delete, content: HighlightEditRow.init)
         }

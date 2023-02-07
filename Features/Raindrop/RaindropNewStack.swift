@@ -14,6 +14,7 @@ public struct RaindropNewStack<C: View>: View {
     
     public init(_ url: URL, content: @escaping (Binding<Raindrop>) -> C) {
         self.url = url
+        self.blank = .new(link: url)
         self.content = content
     }
     

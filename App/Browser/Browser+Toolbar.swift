@@ -1,13 +1,19 @@
 import SwiftUI
 import API
 import UI
+import Features
 
 extension Browser {
     struct Toolbar {
         @Environment(\.horizontalSizeClass) private var horizontalSizeClass
         @Environment(\.verticalSizeClass) private var verticalSizeClass
-        @State private var appearance = false
         
+        @State private var appearance = false
+        @State private var collection = false
+        @State private var tags = false
+        @State private var highlights = false
+        @State private var form = false
+
         @ObservedObject var page: WebPage
         @Binding var raindrop: Raindrop
     }
@@ -42,7 +48,7 @@ extension Browser.Toolbar: ViewModifier {
                     Button { appearance.toggle() } label: {
                         Image(systemName: "textformat.size")
                     }
-                        .popover(isPresented: $appearance, content: ReaderAppearance.init)
+                    .popover(isPresented: $appearance, content: ReaderAppearance.init)
                     
                     Spacer()
                 }
@@ -57,9 +63,7 @@ extension Browser.Toolbar: ViewModifier {
             
             //move
             ToolbarItemGroup(placement: placement) {
-                Button {
-                    
-                } label: {
+                Button { collection.toggle() } label: {
                     Image(systemName: "folder")
                 }
                     .disabled(raindrop.isNew)
@@ -68,9 +72,7 @@ extension Browser.Toolbar: ViewModifier {
             
             //add tags
             ToolbarItemGroup(placement: placement) {
-                Button {
-                    
-                } label: {
+                Button { tags.toggle() } label: {
                     Image(systemName: "number")
                 }
                     .disabled(raindrop.isNew)
@@ -79,9 +81,7 @@ extension Browser.Toolbar: ViewModifier {
             
             //highlights
             ToolbarItemGroup(placement: placement) {
-                Button {
-                    
-                } label: {
+                Button { highlights.toggle() } label: {
                     Image(systemName: Filter.Kind.highlights.systemImage)
                         .overlay(alignment: .topTrailing) {
                             if !raindrop.highlights.isEmpty {
@@ -91,6 +91,9 @@ extension Browser.Toolbar: ViewModifier {
                             }
                         }
                 }
+                    .popover(isPresented: $highlights) {
+                        Editor(raindrop: raindrop, content: HighlightsList.init)
+                    }
                     .disabled(raindrop.isNew)
                 Spacer()
             }
@@ -106,12 +109,31 @@ extension Browser.Toolbar: ViewModifier {
             
             //edit/add
             ToolbarItemGroup(placement: placement) {
-                Button {
-                    
-                } label: {
+                Button { form.toggle() } label: {
                     Image(systemName: raindrop.isNew ? "plus.circle" : "ellipsis.circle")
                 }
+                .popover(isPresented: $form) {
+                    Editor(raindrop: raindrop, content: RaindropForm.init)
+                }
             }
+        }
+    }
+}
+
+extension Browser.Toolbar {
+    struct Editor<C: View>: View {
+        var raindrop: Raindrop
+        var content: (Binding<Raindrop>) -> C
+        
+        var body: some View {
+            Group {
+                if raindrop.isNew {
+                    RaindropNewStack(raindrop.link, content: content)
+                } else {
+                    RaindropEditStack(raindrop.id, content: content)
+                }
+            }
+            .frame(idealWidth: 400, idealHeight: 600)
         }
     }
 }
