@@ -2,14 +2,14 @@ import SwiftUI
 import API
 import UI
 
-extension RaindropStack {
+extension RaindropForm {
     struct Fields {
         @Binding var raindrop: Raindrop
         @FocusState var focus: FocusField?
     }
 }
 
-extension RaindropStack.Fields: View {
+extension RaindropForm.Fields: View {
     var body: some View {
         Section {
             HStack(spacing: 16) {
@@ -97,7 +97,7 @@ extension RaindropStack.Fields: View {
     }
 }
 
-extension RaindropStack.Fields {
+extension RaindropForm.Fields {
     enum FocusField {
         case title
         case excerpt

@@ -2,7 +2,7 @@ import SwiftUI
 import API
 import UI
 
-extension RaindropStack {
+extension RaindropForm {
     struct Toolbar {
         @EnvironmentObject private var dispatch: Dispatcher
         @Environment(\.dismiss) private var dismiss
@@ -10,7 +10,7 @@ extension RaindropStack {
     }
 }
 
-extension RaindropStack.Toolbar: ViewModifier {
+extension RaindropForm.Toolbar: ViewModifier {
     func body(content: Content) -> some View {
         content
             .toolbar {

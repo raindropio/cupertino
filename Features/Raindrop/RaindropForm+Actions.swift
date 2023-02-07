@@ -2,7 +2,7 @@ import SwiftUI
 import API
 import UI
 
-extension RaindropStack {
+extension RaindropForm {
     struct Actions: View {
         @EnvironmentObject private var dispatch: Dispatcher
         @Environment(\.dismiss) private var dismiss

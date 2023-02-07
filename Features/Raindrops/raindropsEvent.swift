@@ -32,7 +32,9 @@ fileprivate struct _Modifier: ViewModifier {
         .onReceive(event.addTags) { addTags = $0 }
         .onReceive(event.delete) { delete = $0; deleting = true }
         //sheets/alerts
-        .sheet(item: $edit, content: RaindropStack.ById.init)
+        .sheet(item: $edit) { id in
+            RaindropEditStack(id, content: RaindropForm.init)
+        }
         .sheet(item: $move) { pick in
             NavigationStack {
                 MoveRaindrops(pick: pick)
