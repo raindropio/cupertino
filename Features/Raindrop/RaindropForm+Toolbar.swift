@@ -5,7 +5,6 @@ import UI
 extension RaindropForm {
     struct Toolbar {
         @EnvironmentObject private var dispatch: Dispatcher
-        @Environment(\.dismiss) private var dismiss
         @Binding var raindrop: Raindrop
     }
 }
@@ -21,11 +20,6 @@ extension RaindropForm.Toolbar: ViewModifier {
                             .symbolVariant(raindrop.important ? .fill : .none)
                     }
                         .tint(raindrop.important ? .accentColor : .secondary)
-                }
-                
-                //cancel/done
-                ToolbarItem(placement: raindrop.isNew ? .cancellationAction : .confirmationAction) {
-                    Button(raindrop.isNew ? "Cancel" : "Done", action: dismiss.callAsFunction)
                 }
             }
             .toolbarTitleMenu {

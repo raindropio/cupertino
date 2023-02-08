@@ -13,19 +13,14 @@ extension RaindropForm {
             if raindrop.isNew {
                 SubmitButton("Save")
             } else {
-                ConfirmButton(role: .destructive) {
-                    Button(
-                        raindrop.collection == -99 ? "Delete permanently" : "Move bookmark to Trash",
-                        role: .destructive
-                    ) {
-                        raindrop.collection = -99
-                        dispatch.sync(RaindropsAction.delete(raindrop.id))
-                        dismiss()
-                    }
+                ActionButton(role: .destructive) {
+                    try await dispatch(RaindropsAction.delete(raindrop.id))
+                    dismiss()
                 } label: {
-                    Text("Delete")
+                    Text(raindrop.collection == -99 ? "Delete" : "Move to Trash")
                         .frame(maxWidth: .infinity)
                 }
+                    .tint(.red)
                 
                 Section {} header: {
                     (

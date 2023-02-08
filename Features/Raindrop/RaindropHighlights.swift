@@ -1,7 +1,7 @@
 import SwiftUI
 import API
 
-public struct HighlightsList: View {
+public struct RaindropHighlights: View {
     @Binding var raindrop: Raindrop
     
     public init(_ raindrop: Binding<Raindrop>) {
@@ -10,10 +10,9 @@ public struct HighlightsList: View {
     
     public var body: some View {
         List {
-            ForEach($raindrop.highlights, editActions: .delete, content: HighlightEditRow.init)
+            ForEach($raindrop.highlights, content: HighlightEditRow.init)
         }
-        .toolbar {
-            EditButton()
-        }
+            .navigationTitle(Filter.Kind.highlights.title)
+            .navigationBarTitleDisplayMode(.inline)
     }
 }

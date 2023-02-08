@@ -76,9 +76,6 @@ public actor RaindropsReducer: Reducer {
         case .reorder(let id, let to, let order):
             return reorder(state: &state, id: id, to: to, order: order)
             
-        case .find(let raindrop):
-            try await find(state: &state, raindrop: raindrop)
-            
         case .lookup(let url):
             await lookup(state: &state, url: url)
         }

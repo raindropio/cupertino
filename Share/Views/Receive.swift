@@ -7,7 +7,7 @@ struct Receive: View {
     
     var body: some View {
         if let raindrop: Raindrop = service.decoded() {
-            RaindropNewStack(raindrop, content: RaindropForm.init)
+            RaindropStack(raindrop, content: RaindropForm.init)
         } else {
             AddDetect(service.items) { loading, urls in
                 Group {
@@ -22,7 +22,7 @@ struct Receive: View {
                     }
                     //web url
                     else if let first = urls.first, !first.isFileURL {
-                        RaindropNewStack(first, content: RaindropForm.init)
+                        RaindropStack(first, content: RaindropForm.init)
                     }
                     //files
                     else {

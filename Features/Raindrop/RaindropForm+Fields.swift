@@ -15,7 +15,7 @@ extension RaindropForm.Fields: View {
             HStack(spacing: 16) {
                 ZStack {
                     Thumbnail(
-                        Rest.renderImage(raindrop.cover, options: .maxDeviceSize),
+                        (raindrop.isNew ? raindrop.cover : Rest.renderImage(raindrop.cover, options: .maxDeviceSize)) ?? Rest.renderImage(raindrop.link, options: .maxDeviceSize),
                         width: 56,
                         height: 48
                     )
@@ -59,17 +59,14 @@ extension RaindropForm.Fields: View {
                 }
                 
                 NavigationLink {
-                    TagsList($raindrop.tags)
-                        .navigationTitle("\(raindrop.tags.count) tags")
-                        .navigationBarTitleDisplayMode(.inline)
+                    RaindropTags($raindrop)
                 } label: {}
                     .layoutPriority(-1)
             }
             
             //highlights
             NavigationLink {
-                HighlightsList($raindrop)
-                    .navigationTitle(Filter.Kind.highlights.title)
+                RaindropHighlights($raindrop)
             } label: {
                 Label {
                     Text(Filter.Kind.highlights.title)

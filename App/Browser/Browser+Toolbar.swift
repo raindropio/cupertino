@@ -74,7 +74,17 @@ extension Browser.Toolbar: ViewModifier {
             ToolbarItemGroup(placement: placement) {
                 Button { tags.toggle() } label: {
                     Image(systemName: "number")
+                        .overlay(alignment: .topTrailing) {
+                            if !raindrop.tags.isEmpty {
+                                Text(raindrop.tags.count, format: .number)
+                                    .circularBadge()
+                                    .offset(x: 10, y: -10)
+                            }
+                        }
                 }
+                    .popover(isPresented: $tags) {
+                        Editor(raindrop: raindrop, content: RaindropTags.init)
+                    }
                     .disabled(raindrop.isNew)
                 Spacer()
             }
@@ -92,7 +102,7 @@ extension Browser.Toolbar: ViewModifier {
                         }
                 }
                     .popover(isPresented: $highlights) {
-                        Editor(raindrop: raindrop, content: HighlightsList.init)
+                        Editor(raindrop: raindrop, content: RaindropHighlights.init)
                     }
                     .disabled(raindrop.isNew)
                 Spacer()
@@ -128,9 +138,9 @@ extension Browser.Toolbar {
         var body: some View {
             Group {
                 if raindrop.isNew {
-                    RaindropNewStack(raindrop.link, content: content)
+                    RaindropStack(raindrop.link, content: content)
                 } else {
-                    RaindropEditStack(raindrop.id, content: content)
+                    RaindropStack(raindrop.id, content: content)
                 }
             }
             .frame(idealWidth: 400, idealHeight: 600)
