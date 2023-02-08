@@ -49,6 +49,12 @@ extension Browser.Title: ViewModifier {
                 Label("Original page", systemImage: "safari")
                     .tag(Browse.Location.Mode.raw)
             }
+            
+            if let url = page.url {
+                Link(destination: url) {
+                    Label("Open in browser", systemImage: "arrow.up.forward")
+                }
+            }
         }
     }
 }

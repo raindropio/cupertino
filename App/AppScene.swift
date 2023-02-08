@@ -15,6 +15,7 @@ struct AppScene: View {
                         .navigationDestination(for: UserCollection.self) {
                             Finder(find: .init($0))
                         }
+                        .navigationDestination(for: FindBy.self, destination: Finder.init)
                         .navigationDestination(for: Browse.Location.self, destination: Browse.init)
                 }
             }

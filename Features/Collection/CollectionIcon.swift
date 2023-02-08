@@ -3,6 +3,8 @@ import API
 import UI
 
 struct CollectionIcon<C: CollectionType>: View {
+    @Environment(\.controlSize) private var controlSize
+    
     var cover: URL?
     var systemImage: String
     
@@ -11,7 +13,7 @@ struct CollectionIcon<C: CollectionType>: View {
             #if os(macOS)
             Thumbnail(cover, width: 16, height: 16)
             #else
-            Thumbnail(cover, width: 24, height: 24)
+            Thumbnail(cover, width: controlSize == .small ? 16 : 24, height: controlSize == .small ? 16 : 24)
             #endif
         } else {
             Image(systemName: systemImage)

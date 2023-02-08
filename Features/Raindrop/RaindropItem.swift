@@ -27,6 +27,7 @@ extension RaindropItem: View {
                 }
                 
                 RaindropMeta(raindrop)
+                RaindropLinks(raindrop: raindrop)
             }
         }
             .swipeActions(edge: .leading) {

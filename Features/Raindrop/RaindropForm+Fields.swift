@@ -51,6 +51,7 @@ extension RaindropForm.Fields: View {
                 RaindropCollection($raindrop)
             } label: {
                 CollectionLabel(raindrop.collection, withLocation: true)
+                    .badge(0)
             }
 
             //tags

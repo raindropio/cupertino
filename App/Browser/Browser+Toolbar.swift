@@ -54,10 +54,23 @@ extension Browser.Toolbar: ViewModifier {
                 }
             }
             
-            //share
+            //highlights
             ToolbarItemGroup {
-                ShareLink(item: page.url ?? .init(string: "about:blank")!)
-                    .disabled(page.url == nil)
+                Button { highlights.toggle() } label: {
+                    Image(systemName: Filter.Kind.highlights.systemImage)
+                        .overlay(alignment: .topTrailing) {
+                            if !raindrop.highlights.isEmpty {
+                                Text(raindrop.highlights.count, format: .number)
+                                    .circularBadge()
+                                    .offset(x: 11, y: -11)
+                            }
+                        }
+                }
+                    .popover(isPresented: $highlights) {
+                        RaindropStack($raindrop, content: RaindropHighlights.init)
+                            .frame(idealWidth: 400, idealHeight: 600)
+                    }
+                    .disabled(raindrop.isNew)
                 Spacer()
             }
             
@@ -82,7 +95,7 @@ extension Browser.Toolbar: ViewModifier {
                             if !raindrop.tags.isEmpty {
                                 Text(raindrop.tags.count, format: .number)
                                     .circularBadge()
-                                    .offset(x: 10, y: -10)
+                                    .offset(x: 11, y: -11)
                             }
                         }
                 }
@@ -94,44 +107,33 @@ extension Browser.Toolbar: ViewModifier {
                 Spacer()
             }
             
-            //highlights
+            //edit/add
             ToolbarItemGroup(placement: placement) {
-                Button { highlights.toggle() } label: {
-                    Image(systemName: Filter.Kind.highlights.systemImage)
-                        .overlay(alignment: .topTrailing) {
-                            if !raindrop.highlights.isEmpty {
-                                Text(raindrop.highlights.count, format: .number)
-                                    .circularBadge()
-                                    .offset(x: 10, y: -10)
-                            }
-                        }
+                Button { form.toggle() } label: {
+                    Image(systemName: raindrop.isNew ? "plus.circle" : "info.circle")
                 }
-                    .popover(isPresented: $highlights) {
-                        RaindropStack($raindrop, content: RaindropHighlights.init)
+                    .popover(isPresented: $form) {
+                        RaindropStack($raindrop, content: RaindropForm.init)
                             .frame(idealWidth: 400, idealHeight: 600)
                     }
-                    .disabled(raindrop.isNew)
                 Spacer()
             }
             
-            //safari
+            //share
             ToolbarItemGroup(placement: placement) {
-                Link(destination: page.url ?? .init(string: "about:blank")!) {
-                    Image(systemName: "safari")
-                }
+                ShareLink(item: page.url ?? .init(string: "about:blank")!)
                     .disabled(page.url == nil)
                 Spacer()
             }
             
-            //edit/add
+            //delete
             ToolbarItemGroup(placement: placement) {
-                Button { form.toggle() } label: {
-                    Image(systemName: raindrop.isNew ? "plus.circle" : "ellipsis.circle")
+                ConfirmButton {
+                    
+                } label: {
+                    Image(systemName: "trash")
                 }
-                .popover(isPresented: $form) {
-                    RaindropStack($raindrop, content: RaindropForm.init)
-                        .frame(idealWidth: 400, idealHeight: 600)
-                }
+                    .disabled(raindrop.isNew)
             }
         }
     }

@@ -33,8 +33,11 @@ struct Finder: View {
                     app.browse(id, mode: .cache)
                     break
                     
-                case .find(let find):
-                    app.find = find
+                case .collection(let id):
+                    app.find = .init(id)
+                    
+                case .filter(let filter):
+                    app.path.append(find + .init(filters: [filter]))
                 }
             }
             .scopeEditMode()

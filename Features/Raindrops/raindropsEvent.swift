@@ -87,5 +87,6 @@ public enum RaindropsEventPressed {
     case open(Raindrop.ID)
     case preview(Raindrop.ID)
     case cache(Raindrop.ID)
-    case find(FindBy)
+    case collection(Int)
+    case filter(Filter)
 }

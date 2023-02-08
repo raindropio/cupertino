@@ -51,17 +51,6 @@ fileprivate struct FabStyleModifier: ViewModifier {
 }
 
 public struct FabButtonStyle: ButtonStyle {
-    @Environment(\.controlSize) private var controlSize
-    
-    var size: Double {
-        switch controlSize {
-        case .large: return 8
-        case .regular: return 0
-        case .mini, .small: return -4
-        @unknown default: return 0
-        }
-    }
-    
     public func makeBody(configuration: Configuration) -> some View {
         configuration.label
             .modifier(FabStyleModifier(isPressed: configuration.isPressed))
