@@ -17,7 +17,7 @@ public struct UserCollectionItem: View {
     }
     
     public var body: some View {
-        UserCollectionLabel(collection, withLocation: withLocation)
+        CollectionLabel(collection, withLocation: withLocation)
             .dropConsumer(to: collection)
             .swipeActions(edge: .trailing) {
                 Button {

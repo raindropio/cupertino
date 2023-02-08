@@ -47,7 +47,11 @@ extension RaindropForm.Fields: View {
         }
 
         Section {
-            CollectionsPicker($raindrop.collection, system: [-1, -99])
+            NavigationLink {
+                RaindropCollection($raindrop)
+            } label: {
+                CollectionLabel(raindrop.collection, withLocation: true)
+            }
 
             //tags
             HStack {

@@ -26,12 +26,8 @@ fileprivate struct _Label: View {
     var selection: Int?
     
     var body: some View {
-        if let selection, let collection = c.state.user[selection] {
-            UserCollectionLabel(collection, withLocation: true)
-                .badge(0)
-        } else if let selection, let collection = c.state.system[selection] {
-            SystemCollectionLabel(collection)
-                .badge(0)
+        if let selection {
+            CollectionLabel(selection, withLocation: true)
         } else {
             Text("None")
                 .foregroundStyle(.secondary)

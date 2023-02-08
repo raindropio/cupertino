@@ -66,6 +66,10 @@ extension Browser.Toolbar: ViewModifier {
                 Button { collection.toggle() } label: {
                     Image(systemName: "folder")
                 }
+                    .popover(isPresented: $collection) {
+                        RaindropStack($raindrop, content: RaindropCollection.init)
+                            .frame(idealWidth: 400, idealHeight: 600)
+                    }
                     .disabled(raindrop.isNew)
                 Spacer()
             }
@@ -83,7 +87,8 @@ extension Browser.Toolbar: ViewModifier {
                         }
                 }
                     .popover(isPresented: $tags) {
-                        Editor(raindrop: raindrop, content: RaindropTags.init)
+                        RaindropStack($raindrop, content: RaindropTags.init)
+                            .frame(idealWidth: 400, idealHeight: 600)
                     }
                     .disabled(raindrop.isNew)
                 Spacer()
@@ -102,7 +107,8 @@ extension Browser.Toolbar: ViewModifier {
                         }
                 }
                     .popover(isPresented: $highlights) {
-                        Editor(raindrop: raindrop, content: RaindropHighlights.init)
+                        RaindropStack($raindrop, content: RaindropHighlights.init)
+                            .frame(idealWidth: 400, idealHeight: 600)
                     }
                     .disabled(raindrop.isNew)
                 Spacer()
@@ -123,27 +129,10 @@ extension Browser.Toolbar: ViewModifier {
                     Image(systemName: raindrop.isNew ? "plus.circle" : "ellipsis.circle")
                 }
                 .popover(isPresented: $form) {
-                    Editor(raindrop: raindrop, content: RaindropForm.init)
+                    RaindropStack($raindrop, content: RaindropForm.init)
+                        .frame(idealWidth: 400, idealHeight: 600)
                 }
             }
-        }
-    }
-}
-
-extension Browser.Toolbar {
-    struct Editor<C: View>: View {
-        var raindrop: Raindrop
-        var content: (Binding<Raindrop>) -> C
-        
-        var body: some View {
-            Group {
-                if raindrop.isNew {
-                    RaindropStack(raindrop.link, content: content)
-                } else {
-                    RaindropStack(raindrop.id, content: content)
-                }
-            }
-            .frame(idealWidth: 400, idealHeight: 600)
         }
     }
 }

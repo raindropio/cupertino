@@ -24,7 +24,7 @@ extension Nesteds {
         
         func item(_ collection: UserCollection) -> some View {
             NavigationLink(value: collection) {
-                UserCollectionLabel(collection)
+                CollectionLabel(collection)
             }
                 .dropConsumer(to: collection)
         }

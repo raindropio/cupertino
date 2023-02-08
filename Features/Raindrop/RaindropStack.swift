@@ -13,6 +13,10 @@ public func RaindropStack<C: View>(_ raindrop: Raindrop, content: @escaping (Bin
     ByURL(raindrop: raindrop, content: content)
 }
 
+public func RaindropStack<C: View>(_ raindrop: Binding<Raindrop>, content: @escaping (Binding<Raindrop>) -> C) -> some View {
+    Stack(draft: raindrop, content: content)
+}
+
 //MARK: - Existing
 fileprivate struct ById<C: View>: View {
     @Environment(\.dismiss) private var dismiss
@@ -27,17 +31,25 @@ fileprivate struct ById<C: View>: View {
         r.state.item(id)
     }
     
+    private func changed() {
+        if let stored {
+            draft = stored
+        } else {
+            draft = .new()
+            dismiss()
+        }
+    }
+    
     var body: some View {
-        Stack(draft: $draft, content: content)
-            .redacted(reason: draft.isNew ? .placeholder : [])
-            .task(id: stored) {
-                if let stored {
-                    draft = stored
-                } else {
-                    draft = .new()
-                    dismiss()
-                }
+        Group {
+            if draft.isNew {
+                Text("")
+            } else {
+                Stack(draft: $draft, content: content)
             }
+        }
+            .onAppear(perform: changed)
+            .task(id: stored) { changed() }
     }
 }
 
@@ -53,13 +65,13 @@ fileprivate struct ByURL<C: View>: View {
     var url: URL
     var content: (Binding<Raindrop>) -> C
     
-    public init(url: URL, content: @escaping (Binding<Raindrop>) -> C) {
+    init(url: URL, content: @escaping (Binding<Raindrop>) -> C) {
         self.url = url
         self.blank = .new(link: url)
         self.content = content
     }
     
-    public init(raindrop: Raindrop, content: @escaping (Binding<Raindrop>) -> C) {
+    init(raindrop: Raindrop, content: @escaping (Binding<Raindrop>) -> C) {
         self.url = raindrop.link
         self.blank = raindrop
         self._draft = .init(initialValue: blank)
@@ -75,21 +87,12 @@ fileprivate struct ByURL<C: View>: View {
     @Sendable private func lookup() async {
         defer { loading = false }
         loading = true
-        
-        let rest = Rest()
-        
-        //lookup for url and load meta at the same time
-        async let fMeta = rest.importUrlParse(url)
-        async let fLookup: () = dispatch(RaindropsAction.lookup(url))
-        let result = try? await (fMeta, fLookup)
-        
-        if draft.isNew, let meta = result?.0 {
-            draft = meta
-        }
+        try? await dispatch(RaindropsAction.lookup(url))
     }
     
     var body: some View {
         Stack(draft: $draft, loading: loading, content: content)
+            .onAppear { draft = stored }
             .task(id: stored) { draft = stored }
             .task(id: url, lookup)
     }
@@ -103,6 +106,17 @@ fileprivate struct Stack<C: View>: View {
     @Binding var draft: Raindrop
     var loading = false
     var content: (Binding<Raindrop>) -> C
+    
+    //load meta for new
+    @Sendable
+    private func getMeta() async {
+        guard draft.isNew else { return }
+        let rest = Rest()
+        let meta = try? await rest.importUrlParse(draft.link)
+        if let meta, draft.isNew {
+            draft.enrich(from: meta)
+        }
+    }
     
     //auto-save for existing bookmarks
     private func saveOnClose() {
@@ -118,12 +132,13 @@ fileprivate struct Stack<C: View>: View {
                 .opacity(loading ? 0.7 : 1)
                 .animation(.default, value: [loading, draft.isNew])
                 .toolbar {
-                    ToolbarItem(placement: .confirmationAction) {
+                    ToolbarItem(placement: draft.isNew ? .cancellationAction : .confirmationAction) {
                         Button(draft.isNew ? "Cancel" : "Done", action: dismiss.callAsFunction)
                     }
                 }
         }
             .interactiveDismissDisabled(draft.isNew)
+            .task(id: draft.isNew, getMeta)
             .onDisappear(perform: saveOnClose)
     }
 }

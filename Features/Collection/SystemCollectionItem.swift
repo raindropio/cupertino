@@ -9,7 +9,7 @@ struct SystemCollectionItem: View {
     }
     
     var body: some View {
-        SystemCollectionLabel(collection)
+        CollectionLabel(collection)
             .dropConsumer(to: collection.id)
     }
 }
