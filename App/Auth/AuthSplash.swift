@@ -6,32 +6,30 @@ struct AuthSplash: View {
     var body: some View {
         TabView {
             Slide(
-                title: "Save Webpages, Files & Highlights",
+                title: "Save Web Pages, Books & Highlights",
                 colors: [.blue, .indigo]
             ) {
                 Image(systemName: "star.square")
             } description: {
-                Text("Even if a page you've saved is taken down, you'll still have a ") +
-                    Text(Image(systemName: "lock")) +
-                    Text(" copy of it")
+                Text("Keep your favorite things in one place")
             }
             
             Slide(
-                title: "Organize with Collections, Filters & Tags",
+                title: "Organize with Collections & Tags",
                 colors: [.pink, .orange]
             ) {
-                Image(systemName: "folder")
+                Image(systemName: "tray.full")
             } description: {
                 Text("Group related items within the same context. Remove duplicate & broken links.")
             }
             
             Slide(
-                title: "Search by Page Content",
+                title: "Search by Content",
                 colors: [.blue, .green]
             ) {
                 Image(systemName: "sparkle.magnifyingglass")
             } description: {
-                Text("Search through the entire content of a pages and PDF’s you’ve saved.")
+                Text("Search through the entire content of a pages you’ve saved.")
             }
             
             Slide(
@@ -40,7 +38,7 @@ struct AuthSplash: View {
             ) {
                 Image(systemName: "square.and.arrow.down")
             } description: {
-                Text("Transfer existing bookmarks and automatically save favorite YouTube videos or send items to your Google Sheets")
+                Text("Transfer existing bookmarks & automatically sync favorites from 1000+ websites")
             }
             
             Slide(

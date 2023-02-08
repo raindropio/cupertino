@@ -33,11 +33,13 @@ struct AuthScene: View {
                     .scenePadding(.horizontal)
                     .frame(maxWidth: 500)
                 
-                Text("We keep your [data safe](https://help.raindrop.io/about#privacy), never sold.\nNo limits. [Starting from $0](https://raindrop.io/pro/buy).")
+                Text("We keep your [data safe](https://help.raindrop.io/about#privacy), never sold. No\u{00a0}limits. [Starting from $0](https://raindrop.io/pro/buy).")
                     .foregroundStyle(.secondary)
                     .font(.callout)
                     .multilineTextAlignment(.center)
                     .scenePadding(.bottom)
+                    .scenePadding(.horizontal)
+                    .scenePadding(.horizontal)
             }
                 .background(Color.groupedBackground)
                 .toolbar {
