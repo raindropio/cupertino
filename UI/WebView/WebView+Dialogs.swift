@@ -18,7 +18,7 @@ extension WebView {
             } message: { alert in
                 Text(alert.message)
             }
-            
+
             //confirm
             .confirmationDialog(
                 "",
@@ -30,7 +30,7 @@ extension WebView {
             } message: { confirm in
                 Text(confirm.message)
             }
-            
+
             //prompt
             .alert(
                 "",
@@ -38,12 +38,12 @@ extension WebView {
                 presenting: page.prompt
             ) { prompt in
                 TextField(prompt.message, text: $promptText)
-                    .onAppear { promptText = prompt.defaultValue ?? "" }
                 Button("OK") { prompt.callback(promptText) }
                 Button("Cancel", role: .cancel) { prompt.callback(nil) }
             } message: { prompt in
                 Text(prompt.message)
             }
+            .onChange(of: page.prompt?.defaultValue) { promptText = $0 ?? "" }
         }
     }
 }

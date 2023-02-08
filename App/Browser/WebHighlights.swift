@@ -6,6 +6,7 @@ struct WebHighlights {
     @EnvironmentObject private var dispatch: Dispatcher
     @Environment(\.sendWebMessage) private var _send
     private static let channel = "rdh"
+    private static let highlightsJs = Bundle.main.url(forResource: "highlights", withExtension: "js")!
     
     @ObservedObject var page: WebPage
     @Binding var raindrop: Raindrop
@@ -75,6 +76,7 @@ struct WebHighlights {
 extension WebHighlights: ViewModifier {
     func body(content: Content) -> some View {
         content
+            .injectJavaScript(page, file: Self.highlightsJs)
             .onWebMessage(page, channel: Self.channel, receive: onMessageFromPage)
             .task(id: page.progress, reload)
             .task(id: raindrop.highlights, reload)

@@ -47,6 +47,7 @@
 		76B6737E29928308007A412A /* Browse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76B6737D29928308007A412A /* Browse.swift */; };
 		76B6738029928AB1007A412A /* Browser+Toolbar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76B6737F29928AB1007A412A /* Browser+Toolbar.swift */; };
 		76B6738229928FE6007A412A /* ReaderAppearance.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76B6738129928FE6007A412A /* ReaderAppearance.swift */; };
+		76B673862993A52A007A412A /* highlights.js in Resources */ = {isa = PBXBuildFile; fileRef = 76B673852993A52A007A412A /* highlights.js */; };
 		76BFE36E291E9F6B00DE9DB2 /* AppScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76BFE369291E9F6B00DE9DB2 /* AppScene.swift */; };
 		76BFE36F291E9F6B00DE9DB2 /* AppRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76BFE36A291E9F6B00DE9DB2 /* AppRouter.swift */; };
 		76BFE370291E9F6B00DE9DB2 /* SettingsRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76BFE36B291E9F6B00DE9DB2 /* SettingsRouter.swift */; };
@@ -134,6 +135,7 @@
 		76B6737D29928308007A412A /* Browse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Browse.swift; sourceTree = "<group>"; };
 		76B6737F29928AB1007A412A /* Browser+Toolbar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Browser+Toolbar.swift"; sourceTree = "<group>"; };
 		76B6738129928FE6007A412A /* ReaderAppearance.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReaderAppearance.swift; sourceTree = "<group>"; };
+		76B673852993A52A007A412A /* highlights.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = highlights.js; sourceTree = "<group>"; };
 		76BFE369291E9F6B00DE9DB2 /* AppScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppScene.swift; sourceTree = "<group>"; };
 		76BFE36A291E9F6B00DE9DB2 /* AppRouter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppRouter.swift; sourceTree = "<group>"; };
 		76BFE36B291E9F6B00DE9DB2 /* SettingsRouter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsRouter.swift; sourceTree = "<group>"; };
@@ -191,6 +193,7 @@
 				76ECFDFD2947848500DF15C9 /* Browser+PageError.swift */,
 				76ECFDFF2948793B00DF15C9 /* Browser+CacheError.swift */,
 				76B6738129928FE6007A412A /* ReaderAppearance.swift */,
+				76B673852993A52A007A412A /* highlights.js */,
 				76ECFE0B294B1B5700DF15C9 /* WebHighlights.swift */,
 				76ECFE0A294B1B5700DF15C9 /* WebHighlights+Action.swift */,
 				76ECFE09294B1B5700DF15C9 /* WebHighlights+Event.swift */,
@@ -454,6 +457,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				7685A199286868AD00A4BC3C /* Assets.xcassets in Resources */,
+				76B673862993A52A007A412A /* highlights.js in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

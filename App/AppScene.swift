@@ -36,6 +36,7 @@ struct AppScene: View {
                             
                         case .raindrop(let raindrop):
                             router.browse(raindrop.id)
+                            router.spotlight = false
                             
                         case .find(let find):
                             router.find = find

@@ -1,9 +1,11 @@
 import SwiftUI
 import API
 
+fileprivate var previous: FindBy?
+
 public struct Spotlight {
     @EnvironmentObject private var dispatch: Dispatcher
-    @State private var find: FindBy = .init()
+    @State private var find: FindBy = previous ?? .init()
     @State private var focused = true
     
     public init() {}
@@ -42,7 +44,9 @@ extension Spotlight: View {
             //search
             .modifier(Cancel(focused: $focused))
             .modifier(SearchBar(find: $find, focused: $focused))
-            .task(id: find, priority: .background, debounce: 0.5) {                
+            .task(id: find, priority: .background, debounce: 0.5) {         
+                previous = find
+                       
                 try? await dispatch(
                     [
                         FiltersAction.reload(find),
