@@ -80,8 +80,10 @@ extension Finder.Toolbar {
                 }
                 
                 ToolbarItem(placement: .status) {
-                    if editMode?.wrappedValue == .active, !selection.isEmpty {
-                        Text("\(pick.title) selected")
+                    if editMode?.wrappedValue == .active {
+                        Text("\(selection.count) selected")
+                            .lineLimit(1)
+                            .layoutPriority(-1)
                     }
                 }
                 

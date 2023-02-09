@@ -22,7 +22,7 @@ struct MoveRaindrops: View {
     var body: some View {
         CollectionsList($to, system: [-1, -99])
             .collectionsEvent()
-            .navigationTitle("Select collection")
+            .navigationTitle("Move to collection")
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {
                 ToolbarItem(placement: .bottomBar) {

@@ -14,7 +14,7 @@ public struct RaindropCollection: View {
     public var body: some View {
         CollectionsList($raindrop.collection, system: [-1, -99])
             .collectionsEvent()
-            .navigationTitle("Select collection")
+            .navigationTitle("Collection")
             .navigationBarTitleDisplayMode(.inline)
             .onChange(of: raindrop.collection) { _ in
                 guard isEnabled else { return }

@@ -5,7 +5,8 @@ import UI
 struct RaindropLinks: View {
     @EnvironmentObject private var event: RaindropsEvent
     @Environment(\.raindropsContainer) private var container
-    
+    @Environment(\.editMode) private var editMode
+
     var raindrop: Raindrop
     
     var kinds: [Filter.Kind] {
@@ -66,6 +67,7 @@ struct RaindropLinks: View {
                 .controlSize(.small)
                 .imageScale(.small)
                 .padding(.vertical, 4)
+                .disabled(editMode?.wrappedValue == .active)
         }
     }
 }

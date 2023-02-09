@@ -7,7 +7,9 @@ extension Browser {
     struct Toolbar {
         @Environment(\.horizontalSizeClass) private var horizontalSizeClass
         @Environment(\.verticalSizeClass) private var verticalSizeClass
-        
+        @EnvironmentObject private var dispatch: Dispatcher
+        @Environment(\.dismiss) private var dismiss
+
         @State private var appearance = false
         @State private var collection = false
         @State private var tags = false
@@ -124,8 +126,9 @@ extension Browser.Toolbar: ViewModifier {
             
             //delete
             ToolbarItemGroup(placement: placement) {
-                ConfirmButton {
-                    
+                ActionButton {
+                    try await dispatch(RaindropsAction.delete(raindrop.id))
+                    dismiss()
                 } label: {
                     Image(systemName: "trash")
                 }

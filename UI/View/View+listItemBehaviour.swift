@@ -25,8 +25,8 @@ extension ItemBehaviour {
         isPressing || isSelected
     }
     
-    private var background: Optional<Color> {
-        isHighlighted ? .accentColor : nil
+    private var background: AnyShapeStyle {
+        isHighlighted ? AnyShapeStyle(.selection) : AnyShapeStyle(Color.clear)
     }
     
     private var foreground: Optional<Color> {
@@ -74,7 +74,6 @@ extension ItemBehaviour: ViewModifier {
             .opacity(isSelected ? 0.8 : 1)
             .background(background)
             .foregroundColor(foreground)
-            .listRowBackground(background)
-            .environment(\.colorScheme, isHighlighted ? .dark : colorScheme)
+//            .environment(\.colorScheme, isHighlighted ? .dark : colorScheme)
     }
 }

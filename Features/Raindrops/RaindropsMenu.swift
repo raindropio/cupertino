@@ -1,5 +1,6 @@
 import SwiftUI
 import API
+import UI
 
 public func RaindropsMenu(_ pick: RaindropsPick = .some([])) -> some View {
     _Menu(pick: pick)
@@ -57,6 +58,9 @@ fileprivate struct _Menu: View {
                     }
                 }
             }
+            
+            //copy
+            CopyButton(items: items.map { $0.link })
 
             //share
             ShareLink(items: items.map { $0.link })
