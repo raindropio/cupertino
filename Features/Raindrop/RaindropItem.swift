@@ -21,13 +21,14 @@ extension RaindropItem: View {
             VStack(alignment: .leading, spacing: 4) {
                 RaindropTitleExcerpt(raindrop)
                     .lineLimit(3)
+                
+                RaindropLinks(raindrop: raindrop)
                                 
-                if container?.view == .grid || container?.view == .masonry {
+                if container?.view == .grid {
                     Spacer(minLength: 0)
                 }
                 
                 RaindropMeta(raindrop)
-                RaindropLinks(raindrop: raindrop)
             }
         }
             .swipeActions(edge: .leading) {

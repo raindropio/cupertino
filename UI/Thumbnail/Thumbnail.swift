@@ -108,7 +108,7 @@ extension Thumbnail: View {
             base
                 .onSuccess(saveAspectRatio)
                 .aspectRatio(
-                    url != nil ? Self.cacheAspect[url!] : 2,
+                    url != nil ? Self.cacheAspect[url!] : 0.75,
                     contentMode: .fit
                 )
                 .frame(height: height)
@@ -119,30 +119,41 @@ extension Thumbnail: View {
 
 
 struct Thumbnail_Previews: PreviewProvider {
-    static var url = URL(string: "https://p.calameoassets.com/210330110351-e4b885552abc85081417723d5999e906/p1.jpg")
+    struct P: View {
+        @State private var selection: Set<URL> = .init()
+
+        var items = [
+            Item(id: URL(string: "https://rdl.ink/render/https%3A%2F%2Fpublic-files.gumroad.com%2Fvariants%2Fd4aj5t65fudxb6na9slqtnmldtb8%2Fbaaca0eb0e33dc4f9d45910b8c86623f0144cea0fe0c2093c546d17d535752eb?width=1000&height=1000&dpr=3")!),
+            Item(id: URL(string: "https://rdl.ink/render/https%3A%2F%2Fd2pas86kykpvmq.cloudfront.net%2Ftwitter%2Fabstract.png?width=1000&height=1000&dpr=3")!),
+            Item(id: URL(string: "https://rdl.ink/render/https%3A%2F%2Fuploads-ssl.webflow.com%2F60bf6532b298ace2d2bb8a9d%2F629739f69a2044612aa77212_OG%2520image%2520(1200-630).jpg?width=1000&height=1000&dpr=3")!),
+            Item(id: URL(string: "https://rdl.ink/render/https%3A%2F%2Ffffuel.co%2Fimages%2Fcover.png?width=1000&height=1000&dpr=3")!),
+            Item(id: URL(string: "https://rdl.ink/render/https%3A%2F%2Fup.raindrop.io%2Fraindrop%2Ffiles%2F126%2F906%2F55%2F12690655.jpg?width=1000&height=1000&dpr=3")!)
+        ]
+        
+        struct Item: Identifiable {
+            var id: URL
+        }
+        
+        var body: some View {
+            LazyStack(.grid(250, true), selection: $selection) { _ in
+                
+            } content: {
+                DataSource(items) { item in
+                    VStack(alignment: .leading, spacing: 0) {
+                        Thumbnail(item.id, width: 250)
+                        VStack(alignment: .leading, spacing: 4) {
+                            Text(item.id.absoluteString)
+                            Text(item.id.absoluteString)
+//                            Spacer(minLength: 0)
+                            Text("Footer")
+                        }
+                    }
+                } loadMore: {}
+            }
+        }
+    }
     
     static var previews: some View {
-        HStack {
-            Thumbnail(url, width: 80, height: 60)
-            
-            Thumbnail(url, width: 24, height: 24)
-            
-            VStack {
-                Thumbnail(url, width: 250, aspectRatio: 16/9)
-                Text("Title")
-                Text("Subtitle").foregroundStyle(.secondary)
-            }
-                .frame(width: 300)
-                .background(.secondary)
-            
-            VStack {
-                Thumbnail(url, width: 250)
-                Text("Title")
-                Text("Subtitle").foregroundStyle(.secondary)
-            }
-                .frame(width: 300)
-                .background(.secondary)
-        }
-            .environment(\.colorScheme, .dark)
+        P()
     }
 }

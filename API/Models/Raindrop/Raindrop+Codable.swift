@@ -6,6 +6,7 @@ extension Raindrop: Codable, EncodableWithConfiguration {
         case title
         case excerpt
         case link
+        case domain
         case collection
         case cover
         case media
@@ -37,6 +38,7 @@ extension Raindrop: Codable, EncodableWithConfiguration {
         title = try container.decode(Swift.type(of: title), forKey: .title)
         excerpt = (try? container.decode(Swift.type(of: excerpt), forKey: .excerpt)) ?? ""
         link = (try? container.decode(Swift.type(of: link), forKey: .link)) ?? URL(string: "http://incorrect.url")!
+        domain = (try? container.decode(Swift.type(of: domain), forKey: .domain)) ?? ""
         cover = try? container.decode(Swift.type(of: cover), forKey: .cover)
         media = (try? container.decode(Swift.type(of: media), forKey: .media)) ?? []
         type = (try? container.decode(Swift.type(of: type), forKey: .type)) ?? .link
@@ -74,6 +76,7 @@ extension Raindrop: Codable, EncodableWithConfiguration {
             try container.encode(duplicate, forKey: .duplicate)
             try container.encode(file, forKey: .file)
             try container.encode(cache, forKey: .cache)
+            try container.encode(domain, forKey: .domain)
         }
         
         //all or new

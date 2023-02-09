@@ -3,6 +3,7 @@ import Foundation
 public struct Raindrop: Identifiable, Hashable {
     public var id: Int
     public var link: URL
+    public var domain: String = ""
     public var title: String
     public var excerpt = ""
     public var collection: Int = -1

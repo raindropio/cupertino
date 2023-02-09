@@ -85,7 +85,7 @@ extension WebPage {
     public var title: String? { view?.title }
     public var rendered: Bool {
         //TODO: better logic (for next page navigation)
-        canGoBack || canGoForward || progress >= 0.5
+        canGoBack || canGoForward || progress >= 0.4
     }
     public var colorScheme: ColorScheme {
         view?.underPageBackgroundColor.isLight == true ? .light : .dark

@@ -15,26 +15,25 @@ public extension MenuStyle where Self == ChipMenuButtonStyle {
 
 fileprivate struct ChipStyleModifier: ViewModifier {
     @Environment(\.controlSize) private var controlSize
-    
+    private static let height: [ControlSize: CGFloat]   = [.large: 50,    .regular: 40,   .small: 28, .mini: 28]
+    private static let padding: [ControlSize: CGFloat]  = [.large: 16,   .regular: 14,   .small: 10, .mini: 10]
+    private static let corner: [ControlSize: CGFloat]   = [.large: 8,     .regular: 6,    .small: 14, .mini: 14]
+
     var isPressed = false
-    
-    private var size: Double {
-        switch controlSize {
-        case .large: return 8
-        case .regular: return 0
-        case .mini, .small: return -4
-        @unknown default: return 0
-        }
-    }
     
     func body(content: Content) -> some View {
         content
             .font(controlSize == .small ? .callout : .body)
+            .lineLimit(1)
             .labelStyle(ChipLabelStyle())
-            .padding(.horizontal, 14 + size)
-            .padding(.vertical, 8 + size)
+            .padding(.horizontal, Self.padding[controlSize])
+            .frame(height: Self.height[controlSize])
             .fixedSize()
-            .background(.tint.opacity(0.2), in: Capsule())
+            .background(
+                .tint.opacity(isPressed ? 0.4 : 0.2),
+                in: RoundedRectangle(cornerRadius: Self.corner[controlSize] ?? Self.corner[.small]!, style: .continuous)
+            )
+            .contentShape(Rectangle())
     }
 }
 
@@ -43,7 +42,6 @@ fileprivate struct ChipLabelStyle: LabelStyle {
         HStack {
             configuration.icon
                 .foregroundStyle(.tint)
-            
             configuration.title
         }
     }

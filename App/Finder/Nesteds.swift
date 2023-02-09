@@ -36,9 +36,10 @@ extension Nesteds {
                         ForEach(items, content: item)
                     }
                         .scenePadding(.horizontal)
-                        .frame(height: 38)
+                        .frame(height: 44)
                 }
-                    .buttonStyle(.bordered)
+                    .tint(.secondary)
+                    .buttonStyle(.chip)
                     .foregroundStyle(.primary)
                     .padding(.vertical, 8)
                     .clearSection()

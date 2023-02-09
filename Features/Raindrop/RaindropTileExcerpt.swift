@@ -12,9 +12,12 @@ public struct RaindropTitleExcerpt: View {
     public var body: some View {
         Text(raindrop.title)
             .fontWeight(.semibold)
+            .fixedSize(horizontal: false, vertical: true)
         
         if !raindrop.excerpt.isEmpty {
             Text(raindrop.excerpt)
+                .font(.callout)
+                .fixedSize(horizontal: false, vertical: true)
         }
     }
 }

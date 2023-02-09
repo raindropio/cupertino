@@ -85,13 +85,24 @@ extension RaindropForm.Fields: View {
         }
             .listItemTint(.monochrome)
         
-        if raindrop.file == nil {
-            Section {
-                URLField("URL", value: $raindrop.link)
-                    .focused($focus, equals: .link)
-                    .font(.subheadline)
-                    .foregroundStyle(focus == .link ? .primary : .secondary)
-                    .multilineTextAlignment(.center)
+        Section {
+            Label {
+                if raindrop.file == nil {
+                    URLField("URL", value: $raindrop.link)
+                        .focused($focus, equals: .link)
+                        .font(.subheadline)
+                        .foregroundStyle(focus == .link ? .primary : .secondary)
+                        .multilineTextAlignment(.center)
+                } else {
+                    Text("File").foregroundStyle(.tertiary)
+                }
+            } icon: {
+                Button { raindrop.important.toggle() } label: {
+                    Image(systemName: "heart")
+                        .symbolVariant(raindrop.important ? .fill : .none)
+                }
+                    .tint(raindrop.important ? .accentColor : .secondary)
+                    .fixedSize()
             }
         }
     }

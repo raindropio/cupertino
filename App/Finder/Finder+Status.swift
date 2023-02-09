@@ -38,7 +38,6 @@ extension Finder.Status {
                 }
                 .pickerStyle(.menu)
                 .imageScale(.large)
-                .tint(.secondary)
                 .labelsHidden()
                 .lineLimit(1)
                 .scenePadding(.leading)

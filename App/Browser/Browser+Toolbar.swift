@@ -49,8 +49,6 @@ extension Browser.Toolbar: ViewModifier {
                         Image(systemName: "textformat.size")
                     }
                     .popover(isPresented: $appearance, content: ReaderAppearance.init)
-                    
-                    Spacer()
                 }
             }
             
@@ -70,7 +68,6 @@ extension Browser.Toolbar: ViewModifier {
                         RaindropStack($raindrop, content: RaindropHighlights.init)
                             .frame(idealWidth: 400, idealHeight: 600)
                     }
-                Spacer()
             }
             
             //move

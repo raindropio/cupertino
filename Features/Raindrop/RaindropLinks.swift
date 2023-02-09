@@ -22,8 +22,14 @@ struct RaindropLinks: View {
     }
 
     var body: some View {
-        if raindrop.collection != container?.collectionId || !kinds.isEmpty {
+        if (
+            raindrop.collection != container?.collectionId ||
+            raindrop.important ||
+            !raindrop.highlights.isEmpty ||
+            !raindrop.tags.isEmpty
+        ) {
             WStack(spacingX: 6, spacingY: 6) {
+                //collection
                 if raindrop.collection != container?.collectionId {
                     Button { press(raindrop.collection) } label: {
                         CollectionLabel(raindrop.collection).badge(0)
@@ -31,17 +37,35 @@ struct RaindropLinks: View {
                         .tint(.secondary)
                 }
                 
-                ForEach(kinds, id: \.title) { kind in
-                    Button { press(kind) } label: {
-                        FilterRow(.init(kind))
+                //important
+                if raindrop.important {
+                    Button { press(.important) } label: {
+                        Image(systemName: Filter.Kind.important.systemImage)
+                            .symbolVariant(.fill)
+                            .foregroundStyle(.tint)
                     }
-                        .tint(kind.color)
+                        .tint(Filter.Kind.important.color)
                 }
+                
+                //highlights
+                if !raindrop.highlights.isEmpty {
+                    Button { press(.highlights) } label: {
+                        Label("\(raindrop.highlights.count)", systemImage: Filter.Kind.highlights.systemImage)
+                    }
+                        .tint(Filter.Kind.highlights.color)
+                        .allowsHitTesting(false)
+                }
+                
+                //tags
+                ForEach(raindrop.tags) { tag in
+                    Button(tag) { press(.tag(tag)) }
+                }
+                    .tint(Filter.Kind.notag.color)
             }
                 .buttonStyle(.chip)
                 .controlSize(.small)
                 .imageScale(.small)
-                .padding(.top, 4)
+                .padding(.vertical, 4)
         }
     }
 }

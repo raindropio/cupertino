@@ -16,14 +16,15 @@ public struct RaindropMeta: View {
                     Text(Image(systemName: raindrop.type.systemImage)) + Text("\u{00a0}") :
                     Text("")
             )
-            + Text(raindrop.link.host ?? "")
+            + Text(raindrop.domain)
             + Text("\u{00a0}• ")
             + Text(raindrop.created, formatter: .shortDateTime)
         )
-            .font(.callout)
+            .font(.subheadline)
             .foregroundStyle(.secondary)
             .lineLimit(2)
             .symbolVariant(.fill)
             .imageScale(.small)
+            .fixedSize(horizontal: false, vertical: true)
     }
 }

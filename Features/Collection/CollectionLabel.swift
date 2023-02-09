@@ -35,6 +35,7 @@ fileprivate struct System: View {
         Label {
             Text(collection.title)
                 .lineLimit(1)
+                .fixedSize()
         } icon: {
             CollectionIcon(collection)
         }
@@ -60,6 +61,7 @@ fileprivate struct User: View {
                 Text(collection.title+" ")
                     .lineLimit(1)
                     .layoutPriority(1)
+                    .fixedSize()
             }
         } icon: {
             CollectionIcon(collection)
