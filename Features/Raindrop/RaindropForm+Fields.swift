@@ -73,12 +73,10 @@ extension RaindropForm.Fields: View {
             NavigationLink {
                 RaindropHighlights($raindrop)
             } label: {
-                Label {
-                    Text(Filter.Kind.highlights.title)
-                } icon: {
-                    if raindrop.highlights.isEmpty {
-                        Image(systemName: Filter.Kind.highlights.systemImage)
-                    } else {
+                HStack {
+                    Label(Filter.Kind.highlights.title, systemImage: Filter.Kind.highlights.systemImage)
+                    if !raindrop.highlights.isEmpty {
+                        Spacer()
                         Text(raindrop.highlights.count, format: .number)
                             .circularBadge()
                     }

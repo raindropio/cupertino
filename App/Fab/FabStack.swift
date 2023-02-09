@@ -43,7 +43,13 @@ struct FabStack: View {
                 
                 Section {
                     SafariLink(destination: URL(string: "https://help.raindrop.io/mobile-app#save-from-browser")!) {
-                        Label("Add from apps", systemImage: "puzzlepiece.extension").tint(.primary)
+                        HStack {
+                            Label("Add from apps", systemImage: "puzzlepiece.extension").tint(.primary)
+                            Spacer()
+                            Text("Recommended")
+                                .circularBadge()
+                                .tint(.tertiaryLabel)
+                        }
                     }
                         .listItemTint(.monochrome)
                 }

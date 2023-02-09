@@ -17,9 +17,8 @@ extension Browser.Title {
     
     private var title: String {
         switch mode {
-        case .article: return "Reader"
         case .cache: return "Permanent copy"
-        case .embed: return "Preview"
+        case .preview: return "Preview"
         default: return page.url?.host ?? ""
         }
     }
@@ -38,12 +37,14 @@ extension Browser.Title: ViewModifier {
                     app.browse(raindrop.id, mode: $0)
                 }
             }) {
-                Label("Reader", systemImage: "eyeglasses")
-                    .tag(Browse.Location.Mode.article)
-                
                 if !raindrop.isNew {
-                    Label("Permanent copy", systemImage: "clock.arrow.circlepath")
-                        .tag(Browse.Location.Mode.cache)
+                    Label("Preview", systemImage: "eyeglasses")
+                        .tag(Browse.Location.Mode.preview)
+                    
+                    if raindrop.file == nil {
+                        Label("Permanent copy", systemImage: "clock.arrow.circlepath")
+                            .tag(Browse.Location.Mode.cache)
+                    }
                 }
                 
                 Label("Original page", systemImage: "safari")

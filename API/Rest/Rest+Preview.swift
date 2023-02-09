@@ -1,22 +1,13 @@
 import Foundation
 
 extension Rest {
-    public static func previewEmbed(_ url: URL) -> URL {
-        .init(
-            string: "embed/\(url.absoluteString.base64 ?? "")?platform=ios",
-            relativeTo: base.preview
-        )!
-    }
-}
-
-extension Rest {
-    public static func previewArticle(_ url: URL, options: ReaderOptions = .init()) -> URL {
+    public static func raindropPreview(_ id: Raindrop.ID, options: ReaderOptions = .init()) -> URL {
         var components = URLComponents()
         components.queryItems = options.query
         
         return .init(
-            string: "article/\(url.absoluteString.base64 ?? "")#\(components.query ?? "")",
-            relativeTo: base.preview
+            string: "raindrop/preview/\(id)#\(components.query ?? "")",
+            relativeTo: base.api
         )!
     }
 }

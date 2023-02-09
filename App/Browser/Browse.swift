@@ -22,23 +22,17 @@ struct Browse: View {
             
             mode = location.mode ?? {
                 switch item.type {
-                case .article, .book:
-                    return .article
-                    
-                case .audio, .document, .image, .video:
-                    return .embed
-                    
-                default:
+                case .link:
                     return .raw
+                default:
+                    return .preview
                 }
             }()
             
             url = {
                 switch mode {
-                case .article:
-                    return Rest.previewArticle(item.link, options: reader)
-                case .embed:
-                    return Rest.previewEmbed(item.link)
+                case .preview:
+                    return Rest.raindropPreview(item.id, options: reader)
                 case .cache:
                     return Rest.raindropCacheLink(id)
                 case .raw:
@@ -48,16 +42,8 @@ struct Browse: View {
             
         //some url
         case .url(let u):
-            canonical = u
-            mode = location.mode ?? .raw
-            url = {
-                switch mode {
-                case .article:
-                    return Rest.previewArticle(u, options: reader)
-                default:
-                    return u
-                }
-            }()
+            mode = .raw
+            url = u
         }
         
         return .init(url, canonical: canonical, caching: .returnCacheDataElseLoad, attribute: mode)
@@ -80,8 +66,7 @@ extension Browse {
         }
         
         enum Mode: String {
-            case article
-            case embed
+            case preview
             case cache
             case raw
         }

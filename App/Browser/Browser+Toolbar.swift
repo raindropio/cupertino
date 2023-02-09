@@ -44,7 +44,7 @@ extension Browser.Toolbar: ViewModifier {
         .toolbar {
             //reader
             ToolbarItemGroup {
-                if mode == .article {
+                if mode == .preview, raindrop.type == .article {
                     Button { appearance.toggle() } label: {
                         Image(systemName: "textformat.size")
                     }
@@ -70,7 +70,6 @@ extension Browser.Toolbar: ViewModifier {
                         RaindropStack($raindrop, content: RaindropHighlights.init)
                             .frame(idealWidth: 400, idealHeight: 600)
                     }
-                    .disabled(raindrop.isNew)
                 Spacer()
             }
             
