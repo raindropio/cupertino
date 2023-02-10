@@ -28,6 +28,7 @@ extension Folder.Status {
                         Text("\(total) items")
                             .fontWeight(.medium)
                             .foregroundStyle(.secondary)
+                            .contentTransition(.numericText())
                         
                         Spacer()
                         

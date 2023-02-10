@@ -8,19 +8,6 @@ struct RaindropLinks: View {
     @Environment(\.editMode) private var editMode
 
     var raindrop: Raindrop
-    
-    var kinds: [Filter.Kind] {
-        raindrop.important ? [.important] : [] +
-        raindrop.tags.map { .tag($0) }
-    }
-    
-    func press(_ kind: Filter.Kind) {
-        event.press(.filter(.init(kind)))
-    }
-    
-    func press(_ collection: Int) {
-        event.press(.collection(collection))
-    }
 
     var body: some View {
         if (
@@ -32,7 +19,7 @@ struct RaindropLinks: View {
             WStack(spacingX: 6, spacingY: 6) {
                 //collection
                 if raindrop.collection != container?.collectionId {
-                    Button { press(raindrop.collection) } label: {
+                    Button { event.press(.collection(raindrop.collection)) } label: {
                         CollectionLabel(raindrop.collection).badge(0)
                     }
                         .tint(.secondary)
@@ -40,7 +27,7 @@ struct RaindropLinks: View {
                 
                 //important
                 if raindrop.important {
-                    Button { press(.important) } label: {
+                    SearchCompletionButton(Filter(.important)) {
                         Image(systemName: Filter.Kind.important.systemImage)
                             .symbolVariant(.fill)
                             .foregroundStyle(.tint)
@@ -50,7 +37,7 @@ struct RaindropLinks: View {
                 
                 //highlights
                 if !raindrop.highlights.isEmpty {
-                    Button { press(.highlights) } label: {
+                    SearchCompletionButton(Filter(.highlights)) {
                         Label("\(raindrop.highlights.count)", systemImage: Filter.Kind.highlights.systemImage)
                     }
                         .tint(Filter.Kind.highlights.color)
@@ -59,7 +46,9 @@ struct RaindropLinks: View {
                 
                 //tags
                 ForEach(raindrop.tags) { tag in
-                    Button(tag) { press(.tag(tag)) }
+                    SearchCompletionButton(Filter(.tag(tag))) {
+                        Text(tag)
+                    }
                 }
                     .tint(Filter.Kind.notag.color)
             }

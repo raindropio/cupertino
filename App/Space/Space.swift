@@ -12,6 +12,7 @@ struct Space: View {
             Folder(find: refine) {                
                 if isSearching {
                     SearchSuggestions(refine)
+                        .controlSize(.small)
                 } else {
                     Nesteds(find: refine)
                 }
@@ -29,9 +30,6 @@ struct Space: View {
                     
                 case .collection(let id):
                     app.space = .init(id)
-                    
-                case .filter(let filter):
-                    app.path.append(find + .init(filters: [filter]))
                 }
             }
     }

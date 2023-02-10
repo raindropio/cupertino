@@ -37,12 +37,13 @@ extension SuggestedFilters {
                     if !tags.isEmpty {
                         Menu {
                             ForEach(tags) { item in
-                                FilterRow(item)
-                                    .searchCompletion(item)
+                                SearchCompletionButton(item) {
+                                    FilterRow(item)
+                                }
                             }
                         } label: {
                             Label {
-                                Text("Tagged")
+                                Text("Tags")
                                     .foregroundColor(.primary)
                             } icon: {
                                 Image(systemName: "number")
@@ -62,8 +63,9 @@ extension SuggestedFilters {
                     if !created.isEmpty {
                         Menu {
                             ForEach(created) { item in
-                                FilterRow(item)
-                                    .searchCompletion(item)
+                                SearchCompletionButton(item) {
+                                    FilterRow(item)
+                                }
                             }
                         } label: {
                             Label {
@@ -79,7 +81,6 @@ extension SuggestedFilters {
                 }
                 .transition(.move(edge: .trailing))
                 .scenePadding(.horizontal)
-                .frame(height: 44)
                 .buttonStyle(.chip)
                 .menuStyle(.chip)
                 .fixedSize()

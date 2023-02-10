@@ -16,8 +16,10 @@ fileprivate struct OnSearching: ViewModifier {
             .onChange(of: isSearching, perform: perform)
             //react to cancel faster
             .onReceive(NotificationCenter.default.publisher(for: UITextField.textDidEndEditingNotification)) {
-                if $0.object is UISearchTextField {
-                    perform(false)
+                if let searchTextField = $0.object as? UISearchTextField {
+                    if searchTextField.text?.isEmpty == true, searchTextField.tokens.isEmpty == true {
+                        perform(false)
+                    }
                 }
             }
     }

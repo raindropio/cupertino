@@ -23,6 +23,7 @@ extension Folder {
 extension Folder.Toolbar {
     fileprivate struct Memorized: ViewModifier {
         @Environment(\.editMode) private var editMode
+        @Environment(\.isSearching) private var isSearching
         @Environment(\.containerHorizontalSizeClass) private var sizeClass
         @EnvironmentObject private var app: AppRouter
 
@@ -34,56 +35,85 @@ extension Folder.Toolbar {
             selection.count == ids.count ? .all(find): .some(selection)
         }
         
+        private var cancelEditModeButton: some View {
+            Button("Cancel", role: .cancel) {
+                withAnimation {
+                    editMode?.wrappedValue = .inactive
+                }
+            }
+        }
+        
+        private var selectAllButton: some View {
+            Button {
+                selection = .init(pick.isAll ? [] : ids)
+            } label: {
+                Label(
+                    pick.isAll ? "Deselect all" : "Select all",
+                    systemImage: pick.isAll ? "checklist.unchecked" : "checklist.checked"
+                )
+            }
+        }
+        
         func body(content: Content) -> some View {
             content
             .toolbarRole(.browser)
             .navigationBarBackButtonHidden(editMode?.wrappedValue == .active)
             .toolbar {
-                ToolbarItemGroup {
-                    if editMode?.wrappedValue == .active {
-                        Button(pick.isAll ? "Deselect all" : "Select all") {
-                            selection = .init(pick.isAll ? [] : ids)
+                //edit mode
+                if editMode?.wrappedValue == .active {
+                    ToolbarItem {
+                        selectAllButton
+                            .labelStyle(.titleOnly)
+                    }
+                    
+                    ToolbarItem(placement: .cancellationAction) {
+                        cancelEditModeButton
+                            .fontWeight(.semibold)
+                    }
+                    
+                    ToolbarItem(placement: .status) {
+                        Menu {
+                            selectAllButton
+                            
+                            Section {
+                                cancelEditModeButton
+                            }
+                        } label: {
+                            (Text("\(selection.count) selected ") + Text(Image(systemName: "chevron.up.chevron.down")))
+                                .imageScale(.small)
                         }
-                    } else {
+                            .tint(.primary)
+                            .lineLimit(1)
+                            .layoutPriority(-1)
+                    }
+                    
+                    ToolbarItemGroup(placement: .bottomBar) {
+                        RaindropsMenu(pick)
+                    }
+                }
+                //regular
+                else {
+                    ToolbarItemGroup {
                         if sizeClass == .regular {
                             SortRaindropsButton(find)
                             CustomizeRaindropsButton(find)
-                            EditButton("Select")
                         }
+                        
+                        EditButton("Select")
                         
                         //more
                         Menu {
-                            if sizeClass == .compact {
-                                EditButton("Select")
-                            }
-                            
-                            Section {
-                                CollectionsMenu(find.collectionId)
-                            }
+                            CollectionsMenu(find.collectionId)
                         } label: {
                             Label("Edit collection", systemImage: "ellipsis")
                         }
                     }
-                }
-                
-                ToolbarItem(placement: .cancellationAction) {
-                    if editMode?.wrappedValue == .active {
-                        EditButton()
-                            .fontWeight(.semibold)
-                    }
-                }
-                
-                ToolbarItem(placement: .status) {
-                    if editMode?.wrappedValue == .active {
-                        Text("\(selection.count) selected")
-                            .lineLimit(1)
-                            .layoutPriority(-1)
-                    }
-                }
-                
-                ToolbarItemGroup(placement: .bottomBar) {
-                    if editMode?.wrappedValue == .active {
-                        RaindropsMenu(pick)
+                    
+                    if isSearching, sizeClass == .compact {
+                        ToolbarItemGroup(placement: .status) {
+                            EditButton("Select")
+                                .labelStyle(.titleAndIcon)
+                        }
                     }
                 }
             }

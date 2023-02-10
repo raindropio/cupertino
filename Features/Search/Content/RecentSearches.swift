@@ -18,9 +18,10 @@ extension RecentSearches {
         
         var body: some View {
             Section {
-                ForEach(items, id: \.self) {
-                    Label($0, systemImage: "clock.arrow.circlepath")
-                        .searchCompletion($0)
+                ForEach(items, id: \.self) { item in
+                    SearchCompletionButton(item) {
+                        Label(item, systemImage: "clock.arrow.circlepath")
+                    }
                 }
             } header: {
                 if !items.isEmpty {

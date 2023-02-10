@@ -1,5 +1,6 @@
 import SwiftUI
 import API
+import UI
 
 struct SuggestedCompletion: View {
     @EnvironmentObject private var f: FiltersStore
@@ -21,11 +22,12 @@ extension SuggestedCompletion {
         var body: some View {
             Section {
                 ForEach(items) { item in
-                    FilterRow(item)
+                    SearchCompletionButton(item) {
+                        FilterRow(item)
+                    }
                         .swipeActions {
                             TagsMenu(item)
                         }
-                        .searchCompletion(item)
                         .listItemTint(item.color)
                 }
             } header: {
