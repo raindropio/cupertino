@@ -22,6 +22,7 @@
 		765F23FE2991409500282298 /* Browser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 765F23FD2991409500282298 /* Browser.swift */; };
 		765F24042991473600282298 /* Browser+Title.swift in Sources */ = {isa = PBXBuildFile; fileRef = 765F24032991473600282298 /* Browser+Title.swift */; };
 		7673C0AA295DD3B8002D4229 /* SidebarScreen+Toolbar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7673C0A9295DD3B8002D4229 /* SidebarScreen+Toolbar.swift */; };
+		76799F8B299632790042DF78 /* Folder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76799F8A299632790042DF78 /* Folder.swift */; };
 		7685A195286868AC00A4BC3C /* App.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7685A194286868AC00A4BC3C /* App.swift */; };
 		7685A199286868AD00A4BC3C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7685A198286868AD00A4BC3C /* Assets.xcassets */; };
 		76864FBD291EA059000B9B45 /* SidebarScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76864FB5291EA059000B9B45 /* SidebarScreen.swift */; };
@@ -33,10 +34,10 @@
 		768CA20129505A6E00AD7E62 /* AuthContinueWith+Apple.swift in Sources */ = {isa = PBXBuildFile; fileRef = 768CA20029505A6E00AD7E62 /* AuthContinueWith+Apple.swift */; };
 		768CA20329505AD600AD7E62 /* AuthContinueWith+JWT.swift in Sources */ = {isa = PBXBuildFile; fileRef = 768CA20229505AD600AD7E62 /* AuthContinueWith+JWT.swift */; };
 		768CA20529506D7A00AD7E62 /* AuthSplash+Slide.swift in Sources */ = {isa = PBXBuildFile; fileRef = 768CA20429506D7A00AD7E62 /* AuthSplash+Slide.swift */; };
-		769056EC297536570090C1EF /* Finder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 769056EB297536570090C1EF /* Finder.swift */; };
-		769056F0297539080090C1EF /* Finder+Title.swift in Sources */ = {isa = PBXBuildFile; fileRef = 769056EF297539080090C1EF /* Finder+Title.swift */; };
-		769056F229753E520090C1EF /* Finder+Toolbar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 769056F129753E520090C1EF /* Finder+Toolbar.swift */; };
-		769056F4297547C10090C1EF /* Finder+Status.swift in Sources */ = {isa = PBXBuildFile; fileRef = 769056F3297547C10090C1EF /* Finder+Status.swift */; };
+		769056EC297536570090C1EF /* Space.swift in Sources */ = {isa = PBXBuildFile; fileRef = 769056EB297536570090C1EF /* Space.swift */; };
+		769056F0297539080090C1EF /* Folder+Title.swift in Sources */ = {isa = PBXBuildFile; fileRef = 769056EF297539080090C1EF /* Folder+Title.swift */; };
+		769056F229753E520090C1EF /* Folder+Toolbar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 769056F129753E520090C1EF /* Folder+Toolbar.swift */; };
+		769056F4297547C10090C1EF /* Folder+Status.swift in Sources */ = {isa = PBXBuildFile; fileRef = 769056F3297547C10090C1EF /* Folder+Status.swift */; };
 		769056F62975499D0090C1EF /* Nesteds.swift in Sources */ = {isa = PBXBuildFile; fileRef = 769056F52975499D0090C1EF /* Nesteds.swift */; };
 		7697437429718A6100322290 /* Features in Frameworks */ = {isa = PBXBuildFile; productRef = 7697437329718A6100322290 /* Features */; };
 		7697437629718A6900322290 /* Features in Frameworks */ = {isa = PBXBuildFile; productRef = 7697437529718A6900322290 /* Features */; };
@@ -109,6 +110,7 @@
 		765F23FD2991409500282298 /* Browser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Browser.swift; sourceTree = "<group>"; };
 		765F24032991473600282298 /* Browser+Title.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Browser+Title.swift"; sourceTree = "<group>"; };
 		7673C0A9295DD3B8002D4229 /* SidebarScreen+Toolbar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SidebarScreen+Toolbar.swift"; sourceTree = "<group>"; };
+		76799F8A299632790042DF78 /* Folder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Folder.swift; sourceTree = "<group>"; };
 		767AC1162925196F00766998 /* Features */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = Features; sourceTree = "<group>"; };
 		7685A191286868AC00A4BC3C /* Raindrop.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Raindrop.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7685A194286868AC00A4BC3C /* App.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = App.swift; sourceTree = "<group>"; };
@@ -124,10 +126,10 @@
 		768CA20029505A6E00AD7E62 /* AuthContinueWith+Apple.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AuthContinueWith+Apple.swift"; sourceTree = "<group>"; };
 		768CA20229505AD600AD7E62 /* AuthContinueWith+JWT.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AuthContinueWith+JWT.swift"; sourceTree = "<group>"; };
 		768CA20429506D7A00AD7E62 /* AuthSplash+Slide.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AuthSplash+Slide.swift"; sourceTree = "<group>"; };
-		769056EB297536570090C1EF /* Finder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Finder.swift; sourceTree = "<group>"; };
-		769056EF297539080090C1EF /* Finder+Title.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Finder+Title.swift"; sourceTree = "<group>"; };
-		769056F129753E520090C1EF /* Finder+Toolbar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Finder+Toolbar.swift"; sourceTree = "<group>"; };
-		769056F3297547C10090C1EF /* Finder+Status.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Finder+Status.swift"; sourceTree = "<group>"; };
+		769056EB297536570090C1EF /* Space.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Space.swift; sourceTree = "<group>"; };
+		769056EF297539080090C1EF /* Folder+Title.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Folder+Title.swift"; sourceTree = "<group>"; };
+		769056F129753E520090C1EF /* Folder+Toolbar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Folder+Toolbar.swift"; sourceTree = "<group>"; };
+		769056F3297547C10090C1EF /* Folder+Status.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Folder+Status.swift"; sourceTree = "<group>"; };
 		769056F52975499D0090C1EF /* Nesteds.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Nesteds.swift; sourceTree = "<group>"; };
 		76B16BCF2930E6EB00032D7D /* Share.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Share.swift; sourceTree = "<group>"; };
 		76B16BD52930F43900032D7D /* Share.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = Share.js; sourceTree = "<group>"; };
@@ -264,7 +266,7 @@
 				767AC1102925148D00766998 /* Auth */,
 				765F23FC2991408C00282298 /* Browser */,
 				76F05F0A293F89D4003CCD75 /* Fab */,
-				769056EA2975364E0090C1EF /* Finder */,
+				769056EA2975364E0090C1EF /* Space */,
 				767AC111292514C500766998 /* Sidebar */,
 				767AC10F2925147E00766998 /* Settings */,
 				7685A194286868AC00A4BC3C /* App.swift */,
@@ -285,16 +287,17 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
-		769056EA2975364E0090C1EF /* Finder */ = {
+		769056EA2975364E0090C1EF /* Space */ = {
 			isa = PBXGroup;
 			children = (
-				769056EB297536570090C1EF /* Finder.swift */,
-				769056F3297547C10090C1EF /* Finder+Status.swift */,
-				769056EF297539080090C1EF /* Finder+Title.swift */,
-				769056F129753E520090C1EF /* Finder+Toolbar.swift */,
+				769056EB297536570090C1EF /* Space.swift */,
+				76799F8A299632790042DF78 /* Folder.swift */,
+				769056F3297547C10090C1EF /* Folder+Status.swift */,
+				769056EF297539080090C1EF /* Folder+Title.swift */,
+				769056F129753E520090C1EF /* Folder+Toolbar.swift */,
 				769056F52975499D0090C1EF /* Nesteds.swift */,
 			);
-			path = Finder;
+			path = Space;
 			sourceTree = "<group>";
 		};
 		769743792971943B00322290 /* Screens */ = {
@@ -490,7 +493,7 @@
 				76292CE42951A4D7000E16AA /* SettingsHome.swift in Sources */,
 				76864FBD291EA059000B9B45 /* SidebarScreen.swift in Sources */,
 				76292CE82951B413000E16AA /* SettingsWebApp.swift in Sources */,
-				769056F0297539080090C1EF /* Finder+Title.swift in Sources */,
+				769056F0297539080090C1EF /* Folder+Title.swift in Sources */,
 				768CA20329505AD600AD7E62 /* AuthContinueWith+JWT.swift in Sources */,
 				76ECFE002948793B00DF15C9 /* Browser+CacheError.swift in Sources */,
 				76BFE371291E9F6B00DE9DB2 /* AuthScene.swift in Sources */,
@@ -509,14 +512,15 @@
 				76BFE36F291E9F6B00DE9DB2 /* AppRouter.swift in Sources */,
 				76B6738229928FE6007A412A /* ReaderAppearance.swift in Sources */,
 				76B6737E29928308007A412A /* Browse.swift in Sources */,
-				769056F229753E520090C1EF /* Finder+Toolbar.swift in Sources */,
+				769056F229753E520090C1EF /* Folder+Toolbar.swift in Sources */,
 				768CA1F9294CC15600AD7E62 /* AuthSplash.swift in Sources */,
-				769056EC297536570090C1EF /* Finder.swift in Sources */,
+				769056EC297536570090C1EF /* Space.swift in Sources */,
 				76BFE36E291E9F6B00DE9DB2 /* AppScene.swift in Sources */,
 				7685A195286868AC00A4BC3C /* App.swift in Sources */,
-				769056F4297547C10090C1EF /* Finder+Status.swift in Sources */,
+				769056F4297547C10090C1EF /* Folder+Status.swift in Sources */,
 				76BFE370291E9F6B00DE9DB2 /* SettingsRouter.swift in Sources */,
 				768CA1FD294CCD5800AD7E62 /* AuthSignup.swift in Sources */,
+				76799F8B299632790042DF78 /* Folder.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

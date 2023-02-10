@@ -37,15 +37,16 @@ extension Nesteds {
                     LazyHStack(spacing: 12) {
                         ForEach(items, content: item)
                     }
+                        .tint(.secondary)
+                        .buttonStyle(.chip)
                         .scenePadding(.horizontal)
                         .frame(height: 44)
+                        .fixedSize()
                 }
-                    .tint(.secondary)
-                    .buttonStyle(.chip)
-                    .foregroundStyle(.primary)
                     .padding(.vertical, 8)
                     .clearSection()
                     .disabled(editMode?.wrappedValue == .active)
+                    .fixedSize(horizontal: false, vertical: true)
             }
         }
     }

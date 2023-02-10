@@ -9,7 +9,7 @@ struct SidebarScreen: View {
     
     var body: some View {
         FindByList(
-            selection: $app.find,
+            selection: $app.space,
             search: search
         )
             .modifier(Toolbar())

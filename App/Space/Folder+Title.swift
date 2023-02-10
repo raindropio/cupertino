@@ -2,7 +2,7 @@ import SwiftUI
 import UI
 import API
 
-extension Finder {
+extension Folder {
     struct Title: ViewModifier {
         @EnvironmentObject private var c: CollectionsStore
         var find: FindBy
@@ -15,7 +15,7 @@ extension Finder {
     }
 }
 
-extension Finder.Title {
+extension Folder.Title {
     fileprivate struct Memorized: ViewModifier {
         var find: FindBy
         var title: String

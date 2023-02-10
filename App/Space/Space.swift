@@ -3,26 +3,20 @@ import Features
 import API
 import UI
 
-struct Finder: View {
+struct Space: View {
     @EnvironmentObject private var app: AppRouter
-    @State private var selection: Set<Raindrop.ID> = .init()
-    
     var find: FindBy
     
     var body: some View {
-        RaindropsContainer(find, selection: $selection) {
-            Nesteds(find: find)
-            
-            if isPhone {
-                Status(find: find)
+        Search(find) { refine, isSearching in
+            Folder(find: refine) {                
+                if isSearching {
+                    SearchSuggestions(refine)
+                } else {
+                    Nesteds(find: refine)
+                }
             }
-            
-            RaindropItems(find)
-            LoadMoreRaindropsButton(find)
         }
-            .fab(to: find.collectionId)
-            .modifier(Title(find: find))
-            .modifier(Toolbar(find: find, selection: $selection))
             .raindropsEvent {
                 switch $0 {
                 case .open(let id), .preview(let id):
@@ -34,12 +28,11 @@ struct Finder: View {
                     break
                     
                 case .collection(let id):
-                    app.find = .init(id)
+                    app.space = .init(id)
                     
                 case .filter(let filter):
                     app.path.append(find + .init(filters: [filter]))
                 }
             }
-            .scopeEditMode()
     }
 }

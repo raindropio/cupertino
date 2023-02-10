@@ -25,13 +25,12 @@ struct FoundCollections: View {
 
 extension FoundCollections {
     fileprivate struct Memorized: View {
-        @EnvironmentObject private var event: SpotlightEvent
         var items: [UserCollection]
         
         var body: some View {
             ForEach(items) { item in
                 Button {
-                    event.press(.collection(item))
+                    
                 } label: {
                     UserCollectionItem(item, withLocation: true)
                 }

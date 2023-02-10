@@ -1,18 +1,15 @@
 import SwiftUI
 import API
 
-extension Spotlight {
-    struct SearchBar: ViewModifier {
-        @Binding var find: FindBy
-        @Binding var focused: Bool
+extension Search {
+    struct Bar: ViewModifier {
+        @Binding var refine: FindBy
 
         func body(content: Content) -> some View {
             content
                 .searchable(
-                    text: $find.text,
-                    tokens: $find.filters,
-                    placement: .navigationBarDrawer(displayMode: .always),
-                    prompt: Text("Quick search"),
+                    text: $refine.text,
+                    tokens: $refine.filters,
                     token: FilterRow.init
                 )
                 #if canImport(UIKit)
@@ -20,7 +17,6 @@ extension Spotlight {
                 .textInputAutocapitalization(.never)
                 .keyboardType(.webSearch)
                 #endif
-                .searchFocused($focused)
         }
     }
 }

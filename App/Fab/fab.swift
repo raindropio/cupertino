@@ -9,6 +9,7 @@ extension View {
 
 fileprivate struct FabModifier: ViewModifier {
     @Environment(\.editMode) private var editMode
+    @Environment(\.isSearching) private var isSearching
     @EnvironmentObject private var app: AppRouter
 
     @State private var present = false
@@ -18,7 +19,7 @@ fileprivate struct FabModifier: ViewModifier {
     func body(content: Content) -> some View {
         content
             .floatingActionButton(
-                hide: hidden || editMode?.wrappedValue == .active || app.spotlight
+                hide: hidden || editMode?.wrappedValue == .active || isSearching
             ) {
                 Button {
                     present.toggle()

@@ -3,7 +3,7 @@ import UI
 import API
 import Features
 
-extension Finder {
+extension Folder {
     struct Toolbar: ViewModifier {
         @EnvironmentObject private var r: RaindropsStore
         
@@ -20,7 +20,7 @@ extension Finder {
     }
 }
 
-extension Finder.Toolbar {
+extension Folder.Toolbar {
     fileprivate struct Memorized: ViewModifier {
         @Environment(\.editMode) private var editMode
         @Environment(\.containerHorizontalSizeClass) private var sizeClass
@@ -49,12 +49,6 @@ extension Finder.Toolbar {
                             SortRaindropsButton(find)
                             CustomizeRaindropsButton(find)
                             EditButton("Select")
-                        }
-                                                
-                        Button {
-                            app.spotlight = true
-                        } label: {
-                            Image(systemName: "magnifyingglass")
                         }
                         
                         //more
