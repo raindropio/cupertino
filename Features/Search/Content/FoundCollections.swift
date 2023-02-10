@@ -29,9 +29,7 @@ extension FoundCollections {
         
         var body: some View {
             ForEach(items) { item in
-                Button {
-                    
-                } label: {
+                ItemLink(item: item) {
                     UserCollectionItem(item, withLocation: true)
                 }
             }

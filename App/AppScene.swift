@@ -12,11 +12,17 @@ struct AppScene: View {
             NavigationStack(path: $router.path) {
                 if let space = router.space {
                     Space(find: space)
-                        .navigationDestination(for: UserCollection.self) {
+                        //screens
+                        .navigationDestination(for: UserCollection.ID.self) {
                             Space(find: .init($0))
                         }
                         .navigationDestination(for: FindBy.self, destination: Space.init)
                         .navigationDestination(for: Browse.Location.self, destination: Browse.init)
+                        //item links
+                        .itemDestination("preview", for: Raindrop.self) { router.browse($0) }
+                        .itemDestination("cache", for: Raindrop.self) { router.browse($0, mode: .cache) }
+                        .itemDestination(for: Raindrop.self) { router.browse($0) }
+                        .itemDestination(for: UserCollection.self) { router.path.append($0) }
                 }
             }
                 .navigationBarTitleDisplayMode(.large) //fix iphone bug

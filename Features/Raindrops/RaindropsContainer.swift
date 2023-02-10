@@ -48,7 +48,8 @@ public struct RaindropsContainer<C: View>: View {
 extension RaindropsContainer { fileprivate struct Memorized: View {
     @EnvironmentObject private var event: RaindropsEvent
     @EnvironmentObject private var dispatch: Dispatcher
-    
+    @EnvironmentObject private var itemLinkService: ItemLinkService<Raindrop>
+
     var find: FindBy
     @Binding var selection: Set<Raindrop.ID>
     var layout: LazyStackLayout
@@ -58,7 +59,7 @@ extension RaindropsContainer { fileprivate struct Memorized: View {
         LazyStack(
             layout,
             selection: $selection,
-            action: event.open,
+            action: { itemLinkService(id: $0) },
             contextMenu: RaindropsMenu,
             content: content
         )

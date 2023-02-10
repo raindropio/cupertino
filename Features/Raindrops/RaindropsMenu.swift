@@ -42,13 +42,13 @@ fileprivate struct _Menu: View {
                     Link(destination: item.link) {
                         Label("Open", systemImage: "safari")
                     }
-
-                    Button { event.press(.preview(item.id)) } label: {
+                    
+                    ItemLink("preview", id: item.id, for: Raindrop.self) {
                         Label("Preview", systemImage: "eyeglasses")
                     }
 
                     if item.file == nil {
-                        Button { event.press(.cache(item.id)) } label: {
+                        ItemLink("cache", id: item.id, for: Raindrop.self) {
                             Label("Permanent copy", systemImage: "clock.arrow.circlepath")
                         }
                     }

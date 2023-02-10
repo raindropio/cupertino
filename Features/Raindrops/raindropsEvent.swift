@@ -4,10 +4,8 @@ import UI
 import API
 
 public extension View {
-    func raindropsEvent(
-        onPress: @escaping (RaindropsEventPressed) -> Void
-    ) -> some View {
-        modifier(_Modifier(onPress: onPress))
+    func raindropsEvent() -> some View {
+        modifier(_Modifier())
     }
 }
 
@@ -19,14 +17,11 @@ fileprivate struct _Modifier: ViewModifier {
     @State private var addTags: RaindropsPick?
     @State private var delete: RaindropsPick?
     @State private var deleting = false
-
-    var onPress: (RaindropsEventPressed) -> Void
     
     func body(content: Content) -> some View {
         content
         //receive
         .environmentObject(event)
-        .onReceive(event.pressed, perform: onPress)
         .onReceive(event.edit) { edit = $0 }
         .onReceive(event.move) { move = $0 }
         .onReceive(event.addTags) { addTags = $0 }
@@ -52,19 +47,10 @@ fileprivate struct _Modifier: ViewModifier {
 }
 
 class RaindropsEvent: ObservableObject {
-    fileprivate let pressed: PassthroughSubject<RaindropsEventPressed, Never> = PassthroughSubject()
     fileprivate let edit: PassthroughSubject<Raindrop.ID, Never> = PassthroughSubject()
     fileprivate let move: PassthroughSubject<RaindropsPick, Never> = PassthroughSubject()
     fileprivate let addTags: PassthroughSubject<RaindropsPick, Never> = PassthroughSubject()
     fileprivate let delete: PassthroughSubject<RaindropsPick, Never> = PassthroughSubject()
-    
-    func press(_ of: RaindropsEventPressed) {
-        self.pressed.send(of)
-    }
-    
-    func open(_ id: Raindrop.ID) {
-        press(.open(id))
-    }
     
     func edit(_ id: Raindrop.ID) {
         edit.send(id)
@@ -81,11 +67,4 @@ class RaindropsEvent: ObservableObject {
     func delete(_ pick: RaindropsPick) {
         delete.send(pick)
     }
-}
-
-public enum RaindropsEventPressed {
-    case open(Raindrop.ID)
-    case preview(Raindrop.ID)
-    case cache(Raindrop.ID)
-    case collection(Int)
 }

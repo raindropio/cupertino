@@ -19,7 +19,7 @@ struct RaindropLinks: View {
             WStack(spacingX: 6, spacingY: 6) {
                 //collection
                 if raindrop.collection != container?.collectionId {
-                    Button { event.press(.collection(raindrop.collection)) } label: {
+                    ItemLink(id: raindrop.collection, for: UserCollection.self) {
                         CollectionLabel(raindrop.collection).badge(0)
                     }
                         .tint(.secondary)
