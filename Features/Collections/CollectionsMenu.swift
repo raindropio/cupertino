@@ -32,12 +32,12 @@ fileprivate struct _CollectionsMenu: View {
     func new(_ ids: Set<Int>) -> some View {
         if ids.isEmpty {
             Button { event.create(.group()) } label: {
-                Label("New", systemImage: "plus")
+                Label("New collection", systemImage: "plus")
             }
         }
         else if ids.count == 1, let id = ids.first, id > 0 {
             Button { event.create(.parent(id)) } label: {
-                Label("Add", systemImage: "plus.square.dashed")
+                Label("Add collection", systemImage: "plus.square.dashed")
             }
         }
     }
@@ -70,7 +70,7 @@ fileprivate struct _CollectionsMenu: View {
                 Button {
                     event.edit(collection)
                 } label: {
-                    Label("Edit", systemImage: "pencil")
+                    Label("Edit collection", systemImage: "pencil")
                 }
             }
         }
@@ -80,7 +80,7 @@ fileprivate struct _CollectionsMenu: View {
             Button {
                 event.merge(ids)
             } label: {
-                Label("Merge", systemImage: "arrow.triangle.merge")
+                Label("Merge collections", systemImage: "arrow.triangle.merge")
             }
         }
             
@@ -88,7 +88,7 @@ fileprivate struct _CollectionsMenu: View {
             Button(role: .destructive) {
                 event.delete(ids)
             } label: {
-                Label("Delete", systemImage: "trash")
+                Label("Delete collection", systemImage: "trash")
             }
                 .tint(.red)
         }

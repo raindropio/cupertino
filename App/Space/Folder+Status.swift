@@ -47,6 +47,7 @@ extension Folder.Status {
                     .scenePadding(.leading)
                 }
                 .clearSection()
+                .contentTransition(.identity)
                 .disabled(editMode?.wrappedValue == .active)
             }
         }

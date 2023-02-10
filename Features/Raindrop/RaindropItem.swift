@@ -31,6 +31,7 @@ extension RaindropItem: View {
                 RaindropMeta(raindrop)
             }
         }
+            .contentTransition(.identity)
             .swipeActions(edge: .leading) {
                 Link(destination: raindrop.link) {
                     Label("Open", systemImage: "safari")
