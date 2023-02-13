@@ -10,7 +10,6 @@ extension View {
 fileprivate struct FabModifier: ViewModifier {
     @Environment(\.editMode) private var editMode
     @Environment(\.isSearching) private var isSearching
-    @EnvironmentObject private var app: AppRouter
 
     @State private var present = false
     var collection: Int

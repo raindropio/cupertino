@@ -29,7 +29,7 @@ extension FoundCollections {
         
         var body: some View {
             ForEach(items) { item in
-                ItemLink(item: item) {
+                DeepLink(.collection(.open(item.id))) {
                     UserCollectionItem(item, withLocation: true)
                 }
             }

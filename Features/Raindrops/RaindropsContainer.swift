@@ -39,7 +39,7 @@ public struct RaindropsContainer<C: View>: View {
             content: content
         )
             .environment(\.raindropsContainer, .init(
-                collectionId: find.collectionId,
+                find: find,
                 view: view
             ))
     }
@@ -47,7 +47,7 @@ public struct RaindropsContainer<C: View>: View {
 
 extension RaindropsContainer { fileprivate struct Memorized: View {
     @EnvironmentObject private var dispatch: Dispatcher
-    @EnvironmentObject private var itemLinkService: ItemLinkService<Raindrop>
+    @Environment(\.openDeepLink) private var openDeepLink
 
     var find: FindBy
     @Binding var selection: Set<Raindrop.ID>
@@ -58,7 +58,7 @@ extension RaindropsContainer { fileprivate struct Memorized: View {
         LazyStack(
             layout,
             selection: $selection,
-            action: { itemLinkService(id: $0) },
+            action: { openDeepLink?(.raindrop(.open($0))) },
             contextMenu: RaindropsMenu,
             content: content
         )

@@ -22,7 +22,7 @@ extension Nesteds {
         var items: [UserCollection]
         
         func item(_ collection: UserCollection) -> some View {
-            ItemLink(item: collection) {
+            DeepLink(.collection(.open(collection.id))) {
                 CollectionLabel(collection)
             }
                 .dropConsumer(to: collection)

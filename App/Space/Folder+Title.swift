@@ -25,7 +25,7 @@ extension Folder.Title {
                 if find.collectionId == 0 {
                     return find.search
                 } else {
-                    return "\(title): \(find.collectionId)"
+                    return "\(title): \(find.search)"
                 }
             }
             

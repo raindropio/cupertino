@@ -3,7 +3,7 @@ import API
 
 extension EnvironmentValues {
     struct RC: Equatable {
-        var collectionId: Int
+        var find: FindBy
         var view: CollectionView
     }
     

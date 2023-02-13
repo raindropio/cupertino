@@ -30,17 +30,13 @@ extension Browser.Title: ViewModifier {
         .navigationTitle(title)
         .navigationBarTitleDisplayMode(.inline)
         .toolbarTitleMenu {
-            Picker("", selection: .init { mode } set: {
-                if raindrop.isNew {
-                    app.navigate(url: raindrop.link)
-                } else {
+            if !raindrop.isNew {
+                Picker("", selection: .init { mode } set: {
                     app.navigate(raindrop: raindrop.id, mode: $0)
-                }
-            }) {
-                Label("Original page", systemImage: "safari")
-                    .tag(Browse.Location.Mode.raw)
-                
-                if !raindrop.isNew {
+                }) {
+                    Label("Original page", systemImage: "safari")
+                        .tag(Browse.Location.Mode.raw)
+                    
                     if raindrop.type != .link {
                         Label("Preview", systemImage: "eyeglasses")
                             .tag(Browse.Location.Mode.preview)

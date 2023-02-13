@@ -43,12 +43,12 @@ fileprivate struct _Menu: View {
                         Label("Open", systemImage: "safari")
                     }
                     
-                    ItemLink("preview", id: item.id, for: Raindrop.self) {
+                    DeepLink(.raindrop(.preview(item.id))) {
                         Label("Preview", systemImage: "eyeglasses")
                     }
 
                     if item.file == nil {
-                        ItemLink("cache", id: item.id, for: Raindrop.self) {
+                        DeepLink(.raindrop(.cache(item.id))) {
                             Label("Permanent copy", systemImage: "clock.arrow.circlepath")
                         }
                     }

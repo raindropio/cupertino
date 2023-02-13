@@ -31,8 +31,4 @@ extension AppRouter {
     func navigate(raindrop: Raindrop.ID, mode: Browse.Location.Mode? = nil) {
         path.append(Browse.Location(kind: .raindrop(raindrop), mode: mode))
     }
-    
-    func navigate(url: URL) {
-        path.append(Browse.Location(kind: .url(url)))
-    }
 }

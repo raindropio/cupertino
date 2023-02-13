@@ -3,22 +3,28 @@ import API
 import UI
 
 struct RaindropLinks: View {
+    @Environment(\.openDeepLink) private var openDeepLink
     @Environment(\.raindropsContainer) private var container
     @Environment(\.editMode) private var editMode
 
     var raindrop: Raindrop
+    
+    private func tapFilter(_ kind: Filter.Kind) {
+        guard let find = container?.find else { return }
+        openDeepLink?(.find(find + Filter(kind)))
+    }
 
     var body: some View {
         if (
-            raindrop.collection != container?.collectionId ||
+            raindrop.collection != container?.find.collectionId ||
             raindrop.important ||
             !raindrop.highlights.isEmpty ||
             !raindrop.tags.isEmpty
         ) {
             WStack(spacingX: 6, spacingY: 6) {
                 //collection
-                if raindrop.collection != container?.collectionId {
-                    ItemLink(id: raindrop.collection, for: UserCollection.self) {
+                if raindrop.collection != container?.find.collectionId {
+                    DeepLink(.collection(.open(raindrop.collection))) {
                         CollectionLabel(raindrop.collection).badge(0)
                     }
                         .tint(.secondary)
@@ -26,7 +32,7 @@ struct RaindropLinks: View {
                 
                 //important
                 if raindrop.important {
-                    SearchCompletionButton(Filter(.important)) {
+                    Button { tapFilter(.important) } label: {
                         Image(systemName: Filter.Kind.important.systemImage)
                             .symbolVariant(.fill)
                             .foregroundStyle(.tint)
@@ -36,7 +42,7 @@ struct RaindropLinks: View {
                 
                 //highlights
                 if !raindrop.highlights.isEmpty {
-                    SearchCompletionButton(Filter(.highlights)) {
+                    Button { tapFilter(.highlights) } label: {
                         Label("\(raindrop.highlights.count)", systemImage: Filter.Kind.highlights.systemImage)
                     }
                         .tint(Filter.Kind.highlights.color)
@@ -45,7 +51,7 @@ struct RaindropLinks: View {
                 
                 //tags
                 ForEach(raindrop.tags) { tag in
-                    SearchCompletionButton(Filter(.tag(tag))) {
+                    Button { tapFilter(.tag(tag)) } label: {
                         Text(tag)
                     }
                 }

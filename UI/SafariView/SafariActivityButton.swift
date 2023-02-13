@@ -1,4 +1,9 @@
 public struct SafariActivityButton {
-    var systemImage: String
-    var extensionIdentifier: String
+    public var extensionIdentifier: String
+    public var systemImage: String
+    
+    public init(id: String, systemImage: String) {
+        self.extensionIdentifier = id
+        self.systemImage = systemImage
+    }
 }

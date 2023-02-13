@@ -26,12 +26,8 @@ struct AppScene: View {
             .collectionSheets()
             .tagSheets()
             .dropProvider()
+            .modifier(AppDeepLinks())
             .environmentObject(router)
             .preferredColorScheme(theme.colorScheme)
-            //item links
-            .itemDestination("preview", for: Raindrop.self) { router.navigate(raindrop: $0) }
-            .itemDestination("cache", for: Raindrop.self) { router.navigate(raindrop: $0, mode: .cache) }
-            .itemDestination(for: Raindrop.self) { router.navigate(raindrop: $0) }
-            .itemDestination(for: UserCollection.self) { router.navigate(collection: $0) }
     }
 }

@@ -70,6 +70,16 @@ extension FindBy {
         )
     }
     
+    public static func +(lhs: Self, rhs: Filter) -> Self {
+        var find = lhs
+        if !find.filters.contains(where: {
+            $0.kind == rhs.kind
+        }) {
+            find.filters.append(rhs)
+        }
+        return find
+    }
+    
     public func excludingText() -> Self {
         var copy = self
         copy.text = ""
