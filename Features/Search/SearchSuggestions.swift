@@ -13,9 +13,13 @@ public struct SearchSuggestions: View {
     
     public var body: some View {
         SuggestedFilters(find: find)
-        RecentSearches(find: find)
-        //TODO: recent collections/bookmarks
-        SuggestedCompletion(find: find)
-        FoundCollections(find: find)
+        
+        Group {
+            RecentSearches(find: find)
+            //TODO: recent collections/bookmarks
+            SuggestedCompletion(find: find)
+            FoundCollections(find: find)
+        }
+            .lazyStackSection()
     }
 }
