@@ -4,8 +4,9 @@ import Features
 
 struct SaveFiles: View {
     @Environment(\.dismiss) private var dismiss
-    @State private var collection: Int?
+    
     var urls: Set<URL>
+    @State var collection: Int?
     
     var body: some View {
         Group {

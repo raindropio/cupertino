@@ -5,6 +5,7 @@ import UI
 public struct RaindropForm {
     @EnvironmentObject private var dispatch: Dispatcher
     @Environment(\.dismiss) private var dismiss
+    @AppStorage("default-collection") private var defaultCollection: Int?
     
     @Binding var raindrop: Raindrop
     
@@ -15,6 +16,9 @@ public struct RaindropForm {
 
 extension RaindropForm {
     private func commit() async throws {
+        if raindrop.isNew {
+            defaultCollection = raindrop.collection
+        }
         try await dispatch(raindrop.isNew ? RaindropsAction.create(raindrop) : RaindropsAction.update(raindrop))
         dismiss()
     }

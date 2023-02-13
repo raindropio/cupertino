@@ -5,7 +5,7 @@ public struct SubmitButton<Label>: View where Label: View {
     @Environment(\.submitting) private var submitting
     @ViewBuilder private var label: () -> Label
     
-    public init(label: @escaping () -> Label) {
+    public init(@ViewBuilder label: @escaping () -> Label) {
         self.label = label
     }
 

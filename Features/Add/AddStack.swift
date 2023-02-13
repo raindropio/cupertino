@@ -5,6 +5,7 @@ import UI
 public struct AddStack {
     @Environment(\.dismiss) private var dismiss
     @EnvironmentObject private var dispatch: Dispatcher
+    @AppStorage("default-collection") private var defaultCollection: Int?
     
     @State private var uploading = false
     @State private var completed = Set<URL>()
@@ -28,6 +29,8 @@ extension AddStack {
     private func upload() async {
         uploading = true
         defer { uploading = false }
+        
+        defaultCollection = collection
         
         try? await dispatch(
             RaindropsAction.add(

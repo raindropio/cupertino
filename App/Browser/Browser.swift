@@ -6,6 +6,7 @@ struct Browser {
     @StateObject private var page = WebPage()
     @EnvironmentObject private var r: RaindropsStore
     @EnvironmentObject private var dispatch: Dispatcher
+    @AppStorage("default-collection") private var defaultCollection: Int?
     
     @State private var raindrop = Raindrop.new()
     @State private var loading = false
@@ -16,7 +17,7 @@ struct Browser {
 extension Browser {
     private var stored: Raindrop {
         guard let url = page.url else { return .new() }
-        return r.state.item(url) ?? .new(link: url)
+        return r.state.item(url) ?? .new(link: url, collection: defaultCollection)
     }
     
     @Sendable private func lookup() async {
