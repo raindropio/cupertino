@@ -21,7 +21,6 @@ struct AppScene: View {
             }
                 .navigationBarTitleDisplayMode(.large) //fix iphone bug
         }
-            .navigationSplitViewStyle(.balanced)
             .navigationSplitViewUnlimitedWidth()
             .containerSizeClass()
             .collectionsEvent()

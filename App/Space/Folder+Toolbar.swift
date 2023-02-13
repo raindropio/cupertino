@@ -99,11 +99,25 @@ extension Folder.Toolbar {
                             CustomizeRaindropsButton(find)
                         }
                         
-                        EditButton("Select")
+                        if sizeClass == .compact {
+                            Button {
+                                app.search()
+                            } label: {
+                                Image(systemName: "magnifyingglass")
+                            }
+                        } else {
+                            EditButton("Select")
+                        }
                         
                         //more
                         Menu {
-                            CollectionsMenu(find.collectionId)
+                            if sizeClass == .compact {
+                                EditButton("Select")
+                            }
+                            
+                            Section {
+                                CollectionsMenu(find.collectionId)
+                            }
                         } label: {
                             Label("Edit collection", systemImage: "ellipsis")
                         }

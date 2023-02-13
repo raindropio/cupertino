@@ -29,5 +29,8 @@ struct Folder<H: View>: View {
             .modifier(Toolbar(find: find, selection: $selection))
             .raindropsEvent()
             .scopeEditMode()
+            .onChange(of: find) { _ in
+                selection = .init()
+            }
     }
 }
