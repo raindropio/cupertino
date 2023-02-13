@@ -31,7 +31,7 @@ extension RaindropsState {
     }
     
     public func status(_ find: FindBy) -> Segment.Status {
-        self[find].status
+        segments[find] != nil ? self[find].status : .loading
     }
     
     public func more(_ find: FindBy) -> Segment.Status {

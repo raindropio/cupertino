@@ -61,7 +61,9 @@ extension CollectionsState {
     }
     
     public func find(_ findBy: FindBy) -> [UserCollection] {
-        find(findBy.search).filter {
+        guard findBy.collectionId == 0 else { return [] }
+        
+        return find(findBy.search).filter {
             $0.id != findBy.collectionId
         }
     }

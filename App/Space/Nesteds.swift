@@ -1,5 +1,6 @@
 import SwiftUI
 import API
+import UI
 import Features
 
 struct Nesteds: View {
@@ -18,14 +19,10 @@ struct Nesteds: View {
 extension Nesteds {
     struct Memorized: View {
         @Environment(\.editMode) private var editMode
-        @EnvironmentObject private var app: AppRouter
-        
         var items: [UserCollection]
         
         func item(_ collection: UserCollection) -> some View {
-            Button {
-                app.path.append(collection)
-            } label: {
+            ItemLink(item: collection) {
                 CollectionLabel(collection)
             }
                 .dropConsumer(to: collection)

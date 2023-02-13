@@ -24,7 +24,7 @@ extension Browser {
 
                             if raindrop.cache != nil {
                                 Button {
-                                    app.browse(raindrop.id, mode: .cache)
+                                    app.navigate(raindrop: raindrop.id, mode: .cache)
                                 } label: {
                                     Label("Open permanent copy", systemImage: "clock.arrow.circlepath")
                                 }

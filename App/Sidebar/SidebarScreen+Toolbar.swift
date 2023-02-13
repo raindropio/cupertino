@@ -28,7 +28,7 @@ extension SidebarScreen {
                     if editMode?.wrappedValue != .active {
                         if sizeClass == .compact {
                             Button {
-                                
+                                app.search()
                             } label: {
                                 Image(systemName: "magnifyingglass")
                             }

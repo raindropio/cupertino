@@ -9,7 +9,10 @@ public struct Search<C: View>: View {
     var base: FindBy
     var content: (FindBy, Bool) -> C
     
-    public init(_ base: FindBy, content: @escaping (_ refine: FindBy, _ isActive: Bool) -> C) {
+    public init(
+        _ base: FindBy = .init(),
+        @ViewBuilder content: @escaping (_ refine: FindBy, _ isActive: Bool
+    ) -> C) {
         self.base = base
         self.content = content
     }

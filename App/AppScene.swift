@@ -10,20 +10,14 @@ struct AppScene: View {
     var body: some View {
         NavigationSplitView(sidebar: SidebarScreen.init) {
             NavigationStack(path: $router.path) {
-                if let space = router.space {
-                    Space(find: space)
-                        //screens
-                        .navigationDestination(for: UserCollection.ID.self) {
-                            Space(find: .init($0))
-                        }
-                        .navigationDestination(for: FindBy.self, destination: Space.init)
-                        .navigationDestination(for: Browse.Location.self, destination: Browse.init)
-                        //item links
-                        .itemDestination("preview", for: Raindrop.self) { router.browse($0) }
-                        .itemDestination("cache", for: Raindrop.self) { router.browse($0, mode: .cache) }
-                        .itemDestination(for: Raindrop.self) { router.browse($0) }
-                        .itemDestination(for: UserCollection.self) { router.path.append($0) }
+                Group {
+                    if let space = router.space {
+                        Space(find: space)
+                    }
                 }
+                    //screens
+                    .navigationDestination(for: FindBy.self, destination: Space.init)
+                    .navigationDestination(for: Browse.Location.self, destination: Browse.init)
             }
                 .navigationBarTitleDisplayMode(.large) //fix iphone bug
         }
@@ -35,5 +29,10 @@ struct AppScene: View {
             .dropProvider()
             .environmentObject(router)
             .preferredColorScheme(theme.colorScheme)
+            //item links
+            .itemDestination("preview", for: Raindrop.self) { router.navigate(raindrop: $0) }
+            .itemDestination("cache", for: Raindrop.self) { router.navigate(raindrop: $0, mode: .cache) }
+            .itemDestination(for: Raindrop.self) { router.navigate(raindrop: $0) }
+            .itemDestination(for: UserCollection.self) { router.navigate(collection: $0) }
     }
 }

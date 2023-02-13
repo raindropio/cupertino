@@ -100,7 +100,9 @@ extension Thumbnail: View {
         else if let aspectRatio {
             ZStack {
                 base.layoutPriority(-1)
-                Color.clear.aspectRatio(aspectRatio, contentMode: .fit).frame(maxWidth: .infinity)
+                Color.clear.aspectRatio(aspectRatio, contentMode: .fit)
+                    .frame(maxWidth: .infinity)
+                    .fixedSize(horizontal: width == nil, vertical: height == nil)
             }
         }
         //downsampled
@@ -108,10 +110,11 @@ extension Thumbnail: View {
             base
                 .onSuccess(saveAspectRatio)
                 .aspectRatio(
-                    url != nil ? Self.cacheAspect[url!] : 0.75,
+                    url != nil ? Self.cacheAspect[url!] : 1.77,
                     contentMode: .fit
                 )
                 .frame(height: height)
+                .fixedSize(horizontal: width == nil, vertical: height == nil)
                 .tag(reload)
         }
     }

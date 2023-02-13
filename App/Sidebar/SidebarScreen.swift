@@ -4,16 +4,13 @@ import UI
 import Features
 
 struct SidebarScreen: View {
+    @Environment(\.containerHorizontalSizeClass) private var sizeClass
     @EnvironmentObject private var app: AppRouter
-    @State private var search = ""
     
     var body: some View {
-        FindByList(
-            selection: $app.space,
-            search: search
-        )
+        FindByList(selection: $app.space)
             .modifier(Toolbar())
-            .fab(hidden: !isPhone)
+            .fab(hidden: sizeClass == .regular)
             .scopeEditMode()
             .navigationSplitViewColumnWidth(ideal: 450)
     }

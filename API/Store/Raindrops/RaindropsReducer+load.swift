@@ -42,6 +42,11 @@ extension RaindropsReducer {
         //do not override if data is not modified (useful for pagination)
         let oldIds = state[find].ids
         let newIds = items.map(\.id)
+        
+        //animate addition/deletion
+        if total > state[find].total || total < state[find].total {
+            state.animation = .init()
+        }
 
         if state[find].total != total || oldIds.count < newIds.count || oldIds[0..<newIds.count] != newIds[0..<newIds.count] {
             state[find].ids = newIds

@@ -5,12 +5,34 @@ import UI
 class AppRouter: ObservableObject {
     @Published var space: FindBy? = .init()
     @Published var path: NavigationPath = .init()
-    
-    func browse(_ id: Raindrop.ID, mode: Browse.Location.Mode? = nil) {
-        path.append(Browse.Location(kind: .raindrop(id), mode: mode))
+    @Published var searchPreferred = false
+}
+
+extension AppRouter {
+    func search() {
+        if space == nil {
+            space = .init()
+        }
+        searchPreferred = true
     }
     
-    func browse(_ url: URL, mode: Browse.Location.Mode? = nil) {
-        path.append(Browse.Location(kind: .url(url), mode: mode))
+    func navigate(find: FindBy) {
+        if space == nil {
+            space = find
+        } else {
+            path.append(find)
+        }
+    }
+    
+    func navigate(collection: UserCollection.ID) {
+        navigate(find: FindBy(collection))
+    }
+    
+    func navigate(raindrop: Raindrop.ID, mode: Browse.Location.Mode? = nil) {
+        path.append(Browse.Location(kind: .raindrop(raindrop), mode: mode))
+    }
+    
+    func navigate(url: URL) {
+        path.append(Browse.Location(kind: .url(url)))
     }
 }

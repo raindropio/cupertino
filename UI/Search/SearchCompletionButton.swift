@@ -60,6 +60,7 @@ fileprivate struct SC<T: RandomAccessCollection & RangeReplaceableCollection>: V
                     $0.id == token.id
                 }
                 if !exists {
+                    text = ""
                     tokens.append(token)
                 }
             }

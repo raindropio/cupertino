@@ -4,7 +4,9 @@ import API
 import UI
 
 struct Space: View {
-    var find: FindBy
+    @EnvironmentObject private var app: AppRouter
+    
+    var find: FindBy = .init()
     
     var body: some View {
         Search(find) { refine, isSearching in
@@ -17,5 +19,6 @@ struct Space: View {
                 }
             }
         }
+            .searchFocused($app.searchPreferred)
     }
 }

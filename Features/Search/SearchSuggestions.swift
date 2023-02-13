@@ -3,6 +3,8 @@ import API
 import UI
 
 public struct SearchSuggestions: View {
+    @Environment(\.defaultMinListHeaderHeight) private var h
+    
     var find: FindBy
     
     public init(_ find: FindBy) {

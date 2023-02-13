@@ -68,14 +68,14 @@ extension RaindropItem {
                 HStack(alignment: .top, spacing: 14) {
                     parts.value.0
                         .cornerRadius(3)
-                        .padding(.top, 8)
+                        .padding(.top, 4)
                     parts.value.1
                 }
                 
             case .simple:
                 HStack(alignment: .top, spacing: 14) {
                     parts.value.0
-                        .padding(.top, 8)
+                        .padding(.top, 4)
                     parts.value.1
                 }
                 

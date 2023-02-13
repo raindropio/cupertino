@@ -32,9 +32,9 @@ extension Browser.Title: ViewModifier {
         .toolbarTitleMenu {
             Picker("", selection: .init { mode } set: {
                 if raindrop.isNew {
-                    app.browse(raindrop.link, mode: $0)
+                    app.navigate(url: raindrop.link)
                 } else {
-                    app.browse(raindrop.id, mode: $0)
+                    app.navigate(raindrop: raindrop.id, mode: $0)
                 }
             }) {
                 if !raindrop.isNew {
