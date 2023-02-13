@@ -37,18 +37,20 @@ extension Browser.Title: ViewModifier {
                     app.navigate(raindrop: raindrop.id, mode: $0)
                 }
             }) {
+                Label("Original page", systemImage: "safari")
+                    .tag(Browse.Location.Mode.raw)
+                
                 if !raindrop.isNew {
-                    Label("Preview", systemImage: "eyeglasses")
-                        .tag(Browse.Location.Mode.preview)
+                    if raindrop.type != .link {
+                        Label("Preview", systemImage: "eyeglasses")
+                            .tag(Browse.Location.Mode.preview)
+                    }
                     
                     if raindrop.file == nil {
                         Label("Permanent copy", systemImage: "clock.arrow.circlepath")
                             .tag(Browse.Location.Mode.cache)
                     }
                 }
-                
-                Label("Original page", systemImage: "safari")
-                    .tag(Browse.Location.Mode.raw)
             }
             
             if let url = page.url {

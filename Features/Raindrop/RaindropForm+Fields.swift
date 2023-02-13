@@ -4,6 +4,7 @@ import UI
 
 extension RaindropForm {
     struct Fields {
+        @State private var cover = false
         @Binding var raindrop: Raindrop
         @FocusState var focus: FocusField?
     }
@@ -13,20 +14,18 @@ extension RaindropForm.Fields: View {
     var body: some View {
         Section {
             HStack(spacing: 16) {
-                ZStack {
+                Button { cover.toggle() } label: {
                     Thumbnail(
                         (raindrop.isNew ? raindrop.cover : Rest.renderImage(raindrop.cover, options: .maxDeviceSize)) ?? Rest.renderImage(raindrop.link, options: .maxDeviceSize),
                         width: 56,
                         height: 48
                     )
-                        .cornerRadius(3)
-                    
-                    NavigationLink {
-                        CoverPicker(raindrop: $raindrop)
-                    } label: {}
-                        .opacity(0.00001)
-                        .layoutPriority(-1)
+                    .cornerRadius(3)
                 }
+                    .buttonStyle(.borderless)
+                    .navigationDestination(isPresented: $cover) {
+                        CoverPicker(raindrop: $raindrop)
+                    }
                     .padding(.top, 10)
                     .frame(maxHeight: .infinity, alignment: .top)
                 
@@ -38,7 +37,6 @@ extension RaindropForm.Fields: View {
                     .onSubmit {
                         focus = nil
                     }
-                    .frame(maxHeight: .infinity)
             }
             
             TextField("Description", text: $raindrop.excerpt, axis: .vertical)
@@ -86,21 +84,21 @@ extension RaindropForm.Fields: View {
             .listItemTint(.monochrome)
         
         Section {
-            Label {
+            HStack(spacing: 16) {
                 if raindrop.file == nil {
                     URLField("URL", value: $raindrop.link)
                         .focused($focus, equals: .link)
                         .font(.subheadline)
                         .foregroundStyle(focus == .link ? .primary : .secondary)
-                        .multilineTextAlignment(.center)
-                } else {
-                    Text("File").foregroundStyle(.tertiary)
+                    
+                    Divider()
                 }
-            } icon: {
+                
                 Button { raindrop.important.toggle() } label: {
                     Image(systemName: "heart")
                         .symbolVariant(raindrop.important ? .fill : .none)
                 }
+                    .buttonStyle(.borderless)
                     .tint(raindrop.important ? .accentColor : .secondary)
                     .fixedSize()
             }
