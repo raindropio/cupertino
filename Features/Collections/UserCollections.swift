@@ -45,7 +45,7 @@ extension UserCollections {
                         Image(systemName: "square.grid.3x1.folder.badge.plus")
                     } actions: {
                         Button("Create collection") {
-                            event.create(.group())
+                            event.create()
                         }
                     }
                 }

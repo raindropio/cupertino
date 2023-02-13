@@ -75,7 +75,7 @@ struct FabStack: View {
                     home
                     
                 case .collection:
-                    CollectionStack(collection > 0 ? .parent(collection) : .group())
+                    CollectionStack(.new(parent: collection > 0 ? collection : nil), content: CollectionForm.init)
                     
                 case .media:
                     MediaPicker(selection: $items, matching: [.images, .videos])

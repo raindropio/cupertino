@@ -29,7 +29,7 @@ public struct UserCollectionItem: View {
             }
             .swipeActions(edge: .leading) {
                 Button {
-                    event.create(.parent(collection.id))
+                    event.create(collection.id)
                 } label: {
                     Label("Create collection", systemImage: "plus")
                 }

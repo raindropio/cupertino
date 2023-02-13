@@ -31,12 +31,12 @@ fileprivate struct _CollectionsMenu: View {
     @ViewBuilder
     func new(_ ids: Set<Int>) -> some View {
         if ids.isEmpty {
-            Button { event.create(.group()) } label: {
+            Button { event.create() } label: {
                 Label("New collection", systemImage: "plus")
             }
         }
         else if ids.count == 1, let id = ids.first, id > 0 {
-            Button { event.create(.parent(id)) } label: {
+            Button { event.create(id) } label: {
                 Label("Add collection", systemImage: "plus.square.dashed")
             }
         }

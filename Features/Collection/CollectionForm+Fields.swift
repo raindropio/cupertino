@@ -2,13 +2,13 @@ import SwiftUI
 import UI
 import API
 
-extension CollectionStack {
+extension CollectionForm {
     struct Fields {
         @Binding var collection: UserCollection
     }
 }
 
-extension CollectionStack.Fields: View {
+extension CollectionForm.Fields: View {
     var body: some View {
         Section {
             Label {

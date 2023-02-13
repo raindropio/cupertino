@@ -11,7 +11,7 @@ struct CollectionsGroup<T: Hashable>: View {
     var tag: (Int) -> T
     
     func add() {
-        event.create(.group(group))
+        event.create()
     }
 
     func toggle() {

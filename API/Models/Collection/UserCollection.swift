@@ -34,6 +34,10 @@ public struct UserCollection: CollectionType {
     public var isValid: Bool {
         !title.isEmpty
     }
+    
+    public var isNew: Bool {
+        id == 0
+    }
 }
 
 extension UserCollection {

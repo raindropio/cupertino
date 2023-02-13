@@ -11,7 +11,7 @@ public extension View {
 struct _CollectionsEventModifier: ViewModifier {
     @StateObject private var event = CollectionsEvent()
     
-    @State private var create: CollectionStack.NewLocation?
+    @State private var create: UserCollection?
     @State private var edit: UserCollection?
     @State private var merge: Set<UserCollection.ID> = .init()
     @State private var merging = false
@@ -26,15 +26,19 @@ struct _CollectionsEventModifier: ViewModifier {
         content
             //receive events
             .environmentObject(event)
-            .onReceive(event.create) { create = $0 }
+            .onReceive(event.create) { create = .new(parent: $0) }
             .onReceive(event.edit) { edit = $0 }
             .onReceive(event.merge) { merge = $0; merging = true }
             .onReceive(event.delete) { delete = $0; deleting = true }
             .onReceive(event.groupEdit) { groupEdit = $0; groupEditing = true }
             .onReceive(event.groupDelete) { groupDelete = $0; groupDeleting = true }
             //sheets/alerts
-            .sheet(item: $create, content: CollectionStack.init)
-            .sheet(item: $edit, content: CollectionStack.init)
+            .sheet(item: $create) {
+                CollectionStack($0, content: CollectionForm.init)
+            }
+            .sheet(item: $edit) {
+                CollectionStack($0, content: CollectionForm.init)
+            }
             .alert("Are you sure?", isPresented: $merging, presenting: merge, actions: Merge.init)
             .alert("Are you sure?", isPresented: $deleting, presenting: delete, actions: Delete.init) { _ in
                 Text("Bookmarks will be moved to Trash")
@@ -46,15 +50,15 @@ struct _CollectionsEventModifier: ViewModifier {
 }
 
 class CollectionsEvent: ObservableObject {
-    fileprivate let create: PassthroughSubject<CollectionStack.NewLocation, Never> = PassthroughSubject()
+    fileprivate let create: PassthroughSubject<UserCollection.ID?, Never> = PassthroughSubject()
     fileprivate let edit: PassthroughSubject<UserCollection, Never> = PassthroughSubject()
     fileprivate let merge: PassthroughSubject<Set<UserCollection.ID>, Never> = PassthroughSubject()
     fileprivate let delete: PassthroughSubject<Set<UserCollection.ID>, Never> = PassthroughSubject()
     fileprivate let groupEdit: PassthroughSubject<CGroup, Never> = PassthroughSubject()
     fileprivate let groupDelete: PassthroughSubject<CGroup, Never> = PassthroughSubject()
 
-    func create(_ location: CollectionStack.NewLocation) {
-        create.send(location)
+    func create(_ parent: UserCollection.ID? = nil) {
+        create.send(parent)
     }
     
     func edit(_ collection: UserCollection) {
