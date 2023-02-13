@@ -28,8 +28,18 @@ extension CollectionForm.Fields: View {
             }
         }
         
-        Section("Parent") {
-            CollectionsPicker($collection.parent)
+        Section("Parent") {            
+            NavigationLink {
+                CollectionParent($collection)
+            } label: {
+                if let parent = collection.parent {
+                    CollectionLabel(parent, withLocation: true)
+                        .badge(0)
+                } else {
+                    Text("None")
+                        .foregroundStyle(.secondary)
+                }
+            }
         }
     }
 }
