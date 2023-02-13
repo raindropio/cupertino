@@ -2,7 +2,7 @@ import SwiftUI
 import API
 
 struct RaindropItem {
-    @EnvironmentObject private var event: RaindropsEvent
+    @EnvironmentObject private var sheet: RaindropSheet
     @EnvironmentObject private var dispatch: Dispatcher
     @Environment(\.raindropsContainer) private var container
     
@@ -38,7 +38,7 @@ extension RaindropItem: View {
                 }
             }
             .swipeActions(edge: .trailing) {
-                Button { event.edit(raindrop.id) } label: {
+                Button { sheet.edit(raindrop.id) } label: {
                     Label("More", systemImage: "ellipsis.circle")
                 }
 

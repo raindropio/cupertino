@@ -1,7 +1,7 @@
 import SwiftUI
 import API
 
-extension _CollectionsEventModifier {
+extension _CollectionSheetsModifier {
     struct Delete: View {
         @EnvironmentObject private var dispatch: Dispatcher
         var ids: Set<UserCollection.ID>

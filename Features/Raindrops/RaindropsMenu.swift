@@ -19,7 +19,7 @@ public func RaindropsMenu(_ ids: Set<Raindrop.ID>) -> some View {
 }
 
 fileprivate struct _Menu: View {
-    @EnvironmentObject private var event: RaindropsEvent
+    @EnvironmentObject private var sheet: RaindropSheet
     @EnvironmentObject private var r: RaindropsStore
     @EnvironmentObject private var dispatch: Dispatcher
 
@@ -53,7 +53,7 @@ fileprivate struct _Menu: View {
                         }
                     }
                     
-                    Button { event.edit(item.id) } label: {
+                    Button { sheet.edit(item.id) } label: {
                         Label("Edit", systemImage: "pencil")
                     }
                 }
@@ -66,17 +66,17 @@ fileprivate struct _Menu: View {
             ShareLink(items: items.map { $0.link })
             
             //move
-            Button { event.move(pick) } label: {
+            Button { sheet.move(pick) } label: {
                 Label("Move", systemImage: "folder")
             }
             
             //add tags
-            Button { event.addTags(pick) } label: {
+            Button { sheet.addTags(pick) } label: {
                 Label("Add tags", systemImage: "number")
             }
 
             //delete
-            Button(role: .destructive) { event.delete(pick) } label: {
+            Button(role: .destructive) { sheet.delete(pick) } label: {
                 Label("Delete", systemImage: "trash")
             }
                 .tint(.red)

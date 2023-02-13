@@ -3,7 +3,6 @@ import API
 import UI
 
 struct RaindropLinks: View {
-    @EnvironmentObject private var event: RaindropsEvent
     @Environment(\.raindropsContainer) private var container
     @Environment(\.editMode) private var editMode
 

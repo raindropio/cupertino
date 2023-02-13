@@ -23,7 +23,7 @@ public func CollectionsMenu(_ ids: Set<FindBy>) -> some View {
 
 fileprivate struct _CollectionsMenu: View {
     @EnvironmentObject private var c: CollectionsStore
-    @EnvironmentObject private var event: CollectionsEvent
+    @EnvironmentObject private var sheet: CollectionSheet
     @EnvironmentObject private var dispatch: Dispatcher
 
     var ids: Set<Int>
@@ -31,12 +31,12 @@ fileprivate struct _CollectionsMenu: View {
     @ViewBuilder
     func new(_ ids: Set<Int>) -> some View {
         if ids.isEmpty {
-            Button { event.create() } label: {
+            Button { sheet.create() } label: {
                 Label("New collection", systemImage: "plus")
             }
         }
         else if ids.count == 1, let id = ids.first, id > 0 {
-            Button { event.create(id) } label: {
+            Button { sheet.create(id) } label: {
                 Label("Add collection", systemImage: "plus.square.dashed")
             }
         }
@@ -68,7 +68,7 @@ fileprivate struct _CollectionsMenu: View {
             if let collection = c.state.user[id] {
                 //edit
                 Button {
-                    event.edit(collection)
+                    sheet.edit(collection)
                 } label: {
                     Label("Edit collection", systemImage: "pencil")
                 }
@@ -78,7 +78,7 @@ fileprivate struct _CollectionsMenu: View {
         //merge
         if ids.count > 1 {
             Button {
-                event.merge(ids)
+                sheet.merge(ids)
             } label: {
                 Label("Merge collections", systemImage: "arrow.triangle.merge")
             }
@@ -86,7 +86,7 @@ fileprivate struct _CollectionsMenu: View {
             
         if !ids.isEmpty {
             Button(role: .destructive) {
-                event.delete(ids)
+                sheet.delete(ids)
             } label: {
                 Label("Delete collection", systemImage: "trash")
             }

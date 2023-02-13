@@ -46,7 +46,6 @@ public struct RaindropsContainer<C: View>: View {
 }
 
 extension RaindropsContainer { fileprivate struct Memorized: View {
-    @EnvironmentObject private var event: RaindropsEvent
     @EnvironmentObject private var dispatch: Dispatcher
     @EnvironmentObject private var itemLinkService: ItemLinkService<Raindrop>
 

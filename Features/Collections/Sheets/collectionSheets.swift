@@ -3,13 +3,13 @@ import API
 import Combine
 
 public extension View {
-    func collectionsEvent() -> some View {
-        modifier(_CollectionsEventModifier())
+    func collectionSheets() -> some View {
+        modifier(_CollectionSheetsModifier())
     }
 }
 
-struct _CollectionsEventModifier: ViewModifier {
-    @StateObject private var event = CollectionsEvent()
+struct _CollectionSheetsModifier: ViewModifier {
+    @StateObject private var sheet = CollectionSheet()
     
     @State private var create: UserCollection?
     @State private var edit: UserCollection?
@@ -24,14 +24,14 @@ struct _CollectionsEventModifier: ViewModifier {
     
     func body(content: Content) -> some View {
         content
-            //receive events
-            .environmentObject(event)
-            .onReceive(event.create) { create = .new(parent: $0) }
-            .onReceive(event.edit) { edit = $0 }
-            .onReceive(event.merge) { merge = $0; merging = true }
-            .onReceive(event.delete) { delete = $0; deleting = true }
-            .onReceive(event.groupEdit) { groupEdit = $0; groupEditing = true }
-            .onReceive(event.groupDelete) { groupDelete = $0; groupDeleting = true }
+            //receive sheets
+            .environmentObject(sheet)
+            .onReceive(sheet.create) { create = .new(parent: $0) }
+            .onReceive(sheet.edit) { edit = $0 }
+            .onReceive(sheet.merge) { merge = $0; merging = true }
+            .onReceive(sheet.delete) { delete = $0; deleting = true }
+            .onReceive(sheet.groupEdit) { groupEdit = $0; groupEditing = true }
+            .onReceive(sheet.groupDelete) { groupDelete = $0; groupDeleting = true }
             //sheets/alerts
             .sheet(item: $create) {
                 CollectionStack($0, content: CollectionForm.init)
@@ -49,7 +49,7 @@ struct _CollectionsEventModifier: ViewModifier {
     }
 }
 
-class CollectionsEvent: ObservableObject {
+class CollectionSheet: ObservableObject {
     fileprivate let create: PassthroughSubject<UserCollection.ID?, Never> = PassthroughSubject()
     fileprivate let edit: PassthroughSubject<UserCollection, Never> = PassthroughSubject()
     fileprivate let merge: PassthroughSubject<Set<UserCollection.ID>, Never> = PassthroughSubject()

@@ -27,7 +27,7 @@ struct Folder<H: View>: View {
             .fab(to: find.collectionId)
             .modifier(Title(find: find))
             .modifier(Toolbar(find: find, selection: $selection))
-            .raindropsEvent()
+            .raindropSheets()
             .scopeEditMode()
             .onChange(of: find) { _ in
                 selection = .init()

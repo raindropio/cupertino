@@ -1,7 +1,7 @@
 import SwiftUI
 import API
 
-extension _CollectionsEventModifier {
+extension _CollectionSheetsModifier {
     struct GroupEdit: View {
         @EnvironmentObject private var dispatch: Dispatcher
         @State private var newName: String
@@ -28,7 +28,7 @@ extension _CollectionsEventModifier {
     }
 }
 
-extension _CollectionsEventModifier {
+extension _CollectionSheetsModifier {
     struct GroupDelete: View {
         @EnvironmentObject private var dispatch: Dispatcher
         var group: CGroup

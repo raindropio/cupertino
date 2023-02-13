@@ -15,7 +15,7 @@ struct SaveFiles: View {
             } else {
                 NavigationStack {
                     CollectionsList($collection, system: [-1])
-                        .collectionsEvent()
+                        .collectionSheets()
                         .navigationTitle("Where to save")
                         .navigationBarTitleDisplayMode(.inline)
                         .toolbar {

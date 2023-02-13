@@ -3,13 +3,13 @@ import API
 import Combine
 
 public extension View {
-    func tagsEvent() -> some View {
-        modifier(_TagsEventModifier())
+    func tagSheets() -> some View {
+        modifier(_TagSheetsModifier())
     }
 }
 
-struct _TagsEventModifier: ViewModifier {
-    @StateObject private var event = TagsEvent()
+struct _TagSheetsModifier: ViewModifier {
+    @StateObject private var sheet = TagSheet()
     
     @State private var rename: String?
     @State private var renaming = false
@@ -20,11 +20,10 @@ struct _TagsEventModifier: ViewModifier {
     
     func body(content: Content) -> some View {
         content
-            //receive events
-            .environmentObject(event)
-            .onReceive(event.rename) { rename = $0; renaming = true }
-            .onReceive(event.merge) { merge = $0; merging = true }
-            .onReceive(event.delete) { delete = $0; deleting = true }
+            .environmentObject(sheet)
+            .onReceive(sheet.rename) { rename = $0; renaming = true }
+            .onReceive(sheet.merge) { merge = $0; merging = true }
+            .onReceive(sheet.delete) { delete = $0; deleting = true }
             //alerts
             .alert("Rename", isPresented: $renaming, presenting: rename, actions: Rename.init)
             .alert("Merge", isPresented: $merging, presenting: merge, actions: Merge.init)
@@ -32,7 +31,7 @@ struct _TagsEventModifier: ViewModifier {
     }
 }
 
-class TagsEvent: ObservableObject {
+class TagSheet: ObservableObject {
     fileprivate let rename: PassthroughSubject<String, Never> = PassthroughSubject()
     fileprivate let merge: PassthroughSubject<Set<String>, Never> = PassthroughSubject()
     fileprivate let delete: PassthroughSubject<Set<String>, Never> = PassthroughSubject()

@@ -37,7 +37,7 @@ public func TagsMenu(_ findBy: Set<FindBy>) -> some View {
 
 
 fileprivate struct _TagsMenu: View {
-    @EnvironmentObject private var event: TagsEvent
+    @EnvironmentObject private var sheet: TagSheet
     @EnvironmentObject private var dispatch: Dispatcher
 
     var tags: Set<String>
@@ -53,20 +53,20 @@ fileprivate struct _TagsMenu: View {
         }
         
         if let tag = tags.first, tags.count == 1 {
-            Button { event.rename(tag) } label: {
+            Button { sheet.rename(tag) } label: {
                 Label("Rename", systemImage: "pencil")
             }
             .tint(.accentColor)
         }
         
         if tags.count > 1 {
-            Button { event.merge(tags) } label: {
+            Button { sheet.merge(tags) } label: {
                 Label("Merge", systemImage: "arrow.triangle.merge")
             }
         }
             
         if !tags.isEmpty {
-            Button { event.delete(tags) } label: {
+            Button { sheet.delete(tags) } label: {
                 Label("Delete", systemImage: "trash")
             }
                 .tint(.red)

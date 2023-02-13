@@ -30,7 +30,7 @@ extension UserCollections where T == FindBy {
 extension UserCollections {
     fileprivate struct Memorized: View {
         @Environment(\.editMode) private var editMode
-        @EnvironmentObject private var event: CollectionsEvent
+        @EnvironmentObject private var sheet: CollectionSheet
         
         var tag: (Int) -> T
         var groups: [CGroup]
@@ -45,7 +45,7 @@ extension UserCollections {
                         Image(systemName: "square.grid.3x1.folder.badge.plus")
                     } actions: {
                         Button("Create collection") {
-                            event.create()
+                            sheet.create()
                         }
                     }
                 }

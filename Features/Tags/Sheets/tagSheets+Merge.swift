@@ -2,7 +2,7 @@ import SwiftUI
 import API
 import Combine
 
-extension _TagsEventModifier {
+extension _TagSheetsModifier {
     struct Merge: View {
         @EnvironmentObject private var dispatch: Dispatcher
         @State private var newName: String

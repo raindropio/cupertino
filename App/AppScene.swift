@@ -23,8 +23,8 @@ struct AppScene: View {
         }
             .navigationSplitViewUnlimitedWidth()
             .containerSizeClass()
-            .collectionsEvent()
-            .tagsEvent()
+            .collectionSheets()
+            .tagSheets()
             .dropProvider()
             .environmentObject(router)
             .preferredColorScheme(theme.colorScheme)

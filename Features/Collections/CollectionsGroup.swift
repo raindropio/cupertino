@@ -4,14 +4,14 @@ import UI
 
 struct CollectionsGroup<T: Hashable>: View {
     @EnvironmentObject private var dispatch: Dispatcher
-    @EnvironmentObject private var event: CollectionsEvent
+    @EnvironmentObject private var sheet: CollectionSheet
 
     var group: CGroup
     var items: [UserCollection.ID: UserCollection]
     var tag: (Int) -> T
     
     func add() {
-        event.create()
+        sheet.create()
     }
 
     func toggle() {

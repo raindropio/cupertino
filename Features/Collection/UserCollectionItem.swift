@@ -3,7 +3,7 @@ import API
 import UI
 
 public struct UserCollectionItem: View {
-    @EnvironmentObject private var event: CollectionsEvent
+    @EnvironmentObject private var sheet: CollectionSheet
     var collection: UserCollection
     var withLocation = false
     
@@ -21,7 +21,7 @@ public struct UserCollectionItem: View {
             .dropConsumer(to: collection)
             .swipeActions(edge: .trailing) {
                 Button {
-                    event.edit(collection)
+                    sheet.edit(collection)
                 } label: {
                     Label("Edit", systemImage: "pencil")
                 }
@@ -29,7 +29,7 @@ public struct UserCollectionItem: View {
             }
             .swipeActions(edge: .leading) {
                 Button {
-                    event.create(collection.id)
+                    sheet.create(collection.id)
                 } label: {
                     Label("Create collection", systemImage: "plus")
                 }

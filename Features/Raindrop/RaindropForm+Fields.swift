@@ -97,6 +97,7 @@ extension RaindropForm.Fields: View {
                 Button { raindrop.important.toggle() } label: {
                     Image(systemName: "heart")
                         .symbolVariant(raindrop.important ? .fill : .none)
+                        .imageScale(.medium)
                 }
                     .buttonStyle(.borderless)
                     .tint(raindrop.important ? .accentColor : .secondary)

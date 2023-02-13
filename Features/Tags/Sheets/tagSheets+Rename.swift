@@ -2,7 +2,7 @@ import SwiftUI
 import API
 import Combine
 
-extension _TagsEventModifier {
+extension _TagSheetsModifier {
     struct Rename: View {
         @EnvironmentObject private var dispatch: Dispatcher
         @State private var newName: String

@@ -4,14 +4,14 @@ import UI
 import API
 
 public extension View {
-    func raindropsEvent() -> some View {
+    func raindropSheets() -> some View {
         modifier(_Modifier())
     }
 }
 
 fileprivate struct _Modifier: ViewModifier {
     @Environment(\.editMode) private var editMode
-    @StateObject private var event = RaindropsEvent()
+    @StateObject private var sheet = RaindropSheet()
     @State private var edit: Raindrop.ID?
     @State private var move: RaindropsPick?
     @State private var addTags: RaindropsPick?
@@ -21,11 +21,11 @@ fileprivate struct _Modifier: ViewModifier {
     func body(content: Content) -> some View {
         content
         //receive
-        .environmentObject(event)
-        .onReceive(event.edit) { edit = $0 }
-        .onReceive(event.move) { move = $0 }
-        .onReceive(event.addTags) { addTags = $0 }
-        .onReceive(event.delete) { delete = $0; deleting = true }
+        .environmentObject(sheet)
+        .onReceive(sheet.edit) { edit = $0 }
+        .onReceive(sheet.move) { move = $0 }
+        .onReceive(sheet.addTags) { addTags = $0 }
+        .onReceive(sheet.delete) { delete = $0; deleting = true }
         //sheets/alerts
         .sheet(item: $edit) { id in
             RaindropStack(id, content: RaindropForm.init)
@@ -46,7 +46,7 @@ fileprivate struct _Modifier: ViewModifier {
     }
 }
 
-class RaindropsEvent: ObservableObject {
+class RaindropSheet: ObservableObject {
     fileprivate let edit: PassthroughSubject<Raindrop.ID, Never> = PassthroughSubject()
     fileprivate let move: PassthroughSubject<RaindropsPick, Never> = PassthroughSubject()
     fileprivate let addTags: PassthroughSubject<RaindropsPick, Never> = PassthroughSubject()
