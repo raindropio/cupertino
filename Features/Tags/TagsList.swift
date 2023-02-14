@@ -80,12 +80,14 @@ extension TagsList: View {
                         .textInputAutocapitalization(.never)
                         .keyboardType(.webSearch)
                         #endif
+                        .autoFocus()
                 } icon: {
                     Button { focused = true } label: {
                         Image(systemName: "plus")
                     }
                         .tint(.gray)
                 }
+                    .listRowBackground(Color.primary.opacity(0.07))
                     .onSubmit(of: .text) {
                         focused = !new.isEmpty
                         add(new)
@@ -107,6 +109,7 @@ extension TagsList: View {
                 }
             }
         }
+            ._safeAreaInsets(.init(top: -20, leading: 0, bottom: 0, trailing: 0))
             .animation(.default, value: selected)
             .animation(.default, value: suggestions)
             .tagSheets()

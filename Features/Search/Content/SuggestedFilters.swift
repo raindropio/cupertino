@@ -37,7 +37,7 @@ extension SuggestedFilters {
                     if !tags.isEmpty {
                         Menu {
                             ForEach(tags) { item in
-                                SearchCompletionButton(item) {
+                                SearchCompletionButton(item, replace: false) {
                                     FilterRow(item)
                                 }
                             }
@@ -53,7 +53,7 @@ extension SuggestedFilters {
                     }
                     
                     ForEach(simple) { item in
-                        SearchCompletionButton(item) {
+                        SearchCompletionButton(item, replace: false) {
                             FilterRow(item)
                         }
                             .tint(item.color)
@@ -63,7 +63,7 @@ extension SuggestedFilters {
                     if !created.isEmpty {
                         Menu {
                             ForEach(created) { item in
-                                SearchCompletionButton(item) {
+                                SearchCompletionButton(item, replace: false) {
                                     FilterRow(item)
                                 }
                             }

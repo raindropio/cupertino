@@ -37,7 +37,9 @@ struct AutoFocus<C: View>: UIViewControllerRepresentable {
             if condition, !focused, let child = view.subviews.first?.subviews.first {
                 focused = true
                 DispatchQueue.main.async {
-                    child.becomeFirstResponder()
+                    UIView.performWithoutAnimation {
+                        child.becomeFirstResponder()
+                    }
                 }
             }
         }

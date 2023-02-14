@@ -6,8 +6,8 @@ public func SearchCompletionButton<L: View>(_ completion: String, label: @escapi
     TextButton(completion: completion, label: label)
 }
 
-public func SearchCompletionButton<T: Identifiable, L: View>(_ token: T, label: @escaping () -> L) -> some View {
-    TokenButton(token: token, label: label)
+public func SearchCompletionButton<T: Identifiable, L: View>(_ token: T, replace: Bool = true, label: @escaping () -> L) -> some View {
+    TokenButton(token: token, replace: replace, label: label)
 }
 
 fileprivate struct TextButton<L: View>: View {
@@ -27,11 +27,12 @@ fileprivate struct TokenButton<T: Identifiable, L: View>: View {
     @EnvironmentObject private var service: TokensService<T>
     
     var token: T
+    var replace: Bool
     var label: () -> L
     
     var body: some View {
         Button(action: {
-            service.subject.send(token)
+            service.subject.send(.init(value: token, replace: replace))
         }, label: label)
     }
 }
@@ -57,11 +58,13 @@ fileprivate struct SC<T: RandomAccessCollection & RangeReplaceableCollection>: V
             }
             .onReceive(tokensService.subject) { token in
                 let exists = tokens.contains {
-                    $0.id == token.id
+                    $0.id == token.value.id
                 }
                 if !exists {
-                    text = ""
-                    tokens.append(token)
+                    if token.replace {
+                        text = ""
+                    }
+                    tokens.append(token.value)
                 }
             }
             .environmentObject(tokensService)
@@ -70,7 +73,12 @@ fileprivate struct SC<T: RandomAccessCollection & RangeReplaceableCollection>: V
 }
 
 fileprivate class TokensService<T: Identifiable>: ObservableObject {
-    let subject: PassthroughSubject<T, Never> = PassthroughSubject()
+    let subject: PassthroughSubject<Token, Never> = PassthroughSubject()
+    
+    struct Token {
+        var value: T
+        var replace: Bool
+    }
 }
 
 fileprivate class TextService: ObservableObject {

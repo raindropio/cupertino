@@ -28,12 +28,6 @@ public struct Search<C: View>: View {
                     isActive = $0
                 }
             }
-            .onChange(of: refine) {
-                if $0.isSearching, !isActive {
-                    refine = refine + base
-                    isActive = true
-                }
-            }
             .modifier(Animations(refine: $refine, isActive: isActive))
             .modifier(Bar(refine: $refine))
             .modifier(Scope(base: base, refine: $refine, isActive: isActive))
