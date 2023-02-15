@@ -35,7 +35,7 @@ fileprivate struct DropProviderModifier: ViewModifier {
             self.collection = collection
             //make sure to get urls right away, otherwise OS kills nsitems in short time
             Task {
-                self.urls = await items.getURLs(addTypes)
+                self.urls = await items.urls()
             }
         }
     }

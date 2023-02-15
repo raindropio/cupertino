@@ -22,7 +22,7 @@ extension AddDetect {
     func convert() async {
         loading = true
         
-        let urls = await items.getURLs(addTypes)
+        let urls = await items.urls()
 
         let web = urls.filter { !$0.isFileURL }
         //web urls are priority

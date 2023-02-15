@@ -41,6 +41,7 @@ extension RaindropsReducer {
                             completed?.wrappedValue.insert(url)
                             return raindrop
                         } catch {
+                            print(error)
                             failed?.wrappedValue.insert(url)
                             return nil
                         }
