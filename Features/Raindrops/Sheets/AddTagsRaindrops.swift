@@ -3,8 +3,9 @@ import API
 import UI
 
 struct AddTagsRaindrops: View {
-    @Environment(\.dismiss) private var dismiss
     @EnvironmentObject private var dispatch: Dispatcher
+    @Environment(\.dismiss) private var dismiss
+    @Environment(\.editMode) private var editMode
     
     @State private var tags = [String]()
 
@@ -15,6 +16,9 @@ struct AddTagsRaindrops: View {
     private func add() async throws {
         guard !tags.isEmpty else { return }
         try await dispatch(RaindropsAction.updateMany(pick, .addTags(tags)))
+        
+        dismiss()
+        editMode?.wrappedValue = .inactive
     }
     
     var body: some View {

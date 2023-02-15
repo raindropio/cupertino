@@ -41,6 +41,19 @@ extension CollectionForm.Fields: View {
                 }
             }
         }
+        
+        Section("Sharing") {
+            Toggle(isOn: $collection.public) {
+                Label("Public page", systemImage: "globe.americas.fill")
+            }
+            
+            NavigationLink {
+                
+            } label: {
+                Label("Collaboration", systemImage: "person.2.fill")
+            }
+        }
+            .listItemTint(.monochrome)
     }
 }
 

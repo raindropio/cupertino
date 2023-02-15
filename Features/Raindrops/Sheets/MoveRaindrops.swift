@@ -3,9 +3,10 @@ import API
 import UI
 
 struct MoveRaindrops: View {
-    @Environment(\.dismiss) private var dismiss
     @EnvironmentObject private var dispatch: Dispatcher
     @EnvironmentObject private var c: CollectionsStore
+    @Environment(\.dismiss) private var dismiss
+    @Environment(\.editMode) private var editMode
     
     @State private var to: Int?
 
@@ -17,6 +18,8 @@ struct MoveRaindrops: View {
         guard let to else { return }
         try await dispatch(RaindropsAction.updateMany(pick, .moveTo(to)))
         self.to = nil
+        dismiss()
+        editMode?.wrappedValue = .inactive
     }
     
     var body: some View {
