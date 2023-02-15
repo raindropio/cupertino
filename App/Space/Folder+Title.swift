@@ -23,12 +23,10 @@ extension Folder.Title {
         var title: String
         
         var scope: String {
-            if isSearching {
-                return "Search"
-            }
-            
             if find.isSearching {
-                if find.collectionId == 0 {
+                if isSearching {
+                    return "Search"
+                } else if find.collectionId == 0 {
                     return find.search
                 } else {
                     return "\(title): \(find.search)"
