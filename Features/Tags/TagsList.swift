@@ -109,7 +109,6 @@ extension TagsList: View {
                 }
             }
         }
-            ._safeAreaInsets(.init(top: -20, leading: 0, bottom: 0, trailing: 0))
             .animation(.default, value: selected)
             .animation(.default, value: suggestions)
             .tagSheets()

@@ -17,10 +17,16 @@ extension Folder {
 
 extension Folder.Title {
     fileprivate struct Memorized: ViewModifier {
+        @Environment(\.isSearching) private var isSearching
+        
         var find: FindBy
         var title: String
         
         var scope: String {
+            if isSearching {
+                return "Search"
+            }
+            
             if find.isSearching {
                 if find.collectionId == 0 {
                     return find.search

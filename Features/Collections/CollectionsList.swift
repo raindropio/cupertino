@@ -57,7 +57,6 @@ extension _Optional: View {
                 FindCollections<Int>(search)
             }
         }
-            ._safeAreaInsets(.init(top: -20, leading: 0, bottom: 0, trailing: 0))
             #if os(iOS)
             .listStyle(.insetGrouped)
             .headerProminence(.increased)

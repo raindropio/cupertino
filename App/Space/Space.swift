@@ -18,7 +18,7 @@ struct Space: View {
                     Nesteds(find: refine)
                 }
             }
+                .isSearching($app.searchPreferred)
         }
-            .searchFocused($app.searchPreferred)
     }
 }
