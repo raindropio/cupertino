@@ -32,6 +32,7 @@ extension CollectionForm: View {
             
             if collection.isNew {
                 SubmitButton("Create")
+                    .disabled(!collection.isValid)
             } else if collection.access.level >= .member {
                 ActionButton(message: "This action will delete collection and all nested collections.\nBookmarks will be moved to Trash.", role: .destructive, action: delete) {
                     Text("Delete collection").frame(maxWidth: .infinity)

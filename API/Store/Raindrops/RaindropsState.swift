@@ -4,8 +4,9 @@ import SwiftUI
 public struct RaindropsState: ReduxState {
     typealias Segments = [ FindBy : Segment ]
 
-    @Cached("rns-items") var items = [Raindrop.ID: Raindrop]()
+    @Cached("rns-items") var items = [ Raindrop.ID: Raindrop ]()
     @Cached("rns-segments", restore) var segments = Segments()
+    @Cached("rns-links") var lookups = [ URL: Raindrop.ID ]()
     public var animation = UUID()
 
     public init() {}
@@ -17,10 +18,8 @@ extension RaindropsState {
     }
     
     public func item(_ url: URL) -> Raindrop? {
-        items.first {
-            $0.value.link == url
-        }.map {
-            $0.value
-        }
+        let id = lookups[url.compact]
+        guard let id else { return nil }
+        return items[id]
     }
 }
