@@ -15,6 +15,7 @@ public struct CollectionForm {
 
 extension CollectionForm {
     private func commit() async throws {
+        guard collection.isValid else { return }
         try await dispatch(collection.isNew ? CollectionsAction.create(collection) : CollectionsAction.update(collection))
         dismiss()
     }

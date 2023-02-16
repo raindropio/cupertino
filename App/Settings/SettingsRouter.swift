@@ -17,4 +17,5 @@ enum SettingsRoute {
     case subscription
     case backups
     case `import`
+    case appicon
 }

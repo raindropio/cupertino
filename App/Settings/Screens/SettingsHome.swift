@@ -24,21 +24,26 @@ struct SettingsHome: View {
                 }
                 
                 Section {
+                    NavigationLink(value: SettingsRoute.appicon) {
+                        Label("App Icon", systemImage: "app.badge.fill").tint(.primary)
+                    }
+                        .listItemTint(.purple)
+                    
                     SettingsBrowser()
-                        .listItemTint(.blue)
+                        .listItemTint(.indigo)
                     
                     SettingsTheme()
-                        .listItemTint(.indigo)
+                        .listItemTint(.blue)
                     
                     Link(destination: URL(string: "https://ifttt.com/raindrop")!) {
                         Label("Integrations", systemImage: "puzzlepiece.extension").badge("+2,000").tint(.primary)
                     }
-                        .listItemTint(.purple)
+                        .listItemTint(.cyan)
                     
                     NavigationLink(value: SettingsRoute.import) {
                         Label("Import", systemImage: "square.and.arrow.down").tint(.primary)
                     }
-                        .listItemTint(.orange)
+                        .listItemTint(.green)
                     
                     NavigationLink(value: SettingsRoute.backups) {
                         Label("Backups", systemImage: "clock.arrow.circlepath").tint(.primary)

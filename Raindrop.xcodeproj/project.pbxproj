@@ -10,6 +10,7 @@
 		760DD2FD2942333D00103C9E /* SaveFiles.swift in Sources */ = {isa = PBXBuildFile; fileRef = 760DD2FC2942333D00103C9E /* SaveFiles.swift */; };
 		760DD2FF294237E900103C9E /* NothingFound.swift in Sources */ = {isa = PBXBuildFile; fileRef = 760DD2FE294237E900103C9E /* NothingFound.swift */; };
 		76143B0228842C85006A7508 /* UI in Frameworks */ = {isa = PBXBuildFile; productRef = 76143B0128842C85006A7508 /* UI */; };
+		761F4CAD299E2E86008C1E6D /* SettingsAppIcon.swift in Sources */ = {isa = PBXBuildFile; fileRef = 761F4CAC299E2E86008C1E6D /* SettingsAppIcon.swift */; };
 		76292CE42951A4D7000E16AA /* SettingsHome.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76292CE32951A4D7000E16AA /* SettingsHome.swift */; };
 		76292CE82951B413000E16AA /* SettingsWebApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76292CE72951B413000E16AA /* SettingsWebApp.swift */; };
 		76292CEA2951B86F000E16AA /* SettingsSubscription.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76292CE92951B86F000E16AA /* SettingsSubscription.swift */; };
@@ -98,6 +99,7 @@
 /* Begin PBXFileReference section */
 		760DD2FC2942333D00103C9E /* SaveFiles.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SaveFiles.swift; sourceTree = "<group>"; };
 		760DD2FE294237E900103C9E /* NothingFound.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NothingFound.swift; sourceTree = "<group>"; };
+		761F4CAC299E2E86008C1E6D /* SettingsAppIcon.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsAppIcon.swift; sourceTree = "<group>"; };
 		76292CE32951A4D7000E16AA /* SettingsHome.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsHome.swift; sourceTree = "<group>"; };
 		76292CE72951B413000E16AA /* SettingsWebApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsWebApp.swift; sourceTree = "<group>"; };
 		76292CE92951B86F000E16AA /* SettingsSubscription.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsSubscription.swift; sourceTree = "<group>"; };
@@ -309,6 +311,7 @@
 				76292CE32951A4D7000E16AA /* SettingsHome.swift */,
 				76292CE72951B413000E16AA /* SettingsWebApp.swift */,
 				76292CE92951B86F000E16AA /* SettingsSubscription.swift */,
+				761F4CAC299E2E86008C1E6D /* SettingsAppIcon.swift */,
 				76292CEB2951BC52000E16AA /* SettingsBrowser.swift */,
 				76292CED2951BF65000E16AA /* SettingsTheme.swift */,
 				76292CEF2951C7D2000E16AA /* SettingsLogout.swift */,
@@ -497,6 +500,7 @@
 				76864FBD291EA059000B9B45 /* SidebarScreen.swift in Sources */,
 				76292CE82951B413000E16AA /* SettingsWebApp.swift in Sources */,
 				769056F0297539080090C1EF /* Folder+Title.swift in Sources */,
+				761F4CAD299E2E86008C1E6D /* SettingsAppIcon.swift in Sources */,
 				768CA20329505AD600AD7E62 /* AuthContinueWith+JWT.swift in Sources */,
 				76ECFE002948793B00DF15C9 /* Browser+CacheError.swift in Sources */,
 				76BFE371291E9F6B00DE9DB2 /* AuthScene.swift in Sources */,
@@ -669,6 +673,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				ASSETCATALOG_COMPILER_ALTERNATE_APPICON_NAMES = "Flow Holo Blue Black Zen";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = App/App.entitlements;
@@ -713,6 +718,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				ASSETCATALOG_COMPILER_ALTERNATE_APPICON_NAMES = "Flow Holo Blue Black Zen";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = App/App.entitlements;
