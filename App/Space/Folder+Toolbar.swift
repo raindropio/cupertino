@@ -79,12 +79,23 @@ extension Folder.Toolbar {
                                 cancelEditModeButton
                             }
                         } label: {
-                            (Text("\(selection.count) selected ") + Text(Image(systemName: "chevron.up.chevron.down")))
+                            HStack {
+                                if pick.isAll {
+                                    Text("All")
+                                } else {
+                                    Text(selection.count, format: .number)
+                                        .contentTransition(.numericText())
+                                }
+                                Text(Image(systemName: "chevron.up.chevron.down"))
+                            }
                                 .imageScale(.small)
+                                .lineLimit(1)
+                                .animation(.easeInOut(duration: 0.2), value: selection.count)
                         }
-                            .tint(.primary)
-                            .lineLimit(1)
-                            .layoutPriority(-1)
+                            .buttonStyle(.bordered)
+                            .menuStyle(.button)
+                            .controlSize(.mini)
+                            .tint(.accentColor)
                     }
                     
                     ToolbarItemGroup(placement: .bottomBar) {

@@ -19,7 +19,9 @@ struct MoveRaindrops: View {
         try await dispatch(RaindropsAction.updateMany(pick, .moveTo(to)))
         self.to = nil
         dismiss()
-        editMode?.wrappedValue = .inactive
+        withAnimation {
+            editMode?.wrappedValue = .inactive
+        }
     }
     
     var body: some View {

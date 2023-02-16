@@ -89,7 +89,9 @@ fileprivate struct _Menu: View {
                     Menu {
                         Button("Confirm", role: .destructive) {
                             dispatch.sync(RaindropsAction.updateMany(pick, .removeTags))
-                            editMode?.wrappedValue = .inactive
+                            withAnimation {
+                                editMode?.wrappedValue = .inactive
+                            }
                         }
                     } label: {
                         Label("Remove tags", systemImage: "tag.slash")

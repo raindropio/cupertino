@@ -18,7 +18,9 @@ struct AddTagsRaindrops: View {
         try await dispatch(RaindropsAction.updateMany(pick, .addTags(tags)))
         
         dismiss()
-        editMode?.wrappedValue = .inactive
+        withAnimation {
+            editMode?.wrappedValue = .inactive
+        }
     }
     
     var body: some View {

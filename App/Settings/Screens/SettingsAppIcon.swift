@@ -26,7 +26,9 @@ struct SettingsAppIcon: View {
                             .resizable()
                             .frame(width: 64, height: 64)
                             .clipShape(RoundedRectangle(cornerRadius: 13, style: .continuous))
-                            .overlay(RoundedRectangle(cornerRadius: 13, style: .continuous).strokeBorder(.primary.opacity(0.2), lineWidth: 0.5))
+                            .overlay(RoundedRectangle(cornerRadius: 13, style: .continuous)
+                                .strokeBorder(.primary.opacity(0.2), lineWidth: 0.5)
+                            )
                         
                         Text(name ?? "Default")
                     }

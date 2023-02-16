@@ -12,7 +12,9 @@ struct DeleteRaindrops: View {
     //do work
     private func delete() {
         dispatch.sync(RaindropsAction.deleteMany(pick))
-        editMode?.wrappedValue = .inactive
+        withAnimation {
+            editMode?.wrappedValue = .inactive
+        }
     }
     
     var body: some View {
