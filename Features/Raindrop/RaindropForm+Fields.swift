@@ -5,7 +5,6 @@ import UI
 extension RaindropForm {
     struct Fields {
         @State private var cover = false
-        @Namespace private var animation
         
         @Binding var raindrop: Raindrop
         @FocusState var focus: FocusField?
@@ -45,7 +44,7 @@ extension RaindropForm.Fields: View {
                 .focused($focus, equals: .excerpt)
                 .lineLimit(5)
         }
-
+        
         Section {
             NavigationLink {
                 RaindropCollection($raindrop)
@@ -53,11 +52,16 @@ extension RaindropForm.Fields: View {
                 CollectionLabel(raindrop.collection, withLocation: true)
                     .badge(0)
                     .symbolVariant(.fill)
-                    .matchedGeometryEffect(id: raindrop.collection, in: animation)
             }
-            
-            SuggestedCollections($raindrop, animation: animation)
-
+                .id(raindrop.collection)
+        } header: {
+            Text("Collection")
+        } footer: {
+            RaindropSuggestedCollections($raindrop)
+        }
+            .listItemTint(.monochrome)
+        
+        Section {
             //tags
             HStack {
                 Label {
@@ -73,33 +77,12 @@ extension RaindropForm.Fields: View {
                     .layoutPriority(-1)
             }
             
-            //highlights
-            NavigationLink {
-                RaindropHighlights($raindrop)
-            } label: {
-                HStack {
-                    Label(Filter.Kind.highlights.title, systemImage: Filter.Kind.highlights.systemImage)
-                    if !raindrop.highlights.isEmpty {
-                        Spacer()
-                        Text(raindrop.highlights.count, format: .number)
-                            .circularBadge()
-                    }
-                }
-            }
-        }
-            .listItemTint(.monochrome)
-        
-        Section {
-            HStack(spacing: 16) {
+            Label {
                 if raindrop.file == nil {
                     URLField("URL", value: $raindrop.link)
                         .focused($focus, equals: .link)
-                        .font(.subheadline)
-                        .foregroundStyle(focus == .link ? .primary : .secondary)
-                    
-                    Divider()
                 }
-                
+            } icon: {
                 Button { raindrop.important.toggle() } label: {
                     Image(systemName: "heart")
                         .symbolVariant(raindrop.important ? .fill : .none)
@@ -107,9 +90,9 @@ extension RaindropForm.Fields: View {
                 }
                     .buttonStyle(.borderless)
                     .tint(raindrop.important ? .accentColor : .secondary)
-                    .fixedSize()
             }
         }
+            .listItemTint(.monochrome)
     }
 }
 

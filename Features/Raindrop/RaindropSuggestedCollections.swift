@@ -1,0 +1,62 @@
+import SwiftUI
+import API
+import UI
+
+public struct RaindropSuggestedCollections: View {
+    @EnvironmentObject private var r: RaindropsStore
+    @AppStorage("default-collection") private var defaultCollection: Int?
+    
+    @Binding var raindrop: Raindrop
+    
+    public init(_ raindrop: Binding<Raindrop>) {
+        self._raindrop = raindrop
+    }
+    
+    private var suggestions: [UserCollection.ID] {
+        r.state.suggestions(raindrop.link).collections
+            .filter { $0 != defaultCollection }
+    }
+    
+    private func row(_ id: Int) -> some View {
+        Button {
+            raindrop.collection = id
+        } label: {
+            CollectionLabel(id)
+                .badge(0)
+        }
+    }
+    
+    public var body: some View {
+        Group {
+            if !suggestions.isEmpty, raindrop.collection == -1 {
+                ScrollView(.horizontal, showsIndicators: false) {
+                    HStack(spacing: 10) {
+                        if let defaultCollection {
+                            row(defaultCollection)
+                        }
+                        
+                        ForEach(suggestions, id: \.self, content: row)
+                    }
+                    .buttonStyle(.chip)
+                    .controlSize(.small)
+                    .tint(.secondary)
+                    .foregroundColor(.primary)
+                    .padding(.vertical, 14)
+                    .padding(.trailing, 32)
+                    .fixedSize()
+                }
+                .opacity(0.8)
+                .fixedSize(horizontal: false, vertical: true)
+                .mask(LinearGradient(
+                    gradient: Gradient(colors: Array(repeating: .black, count: 7) + [.clear]),
+                    startPoint: .leading,
+                    endPoint: .trailing
+                ))
+            }
+        }
+            .contentTransition(.identity)
+            .animation(.default, value: raindrop.collection)
+            .animation(.default, value: !suggestions.isEmpty)
+            .clearSection()
+    }
+}

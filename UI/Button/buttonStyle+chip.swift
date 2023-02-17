@@ -16,9 +16,9 @@ public extension MenuStyle where Self == ChipMenuButtonStyle {
 fileprivate struct ChipStyleModifier: ViewModifier {
     @Environment(\.controlSize) private var controlSize
     @Environment(\.isEnabled) private var isEnabled
-    private static let height: [ControlSize: CGFloat]   = [.large: 50,    .regular: 40,   .small: 28, .mini: 28]
-    private static let padding: [ControlSize: CGFloat]  = [.large: 16,   .regular: 14,   .small: 10, .mini: 10]
-    private static let corner: [ControlSize: CGFloat]   = [.large: 8,     .regular: 6,    .small: 14, .mini: 14]
+    private static let height: [ControlSize: CGFloat]   = [.large: 50,  .regular: 40,   .small: 30, .mini: 30]
+    private static let padding: [ControlSize: CGFloat]  = [.large: 16,  .regular: 14,   .small: 10, .mini: 10]
+    private static let corner: [ControlSize: CGFloat]   = [.large: 8,   .regular: 6,    .small: 15, .mini: 15]
 
     var isPressed = false
     

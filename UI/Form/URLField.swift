@@ -31,7 +31,6 @@ extension URLField: View {
             .keyboardType(.URL)
             .textContentType(.URL)
             .textInputAutocapitalization(.never)
-            .truncationMode(.head)
             .disableAutocorrection(true)
     }
 }

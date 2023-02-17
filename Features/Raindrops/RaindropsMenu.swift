@@ -54,6 +54,10 @@ fileprivate struct _Menu: View {
                         }
                     }
                     
+                    Button { sheet.highlights(item.id) } label: {
+                        Label("Highlights", systemImage: Filter.Kind.highlights.systemImage)
+                    }
+                    
                     Button { sheet.edit(item.id) } label: {
                         Label("Edit", systemImage: "pencil")
                     }
