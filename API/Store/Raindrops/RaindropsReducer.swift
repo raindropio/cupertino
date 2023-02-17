@@ -72,12 +72,16 @@ public actor RaindropsReducer: Reducer {
         case .updatedMany(let pick, let operation):
             updatedMany(state: &state, pick: pick, operation: operation)
             
+        //Helpers
+        case .lookup(let url):
+            await lookup(state: &state, url: url)
+            
+        case .suggest(let raindrop):
+            await suggest(state: &state, raindrop: raindrop)
+            
         //Shorthands
         case .reorder(let id, let to, let order):
             return reorder(state: &state, id: id, to: to, order: order)
-            
-        case .lookup(let url):
-            await lookup(state: &state, url: url)
         }
         return nil
     }

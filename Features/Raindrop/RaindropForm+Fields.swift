@@ -5,6 +5,8 @@ import UI
 extension RaindropForm {
     struct Fields {
         @State private var cover = false
+        @Namespace private var animation
+        
         @Binding var raindrop: Raindrop
         @FocusState var focus: FocusField?
     }
@@ -50,7 +52,11 @@ extension RaindropForm.Fields: View {
             } label: {
                 CollectionLabel(raindrop.collection, withLocation: true)
                     .badge(0)
+                    .symbolVariant(.fill)
+                    .matchedGeometryEffect(id: raindrop.collection, in: animation)
             }
+            
+            SuggestedCollections($raindrop, animation: animation)
 
             //tags
             HStack {

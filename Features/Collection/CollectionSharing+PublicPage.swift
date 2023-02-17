@@ -13,7 +13,7 @@ extension CollectionSharing {
                         SafariLink(destination: collection.publicPage) {
                             Label("Open", systemImage: "safari").tint(.primary)
                         }
-                        ShareLink(item: collection, preview: .init(collection.title)) {
+                        ShareLink(item: collection.publicPage) {
                             Label("Share", systemImage: "square.and.arrow.up").tint(.primary)
                         }
                     }

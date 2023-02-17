@@ -87,7 +87,10 @@ fileprivate struct ByURL<C: View>: View {
     @Sendable private func lookup() async {
         defer { loading = false }
         loading = true
-        try? await dispatch(RaindropsAction.lookup(url))
+        try? await dispatch([
+            RaindropsAction.lookup(url),
+            RaindropsAction.suggest(draft)
+        ])
     }
     
     var body: some View {

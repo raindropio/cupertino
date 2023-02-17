@@ -30,6 +30,7 @@ extension RaindropForm: View {
             Fields(raindrop: $raindrop)
             Actions(raindrop: $raindrop)
         }
+            .animation(.default, value: raindrop.collection)
             .modifier(Toolbar(raindrop: $raindrop))
             .submitLabel(.done)
             .onSubmit(commit)

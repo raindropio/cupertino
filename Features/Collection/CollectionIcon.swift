@@ -20,7 +20,7 @@ struct CollectionIcon<C: CollectionType>: View {
                 Image(systemName: systemImage)
             }
         }
-        .fixedSize()
+            .fixedSize()
     }
 }
 

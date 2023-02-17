@@ -70,6 +70,7 @@ public enum RaindropsAction: ReduxAction {
     case moreLoaded(FindBy, Int, [Raindrop], Int)
     //single
     case lookup(URL)
+    case suggest(Raindrop)
     //create
     case create(Raindrop) // -> createMany
     //update
