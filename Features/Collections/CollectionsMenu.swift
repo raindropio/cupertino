@@ -72,6 +72,13 @@ fileprivate struct _CollectionsMenu: View {
                 } label: {
                     Label("Edit collection", systemImage: "pencil")
                 }
+                
+                //share
+                Button {
+                    sheet.share(collection)
+                } label: {
+                    Label("Share collection", systemImage: "square.and.arrow.up")
+                }
             }
         }
         

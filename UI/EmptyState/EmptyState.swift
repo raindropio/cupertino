@@ -35,6 +35,7 @@ extension EmptyState: View {
                     Text(title)
                         .font(.title)
                         .fontWeight(.bold)
+                        .multilineTextAlignment(.center)
                 }
                 
                 if !message.isEmpty {

@@ -12,6 +12,15 @@ public enum AuthAction: ReduxAction {
     case jwt(URL)
 }
 
+public enum CollaboratorsAction: ReduxAction {
+    case load(UserCollection.ID)
+    case reload(UserCollection.ID)
+    case reloaded(UserCollection.ID, [Collaborator])
+    case invite(UserCollection.ID, InviteCollaboratorRequest)
+    case deleteAll(UserCollection.ID)
+    case change(UserCollection.ID, userId: Collaborator.ID, level: CollectionAccess.Level)
+}
+
 public enum CollectionsAction: ReduxAction {
     //load
     case load

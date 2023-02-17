@@ -42,18 +42,29 @@ extension CollectionForm.Fields: View {
             }
         }
         
-        Section("Sharing") {
-            Toggle(isOn: $collection.public) {
-                Label("Public page", systemImage: "globe.americas.fill")
+        if !collection.isNew {
+            Section {
+                NavigationLink {
+                    CollectionSharing($collection)
+                } label: {
+                    HStack {
+                        Text("Sharing")
+                        Spacer()
+                        
+                        if collection.public {
+                            Text("Public")
+                                .circularBadge()
+                                .tint(.accentColor)
+                        } else {
+                            (Text(Image(systemName: "lock.fill")) + Text(" Private"))
+                                .foregroundStyle(.secondary)
+                                .imageScale(.small)
+                        }
+                    }
+                }
             }
-            
-            NavigationLink {
-                
-            } label: {
-                Label("Collaboration", systemImage: "person.2.fill")
-            }
+                .listItemTint(.monochrome)
         }
-            .listItemTint(.monochrome)
     }
 }
 

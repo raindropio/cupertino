@@ -25,10 +25,8 @@ public struct UserCollection: CollectionType {
         "folder"
     }
     
-    public var publicPage: URL? {
-        self.public ?
-            .init(string: "https://raindrop.io/\(creatorRef?.name ?? "")/\(slug)") :
-            nil
+    public var publicPage: URL {
+        .init(string: "https://raindrop.io/\(creatorRef?.name ?? "")/\(slug)-\(id)")!
     }
     
     public var isValid: Bool {

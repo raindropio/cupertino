@@ -4,9 +4,9 @@ import UI
 
 struct UserRow<U: UserType>: View {
     var user: U?
-    var width: Double
+    var width: Double?
     
-    init(_ user: U?, width: Double = 28.0) {
+    init(_ user: U?, width: Double? = nil) {
         self.user = user
         self.width = width
     }
@@ -15,13 +15,7 @@ struct UserRow<U: UserType>: View {
         Label {
             Text(user?.name ?? "Unknown")
         } icon: {
-            if let avatar = user?.avatar {
-                Thumbnail(avatar, width: width, height: width)
-                    .cornerRadius(width)
-            } else {
-                Image(systemName: "person.crop.circle")
-                    .symbolVariant(.fill)
-            }
+            UserAvatar(user, width: width)
         }
     }
 }

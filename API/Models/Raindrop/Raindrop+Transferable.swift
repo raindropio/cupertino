@@ -35,14 +35,10 @@ extension Raindrop: CustomItemProvider {
     }
 }
 
-//@available(iOS 16.0, macOS 13.0, tvOS 16.0, watchOS 9.0, *)
-//extension Raindrop: Transferable {
-//    public static var transferRepresentation: some TransferRepresentation {
-//        CodableRepresentation(contentType: .raindrop)
-//        DataRepresentation(exportedContentType: .url) {
-//            $0.link.dataRepresentation
-//        }
-//        ProxyRepresentation(exporting: \.title)
-//    }
-//}
-
+@available(iOS 16.0, macOS 13.0, tvOS 16.0, watchOS 9.0, *)
+extension Raindrop: Transferable {
+    public static var transferRepresentation: some TransferRepresentation {
+        CodableRepresentation(contentType: .raindrop)
+        ProxyRepresentation(exporting: \.link)
+    }
+}

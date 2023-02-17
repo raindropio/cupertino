@@ -18,6 +18,7 @@ struct RaindropApp: App {
             }
                 .environmentObject(store.dispatcher)
                 .environmentObject(store.auth)
+                .environmentObject(store.collaborators)
                 .environmentObject(store.collections)
                 .environmentObject(store.filters)
                 .environmentObject(store.icons)

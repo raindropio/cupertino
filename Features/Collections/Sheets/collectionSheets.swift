@@ -13,6 +13,7 @@ struct _CollectionSheetsModifier: ViewModifier {
     
     @State private var create: UserCollection?
     @State private var edit: UserCollection?
+    @State private var share: UserCollection?
     @State private var merge: Set<UserCollection.ID> = .init()
     @State private var merging = false
     @State private var delete: Set<UserCollection.ID> = .init()
@@ -28,6 +29,7 @@ struct _CollectionSheetsModifier: ViewModifier {
             .environmentObject(sheet)
             .onReceive(sheet.create) { create = .new(parent: $0) }
             .onReceive(sheet.edit) { edit = $0 }
+            .onReceive(sheet.share) { share = $0 }
             .onReceive(sheet.merge) { merge = $0; merging = true }
             .onReceive(sheet.delete) { delete = $0; deleting = true }
             .onReceive(sheet.groupEdit) { groupEdit = $0; groupEditing = true }
@@ -38,6 +40,9 @@ struct _CollectionSheetsModifier: ViewModifier {
             }
             .sheet(item: $edit) {
                 CollectionStack($0, content: CollectionForm.init)
+            }
+            .sheet(item: $share) {
+                CollectionStack($0, content: CollectionSharing.init)
             }
             .alert("Are you sure?", isPresented: $merging, presenting: merge, actions: Merge.init)
             .alert("Are you sure?", isPresented: $deleting, presenting: delete, actions: Delete.init) { _ in
@@ -52,6 +57,7 @@ struct _CollectionSheetsModifier: ViewModifier {
 class CollectionSheet: ObservableObject {
     fileprivate let create: PassthroughSubject<UserCollection.ID?, Never> = PassthroughSubject()
     fileprivate let edit: PassthroughSubject<UserCollection, Never> = PassthroughSubject()
+    fileprivate let share: PassthroughSubject<UserCollection, Never> = PassthroughSubject()
     fileprivate let merge: PassthroughSubject<Set<UserCollection.ID>, Never> = PassthroughSubject()
     fileprivate let delete: PassthroughSubject<Set<UserCollection.ID>, Never> = PassthroughSubject()
     fileprivate let groupEdit: PassthroughSubject<CGroup, Never> = PassthroughSubject()
@@ -63,6 +69,10 @@ class CollectionSheet: ObservableObject {
     
     func edit(_ collection: UserCollection) {
         edit.send(collection)
+    }
+    
+    func share(_ collection: UserCollection) {
+        share.send(collection)
     }
     
     func edit(_ group: CGroup) {
