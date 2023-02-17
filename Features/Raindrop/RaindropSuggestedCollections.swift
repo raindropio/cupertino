@@ -4,7 +4,7 @@ import UI
 
 public struct RaindropSuggestedCollections: View {
     @EnvironmentObject private var r: RaindropsStore
-    @AppStorage("default-collection") private var defaultCollection: Int?
+    @AppStorage("last-used-collection") private var lastUsedCollection: Int?
     
     @Binding var raindrop: Raindrop
     
@@ -14,7 +14,7 @@ public struct RaindropSuggestedCollections: View {
     
     private var suggestions: [UserCollection.ID] {
         r.state.suggestions(raindrop.link).collections
-            .filter { $0 != defaultCollection }
+            .filter { $0 != lastUsedCollection }
     }
     
     private func row(_ id: Int) -> some View {
@@ -31,8 +31,8 @@ public struct RaindropSuggestedCollections: View {
             if !suggestions.isEmpty, raindrop.collection == -1 {
                 ScrollView(.horizontal, showsIndicators: false) {
                     HStack(spacing: 10) {
-                        if let defaultCollection {
-                            row(defaultCollection)
+                        if let lastUsedCollection, lastUsedCollection != raindrop.collection {
+                            row(lastUsedCollection)
                         }
                         
                         ForEach(suggestions, id: \.self, content: row)
