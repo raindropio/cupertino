@@ -6,7 +6,7 @@ extension Array where Element == NSItemProvider {
     public func urls() async -> Set<URL> {
         var found: Set<URL> = []
         for item in self {
-            let url = try! await item.url()
+            let url = try? await item.url()
             if let url {
                 found.insert(url)
             }
@@ -23,7 +23,9 @@ extension NSItemProvider {
 }
 
 fileprivate struct AnyURL: Transferable {
-    private let string: String = ""
+    private var string: String { rawValue.absoluteString }
+    private var data: Data { rawValue.dataRepresentation }
+
     let rawValue: URL
     
     @Sendable init(_ url: URL) throws {
@@ -52,16 +54,27 @@ fileprivate struct AnyURL: Transferable {
             throw MyError.ignore
         }
     }
+    
+    //youtube specific
+    @Sendable init(_ data: Data) throws {
+        let text = try NSKeyedUnarchiver.unarchiveTopLevelObjectWithData(data) as? String
+        if let text {
+            try self.init(text)
+        } else {
+            throw MyError.ignore
+        }
+    }
         
     static var transferRepresentation: some TransferRepresentation {
         ProxyRepresentation(exporting: \.rawValue, importing: self.init)
-        ProxyRepresentation(exporting: \.string, importing: self.init)
         FileRepresentation(importedContentType: .fileURL, importing: self.init)
         FileRepresentation(importedContentType: .image, importing: self.init)
         FileRepresentation(importedContentType: .video, importing: self.init)
         FileRepresentation(importedContentType: .movie, importing: self.init)
         FileRepresentation(importedContentType: .audio, importing: self.init)
         FileRepresentation(importedContentType: .pdf, importing: self.init)
+        ProxyRepresentation(exporting: \.string, importing: self.init)
+        DataRepresentation(contentType: .text, exporting: \.data, importing: self.init)
     }
     
     enum MyError: Error {

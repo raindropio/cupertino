@@ -114,7 +114,9 @@ fileprivate struct Stack<C: View>: View {
         let rest = Rest()
         let meta = try? await rest.importUrlParse(draft.link)
         if let meta, draft.isNew {
-            draft.enrich(from: meta)
+            withAnimation {
+                draft.enrich(from: meta)
+            }
         }
     }
     
