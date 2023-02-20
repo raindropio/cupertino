@@ -22,34 +22,32 @@ extension Folder.Status {
         var total: Int
         
         var body: some View {
-            if total > 0 {
-                Section {
-                    HStack {
-                        Text("\(total) items")
-                            .fontWeight(.medium)
-                            .foregroundStyle(.secondary)
-                            .contentTransition(.numericText())
-                        
-                        Spacer()
-                        
-                        SortRaindropsButton(find)
-                            .labelStyle(.titleOnly)
-                            .fixedSize()
-                        
-                        CustomizeRaindropsButton(find)
-                            .labelStyle(.iconOnly)
-                            .fixedSize()
-                    }
-                    .pickerStyle(.menu)
-                    .imageScale(.large)
-                    .labelsHidden()
-                    .lineLimit(1)
-                    .scenePadding(.leading)
+            Section {
+                HStack {
+                    Text("\(total) items")
+                        .fontWeight(.medium)
+                        .foregroundStyle(.secondary)
+                    
+                    Spacer()
+                    
+                    SortRaindropsButton(find)
+                        .labelStyle(.titleOnly)
+                        .fixedSize()
+                    
+                    CustomizeRaindropsButton(find)
+                        .labelStyle(.iconOnly)
+                        .fixedSize()
                 }
-                .clearSection()
-                .contentTransition(.identity)
-                .disabled(editMode?.wrappedValue == .active)
+                .pickerStyle(.menu)
+                .imageScale(.large)
+                .labelsHidden()
+                .lineLimit(1)
+                .scenePadding(.leading)
             }
+            .clearSection()
+            .contentTransition(.identity)
+            .disabled(editMode?.wrappedValue == .active)
+            .opacity(total > 0 ? 1 : 0)
         }
     }
 }

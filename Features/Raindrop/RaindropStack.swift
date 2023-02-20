@@ -85,12 +85,14 @@ fileprivate struct ByURL<C: View>: View {
     
     //maybe existing?
     @Sendable private func lookup() async {
-        defer { loading = false }
         loading = true
-        try? await dispatch([
-            RaindropsAction.lookup(url),
-            RaindropsAction.suggest(draft)
-        ])
+        try? await dispatch(RaindropsAction.lookup(url))
+        loading = false
+    }
+    
+    //load suggestions
+    @Sendable private func suggest() async {
+        try? await dispatch(RaindropsAction.suggest(draft))
     }
     
     var body: some View {
@@ -98,6 +100,7 @@ fileprivate struct ByURL<C: View>: View {
             .onAppear { draft = stored }
             .task(id: stored) { draft = stored }
             .task(id: url, lookup)
+            .task(id: url, suggest)
     }
 }
 

@@ -13,8 +13,12 @@ public struct RaindropSuggestedCollections: View {
     }
     
     private var suggestions: [UserCollection.ID] {
-        r.state.suggestions(raindrop.link).collections
+        var ids = r.state.suggestions(raindrop.link).collections
             .filter { $0 != lastUsedCollection }
+        if let lastUsedCollection, lastUsedCollection != raindrop.collection {
+            ids.insert(lastUsedCollection, at: 0)
+        }
+        return ids
     }
     
     private func row(_ id: Int) -> some View {
@@ -28,13 +32,9 @@ public struct RaindropSuggestedCollections: View {
     
     public var body: some View {
         Group {
-            if !suggestions.isEmpty, raindrop.collection == -1 {
+            if raindrop.collection == -1, !suggestions.isEmpty {
                 ScrollView(.horizontal, showsIndicators: false) {
                     HStack(spacing: 10) {
-                        if let lastUsedCollection, lastUsedCollection != raindrop.collection {
-                            row(lastUsedCollection)
-                        }
-                        
                         ForEach(suggestions, id: \.self, content: row)
                     }
                     .buttonStyle(.chip)

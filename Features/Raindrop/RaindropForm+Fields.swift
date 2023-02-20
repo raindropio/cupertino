@@ -14,7 +14,16 @@ extension RaindropForm {
 extension RaindropForm.Fields: View {
     var body: some View {
         Section {
-            HStack(spacing: 16) {
+            HStack(spacing: 8) {
+                TextField("Title", text: $raindrop.title, axis: .vertical)
+                    .preventLineBreaks(text: $raindrop.title)
+                    .focused($focus, equals: .title)
+                    .fontWeight(.semibold)
+                    .lineLimit(5)
+                    .onSubmit {
+                        focus = nil
+                    }
+                
                 Button { cover.toggle() } label: {
                     Thumbnail(
                         (raindrop.isNew ? raindrop.cover : Rest.renderImage(raindrop.cover, options: .maxDeviceSize)) ?? Rest.renderImage(raindrop.link, options: .maxDeviceSize),
@@ -29,15 +38,6 @@ extension RaindropForm.Fields: View {
                     }
                     .padding(.top, 10)
                     .frame(maxHeight: .infinity, alignment: .top)
-                
-                TextField("Title", text: $raindrop.title, axis: .vertical)
-                    .preventLineBreaks(text: $raindrop.title)
-                    .focused($focus, equals: .title)
-                    .fontWeight(.semibold)
-                    .lineLimit(5)
-                    .onSubmit {
-                        focus = nil
-                    }
             }
             
             TextField("Description", text: $raindrop.excerpt, axis: .vertical)

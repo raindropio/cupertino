@@ -29,14 +29,14 @@ struct FabStack: View {
                     Button {
                         kind = .media
                     } label: {
-                        Label("Photos or videos", systemImage: Filter.Kind.type(.image).systemImage).tint(.primary)
+                        Label("Media", systemImage: Filter.Kind.type(.image).systemImage).tint(.primary)
                     }
                         .listItemTint(Filter.Kind.type(.image).color)
                     
                     Button {
                         kind = .document
                     } label: {
-                        Label("Files", systemImage: Filter.Kind.file.systemImage).tint(.primary)
+                        Label("File", systemImage: Filter.Kind.file.systemImage).tint(.primary)
                     }
                         .listItemTint(Filter.Kind.file.color)
                 }

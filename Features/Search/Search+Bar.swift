@@ -11,7 +11,7 @@ extension Search {
             if sizeClass == .regular {
                 return .automatic
             } else {
-                return .navigationBarDrawer(displayMode: refine.isSearching ? .always : .automatic)
+                return .navigationBarDrawer(displayMode: .always)
             }
         }
 

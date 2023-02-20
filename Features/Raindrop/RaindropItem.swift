@@ -48,6 +48,9 @@ extension RaindropItem: View {
                     Label("Delete", systemImage: "trash")
                 }
                     .tint(.red)
+                
+                ShareLink(item: raindrop.link)
+                    .tint(.blue)
             }
             .onDrag {
                 raindrop.itemProvider

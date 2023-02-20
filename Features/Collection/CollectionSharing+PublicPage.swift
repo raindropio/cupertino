@@ -27,7 +27,7 @@ extension CollectionSharing {
                         .toggleStyle(.switch)
                 }
             } footer: {
-                Text("Share individual collections with the entire web. Sign-up is not required. [Learn more](https://help.raindrop.io/public-page/)")
+                Text("Share collection with the entire web. Sign-up is not required. [Learn more](https://help.raindrop.io/public-page/)")
                     .padding(.bottom)
             }
                 .listItemTint(.monochrome)
