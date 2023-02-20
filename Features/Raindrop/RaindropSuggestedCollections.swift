@@ -37,7 +37,7 @@ public struct RaindropSuggestedCollections: View {
                     HStack(spacing: 10) {
                         ForEach(suggestions, id: \.self, content: row)
                     }
-                    .buttonStyle(.chip)
+                    .buttonStyle(.dotted)
                     .controlSize(.small)
                     .tint(.secondary)
                     .foregroundColor(.primary)

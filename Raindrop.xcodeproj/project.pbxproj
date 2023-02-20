@@ -588,6 +588,7 @@
 /* Begin PBXShellScriptBuildPhase section */
 		767F0AFD29A368C200349902 /* Download latest app/extension prod build to ./bundle folder */ = {
 			isa = PBXShellScriptBuildPhase;
+			alwaysOutOfDate = 1;
 			buildActionMask = 2147483647;
 			files = (
 			);

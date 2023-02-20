@@ -95,6 +95,16 @@ public actor CollectionsReducer: Reducer {
             }
         }
         
+        //User
+        if let action = action as? UserAction {
+            switch action {
+            case .reloaded(_):
+                return A.reload
+                
+            default: break
+            }
+        }
+        
         //Raindrops
         if let action = action as? RaindropsAction {
             switch action {
