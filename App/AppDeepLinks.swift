@@ -16,15 +16,15 @@ struct AppDeepLinks: ViewModifier {
                 case .collection(let action):
                     switch action {
                     case .open(let id):
-                        router.navigate(collection: id)
+                        router.find(collection: id)
                     }
                     
                 case .raindrop(let action):
                     switch action {
-                    case .open(let id):
+                    case .open(let find, let id):
                         switch browser {
                         case .inapp:
-                            router.navigate(raindrop: id)
+                            router.preview(find: find, id: id)
                             
                         case .safari:
                             if let url = r.state.item(id)?.link {
@@ -38,14 +38,14 @@ struct AppDeepLinks: ViewModifier {
                         }
                         
                     case .cache(let id):
-                        router.navigate(raindrop: id, mode: .cache)
+                        router.cached(id: id)
                         
-                    case .preview(let id):
-                        router.navigate(raindrop: id)
+                    case .preview(let find, let id):
+                        router.preview(find: find, id: id)
                     }
                     
                 case .find(let find):
-                    router.navigate(find: find)
+                    router.find(find)
                 }
             }
             .safariView(item: $safari, button: .init(id: "io.raindrop.ios.share", systemImage: "info.circle"))

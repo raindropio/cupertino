@@ -9,17 +9,21 @@ struct AppScene: View {
 
     var body: some View {
         NavigationSplitView(sidebar: SidebarScreen.init) {
-            NavigationStack(path: $router.path) {
+            NavigationStack(path: $router.detail) {
                 Group {
-                    if let space = router.space {
-                        Space(find: space)
+                    if let space = router.sidebar {
+                        Find(find: space)
                     }
                 }
-                    //screens
-                    .navigationDestination(for: FindBy.self, destination: Space.init)
-                    .navigationDestination(for: Browse.Location.self, destination: Browse.init)
+                .navigationDestination(for: AppRouter.Path.self) {
+                    switch $0 {
+                    case .find(let find): Find(find: find)
+                    case .preview(let find, let id): Preview(find: find, id: id)
+                    case .cached(let id): Cached(id: id)
+                    case .browse(let url): Browse(url: url)
+                    }
+                }
             }
-                .navigationBarTitleDisplayMode(.large) //fix iphone bug
         }
             .navigationSplitViewUnlimitedWidth()
             .containerSizeClass()

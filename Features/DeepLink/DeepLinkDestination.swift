@@ -4,8 +4,8 @@ import API
 public enum DeepLinkDestination: Equatable {
     case raindrop(R)
     public enum R: Equatable {
-        case open(Raindrop.ID)
-        case preview(Raindrop.ID)
+        case open(FindBy, Raindrop.ID)
+        case preview(FindBy, Raindrop.ID)
         case cache(Raindrop.ID)
     }
     

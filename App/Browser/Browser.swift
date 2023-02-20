@@ -3,13 +3,13 @@ import API
 import UI
 
 struct Browser {
-    @StateObject private var page = WebPage()
     @EnvironmentObject private var r: RaindropsStore
     @EnvironmentObject private var dispatch: Dispatcher
     
     @State private var raindrop = Raindrop.new()
     @State private var loading = false
     
+    @ObservedObject var page: WebPage
     var start: WebRequest
 }
 
@@ -34,9 +34,8 @@ extension Browser: View {
             .task(id: stored) { raindrop = stored }
             .task(id: page.url, lookup)
             //browser
-            .modifier(Title(page: page, raindrop: $raindrop))
+            .navigationBarTitleDisplayMode(.inline)
             .modifier(Toolbar(page: page, raindrop: $raindrop))
-            .modifier(CacheError(page: page, raindrop: $raindrop))
             .modifier(PageError(page: page, raindrop: $raindrop))
             .modifier(WebHighlights(page: page, raindrop: $raindrop, loading: $loading))
     }

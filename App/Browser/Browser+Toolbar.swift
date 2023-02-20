@@ -10,7 +10,6 @@ extension Browser {
         @EnvironmentObject private var dispatch: Dispatcher
         @Environment(\.dismiss) private var dismiss
 
-        @State private var appearance = false
         @State private var collection = false
         @State private var tags = false
         @State private var highlights = false
@@ -22,10 +21,6 @@ extension Browser {
 }
 
 extension Browser.Toolbar {
-    private var mode: Browse.Location.Mode {
-        page.request?.attribute as? Browse.Location.Mode ?? .raw
-    }
-    
     private var portrait: Bool {
         verticalSizeClass == .regular && horizontalSizeClass == .compact
     }
@@ -44,13 +39,11 @@ extension Browser.Toolbar: ViewModifier {
         .animation(.default, value: page.prefersHiddenToolbars)
         //buttons
         .toolbar {
-            //reader
-            ToolbarItemGroup {
-                if mode == .preview, raindrop.type == .article {
-                    Button { appearance.toggle() } label: {
-                        Image(systemName: "textformat.size")
+            ToolbarTitleMenu {
+                if let url = page.url {
+                    Link(destination: url) {
+                        Label("Open in browser", systemImage: "arrow.up.forward")
                     }
-                    .popover(isPresented: $appearance, content: ReaderAppearance.init)
                 }
             }
             

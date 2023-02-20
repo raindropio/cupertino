@@ -3,7 +3,7 @@ import Features
 import API
 import UI
 
-struct Space: View {
+struct Find: View {
     @EnvironmentObject private var app: AppRouter
     
     var find: FindBy = .init()

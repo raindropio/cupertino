@@ -8,7 +8,7 @@ struct SidebarScreen: View {
     @EnvironmentObject private var app: AppRouter
     
     var body: some View {
-        FindByList(selection: $app.space)
+        FindByList(selection: $app.sidebar)
             .modifier(Toolbar())
             .fab(hidden: sizeClass == .regular)
             .scopeEditMode()

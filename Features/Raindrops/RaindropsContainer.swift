@@ -58,7 +58,7 @@ extension RaindropsContainer { fileprivate struct Memorized: View {
         LazyStack(
             layout,
             selection: $selection,
-            action: { openDeepLink?(.raindrop(.open($0))) },
+            action: { openDeepLink?(.raindrop(.open(find, $0))) },
             contextMenu: RaindropsMenu,
             content: content
         )
