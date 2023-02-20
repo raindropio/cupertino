@@ -2,29 +2,23 @@
 import PackageDescription
 
 let package = Package(
-    name: "Features",
+    name: "Backport",
     platforms: [
         .macOS("13.0"),
         .iOS("16.0")
     ],
     products: [
         .library(
-            name: "Features",
-            targets: ["Features"]
+            name: "Backport",
+            targets: ["Backport"]
         ),
     ],
     dependencies: [
-        .package(path: "API"),
-        .package(path: "Backport"),
-        .package(path: "UI")
     ],
     targets: [
         .target(
-            name: "Features",
+            name: "Backport",
             dependencies: [
-                .byName(name: "API"),
-                .byName(name: "Backport"),
-                .byName(name: "UI")
             ],
             path: ""
         )

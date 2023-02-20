@@ -183,6 +183,7 @@
 		76D880DC2930E1FB00D43AD9 /* Share.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = Share.appex; sourceTree = BUILT_PRODUCTS_DIR; };
 		76D880DE2930E1FB00D43AD9 /* ExtensionController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtensionController.swift; sourceTree = "<group>"; };
 		76D880E32930E1FB00D43AD9 /* Share.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Share.plist; sourceTree = "<group>"; };
+		76E08B6929A3976000B3202D /* Backport */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = Backport; sourceTree = "<group>"; };
 		76E51CE9299A8A1400FE7763 /* AppDeepLinks.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDeepLinks.swift; sourceTree = "<group>"; };
 		76ECFDFD2947848500DF15C9 /* Browser+PageError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Browser+PageError.swift"; sourceTree = "<group>"; };
 		76ECFDFF2948793B00DF15C9 /* Browser+CacheError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Browser+CacheError.swift"; sourceTree = "<group>"; };
@@ -316,6 +317,7 @@
 				767F0943299FD6E100349902 /* WebExtension */,
 				767AC1162925196F00766998 /* Features */,
 				7685A1AC286880F600A4BC3C /* API */,
+				76E08B6929A3976000B3202D /* Backport */,
 				7639A6AE286889DB00A76FE9 /* UI */,
 				7685A192286868AC00A4BC3C /* Products */,
 				7685A1AD2868810D00A4BC3C /* Frameworks */,

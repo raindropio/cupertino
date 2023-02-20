@@ -4,12 +4,15 @@ import UniformTypeIdentifiers
 final class ExtensionService: ObservableObject {
     private weak var context: NSExtensionContext?
     
-    var preprocessed: NSDictionary?
-    var items = [NSItemProvider]()
+    @Published var preprocessed: NSDictionary?
+    @Published var items = [NSItemProvider]()
     
     init(_ context: NSExtensionContext? = nil) {
         self.context = context
-        self.load()
+        
+        Task {
+            await load()
+        }
     }
     
     func decoded<T: Decodable>() -> T? {
@@ -28,7 +31,8 @@ final class ExtensionService: ObservableObject {
 }
 
 extension ExtensionService {
-    private func load() {
+    @MainActor
+    private func load() async {
         guard let context else { return }
         
         for input in context.inputItems {
@@ -38,7 +42,7 @@ extension ExtensionService {
             for attachment in attachments {
                 //preprocessed javascript
                 if attachment.hasItemConformingToTypeIdentifier(UTType.propertyList.identifier) {
-                    loadPreprocessed(attachment)
+                    await loadPreprocessed(attachment)
                     return
                 }
                 else {
@@ -48,12 +52,12 @@ extension ExtensionService {
         }
     }
     
-    private func loadPreprocessed(_ attachment: NSItemProvider) {
-        attachment.loadItem(forTypeIdentifier: UTType.propertyList.identifier) { item, error in
-            if let item = item as? NSDictionary,
-               let result = item[NSExtensionJavaScriptPreprocessingResultsKey] as? NSDictionary {
-                self.preprocessed = result
-            }
+    @MainActor
+    private func loadPreprocessed(_ attachment: NSItemProvider) async {
+        let item = try? await attachment.loadItem(forTypeIdentifier: UTType.propertyList.identifier)
+        if let item = item as? NSDictionary,
+           let result = item[NSExtensionJavaScriptPreprocessingResultsKey] as? NSDictionary {
+            self.preprocessed = result
         }
     }
 }
