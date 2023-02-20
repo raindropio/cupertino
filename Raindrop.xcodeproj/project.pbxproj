@@ -24,6 +24,14 @@
 		765F24042991473600282298 /* Browser+Title.swift in Sources */ = {isa = PBXBuildFile; fileRef = 765F24032991473600282298 /* Browser+Title.swift */; };
 		7673C0AA295DD3B8002D4229 /* SidebarScreen+Toolbar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7673C0A9295DD3B8002D4229 /* SidebarScreen+Toolbar.swift */; };
 		76799F8B299632790042DF78 /* Folder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76799F8A299632790042DF78 /* Folder.swift */; };
+		767F098C299FD6E200349902 /* WebExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 767F0944299FD6E100349902 /* WebExtension.swift */; };
+		767F09B4299FD94B00349902 /* WebExtension.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = 767F096F299FD6E200349902 /* WebExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		767F0B5329A3744D00349902 /* index.html in Resources */ = {isa = PBXBuildFile; fileRef = 767F0B0129A3744C00349902 /* index.html */; };
+		767F0B5429A3744D00349902 /* background.js in Resources */ = {isa = PBXBuildFile; fileRef = 767F0B0229A3744C00349902 /* background.js */; };
+		767F0B6429A3744D00349902 /* manifest.json in Resources */ = {isa = PBXBuildFile; fileRef = 767F0B1329A3744C00349902 /* manifest.json */; };
+		767F0B9529A3745A00349902 /* assets in Resources */ = {isa = PBXBuildFile; fileRef = 767F0B9229A3745A00349902 /* assets */; };
+		767F0B9629A3745A00349902 /* _locales in Resources */ = {isa = PBXBuildFile; fileRef = 767F0B9329A3745A00349902 /* _locales */; };
+		767F0B9729A3745A00349902 /* welcome in Resources */ = {isa = PBXBuildFile; fileRef = 767F0B9429A3745A00349902 /* welcome */; };
 		7685A195286868AC00A4BC3C /* App.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7685A194286868AC00A4BC3C /* App.swift */; };
 		7685A199286868AD00A4BC3C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7685A198286868AD00A4BC3C /* Assets.xcassets */; };
 		76864FBD291EA059000B9B45 /* SidebarScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76864FB5291EA059000B9B45 /* SidebarScreen.swift */; };
@@ -73,6 +81,20 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		767F09B5299FD94B00349902 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 7685A189286868AC00A4BC3C /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 767F096E299FD6E200349902;
+			remoteInfo = "WebExtension (iOS)";
+		};
+		767F09B829A3592300349902 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 7685A189286868AC00A4BC3C /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 767F0978299FD6E200349902;
+			remoteInfo = "WebExtension (macOS)";
+		};
 		76D880E42930E1FB00D43AD9 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 7685A189286868AC00A4BC3C /* Project object */;
@@ -90,6 +112,7 @@
 			dstSubfolderSpec = 13;
 			files = (
 				76D880E62930E1FB00D43AD9 /* Share.appex in Embed Foundation Extensions */,
+				767F09B4299FD94B00349902 /* WebExtension.appex in Embed Foundation Extensions */,
 			);
 			name = "Embed Foundation Extensions";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -115,6 +138,17 @@
 		7673C0A9295DD3B8002D4229 /* SidebarScreen+Toolbar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SidebarScreen+Toolbar.swift"; sourceTree = "<group>"; };
 		76799F8A299632790042DF78 /* Folder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Folder.swift; sourceTree = "<group>"; };
 		767AC1162925196F00766998 /* Features */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = Features; sourceTree = "<group>"; };
+		767F0944299FD6E100349902 /* WebExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebExtension.swift; sourceTree = "<group>"; };
+		767F096F299FD6E200349902 /* WebExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = WebExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
+		767F0974299FD6E200349902 /* WebExtension.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = WebExtension.plist; sourceTree = "<group>"; };
+		767F097F299FD6E200349902 /* WebExtension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = WebExtension.entitlements; sourceTree = "<group>"; };
+		767F0AFE29A36C8900349902 /* download.command */ = {isa = PBXFileReference; lastKnownFileType = text; path = download.command; sourceTree = "<group>"; };
+		767F0B0129A3744C00349902 /* index.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = index.html; sourceTree = "<group>"; };
+		767F0B0229A3744C00349902 /* background.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = background.js; sourceTree = "<group>"; };
+		767F0B1329A3744C00349902 /* manifest.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = manifest.json; sourceTree = "<group>"; };
+		767F0B9229A3745A00349902 /* assets */ = {isa = PBXFileReference; lastKnownFileType = folder; path = assets; sourceTree = "<group>"; };
+		767F0B9329A3745A00349902 /* _locales */ = {isa = PBXFileReference; lastKnownFileType = folder; path = _locales; sourceTree = "<group>"; };
+		767F0B9429A3745A00349902 /* welcome */ = {isa = PBXFileReference; lastKnownFileType = folder; path = welcome; sourceTree = "<group>"; };
 		7685A191286868AC00A4BC3C /* Raindrop.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Raindrop.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7685A194286868AC00A4BC3C /* App.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = App.swift; sourceTree = "<group>"; };
 		7685A198286868AD00A4BC3C /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -165,6 +199,13 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		767F096C299FD6E200349902 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		7685A18E286868AC00A4BC3C /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -242,11 +283,37 @@
 			path = Sidebar;
 			sourceTree = "<group>";
 		};
+		767F0943299FD6E100349902 /* WebExtension */ = {
+			isa = PBXGroup;
+			children = (
+				767F0B0029A3744C00349902 /* dist */,
+				767F097F299FD6E200349902 /* WebExtension.entitlements */,
+				767F0974299FD6E200349902 /* WebExtension.plist */,
+				767F0944299FD6E100349902 /* WebExtension.swift */,
+				767F0AFE29A36C8900349902 /* download.command */,
+			);
+			path = WebExtension;
+			sourceTree = "<group>";
+		};
+		767F0B0029A3744C00349902 /* dist */ = {
+			isa = PBXGroup;
+			children = (
+				767F0B9329A3745A00349902 /* _locales */,
+				767F0B9229A3745A00349902 /* assets */,
+				767F0B9429A3745A00349902 /* welcome */,
+				767F0B0129A3744C00349902 /* index.html */,
+				767F0B0229A3744C00349902 /* background.js */,
+				767F0B1329A3744C00349902 /* manifest.json */,
+			);
+			path = dist;
+			sourceTree = "<group>";
+		};
 		7685A188286868AC00A4BC3C = {
 			isa = PBXGroup;
 			children = (
 				7685A1A428687C6000A4BC3C /* App */,
 				76D880DD2930E1FB00D43AD9 /* Share */,
+				767F0943299FD6E100349902 /* WebExtension */,
 				767AC1162925196F00766998 /* Features */,
 				7685A1AC286880F600A4BC3C /* API */,
 				7639A6AE286889DB00A76FE9 /* UI */,
@@ -260,6 +327,7 @@
 			children = (
 				7685A191286868AC00A4BC3C /* Raindrop.app */,
 				76D880DC2930E1FB00D43AD9 /* Share.appex */,
+				767F096F299FD6E200349902 /* WebExtension.appex */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -375,6 +443,24 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		767F096E299FD6E200349902 /* WebExtension (iOS) */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 767F09A8299FD6E200349902 /* Build configuration list for PBXNativeTarget "WebExtension (iOS)" */;
+			buildPhases = (
+				767F0AFD29A368C200349902 /* Download latest app/extension prod build to ./bundle folder */,
+				767F096B299FD6E200349902 /* Sources */,
+				767F096C299FD6E200349902 /* Frameworks */,
+				767F096D299FD6E200349902 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "WebExtension (iOS)";
+			productName = "WebExtension (iOS)";
+			productReference = 767F096F299FD6E200349902 /* WebExtension.appex */;
+			productType = "com.apple.product-type.app-extension";
+		};
 		7685A190286868AC00A4BC3C /* Raindrop */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 7685A1A0286868AD00A4BC3C /* Build configuration list for PBXNativeTarget "Raindrop" */;
@@ -388,6 +474,8 @@
 			);
 			dependencies = (
 				76D880E52930E1FB00D43AD9 /* PBXTargetDependency */,
+				767F09B6299FD94B00349902 /* PBXTargetDependency */,
+				767F09B929A3592300349902 /* PBXTargetDependency */,
 			);
 			name = Raindrop;
 			packageProductDependencies = (
@@ -428,9 +516,12 @@
 			isa = PBXProject;
 			attributes = {
 				BuildIndependentTargetsInParallel = 1;
-				LastSwiftUpdateCheck = 1410;
+				LastSwiftUpdateCheck = 1420;
 				LastUpgradeCheck = 1410;
 				TargetAttributes = {
+					767F096E299FD6E200349902 = {
+						CreatedOnToolsVersion = 14.2;
+					};
 					7685A190286868AC00A4BC3C = {
 						CreatedOnToolsVersion = 14.0;
 					};
@@ -456,11 +547,25 @@
 			targets = (
 				7685A190286868AC00A4BC3C /* Raindrop */,
 				76D880DB2930E1FB00D43AD9 /* Share */,
+				767F096E299FD6E200349902 /* WebExtension (iOS) */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		767F096D299FD6E200349902 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				767F0B6429A3744D00349902 /* manifest.json in Resources */,
+				767F0B9529A3745A00349902 /* assets in Resources */,
+				767F0B5429A3744D00349902 /* background.js in Resources */,
+				767F0B9729A3745A00349902 /* welcome in Resources */,
+				767F0B9629A3745A00349902 /* _locales in Resources */,
+				767F0B5329A3744D00349902 /* index.html in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		7685A18F286868AC00A4BC3C /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -480,7 +585,36 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		767F0AFD29A368C200349902 /* Download latest app/extension prod build to ./bundle folder */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			name = "Download latest app/extension prod build to ./bundle folder";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "chmod +x $PROJECT_DIR/WebExtension/download.command\n$PROJECT_DIR/WebExtension/download.command\n";
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
+		767F096B299FD6E200349902 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				767F098C299FD6E200349902 /* WebExtension.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		7685A18D286868AC00A4BC3C /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -550,6 +684,15 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
+		767F09B6299FD94B00349902 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 767F096E299FD6E200349902 /* WebExtension (iOS) */;
+			targetProxy = 767F09B5299FD94B00349902 /* PBXContainerItemProxy */;
+		};
+		767F09B929A3592300349902 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			targetProxy = 767F09B829A3592300349902 /* PBXContainerItemProxy */;
+		};
 		76D880E52930E1FB00D43AD9 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = 76D880DB2930E1FB00D43AD9 /* Share */;
@@ -558,6 +701,71 @@
 /* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
+		767F09A4299FD6E200349902 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 7459JWM5TY;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = WebExtension/WebExtension.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = Raindrop.io;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				OTHER_LDFLAGS = (
+					"-framework",
+					SafariServices,
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "io.raindrop.ios.safari-extension";
+				PRODUCT_NAME = WebExtension;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		767F09A5299FD6E200349902 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 7459JWM5TY;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = WebExtension/WebExtension.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = Raindrop.io;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				OTHER_LDFLAGS = (
+					"-framework",
+					SafariServices,
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "io.raindrop.ios.safari-extension";
+				PRODUCT_NAME = WebExtension;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
 		7685A19E286868AD00A4BC3C /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -822,6 +1030,15 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		767F09A8299FD6E200349902 /* Build configuration list for PBXNativeTarget "WebExtension (iOS)" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				767F09A4299FD6E200349902 /* Debug */,
+				767F09A5299FD6E200349902 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		7685A18C286868AC00A4BC3C /* Build configuration list for PBXProject "Raindrop" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (

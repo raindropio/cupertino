@@ -30,3 +30,6 @@ DerivedData/
 
 ## Gcc Patch
 /*.gcno
+
+# Web Extension
+WebExtension/dist/

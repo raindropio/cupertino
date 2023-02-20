@@ -19,6 +19,11 @@
 			<key>orderHint</key>
 			<integer>4</integer>
 		</dict>
+		<key>WebExtension (iOS).xcscheme_^#shared#^_</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>5</integer>
+		</dict>
 		<key>cupertino.xcscheme_^#shared#^_</key>
 		<dict>
 			<key>orderHint</key>
@@ -27,6 +32,21 @@
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
+		<key>767F0951299FD6E100349902</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>767F096E299FD6E200349902</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>767F0978299FD6E200349902</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
 		<key>7685A190286868AC00A4BC3C</key>
 		<dict>
 			<key>primary</key>
