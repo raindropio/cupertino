@@ -14,9 +14,7 @@ struct FabStack: View {
     var home: some View {
         NavigationStack {
             Form {
-                Section("URL") {
-                    Web(items: $items)
-                }
+                Web(items: $items)
                 
                 Section {
                     Button {

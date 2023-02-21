@@ -1,5 +1,6 @@
 import SwiftUI
 import API
+import UI
 
 extension Search {
     struct Loading: ViewModifier {
@@ -19,8 +20,8 @@ extension Search {
 
         func body(content: Content) -> some View {
             content
-                .task(id: refine, priority: .background, reload)
-                .task(id: isActive, priority: .background, reload)
+                .task(id: refine, priority: .background, debounce: 0.3, reload)
+                .task(id: isActive, priority: .background, debounce: 0.3, reload)
         }
     }
 }

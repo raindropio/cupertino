@@ -39,15 +39,23 @@ extension DataSource: View {
             Group {
                 if staggered {
                     GridStaggered(data, width) { group in
-                        GridForEach(data: group, insert: insert, insertOf: insertOf, content: content)
+                        GridForEach(data: group, content: content)
                     }
                 } else {
                     GridColumns(width) {
-                        GridForEach(data: data, insert: insert, insertOf: insertOf, content: content)
+                        GridForEach(data: data, content: content)
                     }
                 }
             }
                 .infiniteScroll(data, action: loadMore)
+                .contentShape(Rectangle())
+                .onDrop(of: insertOf, isTargeted: .constant(insert != nil)) {
+                    if let insert {
+                        insert(0, $0)
+                        return true
+                    }
+                    return false
+                }
             
         case nil:
             EmptyView()

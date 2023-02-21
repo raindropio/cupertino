@@ -35,11 +35,12 @@ fileprivate struct System: View {
         Label {
             Text(collection.title)
                 .lineLimit(1)
-                .fixedSize()
+                .fixedSize(horizontal: false, vertical: true)
         } icon: {
             CollectionIcon(collection)
         }
             .badge(collection.count)
+            .fixedSize(horizontal: false, vertical: true)
             .listItemTint(collection.color)
     }
 }
@@ -61,12 +62,14 @@ fileprivate struct User: View {
                 Text(collection.title+" ")
                     .lineLimit(1)
                     .layoutPriority(1)
-                    .fixedSize()
+                    .fixedSize(horizontal: false, vertical: true)
             }
+                .fixedSize(horizontal: false, vertical: true)
         } icon: {
             CollectionIcon(collection)
         }
             .badge(collection.count)
+            .fixedSize(horizontal: false, vertical: true)
             .listItemTint(.monochrome)
     }
 }

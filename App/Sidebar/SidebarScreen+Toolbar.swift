@@ -26,14 +26,6 @@ extension SidebarScreen {
                 
                 ToolbarItemGroup {
                     if editMode?.wrappedValue != .active {
-                        if sizeClass == .compact {
-                            Button {
-                                app.search()
-                            } label: {
-                                Image(systemName: "magnifyingglass")
-                            }
-                        }
-                        
                         Menu {
                             //EditButton("Select")
                             

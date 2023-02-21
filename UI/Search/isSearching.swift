@@ -46,10 +46,10 @@ fileprivate struct Update: UIViewControllerRepresentable {
         @MainActor
         func update(_ base: Update) {
             self.base = base
-            
+
             guard let searchController = parent?.navigationItem.searchController else { return }
             guard searchController.searchBar.isFirstResponder != base.condition else { return }
-            
+
             if base.condition {
                 searchController.searchBar.becomeFirstResponder()
                 searchController.isActive = true

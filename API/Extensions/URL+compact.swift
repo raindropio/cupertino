@@ -1,6 +1,7 @@
 import Foundation
 
 fileprivate var cache: [URL: URL] = [:]
+fileprivate let queue = DispatchQueue(label: "url-compact-cache", attributes: .concurrent)
 
 extension URL {
     /// Strip everything non-significant like:
@@ -8,9 +9,9 @@ extension URL {
     /// - sort query parameters
     /// - trailing slash
     var compact: Self {
-        if let cached = cache[self] {
-            return cached
-        }
+        var cached: URL?
+        queue.sync { cached = cache[self] }
+        if let cached { return cached }
         
         let components = NSURLComponents.init(url: self, resolvingAgainstBaseURL: true)
         guard let components else { return self }
@@ -29,7 +30,9 @@ extension URL {
         }
         
         if let url = components.url?.absoluteURL {
-            cache[self] = url
+            queue.async(flags: .barrier) {
+                cache[self] = url
+            }
             return url
         }
         

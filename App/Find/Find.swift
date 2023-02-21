@@ -5,7 +5,6 @@ import UI
 
 struct Find: View {
     @EnvironmentObject private var app: AppRouter
-    
     var find: FindBy = .init()
     
     var body: some View {
@@ -18,8 +17,8 @@ struct Find: View {
                     Nesteds(find: refine)
                 }
             }
-                .isSearching($app.searchPreferred)
         }
+            .id(find)
             .dropProvider()
     }
 }

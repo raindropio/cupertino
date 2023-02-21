@@ -17,10 +17,9 @@ extension RaindropsReducer {
         let links = try? await rest.raindropsLinks()
         guard let links else { return }
         
-        state.lookups = Dictionary(uniqueKeysWithValues:
-            links.map {
-                ($0.key.compact, $0.value)
-            }
-        )
+        state.lookups = [:]
+        links.forEach {
+            state.lookups[$0.key.compact] = $0.value
+        }
     }
 }

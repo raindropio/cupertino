@@ -26,6 +26,7 @@ extension ListForEach: View {
     var body: some View {
         ForEach(data) {
             content($0)
+                .transaction { $0.animation = nil } //prevent weird animations inside item
                 .infiniteScrollElement($0.id)
                 .tag($0.id)
         }

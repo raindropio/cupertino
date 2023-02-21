@@ -59,6 +59,12 @@ extension Folder.Toolbar {
             .toolbarRole(.browser)
             .navigationBarBackButtonHidden(editMode?.wrappedValue == .active)
             .toolbar {
+                if find.collectionId > 0 {
+                    ToolbarTitleMenu {
+                        CollectionsMenu(find.collectionId)
+                    }
+                }
+                
                 //edit mode
                 if editMode?.wrappedValue == .active {
                     ToolbarItem {
@@ -110,13 +116,10 @@ extension Folder.Toolbar {
                             CustomizeRaindropsButton(find)
                         }
                         
-                        EditButton()
-                        
-                        //more
-                        Menu {
-                            CollectionsMenu(find.collectionId)
-                        } label: {
-                            Label("Edit collection", systemImage: "ellipsis")
+                        EditButton {
+                            Image(systemName: "checkmark.circle.fill")
+                                .symbolRenderingMode(.hierarchical)
+                                .fontWeight(.bold)
                         }
                     }
                     

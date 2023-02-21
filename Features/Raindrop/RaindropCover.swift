@@ -32,3 +32,5 @@ struct RaindropCover: View {
         }
     }
 }
+
+extension RaindropCover: Equatable {}

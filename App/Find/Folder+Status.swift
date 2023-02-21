@@ -25,7 +25,6 @@ extension Folder.Status {
             Section {
                 HStack {
                     Text("\(total) items")
-                        .fontWeight(.medium)
                         .foregroundStyle(.secondary)
                     
                     Spacer()
@@ -44,6 +43,8 @@ extension Folder.Status {
                 .lineLimit(1)
                 .scenePadding(.leading)
             }
+            .font(.callout)
+            .controlSize(.small)
             .clearSection()
             .contentTransition(.identity)
             .disabled(editMode?.wrappedValue == .active)

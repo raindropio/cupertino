@@ -19,7 +19,7 @@ extension RaindropsState {
     }
     
     public func item(_ url: URL) -> Raindrop? {
-        let id = lookups[url.compact]
+        let id = lookups[url.compact]        
         guard let id else { return nil }
         return items[id]
     }

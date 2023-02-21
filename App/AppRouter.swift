@@ -4,7 +4,6 @@ import UI
 
 class AppRouter: ObservableObject {
     @Published private var path: [Path] = [.find(.init())]
-    @Published var searchPreferred = false
     
     var sidebar: FindBy? {
         get {
@@ -44,6 +43,16 @@ extension AppRouter {
 
 extension AppRouter {
     func find(_ find: FindBy) {
+        if !isPhone {
+            switch path.first {
+            case .find(let find):
+                if find.collectionId == 0 {
+                    path = []
+                }
+            default: break
+            }
+        }
+        
         path.append(.find(find))
     }
     
@@ -61,12 +70,5 @@ extension AppRouter {
     
     func browse(url: URL) {
         path += (path.isEmpty ? [.find(.init())] : []) + [.browse(url)]
-    }
-    
-    func search() {
-        if path.isEmpty {
-            path.append(.find(.init()))
-        }
-        searchPreferred = true
     }
 }

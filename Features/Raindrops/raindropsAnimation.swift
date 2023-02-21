@@ -12,6 +12,6 @@ fileprivate struct RaindropsAnimation: ViewModifier {
     
     func body(content: Content) -> some View {
         content
-            .animation(.default, value: r.state.animation)
+            .animation(.easeInOut(duration: 0.3), value: r.state.animation)
     }
 }

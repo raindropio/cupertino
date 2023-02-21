@@ -14,13 +14,13 @@ public struct RaindropItems: View {
         if r.state.isEmpty(find) {
             EmptyRaindrops(find: find, status: r.state.status(find))
                 .dropConsumer(to: find)
-        } else {
-            Memorized(
-                find: find,
-                items: r.state.items(find),
-                sort: r.state.sort(find)
-            )
         }
+        
+        Memorized(
+            find: find,
+            items: r.state.items(find),
+            sort: r.state.sort(find)
+        )
     }
 }
 

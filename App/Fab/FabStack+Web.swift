@@ -20,16 +20,24 @@ extension FabStack {
         }
         
         var body: some View {
-            URLField("https://", value: $url)
-                .onSubmit(saveUrl)
-                .autoFocus()
-                .toolbar {
-                    ToolbarItem(placement: .confirmationAction) {
-                        Button("Done", action: saveUrl)
-                            .disabled(url == nil)
+            Section("URL") {
+                HStack {
+                    URLField("https://", value: $url)
+                        .autoFocus()
+                        .onAppear(perform: onAppear)
+                    
+                    Button(action: saveUrl) {
+                        Image(systemName: "plus")
                     }
+                        .buttonStyle(.borderedProminent)
+                        .fontWeight(.semibold)
+                        .controlSize(.small)
+                        .opacity(url == nil ? 0 : 1)
+                        .scaleEffect(url == nil ? 0.5 : 1)
+                        .animation(.spring(), value: url != nil)
                 }
-                .onAppear(perform: onAppear)
+            }
+                .onSubmit(saveUrl)
         }
     }
 }

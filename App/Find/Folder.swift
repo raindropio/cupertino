@@ -5,6 +5,7 @@ import UI
 
 struct Folder<H: View>: View {
     @Environment(\.isSearching) private var isSearching
+    @Environment(\.containerHorizontalSizeClass) private var sizeClass
     @State private var selection: Set<Raindrop.ID> = .init()
     
     var find: FindBy
@@ -16,7 +17,7 @@ struct Folder<H: View>: View {
             header()
             
             if !compact {
-                if isPhone {
+                if sizeClass == .compact {
                     Status(find: find)
                 }
                 

@@ -1,6 +1,7 @@
 import SwiftUI
 import API
 import UI
+import Backport
 
 extension Search {
     struct Bar: ViewModifier {
@@ -8,15 +9,12 @@ extension Search {
         @Binding var refine: FindBy
         
         private var placement: SearchFieldPlacement {
-            if sizeClass == .regular {
-                return .automatic
-            } else {
-                return .navigationBarDrawer(displayMode: .always)
-            }
+            .toolbar
         }
 
         func body(content: Content) -> some View {
             content
+                .backport.fixSearchAppearance()
                 .searchable(
                     text: $refine.text,
                     tokens: $refine.filters,

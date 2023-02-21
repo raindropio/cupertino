@@ -39,6 +39,7 @@ extension Folder.Title {
         func body(content: Content) -> some View {
             content
                 .navigationTitle(scope)
+                .navigationBarTitleDisplayMode(.inline)
         }
     }
 }

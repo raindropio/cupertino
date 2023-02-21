@@ -17,6 +17,7 @@ extension RaindropItem: View {
     var body: some View {
         Layout {
             RaindropCover(raindrop, view: container?.view)
+                .equatable()
             
             VStack(alignment: .leading, spacing: 4) {
                 RaindropTitleExcerpt(raindrop)
@@ -31,7 +32,6 @@ extension RaindropItem: View {
                 RaindropMeta(raindrop)
             }
         }
-            .contentTransition(.identity)
             .swipeActions(edge: .leading) {
                 Link(destination: raindrop.link) {
                     Label("Open", systemImage: "safari")
@@ -55,6 +55,7 @@ extension RaindropItem: View {
             .onDrag {
                 raindrop.itemProvider
             }
+            .contentTransition(.identity)
     }
 }
 
