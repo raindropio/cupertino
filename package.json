@@ -1,0 +1,6 @@
+{
+	"name": "cupertino",
+    "scripts": {
+        "deploy:prod": "git branch -f release/production main && git push --force origin release/production"
+    }
+}
