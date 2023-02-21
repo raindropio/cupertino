@@ -59,7 +59,7 @@ extension Folder.Toolbar {
             .toolbarRole(.browser)
             .navigationBarBackButtonHidden(editMode?.wrappedValue == .active)
             .toolbar {
-                if find.collectionId > 0 {
+                if find.collectionId > 0, !find.isSearching {
                     ToolbarTitleMenu {
                         CollectionsMenu(find.collectionId)
                     }

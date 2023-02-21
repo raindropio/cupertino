@@ -45,8 +45,8 @@ extension AppRouter {
     func find(_ find: FindBy) {
         if !isPhone {
             switch path.first {
-            case .find(let find):
-                if find.collectionId == 0 {
+            case .find(let f):
+                if f.collectionId == 0, f.collectionId != find.collectionId {
                     path = []
                 }
             default: break

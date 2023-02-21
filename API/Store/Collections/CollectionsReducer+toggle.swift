@@ -23,11 +23,8 @@ extension CollectionsReducer {
 
 extension CollectionsReducer {
     func toggleMany(state: inout S) -> ReduxAction? {
-        let anyParent = state.user.first { $0.value.parent != nil }?.value.parent
-        let anyExpanded = state.user.first { $0.value.id == anyParent }?.value.expanded ?? false
-        
-        return A.updateMany(
-            .init(expanded: !anyExpanded)
+        A.updateMany(
+            .init(expanded: state.allCollapsed)
         )
     }
 }
