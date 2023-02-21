@@ -7,7 +7,7 @@ struct AppScene: View {
     @StateObject private var router = AppRouter()
     @AppStorage("theme") private var theme: PreferredTheme = .default
 
-    var body: some View {
+    var body: some View {        
         NavigationSplitView(sidebar: SidebarScreen.init) {
             NavigationStack(path: $router.detail) {
                 Group {
@@ -29,7 +29,6 @@ struct AppScene: View {
             .containerSizeClass()
             .collectionSheets()
             .tagSheets()
-            .dropProvider()
             .modifier(AppDeepLinks())
             .environmentObject(router)
             .preferredColorScheme(theme.colorScheme)

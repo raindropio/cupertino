@@ -11,6 +11,7 @@ struct SidebarScreen: View {
         FindByList(selection: $app.sidebar)
             .modifier(Toolbar())
             .fab(hidden: sizeClass == .regular)
+            .dropProvider()
             .scopeEditMode()
             .navigationSplitViewColumnWidth(ideal: 450)
     }

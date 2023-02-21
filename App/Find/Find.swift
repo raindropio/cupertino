@@ -20,5 +20,6 @@ struct Find: View {
             }
                 .isSearching($app.searchPreferred)
         }
+            .dropProvider()
     }
 }

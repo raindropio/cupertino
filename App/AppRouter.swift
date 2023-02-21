@@ -43,19 +43,8 @@ extension AppRouter {
 }
 
 extension AppRouter {
-    func search() {
-        if path.isEmpty {
-            path.append(.find(.init()))
-        }
-        searchPreferred = true
-    }
-    
     func find(_ find: FindBy) {
-        if path.isEmpty {
-            path.append(.find(.init()))
-        } else {
-            path.append(.find(find))
-        }
+        path.append(.find(find))
     }
     
     func find(collection: UserCollection.ID) {
@@ -63,14 +52,21 @@ extension AppRouter {
     }
     
     func preview(find: FindBy, id: Raindrop.ID) {
-        path.append(.preview(find, id))
+        path += (path.isEmpty ? [.find(find)] : []) + [.preview(find, id)]
     }
     
     func cached(id: Raindrop.ID) {
-        path.append(.cached(id))
+        path += (path.isEmpty ? [.find(.init())] : []) + [.cached(id)]
     }
     
     func browse(url: URL) {
-        path.append(.browse(url))
+        path += (path.isEmpty ? [.find(.init())] : []) + [.browse(url)]
+    }
+    
+    func search() {
+        if path.isEmpty {
+            path.append(.find(.init()))
+        }
+        searchPreferred = true
     }
 }
