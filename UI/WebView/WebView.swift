@@ -16,14 +16,9 @@ public struct WebView {
 }
 
 extension WebView: View {
-    private var show: Bool {
-        page.rendered && page.error == nil
-    }
-    
     public var body: some View {
         Holder(page: page, request: request, userAgent: userAgent)
             .ignoresSafeArea()
-            .opacity(show ? 1 : 0.01)
             //progress bar
             .overlay(alignment: .topLeading) {
                 ProgressBar(value: page.progress)
@@ -33,14 +28,12 @@ extension WebView: View {
                 Color.white
                     .overlay(
                         .regularMaterial
-                        .opacity(show && (page.toolbarBackground == nil || page.prefersHiddenToolbars) ? 1 : 0.01)
+                        .opacity((page.toolbarBackground == nil || page.prefersHiddenToolbars) ? 1 : 0.01)
                     )
                     .overlay(page.toolbarBackground)
                     .frame(height: 0)
                     .animation(nil, value: page.prefersHiddenToolbars)
             }
-            //animation
-            .animation(.default, value: show)
             //dialogs
             .modifier(Dialogs(page: page))
             //allow back webview navigation

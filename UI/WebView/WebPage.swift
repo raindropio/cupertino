@@ -83,10 +83,6 @@ extension WebPage {
     public var canGoBack: Bool { view?.canGoBack ?? false }
     public var canGoForward: Bool { view?.canGoForward ?? false }
     public var title: String? { view?.title }
-    public var rendered: Bool {
-        //TODO: better logic (for next page navigation)
-        canGoBack || canGoForward || progress >= 0.4
-    }
     public var colorScheme: ColorScheme {
         view?.underPageBackgroundColor.isLight == true ? .light : .dark
     }

@@ -12,33 +12,35 @@ struct Preview: View {
     var find: FindBy
     var id: Raindrop.ID
     
+    private var raindrop: Raindrop {
+        r.state.item(id) ?? .new()
+    }
+    
     private var request: WebRequest {
-        let item = r.state.item(id) ?? .new()
-        
-        return .init(
+        .init(
             {
-                switch item.type {
+                switch raindrop.type {
                 case .link:
-                    return item.link
+                    return raindrop.link
                     
                 default:
-                    return Rest.raindropPreview(item.id, options: reader)
+                    return Rest.raindropPreview(raindrop.id, options: reader)
                 }
             }(),
-            canonical: item.link,
+            canonical: raindrop.link,
             caching: .returnCacheDataElseLoad
         )
     }
     
     private var title: String {
-        page.canGoBack ? (page.url?.host() ?? "") : "Preview"
+        (!page.canGoBack ? raindrop.link.host() : page.url?.host()) ?? ""
     }
     
     var body: some View {
         Browser(page: page, start: request)
             .navigationTitle(title)
             .toolbar {
-                if !page.canGoBack {
+                if !page.canGoBack, (raindrop.type == .article || raindrop.type == .book) {
                     ToolbarItemGroup {
                         Button { appearance.toggle() } label: {
                             Image(systemName: "textformat.size")

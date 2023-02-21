@@ -119,7 +119,7 @@ extension Folder.Toolbar {
                         EditButton {
                             Image(systemName: "checkmark.circle.fill")
                                 .symbolRenderingMode(.hierarchical)
-                                .fontWeight(.bold)
+                                .fontWeight(.semibold)
                         }
                     }
                     
