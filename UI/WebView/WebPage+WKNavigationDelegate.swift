@@ -12,10 +12,22 @@ extension WebPage: WKNavigationDelegate {
         decidePolicyFor navigationResponse: WKNavigationResponse,
         decisionHandler: @escaping (WKNavigationResponsePolicy) -> Void
     ) {
-        //remove background for non text response
-        let isText = navigationResponse.response.mimeType?.contains("text") ?? true
-        view?.isOpaque = isText
-        view?.backgroundColor = isText ? nil : .clear
+        if navigationResponse.isForMainFrame {
+            //remove background for non text response
+            let isText = navigationResponse.response.mimeType?.contains("text") ?? true
+            view?.isOpaque = isText
+            view?.backgroundColor = isText ? nil : .clear
+            
+            //show error for non ok response
+            if let response = navigationResponse.response as? HTTPURLResponse {
+                if response.statusCode >= 400 {
+                    self.error = NSError(
+                        domain: HTTPURLResponse.localizedString(forStatusCode: response.statusCode),
+                        code: response.statusCode
+                    )
+                }
+            }
+        }
         
         decisionHandler(.allow)
     }

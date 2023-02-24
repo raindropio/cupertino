@@ -3,7 +3,7 @@ import API
 import UI
 
 class AppRouter: ObservableObject {
-    @Published private var path: [Path] = [.find(.init())]
+    @Published var path: [Path] = [.find(.init())]
     
     var sidebar: FindBy? {
         get {

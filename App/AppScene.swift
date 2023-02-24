@@ -6,21 +6,33 @@ import Features
 struct AppScene: View {
     @StateObject private var router = AppRouter()
     @AppStorage("theme") private var theme: PreferredTheme = .default
+    
+    @ViewBuilder
+    private func screen(_ path: AppRouter.Path) -> some View {
+        switch path {
+        case .find(let find): Find(find: find)
+        case .preview(let find, let id): Preview(find: find, id: id)
+        case .cached(let id): Cached(id: id)
+        case .browse(let url): Browse(url: url)
+        }
+    }
 
-    var body: some View {        
-        NavigationSplitView(sidebar: SidebarScreen.init) {
-            NavigationStack(path: $router.detail) {
-                Group {
-                    if let space = router.sidebar {
-                        Find(find: space)
-                    }
+    var body: some View {
+        Group {
+            if isPhone {
+                NavigationStack(path: $router.path) {
+                    SidebarScreen()
+                        .navigationDestination(for: AppRouter.Path.self, destination: screen)
                 }
-                .navigationDestination(for: AppRouter.Path.self) {
-                    switch $0 {
-                    case .find(let find): Find(find: find)
-                    case .preview(let find, let id): Preview(find: find, id: id)
-                    case .cached(let id): Cached(id: id)
-                    case .browse(let url): Browse(url: url)
+            } else {
+                NavigationSplitView(sidebar: SidebarScreen.init) {
+                    NavigationStack(path: $router.detail) {
+                        Group {
+                            if let space = router.sidebar {
+                                Find(find: space)
+                            }
+                        }
+                        .navigationDestination(for: AppRouter.Path.self, destination: screen)
                     }
                 }
             }
