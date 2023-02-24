@@ -25,7 +25,9 @@ struct SettingsHome: View {
                 
                 Section {
                     NavigationLink(value: SettingsRoute.appicon) {
-                        Label("App Icon", systemImage: "app.badge.fill").tint(.primary)
+                        Label("App Icon", systemImage: "app.badge.fill")
+                            .badge(UIApplication.shared.alternateIconName ?? "")
+                            .tint(.primary)
                     }
                         .listItemTint(.purple)
                     

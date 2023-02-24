@@ -4,10 +4,11 @@ import UI
 
 /// Steps to add new icon
 /// 1. Add iOS icon asset to `Assets`
-/// 2. Add name of asset to `App / Build Settings / Alternate App Icon Sets`
+/// 2. Add name to `available` array
 
 struct SettingsAppIcon: View {
-    private static let available = [nil] + Bundle.alternateIcons
+    private static let primary = "AppIcon"
+    private static let available = [nil, "Flow", "Holo", "Blue", "Black", "Zen", "Pinky"]
     @State private var selection = UIApplication.shared.alternateIconName
     
     @Sendable
@@ -22,13 +23,15 @@ struct SettingsAppIcon: View {
             Picker(selection: $selection) {
                 ForEach(Self.available, id: \.self) { name in
                     HStack(spacing: 16) {
-                        Image(uiImage: UIImage(named: name ?? Bundle.primaryIcon)!)
-                            .resizable()
-                            .frame(width: 64, height: 64)
-                            .clipShape(RoundedRectangle(cornerRadius: 13, style: .continuous))
-                            .overlay(RoundedRectangle(cornerRadius: 13, style: .continuous)
-                                .strokeBorder(.primary.opacity(0.2), lineWidth: 0.5)
-                            )
+                        if let uiImage = UIImage(named: name ?? Self.primary) {
+                            Image(uiImage: uiImage)
+                                .resizable()
+                                .frame(width: 64, height: 64)
+                                .clipShape(RoundedRectangle(cornerRadius: 13, style: .continuous))
+                                .overlay(RoundedRectangle(cornerRadius: 13, style: .continuous)
+                                    .strokeBorder(.primary.opacity(0.2), lineWidth: 0.5)
+                                )
+                        }
                         
                         Text(name ?? "Default")
                     }
@@ -42,19 +45,5 @@ struct SettingsAppIcon: View {
             .listStyle(.plain)
             .navigationTitle("App Icon")
             .task(id: selection, update)
-    }
-}
-
-fileprivate extension Bundle {
-    static var primaryIcon: String {
-        let icons = Bundle.main.infoDictionary?["CFBundleIcons"] as? [String: [String: Any]]
-        return icons?["CFBundlePrimaryIcon"]?["CFBundleIconName"] as! String
-    }
-    
-    static var alternateIcons: [String] {
-        let icons = Bundle.main.infoDictionary?["CFBundleIcons"] as? [String: [String: Any]]
-        let names = icons?["CFBundleAlternateIcons"]?.keys
-        guard let names else { return [] }
-        return Array(names)
     }
 }
