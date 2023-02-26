@@ -147,6 +147,13 @@ function getItem() {
     if (item.excerpt && item.excerpt.length)
         item.excerpt = item.excerpt.substr(0, 10000)
 
+    //highlights
+    try {
+        const selectedText = window.getSelection().getRangeAt(0).toString().trim()
+        if (selectedText != '')
+            item.highlights = [{ _id: String(new Date().getTime()), text: selectedText }]
+    } catch(e) {}
+
     //remove empty keys
     for(const i in item)
         if(!item[i])

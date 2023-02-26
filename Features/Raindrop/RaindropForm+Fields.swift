@@ -77,6 +77,19 @@ extension RaindropForm.Fields: View {
                     .layoutPriority(-1)
             }
             
+            //highlights
+            NavigationLink {
+                RaindropHighlights($raindrop)
+            } label: {
+                HStack {
+                    Label("Highlights", systemImage: Filter.Kind.highlights.systemImage)
+                    if !raindrop.highlights.isEmpty {
+                        Spacer()
+                        Text(raindrop.highlights.count, format: .number).circularBadge()
+                    }
+                }
+            }
+            
             Label {
                 if raindrop.file == nil {
                     URLField("URL", value: $raindrop.link)

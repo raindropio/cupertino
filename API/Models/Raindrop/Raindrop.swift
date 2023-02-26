@@ -72,4 +72,14 @@ extension Raindrop {
             type = meta.type
         }
     }
+    
+    public mutating func append(highlights: [Highlight]) {
+        guard !highlights.isEmpty else { return }
+        
+        highlights.forEach { h in
+            if !self.highlights.contains(where: { $0.text == h.text }) {
+                self.highlights.append(h)
+            }
+        }
+    }
 }
