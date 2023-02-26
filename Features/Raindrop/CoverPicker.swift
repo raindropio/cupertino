@@ -18,12 +18,15 @@ struct CoverPicker: View {
     }
     
     var body: some View {
-        ImagePicker(
-            items,
-            selection: $raindrop.cover,
-            width: 92, height: 69
-        )
-            .equatable()
+        ScrollView(.vertical) {
+            ImagePicker(
+                items,
+                selection: $raindrop.cover,
+                width: 92, height: 69
+            )
+                .equatable()
+        }
+            .ignoresSafeArea(.keyboard)
             .navigationTitle("Cover")
             #if os(iOS)
             .navigationBarTitleDisplayMode(.inline)

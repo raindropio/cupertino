@@ -23,24 +23,21 @@ public struct ImagePicker {
 
 extension ImagePicker: View {
     public var body: some View {
-        ScrollView(.vertical) {
-            Columns(width: width) {
-                ForEach(data, id: \.self) { url in
-                    Cell(
-                        url: url,
-                        selected: url == selection,
-                        width: width,
-                        height: height,
-                        aspectRatio: aspectRatio
-                    )
-                        .equatable()
-                        .onTapGesture {
-                            selection = url
-                        }
-                }
+        Columns(width: width) {
+            ForEach(data, id: \.self) { url in
+                Cell(
+                    url: url,
+                    selected: url == selection,
+                    width: width,
+                    height: height,
+                    aspectRatio: aspectRatio
+                )
+                    .equatable()
+                    .onTapGesture {
+                        selection = url
+                    }
             }
         }
-            .ignoresSafeArea(.keyboard)
     }
 }
 
