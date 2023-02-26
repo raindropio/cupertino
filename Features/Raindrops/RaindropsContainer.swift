@@ -4,7 +4,8 @@ import UI
 
 public struct RaindropsContainer<C: View>: View {
     @EnvironmentObject private var c: CollectionsStore
-    
+    @EnvironmentObject private var cfg: ConfigStore
+
     var find: FindBy
     @Binding var selection: Set<Raindrop.ID>
     var content: () -> C
@@ -23,11 +24,15 @@ public struct RaindropsContainer<C: View>: View {
         c.state.view(find.collectionId)
     }
     
+    private var coverWidth: Double {
+        194 + (Double(cfg.state.raindrops.coverSize) * 30)
+    }
+    
     private var layout: LazyStackLayout {
         switch view {
         case .list, .simple: return .list
-        case .grid: return .grid(250, false)
-        case .masonry: return .grid(250, true)
+        case .grid: return .grid(coverWidth, false)
+        case .masonry: return .grid(coverWidth, true)
         }
     }
     
@@ -40,7 +45,10 @@ public struct RaindropsContainer<C: View>: View {
         )
             .environment(\.raindropsContainer, .init(
                 find: find,
-                view: view
+                view: view,
+                hide: cfg.state.raindrops.hide[view] ?? .init(),
+                coverRight: cfg.state.raindrops.coverRight,
+                coverWidth: coverWidth
             ))
     }
 }

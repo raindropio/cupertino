@@ -15,7 +15,7 @@ struct GridColumns<Content: View> {
 
 extension GridColumns: View {
     var body: some View {
-        let columns = [GridItem](
+        let gridColumns = [GridItem](
             repeating: .init(
                 .flexible(),
                 spacing: gap / 2,
@@ -24,8 +24,9 @@ extension GridColumns: View {
             count: columns
         )
         
-        LazyVGrid(columns: columns, alignment: .leading, spacing: gap / 2, content: content)
+        LazyVGrid(columns: gridColumns, alignment: .leading, spacing: gap / 2, content: content)
             .scenePadding(.horizontal)
             .padding(.vertical, gap / 3)
+            .animation(.default, value: columns)
     }
 }

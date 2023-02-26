@@ -5,10 +5,12 @@ import UI
 struct RaindropCover: View {
     var raindrop: Raindrop
     var view: CollectionView
+    var width: Double?
     
-    init(_ raindrop: Raindrop, view: CollectionView? = nil) {
+    init(_ raindrop: Raindrop, view: CollectionView? = nil, width: Double? = nil) {
         self.raindrop = raindrop
         self.view = view ?? .list
+        self.width = width
     }
     
     var body: some View {
@@ -25,10 +27,10 @@ struct RaindropCover: View {
             Thumbnail(raindrop.favicon, width: 20, height: 20)
             
         case .grid:
-            Thumbnail(cover, width: 250, aspectRatio: 1.5)
+            Thumbnail(cover, width: width ?? 250, aspectRatio: 1.5)
             
         case .masonry:
-            Thumbnail(cover, width: 250)
+            Thumbnail(cover, width: width ?? 250)
         }
     }
 }

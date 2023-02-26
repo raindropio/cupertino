@@ -52,6 +52,13 @@ public enum CollectionsAction: ReduxAction {
     case deleteGroup(CGroup)
 }
 
+public enum ConfigAction: ReduxAction {
+    case load
+    case reloaded(ConfigState)
+    case updateRaindrops(ConfigRaindrops)
+    case save
+}
+
 public enum IconsAction: ReduxAction {
     case load(String = "")
     case reload(String)

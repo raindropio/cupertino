@@ -1,5 +1,6 @@
 import SwiftUI
 import API
+import UI
 
 struct RaindropItem {
     @EnvironmentObject private var sheet: RaindropSheet
@@ -16,21 +17,28 @@ struct RaindropItem {
 extension RaindropItem: View {
     var body: some View {
         Layout {
-            RaindropCover(raindrop, view: container?.view)
-                .equatable()
+            if container?.hide.contains(.cover) != true {
+                RaindropCover(raindrop, view: container?.view, width: container?.coverWidth)
+                    .equatable()
+            }
             
             VStack(alignment: .leading, spacing: 4) {
                 RaindropTitleExcerpt(raindrop)
                     .lineLimit(3)
                 
-                RaindropLinks(raindrop: raindrop)
+                if container?.hide.contains(.tags) != true {
+                    RaindropLinks(raindrop: raindrop)
+                }
                                 
                 if container?.view == .grid {
                     Spacer(minLength: 0)
                 }
                 
-                RaindropMeta(raindrop)
+                if container?.hide.contains(.info) != true {
+                    RaindropMeta(raindrop)
+                }
             }
+                .frame(maxWidth: .infinity, alignment: .leading)
         }
             .swipeActions(edge: .leading) {
                 Link(destination: raindrop.link) {
@@ -70,17 +78,27 @@ extension RaindropItem {
             switch container?.view {
             case .list, nil:
                 HStack(alignment: .top, spacing: 14) {
+                    if container?.coverRight == true {
+                        parts.value.1
+                    }
                     parts.value.0
                         .cornerRadius(3)
                         .padding(.top, 4)
-                    parts.value.1
+                    if container?.coverRight == false {
+                        parts.value.1
+                    }
                 }
                 
             case .simple:
                 HStack(alignment: .top, spacing: 14) {
+                    if container?.coverRight == true {
+                        parts.value.1
+                    }
                     parts.value.0
                         .padding(.top, 4)
-                    parts.value.1
+                    if container?.coverRight == false {
+                        parts.value.1
+                    }
                 }
                 
             case .grid:

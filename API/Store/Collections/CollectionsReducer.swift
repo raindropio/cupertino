@@ -88,13 +88,21 @@ public actor CollectionsReducer: Reducer {
         //Auth
         if let action = action as? AuthAction {
             switch action {
-            case .login(_), .apple(_), .jwt(_):
-                return A.reload
-
             case .logout:
                 logout(state: &state)
-                            
-            case .signup(_):
+                
+            default:
+                break
+            }
+        }
+        
+        //User
+        if let action = action as? UserAction {
+            switch action {
+            case .reloaded(_):
+                return A.load
+                
+            default:
                 break
             }
         }

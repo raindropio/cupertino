@@ -23,7 +23,7 @@ extension Folder.Status {
         
         var body: some View {
             Section {
-                HStack {
+                HStack(spacing: 0) {
                     Text("\(total) items")
                         .foregroundStyle(.secondary)
                     
@@ -33,7 +33,7 @@ extension Folder.Status {
                         .labelStyle(.titleOnly)
                         .fixedSize()
                     
-                    CustomizeRaindropsButton(find)
+                    ViewConfigRaindropsButton(find)
                         .labelStyle(.iconOnly)
                         .fixedSize()
                 }

@@ -113,7 +113,7 @@ extension Folder.Toolbar {
                     ToolbarItemGroup {
                         if sizeClass == .regular {
                             SortRaindropsButton(find)
-                            CustomizeRaindropsButton(find)
+                            ViewConfigRaindropsButton(find)
                         }
                         
                         EditButton {

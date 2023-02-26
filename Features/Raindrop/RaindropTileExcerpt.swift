@@ -3,6 +3,7 @@ import API
 import UI
 
 public struct RaindropTitleExcerpt: View {
+    @Environment(\.raindropsContainer) private var container
     var raindrop: Raindrop
     
     public init(_ raindrop: Raindrop) {
@@ -10,11 +11,13 @@ public struct RaindropTitleExcerpt: View {
     }
     
     public var body: some View {
-        Text(raindrop.title)
-            .fontWeight(.semibold)
-            .fixedSize(horizontal: false, vertical: true)
+        if container?.hide.contains(.title) != true {
+            Text(raindrop.title)
+                .fontWeight(.semibold)
+                .fixedSize(horizontal: false, vertical: true)
+        }
         
-        if !raindrop.excerpt.isEmpty {
+        if !raindrop.excerpt.isEmpty, container?.hide.contains(.excerpt) != true {
             Text(raindrop.excerpt)
                 .font(.callout)
                 .fixedSize(horizontal: false, vertical: true)

@@ -27,25 +27,7 @@ extension ReaderAppearance: View {
                     .clearSection()
 
                 Section {
-                    ControlGroup {
-                        Button { options.fontSize -= 1 } label: {
-                            Image(systemName: "textformat.size.smaller")
-                                .frame(maxWidth: .infinity)
-                                .contentShape(Rectangle())
-                        }
-                        .disabled(options.fontSize <= 0)
-                        
-                        Divider()
-                        
-                        Button { options.fontSize += 1 } label: {
-                            Image(systemName: "textformat.size.larger")
-                                .frame(maxWidth: .infinity)
-                                .contentShape(Rectangle())
-                        }
-                        .disabled(options.fontSize >= 9)
-                    }
-                    .controlGroupStyle(.navigation)
-                    .buttonStyle(.plain)
+                    Stepper("Font size", value: $options.fontSize, in: 0...9)
                 }
                 
                 Section {

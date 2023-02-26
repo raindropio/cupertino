@@ -5,6 +5,9 @@ extension EnvironmentValues {
     struct RC: Equatable {
         var find: FindBy
         var view: CollectionView
+        var hide: Set<ConfigRaindrops.Element>
+        var coverRight: Bool = false
+        var coverWidth: Double
     }
     
     fileprivate struct RaindropsContainerKey: EnvironmentKey {
