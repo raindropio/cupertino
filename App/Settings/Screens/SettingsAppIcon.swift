@@ -3,8 +3,10 @@ import API
 import UI
 
 /// Steps to add new icon
-/// 1. Add iOS icon asset to `Assets`
-/// 2. Add name to `available` array
+/// 1. Add iOS icon asset to `Assets/AppIcon` in format `Name` (App Icon) and `NameThumb` (Image Set)
+/// 2. Add `Name` to `available` array
+///
+/// Why two copies of image? In production build Xcode cloud removes or renames original app icon's, so we need additional thumbnail image
 
 struct SettingsAppIcon: View {
     private static let primary = "AppIcon"
@@ -23,7 +25,7 @@ struct SettingsAppIcon: View {
             Picker(selection: $selection) {
                 ForEach(Self.available, id: \.self) { name in
                     HStack(spacing: 16) {
-                        if let uiImage = UIImage(named: name ?? Self.primary) {
+                        if let uiImage = UIImage(named: "\(name ?? Self.primary)Thumb") {
                             Image(uiImage: uiImage)
                                 .resizable()
                                 .frame(width: 64, height: 64)

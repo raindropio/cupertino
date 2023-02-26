@@ -3,14 +3,19 @@ import Foundation
 extension CollectionsState {
     /// Make sure to call this method after any changes to groups and/or user
     mutating func clean() {
-        //keep only existings ROOT collections
-        groups = groups.map {
-            var group = $0
-            group.collections = group.collections.filter { id in
-                user[id] != nil && user[id]?.parent == nil
+        groups = groups
+            //keep only existings ROOT collections
+            .map {
+                var group = $0
+                group.collections = group.collections.filter { id in
+                    user[id] != nil && user[id]?.parent == nil
+                }
+                return group
             }
-            return group
-        }
+            //ignore empty groups
+            .filter {
+                !$0.collections.isEmpty
+            }
         
         //create blank group
         if groups.isEmpty {

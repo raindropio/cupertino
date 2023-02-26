@@ -68,15 +68,14 @@ struct SettingsHome: View {
                         Label("Support", systemImage: "square.and.pencil").tint(.primary)
                     }
                         .listItemTint(.gray)
+                } footer: {
+                    Text("Version \(Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String ?? "") (\(Bundle.main.infoDictionary?["CFBundleVersion"] as? String ?? ""))")
+                        .frame(maxWidth: .infinity)
+                        .multilineTextAlignment(.center)
+                        .scenePadding(.top)
                 }
                 
                 SettingsLogout()
-                
-                Section {} footer: {
-                    Text("Version \(Bundle.main.object(forInfoDictionaryKey: "CFBundleShortVersionString") as? String ?? "")")
-                        .frame(maxWidth: .infinity)
-                        .multilineTextAlignment(.center)
-                }
             }
                 .environment(\.defaultMinListRowHeight, 40)
         }
