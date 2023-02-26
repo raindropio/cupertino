@@ -24,5 +24,17 @@ extension ConfigRaindrops {
             case .info: return "Date, domain & type"
             }
         }
+        
+        public static let allExceptCover = {
+            var a = Set(allCases)
+            a.remove(.cover)
+            return a
+        }()
+    }
+}
+
+extension Set where Element == ConfigRaindrops.Element {
+    public var allExceptCover: Bool {
+        self == Element.allExceptCover
     }
 }

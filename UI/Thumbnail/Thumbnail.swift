@@ -82,7 +82,6 @@ extension Thumbnail: View {
     @MainActor
     var base: LazyImage<NukeUI.Image> {
         LazyImage(url: url)
-            .animation(nil)
             .processors(resize)
             .pipeline(Self.pipeline)
 //            .priority(.veryLow)

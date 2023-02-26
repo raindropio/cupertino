@@ -19,7 +19,7 @@ extension RaindropItem: View {
         Layout {
             if container?.hide.contains(.cover) != true {
                 RaindropCover(raindrop, view: container?.view, width: container?.coverWidth)
-                    .equatable()
+                   .equatable()
             }
             
             VStack(alignment: .leading, spacing: 4) {
@@ -105,14 +105,14 @@ extension RaindropItem {
                 VStack(alignment: .leading, spacing: 0) {
                     parts.value.0
                     parts.value.1
-                        .padding(12)
+                        .padding(container?.hide.allExceptCover == true ? 0 : 12)
                 }
                 
             case .masonry:
                 VStack(alignment: .leading, spacing: 0) {
                     parts.value.0
                     parts.value.1
-                        .padding(12)
+                        .padding(container?.hide.allExceptCover == true ? 0 : 12)
                 }
             }
         }

@@ -18,23 +18,14 @@ struct AppScene: View {
     }
 
     var body: some View {
-        Group {
-            if isPhone {
-                NavigationStack(path: $router.path) {
-                    SidebarScreen()
-                        .navigationDestination(for: AppRouter.Path.self, destination: screen)
-                }
-            } else {
-                NavigationSplitView(sidebar: SidebarScreen.init) {
-                    NavigationStack(path: $router.detail) {
-                        Group {
-                            if let space = router.sidebar {
-                                Find(find: space)
-                            }
-                        }
-                        .navigationDestination(for: AppRouter.Path.self, destination: screen)
+        NavigationSplitView(sidebar: SidebarScreen.init) {
+            NavigationStack(path: $router.detail) {
+                Group {
+                    if let space = router.sidebar {
+                        Find(find: space)
                     }
                 }
+                .navigationDestination(for: AppRouter.Path.self, destination: screen)
             }
         }
             .navigationSplitViewUnlimitedWidth()

@@ -24,12 +24,12 @@ extension ViewConfigRaindropsButton {
         }
         
         var body: some View {
-            Menu {
-                ForEach(ConfigRaindrops.Element.allCases, id: \.rawValue) {
-                    Toggle($0.title, isOn: isOn($0))
+            Menu("View options") {
+                Section("Show fields:") {
+                    ForEach(ConfigRaindrops.Element.allCases, id: \.rawValue) {
+                        Toggle($0.title, isOn: isOn($0))
+                    }
                 }
-            } label: {
-                Label("Show in \(view.title.localizedLowercase)", systemImage: "eye")
             }
         }
     }
