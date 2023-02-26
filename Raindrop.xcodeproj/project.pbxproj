@@ -59,6 +59,8 @@
 		76B6738029928AB1007A412A /* Browser+Toolbar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76B6737F29928AB1007A412A /* Browser+Toolbar.swift */; };
 		76B6738229928FE6007A412A /* ReaderAppearance.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76B6738129928FE6007A412A /* ReaderAppearance.swift */; };
 		76B673862993A52A007A412A /* highlights.js in Resources */ = {isa = PBXBuildFile; fileRef = 76B673852993A52A007A412A /* highlights.js */; };
+		76BF915A29AB952C001445E5 /* NothingFound+AddText.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76BF915929AB952C001445E5 /* NothingFound+AddText.swift */; };
+		76BF915C29AB955D001445E5 /* NothingFound+Generic.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76BF915B29AB955D001445E5 /* NothingFound+Generic.swift */; };
 		76BFE36E291E9F6B00DE9DB2 /* AppScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76BFE369291E9F6B00DE9DB2 /* AppScene.swift */; };
 		76BFE36F291E9F6B00DE9DB2 /* AppRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76BFE36A291E9F6B00DE9DB2 /* AppRouter.swift */; };
 		76BFE370291E9F6B00DE9DB2 /* SettingsRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76BFE36B291E9F6B00DE9DB2 /* SettingsRouter.swift */; };
@@ -176,6 +178,8 @@
 		76B6737F29928AB1007A412A /* Browser+Toolbar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Browser+Toolbar.swift"; sourceTree = "<group>"; };
 		76B6738129928FE6007A412A /* ReaderAppearance.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReaderAppearance.swift; sourceTree = "<group>"; };
 		76B673852993A52A007A412A /* highlights.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = highlights.js; sourceTree = "<group>"; };
+		76BF915929AB952C001445E5 /* NothingFound+AddText.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NothingFound+AddText.swift"; sourceTree = "<group>"; };
+		76BF915B29AB955D001445E5 /* NothingFound+Generic.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NothingFound+Generic.swift"; sourceTree = "<group>"; };
 		76BFE369291E9F6B00DE9DB2 /* AppScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppScene.swift; sourceTree = "<group>"; };
 		76BFE36A291E9F6B00DE9DB2 /* AppRouter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppRouter.swift; sourceTree = "<group>"; };
 		76BFE36B291E9F6B00DE9DB2 /* SettingsRouter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsRouter.swift; sourceTree = "<group>"; };
@@ -436,6 +440,8 @@
 			children = (
 				76F282BB2934C76A00D00363 /* Receive.swift */,
 				760DD2FE294237E900103C9E /* NothingFound.swift */,
+				76BF915B29AB955D001445E5 /* NothingFound+Generic.swift */,
+				76BF915929AB952C001445E5 /* NothingFound+AddText.swift */,
 				760DD2FC2942333D00103C9E /* SaveFiles.swift */,
 				76F282B92934C43200D00363 /* NoAuth.swift */,
 			);
@@ -675,11 +681,13 @@
 			files = (
 				760DD2FF294237E900103C9E /* NothingFound.swift in Sources */,
 				76F282B52934C24B00D00363 /* ExtensionUI.swift in Sources */,
+				76BF915C29AB955D001445E5 /* NothingFound+Generic.swift in Sources */,
 				76D880DF2930E1FB00D43AD9 /* ExtensionController.swift in Sources */,
 				76B16BD02930E6EB00032D7D /* Share.swift in Sources */,
 				76F282B72934C25400D00363 /* ExtensionService.swift in Sources */,
 				760DD2FD2942333D00103C9E /* SaveFiles.swift in Sources */,
 				76F282BA2934C43200D00363 /* NoAuth.swift in Sources */,
+				76BF915A29AB952C001445E5 /* NothingFound+AddText.swift in Sources */,
 				76F282BC2934C76A00D00363 /* Receive.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

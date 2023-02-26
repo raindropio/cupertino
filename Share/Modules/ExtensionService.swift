@@ -28,6 +28,12 @@ final class ExtensionService: ObservableObject {
     func close() {
         context?.completeRequest(returningItems: context?.inputItems ?? [])
     }
+    
+    var containsText: Bool {
+        items.contains {
+            $0.hasItemConformingToTypeIdentifier(UTType.text.identifier)
+        }
+    }
 }
 
 extension ExtensionService {
