@@ -57,8 +57,11 @@ extension ItemBehaviour {
 }
 
 extension ItemBehaviour: ViewModifier {
+    @ViewBuilder
     private func menuItems() -> some View {
-        service.menu?(Set([tag]))
+        if editMode?.wrappedValue != .active {
+            service.menu?(Set([tag]))
+        }
     }
     
     func body(content: Content) -> some View {

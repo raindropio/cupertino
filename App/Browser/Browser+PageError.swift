@@ -22,7 +22,7 @@ extension Browser {
                                 Label("Reload", systemImage: "arrow.clockwise")
                             }
 
-                            if raindrop.file == nil, raindrop.cache != nil {
+                            if raindrop.file == nil, raindrop.cache?.status == .ready {
                                 Button {
                                     app.cached(id: raindrop.id)
                                 } label: {
