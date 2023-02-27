@@ -64,15 +64,22 @@ fileprivate struct AnyURL: Transferable {
             throw MyError.ignore
         }
     }
+    
+    static let shouldAttemptToOpenInPlace: Bool = {
+        let version = ProcessInfo().operatingSystemVersion
+        return version.majorVersion >= 16 && version.minorVersion >= 4
+    }()
         
     static var transferRepresentation: some TransferRepresentation {
         ProxyRepresentation(exporting: \.rawValue, importing: self.init)
-        FileRepresentation(importedContentType: .fileURL, importing: self.init)
-        FileRepresentation(importedContentType: .image, importing: self.init)
-        FileRepresentation(importedContentType: .video, importing: self.init)
-        FileRepresentation(importedContentType: .movie, importing: self.init)
-        FileRepresentation(importedContentType: .audio, importing: self.init)
-        FileRepresentation(importedContentType: .pdf, importing: self.init)
+        
+        FileRepresentation(importedContentType: .fileURL, shouldAttemptToOpenInPlace: shouldAttemptToOpenInPlace, importing: self.init)
+        FileRepresentation(importedContentType: .image, shouldAttemptToOpenInPlace: shouldAttemptToOpenInPlace, importing: self.init)
+        FileRepresentation(importedContentType: .video, shouldAttemptToOpenInPlace: shouldAttemptToOpenInPlace, importing: self.init)
+        FileRepresentation(importedContentType: .movie, shouldAttemptToOpenInPlace: shouldAttemptToOpenInPlace, importing: self.init)
+        FileRepresentation(importedContentType: .audio, shouldAttemptToOpenInPlace: shouldAttemptToOpenInPlace, importing: self.init)
+        FileRepresentation(importedContentType: .pdf, shouldAttemptToOpenInPlace: shouldAttemptToOpenInPlace, importing: self.init)
+        
         ProxyRepresentation(exporting: \.string, importing: self.init)
         DataRepresentation(contentType: .text, exporting: \.data, importing: self.init)
     }
