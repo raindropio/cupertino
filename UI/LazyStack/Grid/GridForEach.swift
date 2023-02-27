@@ -7,12 +7,12 @@ struct GridForEach<D: RandomAccessCollection, C: View> where D.Element: Identifi
 }
 
 extension GridForEach: View {
-    func getIndex(_ element: D.Element) -> Int? {
-        if let items = data as? [D.Element] {
-            return items.firstIndex { $0.id == element.id }
-        }
-        return nil
-    }
+//    func getIndex(_ element: D.Element) -> Int? {
+//        if let items = data as? [D.Element] {
+//            return items.firstIndex { $0.id == element.id }
+//        }
+//        return nil
+//    }
     
     var body: some View {
         ForEach(data) { element in
@@ -21,7 +21,6 @@ extension GridForEach: View {
                 .listItemBehaviour(element.id)
                 .background(Color.secondaryGroupedBackground)
                 .clipShape(RoundedRectangle(cornerRadius: 5))
-                
         }
     }
 }

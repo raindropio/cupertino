@@ -14,8 +14,8 @@ struct GridColumns<Content: View> {
 }
 
 extension GridColumns: View {
-    var body: some View {
-        let gridColumns = [GridItem](
+    private var gridItems: [GridItem] {
+        .init(
             repeating: .init(
                 .flexible(),
                 spacing: gap / 2,
@@ -23,10 +23,24 @@ extension GridColumns: View {
             ),
             count: columns
         )
+    }
+    
+    var body: some View {
+        Memorized(gridItems: gridItems, spacing: gap / 2, content: content)
+    }
+}
+
+extension GridColumns {
+    fileprivate struct Memorized: View {
+        var gridItems: [GridItem]
+        var spacing: Double
+        var content: () -> Content
         
-        LazyVGrid(columns: gridColumns, alignment: .leading, spacing: gap / 2, content: content)
-            .scenePadding(.horizontal)
-            .padding(.vertical, gap / 3)
-            .animation(.default, value: columns)
+        var body: some View {
+            LazyVGrid(columns: gridItems, alignment: .leading, spacing: spacing, content: content)
+                .scenePadding(.horizontal)
+                .scenePadding(.bottom)
+                .animation(.default, value: gridItems.count)
+        }
     }
 }

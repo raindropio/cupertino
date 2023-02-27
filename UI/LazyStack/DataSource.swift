@@ -1,7 +1,7 @@
 import SwiftUI
 import UniformTypeIdentifiers
 
-public struct DataSource<D: RandomAccessCollection, C: View> where D.Element: Identifiable {
+public struct DataSource<D: RandomAccessCollection & Hashable, C: View> where D.Element: Identifiable {
     @Environment(\.lazyStackLayout) private var layout
     
     let data: D

@@ -82,6 +82,7 @@ extension Thumbnail: View {
     @MainActor
     var base: LazyImage<NukeUI.Image> {
         LazyImage(url: url)
+            .animation(nil)
             .processors(resize)
             .pipeline(Self.pipeline)
 //            .priority(.veryLow)
@@ -132,7 +133,7 @@ struct Thumbnail_Previews: PreviewProvider {
             Item(id: URL(string: "https://rdl.ink/render/https%3A%2F%2Fup.raindrop.io%2Fraindrop%2Ffiles%2F126%2F906%2F55%2F12690655.jpg?width=1000&height=1000&dpr=3")!)
         ]
         
-        struct Item: Identifiable {
+        struct Item: Identifiable, Hashable {
             var id: URL
         }
         
