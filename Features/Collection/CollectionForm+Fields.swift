@@ -11,21 +11,17 @@ extension CollectionForm {
 extension CollectionForm.Fields: View {
     var body: some View {
         Section {
-            Label {
+            HStack {
                 TextField("Title", text: $collection.title)
                     .fontWeight(.semibold)
                     .autoFocus()
-            } icon: {
-                IconPicker(collection: $collection)
+                
+                Icon(collection: $collection)
             }
             
-            Label {
-                TextField("Description", text: $collection.description, axis: .vertical)
-                    .preventLineBreaks(text: $collection.description)
-                    .lineLimit(2...)
-            } icon: {
-                Color.clear
-            }
+            TextField("Description", text: $collection.description, axis: .vertical)
+                .preventLineBreaks(text: $collection.description)
+                .lineLimit(2...)
         }
         
         Section("Parent") {            

@@ -29,6 +29,11 @@ extension CollectionIcon where C == UserCollection {
         cover = collection.cover
         systemImage = collection.systemImage
     }
+    
+    init(_ collection: C, fallbackImageName: String) {
+        cover = collection.cover
+        systemImage = fallbackImageName
+    }
 }
 
 extension CollectionIcon where C == SystemCollection {
