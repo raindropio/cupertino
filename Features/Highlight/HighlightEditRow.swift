@@ -19,8 +19,10 @@ struct HighlightEditRow: View {
                         .frame(maxWidth: .infinity, alignment: .leading)
                 }
                 
-                TextField("Note", text: $highlight.note, axis: .vertical)
-                    .preventLineBreaks(text: $highlight.note)
+                ProGroup {
+                    TextField("Note", text: $highlight.note, axis: .vertical)
+                        .preventLineBreaks(text: $highlight.note)
+                }
                 
                 Text(highlight.created, formatter: .shortDateTime)
                     .lineLimit(1)

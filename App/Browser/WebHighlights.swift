@@ -4,6 +4,7 @@ import API
 
 struct WebHighlights {
     @EnvironmentObject private var dispatch: Dispatcher
+    @EnvironmentObject private var user: UserStore
     @Environment(\.sendWebMessage) private var _send
     private static let channel = "rdh"
     private static let highlightsJs = Bundle.main.url(forResource: "highlights", withExtension: "js")!
@@ -64,7 +65,7 @@ struct WebHighlights {
     private func reload() async {
         guard page.progress == 1 else { return }
         
-        try? await send(.config(.init(enabled: true, nav: true, pro: true)))
+        try? await send(.config(.init(enabled: true, nav: true, pro: user.state.me?.pro == true)))
         try? await send(.apply(raindrop.highlights))
     }
     

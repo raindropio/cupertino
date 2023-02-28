@@ -24,17 +24,23 @@ extension CollectionForm.Fields: View {
                 .lineLimit(2...)
         }
         
-        Section("Parent") {            
-            NavigationLink {
-                CollectionParent($collection)
-            } label: {
-                if let parent = collection.parent {
-                    CollectionLabel(parent, withLocation: true)
-                        .badge(0)
-                } else {
-                    Text("None")
-                        .foregroundStyle(.secondary)
+        Section("Parent") {
+            ProGroup {
+                NavigationLink {
+                    CollectionParent($collection)
+                } label: {
+                    if let parent = collection.parent {
+                        CollectionLabel(parent, withLocation: true)
+                            .badge(0)
+                    } else {
+                        Text("None")
+                            .foregroundStyle(.secondary)
+                    }
                 }
+            } free: {
+                Label("Nested collections available in Pro plan", systemImage: "bolt.fill")
+                    .foregroundStyle(.tertiary)
+                    .onAppear { collection.parent = nil }
             }
         }
         

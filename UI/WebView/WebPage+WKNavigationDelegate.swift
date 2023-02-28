@@ -21,10 +21,10 @@ extension WebPage: WKNavigationDelegate {
             //show error for non ok response
             if let response = navigationResponse.response as? HTTPURLResponse {
                 if response.statusCode >= 400 {
-                    self.error = NSError(
+                    onError(webView, error: NSError(
                         domain: HTTPURLResponse.localizedString(forStatusCode: response.statusCode),
                         code: response.statusCode
-                    )
+                    ))
                 }
             }
         }
@@ -42,13 +42,18 @@ extension WebPage: WKNavigationDelegate {
     }
     
     //error
-    public func webView(_ webView: WKWebView, didFail navigation: WKNavigation!, withError error: Error) {
+    private func onError(_ webView: WKWebView, error: Error) {
         guard (error as NSError).code != NSURLErrorCancelled else { return }
         self.error = error
+        self.prefersHiddenToolbars = false
         webView.scrollView.refreshControl?.endRefreshing()
     }
     
+    public func webView(_ webView: WKWebView, didFail navigation: WKNavigation!, withError error: Error) {
+        onError(webView, error: error)
+    }
+    
     public func webView(_ webView: WKWebView, didFailProvisionalNavigation navigation: WKNavigation!, withError error: Error) {
-        self.webView(webView, didFail: navigation, withError: error)
+        onError(webView, error: error)
     }
 }
