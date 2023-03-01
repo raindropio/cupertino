@@ -6,6 +6,7 @@ import Features
 struct AppScene: View {
     @StateObject private var router = AppRouter()
     @AppStorage("theme") private var theme: PreferredTheme = .default
+    @SceneStorage("column-visibility") private var columnVisibility = NavigationSplitViewVisibility.automatic
     
     @ViewBuilder
     private func screen(_ path: AppRouter.Path) -> some View {
@@ -18,7 +19,10 @@ struct AppScene: View {
     }
 
     var body: some View {
-        NavigationSplitView(sidebar: SidebarScreen.init) {
+        NavigationSplitView(
+            columnVisibility: $columnVisibility,
+            sidebar: SidebarScreen.init
+        ) {
             NavigationStack(path: $router.detail) {
                 Group {
                     if let space = router.sidebar {

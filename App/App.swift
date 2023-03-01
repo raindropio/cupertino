@@ -10,9 +10,7 @@ struct RaindropApp: App {
         WindowGroup {
             AuthGroup {
                 AppScene()
-                    #if os(iOS)
                     .modifier(SettingsScene.Attach())
-                    #endif
             } notAuthorized: {
                 AuthScene()
             }
