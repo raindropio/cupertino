@@ -83,7 +83,6 @@
 		76DC0BB629AF6DAB007B4BDF /* UI in Frameworks */ = {isa = PBXBuildFile; productRef = 76DC0BB529AF6DAB007B4BDF /* UI */; };
 		76DC0BB829AF6DAD007B4BDF /* Features in Frameworks */ = {isa = PBXBuildFile; productRef = 76DC0BB729AF6DAD007B4BDF /* Features */; };
 		76DC0BBC29AF7FE1007B4BDF /* Action.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = 76DC0B9729AF6C21007B4BDF /* Action.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
-		76DC0BC129AF849F007B4BDF /* Action.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 76DC0BBF29AF849C007B4BDF /* Action.xcassets */; };
 		76DC0BC229AF84E2007B4BDF /* Action.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 76DC0BBF29AF849C007B4BDF /* Action.xcassets */; };
 		76E51CEA299A8A1400FE7763 /* AppDeepLinks.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76E51CE9299A8A1400FE7763 /* AppDeepLinks.swift */; };
 		76ECFDFE2947848500DF15C9 /* Browser+PageError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76ECFDFD2947848500DF15C9 /* Browser+PageError.swift */; };
@@ -640,7 +639,6 @@
 			files = (
 				767F0B6429A3744D00349902 /* manifest.json in Resources */,
 				767F0B9529A3745A00349902 /* assets in Resources */,
-				76DC0BC129AF849F007B4BDF /* Action.xcassets in Resources */,
 				767F0B5429A3744D00349902 /* background.js in Resources */,
 				767F0B9729A3745A00349902 /* welcome in Resources */,
 				767F0B9629A3745A00349902 /* _locales in Resources */,
@@ -821,7 +819,6 @@
 			buildSettings = {
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 5000;
 				DEVELOPMENT_TEAM = 7459JWM5TY;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = WebExtension/WebExtension.plist;
@@ -833,7 +830,6 @@
 					"@executable_path/Frameworks",
 					"@executable_path/../../Frameworks",
 				);
-				MARKETING_VERSION = 5.0.5;
 				OTHER_LDFLAGS = (
 					"-framework",
 					SafariServices,
@@ -853,7 +849,6 @@
 			buildSettings = {
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 5000;
 				DEVELOPMENT_TEAM = 7459JWM5TY;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = WebExtension/WebExtension.plist;
@@ -865,7 +860,6 @@
 					"@executable_path/Frameworks",
 					"@executable_path/../../Frameworks",
 				);
-				MARKETING_VERSION = 5.0.5;
 				OTHER_LDFLAGS = (
 					"-framework",
 					SafariServices,
@@ -914,6 +908,7 @@
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				COPY_PHASE_STRIP = NO;
+				CURRENT_PROJECT_VERSION = 5000;
 				DEAD_CODE_STRIPPING = YES;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
@@ -932,6 +927,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
+				MARKETING_VERSION = 5.0.7;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -973,6 +969,7 @@
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				COPY_PHASE_STRIP = NO;
+				CURRENT_PROJECT_VERSION = 5000;
 				DEAD_CODE_STRIPPING = YES;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_NS_ASSERTIONS = NO;
@@ -985,6 +982,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
+				MARKETING_VERSION = 5.0.7;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SWIFT_COMPILATION_MODE = wholemodule;
@@ -1004,7 +1002,6 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "Apple Development";
 				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "-";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 5000;
 				DEAD_CODE_STRIPPING = YES;
 				DEVELOPMENT_ASSET_PATHS = "";
 				DEVELOPMENT_TEAM = 7459JWM5TY;
@@ -1024,7 +1021,6 @@
 				LD_RUNPATH_SEARCH_PATHS = "@executable_path/Frameworks";
 				"LD_RUNPATH_SEARCH_PATHS[sdk=macosx*]" = "@executable_path/../Frameworks";
 				MACOSX_DEPLOYMENT_TARGET = 13.0;
-				MARKETING_VERSION = 5.0.5;
 				PRODUCT_BUNDLE_IDENTIFIER = io.raindrop.ios;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = auto;
@@ -1048,7 +1044,6 @@
 				CODE_SIGN_IDENTITY = "-";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 5000;
 				DEAD_CODE_STRIPPING = YES;
 				DEVELOPMENT_ASSET_PATHS = "";
 				DEVELOPMENT_TEAM = 7459JWM5TY;
@@ -1068,7 +1063,6 @@
 				LD_RUNPATH_SEARCH_PATHS = "@executable_path/Frameworks";
 				"LD_RUNPATH_SEARCH_PATHS[sdk=macosx*]" = "@executable_path/../Frameworks";
 				MACOSX_DEPLOYMENT_TARGET = 13.0;
-				MARKETING_VERSION = 5.0.5;
 				PRODUCT_BUNDLE_IDENTIFIER = io.raindrop.ios;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = auto;
@@ -1088,7 +1082,6 @@
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
 				CODE_SIGN_ENTITLEMENTS = Share/Share.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 5000;
 				DEVELOPMENT_TEAM = 7459JWM5TY;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = share/Share.plist;
@@ -1100,7 +1093,6 @@
 					"@executable_path/Frameworks",
 					"@executable_path/../../Frameworks",
 				);
-				MARKETING_VERSION = 5.0.5;
 				PRODUCT_BUNDLE_IDENTIFIER = io.raindrop.ios.share;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = iphoneos;
@@ -1118,7 +1110,6 @@
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
 				CODE_SIGN_ENTITLEMENTS = Share/Share.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 5000;
 				DEVELOPMENT_TEAM = 7459JWM5TY;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = share/Share.plist;
@@ -1130,7 +1121,6 @@
 					"@executable_path/Frameworks",
 					"@executable_path/../../Frameworks",
 				);
-				MARKETING_VERSION = 5.0.5;
 				PRODUCT_BUNDLE_IDENTIFIER = io.raindrop.ios.share;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = iphoneos;
@@ -1164,7 +1154,6 @@
 					"@executable_path/Frameworks",
 					"@executable_path/../../Frameworks",
 				);
-				MARKETING_VERSION = 5.0.5;
 				PRODUCT_BUNDLE_IDENTIFIER = io.raindrop.ios.action;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = iphoneos;
@@ -1196,7 +1185,6 @@
 					"@executable_path/Frameworks",
 					"@executable_path/../../Frameworks",
 				);
-				MARKETING_VERSION = 5.0.5;
 				PRODUCT_BUNDLE_IDENTIFIER = io.raindrop.ios.action;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = iphoneos;

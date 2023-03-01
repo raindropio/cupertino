@@ -14,12 +14,15 @@ fileprivate struct Proxy: UIViewControllerRepresentable {
 
 extension Proxy {
     class VC: UIViewController {
+        var wait = false
+        
         override func willMove(toParent parent: UIViewController?) {
             super.willMove(toParent: parent)
             
             if let searchController = parent?.navigationItem.searchController,
-               searchController.searchBarPlacement != .inline {
-                searchController.searchBar.isHidden = true
+               searchController.searchBarPlacement != .inline,
+               !searchController.isActive {
+                searchController.searchBar.isHidden = !wait
             }
         }
         
@@ -27,9 +30,18 @@ extension Proxy {
             super.viewDidAppear(animated)
             
             if let searchController = parent?.navigationItem.searchController,
-               searchController.searchBarPlacement != .inline {
+               searchController.searchBarPlacement != .inline,
+               !searchController.isActive {
                 searchController.searchBar.isHidden = false
             }
+            
+            wait = false
+        }
+        
+        override func viewDidDisappear(_ animated: Bool) {
+            super.viewDidDisappear(animated)
+            
+            wait = true
         }
     }
 }
