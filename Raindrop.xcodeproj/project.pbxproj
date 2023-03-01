@@ -83,6 +83,8 @@
 		76DC0BB629AF6DAB007B4BDF /* UI in Frameworks */ = {isa = PBXBuildFile; productRef = 76DC0BB529AF6DAB007B4BDF /* UI */; };
 		76DC0BB829AF6DAD007B4BDF /* Features in Frameworks */ = {isa = PBXBuildFile; productRef = 76DC0BB729AF6DAD007B4BDF /* Features */; };
 		76DC0BBC29AF7FE1007B4BDF /* Action.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = 76DC0B9729AF6C21007B4BDF /* Action.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		76DC0BC129AF849F007B4BDF /* Action.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 76DC0BBF29AF849C007B4BDF /* Action.xcassets */; };
+		76DC0BC229AF84E2007B4BDF /* Action.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 76DC0BBF29AF849C007B4BDF /* Action.xcassets */; };
 		76E51CEA299A8A1400FE7763 /* AppDeepLinks.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76E51CE9299A8A1400FE7763 /* AppDeepLinks.swift */; };
 		76ECFDFE2947848500DF15C9 /* Browser+PageError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76ECFDFD2947848500DF15C9 /* Browser+PageError.swift */; };
 		76ECFE0C294B1B5700DF15C9 /* WebHighlights+Event.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76ECFE09294B1B5700DF15C9 /* WebHighlights+Event.swift */; };
@@ -215,6 +217,7 @@
 		76DC0B9829AF6C21007B4BDF /* UniformTypeIdentifiers.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UniformTypeIdentifiers.framework; path = System/Library/Frameworks/UniformTypeIdentifiers.framework; sourceTree = SDKROOT; };
 		76DC0BA229AF6C21007B4BDF /* Action.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Action.plist; sourceTree = "<group>"; };
 		76DC0BB929AF6DE9007B4BDF /* Action.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Action.entitlements; sourceTree = "<group>"; };
+		76DC0BBF29AF849C007B4BDF /* Action.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Action.xcassets; sourceTree = "<group>"; };
 		76E08B6929A3976000B3202D /* Backport */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = Backport; sourceTree = "<group>"; };
 		76E51CE9299A8A1400FE7763 /* AppDeepLinks.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDeepLinks.swift; sourceTree = "<group>"; };
 		76ECFDFD2947848500DF15C9 /* Browser+PageError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Browser+PageError.swift"; sourceTree = "<group>"; };
@@ -463,6 +466,7 @@
 				76B16BD52930F43900032D7D /* Share.js */,
 				76DC0BA229AF6C21007B4BDF /* Action.plist */,
 				76DC0BB929AF6DE9007B4BDF /* Action.entitlements */,
+				76DC0BBF29AF849C007B4BDF /* Action.xcassets */,
 			);
 			path = Share;
 			sourceTree = "<group>";
@@ -636,6 +640,7 @@
 			files = (
 				767F0B6429A3744D00349902 /* manifest.json in Resources */,
 				767F0B9529A3745A00349902 /* assets in Resources */,
+				76DC0BC129AF849F007B4BDF /* Action.xcassets in Resources */,
 				767F0B5429A3744D00349902 /* background.js in Resources */,
 				767F0B9729A3745A00349902 /* welcome in Resources */,
 				767F0B9629A3745A00349902 /* _locales in Resources */,
@@ -664,6 +669,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				76DC0BC229AF84E2007B4BDF /* Action.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1139,6 +1145,7 @@
 		76DC0BA629AF6C22007B4BDF /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = ActionIcon;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
 				CODE_SIGN_ENTITLEMENTS = Share/Action.entitlements;
 				CODE_SIGN_IDENTITY = "-";
@@ -1171,6 +1178,7 @@
 		76DC0BA729AF6C22007B4BDF /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = ActionIcon;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
 				CODE_SIGN_ENTITLEMENTS = Share/Action.entitlements;
 				CODE_SIGN_IDENTITY = "-";

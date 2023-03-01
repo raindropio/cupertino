@@ -17,9 +17,10 @@ extension RaindropsReducer {
         let links = try? await rest.raindropsLinks()
         guard let links else { return }
         
-        state.lookups = [:]
+        var lookups: [URL: Raindrop.ID] = [:]
         links.forEach {
-            state.lookups[$0.key.compact] = $0.value
+            lookups[$0.key.compact] = $0.value
         }
+        state.lookups = lookups
     }
 }
