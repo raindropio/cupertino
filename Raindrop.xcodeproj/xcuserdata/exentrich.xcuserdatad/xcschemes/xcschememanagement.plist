@@ -4,25 +4,30 @@
 <dict>
 	<key>SchemeUserState</key>
 	<dict>
-		<key>Prod.xcscheme_^#shared#^_</key>
-		<dict>
-			<key>orderHint</key>
-			<integer>4</integer>
-		</dict>
-		<key>Raindrop.xcscheme_^#shared#^_</key>
+		<key>Action.xcscheme_^#shared#^_</key>
 		<dict>
 			<key>orderHint</key>
 			<integer>3</integer>
 		</dict>
+		<key>Prod.xcscheme_^#shared#^_</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>1</integer>
+		</dict>
+		<key>Raindrop.xcscheme_^#shared#^_</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>0</integer>
+		</dict>
 		<key>Share.xcscheme_^#shared#^_</key>
 		<dict>
 			<key>orderHint</key>
-			<integer>5</integer>
+			<integer>2</integer>
 		</dict>
 		<key>WebExtension (iOS).xcscheme_^#shared#^_</key>
 		<dict>
 			<key>orderHint</key>
-			<integer>6</integer>
+			<integer>4</integer>
 		</dict>
 		<key>cupertino.xcscheme_^#shared#^_</key>
 		<dict>
@@ -48,6 +53,11 @@
 			<true/>
 		</dict>
 		<key>7685A190286868AC00A4BC3C</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>76DC0B9629AF6C21007B4BDF</key>
 		<dict>
 			<key>primary</key>
 			<true/>

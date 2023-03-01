@@ -9,7 +9,7 @@ struct ExtensionUI: View {
             .sheet(
                 isPresented: $isPresented,
                 onDismiss: service.close,
-                content: Share.init
+                content: Main.init
             )
             .environmentObject(service)
     }

@@ -4,12 +4,13 @@ import UniformTypeIdentifiers
 final class ExtensionService: ObservableObject {
     private weak var context: NSExtensionContext?
     
+    let extensionType: ExtensionType = .detect()
     @Published var preprocessed: NSDictionary?
     @Published var items = [NSItemProvider]()
     
     init(_ context: NSExtensionContext? = nil) {
         self.context = context
-        
+                    
         Task {
             await load()
         }
@@ -33,6 +34,16 @@ final class ExtensionService: ObservableObject {
         items.contains {
             $0.hasItemConformingToTypeIdentifier(UTType.text.identifier)
         }
+    }
+}
+
+enum ExtensionType {
+    case share
+    case action
+    
+    static func detect() -> Self {
+        let id = (Bundle.main.infoDictionary?["NSExtension"] as? [String: Any])?["NSExtensionPointIdentifier"] as? String
+        return id == "com.apple.ui-services" ? .action : .share
     }
 }
 
