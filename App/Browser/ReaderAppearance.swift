@@ -12,7 +12,7 @@ extension ReaderAppearance: View {
     var body: some View {
         NavigationStack {
             List {
-                Section {
+                HStack(spacing: 24) {
                     Picker(selection: $options.theme) {
                         ForEach(ReaderOptions.Theme.allCases, id: \.rawValue) {
                             Label($0.title, systemImage: $0.systemImage)
@@ -21,14 +21,14 @@ extension ReaderAppearance: View {
                                 .tag($0)
                         }
                     } label: {}
-                    .pickerStyle(.segmented)
-                    .labelStyle(.iconOnly)
+                        .pickerStyle(.segmented)
+                        .labelStyle(.iconOnly)
+                    
+                    Stepper(value: $options.fontSize, in: 0...9) {}
+                        .labelsHidden()
                 }
-                    .clearSection()
-
-                Section {
-                    Stepper("Font size", value: $options.fontSize, in: 0...9)
-                }
+                    .padding(.bottom, 8)
+                    .listSectionSeparator(.hidden)
                 
                 Section {
                     Picker(selection: $options.fontFamily) {
@@ -37,12 +37,11 @@ extension ReaderAppearance: View {
                                 .font($0.preview)
                                 .tag($0)
                         }
-                    } label: {
-                        
-                    }
+                    } label: {}
                         .pickerStyle(.inline)
                 }
             }
+                .listStyle(.plain)
                 .navigationTitle("Appearance")
                 .navigationBarTitleDisplayMode(.inline)
                 .toolbar {
