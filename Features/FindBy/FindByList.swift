@@ -34,22 +34,21 @@ extension FindByList: View {
     public var body: some View {
         List(selection: $selection) {
             if search.isEmpty {
-                Section {
-                    if editMode?.wrappedValue != .active {
-                        SystemCollections<FindBy>(0, -1)
+                if editMode?.wrappedValue != .active {
+                    SystemCollections<FindBy>(0, -1)
+                    
+                    DisclosureGroup(content: SimpleFilters<FindBy>.init) {
+                        Label("Filters", systemImage: "circle.grid.2x2")
                     }
+                        .listItemTint(.monochrome)
                 }
                 
                 UserCollections<FindBy>()
                 
-                DisclosureSection("Tags", isExpanded: $isExpanded) {
-                    AllTags<FindBy>()
-                }
+                DisclosureSection("Tags", isExpanded: $isExpanded, content: AllTags<FindBy>.init)
                 
-                Section {
-                    if editMode?.wrappedValue != .active {
-                        SystemCollections<FindBy>(-99)
-                    }
+                if editMode?.wrappedValue != .active {
+                    SystemCollections<FindBy>(-99)
                 }
             } else {
                 FindCollections<FindBy>(search)

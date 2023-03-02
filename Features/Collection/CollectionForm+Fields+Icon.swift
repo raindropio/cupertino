@@ -15,10 +15,10 @@ extension CollectionForm.Fields {
                 .buttonStyle(.bordered)
                 .buttonBorderShape(.roundedRectangle(radius: 6))
                 .navigationDestination(isPresented: $show) {
-                    CollectionIconPicker(selection: $collection.cover, suggest: collection.title)
+                    CollectionIconGrid(selection: $collection.cover, suggest: collection.title)
                 }
                 .opacity(show ? 1 : 1) //fix navigationDestination
-                .modifier(CollectionIconPicker.Preload(suggest: collection.title))
+                .modifier(CollectionIconGrid.Preload(suggest: collection.title))
         }
     }
 }

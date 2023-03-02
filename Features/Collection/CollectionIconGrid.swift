@@ -2,7 +2,7 @@ import SwiftUI
 import UI
 import API
 
-struct CollectionIconPicker: View {
+struct CollectionIconGrid: View {
     @Environment(\.dismiss) private var dismiss
     @EnvironmentObject private var i: IconsStore
     @EnvironmentObject private var dispatch: Dispatcher
@@ -74,7 +74,7 @@ struct CollectionIconPicker: View {
     }
 }
 
-extension CollectionIconPicker {
+extension CollectionIconGrid {
     struct Preload: ViewModifier {
         @EnvironmentObject private var dispatch: Dispatcher
         var suggest: String = ""

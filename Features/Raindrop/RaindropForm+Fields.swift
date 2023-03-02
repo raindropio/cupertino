@@ -34,7 +34,7 @@ extension RaindropForm.Fields: View {
                 }
                     .buttonStyle(.borderless)
                     .navigationDestination(isPresented: $cover) {
-                        CoverPicker(raindrop: $raindrop)
+                        RaindropCoverGrid(raindrop: $raindrop)
                     }
                     .padding(.top, 10)
                     .frame(maxHeight: .infinity, alignment: .top)

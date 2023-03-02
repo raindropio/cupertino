@@ -2,7 +2,7 @@ import SwiftUI
 import UI
 import API
 
-struct CoverPicker: View {
+struct RaindropCoverGrid: View {
     @Environment(\.dismiss) private var dismiss
     @Binding var raindrop: Raindrop
     
