@@ -18,9 +18,10 @@ public struct Thumbnail {
             name: "\(Bundle.main.bundleIdentifier!).thumbnail",
             sizeLimit: ImageCache.shared.costLimit
         )
-        configuration.dataCachePolicy = .storeEncodedImages
-        configuration.isDecompressionEnabled = true
-        configuration.isRateLimiterEnabled = false
+        configuration.dataCachePolicy = .storeAll
+        configuration.isDecompressionEnabled = false
+        configuration.isRateLimiterEnabled = true
+        configuration.isProgressiveDecodingEnabled = true
         return ImagePipeline(configuration: configuration)
     }()
         

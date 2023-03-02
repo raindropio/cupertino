@@ -11,16 +11,18 @@ public struct RaindropTitleExcerpt: View {
     }
     
     public var body: some View {
-        if container?.hide.contains(.title) != true {
-            Text(raindrop.title)
-                .fontWeight(.semibold)
-                .fixedSize(horizontal: false, vertical: true)
+        Group {
+            if container?.hide.contains(.title) != true {
+                Text(raindrop.title)
+                    .fontWeight(.semibold)
+            }
+            
+            if !raindrop.excerpt.isEmpty, container?.hide.contains(.excerpt) != true {
+                Text(raindrop.excerpt)
+                    .font(.callout)
+            }
         }
-        
-        if !raindrop.excerpt.isEmpty, container?.hide.contains(.excerpt) != true {
-            Text(raindrop.excerpt)
-                .font(.callout)
-                .fixedSize(horizontal: false, vertical: true)
-        }
+            .fixedSize(horizontal: false, vertical: true)
+            .contentTransition(.opacity)
     }
 }

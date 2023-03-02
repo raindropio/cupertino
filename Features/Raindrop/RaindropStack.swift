@@ -94,18 +94,12 @@ fileprivate struct ByURL<C: View>: View {
         
         loading = false
     }
-    
-    //load suggestions
-    @Sendable private func suggest() async {
-        try? await dispatch(RaindropsAction.suggest(draft))
-    }
-    
+        
     var body: some View {
         Stack(draft: $draft, loading: loading, content: content)
             .onAppear { draft = stored }
             .task(id: stored) { draft = stored }
             .task(id: url, lookup)
-            .task(id: url, suggest)
     }
 }
 
@@ -131,6 +125,11 @@ fileprivate struct Stack<C: View>: View {
         }
     }
     
+    //load suggestions
+    @Sendable private func suggest() async {
+        try? await dispatch(RaindropsAction.suggest(draft))
+    }
+    
     //auto-save for existing bookmarks
     private func saveOnClose() {
         guard !draft.isNew else { return }
@@ -152,6 +151,7 @@ fileprivate struct Stack<C: View>: View {
         }
             .interactiveDismissDisabled(draft.isNew)
             .task(id: draft.isNew, getMeta)
+            .task(suggest)
             .onDisappear(perform: saveOnClose)
     }
 }

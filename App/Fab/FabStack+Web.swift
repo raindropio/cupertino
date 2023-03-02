@@ -23,8 +23,9 @@ extension FabStack {
             Section("URL") {
                 HStack {
                     URLField("https://", value: $url)
-                        .autoFocus()
+                        .onSubmit(saveUrl)
                         .onAppear(perform: onAppear)
+                        .autoFocus()
                     
                     Button(action: saveUrl) {
                         Image(systemName: "plus")
@@ -37,7 +38,6 @@ extension FabStack {
                         .animation(.spring(), value: url != nil)
                 }
             }
-                .onSubmit(saveUrl)
         }
     }
 }

@@ -13,12 +13,11 @@ public struct ViewConfigRaindropsButton: View {
     }
     
     public var body: some View {
-        if !r.state.isEmpty(find) {
-            Memorized(
-                find: find,
-                view: c.state.view(find.collectionId)
-            )
-        }
+        Memorized(
+            find: find,
+            view: c.state.view(find.collectionId)
+        )
+            .disabled(r.state.isEmpty(find))
     }
 }
 

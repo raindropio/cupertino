@@ -10,9 +10,8 @@ public struct SortRaindropsButton: View {
     }
     
     public var body: some View {
-        if !r.state.isEmpty(find) {
-            Memorized(find: find, sort: r.state.sort(find))
-        }
+        Memorized(find: find, sort: r.state.sort(find))
+            .disabled(r.state.isEmpty(find))
     }
 }
 

@@ -7,6 +7,16 @@ public actor ReduxSubStore<R: Reducer>: ObservableObject {
     @MainActor public var state: R.S { s }
     
     func reduce(_ some: Any) async throws -> ReduxAction? {
+        #if DEBUG
+        let start = Date()
+        defer {
+            let took = Date().timeIntervalSince(start)
+            if took > 1 {
+                print("Slow action (\(String(format: "%.2f", took))s):", R.self, some)
+            }
+        }
+        #endif
+        
         var mutated = await s
         var next: ReduxAction? = nil
         var nextError: Error? = nil

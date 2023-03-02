@@ -54,7 +54,7 @@ public struct RaindropSuggestedCollections: View {
                 ))
             }
         }
-            .contentTransition(.identity)
+            .contentTransition(.opacity)
             .animation(.default, value: raindrop.collection)
             .animation(.default, value: !suggestions.isEmpty)
             .clearSection()

@@ -26,7 +26,7 @@ extension RaindropForm.Fields: View {
                 
                 Button { cover.toggle() } label: {
                     Thumbnail(
-                        (raindrop.isNew ? raindrop.cover : Rest.renderImage(raindrop.cover, options: .maxDeviceSize)) ?? Rest.renderImage(raindrop.link, options: .maxDeviceSize),
+                        (raindrop.isNew ? raindrop.cover : Rest.renderImage(raindrop.cover, options: .optimalSize)) ?? Rest.renderImage(raindrop.link, options: .optimalSize),
                         width: 56,
                         height: 48
                     )

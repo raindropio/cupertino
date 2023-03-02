@@ -6,7 +6,7 @@ import AppKit
 
 public enum RenderOption {
     case format(Format)
-    case maxDeviceSize
+    case optimalSize
     case width(Double)
     case height(Double)
     

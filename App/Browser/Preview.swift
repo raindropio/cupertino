@@ -33,7 +33,11 @@ struct Preview: View {
     }
     
     private var title: String {
-        (!page.canGoBack ? raindrop.link.host() : page.url?.host()) ?? ""
+        guard
+            let url = page.canGoBack ? page.url : raindrop.link,
+            let host: String = url.host
+        else { return "" }
+        return host
     }
     
     var body: some View {

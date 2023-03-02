@@ -77,7 +77,7 @@ struct EmptyRaindrops: View {
             .clearSection()
             .scenePadding()
             .transition(.opacity)
-            .contentTransition(.identity)
+            .contentTransition(.opacity)
             .animation(.default, value: status)
     }
 }

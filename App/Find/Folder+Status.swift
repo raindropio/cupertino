@@ -47,8 +47,6 @@ extension Folder.Status {
             .controlSize(.small)
             .clearSection()
             .contentTransition(.identity)
-            .disabled(editMode?.wrappedValue == .active)
-            .opacity(total > 0 ? 1 : 0)
         }
     }
 }

@@ -11,16 +11,19 @@ public struct RaindropItems: View {
     }
     
     public var body: some View {
-        if r.state.isEmpty(find) {
-            EmptyRaindrops(find: find, status: r.state.status(find))
-                .dropConsumer(to: find)
+        //section is important, otherwise List animation breaks
+        Section {
+            Memorized(
+                find: find,
+                items: r.state.items(find),
+                sort: r.state.sort(find)
+            )
+        } footer: {
+            if r.state.isEmpty(find) {
+                EmptyRaindrops(find: find, status: r.state.status(find))
+                    .dropConsumer(to: find)
+            }
         }
-        
-        Memorized(
-            find: find,
-            items: r.state.items(find),
-            sort: r.state.sort(find)
-        )
     }
 }
 

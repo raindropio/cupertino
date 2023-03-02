@@ -22,8 +22,4 @@ class ExtensionController: UIViewController {
             ui.view.centerYAnchor.constraint(equalTo: view.centerYAnchor)
         ])
     }
-
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-    }
 }

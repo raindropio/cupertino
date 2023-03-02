@@ -1146,7 +1146,7 @@
 				DEVELOPMENT_TEAM = 7459JWM5TY;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Share/Action.plist;
-				INFOPLIST_KEY_CFBundleDisplayName = "Add to Unsorted";
+				INFOPLIST_KEY_CFBundleDisplayName = "Save to Raindrop.io";
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
 				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -1177,7 +1177,7 @@
 				DEVELOPMENT_TEAM = 7459JWM5TY;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Share/Action.plist;
-				INFOPLIST_KEY_CFBundleDisplayName = "Add to Unsorted";
+				INFOPLIST_KEY_CFBundleDisplayName = "Save to Raindrop.io";
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
 				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				LD_RUNPATH_SEARCH_PATHS = (

@@ -21,11 +21,11 @@ extension RenderOption: RawRepresentable {
                 .init(name: "dpr", value: "\(Int(dpr))"),
             ]
             
-        case .maxDeviceSize:
+        case .optimalSize:
             #if canImport(UIKit)
-            let maxSize = Int(max(UIScreen.main.bounds.width, UIScreen.main.bounds.height))
+            let maxSize = Int(min(UIScreen.main.bounds.width, UIScreen.main.bounds.height) / 2)
             #else
-            let maxSize = Int(max(NSScreen.main?.frame.width ?? 1000, NSScreen.main?.frame.height ?? 1000))
+            let maxSize = Int(min(NSScreen.main?.frame.width ?? 1000, NSScreen.main?.frame.height ?? 1000) / 4)
             #endif
             
             return [

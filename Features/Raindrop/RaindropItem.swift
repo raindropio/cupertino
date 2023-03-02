@@ -63,7 +63,6 @@ extension RaindropItem: View {
             .onDrag {
                 raindrop.itemProvider
             }
-            .contentTransition(.identity)
     }
 }
 

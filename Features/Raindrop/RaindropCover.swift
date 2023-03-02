@@ -16,9 +16,9 @@ struct RaindropCover: View {
     var body: some View {
         let cover = Rest.renderImage(
             raindrop.cover ?? raindrop.link,
-            options: .maxDeviceSize
+            options: .optimalSize
         )
-        
+                
         switch view {
         case .list:
             Thumbnail(cover, width: 80, height: 60)
