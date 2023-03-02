@@ -16,6 +16,15 @@ public struct CollectionParent: View {
             .collectionSheets()
             .navigationTitle("Parent")
             .navigationBarTitleDisplayMode(.inline)
+            .toolbar {
+                if collection.parent != nil {
+                    ToolbarItem {
+                        Button("None") {
+                            collection.parent = nil
+                        }
+                    }
+                }
+            }
             .onChange(of: collection.parent) { _ in
                 guard isEnabled else { return }
                 dismiss()

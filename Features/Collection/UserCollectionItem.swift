@@ -23,9 +23,22 @@ public struct UserCollectionItem: View {
                 Button {
                     sheet.edit(collection)
                 } label: {
-                    Label("Edit", systemImage: "pencil")
+                    Label("More", systemImage: "ellipsis.circle")
                 }
-                    .tint(.accentColor)
+                
+                Button {
+                    sheet.delete([collection.id])
+                } label: {
+                    Label("Delete", systemImage: "trash")
+                }
+                    .tint(.red)
+                
+                Button {
+                    sheet.share(collection)
+                } label: {
+                    Label("Share", systemImage: "square.and.arrow.up")
+                }
+                    .tint(.blue)
             }
             .swipeActions(edge: .leading) {
                 Button {

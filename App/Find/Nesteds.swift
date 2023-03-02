@@ -11,7 +11,8 @@ struct Nesteds: View {
         Memorized(
             items: find.isSearching ?
                 [] :
-                c.state.childrens(of: find.collectionId)
+                c.state.childrens(of: find.collectionId),
+            animation: c.state.animation
         )
     }
 }
@@ -20,6 +21,7 @@ extension Nesteds {
     struct Memorized: View {
         @Environment(\.editMode) private var editMode
         var items: [UserCollection]
+        var animation: UUID
         
         func item(_ collection: UserCollection) -> some View {
             DeepLink(.collection(.open(collection.id))) {
@@ -44,6 +46,7 @@ extension Nesteds {
                     .clearSection()
                     .disabled(editMode?.wrappedValue == .active)
                     .fixedSize(horizontal: false, vertical: true)
+                    .animation(.default, value: animation)
             }
         }
     }
