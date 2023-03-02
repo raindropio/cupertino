@@ -3,7 +3,6 @@ import UI
 
 struct SettingsScene: View {
     @EnvironmentObject private var settings: SettingsRouter
-    @AppStorage("theme") private var theme: PreferredTheme = .default
 
     var body: some View {
         NavigationStack(path: $settings.path) {
@@ -23,7 +22,6 @@ struct SettingsScene: View {
                     }
                 }
         }
-            .preferredColorScheme(theme.colorScheme)
     }
 }
 

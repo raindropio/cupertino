@@ -34,9 +34,6 @@ struct SettingsHome: View {
                     SettingsBrowser()
                         .listItemTint(.indigo)
                     
-                    SettingsTheme()
-                        .listItemTint(.blue)
-                    
                     Link(destination: URL(string: "https://ifttt.com/raindrop")!) {
                         Label("Integrations", systemImage: "puzzlepiece.extension").badge("+2,000").tint(.primary)
                     }

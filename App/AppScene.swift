@@ -5,7 +5,6 @@ import Features
 
 struct AppScene: View {
     @StateObject private var router = AppRouter()
-    @AppStorage("theme") private var theme: PreferredTheme = .default
     @SceneStorage("column-visibility") private var columnVisibility = NavigationSplitViewVisibility.automatic
     
     @ViewBuilder
@@ -38,6 +37,5 @@ struct AppScene: View {
             .tagSheets()
             .modifier(AppDeepLinks())
             .environmentObject(router)
-            .preferredColorScheme(theme.colorScheme)
     }
 }

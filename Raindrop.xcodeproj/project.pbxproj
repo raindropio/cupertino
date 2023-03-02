@@ -17,10 +17,8 @@
 		76292CE82951B413000E16AA /* SettingsWebApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76292CE72951B413000E16AA /* SettingsWebApp.swift */; };
 		76292CEA2951B86F000E16AA /* SettingsSubscription.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76292CE92951B86F000E16AA /* SettingsSubscription.swift */; };
 		76292CEC2951BC52000E16AA /* SettingsBrowser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76292CEB2951BC52000E16AA /* SettingsBrowser.swift */; };
-		76292CEE2951BF65000E16AA /* SettingsTheme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76292CED2951BF65000E16AA /* SettingsTheme.swift */; };
 		76292CF02951C7D2000E16AA /* SettingsLogout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76292CEF2951C7D2000E16AA /* SettingsLogout.swift */; };
 		76292CF82952F2CB000E16AA /* PreferredBrowser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76292CF72952F2CB000E16AA /* PreferredBrowser.swift */; };
-		76292CFA2952F2DF000E16AA /* PreferredTheme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76292CF92952F2DF000E16AA /* PreferredTheme.swift */; };
 		76460FA7292A6E3B00C21ACE /* API in Frameworks */ = {isa = PBXBuildFile; productRef = 76460FA6292A6E3B00C21ACE /* API */; };
 		765F23FE2991409500282298 /* Browser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 765F23FD2991409500282298 /* Browser.swift */; };
 		7673C0AA295DD3B8002D4229 /* SidebarScreen+Toolbar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7673C0A9295DD3B8002D4229 /* SidebarScreen+Toolbar.swift */; };
@@ -155,10 +153,8 @@
 		76292CE72951B413000E16AA /* SettingsWebApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsWebApp.swift; sourceTree = "<group>"; };
 		76292CE92951B86F000E16AA /* SettingsSubscription.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsSubscription.swift; sourceTree = "<group>"; };
 		76292CEB2951BC52000E16AA /* SettingsBrowser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsBrowser.swift; sourceTree = "<group>"; };
-		76292CED2951BF65000E16AA /* SettingsTheme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsTheme.swift; sourceTree = "<group>"; };
 		76292CEF2951C7D2000E16AA /* SettingsLogout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsLogout.swift; sourceTree = "<group>"; };
 		76292CF72952F2CB000E16AA /* PreferredBrowser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreferredBrowser.swift; sourceTree = "<group>"; };
-		76292CF92952F2DF000E16AA /* PreferredTheme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreferredTheme.swift; sourceTree = "<group>"; };
 		7639A6AE286889DB00A76FE9 /* UI */ = {isa = PBXFileReference; lastKnownFileType = text; path = UI; sourceTree = SOURCE_ROOT; };
 		765F0DDB287EE0FB001E34CA /* App.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = App.plist; sourceTree = "<group>"; };
 		765F23FD2991409500282298 /* Browser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Browser.swift; sourceTree = "<group>"; };
@@ -429,7 +425,6 @@
 				76292CE92951B86F000E16AA /* SettingsSubscription.swift */,
 				761F4CAC299E2E86008C1E6D /* SettingsAppIcon.swift */,
 				76292CEB2951BC52000E16AA /* SettingsBrowser.swift */,
-				76292CED2951BF65000E16AA /* SettingsTheme.swift */,
 				76292CEF2951C7D2000E16AA /* SettingsLogout.swift */,
 			);
 			path = Screens;
@@ -439,7 +434,6 @@
 			isa = PBXGroup;
 			children = (
 				76292CF72952F2CB000E16AA /* PreferredBrowser.swift */,
-				76292CF92952F2DF000E16AA /* PreferredTheme.swift */,
 			);
 			path = Storage;
 			sourceTree = "<group>";
@@ -709,7 +703,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				76ECFE0D294B1B5700DF15C9 /* WebHighlights.swift in Sources */,
-				76292CEE2951BF65000E16AA /* SettingsTheme.swift in Sources */,
 				76ECFE0C294B1B5700DF15C9 /* WebHighlights+Event.swift in Sources */,
 				76292CF82952F2CB000E16AA /* PreferredBrowser.swift in Sources */,
 				76B6738029928AB1007A412A /* Browser+Toolbar.swift in Sources */,
@@ -728,7 +721,6 @@
 				768CA20329505AD600AD7E62 /* AuthContinueWith+JWT.swift in Sources */,
 				76BFE371291E9F6B00DE9DB2 /* AuthScene.swift in Sources */,
 				76292CF02951C7D2000E16AA /* SettingsLogout.swift in Sources */,
-				76292CFA2952F2DF000E16AA /* PreferredTheme.swift in Sources */,
 				76ECFDFE2947848500DF15C9 /* Browser+PageError.swift in Sources */,
 				76F05F12293F95DC003CCD75 /* FabStack+Web.swift in Sources */,
 				76BFE372291E9F6B00DE9DB2 /* SettingsScene.swift in Sources */,
