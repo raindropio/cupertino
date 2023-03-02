@@ -22,5 +22,6 @@ struct Main: View {
             .environmentObject(store.filters)
             .environmentObject(store.recent)
             .environmentObject(store.user)
+            .frame(idealWidth: 400, idealHeight: 600)
     }
 }

@@ -35,3 +35,11 @@ extension RaindropsReducer {
         state.animation = .init()
     }
 }
+
+extension RaindropsReducer {
+    func deletedCollections(state: inout S, ids: Set<UserCollection.ID>) {
+        state.segments = state.segments.filter {
+            !ids.contains($0.key.collectionId)
+        }
+    }
+}

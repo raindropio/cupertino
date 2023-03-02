@@ -88,6 +88,17 @@ public actor RaindropsReducer: Reducer {
     
     //MARK: - Other actions
     public func reduce(state: inout S, action: ReduxAction) async throws -> ReduxAction? {
+        //MARK: - Collection
+        if let action = action as? CollectionsAction {
+            switch action {
+            case .deleteMany(let ids, _):
+                deletedCollections(state: &state, ids: ids)
+                
+            default:
+                break
+            }
+        }
+        
         //MARK: - Auth
         if let action = action as? AuthAction {
             switch action {
