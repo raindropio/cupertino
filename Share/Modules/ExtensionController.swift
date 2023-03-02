@@ -8,7 +8,6 @@ class ExtensionController: UIViewController {
 
         //SwiftUI
         let ui = UIHostingController(rootView: ExtensionUI(service: .init(self.extensionContext)))
-        ui.sheetPresentationController?.largestUndimmedDetentIdentifier = .medium
         ui.view.backgroundColor = .clear
         addChild(ui)
         ui.view.translatesAutoresizingMaskIntoConstraints = false

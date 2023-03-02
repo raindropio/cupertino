@@ -47,7 +47,6 @@ extension Receive {
                             SaveFiles(urls: urls)
                         }
                     }
-                        .presentationUndimmed(.medium)
                         .transition(.opacity)
                         .animation(.default, value: loading)
                 }
@@ -70,7 +69,6 @@ extension Receive {
                     }
                 }
                     .presentationDetents([.medium])
-                    .presentationUndimmed(.medium)
                     .transition(.opacity)
                     .animation(.default, value: loading)
             }

@@ -6,10 +6,22 @@ extension RaindropsReducer {
         guard !urls.isEmpty
         else { return nil }
         
+        await links(state: &state)
+        
         var newRaindrops = [Raindrop]()
-
+        
         let chunks = urls
+            //ignore existing
+            .filter { url in
+                if state.lookups[url.compact] != nil {
+                    completed?.wrappedValue.insert(url)
+                    return false
+                }
+                return true
+            }
+            //ignore completed
             .filter { !(completed?.wrappedValue ?? []).contains($0) }
+            //split to parallel tasks
             .chunked(into: 10)
         
         for chunk in chunks {
