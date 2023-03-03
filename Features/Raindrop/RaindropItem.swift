@@ -110,6 +110,7 @@ extension RaindropItem {
             case .masonry:
                 VStack(alignment: .leading, spacing: 0) {
                     parts.value.0
+                        .transaction { $0.animation = nil }
                     parts.value.1
                         .padding(container?.hide.allExceptCover == true ? 0 : 12)
                 }

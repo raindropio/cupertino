@@ -44,6 +44,7 @@ extension RaindropForm.Fields: View {
                 .focused($focus, equals: .excerpt)
                 .lineLimit(5)
         }
+            .contentTransition(.opacity)
         
         Section {
             NavigationLink {

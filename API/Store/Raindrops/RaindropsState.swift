@@ -27,4 +27,13 @@ extension RaindropsState {
     public func suggestions(_ url: URL) -> RaindropSuggestions {
         suggestions[url.compact] ?? .init()
     }
+    
+    public func waitLookup(_ url: URL) -> Bool {
+        //known id, but no item
+        if let id = lookups[url.compact], items[id] == nil {
+            return true
+        }
+        //no lookups
+        return lookups.isEmpty
+    }
 }

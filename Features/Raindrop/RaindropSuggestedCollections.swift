@@ -4,12 +4,18 @@ import UI
 
 public struct RaindropSuggestedCollections: View {
     @EnvironmentObject private var r: RaindropsStore
+    @EnvironmentObject private var dispatch: Dispatcher
     @AppStorage("last-used-collection") private var lastUsedCollection: Int?
     
     @Binding var raindrop: Raindrop
     
     public init(_ raindrop: Binding<Raindrop>) {
         self._raindrop = raindrop
+    }
+    
+    //load suggestions
+    @Sendable private func suggest() async {
+        try? await dispatch(RaindropsAction.suggest(raindrop))
     }
     
     private var suggestions: [UserCollection.ID] {
@@ -31,32 +37,36 @@ public struct RaindropSuggestedCollections: View {
     }
     
     public var body: some View {
-        Group {
-            if raindrop.collection == -1, !suggestions.isEmpty {
-                ScrollView(.horizontal, showsIndicators: false) {
-                    HStack(spacing: 10) {
-                        ForEach(suggestions, id: \.self, content: row)
+        if raindrop.collection == -1 {
+            ZStack {
+                if !suggestions.isEmpty {
+                    ScrollView(.horizontal, showsIndicators: false) {
+                        HStack(spacing: 10) {
+                            ForEach(suggestions, id: \.self, content: row)
+                        }
+                        .buttonStyle(.dotted)
+                        .controlSize(.small)
+                        .tint(.secondary)
+                        .foregroundColor(.primary)
+                        .padding(.vertical, 14)
+                        .padding(.trailing, 32)
+                        .fixedSize()
                     }
-                    .buttonStyle(.dotted)
-                    .controlSize(.small)
-                    .tint(.secondary)
-                    .foregroundColor(.primary)
-                    .padding(.vertical, 14)
-                    .padding(.trailing, 32)
-                    .fixedSize()
+                    .opacity(0.8)
+                    .mask(LinearGradient(
+                        gradient: Gradient(colors: Array(repeating: .black, count: 7) + [.clear]),
+                        startPoint: .leading,
+                        endPoint: .trailing
+                    ))
                 }
-                .opacity(0.8)
-                .fixedSize(horizontal: false, vertical: true)
-                .mask(LinearGradient(
-                    gradient: Gradient(colors: Array(repeating: .black, count: 7) + [.clear]),
-                    startPoint: .leading,
-                    endPoint: .trailing
-                ))
             }
+                .fixedSize(horizontal: false, vertical: true)
+                .contentTransition(.opacity)
+                .transition(.opacity)
+                .animation(.default, value: raindrop.collection)
+                .animation(.default, value: !suggestions.isEmpty)
+                .task(suggest)
+                .clearSection()
         }
-            .contentTransition(.opacity)
-            .animation(.default, value: raindrop.collection)
-            .animation(.default, value: !suggestions.isEmpty)
-            .clearSection()
     }
 }

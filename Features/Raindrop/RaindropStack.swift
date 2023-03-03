@@ -85,7 +85,7 @@ fileprivate struct ByURL<C: View>: View {
     
     //maybe existing?
     @Sendable private func lookup() async {
-        loading = true
+        loading = r.state.waitLookup(url)
         
         try? await dispatch(RaindropsAction.lookup(url))
         
@@ -94,7 +94,7 @@ fileprivate struct ByURL<C: View>: View {
         
         loading = false
     }
-        
+
     var body: some View {
         Stack(draft: $draft, loading: loading, content: content)
             .onAppear { draft = stored }
@@ -125,11 +125,6 @@ fileprivate struct Stack<C: View>: View {
         }
     }
     
-    //load suggestions
-    @Sendable private func suggest() async {
-        try? await dispatch(RaindropsAction.suggest(draft))
-    }
-    
     //auto-save for existing bookmarks
     private func saveOnClose() {
         guard !draft.isNew else { return }
@@ -139,10 +134,8 @@ fileprivate struct Stack<C: View>: View {
     var body: some View {
         NavigationStack {
             content($draft)
-                .animation(nil, value: [loading, draft.isNew])
                 .disabled(loading)
-                .opacity(loading ? 0.7 : 1)
-                .animation(.default, value: [loading, draft.isNew])
+                .animation(.easeInOut(duration: 0.3), value: [loading, draft.isNew])
                 .toolbar {
                     ToolbarItem(placement: draft.isNew ? .cancellationAction : .confirmationAction) {
                         Button(draft.isNew ? "Cancel" : "Done", action: dismiss.callAsFunction)
@@ -151,7 +144,6 @@ fileprivate struct Stack<C: View>: View {
         }
             .interactiveDismissDisabled(draft.isNew)
             .task(id: draft.isNew, getMeta)
-            .task(suggest)
             .onDisappear(perform: saveOnClose)
     }
 }
