@@ -41,14 +41,12 @@ extension AllTags {
         var items: [Filter]
     
         var body: some View {
-            if !items.isEmpty {
-                ForEach(items) { item in
-                    FilterRow(item)
-                        .swipeActions {
-                            TagsMenu(item)
-                        }
-                        .tag(tag(item))
-                }
+            ForEach(items) { item in
+                FilterRow(item)
+                    .swipeActions {
+                        TagsMenu(item)
+                    }
+                    .tag(tag(item))
             }
         }
     }

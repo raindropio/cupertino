@@ -21,10 +21,11 @@ public struct RaindropMeta: View {
             + Text(raindrop.created, formatter: .shortDateTime)
         )
             .font(.subheadline)
-            .foregroundStyle(.secondary)
+            .foregroundStyle(.gray)
             .lineLimit(2)
             .symbolVariant(.fill)
             .imageScale(.small)
             .fixedSize(horizontal: false, vertical: true)
+            .contentTransition(.identity)
     }
 }

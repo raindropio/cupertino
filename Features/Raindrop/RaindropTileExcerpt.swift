@@ -23,6 +23,6 @@ public struct RaindropTitleExcerpt: View {
             }
         }
             .fixedSize(horizontal: false, vertical: true)
-            .contentTransition(.opacity)
+            .contentTransition(.identity)
     }
 }

@@ -6,7 +6,8 @@ public struct FindByList {
     @EnvironmentObject private var dispatch: Dispatcher
     @Environment(\.editMode) private var editMode
     @Environment(\.isSearching) private var isSearching
-    @AppStorage("tags-expanded") private var isExpanded = true
+    @AppStorage("filters-expanded") private var filtersExpanded = false
+    @AppStorage("tags-expanded") private var tagsExpanded = true
 
     @Binding var selection: FindBy?
     var search: String
@@ -37,7 +38,10 @@ extension FindByList: View {
                 if editMode?.wrappedValue != .active {
                     SystemCollections<FindBy>(0, -1)
                     
-                    DisclosureGroup(content: SimpleFilters<FindBy>.init) {
+                    DisclosureGroup(
+                        isExpanded: $filtersExpanded,
+                        content: SimpleFilters<FindBy>.init
+                    ) {
                         Label("Filters", systemImage: "circle.grid.2x2")
                     }
                         .listItemTint(.monochrome)
@@ -45,7 +49,11 @@ extension FindByList: View {
                 
                 UserCollections<FindBy>()
                 
-                DisclosureSection("Tags", isExpanded: $isExpanded, content: AllTags<FindBy>.init)
+                DisclosureSection(
+                    "Tags",
+                    isExpanded: $tagsExpanded,
+                    content: AllTags<FindBy>.init
+                )
                 
                 if editMode?.wrappedValue != .active {
                     SystemCollections<FindBy>(-99)

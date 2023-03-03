@@ -75,6 +75,16 @@ fileprivate struct _Menu: View {
             Button { sheet.addTags(pick) } label: {
                 Label("Add tags", systemImage: "number")
             }
+            
+            //favorite
+            Button {
+                dispatch.sync(RaindropsAction.updateMany(pick, .important(true)))
+                withAnimation {
+                    editMode?.wrappedValue = .inactive
+                }
+            } label: {
+                Label("Favorite", systemImage: "heart")
+            }
 
             //delete
             Button(role: .destructive) { sheet.delete(pick) } label: {
@@ -95,6 +105,15 @@ fileprivate struct _Menu: View {
                         }
                     } label: {
                         Label("Remove tags", systemImage: "tag.slash")
+                    }
+                    
+                    Button {
+                        dispatch.sync(RaindropsAction.updateMany(pick, .important(false)))
+                        withAnimation {
+                            editMode?.wrappedValue = .inactive
+                        }
+                    } label: {
+                        Label("Remove from favorites", systemImage: "heart.slash")
                     }
                 }
                     .labelStyle(.titleAndIcon)

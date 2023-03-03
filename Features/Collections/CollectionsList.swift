@@ -63,13 +63,8 @@ extension _Optional: View {
             #endif
             .labelStyle(.sidebar)
             .collectionsAnimation()
-            //menu
             .contextMenu(forSelectionType: FindBy.self) { selection in
                 CollectionsMenu(selection)
-            }
-            //reload
-            .refreshable {
-                try? await dispatch(CollectionsAction.load)
             }
             .reload {
                 try? await dispatch(CollectionsAction.load)
