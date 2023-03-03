@@ -10,7 +10,6 @@ struct Main: View {
             authorized: Receive.init,
             notAuthorized: NoAuth.init
         )
-            .tint(.blue)
             .environmentObject(store.dispatcher)
             .environmentObject(store.auth)
             .environmentObject(store.collaborators)
@@ -22,6 +21,5 @@ struct Main: View {
             .environmentObject(store.filters)
             .environmentObject(store.recent)
             .environmentObject(store.user)
-            .frame(idealWidth: 400, idealHeight: 600)
     }
 }

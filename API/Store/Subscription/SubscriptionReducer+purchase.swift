@@ -13,6 +13,7 @@ extension SubscriptionReducer {
 extension SubscriptionReducer {
     func purchasing(state: inout S, userRef: User.ID, product: Product) async throws -> ReduxAction? {
         let result = try await product.purchase(options: [
+            //.simulatesAskToBuyInSandbox(true),
             .custom(key: "userRef", value: Double(userRef))
         ])
         

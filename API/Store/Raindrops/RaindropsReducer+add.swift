@@ -53,7 +53,7 @@ extension RaindropsReducer {
                             completed?.wrappedValue.insert(url)
                             return raindrop
                         } catch {
-                            print(error)
+                            print(error, url)
                             failed?.wrappedValue.insert(url)
                             return nil
                         }

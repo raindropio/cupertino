@@ -111,15 +111,18 @@ extension Folder.Toolbar {
                 //regular
                 else {
                     ToolbarItemGroup {
+                        EditButton("Edit")
+                            .labelStyle(.titleOnly)
+                        
                         if sizeClass == .regular {
                             SortRaindropsButton(find)
                             ViewConfigRaindropsButton(find)
                         }
                         
-                        EditButton {
-                            Image(systemName: "checkmark.circle.fill")
-                                .symbolRenderingMode(.hierarchical)
-                                .fontWeight(.semibold)
+                        AddButton(collection: find.collectionId)
+                        
+                        if sizeClass == .regular {
+                            Spacer()
                         }
                     }
                     

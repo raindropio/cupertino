@@ -2,7 +2,7 @@ import SwiftUI
 import UI
 import UniformTypeIdentifiers
 
-extension FabStack {
+extension AddPopover {
     struct Web: View {
         @State private var url: URL?
         @Binding var items: [NSItemProvider]

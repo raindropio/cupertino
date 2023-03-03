@@ -13,5 +13,6 @@ struct NoAuth: View {
         }
             .presentationDetents([.medium])
             .presentationUndimmed(.medium)
+            .frame(idealWidth: 400, idealHeight: 400)
     }
 }

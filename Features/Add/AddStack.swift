@@ -5,6 +5,7 @@ import UI
 public struct AddStack {
     @Environment(\.dismiss) private var dismiss
     @EnvironmentObject private var dispatch: Dispatcher
+    @EnvironmentObject private var c: CollectionsStore
     @AppStorage("last-used-collection") private var lastUsedCollection: Int?
     
     @State private var uploading = false
@@ -49,10 +50,9 @@ extension AddStack: View {
             VStack {
                 Group {
                     if isCompleteAll {
-                        EmptyState("Done") {
-                            Image(systemName: "checkmark.icloud")
-                                .foregroundStyle(.green)
-                        }
+                        Image(systemName: "checkmark.circle.fill")
+                            .foregroundStyle(.green)
+                            .font(.system(size: 56, weight: .semibold))
                     } else {
                         if urls.count == 1 {
                             ProgressView()
@@ -68,7 +68,7 @@ extension AddStack: View {
                         }
                     }
                 }
-                    .transition(.scale(scale: 1.1).combined(with: .opacity))
+                    .transition(.scale(scale: 1.5).combined(with: .opacity))
                 
                 if !failed.isEmpty {
                     ActionButton(action: upload) {
@@ -78,24 +78,28 @@ extension AddStack: View {
                 }
             }
                 .scenePadding()
-                .navigationTitle("Add")
+                .navigationTitle("Add to \(c.state.title(collection))")
                 #if os(iOS)
                 .navigationBarTitleDisplayMode(.inline)
                 #endif
                 .toolbar {
-                    ToolbarItem(placement: isCompleteAll ? .confirmationAction : .cancellationAction) {
-                        Button(isCompleteAll ? "Done" : "Cancel", action: dismiss.callAsFunction)
+                    ToolbarItem(placement: .cancellationAction) {
+                        Button(action: dismiss.callAsFunction) {
+                            Image(systemName: "xmark.circle.fill")
+                                .symbolRenderingMode(.hierarchical)
+                        }
+                            .tint(.secondary)
                     }
                 }
         }
-            .animation(.default, value: isCompleteAll)
+            .animation(.spring(), value: isCompleteAll)
             .interactiveDismissDisabled(!isCompleteAll)
             //start uploading
             .task(id: urls, priority: .background, upload)
             //auto close when complete all
             .task(id: isCompleteAll) {
                 if isCompleteAll {
-                    try? await Task.sleep(nanoseconds: 3_000_000_000)
+                    try? await Task.sleep(nanoseconds: 2_000_000_000)
                     dismiss()
                 }
             }

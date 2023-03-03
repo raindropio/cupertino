@@ -4,7 +4,7 @@ import UI
 import UniformTypeIdentifiers
 import Features
 
-struct FabStack: View {
+struct AddPopover: View {
     @Environment(\.dismiss) private var dismiss
     @State private var items = [NSItemProvider]()
     @State private var kind: Kind?
@@ -102,7 +102,7 @@ struct FabStack: View {
     }
 }
 
-extension FabStack {
+extension AddPopover {
     enum Kind {
         case collection
         case media

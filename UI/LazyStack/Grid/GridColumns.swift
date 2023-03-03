@@ -39,7 +39,7 @@ extension GridColumns {
         var body: some View {
             LazyVGrid(columns: gridItems, alignment: .leading, spacing: spacing, content: content)
                 .scenePadding(.horizontal)
-                .scenePadding(.bottom)
+                .padding(.vertical, spacing / 2)
                 .animation(.default, value: gridItems.count)
         }
     }

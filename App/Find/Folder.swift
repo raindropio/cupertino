@@ -25,7 +25,6 @@ struct Folder<H: View>: View {
                 LoadMoreRaindropsButton(find)
             }
         }
-            .fab(to: find.collectionId)
             .modifier(Title(find: find))
             .modifier(Toolbar(find: find, selection: $selection))
             .raindropSheets()

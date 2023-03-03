@@ -22,10 +22,6 @@ struct PurchaseStack: View {
                     Products()
                 }
             }
-                .scrollContentBackground(.hidden)
-                .presentationBackground(.hidden)
-                .background(.background.opacity(0.4))
-                .background(.regularMaterial)
                 .animation(.default, value: products.isEmpty)
                 .reload {
                     try? await dispatch(SubscriptionAction.products)
@@ -43,7 +39,6 @@ struct PurchaseStack: View {
                 }
         }
             .presentationDetents([.height(300)])
-            .presentationBackground(.hidden)
             .tint(.red)
     }
 }

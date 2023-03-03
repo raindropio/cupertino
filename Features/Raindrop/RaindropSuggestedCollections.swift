@@ -52,7 +52,6 @@ public struct RaindropSuggestedCollections: View {
                         .padding(.trailing, 32)
                         .fixedSize()
                     }
-                    .opacity(0.8)
                     .mask(LinearGradient(
                         gradient: Gradient(colors: Array(repeating: .black, count: 7) + [.clear]),
                         startPoint: .leading,
