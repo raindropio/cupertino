@@ -28,9 +28,11 @@ extension URLField: View {
         TextField(title, text: $temp)
             .task(id: value) { temp = value?.absoluteString ?? "" }
             .task(id: temp) { value = URL(string: temp) }
+            #if os(iOS)
             .keyboardType(.URL)
             .textContentType(.URL)
             .textInputAutocapitalization(.never)
+            #endif
             .disableAutocorrection(true)
     }
 }

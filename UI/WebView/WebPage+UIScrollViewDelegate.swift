@@ -1,3 +1,4 @@
+#if canImport(UIKit)
 import UIKit
 
 extension WebPage: UIScrollViewDelegate {
@@ -32,3 +33,4 @@ extension WebPage: UIScrollViewDelegate {
         return true
     }
 }
+#endif

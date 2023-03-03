@@ -13,6 +13,6 @@ public enum RenderOption {
     #if canImport(UIKit)
     case dpr(Double = UIScreen.main.scale)
     #else
-    case dpr(Double = NSScreen.main?.backingScaleFactor ?? 1)
+    case dpr(Double = .init(NSScreen.main?.backingScaleFactor ?? 1))
     #endif
 }

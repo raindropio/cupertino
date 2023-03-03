@@ -19,15 +19,21 @@ extension SafariLink where L == Text {
     }
 }
 
-extension SafariLink {
+#if canImport(UIKit)
+extension SafariLink: View {
     private func press() {
         show.toggle()
     }
-}
-
-extension SafariLink: View {
+    
     public var body: some View {
         Button(action: press, label: label)
             .safariView(isPresented: $show, url: destination)
     }
 }
+#else
+extension SafariLink: View {
+    public var body: some View {
+        Link(destination: destination, label: label)
+    }
+}
+#endif

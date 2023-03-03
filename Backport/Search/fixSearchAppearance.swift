@@ -1,12 +1,15 @@
 import SwiftUI
 
 public extension Backport where Wrapped: View {
-    @ViewBuilder func fixSearchAppearance() -> some View {
+    func fixSearchAppearance() -> some View {
         content
+            #if os(iOS)
             .overlay(Proxy().opacity(0))
+            #endif
     }
 }
 
+#if os(iOS)
 fileprivate struct Proxy: UIViewControllerRepresentable {
     func makeUIViewController(context: Context) -> VC { .init() }
     func updateUIViewController(_ controller: VC, context: Context) {}
@@ -45,3 +48,4 @@ extension Proxy {
         }
     }
 }
+#endif

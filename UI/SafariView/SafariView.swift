@@ -1,3 +1,4 @@
+#if canImport(UIKit)
 import SwiftUI
 
 public extension View {
@@ -31,3 +32,4 @@ fileprivate struct ItemURL: Identifiable, Equatable {
         }
     }
 }
+#endif

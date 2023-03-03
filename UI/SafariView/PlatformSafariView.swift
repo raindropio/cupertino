@@ -1,3 +1,4 @@
+#if canImport(UIKit)
 import SwiftUI
 import SafariServices
 
@@ -35,3 +36,4 @@ struct PlatformSafariView: UIViewControllerRepresentable {
         }
     }
 }
+#endif

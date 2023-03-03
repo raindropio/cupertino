@@ -62,7 +62,9 @@ extension EmptyState: View {
             if let actions {
                 actions()
                     .buttonStyle(.bordered)
+                    #if os(iOS)
                     .buttonBorderShape(.capsule)
+                    #endif
                     .tint(.accentColor)
             }
         }

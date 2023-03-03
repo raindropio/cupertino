@@ -1,3 +1,4 @@
+#if canImport(UIKit)
 import SwiftUI
 
 public extension View {
@@ -49,4 +50,4 @@ struct AutoFocus<C: View>: UIViewControllerRepresentable {
         }
     }
 }
-
+#endif

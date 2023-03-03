@@ -1,3 +1,4 @@
+#if os(iOS)
 import SwiftUI
 
 public extension View {
@@ -15,3 +16,4 @@ fileprivate struct _ScopeEditMode: ViewModifier {
         content.environment(\.editMode, $editMode)
     }
 }
+#endif
