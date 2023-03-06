@@ -1,7 +1,6 @@
 extension RecentReducer {
-    func clearSearch(state: inout S) async throws {
-        state.search = .init()
-        state.animation = .init()
+    func clearSearch(state: inout S) async throws -> ReduxAction? {
         try await rest.clearRecentSearch()
+        return A.reload()
     }
 }

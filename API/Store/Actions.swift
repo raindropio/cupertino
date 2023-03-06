@@ -16,9 +16,11 @@ public enum CollaboratorsAction: ReduxAction {
     case load(UserCollection.ID)
     case reload(UserCollection.ID)
     case reloaded(UserCollection.ID, [Collaborator])
+    case reloadFailed(UserCollection.ID, Error)
     case invite(UserCollection.ID, InviteCollaboratorRequest)
     case deleteAll(UserCollection.ID)
     case change(UserCollection.ID, userId: Collaborator.ID, level: CollectionAccess.Level)
+    case changed(UserCollection.ID, userId: Collaborator.ID, level: CollectionAccess.Level)
 }
 
 public enum CollectionsAction: ReduxAction {
@@ -26,6 +28,7 @@ public enum CollectionsAction: ReduxAction {
     case load
     case reload
     case reloaded([CGroup], [SystemCollection], [UserCollection])
+    case reloadFailed(Error)
     //create
     case create(UserCollection)
     case created(UserCollection)
@@ -63,6 +66,7 @@ public enum IconsAction: ReduxAction {
     case load(String = "")
     case reload(String)
     case reloaded(String, [URL])
+    case reloadFailed(String, Error)
 }
 
 public enum RaindropsAction: ReduxAction {
@@ -70,14 +74,17 @@ public enum RaindropsAction: ReduxAction {
     case load(FindBy)
     case reload(FindBy)
     case reloaded(FindBy, [Raindrop], Int)
+    case reloadFailed(FindBy, Error)
     case sort(FindBy, SortBy)
     //more
     case more(FindBy)
     case moreLoad(FindBy)
     case moreLoaded(FindBy, Int, [Raindrop], Int)
+    case moreFailed(FindBy, Int, Error)
     //single
     case lookup(URL)
     case suggest(Raindrop)
+    case suggested(URL, RaindropSuggestions)
     //create
     case create(Raindrop) // -> createMany
     //update
@@ -108,6 +115,7 @@ public enum FiltersAction: ReduxAction {
 
 public enum RecentAction: ReduxAction {
     case reload(FindBy = .init())
+    case reloaded(FindBy, search: [String], tags: [String])
     case clearSearch
     case clearTags
 }
@@ -116,7 +124,9 @@ public enum SubscriptionAction: ReduxAction {
     case load
     case reload
     case reloaded(Subscription)
+    case reloadFailed(Error)
     case products
+    case productsLoaded([Product])
     case purchase(User.ID, StoreKit.Product)
     case purchasing(User.ID, StoreKit.Product)
     case purchased(StoreKit.Transaction)

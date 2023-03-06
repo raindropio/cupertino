@@ -10,7 +10,7 @@ extension CollectionsReducer {
     }
     
     //MARK: - 2
-    func reload(state: inout S) async throws -> ReduxAction? {
+    func reload(state: inout S) async -> ReduxAction? {
         do {
             async let fetchGroups = rest.collectionGroupsGet()
             async let fetchCollections = rest.collectionsGet()
@@ -18,17 +18,23 @@ extension CollectionsReducer {
             let (groups, (system, user)) = try await (fetchGroups, fetchCollections)
             return A.reloaded(groups, system, user)
         }
-        catch is CancellationError {
-            state.status = .idle
-            return nil
-        }
         catch {
+            return A.reloadFailed(error)
+        }
+    }
+    
+    //MARK: - 3
+    func reloadFailed(state: inout S, error: Error) throws {
+        switch error {
+        case is CancellationError:
+            state.status = .idle
+        default:
             state.status = .error
             throw error
         }
     }
     
-    //MARK: - 3
+    //MARK: - 4
     func reloaded(state: inout S, groups: [CGroup], system: [SystemCollection], user: [UserCollection]) {
         state.status = .idle
         state.groups = groups

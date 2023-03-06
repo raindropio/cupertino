@@ -12,10 +12,13 @@ public actor CollaboratorsReducer: Reducer {
             return load(state: &state, collectionId: collectionId)
             
         case .reload(let collectionId):
-            return try await reload(state: &state, collectionId: collectionId)
+            return await reload(state: &state, collectionId: collectionId)
             
         case .reloaded(let collectionId, let users):
             reloaded(state: &state, collectionId: collectionId, users: users)
+            
+        case .reloadFailed(let collectionId, let error):
+            try reloadFailed(state: &state, collectionId: collectionId, error: error)
             
         case .invite(let collectionId, let request):
             try await invite(state: &state, collectionId: collectionId, request: request)
@@ -24,7 +27,10 @@ public actor CollaboratorsReducer: Reducer {
             return try await deleteAll(state: &state, collectionId: collectionId)
             
         case .change(let collectionId, let userId, let level):
-            try await change(state: &state, collectionId: collectionId, userId: userId, level: level)
+            return try await change(state: &state, collectionId: collectionId, userId: userId, level: level)
+            
+        case .changed(let collectionId, let userId, let level):
+            changed(state: &state, collectionId: collectionId, userId: userId, level: level)
         }
         return nil
     }

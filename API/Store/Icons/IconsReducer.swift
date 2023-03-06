@@ -12,10 +12,13 @@ public actor IconsReducer: Reducer {
             return load(state: &state, filter: filter)
             
         case .reload(let filter):
-            return try await reload(state: &state, filter: filter)
+            return await reload(state: &state, filter: filter)
             
         case .reloaded(let filter, let icons):
             reloaded(state: &state, filter: filter, icons: icons)
+            
+        case .reloadFailed(let filter, let error):
+            try reloadFailed(state: &state, filter: filter, error: error)
         }
         return nil
     }

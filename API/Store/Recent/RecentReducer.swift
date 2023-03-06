@@ -9,13 +9,16 @@ public actor RecentReducer: Reducer {
     public func reduce(state: inout S, action: A) async throws -> ReduxAction? {
         switch action {
         case .reload(let find):
-            try await reload(state: &state, find: find)
+            return try await reload(state: &state, find: find)
+            
+        case .reloaded(let find, let search, let tags):
+            reloaded(state: &state, find: find, search: search, tags: tags)
             
         case .clearSearch:
-            try await clearSearch(state: &state)
+            return try await clearSearch(state: &state)
             
         case .clearTags:
-            try await clearTags(state: &state)
+            return try await clearTags(state: &state)
         }
         return nil
     }
@@ -24,7 +27,7 @@ public actor RecentReducer: Reducer {
         if let action = action as? AuthAction {
             switch action {
             case .logout:
-                try await logout(state: &state)
+                logout(state: &state)
                 
             default:
                 break

@@ -14,10 +14,13 @@ public actor RaindropsReducer: Reducer {
             return load(state: &state, find: find)
             
         case .reload(let find):
-            return try await reload(state: &state, find: find)
+            return await reload(state: &state, find: find)
             
         case .reloaded(let find, let items, let total):
             reloaded(state: &state, find: find, items: items, total: total)
+            
+        case .reloadFailed(let find, let error):
+            try reloadFailed(state: &state, find: find, error: error)
             
         case .sort(let find, let by):
             return sort(state: &state, find: find, by: by)
@@ -27,10 +30,13 @@ public actor RaindropsReducer: Reducer {
             return more(state: &state, find: find)
             
         case .moreLoad(let find):
-            return try await moreLoad(state: &state, find: find)
+            return await moreLoad(state: &state, find: find)
             
         case .moreLoaded(let find, let page, let items, let total):
             moreLoaded(state: &state, find: find, page: page, items: items, total: total)
+            
+        case .moreFailed(let find, let page, let error):
+            try moreFailed(state: &state, find: find, page: page, error: error)
             
         //Create
         case .create(let item):
@@ -77,7 +83,10 @@ public actor RaindropsReducer: Reducer {
             await lookup(state: &state, url: url)
             
         case .suggest(let raindrop):
-            await suggest(state: &state, raindrop: raindrop)
+            return await suggest(state: &state, raindrop: raindrop)
+            
+        case .suggested(let url, let suggestions):
+            suggested(state: &state, url: url, suggestions: suggestions)
             
         //Shorthands
         case .reorder(let id, let to, let order):

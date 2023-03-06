@@ -14,10 +14,13 @@ public actor CollectionsReducer: Reducer {
             return load(state: &state)
             
         case .reload:
-            return try await reload(state: &state)
+            return await reload(state: &state)
             
         case .reloaded(let groups, let system, let user):
             reloaded(state: &state, groups: groups, system: system, user: user)
+            
+        case .reloadFailed(let error):
+            try reloadFailed(state: &state, error: error)
         
         //create
         case .create(let collection):

@@ -12,29 +12,35 @@ extension RaindropsReducer {
     }
     
     //MARK: - 2
-    func reload(state: inout S, find: FindBy) async throws -> ReduxAction? {
+    func reload(state: inout S, find: FindBy) async -> ReduxAction? {
         do {
             let sort = state.sort(find)
             let (items, total) = try await rest.raindropsGet(find, sort: sort)
             return A.reloaded(find, items, total)
         }
-        catch RestError.notFound, RestError.forbidden, RestError.unauthorized {
-            state[find] = .init()
-            state[find].status = .notFound
-        }
-        catch is CancellationError {
-            state[find].status = .idle
-            state[find].validMore()
-            return nil
-        }
         catch {
-            state[find].status = .error
-            throw error
+            return A.reloadFailed(find, error)
         }
-        return nil
     }
     
     //MARK: - 3
+    func reloadFailed(state: inout S, find: FindBy, error: Error) throws {
+        switch error {
+        case RestError.notFound, RestError.forbidden, RestError.unauthorized:
+            state[find] = .init()
+            state[find].status = .notFound
+        
+        case is CancellationError:
+            state[find].status = .idle
+            state[find].validMore()
+        
+        default:
+            state[find].status = .error
+            throw error
+        }
+    }
+    
+    //MARK: - 4
     func reloaded(state: inout S, find: FindBy, items: [Raindrop], total: Int) {
         //add to items dictionary and update group
         items.forEach { state.items[$0.id] = $0 }

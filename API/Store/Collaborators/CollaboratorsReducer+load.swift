@@ -8,13 +8,19 @@ extension CollaboratorsReducer {
 }
 
 extension CollaboratorsReducer {
-    func reload(state: inout S, collectionId: UserCollection.ID) async throws -> ReduxAction? {
+    func reload(state: inout S, collectionId: UserCollection.ID) async -> ReduxAction? {
         do {
             return A.reloaded(collectionId, try await rest.collaboratorsGet(collectionId))
         } catch {
-            state.loading[collectionId] = false
-            throw error
+            return A.reloadFailed(collectionId, error)
         }
+    }
+}
+
+extension CollaboratorsReducer {
+    func reloadFailed(state: inout S, collectionId: UserCollection.ID, error: Error) throws {
+        state.loading[collectionId] = false
+        throw error
     }
 }
 

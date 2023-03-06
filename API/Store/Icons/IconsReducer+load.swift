@@ -15,12 +15,23 @@ extension IconsReducer {
 }
 
 extension IconsReducer {
-    func reload(state: inout S, filter: String) async throws -> ReduxAction? {
+    func reload(state: inout S, filter: String) async -> ReduxAction? {
         let key = state.filterKey(filter)
         
         do {
             return A.reloaded(filter, try await rest.iconsGet(key))
         } catch {
+            return A.reloadFailed(filter, error)
+        }
+    }
+}
+
+extension IconsReducer {
+    func reloadFailed(state: inout S, filter: String, error: Error) throws {
+        let key = state.filterKey(filter)
+        
+        switch error {
+        default:
             state.loading[key] = false
             throw error
         }

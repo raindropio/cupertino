@@ -9,28 +9,37 @@ extension RaindropsReducer {
         return A.moreLoad(find)
     }
     
-    func moreLoad(state: inout S, find: FindBy) async throws -> ReduxAction? {
+    func moreLoad(state: inout S, find: FindBy) async -> ReduxAction? {
+        let page = state[find].page + 1
+        
         do {
             let sort = state.sort(find)
-            let page = state[find].page + 1
             let (items, total) = try await rest.raindropsGet(find, sort: sort, page: page)
             
             return A.moreLoaded(find, page, items, total)
         }
-        catch RestError.notFound, RestError.forbidden, RestError.unauthorized {
-            state[find].more = .notFound
+        catch {
+            return A.moreFailed(find, page, error)
         }
-        catch is CancellationError {
+    }
+    
+    func moreFailed(state: inout S, find: FindBy, page: Int, error: Error) throws {
+        //correct page validation
+        guard page == state[find].page + 1
+        else { return }
+        
+        switch error {
+        case RestError.notFound, RestError.forbidden, RestError.unauthorized:
+            state[find].more = .notFound
+            
+        case is CancellationError:
             state[find].more = .idle
             state[find].validMore()
-            return nil
-        }
-        catch {
+            
+        default:
             state[find].more = .error
             throw error
         }
-        
-        return nil
     }
     
     func moreLoaded(state: inout S, find: FindBy, page: Int, items: [Raindrop], total: Int) {

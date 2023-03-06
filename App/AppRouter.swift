@@ -5,6 +5,7 @@ import UI
 class AppRouter: ObservableObject {
     @Published var path: [Path] = [.find(.init())]
     
+    @MainActor
     var sidebar: FindBy? {
         get {
             switch path.first {
@@ -22,6 +23,7 @@ class AppRouter: ObservableObject {
         }
     }
     
+    @MainActor
     var detail: [Path] {
         get {
             path.isEmpty ? [] : Array(path[1...])

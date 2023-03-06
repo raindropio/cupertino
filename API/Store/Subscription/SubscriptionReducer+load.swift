@@ -5,16 +5,24 @@ extension SubscriptionReducer {
 }
 
 extension SubscriptionReducer {
-    func reload(state: inout S) async throws -> ReduxAction? {
+    func reload(state: inout S) async -> ReduxAction? {
         do {
             let subscription = try await rest.subscriptionGet()
             guard subscription.status != .unknown else { return nil }
             return A.reloaded(subscription)
         }
-        catch is CancellationError {
-            return nil
-        }
         catch {
+            return A.reloadFailed(error)
+        }
+    }
+}
+
+extension SubscriptionReducer {
+    func reloadFailed(state: inout S, error: Error) throws {
+        switch error {
+        case is CancellationError:
+            break
+        default:
             state.current = nil
             throw error
         }

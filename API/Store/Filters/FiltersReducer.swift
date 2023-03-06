@@ -15,7 +15,7 @@ public actor FiltersReducer: Reducer {
             reloaded(state: &state, find: find, filters: filters)
             
         case .sort(let by):
-            return try await sort(state: &state, by: by)
+            return sort(state: &state, by: by)
             
         case .update(let tags, let newName):
             return try await update(state: &state, tags: tags, newName: newName)

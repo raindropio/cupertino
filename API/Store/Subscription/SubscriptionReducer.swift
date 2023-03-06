@@ -13,13 +13,19 @@ public actor SubscriptionReducer: Reducer {
             return load(state: &state)
             
         case .reload:
-            return try await reload(state: &state)
+            return await reload(state: &state)
 
         case .reloaded(let subscription):
             reloaded(state: &state, subscription: subscription)
             
+        case .reloadFailed(let error):
+            try reloadFailed(state: &state, error: error)
+            
         case .products:
-            try await products(state: &state)
+            return await products(state: &state)
+            
+        case .productsLoaded(let p):
+            productsLoaded(state: &state, products: p)
             
         //purchase
         case .purchase(let userRef, let product):
