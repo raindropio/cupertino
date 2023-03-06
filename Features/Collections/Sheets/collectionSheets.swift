@@ -54,7 +54,7 @@ struct _CollectionSheetsModifier: ViewModifier {
     }
 }
 
-class CollectionSheet: ObservableObject {
+public class CollectionSheet: ObservableObject {
     fileprivate let create: PassthroughSubject<UserCollection.ID?, Never> = PassthroughSubject()
     fileprivate let edit: PassthroughSubject<UserCollection, Never> = PassthroughSubject()
     fileprivate let share: PassthroughSubject<UserCollection, Never> = PassthroughSubject()
@@ -63,7 +63,7 @@ class CollectionSheet: ObservableObject {
     fileprivate let groupEdit: PassthroughSubject<CGroup, Never> = PassthroughSubject()
     fileprivate let groupDelete: PassthroughSubject<CGroup, Never> = PassthroughSubject()
 
-    func create(_ parent: UserCollection.ID? = nil) {
+    public func create(_ parent: UserCollection.ID? = nil) {
         create.send(parent)
     }
     

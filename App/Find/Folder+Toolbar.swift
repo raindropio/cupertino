@@ -118,9 +118,7 @@ extension Folder.Toolbar {
                             SortRaindropsButton(find)
                             ViewConfigRaindropsButton(find)
                         }
-                        
-                        AddButton(collection: find.collectionId)
-                        
+                                                
                         if sizeClass == .regular {
                             Spacer()
                         }

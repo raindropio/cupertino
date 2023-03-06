@@ -34,8 +34,6 @@ extension SidebarScreen {
                         } label: {
                             Image(systemName: "ellipsis")
                         }
-                        
-                        AddButton()
                     } else {
                         //EditButton()
                     }

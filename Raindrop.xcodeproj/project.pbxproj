@@ -83,13 +83,12 @@
 		76DC0BBC29AF7FE1007B4BDF /* Action.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = 76DC0B9729AF6C21007B4BDF /* Action.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		76DC0BC229AF84E2007B4BDF /* Action.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 76DC0BBF29AF849C007B4BDF /* Action.xcassets */; };
 		76E51CEA299A8A1400FE7763 /* AppDeepLinks.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76E51CE9299A8A1400FE7763 /* AppDeepLinks.swift */; };
+		76E7AAB129B5D37B00520500 /* AddURL.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76E7AAB029B5D37B00520500 /* AddURL.swift */; };
 		76ECFDFE2947848500DF15C9 /* Browser+PageError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76ECFDFD2947848500DF15C9 /* Browser+PageError.swift */; };
 		76ECFE0C294B1B5700DF15C9 /* WebHighlights+Event.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76ECFE09294B1B5700DF15C9 /* WebHighlights+Event.swift */; };
 		76ECFE0D294B1B5700DF15C9 /* WebHighlights.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76ECFE0B294B1B5700DF15C9 /* WebHighlights.swift */; };
 		76ECFE0E294B1B5700DF15C9 /* WebHighlights+Action.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76ECFE0A294B1B5700DF15C9 /* WebHighlights+Action.swift */; };
 		76F05F0C293F89EF003CCD75 /* AddButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76F05F0B293F89EF003CCD75 /* AddButton.swift */; };
-		76F05F0E293F8A9E003CCD75 /* AddPopover.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76F05F0D293F8A9E003CCD75 /* AddPopover.swift */; };
-		76F05F12293F95DC003CCD75 /* AddPopover+Web.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76F05F11293F95DC003CCD75 /* AddPopover+Web.swift */; };
 		76F282B52934C24B00D00363 /* ExtensionUI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76F282B42934C24B00D00363 /* ExtensionUI.swift */; };
 		76F282B72934C25400D00363 /* ExtensionService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76F282B62934C25400D00363 /* ExtensionService.swift */; };
 		76F282BA2934C43200D00363 /* NoAuth.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76F282B92934C43200D00363 /* NoAuth.swift */; };
@@ -215,13 +214,12 @@
 		76DC0BBF29AF849C007B4BDF /* Action.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Action.xcassets; sourceTree = "<group>"; };
 		76E08B6929A3976000B3202D /* Backport */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = Backport; sourceTree = "<group>"; };
 		76E51CE9299A8A1400FE7763 /* AppDeepLinks.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDeepLinks.swift; sourceTree = "<group>"; };
+		76E7AAB029B5D37B00520500 /* AddURL.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddURL.swift; sourceTree = "<group>"; };
 		76ECFDFD2947848500DF15C9 /* Browser+PageError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Browser+PageError.swift"; sourceTree = "<group>"; };
 		76ECFE09294B1B5700DF15C9 /* WebHighlights+Event.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "WebHighlights+Event.swift"; sourceTree = "<group>"; };
 		76ECFE0A294B1B5700DF15C9 /* WebHighlights+Action.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "WebHighlights+Action.swift"; sourceTree = "<group>"; };
 		76ECFE0B294B1B5700DF15C9 /* WebHighlights.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebHighlights.swift; sourceTree = "<group>"; };
 		76F05F0B293F89EF003CCD75 /* AddButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddButton.swift; sourceTree = "<group>"; };
-		76F05F0D293F8A9E003CCD75 /* AddPopover.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddPopover.swift; sourceTree = "<group>"; };
-		76F05F11293F95DC003CCD75 /* AddPopover+Web.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AddPopover+Web.swift"; sourceTree = "<group>"; };
 		76F282B42934C24B00D00363 /* ExtensionUI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtensionUI.swift; sourceTree = "<group>"; };
 		76F282B62934C25400D00363 /* ExtensionService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtensionService.swift; sourceTree = "<group>"; };
 		76F282B92934C43200D00363 /* NoAuth.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoAuth.swift; sourceTree = "<group>"; };
@@ -468,8 +466,7 @@
 			isa = PBXGroup;
 			children = (
 				76F05F0B293F89EF003CCD75 /* AddButton.swift */,
-				76F05F0D293F8A9E003CCD75 /* AddPopover.swift */,
-				76F05F11293F95DC003CCD75 /* AddPopover+Web.swift */,
+				76E7AAB029B5D37B00520500 /* AddURL.swift */,
 			);
 			path = Add;
 			sourceTree = "<group>";
@@ -715,6 +712,7 @@
 				76292CE42951A4D7000E16AA /* SettingsHome.swift in Sources */,
 				761F6C3229A3ADA0002919BC /* Preview.swift in Sources */,
 				76864FBD291EA059000B9B45 /* SidebarScreen.swift in Sources */,
+				76E7AAB129B5D37B00520500 /* AddURL.swift in Sources */,
 				76292CE82951B413000E16AA /* SettingsWebApp.swift in Sources */,
 				769056F0297539080090C1EF /* Folder+Title.swift in Sources */,
 				761F4CAD299E2E86008C1E6D /* SettingsAppIcon.swift in Sources */,
@@ -722,10 +720,8 @@
 				76BFE371291E9F6B00DE9DB2 /* AuthScene.swift in Sources */,
 				76292CF02951C7D2000E16AA /* SettingsLogout.swift in Sources */,
 				76ECFDFE2947848500DF15C9 /* Browser+PageError.swift in Sources */,
-				76F05F12293F95DC003CCD75 /* AddPopover+Web.swift in Sources */,
 				76BFE372291E9F6B00DE9DB2 /* SettingsScene.swift in Sources */,
 				76292CEC2951BC52000E16AA /* SettingsBrowser.swift in Sources */,
-				76F05F0E293F8A9E003CCD75 /* AddPopover.swift in Sources */,
 				76ECFE0E294B1B5700DF15C9 /* WebHighlights+Action.swift in Sources */,
 				76F05F0C293F89EF003CCD75 /* AddButton.swift in Sources */,
 				76292CEA2951B86F000E16AA /* SettingsSubscription.swift in Sources */,

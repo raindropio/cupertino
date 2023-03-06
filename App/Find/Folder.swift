@@ -4,7 +4,6 @@ import API
 import UI
 
 struct Folder<H: View>: View {
-    @Environment(\.isSearching) private var isSearching
     @Environment(\.containerHorizontalSizeClass) private var sizeClass
     @State private var selection: Set<Raindrop.ID> = .init()
     
@@ -28,6 +27,7 @@ struct Folder<H: View>: View {
             .modifier(Title(find: find))
             .modifier(Toolbar(find: find, selection: $selection))
             .raindropSheets()
+            .addButton(to: find.collectionId)
             .scopeEditMode()
             .onChange(of: find) { _ in
                 selection = .init()
