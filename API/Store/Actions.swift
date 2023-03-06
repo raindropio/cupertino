@@ -83,6 +83,7 @@ public enum RaindropsAction: ReduxAction {
     case moreFailed(FindBy, Int, Error)
     //single
     case lookup(URL)
+    case loaded(Raindrop)
     case suggest(Raindrop)
     case suggested(URL, RaindropSuggestions)
     //create
@@ -96,9 +97,9 @@ public enum RaindropsAction: ReduxAction {
     case delete(Raindrop.ID) // -> deleteMany
     case deleteMany(RaindropsPick)
     case deletedMany(RaindropsPick)
-    //add web url or file url
-    case add(Set<URL>, collection: Int? = nil, completed: Binding<Set<URL>>? = nil, failed: Binding<Set<URL>>? = nil)
     //multi
+    case links
+    case add(Set<URL>, collection: Int? = nil, completed: Binding<Set<URL>>? = nil, failed: Binding<Set<URL>>? = nil)
     case createMany([Raindrop])
     case createdMany([Raindrop])
     //shorthands

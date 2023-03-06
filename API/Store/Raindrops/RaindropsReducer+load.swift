@@ -63,4 +63,8 @@ extension RaindropsReducer {
         state[find].total = total
         state[find].validMore()
     }
+    
+    func loaded(state: inout S, raindrop: Raindrop) {
+        state.items[raindrop.id] = raindrop
+    }
 }

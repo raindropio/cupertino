@@ -87,6 +87,7 @@ fileprivate struct ByURL<C: View>: View {
     @Sendable private func lookup() async {
         loading = r.state.waitLookup(url)
         
+        try? await dispatch(RaindropsAction.links)
         try? await dispatch(RaindropsAction.lookup(url))
         
         //useful when sharing existing page, but with additional highlights

@@ -23,6 +23,7 @@ extension Browser {
         defer { loading = false }
         guard let url = page.url else { return }
         loading = true
+        try? await dispatch(RaindropsAction.links)
         try? await dispatch(RaindropsAction.lookup(url))
     }
 }

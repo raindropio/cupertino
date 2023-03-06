@@ -33,6 +33,7 @@ extension AddStack {
         
         lastUsedCollection = collection
         
+        try? await dispatch(RaindropsAction.links)
         try? await dispatch(
             RaindropsAction.add(
                 urls,

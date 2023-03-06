@@ -5,9 +5,7 @@ extension RaindropsReducer {
         //nothing to add
         guard !urls.isEmpty
         else { return nil }
-        
-        await links(state: &state)
-        
+                
         var newRaindrops = [Raindrop]()
         
         let chunks = urls

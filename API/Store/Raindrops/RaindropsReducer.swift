@@ -54,6 +54,9 @@ public actor RaindropsReducer: Reducer {
             return A.deleteMany(.some([id]))
             
         //Add web url or file urls
+        case .links:
+            await links(state: &state)
+            
         case .add(let urls, let collection, let completed, let failed):
             return try await add(state: &state, urls: urls, collection: collection, completed: completed, failed: failed)
             
@@ -78,9 +81,12 @@ public actor RaindropsReducer: Reducer {
         case .updatedMany(let pick, let operation):
             updatedMany(state: &state, pick: pick, operation: operation)
             
-        //Helpers
+        //Item
         case .lookup(let url):
-            await lookup(state: &state, url: url)
+            return await lookup(state: &state, url: url)
+            
+        case .loaded(let raindrop):
+            loaded(state: &state, raindrop: raindrop)
             
         case .suggest(let raindrop):
             return await suggest(state: &state, raindrop: raindrop)
