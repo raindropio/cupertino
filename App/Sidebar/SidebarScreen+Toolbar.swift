@@ -32,7 +32,7 @@ extension SidebarScreen {
                             Section { CollectionsMenu() }
                             Section { TagsMenu() }
                         } label: {
-                            Image(systemName: "ellipsis")
+                            Image(systemName: "ellipsis.circle")
                         }
                     } else {
                         //EditButton()

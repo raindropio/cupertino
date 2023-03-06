@@ -111,8 +111,10 @@ extension Folder.Toolbar {
                 //regular
                 else {
                     ToolbarItemGroup {
-                        EditButton("Edit")
-                            .labelStyle(.titleOnly)
+                        EditButton {
+                            Label("Edit", systemImage: "checkmark.circle")
+                        }
+                            .labelStyle(.iconOnly)
                         
                         if sizeClass == .regular {
                             SortRaindropsButton(find)

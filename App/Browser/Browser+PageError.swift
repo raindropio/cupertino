@@ -11,30 +11,39 @@ extension Browser {
         @Binding var raindrop: Raindrop
 
         func body(content: Content) -> some View {
-            content.overlay {
-                Group {
-                    if let error = page.error {
-                        EmptyState("Error", message: error.localizedDescription) {
-                            Image(systemName: "exclamationmark.triangle")
-                                .foregroundStyle(.yellow)
-                        } actions: {
-                            Button(action: page.reload) {
-                                Label("Reload", systemImage: "arrow.clockwise")
+            content.safeAreaInset(edge: .bottom) {
+                if let error = page.error {
+                    HStack(spacing: 16) {
+                        Image(systemName: "exclamationmark.triangle.fill")
+                            .foregroundStyle(.yellow)
+                        
+                        VStack(alignment: .leading, spacing: 8) {
+                            if !error.localizedDescription.isEmpty {
+                                Text(error.localizedDescription)
+                                    .foregroundStyle(.secondary)
+                                    .font(.subheadline)
                             }
-
+                            
                             if raindrop.file == nil, raindrop.cache?.status == .ready {
                                 Button {
                                     app.cached(id: raindrop.id)
                                 } label: {
-                                    Label("Open permanent copy", systemImage: "clock.arrow.circlepath")
+                                    Label("Permanent copy", systemImage: "clock.arrow.circlepath")
                                 }
-                                    .buttonStyle(.borderedProminent)
-                                    .fontWeight(.semibold)
+                                    .controlSize(.small)
                             }
                         }
-                            .frame(maxWidth: .infinity, maxHeight: .infinity)
-                            .background()
+                            .frame(maxWidth: .infinity, alignment: .leading)
+                        
+                        Button(action: page.reload) {
+                            Label("Reload", systemImage: "arrow.clockwise")
+                        }
+                            .labelStyle(.iconOnly)
+                            .buttonStyle(.borderedProminent)
                     }
+                        .scenePadding()
+                        .frame(maxWidth: .infinity, alignment: .leading)
+                        .background(.regularMaterial)
                 }
             }
         }
