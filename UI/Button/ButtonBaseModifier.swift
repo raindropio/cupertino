@@ -4,9 +4,9 @@ struct ButtonBaseModifier: ViewModifier {
     @Environment(\.controlSize) private var controlSize
     @Environment(\.isEnabled) private var isEnabled
     
-    static let height: [ControlSize: CGFloat]   = [.large: 50,  .regular: 40,   .small: 30, .mini: 30]
+    static let height: [ControlSize: CGFloat]   = [.large: 50,  .regular: 38,   .small: 30, .mini: 30]
     static let padding: [ControlSize: CGFloat]  = [.large: 16,  .regular: 14,   .small: 10, .mini: 10]
-    static let corner: [ControlSize?: CGFloat]  = [.large: 8,   .regular: 6,    .small: 15, .mini: 15, nil: 15]
+    static let corner: [ControlSize?: CGFloat]  = [.large: 10,  .regular: 8,    .small: 15, .mini: 15, nil: 15]
 
     var isPressed = false
     

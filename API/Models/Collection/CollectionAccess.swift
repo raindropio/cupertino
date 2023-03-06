@@ -16,9 +16,9 @@ extension CollectionAccess {
         public var title: String {
             switch self {
             case .noAccess: return "No access"
-            case .public: return "Read only"
-            case .viewer: return "Read only"
-            case .member: return "Can edit & invite"
+            case .public: return "Viewer"
+            case .viewer: return "Viewer"
+            case .member: return "Editor"
             case .owner: return "Owner"
             }
         }
