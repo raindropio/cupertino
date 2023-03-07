@@ -1,4 +1,4 @@
-public actor ConfigReducer: Reducer {
+public final class ConfigReducer: Reducer {
     public typealias S = ConfigState
     public typealias A = ConfigAction
     

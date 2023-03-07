@@ -1,4 +1,4 @@
-public actor FiltersReducer: Reducer {
+public final class FiltersReducer: Reducer {
     public typealias S = FiltersState
     public typealias A = FiltersAction
     

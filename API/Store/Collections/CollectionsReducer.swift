@@ -1,4 +1,4 @@
-public actor CollectionsReducer: Reducer {
+public final class CollectionsReducer: Reducer {
     public typealias S = CollectionsState
     public typealias A = CollectionsAction
     

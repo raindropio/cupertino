@@ -1,4 +1,4 @@
-public actor LogReducer: Reducer {
+public final class LogReducer: Reducer {
     public typealias S = LogState
     public typealias A = LogAction
     

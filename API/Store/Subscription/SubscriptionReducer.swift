@@ -1,4 +1,4 @@
-public actor SubscriptionReducer: Reducer {
+public final class SubscriptionReducer: Reducer {
     public typealias S = SubscriptionState
     public typealias A = SubscriptionAction
     

@@ -1,4 +1,4 @@
-public protocol Reducer: Actor {
+public protocol Reducer: AnyObject {
     associatedtype A: ReduxAction
     associatedtype S: ReduxState
     

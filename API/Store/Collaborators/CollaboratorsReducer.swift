@@ -1,4 +1,4 @@
-public actor CollaboratorsReducer: Reducer {
+public final class CollaboratorsReducer: Reducer {
     public typealias S = CollaboratorsState
     public typealias A = CollaboratorsAction
     

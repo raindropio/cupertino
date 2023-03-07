@@ -1,4 +1,4 @@
-public actor UserReducer: Reducer {
+public final class UserReducer: Reducer {
     public typealias S = UserState
     public typealias A = UserAction
     

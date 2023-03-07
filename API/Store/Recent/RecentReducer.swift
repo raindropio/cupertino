@@ -1,4 +1,4 @@
-public actor RecentReducer: Reducer {
+public final class RecentReducer: Reducer {
     public typealias S = RecentState
     public typealias A = RecentAction
     

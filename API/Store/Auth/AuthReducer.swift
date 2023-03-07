@@ -1,4 +1,4 @@
-public actor AuthReducer: Reducer {
+public final class AuthReducer: Reducer {
     public typealias S = AuthState
     public typealias A = AuthAction
     

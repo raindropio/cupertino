@@ -1,4 +1,4 @@
-public actor RaindropsReducer: Reducer {
+public final class RaindropsReducer: Reducer {
     public typealias S = RaindropsState
     public typealias A = RaindropsAction
     

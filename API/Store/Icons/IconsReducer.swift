@@ -1,4 +1,4 @@
-public actor IconsReducer: Reducer {
+public final class IconsReducer: Reducer {
     public typealias S = IconsState
     public typealias A = IconsAction
     

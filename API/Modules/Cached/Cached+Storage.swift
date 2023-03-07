@@ -2,7 +2,7 @@ import Foundation
 import Combine
 
 extension Cached {
-    class Storage<Value: Codable>: Equatable {
+    class Storage<Value: Codable & Equatable>: Equatable {
         static func == (lhs: Storage<Value>, rhs: Storage<Value>) -> Bool {
             true
         }
@@ -20,6 +20,7 @@ extension Cached {
             publisher
                 .subscribe(on: DispatchQueue.global(qos: .background))
                 .debounce(for: .seconds(1), scheduler: DispatchQueue.global(qos: .background))
+                .removeDuplicates()
                 .receive(on: DispatchQueue.global(qos: .background))
                 .sink(receiveValue: persist)
                 .store(in: &bag)
