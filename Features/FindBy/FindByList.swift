@@ -36,15 +36,17 @@ extension FindByList: View {
         List(selection: $selection) {
             if search.isEmpty {
                 if editMode?.wrappedValue != .active {
-                    SystemCollections<FindBy>(0, -1)
-                    
-                    DisclosureGroup(
-                        isExpanded: $filtersExpanded,
-                        content: SimpleFilters<FindBy>.init
-                    ) {
-                        Label("Filters", systemImage: "circle.grid.2x2")
+                    Section {
+                        SystemCollections<FindBy>(0, -1)
+                        
+                        DisclosureGroup(
+                            isExpanded: $filtersExpanded,
+                            content: SimpleFilters<FindBy>.init
+                        ) {
+                            Label("Filters", systemImage: "circle.grid.2x2")
+                        }
+                            .listItemTint(.monochrome)
                     }
-                        .listItemTint(.monochrome)
                 }
                 
                 UserCollections<FindBy>()
@@ -56,7 +58,9 @@ extension FindByList: View {
                 )
                 
                 if editMode?.wrappedValue != .active {
-                    SystemCollections<FindBy>(-99)
+                    Section {
+                        SystemCollections<FindBy>(-99)
+                    }
                 }
             } else {
                 FindCollections<FindBy>(search)
@@ -74,6 +78,8 @@ extension FindByList: View {
             .labelStyle(.sidebar)
             .collectionsAnimation()
             .tagAnimations()
+            .animation(.default, value: filtersExpanded)
+            .animation(.default, value: tagsExpanded)
             //menu
             .contextMenu(forSelectionType: FindBy.self, menu: contextMenu)
             //reload

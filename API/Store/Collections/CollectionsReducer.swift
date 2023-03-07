@@ -119,6 +119,9 @@ extension CollectionsReducer {
             case .update(let collection, let original):
                 return try await update(state: state, modified: collection, original: original)
                 
+            case .updateMany(let body):
+                return try await updateMany(state: state, body: body)
+                
             //delete
             case .deleteMany(let ids, let nested):
                 return try await deleteMany(state: state, ids: ids, nested: nested)

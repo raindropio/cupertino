@@ -11,7 +11,7 @@ extension ReduxStore {
         if let next = try await self[keyPath: store].reduce(some) {
             try await dispatch(next)
         }
-        
+        //TODO: can be inaccessible if reducer fail
         if let next = try await self[keyPath: store].middleware(some) {
             try await dispatch(next)
         }
