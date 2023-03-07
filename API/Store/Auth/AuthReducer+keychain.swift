@@ -11,7 +11,7 @@ extension AuthReducer {
             kSecReturnData: kCFBooleanTrue!,
             kSecMatchLimit: kSecMatchLimitOne,
             kSecAttrAccessGroup: Constants.keychainGroupName
-        ] as CFDictionary
+        ] as [CFString : Any] as CFDictionary
         
         //get data from keychain
         var raw: AnyObject?
@@ -22,7 +22,7 @@ extension AuthReducer {
         else { return }
         
         //restore cookies
-        guard let cookies = (try? NSKeyedUnarchiver.unarchiveTopLevelObjectWithData(data)) as? [HTTPCookie] else { return }
+        guard let cookies = try? NSKeyedUnarchiver.unarchivedObject(ofClasses: [NSArray.self, HTTPCookie.self], from: data) as? [HTTPCookie] else { return }
         for cookie in cookies {
             HTTPCookieStorage.shared.setCookie(cookie)
         }
@@ -46,7 +46,7 @@ extension AuthReducer {
             kSecAttrAccount: keychainKeyName,
             kSecValueData: data,
             kSecAttrAccessGroup: Constants.keychainGroupName
-        ] as CFDictionary
+        ] as [CFString : Any] as CFDictionary
         SecItemDelete(query)
         SecItemAdd(query, nil)
     }

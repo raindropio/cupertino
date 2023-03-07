@@ -33,6 +33,7 @@ extension SettingsScene {
             content
                 .sheet(isPresented: $settings.isPresented) {
                     SettingsScene()
+                        .environmentObject(settings)
                 }
                 .environmentObject(settings)
         }

@@ -57,7 +57,7 @@ fileprivate struct AnyURL: Transferable {
     
     //youtube specific
     @Sendable init(_ data: Data) throws {
-        let text = try NSKeyedUnarchiver.unarchiveTopLevelObjectWithData(data) as? String
+        let text = try NSKeyedUnarchiver.unarchivedObject(ofClass: NSString.self, from: data) as? String
         if let text {
             try self.init(text)
         } else {

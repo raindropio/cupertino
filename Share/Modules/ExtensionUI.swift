@@ -6,11 +6,9 @@ struct ExtensionUI: View {
     
     var body: some View {
         Color.clear
-            .sheet(
-                isPresented: $isPresented,
-                onDismiss: service.close,
-                content: Main.init
-            )
-            .environmentObject(service)
+            .sheet(isPresented: $isPresented, onDismiss: service.close) {
+                Main()
+                    .environmentObject(service)
+            }
     }
 }
