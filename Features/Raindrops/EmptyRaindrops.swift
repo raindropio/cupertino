@@ -15,7 +15,7 @@ struct EmptyRaindrops: View {
                 Group {
                     if find.isSearching {
                         EmptyState(
-                            message: "Your search - \(find.search) - did not match any items"
+                            message: "Your search - \(find.searchLocalized) - did not match any items"
                         ) {
                             Image(systemName: "doc.text.magnifyingglass")
                         }

@@ -27,9 +27,9 @@ extension Folder.Title {
                 if isSearching {
                     return "Search"
                 } else if find.collectionId == 0 {
-                    return find.search
+                    return find.searchLocalized
                 } else {
-                    return "\(title): \(find.search)"
+                    return "\(title): \(find.searchLocalized)"
                 }
             }
             

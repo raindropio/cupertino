@@ -35,9 +35,15 @@ public struct FindBy: Equatable, Hashable, Codable {
 }
 
 extension FindBy {
-    public var search: String {
+    var search: String {
         (filters.map{ $0.description } + [text])
             .joined(separator: " ")
+            .trimmingCharacters(in: .whitespacesAndNewlines)
+    }
+    
+    public var searchLocalized: String {
+        (filters.map{ $0.title } + (text.isEmpty ? [] : [text]))
+            .joined(separator: ", ")
             .trimmingCharacters(in: .whitespacesAndNewlines)
     }
     
