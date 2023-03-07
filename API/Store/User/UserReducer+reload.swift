@@ -1,5 +1,5 @@
 extension UserReducer {
-    func reload(state: inout S) async throws -> ReduxAction? {
+    func reload(state: S) async throws -> ReduxAction? {
         let user = try await rest.userGet()
         return A.reloaded(user)
     }

@@ -1,5 +1,5 @@
 extension RaindropsReducer {
-    func createMany(state: inout S, items: [Raindrop]) async throws -> ReduxAction? {
+    func createMany(state: S, items: [Raindrop]) async throws -> ReduxAction? {
         let new = try await rest.raindropsCreate(items)
         return A.createdMany(new)
     }

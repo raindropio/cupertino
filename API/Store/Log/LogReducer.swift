@@ -4,7 +4,11 @@ public actor LogReducer: Reducer {
     
     public init() {}
     
-    public func reduce(state: inout S, action: A) async throws -> ReduxAction? {
+    public func reduce(state: inout S, action: A) throws -> ReduxAction? {
+        return nil
+    }
+    
+    public func middleware(state: S, action: A) async throws -> ReduxAction? {
         return nil
     }
     
@@ -13,7 +17,7 @@ public actor LogReducer: Reducer {
         return nil
     }
     
-    public func reduce(state: inout S, error: Error) async throws -> ReduxAction? {
+    public func middleware(state: S, error: Error) async throws -> ReduxAction? {
         print("Store Error:", error)
         return nil
     }

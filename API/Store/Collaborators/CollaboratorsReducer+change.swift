@@ -1,5 +1,5 @@
 extension CollaboratorsReducer {
-    func change(state: inout S, collectionId: UserCollection.ID, userId: Collaborator.ID, level: CollectionAccess.Level) async throws -> ReduxAction? {
+    func change(state: S, collectionId: UserCollection.ID, userId: Collaborator.ID, level: CollectionAccess.Level) async throws -> ReduxAction? {
         try await rest.collaboratorChange(collectionId, userId: userId, level: level)
         return A.changed(collectionId, userId: userId, level: level)
     }

@@ -9,7 +9,7 @@ extension RaindropsReducer {
         return A.moreLoad(find)
     }
     
-    func moreLoad(state: inout S, find: FindBy) async -> ReduxAction? {
+    func moreLoad(state: S, find: FindBy) async -> ReduxAction? {
         let page = state[find].page + 1
         
         do {

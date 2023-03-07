@@ -1,7 +1,7 @@
 import SwiftUI
 
 extension RaindropsReducer {
-    func lookup(state: inout S, url: URL) async -> ReduxAction? {
+    func lookup(state: S, url: URL) async -> ReduxAction? {
         let id = state.lookups[url.compact]
         guard let id else { return nil }
         

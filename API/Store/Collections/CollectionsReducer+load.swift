@@ -10,7 +10,7 @@ extension CollectionsReducer {
     }
     
     //MARK: - 2
-    func reload(state: inout S) async -> ReduxAction? {
+    func reload(state: S) async -> ReduxAction? {
         do {
             async let fetchGroups = rest.collectionGroupsGet()
             async let fetchCollections = rest.collectionsGet()

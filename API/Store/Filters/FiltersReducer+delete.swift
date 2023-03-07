@@ -1,5 +1,5 @@
 extension FiltersReducer {
-    func delete(state: inout S, tags: Set<String>) async throws -> ReduxAction? {
+    func delete(state: S, tags: Set<String>) async throws -> ReduxAction? {
         guard !tags.isEmpty
         else { return nil }
         

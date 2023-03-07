@@ -7,14 +7,11 @@ public actor CollectionsReducer: Reducer {
     public init() {}
     
     //MARK: - My actions
-    public func reduce(state: inout S, action: A) async throws -> ReduxAction? {
+    public func reduce(state: inout S, action: A) throws -> ReduxAction? {
         switch action {
         //load
         case .load:
             return load(state: &state)
-            
-        case .reload:
-            return await reload(state: &state)
             
         case .reloaded(let groups, let system, let user):
             reloaded(state: &state, groups: groups, system: system, user: user)
@@ -23,37 +20,18 @@ public actor CollectionsReducer: Reducer {
             try reloadFailed(state: &state, error: error)
         
         //create
-        case .create(let collection):
-            return try await create(state: &state, draft: collection)
-            
         case .created(let collection):
             return updated(state: &state, collection: collection)
         
         //update
-        case .update(let collection, let original):
-            return try await update(state: &state, modified: collection, original: original)
-            
         case .updated(let collection):
             return updated(state: &state, collection: collection)
-            
-        case .updateMany(let body):
-            return try await updateMany(state: &state, body: body)
             
         //delete
         case .delete(let id):
             return A.deleteMany([id], nested: true)
             
-        case .deleteMany(let ids, let nested):
-            return try await deleteMany(state: &state, ids: ids, nested: nested)
-            
-        //merge
-        case .merge(let ids, let nested):
-            return try await merge(state: &state, ids: ids, nested: nested)
-            
         //groups
-        case .saveGroups:
-            return try await saveGroups(state: &state)
-            
         case .groupsUpdated(let groups):
             groupsUpdated(state: &state, groups: groups)
             
@@ -81,12 +59,50 @@ public actor CollectionsReducer: Reducer {
             
         case .deleteGroup(let group):
             return delete(state: &state, group: group)
+            
+        default:
+            break
         }
 
         return nil
     }
     
-    //MARK: - Other actions
+    public func middleware(state: S, action: A) async throws -> ReduxAction? {
+        switch action {
+        //load
+        case .reload:
+            return await reload(state: state)
+            
+        //create
+        case .create(let collection):
+            return try await create(state: state, draft: collection)
+            
+        //update
+        case .update(let collection, let original):
+            return try await update(state: state, modified: collection, original: original)
+            
+        //delete
+        case .deleteMany(let ids, let nested):
+            return try await deleteMany(state: state, ids: ids, nested: nested)
+            
+        //merge
+        case .merge(let ids, let nested):
+            return try await merge(state: state, ids: ids, nested: nested)
+            
+        //groups
+        case .saveGroups:
+            return try await saveGroups(state: state)
+            
+        default:
+            break
+        }
+
+        return nil
+    }
+}
+
+//MARK: - Other actions
+extension CollectionsReducer {
     public func reduce(state: inout S, action: ReduxAction) async throws -> ReduxAction? {
         //Auth
         if let action = action as? AuthAction {

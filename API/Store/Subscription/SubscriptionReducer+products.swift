@@ -1,7 +1,7 @@
 import StoreKit
 
 extension SubscriptionReducer {
-    func products(state: inout S) async -> ReduxAction {
+    func products(state: S) async -> ReduxAction {
         let products = try? await Product.products(for: Constants.productIdentifiers)
         return A.productsLoaded(products ?? [])
     }

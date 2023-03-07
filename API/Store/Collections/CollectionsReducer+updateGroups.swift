@@ -1,5 +1,5 @@
 extension CollectionsReducer {
-    func saveGroups(state: inout S) async throws -> ReduxAction? {
+    func saveGroups(state: S) async throws -> ReduxAction? {
         A.groupsUpdated(
             try await rest.collectionGroupsUpdate(
                 groups: state.groups

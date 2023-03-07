@@ -1,5 +1,5 @@
 extension CollectionsReducer {
-    func update(state: inout S, modified: UserCollection, original: UserCollection? = nil) async throws -> ReduxAction? {
+    func update(state: S, modified: UserCollection, original: UserCollection? = nil) async throws -> ReduxAction? {
         //ignore if no original or nothing modified
         guard let original = original ?? state.user[modified.id], modified != original
         else { return nil }

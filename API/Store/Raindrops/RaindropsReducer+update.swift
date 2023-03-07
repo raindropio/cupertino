@@ -1,5 +1,5 @@
 extension RaindropsReducer {
-    func update(state: inout S, modified: Raindrop) async throws -> ReduxAction? {
+    func update(state: S, modified: Raindrop) async throws -> ReduxAction? {
         //ignore if no original or nothing modified
         guard let original = state.items[modified.id], modified != original
         else { return nil }
@@ -22,7 +22,7 @@ extension RaindropsReducer {
 }
 
 extension RaindropsReducer {
-    func updateMany(state: inout S, pick: RaindropsPick, operation: UpdateRaindropsRequest) async throws -> ReduxAction? {
+    func updateMany(state: S, pick: RaindropsPick, operation: UpdateRaindropsRequest) async throws -> ReduxAction? {
         let count = try await rest.raindropsUpdate(pick: pick, operation: operation)
         if count > 0 {
             return A.updatedMany(pick, operation)

@@ -1,5 +1,5 @@
 extension FiltersReducer {
-    func reload(state: inout S, find: FindBy) async throws -> ReduxAction? {
+    func reload(state: S, find: FindBy) async throws -> ReduxAction? {
         let (filters, _) = try await rest.filtersGet(find, tagsSort: state.sort)
         return A.reloaded(find, filters)
     }

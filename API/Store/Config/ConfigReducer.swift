@@ -7,27 +7,38 @@ public actor ConfigReducer: Reducer {
     public init() {}
     
     //MARK: - My actions
-    public func reduce(state: inout S, action: A) async throws -> ReduxAction? {
+    public func reduce(state: inout S, action: A) throws -> ReduxAction? {
         switch action {
-            //config
-        case .load:
-            return await load(state: &state)
-            
         case .reloaded(let config):
             reloaded(state: &state, config: config)
             
         case .updateRaindrops(let raindrops):
             return update(state: &state, raindrops: raindrops)
             
-        case .save:
-            try await save(state: &state)
-            return nil
+        default:
+            break
         }
         return nil
     }
     
-    //MARK: - Other actions
-    public func reduce(state: inout S, action: ReduxAction) async throws -> ReduxAction? {
+    public func middleware(state: S, action: A) async throws -> ReduxAction? {
+        switch action {
+        case .load:
+            return await load(state: state)
+            
+        case .save:
+            try await save(state: state)
+            
+        default:
+            break
+        }
+        return nil
+    }
+}
+
+//MARK: - Other actions
+extension ConfigReducer {
+    public func reduce(state: inout S, action: ReduxAction) throws -> ReduxAction? {
         //Auth
         if let action = action as? AuthAction {
             switch action {

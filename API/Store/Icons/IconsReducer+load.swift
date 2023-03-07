@@ -15,7 +15,7 @@ extension IconsReducer {
 }
 
 extension IconsReducer {
-    func reload(state: inout S, filter: String) async -> ReduxAction? {
+    func reload(state: S, filter: String) async -> ReduxAction? {
         let key = state.filterKey(filter)
         
         do {

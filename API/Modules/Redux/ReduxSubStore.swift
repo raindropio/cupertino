@@ -7,16 +7,6 @@ public actor ReduxSubStore<R: Reducer>: ObservableObject {
     @MainActor public var state: R.S { s }
     
     func reduce(_ some: Any) async throws -> ReduxAction? {
-        #if DEBUG
-        let start = Date()
-        defer {
-            let took = Date().timeIntervalSince(start)
-            if took > 1 {
-                print("Slow action (\(String(format: "%.2f", took))s):", R.self, some)
-            }
-        }
-        #endif
-        
         var mutated = await s
         var next: ReduxAction? = nil
         var nextError: Error? = nil
@@ -30,10 +20,6 @@ public actor ReduxSubStore<R: Reducer>: ObservableObject {
             else if let action = some as? ReduxAction {
                 next = try await reducer.reduce(state: &mutated, action: action)
             }
-            //error
-            else if let error = some as? Error {
-                next = try await reducer.reduce(state: &mutated, error: error)
-            }
         } catch {
             nextError = error
         }
@@ -42,6 +28,44 @@ public actor ReduxSubStore<R: Reducer>: ObservableObject {
             await MainActor.run { [mutated] in
                 s = mutated
             }
+        }
+        
+        if let nextError {
+            throw nextError
+        }
+        return next
+    }
+    
+    func middleware(_ some: Any) async throws -> ReduxAction? {
+        #if DEBUG
+        let start = Date()
+        defer {
+            let took = Date().timeIntervalSince(start)
+            if took > 1 {
+                print("Slow action (\(String(format: "%.2f", took))s):", R.self, some)
+            }
+        }
+        #endif
+        
+        let state = await s
+        var next: ReduxAction? = nil
+        var nextError: Error? = nil
+        
+        do {
+            //my action
+            if let action = some as? R.A {
+                next = try await reducer.middleware(state: state, action: action)
+            }
+            //other action
+            else if let action = some as? ReduxAction {
+                next = try await reducer.middleware(state: state, action: action)
+            }
+            //error
+            else if let error = some as? Error {
+                next = try await reducer.middleware(state: state, error: error)
+            }
+        } catch {
+            nextError = error
         }
         
         if let nextError {

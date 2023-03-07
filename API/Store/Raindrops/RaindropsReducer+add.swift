@@ -1,7 +1,7 @@
 import SwiftUI
 
 extension RaindropsReducer {
-    func add(state: inout S, urls: Set<URL>, collection: Int?, completed: Binding<Set<URL>>?, failed: Binding<Set<URL>>?) async throws -> ReduxAction? {
+    func add(state: S, urls: Set<URL>, collection: Int?, completed: Binding<Set<URL>>?, failed: Binding<Set<URL>>?) async throws -> ReduxAction? {
         //nothing to add
         guard !urls.isEmpty
         else { return nil }

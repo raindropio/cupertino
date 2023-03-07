@@ -11,7 +11,7 @@ extension SubscriptionReducer {
 }
 
 extension SubscriptionReducer {
-    func purchasing(state: inout S, userRef: User.ID, product: Product) async throws -> ReduxAction? {
+    func purchasing(state: S, userRef: User.ID, product: Product) async throws -> ReduxAction? {
         let result = try await product.purchase(options: [
             //.simulatesAskToBuyInSandbox(true),
             .custom(key: "userRef", value: Double(userRef))
@@ -41,7 +41,7 @@ extension SubscriptionReducer {
 }
 
 extension SubscriptionReducer {
-    func purchased(state: inout S, transaction: StoreKit.Transaction) async throws -> ReduxAction? {
+    func purchased(state: S, transaction: StoreKit.Transaction) async throws -> ReduxAction? {
         let receipt = try await getSKReceipt()
         try await rest.subscriptionRestore(receipt: receipt)
         

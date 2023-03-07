@@ -1,5 +1,5 @@
 extension ConfigReducer {
-    func load(state: inout S) async -> ReduxAction? {
+    func load(state: S) async -> ReduxAction? {
         let config: S? = try? await rest.configGet()
         guard let config else { return nil }
         return A.reloaded(config)

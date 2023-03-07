@@ -1,7 +1,7 @@
 import SwiftUI
 
 extension RaindropsReducer {
-    func suggest(state: inout S, raindrop: Raindrop) async -> ReduxAction? {
+    func suggest(state: S, raindrop: Raindrop) async -> ReduxAction? {
         let key = raindrop.link.compact
         guard state.suggestions[key] == nil else { return nil }
         

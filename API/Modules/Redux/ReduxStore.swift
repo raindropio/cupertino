@@ -8,8 +8,11 @@ protocol ReduxStore: Actor, ObservableObject {
 
 extension ReduxStore {
     func dispatch(_ some: Any, store: KeyPath<Self, ReduxSubStore<some Reducer>>) async throws {
-        let next = try await self[keyPath: store].reduce(some)
-        if let next {
+        if let next = try await self[keyPath: store].reduce(some) {
+            try await dispatch(next)
+        }
+        
+        if let next = try await self[keyPath: store].middleware(some) {
             try await dispatch(next)
         }
     }

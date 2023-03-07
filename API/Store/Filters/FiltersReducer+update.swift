@@ -1,5 +1,5 @@
 extension FiltersReducer {
-    func update(state: inout S, tags: Set<String>, newName: String) async throws -> ReduxAction? {
+    func update(state: S, tags: Set<String>, newName: String) async throws -> ReduxAction? {
         guard
             !tags.isEmpty,
             !newName.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty

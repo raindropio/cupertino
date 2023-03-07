@@ -1,5 +1,5 @@
 extension RecentReducer {
-    func reload(state: inout S, find: FindBy) async throws -> ReduxAction? {
+    func reload(state: S, find: FindBy) async throws -> ReduxAction? {
         guard find.collectionId == 0 && !find.isSearching
         else { return nil }
         

@@ -5,7 +5,7 @@ extension SubscriptionReducer {
 }
 
 extension SubscriptionReducer {
-    func reload(state: inout S) async -> ReduxAction? {
+    func reload(state: S) async -> ReduxAction? {
         do {
             let subscription = try await rest.subscriptionGet()
             guard subscription.status != .unknown else { return nil }

@@ -6,23 +6,17 @@ public actor SubscriptionReducer: Reducer {
     
     public init() {}
     
-    public func reduce(state: inout S, action: A) async throws -> ReduxAction? {
+    public func reduce(state: inout S, action: A) throws -> ReduxAction? {
         switch action {
         //load
         case .load:
             return load(state: &state)
-            
-        case .reload:
-            return await reload(state: &state)
 
         case .reloaded(let subscription):
             reloaded(state: &state, subscription: subscription)
             
         case .reloadFailed(let error):
             try reloadFailed(state: &state, error: error)
-            
-        case .products:
-            return await products(state: &state)
             
         case .productsLoaded(let p):
             productsLoaded(state: &state, products: p)
@@ -31,20 +25,40 @@ public actor SubscriptionReducer: Reducer {
         case .purchase(let userRef, let product):
             return try purchase(state: &state, userRef: userRef, product: product)
             
-        case .purchasing(let userRef, let product):
-            return try await purchasing(state: &state, userRef: userRef, product: product)
-            
-        case .purchased(let transaction):
-            return try await purchased(state: &state, transaction: transaction)
-            
-        //restore
-        case .restore:
-            return try await restore(state: &state)
+        default:
+            break
         }
         return nil
     }
     
-    public func reduce(state: inout S, action: ReduxAction) async throws -> ReduxAction? {
+    public func middleware(state: S, action: A) async throws -> ReduxAction? {
+        switch action {
+        //load
+        case .reload:
+            return await reload(state: state)
+
+        case .products:
+            return await products(state: state)
+            
+        case .purchasing(let userRef, let product):
+            return try await purchasing(state: state, userRef: userRef, product: product)
+            
+        case .purchased(let transaction):
+            return try await purchased(state: state, transaction: transaction)
+            
+        case .restore:
+            return try await restore(state: state)
+            
+        default:
+            break
+        }
+        return nil
+    }
+}
+
+//MARK: - Other
+extension SubscriptionReducer {
+    public func reduce(state: inout S, action: ReduxAction) throws -> ReduxAction? {
         if let action = action as? AuthAction {
             switch action {
             case .logout:

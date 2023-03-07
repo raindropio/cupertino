@@ -1,5 +1,5 @@
 extension CollectionsReducer {
-    func deleteMany(state: inout S, ids: Set<UserCollection.ID>, nested: Bool) async throws -> ReduxAction? {
+    func deleteMany(state: S, ids: Set<UserCollection.ID>, nested: Bool) async throws -> ReduxAction? {
         var targets = Set<UserCollection.ID>()
         for id in ids {
             guard id > 0 else { continue }

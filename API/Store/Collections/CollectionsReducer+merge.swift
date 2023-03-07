@@ -1,5 +1,5 @@
 extension CollectionsReducer {
-    func merge(state: inout S, ids: Set<UserCollection.ID>, nested: Bool) async throws -> ReduxAction? {
+    func merge(state: S, ids: Set<UserCollection.ID>, nested: Bool) async throws -> ReduxAction? {
         var targets = Set<UserCollection.ID>()
         for id in ids {
             guard id > 0 else { continue }

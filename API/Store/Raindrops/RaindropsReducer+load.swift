@@ -12,7 +12,7 @@ extension RaindropsReducer {
     }
     
     //MARK: - 2
-    func reload(state: inout S, find: FindBy) async -> ReduxAction? {
+    func reload(state: S, find: FindBy) async -> ReduxAction? {
         do {
             let sort = state.sort(find)
             let (items, total) = try await rest.raindropsGet(find, sort: sort)
