@@ -12,12 +12,7 @@ public actor ReduxSubStore<R: Reducer>: ObservableObject {
         var nextError: Error? = nil
         
         do {
-            //my action
-            if let action = some as? R.A {
-                next = try await reducer.reduce(state: &mutated, action: action)
-            }
-            //other action
-            else if let action = some as? ReduxAction {
+            if let action = some as? ReduxAction {
                 next = try await reducer.reduce(state: &mutated, action: action)
             }
         } catch {
@@ -52,12 +47,8 @@ public actor ReduxSubStore<R: Reducer>: ObservableObject {
         var nextError: Error? = nil
         
         do {
-            //my action
-            if let action = some as? R.A {
-                next = try await reducer.middleware(state: state, action: action)
-            }
-            //other action
-            else if let action = some as? ReduxAction {
+            //action
+            if let action = some as? ReduxAction {
                 next = try await reducer.middleware(state: state, action: action)
             }
             //error

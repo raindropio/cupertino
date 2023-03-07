@@ -5,40 +5,24 @@ public actor ConfigReducer: Reducer {
     let rest = Rest()
     
     public init() {}
-    
-    //MARK: - My actions
-    public func reduce(state: inout S, action: A) throws -> ReduxAction? {
-        switch action {
-        case .reloaded(let config):
-            reloaded(state: &state, config: config)
-            
-        case .updateRaindrops(let raindrops):
-            return update(state: &state, raindrops: raindrops)
-            
-        default:
-            break
-        }
-        return nil
-    }
-    
-    public func middleware(state: S, action: A) async throws -> ReduxAction? {
-        switch action {
-        case .load:
-            return await load(state: state)
-            
-        case .save:
-            try await save(state: state)
-            
-        default:
-            break
-        }
-        return nil
-    }
 }
 
-//MARK: - Other actions
 extension ConfigReducer {
     public func reduce(state: inout S, action: ReduxAction) throws -> ReduxAction? {
+        //Config
+        if let action = action as? A {
+            switch action {
+            case .reloaded(let config):
+                reloaded(state: &state, config: config)
+                
+            case .updateRaindrops(let raindrops):
+                return update(state: &state, raindrops: raindrops)
+                
+            default:
+                break
+            }
+        }
+        
         //Auth
         if let action = action as? AuthAction {
             switch action {
@@ -55,6 +39,24 @@ extension ConfigReducer {
             switch action {
             case .reloaded(_):
                 return A.load
+                
+            default:
+                break
+            }
+        }
+        
+        return nil
+    }
+    
+    public func middleware(state: S, action: ReduxAction) async throws -> ReduxAction? {
+        //Config
+        if let action = action as? A {
+            switch action {
+            case .load:
+                return await load(state: state)
+                
+            case .save:
+                try await save(state: state)
                 
             default:
                 break

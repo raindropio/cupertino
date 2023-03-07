@@ -4,43 +4,39 @@ public actor AuthReducer: Reducer {
     
     let rest = Rest()
     
-    @MainActor
-    public init() {
+    @MainActor public init() {
         restore()
-    }
-    
-    public func reduce(state: inout S, action: A) throws -> ReduxAction? {
-        return nil
-    }
-    
-    public func middleware(state: S, action: A) async throws -> ReduxAction? {
-        switch action {
-        case .login(let body):
-            try await login(state: state, body: body)
-            
-        case .signup(let body):
-            return try await signup(state: state, body: body)
-            
-        case .logout:
-            try await logout(state: state)
-            
-        case .apple(let authorization):
-            try await apple(state: state, authorization: authorization)
-            
-        case .jwt(let callbackUrl):
-            try await jwt(state: state, callbackUrl: callbackUrl)
-        }
-        return nil
     }
 }
 
-//MARK: - Other stores
+//MARK: - Reducer
 extension AuthReducer {
-    public func reduce(state: inout S, action: ReduxAction) throws -> ReduxAction? {
+    public func middleware(state: S, action: ReduxAction) async throws -> ReduxAction? {
+        //Auth
+        if let action = action as? A {
+            switch action {
+            case .login(let body):
+                try await login(state: state, body: body)
+                
+            case .signup(let body):
+                return try await signup(state: state, body: body)
+                
+            case .logout:
+                try await logout(state: state)
+                
+            case .apple(let authorization):
+                try await apple(state: state, authorization: authorization)
+                
+            case .jwt(let callbackUrl):
+                try await jwt(state: state, callbackUrl: callbackUrl)
+            }
+        }
+        
+        //User
         if let action = action as? UserAction {
             switch action {
-            //user successfully reloaded, so persit cookies to keychain
             case .reloaded(_):
+                //user successfully reloaded, so persit cookies to keychain
                 persist()
                 
             default:
@@ -48,6 +44,12 @@ extension AuthReducer {
             }
         }
         
+        return nil
+    }
+}
+
+extension AuthReducer {
+    public func reduce(state: inout S, action: ReduxAction) throws -> ReduxAction? {
         return nil
     }
 }

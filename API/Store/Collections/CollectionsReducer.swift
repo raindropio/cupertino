@@ -5,105 +5,69 @@ public actor CollectionsReducer: Reducer {
     let rest = Rest()
     
     public init() {}
-    
-    //MARK: - My actions
-    public func reduce(state: inout S, action: A) throws -> ReduxAction? {
-        switch action {
-        //load
-        case .load:
-            return load(state: &state)
-            
-        case .reloaded(let groups, let system, let user):
-            reloaded(state: &state, groups: groups, system: system, user: user)
-            
-        case .reloadFailed(let error):
-            try reloadFailed(state: &state, error: error)
-        
-        //create
-        case .created(let collection):
-            return updated(state: &state, collection: collection)
-        
-        //update
-        case .updated(let collection):
-            return updated(state: &state, collection: collection)
-            
-        //delete
-        case .delete(let id):
-            return A.deleteMany([id], nested: true)
-            
-        //groups
-        case .groupsUpdated(let groups):
-            groupsUpdated(state: &state, groups: groups)
-            
-        //helpers
-        case .reorder(let id, let parent, let order):
-            return reorder(state: &state, id: id, parent: parent, order: order)
-            
-        case .reorderMany(let by):
-            return reorderMany(state: &state, by: by)
-            
-        case .setView(let id, let view):
-            return setView(state: &state, id: id, view: view)
-        
-        case .toggle(let id):
-            return toggle(state: &state, id: id)
-            
-        case .toggleMany:
-            return toggleMany(state: &state)
-            
-        case .toggleGroup(let group):
-            return toggle(state: &state, group: group)
-            
-        case .renameGroup(let group):
-            return rename(state: &state, group: group)
-            
-        case .deleteGroup(let group):
-            return delete(state: &state, group: group)
-            
-        default:
-            break
-        }
-
-        return nil
-    }
-    
-    public func middleware(state: S, action: A) async throws -> ReduxAction? {
-        switch action {
-        //load
-        case .reload:
-            return await reload(state: state)
-            
-        //create
-        case .create(let collection):
-            return try await create(state: state, draft: collection)
-            
-        //update
-        case .update(let collection, let original):
-            return try await update(state: state, modified: collection, original: original)
-            
-        //delete
-        case .deleteMany(let ids, let nested):
-            return try await deleteMany(state: state, ids: ids, nested: nested)
-            
-        //merge
-        case .merge(let ids, let nested):
-            return try await merge(state: state, ids: ids, nested: nested)
-            
-        //groups
-        case .saveGroups:
-            return try await saveGroups(state: state)
-            
-        default:
-            break
-        }
-
-        return nil
-    }
 }
 
-//MARK: - Other actions
 extension CollectionsReducer {
-    public func reduce(state: inout S, action: ReduxAction) async throws -> ReduxAction? {
+    public func reduce(state: inout S, action: ReduxAction) throws -> ReduxAction? {
+        //Collections
+        if let action = action as? A {
+            switch action {
+            //load
+            case .load:
+                return load(state: &state)
+                
+            case .reloaded(let groups, let system, let user):
+                reloaded(state: &state, groups: groups, system: system, user: user)
+                
+            case .reloadFailed(let error):
+                try reloadFailed(state: &state, error: error)
+            
+            //create
+            case .created(let collection):
+                return updated(state: &state, collection: collection)
+            
+            //update
+            case .updated(let collection):
+                return updated(state: &state, collection: collection)
+                
+            //delete
+            case .delete(let id):
+                return A.deleteMany([id], nested: true)
+                
+            //groups
+            case .groupsUpdated(let groups):
+                groupsUpdated(state: &state, groups: groups)
+                
+            //helpers
+            case .reorder(let id, let parent, let order):
+                return reorder(state: &state, id: id, parent: parent, order: order)
+                
+            case .reorderMany(let by):
+                return reorderMany(state: &state, by: by)
+                
+            case .setView(let id, let view):
+                return setView(state: &state, id: id, view: view)
+            
+            case .toggle(let id):
+                return toggle(state: &state, id: id)
+                
+            case .toggleMany:
+                return toggleMany(state: &state)
+                
+            case .toggleGroup(let group):
+                return toggle(state: &state, group: group)
+                
+            case .renameGroup(let group):
+                return rename(state: &state, group: group)
+                
+            case .deleteGroup(let group):
+                return delete(state: &state, group: group)
+                
+            default:
+                break
+            }
+        }
+        
         //Auth
         if let action = action as? AuthAction {
             switch action {
@@ -135,7 +99,43 @@ extension CollectionsReducer {
             default: break
             }
         }
-        
+
+        return nil
+    }
+    
+    public func middleware(state: S, action: ReduxAction) async throws -> ReduxAction? {
+        //Collections
+        if let action = action as? A {
+            switch action {
+            //load
+            case .reload:
+                return await reload(state: state)
+                
+            //create
+            case .create(let collection):
+                return try await create(state: state, draft: collection)
+                
+            //update
+            case .update(let collection, let original):
+                return try await update(state: state, modified: collection, original: original)
+                
+            //delete
+            case .deleteMany(let ids, let nested):
+                return try await deleteMany(state: state, ids: ids, nested: nested)
+                
+            //merge
+            case .merge(let ids, let nested):
+                return try await merge(state: state, ids: ids, nested: nested)
+                
+            //groups
+            case .saveGroups:
+                return try await saveGroups(state: state)
+                
+            default:
+                break
+            }
+        }
+
         return nil
     }
 }
