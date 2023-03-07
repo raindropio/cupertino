@@ -55,7 +55,9 @@ extension AppRouter {
             }
         }
         
-        path.append(.find(find))
+        if path.last != .find(find) {
+            path.append(.find(find))
+        }
     }
     
     func find(collection: UserCollection.ID) {
