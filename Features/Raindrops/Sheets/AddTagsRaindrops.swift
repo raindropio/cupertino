@@ -25,13 +25,15 @@ struct AddTagsRaindrops: View {
     
     var body: some View {
         TagsList($tags)
-            .navigationTitle("Add tags")
+            .navigationTitle("Add \(tags.count) tags for \(pick.title)")
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {
-                ToolbarItem(placement: .bottomBar) {
+                ToolbarItem(placement: .primaryAction) {
                     if !tags.isEmpty {
-                        ActionButton("Add \(tags.count) tags for \(pick.title)", action: add)
+                        ActionButton("Confirm", action: add)
                             .fontWeight(.semibold)
+                            .buttonStyle(.borderedProminent)
+                            .buttonBorderShape(.capsule)
                     }
                 }
                 

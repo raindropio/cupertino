@@ -7,11 +7,15 @@ struct UserCollections<T: Hashable>: View {
     var tag: (Int) -> T
     
     var body: some View {
-        Memorized(
+        Groups(
             tag: tag,
             groups: collections.state.groups,
             user: collections.state.user
         )
+        
+        if collections.state.groups.isEmpty {
+            Empty()
+        }
     }
 }
 
@@ -28,36 +32,36 @@ extension UserCollections where T == FindBy {
 }
 
 extension UserCollections {
-    fileprivate struct Memorized: View {
-        @Environment(\.editMode) private var editMode
-        @EnvironmentObject private var sheet: CollectionSheet
-        
+    fileprivate struct Groups: View {
         var tag: (Int) -> T
         var groups: [CGroup]
         var user: [UserCollection.ID: UserCollection]
         
         var body: some View {
-            if user.isEmpty {
+            ForEach(groups.indices, id: \.self) { index in
+                CollectionsGroup(
+                    group: groups[index],
+                    items: user,
+                    tag: tag
+                )
+            }
+        }
+    }
+    
+    fileprivate struct Empty: View {
+        @Environment(\.editMode) private var editMode
+        @EnvironmentObject private var sheet: CollectionSheet
+        
+        var body: some View {
+            Section {
                 if editMode?.wrappedValue != .active {
-                    EmptyState(
-                        message: "Whether you’re planning a presentation, preparing for an event or creating a website, create a collection so all the important items are saved in one central place."
-                    ) {
-                        Image(systemName: "square.grid.3x1.folder.badge.plus")
-                    } actions: {
-                        Button("Create collection") {
-                            sheet.create()
-                        }
+                    Button { sheet.create() } label: {
+                        Label("New collection", systemImage: "plus")
                     }
-                }
-            } else {
-                ForEach(groups.indices, id: \.self) { index in
-                    CollectionsGroup(
-                        group: groups[index],
-                        items: user,
-                        tag: tag
-                    )
+                        .tint(.secondary)
                 }
             }
+                .listItemTint(.monochrome)
         }
     }
 }

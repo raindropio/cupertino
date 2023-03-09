@@ -41,3 +41,15 @@ extension SimpleFilters {
         }
     }
 }
+
+extension SimpleFilters where T == Never {
+    struct Optional: ViewModifier {
+        @EnvironmentObject private var f: FiltersStore
+        
+        func body(content: Content) -> some View {
+            if !f.state.simple().isEmpty {
+                content
+            }
+        }
+    }
+}

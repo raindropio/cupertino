@@ -44,7 +44,7 @@ fileprivate struct _CollectionsMenu: View {
     
     @ViewBuilder
     func bulk(_ ids: Set<Int>) -> some View {
-        if ids.isEmpty {
+        if ids.isEmpty, c.state.user.count > 1 {
             Button { dispatch.sync(CollectionsAction.toggleMany) } label: {
                 if c.state.allCollapsed {
                     Label("Expand all", systemImage: "list.bullet.indent")

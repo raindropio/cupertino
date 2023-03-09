@@ -20,8 +20,8 @@ struct InviteCollaborator: View {
         Form {
             if send {
                 EmptyState(
-                    "Invite is send to \(request.email)",
-                    message: "Person need to click on the link from the email, and after a while, the shared collection become available on account"
+                    "Invitation sent to \(request.email)",
+                    message: Text("The invitee must *click on the link* provided in the email to get started")
                 ) {
                     Image(systemName: "envelope")
                         .foregroundColor(.green)

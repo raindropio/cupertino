@@ -8,7 +8,7 @@ public struct ProGroup<P: View, F: View>: View {
     var free: () -> F
     
     public init(
-        pro: @escaping () -> P,
+        @ViewBuilder pro: @escaping () -> P,
         free: @escaping () -> F
     ) {
         self.pro = pro

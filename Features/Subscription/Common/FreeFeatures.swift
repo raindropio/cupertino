@@ -4,7 +4,7 @@ import UI
 struct FreeFeatures: View {
     var body: some View {
         Group {
-            Label("Unlimited bookmarks", systemImage: "checkmark")
+            Label("Unlimited items", systemImage: "checkmark")
             Label("Unlimited collections", systemImage: "checkmark")
             Label("Unlimited highlights", systemImage: "checkmark")
             Label("Unlimited devices", systemImage: "checkmark")

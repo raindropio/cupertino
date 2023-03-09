@@ -8,11 +8,11 @@ extension SubscriptionDetails {
 
         var body: some View {
             Section("") {
-                EmptyState(subscription.plan.title, message: subscription.status.title, icon: {
+                EmptyState(subscription.plan.title, message: Text(subscription.status.title)) {
                     Image(systemName: subscription.status.systemImage)
                         .symbolVariant(.fill)
                         .foregroundColor(subscription.status.color)
-                })
+                }
                     .frame(maxWidth: .infinity)
             }
                 .clearSection()

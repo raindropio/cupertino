@@ -5,7 +5,7 @@ struct ProFaq: View {
     var body: some View {
         DisclosureGroup("Can I use Raindrop.io for free?") {
             Text("Absolutely! Raindrop.io is completely free to use indefinitely.\n\n") +
-            Text("You can use it on unlimited devices and create unlimited bookmarks and collections in all plans.")
+            Text("You can use it on unlimited devices and create unlimited items and collections in all plans.")
         }
         
         DisclosureGroup("Can I collaborate with other people without paying?") {

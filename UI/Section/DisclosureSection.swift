@@ -3,6 +3,7 @@ import SwiftUI
 //MARK: - Init
 public func DisclosureSection<L: StringProtocol, C: View>(
     _ label: L,
+    expandable: Bool = true,
     isExpanded: Binding<Bool>,
     content: @escaping () -> C
 ) -> some View {
@@ -10,12 +11,13 @@ public func DisclosureSection<L: StringProtocol, C: View>(
         isExpanded: isExpanded.wrappedValue,
         content: content
     ) {
-        _SectionHeader(isExpanded: isExpanded, label: Text(label)) {}
+        _SectionHeader(expandable: expandable, isExpanded: isExpanded, label: Text(label)) {}
     }
 }
 
 public func DisclosureSection<L: StringProtocol, C: View, A: View>(
     _ label: L,
+    expandable: Bool = true,
     isExpanded: Binding<Bool>,
     content: @escaping () -> C,
     actions: @escaping () -> A
@@ -24,12 +26,13 @@ public func DisclosureSection<L: StringProtocol, C: View, A: View>(
         isExpanded: isExpanded.wrappedValue,
         content: content
     ) {
-        _SectionHeader(isExpanded: isExpanded, label: Text(label), actions: actions)
+        _SectionHeader(expandable: expandable, isExpanded: isExpanded, label: Text(label), actions: actions)
     }
 }
 
 public func DisclosureSection<L: StringProtocol, C: View, A: View>(
     _ label: L,
+    expandable: Bool = true,
     isExpanded: Bool,
     toggle: @escaping () -> Void,
     content: @escaping () -> C,
@@ -40,6 +43,7 @@ public func DisclosureSection<L: StringProtocol, C: View, A: View>(
         content: content
     ) {
         _SectionHeader(
+            expandable: expandable,
             isExpanded: .init { isExpanded } set: { _ in toggle() },
             label: Text(label),
             actions: actions
@@ -68,6 +72,7 @@ fileprivate struct _DisclosureSection<C: View, H: View>: View {
 fileprivate struct _SectionHeader<L: View, A: View>: View {
     @Environment(\.headerProminence) private var prominence
     
+    var expandable: Bool
     @Binding var isExpanded: Bool
     var label: L
     @ViewBuilder var actions: () -> A
@@ -76,6 +81,7 @@ fileprivate struct _SectionHeader<L: View, A: View>: View {
         HStack(spacing: 10) {
             label
                 ._onButtonGesture(pressing: nil) {
+                    guard expandable else { return }
                     isExpanded.toggle()
                 }
             
@@ -89,6 +95,7 @@ fileprivate struct _SectionHeader<L: View, A: View>: View {
             }
                 .buttonStyle(.plain)
                 .foregroundColor(.gray)
+                .opacity(expandable ? 1 : 0)
             
             Spacer()
             

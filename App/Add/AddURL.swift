@@ -27,7 +27,7 @@ struct AddURL: View {
                     .disabled(url == nil)
             }
                 .onSubmit(saveUrl)
-                .navigationTitle("Add web page")
+                .navigationTitle("Add link")
                 .navigationBarTitleDisplayMode(.inline)
                 .toolbar {
                     ToolbarItem(placement: .cancellationAction) {

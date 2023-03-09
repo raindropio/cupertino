@@ -51,3 +51,16 @@ extension AllTags {
         }
     }
 }
+
+extension AllTags where T == Never {
+    struct Optional: ViewModifier {
+        @EnvironmentObject private var f: FiltersStore
+        var search: String = ""
+        
+        func body(content: Content) -> some View {
+            if !f.state.tags(search).isEmpty {
+                content
+            }
+        }
+    }
+}

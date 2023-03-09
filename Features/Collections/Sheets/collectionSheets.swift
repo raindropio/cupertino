@@ -46,7 +46,7 @@ struct _CollectionSheetsModifier: ViewModifier {
             }
             .alert("Are you sure?", isPresented: $merging, presenting: merge, actions: Merge.init)
             .alert("Are you sure?", isPresented: $deleting, presenting: delete, actions: Delete.init) { _ in
-                Text("Bookmarks will be moved to Trash")
+                Text("Items will be moved to Trash")
             }
             //group
             .alert("Rename group", isPresented: $groupEditing, presenting: groupEdit, actions: GroupEdit.init)

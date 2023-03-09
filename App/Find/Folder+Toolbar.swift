@@ -67,9 +67,11 @@ extension Folder.Toolbar {
                 
                 //edit mode
                 if editMode?.wrappedValue == .active {
-                    ToolbarItem {
-                        selectAllButton
-                            .labelStyle(.titleOnly)
+                    if !ids.isEmpty {
+                        ToolbarItem {
+                            selectAllButton
+                                .labelStyle(.titleOnly)
+                        }
                     }
                     
                     ToolbarItem(placement: .cancellationAction) {
@@ -77,10 +79,13 @@ extension Folder.Toolbar {
                             .fontWeight(.semibold)
                     }
                     
-                    ToolbarItem(placement: .status) {
+                    ToolbarItemGroup(placement: .status) {
+                        Spacer()
                         Menu {
-                            selectAllButton
-                            
+                            if !ids.isEmpty {
+                                selectAllButton
+                            }
+
                             Section {
                                 cancelEditModeButton
                             }
@@ -90,18 +95,14 @@ extension Folder.Toolbar {
                                     Text("All")
                                 } else {
                                     Text(selection.count, format: .number)
-                                        .contentTransition(.numericText())
                                 }
                                 Text(Image(systemName: "chevron.up.chevron.down"))
                             }
                                 .imageScale(.small)
                                 .lineLimit(1)
-                                .animation(.easeInOut(duration: 0.2), value: selection.count)
                         }
-                            .buttonStyle(.bordered)
-                            .menuStyle(.button)
-                            .controlSize(.mini)
-                            .tint(.accentColor)
+                            .tint(.secondary)
+                        Spacer()
                     }
                     
                     ToolbarItemGroup(placement: .bottomBar) {
@@ -111,22 +112,20 @@ extension Folder.Toolbar {
                 //regular
                 else {
                     ToolbarItemGroup {
-                        EditButton {
-                            Label("Edit", systemImage: "checkmark.circle")
+                        if !ids.isEmpty {
+                            EditButton {
+                                Label("Edit", systemImage: "checkmark.circle")
+                            }
+                                .labelStyle(.iconOnly)
                         }
-                            .labelStyle(.iconOnly)
                         
                         if sizeClass == .regular {
                             SortRaindropsButton(find)
                             ViewConfigRaindropsButton(find)
                         }
-                                                
-                        if sizeClass == .regular {
-                            Spacer()
-                        }
                     }
                     
-                    if isSearching, sizeClass == .compact {
+                    if isSearching, sizeClass == .compact, !ids.isEmpty {
                         ToolbarItemGroup(placement: .status) {
                             EditButton("Select")
                                 .labelStyle(.titleAndIcon)

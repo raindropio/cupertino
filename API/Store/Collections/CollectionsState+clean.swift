@@ -18,7 +18,7 @@ extension CollectionsState {
             }
         
         //create blank group
-        if groups.isEmpty {
+        if !user.isEmpty, groups.isEmpty {
             groups = [.blank]
         }
 
@@ -71,29 +71,31 @@ extension CollectionsState {
         
         //fix root collections sort if required
         if collection.parent == nil {
-            let g = groups.firstIndex { $0.collections.contains(id) } ?? 0
-            let s = groups[g].collections.firstIndex(of: id) ?? 0
-            
-            if s != collection.sort {
-                //remove from groups (just to prevent duplicates)
-                groups = groups.map {
-                    var group = $0
-                    group.collections = group.collections.filter { $0 != collection.id }
-                    return group
-                }
+            let g = groups.firstIndex { $0.collections.contains(id) }
+            if let g {
+                let s = groups[g].collections.firstIndex(of: id) ?? 0
                 
-                //insert to specific position inside group
-                if let sort = collection.sort {
-                    groups[g].collections
-                        .insert(
-                            collection.id,
-                            at: max(0, min(sort, groups[g].collections.count))
-                        )
-                }
-                //append to end if no prefered sort
-                else {
-                    groups[g].collections
-                        .append(collection.id)
+                if s != collection.sort {
+                    //remove from groups (just to prevent duplicates)
+                    groups = groups.map {
+                        var group = $0
+                        group.collections = group.collections.filter { $0 != collection.id }
+                        return group
+                    }
+                    
+                    //insert to specific position inside group
+                    if let sort = collection.sort {
+                        groups[g].collections
+                            .insert(
+                                collection.id,
+                                at: max(0, min(sort, groups[g].collections.count))
+                            )
+                    }
+                    //append to end if no prefered sort
+                    else {
+                        groups[g].collections
+                            .append(collection.id)
+                    }
                 }
             }
         }

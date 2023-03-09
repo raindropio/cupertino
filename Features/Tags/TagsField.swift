@@ -18,7 +18,7 @@ struct TagsField: View {
             value: $value,
             suggestions:
                 (r.state.tags.isEmpty ? [] : r.state.tags + [""]) +
-                f.state.tags().map { $0.title }.filter { !r.state.tags.contains($0) }
+                f.state.tags().filter { $0.kind != .notag }.map { $0.title }.filter { !r.state.tags.contains($0) }
         )
             .reload {
                 try? await dispatch(

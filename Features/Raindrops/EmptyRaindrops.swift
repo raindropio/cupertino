@@ -15,7 +15,7 @@ struct EmptyRaindrops: View {
                 Group {
                     if find.isSearching {
                         EmptyState(
-                            message: "Your search - \(find.searchLocalized) - did not match any items"
+                            message: Text("Your search **\(find.searchLocalized)** did not match any items")
                         ) {
                             Image(systemName: "doc.text.magnifyingglass")
                         }
@@ -23,25 +23,28 @@ struct EmptyRaindrops: View {
                         switch find.collectionId {
                         case -1:
                             EmptyState(
-                                message: "The Unsorted is your default collection in Raindrop.io. When you add an item, it goes straight to your Unsorted unless you specify that the item goes into a specific collection"
+                                message:
+                                    Text("The **Unsorted** is your default collection in Raindrop.io.\n\n") +
+                                    Text("When you add an item, it goes straight to your Unsorted unless you specify that the item goes into a specific collection")
                             ) {
                                 Image(systemName: "tray")
                             }
                             
                         case -99:
                             EmptyState(
-                                message: "Trash is empty"
+                                message: Text("**Trash** is empty")
                             ) {
                                 Image(systemName: "trash.slash")
                             }
                             
                         default:
                             EmptyState(
-                                message: "No bookmarks yet"
+                                "No items yet",
+                                message: Text("Add links, media & files")
                             ) {
                                 Image(systemName: "star")
                             } actions: {
-                                SafariLink("Learn more", destination: URL(string: "https://help.raindrop.io/bookmarks")!)
+                                SafariLink("Learn more", destination: URL(string: "https://help.raindrop.io/mobile-app")!)
                                     .tint(.secondary)
                                     .controlSize(.small)
                             }
@@ -54,7 +57,7 @@ struct EmptyRaindrops: View {
                     .scenePadding()
                 
             case .error:
-                EmptyState("Error loading collection") {
+                EmptyState("An error occurred while loading") {
                     Image(systemName: "exclamationmark.triangle")
                         .foregroundStyle(.red)
                 } actions: {
@@ -66,7 +69,7 @@ struct EmptyRaindrops: View {
             case .notFound:
                 EmptyState(
                     "Not found",
-                    message: "Probably collection is deleted or you don't have permissions to view it"
+                    message: Text("The collection has been deleted or you do not have enough permissions to view it")
                 ) {
                     Image(systemName: "exclamationmark.triangle")
                         .foregroundStyle(.yellow)

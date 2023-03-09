@@ -8,26 +8,12 @@ public struct EmptyState<I: View, A: View> {
     
     public init(
         _ title: String = "",
-        message: Text,
+        message: Text? = nil,
         icon: @escaping () -> I,
         @ViewBuilder actions: @escaping () -> A
     ) {
         self.title = title
         self.message = message
-        self.icon = icon
-        self.actions = actions
-    }
-    
-    public init(
-        _ title: String = "",
-        message: String = "",
-        icon: @escaping () -> I,
-        @ViewBuilder actions: @escaping () -> A
-    ) {
-        self.title = title
-        if !message.isEmpty {
-            self.message = Text(message)
-        }
         self.icon = icon
         self.actions = actions
     }
@@ -56,6 +42,7 @@ extension EmptyState: View {
                     message
                         .foregroundStyle(.secondary)
                         .multilineTextAlignment(.center)
+                        .imageScale(.small)
                 }
             }
             
@@ -74,62 +61,12 @@ extension EmptyState: View {
 
 extension EmptyState where A == EmptyView {
     public init(
-        _ title: String,
-        icon: @escaping () -> I
-    ) {
-        self.title = title
-        self.icon = icon
-    }
-}
-
-extension EmptyState where A == EmptyView {
-    public init(
-        message: String,
-        icon: @escaping () -> I
-    ) {
-        if !message.isEmpty {
-            self.message = Text(message)
-        }
-        self.icon = icon
-    }
-}
-
-extension EmptyState where I == EmptyView {
-    public init(
-        _ title: String,
-        message: String,
-        actions: @escaping () -> A
-    ) {
-        self.title = title
-        if !message.isEmpty {
-            self.message = Text(message)
-        }
-        self.actions = actions
-    }
-}
-
-extension EmptyState where A == EmptyView {
-    public init(
-        _ title: String,
-        message: String,
-        icon: @escaping () -> I
-    ) {
-        self.title = title
-        if !message.isEmpty {
-            self.message = Text(message)
-        }
-        self.icon = icon
-    }
-}
-
-extension EmptyState where I == EmptyView, A == EmptyView {
-    public init(
         _ title: String = "",
-        message: String = ""
+        message: Text? = nil,
+        icon: @escaping () -> I
     ) {
         self.title = title
-        if !message.isEmpty {
-            self.message = Text(message)
-        }
+        self.message = message
+        self.icon = icon
     }
 }

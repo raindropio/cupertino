@@ -7,7 +7,7 @@ public struct FindByList {
     @Environment(\.editMode) private var editMode
     @Environment(\.isSearching) private var isSearching
     @AppStorage("filters-expanded") private var filtersExpanded = false
-    @AppStorage("tags-expanded") private var tagsExpanded = true
+    @AppStorage("tags-expanded") private var tagsExpanded = false
 
     @Binding var selection: FindBy?
     var search: String
@@ -45,6 +45,7 @@ extension FindByList: View {
                         ) {
                             Label("Filters", systemImage: "circle.grid.2x2")
                         }
+                            .modifier(SimpleFilters.Optional())
                             .listItemTint(.monochrome)
                     }
                 }
@@ -56,6 +57,7 @@ extension FindByList: View {
                     isExpanded: $tagsExpanded,
                     content: AllTags<FindBy>.init
                 )
+                    .modifier(AllTags.Optional())
                 
                 if editMode?.wrappedValue != .active {
                     Section {
@@ -68,6 +70,7 @@ extension FindByList: View {
                 Section("Tags") {
                     AllTags<FindBy>(search: search)
                 }
+                    .modifier(AllTags.Optional(search: search))
             }
         }
             #if os(iOS)

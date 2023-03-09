@@ -20,7 +20,7 @@ struct Collaboration: View {
                 } label: {
                     Image(systemName: "plus")
                         .imageScale(.large)
-                        .fontWeight(.semibold)
+                        .fontWeight(.medium)
                 }
             }
         } footer: {

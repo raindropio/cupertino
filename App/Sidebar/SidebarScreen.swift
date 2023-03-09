@@ -9,6 +9,7 @@ struct SidebarScreen: View {
     
     var body: some View {
         FindByList(selection: $app.sidebar)
+            .navigationBarTitleDisplayMode(.inline)
             .modifier(Toolbar())
             .addButton(hidden: sizeClass == .regular)
             .dropProvider()

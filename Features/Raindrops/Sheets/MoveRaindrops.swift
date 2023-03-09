@@ -4,7 +4,6 @@ import UI
 
 struct MoveRaindrops: View {
     @EnvironmentObject private var dispatch: Dispatcher
-    @EnvironmentObject private var c: CollectionsStore
     @Environment(\.dismiss) private var dismiss
     @Environment(\.editMode) private var editMode
     
@@ -27,13 +26,15 @@ struct MoveRaindrops: View {
     var body: some View {
         CollectionsList($to, system: [-1, -99])
             .collectionSheets()
-            .navigationTitle("Move to collection")
+            .navigationTitle("Move \(pick.title)")
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {
-                ToolbarItem(placement: .bottomBar) {
-                    if let to {
-                        ActionButton("Move \(pick.title) to \(c.state.title(to))", action: move)
+                ToolbarItem(placement: .primaryAction) {
+                    if to != nil {
+                        ActionButton("Confirm", action: move)
                             .fontWeight(.semibold)
+                            .buttonStyle(.borderedProminent)
+                            .buttonBorderShape(.capsule)
                     }
                 }
                 

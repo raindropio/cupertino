@@ -9,7 +9,7 @@ extension CollectionForm.Fields {
 
         var body: some View {
             Button { show.toggle() } label: {
-                CollectionIcon(collection, fallbackImageName: "photo")
+                CollectionIcon(collection, fallbackImageName: "photo.on.rectangle")
                     .frame(height: 34)
             }
                 .buttonStyle(.bordered)

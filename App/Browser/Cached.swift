@@ -27,7 +27,7 @@ struct Cached: View {
         if raindrop.cache?.status != .ready {
             EmptyState(
                 "No permanent copy",
-                message: raindrop.cache?.status?.title ?? "",
+                message: Text(raindrop.cache?.status?.title ?? ""),
                 icon: {
                     Image(systemName: "icloud.slash")
                         .foregroundStyle(.red)

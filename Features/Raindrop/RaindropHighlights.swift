@@ -12,7 +12,7 @@ public struct RaindropHighlights: View {
     public var body: some View {
         Group {
             if raindrop.highlights.isEmpty {
-                EmptyState("No highlights", message: "Annotate web and easily revisit key passages in the future") {
+                EmptyState("No highlights", message: Text("Annotate web and easily revisit key passages in the future")) {
                     Image(systemName: Filter.Kind.highlights.systemImage)
                         .foregroundStyle(Filter.Kind.highlights.color)
                 } actions: {

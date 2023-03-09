@@ -35,7 +35,7 @@ extension CollectionForm: View {
                 SubmitButton("Create")
                     .disabled(!collection.isValid)
             } else if collection.access.level >= .member {
-                ActionButton(message: "This action will delete collection and all nested collections.\nBookmarks will be moved to Trash.", role: .destructive, action: delete) {
+                ActionButton(message: "This action will delete collection and all nested collections.\nItems will be moved to Trash.", role: .destructive, action: delete) {
                     Text("Delete collection").frame(maxWidth: .infinity)
                 }
             }
@@ -44,5 +44,14 @@ extension CollectionForm: View {
             .onSubmit(commit)
             .navigationTitle(collection.isNew ? "New collection" : "Edit collection")
             .navigationBarTitleDisplayMode(.inline)
+            .toolbar {
+                if collection.isNew {
+                    ToolbarItem {
+                        SafariLink(destination: URL(string: "https://help.raindrop.io/collections")!) {
+                            Label("Help", systemImage: "questionmark.circle")
+                        }
+                    }
+                }
+            }
     }
 }

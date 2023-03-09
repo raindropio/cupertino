@@ -46,7 +46,7 @@ fileprivate struct _Modifier: ViewModifier {
             }
         }
         .alert("Are you sure?", isPresented: $deleting, presenting: delete, actions: DeleteRaindrops.init) { _ in
-            Text("Bookmarks will be moved to Trash")
+            Text("Items will be moved to Trash")
         }
     }
 }

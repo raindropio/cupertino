@@ -37,13 +37,14 @@ public func TagsMenu(_ findBy: Set<FindBy>) -> some View {
 
 
 fileprivate struct _TagsMenu: View {
+    @EnvironmentObject private var f: FiltersStore
     @EnvironmentObject private var sheet: TagSheet
     @EnvironmentObject private var dispatch: Dispatcher
 
     var tags: Set<String>
     
     var body: some View {
-        if tags.isEmpty {
+        if tags.isEmpty, f.state.tags().count > 1 {
             Menu {
                 Button("By name") { dispatch.sync(FiltersAction.sort(.title)) }
                 Button("By count") { dispatch.sync(FiltersAction.sort(.count)) }

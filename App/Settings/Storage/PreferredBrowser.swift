@@ -9,7 +9,7 @@ enum PreferredBrowser: String, CaseIterable {
     
     var title: String {
         switch self {
-        case .inapp: return "In App"
+        case .inapp: return "In app"
         case .safari: return "Safari"
         case .system: return "System default"
         }

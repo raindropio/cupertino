@@ -80,7 +80,6 @@ extension TagsList: View {
                         .textInputAutocapitalization(.never)
                         .keyboardType(.webSearch)
                         #endif
-                        .autoFocus()
                 } icon: {
                     Button { focused = true } label: {
                         Image(systemName: "plus")
@@ -88,10 +87,6 @@ extension TagsList: View {
                         .tint(.gray)
                 }
                     .listRowBackground(Color.primary.opacity(0.07))
-                    .onSubmit(of: .text) {
-                        focused = !new.isEmpty
-                        add(new)
-                    }
             }
             
             //suggestions
@@ -109,9 +104,16 @@ extension TagsList: View {
                 }
             }
         }
+            .onSubmit(of: .text) {
+                focused = !new.isEmpty
+                add(new)
+            }
             .animation(.default, value: selected)
             .animation(.default, value: suggestions)
             .tagSheets()
+            .onAppear {
+                focused = true
+            }
             .reload {
                 try? await dispatch(
                     FiltersAction.reload(),

@@ -31,20 +31,24 @@ fileprivate struct AB: ViewModifier {
 
     func body(content: Content) -> some View {
         content
-            .floatingActionButton(hide: hidden || ignore) {
-                OptionalPasteButton(
-                    supportedContentTypes: addTypes.filter { $0 != .text },
-                    payloadAction: add
-                )
-                    .labelStyle(.iconOnly)
-                    .buttonBorderShape(.capsule)
+            .overlay(alignment: .bottomTrailing) {
+                if !hidden, !ignore {
+                    OptionalPasteButton(
+                        supportedContentTypes: addTypes.filter { $0 != .text },
+                        payloadAction: add
+                    )
+                        .circlePasteButton()
+                        .transition(.opacity)
+                        .padding(.horizontal, 20)
+                        .ignoresSafeArea(.keyboard)
+                }
             }
             .toolbar {
                 if !hidden, !ignore {
                     ToolbarItemGroup(placement: .primaryAction) {
                         Menu {
                             Button { pickURL = true } label: {
-                                Label("Web page", systemImage: "link")
+                                Label("Link", systemImage: "link")
                             }
                             
                             Section {
@@ -63,12 +67,14 @@ fileprivate struct AB: ViewModifier {
                                 }
                             }
                             
-                            Link(destination: URL(string: "https://help.raindrop.io/mobile-app#save-from-browser")!) {
-                                Label("Add from apps", systemImage: "puzzlepiece.extension")
+                            Section("Recommended") {
+                                Link(destination: URL(string: "https://help.raindrop.io/mobile-app#save-from-browser")!) {
+                                    Label("Install extension", systemImage: "puzzlepiece.extension")
+                                }
                             }
                         } label: {
                             Image(systemName: "plus")
-                                .fontWeight(.semibold)
+                                .fontWeight(.medium)
                         }
                             .popover(isPresented: $pickURL) {
                                 AddURL(action: add)

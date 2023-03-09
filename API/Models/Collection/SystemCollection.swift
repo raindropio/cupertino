@@ -7,7 +7,7 @@ public struct SystemCollection: CollectionType {
 
     public var title: String {
         switch id {
-        case 0: return "All bookmarks"
+        case 0: return "All items"
         case -1: return "Unsorted"
         case -99: return "Trash"
         default: return "Unknown"

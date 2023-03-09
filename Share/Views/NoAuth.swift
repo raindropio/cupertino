@@ -5,7 +5,7 @@ struct NoAuth: View {
     @Environment(\.dismiss) private var dismiss
     
     var body: some View {
-        EmptyState("Login required", message: "Please open Raindrop.io app to get started") {
+        EmptyState("Need to log in", message: Text("Please open **Raindrop.io** app to get started")) {
             Image(systemName: "person.crop.circle")
                 .foregroundStyle(.yellow)
         } actions: {

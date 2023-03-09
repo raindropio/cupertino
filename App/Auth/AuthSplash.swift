@@ -47,7 +47,7 @@ struct AuthSplash: View {
             ) {
                 Image(systemName: "laptopcomputer.and.iphone")
             } description: {
-                Text("Access your bookmarks seamlessly across all your devices\n\n")
+                Text("Access your items seamlessly across all your devices\n\n")
             }
         }
             .tabViewStyle(.page(indexDisplayMode: .always))
