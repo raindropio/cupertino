@@ -4,11 +4,11 @@ import UI
 import Features
 
 struct SidebarScreen: View {
-    @EnvironmentObject private var app: AppRouter
     @Environment(\.containerHorizontalSizeClass) private var sizeClass
+    @Binding var selection: FindBy?
     
     var body: some View {
-        FindByList(selection: $app.sidebar)
+        FindByList(selection: $selection)
             .navigationBarTitleDisplayMode(.inline)
             .modifier(Toolbar())
             .addButton(hidden: sizeClass == .regular)

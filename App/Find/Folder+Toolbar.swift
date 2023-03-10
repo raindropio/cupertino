@@ -14,6 +14,7 @@ extension Folder {
             content.modifier(Memorized(
                 find: find,
                 selection: $selection,
+                total: r.state.total(find),
                 ids: r.state.items(find).map { $0.id }
             ))
         }
@@ -29,6 +30,7 @@ extension Folder.Toolbar {
 
         var find: FindBy
         @Binding var selection: Set<Raindrop.ID>
+        var total: Int
         var ids: [Raindrop.ID]
         
         private var pick: RaindropsPick {
@@ -58,13 +60,16 @@ extension Folder.Toolbar {
             content
             .toolbarRole(.browser)
             .navigationBarBackButtonHidden(editMode?.wrappedValue == .active)
-            .toolbar {
-                if find.collectionId > 0, !find.isSearching {
-                    ToolbarTitleMenu {
+            .toolbarTitleMenu {
+                if !find.isSearching {
+                    Section {
                         CollectionsMenu(find.collectionId)
                     }
                 }
                 
+                Text("\(total) items")
+            }
+            .toolbar {
                 //edit mode
                 if editMode?.wrappedValue == .active {
                     if !ids.isEmpty {
