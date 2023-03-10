@@ -61,6 +61,10 @@ extension Receive {
 extension Receive {
     struct Action: View {
         @EnvironmentObject private var service: ExtensionService
+        @AppStorage(
+            "action-default-collection",
+            store: UserDefaults(suiteName: Constants.appGroupName)
+        ) private var collection: Int = -1
 
         var body: some View {
             AddDetect(service.items) { loading, urls in
@@ -68,7 +72,7 @@ extension Receive {
                     if loading {
                         ProgressView()
                     } else {
-                        AddStack(urls, to: -1)
+                        AddStack(urls, to: collection)
                     }
                 }
                     .transition(.opacity)

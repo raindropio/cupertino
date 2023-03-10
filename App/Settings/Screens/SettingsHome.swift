@@ -24,55 +24,47 @@ struct SettingsHome: View {
                 }
                 
                 Section {
-                    if UIApplication.shared.supportsAlternateIcons {
-                        NavigationLink(value: SettingsRoute.appicon) {
-                            Label("App Icon", systemImage: "app.badge.fill")
-                                .badge(UIApplication.shared.alternateIconName ?? "")
-                                .tint(.primary)
-                        }
-                        .listItemTint(.purple)
+                    NavigationLink(value: SettingsRoute.extensions) {
+                        Label("Extensions", systemImage: "puzzlepiece.extension").tint(.primary)
                     }
+                        .listItemTint(.purple)
                     
-                    SettingsBrowser()
+                    NavigationLink(value: SettingsRoute.appearance) {
+                        Label("Appearance", systemImage: "square.on.circle").tint(.primary)
+                    }
                         .listItemTint(.indigo)
                     
+                    SettingsBrowser()
+                        .listItemTint(.cyan)
+                }
+                
+                Section {
                     Link(destination: URL(string: "https://ifttt.com/raindrop")!) {
                         Label("Integrations", systemImage: "puzzlepiece.extension").badge("+2,000").tint(.primary)
                     }
-                        .listItemTint(.cyan)
                     
                     NavigationLink(value: SettingsRoute.import) {
                         Label("Import", systemImage: "square.and.arrow.down").tint(.primary)
                     }
-                        .listItemTint(.green)
                     
                     NavigationLink(value: SettingsRoute.backups) {
                         Label("Backups", systemImage: "clock.arrow.circlepath").tint(.primary)
                     }
-                        .listItemTint(.brown)
-                }
-                
-                Section {
+                    
                     SafariLink(destination: URL(string: "https://raindrop.io/download")!) {
                         Label("Desktop app", systemImage: "desktopcomputer").tint(.primary)
                     }
-                        .listItemTint(.gray)
                     
                     SafariLink(destination: URL(string: "https://help.raindrop.io/")!) {
                         Label("Help", systemImage: "questionmark.circle").tint(.primary)
                     }
-                        .listItemTint(.gray)
-                    
-                    Link(destination: URL(string: "mailto:info@raindrop.io")!) {
-                        Label("Support", systemImage: "square.and.pencil").tint(.primary)
-                    }
-                        .listItemTint(.gray)
                 } footer: {
                     Text("Version \(Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String ?? "") (\(Bundle.main.infoDictionary?["CFBundleVersion"] as? String ?? ""))")
                         .frame(maxWidth: .infinity)
                         .multilineTextAlignment(.center)
                         .scenePadding(.top)
                 }
+                    .listItemTint(.monochrome)
                 
                 SettingsLogout()
             }

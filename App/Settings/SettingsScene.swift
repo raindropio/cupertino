@@ -17,8 +17,10 @@ struct SettingsScene: View {
                         SettingsWebApp(subpage: .import)
                     case .subscription:
                         SettingsSubscription()
-                    case .appicon:
-                        SettingsAppIcon()
+                    case .appearance:
+                        SettingsAppearance()
+                    case .extensions:
+                        SettingsExtensions()
                     }
                 }
         }
