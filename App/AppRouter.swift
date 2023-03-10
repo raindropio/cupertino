@@ -3,39 +3,12 @@ import API
 import UI
 
 class AppRouter: ObservableObject {
-    @Published var path: [Path] = [.find(.init())]
-    
-    @MainActor
-    var sidebar: FindBy? {
-        get {
-            switch path.first {
-            case .find(let find): return find
-            default: return nil
-            }
-        }
-        set {
-            guard sidebar != newValue else { return }
-            if let newValue {
-                path = [.find(newValue)]
-            } else {
-                path = []
-            }
-        }
-    }
-    
-    @MainActor
-    var detail: [Path] {
-        get {
-            path.isEmpty ? [] : Array(path[1...])
-        } set {
-            guard detail != newValue else { return }
-            path = (!path.isEmpty ? [path[0]] : []) + newValue
-        }
-    }
+    @Published var sidebar: FindBy? = .init()
+    @Published var path: [Path] = []
 }
 
 extension AppRouter {
-    enum Path: Hashable {
+    enum Path: Hashable, Codable {
         case find(FindBy)
         case preview(FindBy, Raindrop.ID)
         case cached(Raindrop.ID)
@@ -45,14 +18,9 @@ extension AppRouter {
 
 extension AppRouter {
     func find(_ find: FindBy) {
-        if !isPhone {
-            switch path.first {
-            case .find(let f):
-                if f.collectionId == 0, f.collectionId != find.collectionId {
-                    path = []
-                }
-            default: break
-            }
+        if sidebar == nil || !isPhone {
+            sidebar = find
+            return
         }
         
         if path.last != .find(find) {
@@ -65,14 +33,17 @@ extension AppRouter {
     }
     
     func preview(find: FindBy, id: Raindrop.ID) {
-        path += (path.isEmpty ? [.find(find)] : []) + [.preview(find, id)]
+        if sidebar == nil { sidebar = .init() }
+        path += [.preview(find, id)]
     }
     
     func cached(id: Raindrop.ID) {
-        path += (path.isEmpty ? [.find(.init())] : []) + [.cached(id)]
+        if sidebar == nil { sidebar = .init() }
+        path += [.cached(id)]
     }
     
     func browse(url: URL) {
-        path += (path.isEmpty ? [.find(.init())] : []) + [.browse(url)]
+        if sidebar == nil { sidebar = .init() }
+        path += [.browse(url)]
     }
 }

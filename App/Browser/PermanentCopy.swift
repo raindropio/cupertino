@@ -2,7 +2,7 @@ import SwiftUI
 import API
 import UI
 
-struct Cached: View {
+struct PermanentCopy: View {
     @StateObject private var page = WebPage()
     @EnvironmentObject private var r: RaindropsStore
     var id: Raindrop.ID

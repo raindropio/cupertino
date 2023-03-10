@@ -10,7 +10,11 @@ fileprivate struct NSVPS: ViewModifier {
     @Environment(\.horizontalSizeClass) private var horizontalSizeClass
 
     func body(content: Content) -> some View {
-        content
-            .environment(\.horizontalSizeClass, isPhone ? .compact : horizontalSizeClass)
+        if isPhone {
+            content
+                .environment(\.horizontalSizeClass, .compact)
+        } else {
+            content
+        }
     }
 }

@@ -8,34 +8,40 @@ struct AppScene: View {
     @SceneStorage("column-visibility") private var columnVisibility = NavigationSplitViewVisibility.automatic
     
     @ViewBuilder
-    private func screen(_ path: AppRouter.Path?) -> some View {
+    private func screen(_ path: AppRouter.Path) -> some View {
         switch path {
         case .find(let find): Find(find: find)
         case .preview(let find, let id): Preview(find: find, id: id)
-        case .cached(let id): Cached(id: id)
+        case .cached(let id): PermanentCopy(id: id)
         case .browse(let url): Browse(url: url)
-        case nil: Color.clear
         }
     }
 
-    var body: some View {
+    var body: some View {        
         NavigationSplitView(columnVisibility: $columnVisibility) {
             SidebarScreen(selection: $router.sidebar)
         } detail: {
-            NavigationStack(path: $router.detail) {
-                screen(router.path.first)
+            NavigationStack(path: $router.path) {
+                Group {
+                    if let sidebar = router.sidebar {
+                        Find(find: sidebar)
+                    }
+                }
                     .navigationDestination(for: AppRouter.Path.self, destination: screen)
             }
                 //fix title appearance on iOS <=16.3
-                .toolbarTitleMenu{}.id(router.path.first)
+                .toolbarTitleMenu{}.id(isPhone ? router.sidebar : nil)
         }
-            .navigationSplitViewPhoneStack()
             .navigationSplitViewUnlockSize()
+            .navigationSplitViewPhoneStack()
+            .navigationSplitViewFixStateReset()
             .navigationSplitViewStyle(.balanced)
             .containerSizeClass()
             .collectionSheets()
             .tagSheets()
             .modifier(AppDeepLinks())
             .environmentObject(router)
+            .restoreSceneValue("app-sidebar", value: $router.sidebar)
+            .restoreSceneValue("app-path", value: $router.path)
     }
 }
