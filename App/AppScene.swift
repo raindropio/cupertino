@@ -30,7 +30,8 @@ struct AppScene: View {
                 .toolbarTitleMenu{}.id(router.path.first)
         }
             .navigationSplitViewPhoneStack()
-            .navigationSplitViewUnlimitedWidth()
+            .navigationSplitViewUnlockSize()
+            .navigationSplitViewStyle(.balanced)
             .containerSizeClass()
             .collectionSheets()
             .tagSheets()

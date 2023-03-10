@@ -67,6 +67,7 @@ fileprivate struct User: View {
                 .fixedSize(horizontal: false, vertical: true)
         } icon: {
             CollectionIcon(collection)
+                .foregroundColor(.gray) //fix when nested
         }
             .badge(collection.count)
             .fixedSize(horizontal: false, vertical: true)

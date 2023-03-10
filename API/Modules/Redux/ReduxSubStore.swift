@@ -4,7 +4,7 @@ import Combine
 public actor ReduxSubStore<R: Reducer>: ObservableObject {
     private var reducer = R()
     
-    @MainActor @Published public var state: R.S
+    @MainActor public var state: R.S
     private var working = R.S() { didSet { didChange(oldValue) } }
     
     @MainActor init() {
@@ -16,6 +16,7 @@ public actor ReduxSubStore<R: Reducer>: ObservableObject {
         Task {
             await MainActor.run { [working] in
                 state = working
+                self.objectWillChange.send()
             }
         }
     }

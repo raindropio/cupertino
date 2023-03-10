@@ -1,7 +1,7 @@
 import SwiftUI
 
 public extension View {
-    func navigationSplitViewUnlimitedWidth() -> some View {
+    func navigationSplitViewUnlockSize() -> some View {
         overlay(NSVUW().opacity(0))
     }
 }
@@ -20,11 +20,11 @@ extension NSVUW {
             else { return }
             
             svc.minimumPrimaryColumnWidth = 0
-            svc.maximumPrimaryColumnWidth = .infinity
-            
+            svc.maximumPrimaryColumnWidth = view.frame.width / 2
+                        
             if svc.style == .tripleColumn {
                 svc.minimumSupplementaryColumnWidth = 0
-                svc.maximumSupplementaryColumnWidth = .infinity
+                svc.maximumSupplementaryColumnWidth = view.frame.width / 2
             }
         }
         
@@ -35,6 +35,11 @@ extension NSVUW {
         
         override func viewDidAppear(_ animated: Bool) {
             super.viewDidAppear(animated)
+            fix()
+        }
+        
+        override func viewDidLayoutSubviews() {
+            super.viewDidLayoutSubviews()
             fix()
         }
     }
