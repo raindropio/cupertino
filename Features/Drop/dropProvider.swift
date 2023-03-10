@@ -15,19 +15,20 @@ fileprivate struct DropProviderModifier: ViewModifier {
     @State private var collection = -1
     
     func onDrop(_ items: [NSItemProvider], _ collection: Int) {
-        let raindrops = items.filter {
+        let raindropsDrag = items.contains {
             $0.hasItemConformingToTypeIdentifier(UTType.raindrop.identifier)
         }
         
         //only raindrops
-        if !raindrops.isEmpty {
+        if raindropsDrag {
             Task {
-                try? await dispatch(
-                    RaindropsAction.updateMany(
-                        .some(await Raindrop.getData(raindrops)),
-                        .moveTo(collection)
-                    )
-                )
+                var ids = Set<Raindrop.ID>()
+                for item in items {
+                    if let raindrop = try? await item.loadTransferable(type: Raindrop.self) {
+                        ids.insert(raindrop.id)
+                    }
+                }
+                try? await dispatch(RaindropsAction.updateMany(.some(ids), .moveTo(collection)))
             }
         }
         //other nsitems

@@ -60,9 +60,7 @@ extension RaindropItem: View {
                 ShareLink(item: raindrop.link)
                     .tint(.blue)
             }
-            .onDrag {
-                raindrop.itemProvider
-            }
+            .draggable(raindrop)
     }
 }
 
