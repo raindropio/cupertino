@@ -36,7 +36,6 @@ struct SplitView: View {
             .navigationSplitViewUnlockSize()
             .navigationSplitViewPhoneStack()
             .navigationSplitViewFixStateReset()
-            .navigationSplitViewStyle(.balanced)
             .containerSizeClass()
             //sheets
             .collectionSheets()

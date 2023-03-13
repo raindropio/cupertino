@@ -1,9 +1,9 @@
 struct SettingsPath {
-    var screen: [Screen] = []
+    var screen: Screen?
 }
 
 extension SettingsPath: Identifiable {
-    var id: [Screen] { screen }
+    var id: Screen? { screen }
 }
 
 extension SettingsPath {

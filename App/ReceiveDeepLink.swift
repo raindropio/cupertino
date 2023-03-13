@@ -51,7 +51,7 @@ struct ReceiveDeepLink: ViewModifier {
             case .settings(let action):
                 switch action {
                 case .extensions:
-                    settings = .init(screen: [.extensions])
+                    settings = .init(screen: .extensions)
                     
                 case nil:
                     settings = .init()

@@ -38,19 +38,17 @@ extension FindByList: View {
                 if editMode?.wrappedValue != .active {
                     Section {
                         SystemCollections<FindBy>(0, -1)
-                        
-                        DisclosureGroup(
-                            isExpanded: $filtersExpanded,
-                            content: SimpleFilters<FindBy>.init
-                        ) {
-                            Label("Filters", systemImage: "circle.grid.2x2")
-                        }
-                            .modifier(SimpleFilters.Optional())
-                            .listItemTint(.monochrome)
                     }
                 }
                 
                 UserCollections<FindBy>()
+                
+                DisclosureSection(
+                    "Filters",
+                    isExpanded: $filtersExpanded,
+                    content: SimpleFilters<FindBy>.init
+                )
+                    .modifier(SimpleFilters.Optional())
                 
                 DisclosureSection(
                     "Tags",

@@ -13,7 +13,6 @@
 		761F4CAD299E2E86008C1E6D /* SettingsAppearance.swift in Sources */ = {isa = PBXBuildFile; fileRef = 761F4CAC299E2E86008C1E6D /* SettingsAppearance.swift */; };
 		761F6C3029A3AC99002919BC /* PermanentCopy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 761F6C2F29A3AC99002919BC /* PermanentCopy.swift */; };
 		761F6C3229A3ADA0002919BC /* Preview.swift in Sources */ = {isa = PBXBuildFile; fileRef = 761F6C3129A3ADA0002919BC /* Preview.swift */; };
-		76292CE42951A4D7000E16AA /* SettingsHome.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76292CE32951A4D7000E16AA /* SettingsHome.swift */; };
 		76292CE82951B413000E16AA /* SettingsWebApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76292CE72951B413000E16AA /* SettingsWebApp.swift */; };
 		76292CEA2951B86F000E16AA /* SettingsSubscription.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76292CE92951B86F000E16AA /* SettingsSubscription.swift */; };
 		76292CEC2951BC52000E16AA /* SettingsBrowser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76292CEB2951BC52000E16AA /* SettingsBrowser.swift */; };
@@ -98,6 +97,7 @@
 		76F282BA2934C43200D00363 /* NoAuth.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76F282B92934C43200D00363 /* NoAuth.swift */; };
 		76F282BC2934C76A00D00363 /* Receive.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76F282BB2934C76A00D00363 /* Receive.swift */; };
 		76F6D12329BF1B84009E7BA2 /* SettingsIOS.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76F6D12229BF1B84009E7BA2 /* SettingsIOS.swift */; };
+		76F6D12529BF26EA009E7BA2 /* SettingsIOS+Sidebar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76F6D12429BF26EA009E7BA2 /* SettingsIOS+Sidebar.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -153,7 +153,6 @@
 		761F4CAC299E2E86008C1E6D /* SettingsAppearance.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsAppearance.swift; sourceTree = "<group>"; };
 		761F6C2F29A3AC99002919BC /* PermanentCopy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PermanentCopy.swift; sourceTree = "<group>"; };
 		761F6C3129A3ADA0002919BC /* Preview.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Preview.swift; sourceTree = "<group>"; };
-		76292CE32951A4D7000E16AA /* SettingsHome.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsHome.swift; sourceTree = "<group>"; };
 		76292CE72951B413000E16AA /* SettingsWebApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsWebApp.swift; sourceTree = "<group>"; };
 		76292CE92951B86F000E16AA /* SettingsSubscription.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsSubscription.swift; sourceTree = "<group>"; };
 		76292CEB2951BC52000E16AA /* SettingsBrowser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsBrowser.swift; sourceTree = "<group>"; };
@@ -234,6 +233,7 @@
 		76F282B92934C43200D00363 /* NoAuth.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoAuth.swift; sourceTree = "<group>"; };
 		76F282BB2934C76A00D00363 /* Receive.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Receive.swift; sourceTree = "<group>"; };
 		76F6D12229BF1B84009E7BA2 /* SettingsIOS.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsIOS.swift; sourceTree = "<group>"; };
+		76F6D12429BF26EA009E7BA2 /* SettingsIOS+Sidebar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SettingsIOS+Sidebar.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -300,10 +300,10 @@
 		767AC10F2925147E00766998 /* Settings */ = {
 			isa = PBXGroup;
 			children = (
+				76F6D12629BF27F1009E7BA2 /* iOS */,
 				769743792971943B00322290 /* Screens */,
 				7697437A2971945000322290 /* Storage */,
 				76BFE36B291E9F6B00DE9DB2 /* SettingsPath.swift */,
-				76F6D12229BF1B84009E7BA2 /* SettingsIOS.swift */,
 			);
 			path = Settings;
 			sourceTree = "<group>";
@@ -428,7 +428,6 @@
 		769743792971943B00322290 /* Screens */ = {
 			isa = PBXGroup;
 			children = (
-				76292CE32951A4D7000E16AA /* SettingsHome.swift */,
 				76292CE72951B413000E16AA /* SettingsWebApp.swift */,
 				76292CE92951B86F000E16AA /* SettingsSubscription.swift */,
 				761F4CAC299E2E86008C1E6D /* SettingsAppearance.swift */,
@@ -497,6 +496,15 @@
 				76F282B92934C43200D00363 /* NoAuth.swift */,
 			);
 			path = Views;
+			sourceTree = "<group>";
+		};
+		76F6D12629BF27F1009E7BA2 /* iOS */ = {
+			isa = PBXGroup;
+			children = (
+				76F6D12229BF1B84009E7BA2 /* SettingsIOS.swift */,
+				76F6D12429BF26EA009E7BA2 /* SettingsIOS+Sidebar.swift */,
+			);
+			path = iOS;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -724,7 +732,6 @@
 				768CA1FB294CC17800AD7E62 /* AuthLogIn.swift in Sources */,
 				768CA1FF2950420D00AD7E62 /* AuthContinueWith.swift in Sources */,
 				765F23FE2991409500282298 /* Browser.swift in Sources */,
-				76292CE42951A4D7000E16AA /* SettingsHome.swift in Sources */,
 				761F6C3229A3ADA0002919BC /* Preview.swift in Sources */,
 				76864FBD291EA059000B9B45 /* SidebarScreen.swift in Sources */,
 				76E7AAB129B5D37B00520500 /* AddURL.swift in Sources */,
@@ -733,6 +740,7 @@
 				769056F0297539080090C1EF /* Folder+Title.swift in Sources */,
 				76E44C4029BA0D24009634C6 /* SettingsExtensions.swift in Sources */,
 				761F4CAD299E2E86008C1E6D /* SettingsAppearance.swift in Sources */,
+				76F6D12529BF26EA009E7BA2 /* SettingsIOS+Sidebar.swift in Sources */,
 				768CA20329505AD600AD7E62 /* AuthContinueWith+JWT.swift in Sources */,
 				76BFE371291E9F6B00DE9DB2 /* AuthScreen.swift in Sources */,
 				76E44C4829BB135B009634C6 /* SettingsExtensions+Share.swift in Sources */,
