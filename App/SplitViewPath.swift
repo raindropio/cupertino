@@ -3,12 +3,12 @@ import API
 import UI
 import Features
 
-struct AppPath: Codable {
+struct SplitViewPath: Codable {
     var sidebar: FindBy? = .init()
     var detail: [Screen] = []
 }
 
-extension AppPath {
+extension SplitViewPath {
     enum Screen: Hashable, Codable {
         case find(FindBy)
         case preview(FindBy, Raindrop.ID)
@@ -17,7 +17,7 @@ extension AppPath {
     }
 }
 
-extension AppPath {
+extension SplitViewPath {
     mutating func push(_ find: FindBy) {
         if sidebar == nil || !isPhone {
             sidebar = find

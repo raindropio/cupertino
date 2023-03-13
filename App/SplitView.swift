@@ -3,12 +3,12 @@ import API
 import UI
 import Features
 
-struct AppScene: View {
-    @State private var path = AppPath()
+struct SplitView: View {
+    @State private var path = SplitViewPath()
     @SceneStorage("column-visibility") private var columnVisibility = NavigationSplitViewVisibility.automatic
     
     @ViewBuilder
-    private func screen(_ screen: AppPath.Screen) -> some View {
+    private func screen(_ screen: SplitViewPath.Screen) -> some View {
         switch screen {
         case .find(let find): Find(find: find)
         case .preview(let find, let id): Preview(find: find, id: id)
@@ -27,7 +27,7 @@ struct AppScene: View {
                         Find(find: sidebar)
                     }
                 }
-                    .navigationDestination(for: AppPath.Screen.self, destination: screen)
+                    .navigationDestination(for: SplitViewPath.Screen.self, destination: screen)
             }
                 //fix title appearance on iOS <=16.3
                 .toolbarTitleMenu{}.id(isPhone ? path.sidebar : nil)
@@ -42,7 +42,7 @@ struct AppScene: View {
             .collectionSheets()
             .tagSheets()
             //routing
-            .modifier(AppDeepLink(path: $path))
+            .modifier(ReceiveDeepLink(path: $path))
             .restoreSceneValue("app-path", value: $path)
     }
 }

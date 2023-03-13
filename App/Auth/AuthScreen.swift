@@ -2,8 +2,9 @@ import SwiftUI
 import API
 import UI
 
-struct AuthScene: View {
+struct AuthScreen: View {
     @EnvironmentObject private var auth: AuthStore
+    @EnvironmentObject private var dispatch: Dispatcher
     @State private var login = false
     @State private var signup = false
 
@@ -62,6 +63,9 @@ struct AuthScene: View {
                 }
                 .sheet(isPresented: $signup) {
                     NavigationStack(root: AuthSignup.init)
+                }
+                .task {
+                    try? await dispatch(UserAction.reload)
                 }
         }
     }
