@@ -13,8 +13,8 @@ extension AuthContinueWith {
         private func start(_ provider: Rest.AuthNativeProvider) {
             Task {
                 let callbackUrl = try? await webAuth(
-                    Rest.authJWTStart(provider, deeplink: URL(string: "rnio://jwt")!),
-                    scheme: "rnio"
+                    Rest.authJWTStart(provider, deeplink: URL(string: "raindrop://jwt")!),
+                    scheme: "raindrop"
                 )
                 
                 guard let callbackUrl else { return }

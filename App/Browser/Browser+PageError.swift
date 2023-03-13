@@ -5,8 +5,6 @@ import Features
 
 extension Browser {
     struct PageError: ViewModifier {
-        @EnvironmentObject private var app: AppRouter
-
         @ObservedObject var page: WebPage
         @Binding var raindrop: Raindrop
 
@@ -25,9 +23,7 @@ extension Browser {
                             }
                             
                             if raindrop.file == nil, raindrop.cache?.status == .ready {
-                                Button {
-                                    app.cached(id: raindrop.id)
-                                } label: {
+                                DeepLink(.raindrop(.cache(raindrop.id))) {
                                     Label("Permanent copy", systemImage: "clock.arrow.circlepath")
                                 }
                                     .controlSize(.small)

@@ -20,10 +20,10 @@
 			<key>CFBundleTypeRole</key>
 			<string>Editor</string>
 			<key>CFBundleURLName</key>
-			<string>rnio</string>
+			<string>raindrop</string>
 			<key>CFBundleURLSchemes</key>
 			<array>
-				<string>rnio</string>
+				<string>raindrop</string>
 			</array>
 		</dict>
 	</array>

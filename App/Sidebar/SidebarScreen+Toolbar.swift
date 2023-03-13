@@ -5,7 +5,6 @@ import Features
 
 extension SidebarScreen {
     struct Toolbar: ViewModifier {
-        @EnvironmentObject private var app: AppRouter
         @EnvironmentObject private var settings: SettingsRouter
         @Environment(\.editMode) private var editMode
         @Environment(\.containerHorizontalSizeClass) private var sizeClass

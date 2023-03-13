@@ -26,7 +26,6 @@ extension Folder.Toolbar {
         @Environment(\.editMode) private var editMode
         @Environment(\.isSearching) private var isSearching
         @Environment(\.containerHorizontalSizeClass) private var sizeClass
-        @EnvironmentObject private var app: AppRouter
 
         var find: FindBy
         @Binding var selection: Set<Raindrop.ID>

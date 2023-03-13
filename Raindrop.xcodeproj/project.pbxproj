@@ -60,7 +60,7 @@
 		76BF915A29AB952C001445E5 /* NothingFound+AddText.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76BF915929AB952C001445E5 /* NothingFound+AddText.swift */; };
 		76BF915C29AB955D001445E5 /* NothingFound+Generic.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76BF915B29AB955D001445E5 /* NothingFound+Generic.swift */; };
 		76BFE36E291E9F6B00DE9DB2 /* AppScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76BFE369291E9F6B00DE9DB2 /* AppScene.swift */; };
-		76BFE36F291E9F6B00DE9DB2 /* AppRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76BFE36A291E9F6B00DE9DB2 /* AppRouter.swift */; };
+		76BFE36F291E9F6B00DE9DB2 /* AppPath.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76BFE36A291E9F6B00DE9DB2 /* AppPath.swift */; };
 		76BFE370291E9F6B00DE9DB2 /* SettingsRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76BFE36B291E9F6B00DE9DB2 /* SettingsRouter.swift */; };
 		76BFE371291E9F6B00DE9DB2 /* AuthScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76BFE36C291E9F6B00DE9DB2 /* AuthScene.swift */; };
 		76BFE372291E9F6B00DE9DB2 /* SettingsScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76BFE36D291E9F6B00DE9DB2 /* SettingsScene.swift */; };
@@ -205,7 +205,7 @@
 		76BF915929AB952C001445E5 /* NothingFound+AddText.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NothingFound+AddText.swift"; sourceTree = "<group>"; };
 		76BF915B29AB955D001445E5 /* NothingFound+Generic.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NothingFound+Generic.swift"; sourceTree = "<group>"; };
 		76BFE369291E9F6B00DE9DB2 /* AppScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppScene.swift; sourceTree = "<group>"; };
-		76BFE36A291E9F6B00DE9DB2 /* AppRouter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppRouter.swift; sourceTree = "<group>"; };
+		76BFE36A291E9F6B00DE9DB2 /* AppPath.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppPath.swift; sourceTree = "<group>"; };
 		76BFE36B291E9F6B00DE9DB2 /* SettingsRouter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsRouter.swift; sourceTree = "<group>"; };
 		76BFE36C291E9F6B00DE9DB2 /* AuthScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuthScene.swift; sourceTree = "<group>"; };
 		76BFE36D291E9F6B00DE9DB2 /* SettingsScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsScene.swift; sourceTree = "<group>"; };
@@ -393,7 +393,7 @@
 				767AC111292514C500766998 /* Sidebar */,
 				767AC10F2925147E00766998 /* Settings */,
 				7685A194286868AC00A4BC3C /* App.swift */,
-				76BFE36A291E9F6B00DE9DB2 /* AppRouter.swift */,
+				76BFE36A291E9F6B00DE9DB2 /* AppPath.swift */,
 				76BFE369291E9F6B00DE9DB2 /* AppScene.swift */,
 				76E51CE9299A8A1400FE7763 /* AppDeepLinks.swift */,
 				7685A19A286868AD00A4BC3C /* App.entitlements */,
@@ -745,7 +745,7 @@
 				76292CEA2951B86F000E16AA /* SettingsSubscription.swift in Sources */,
 				768CA20129505A6E00AD7E62 /* AuthContinueWith+Apple.swift in Sources */,
 				76E51CEA299A8A1400FE7763 /* AppDeepLinks.swift in Sources */,
-				76BFE36F291E9F6B00DE9DB2 /* AppRouter.swift in Sources */,
+				76BFE36F291E9F6B00DE9DB2 /* AppPath.swift in Sources */,
 				761F6C3029A3AC99002919BC /* PermanentCopy.swift in Sources */,
 				76B6738229928FE6007A412A /* ReaderAppearance.swift in Sources */,
 				76B6737E29928308007A412A /* Browse.swift in Sources */,

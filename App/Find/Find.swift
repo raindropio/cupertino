@@ -4,7 +4,6 @@ import API
 import UI
 
 struct Find: View {
-    @EnvironmentObject private var app: AppRouter
     var find: FindBy = .init()
     
     var body: some View {

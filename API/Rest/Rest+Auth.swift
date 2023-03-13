@@ -79,7 +79,7 @@ extension Rest {
     }
     
     /// returns URL that can be opened in web browser, after success makes redirect to **deeplink** with JWT token. Then this deeplink can be used in `authJWTEnd` method
-    /// deeplink example: rnio://jwt
+    /// deeplink example: raindrop://jwt
     public static func authJWTStart(_ provider: AuthNativeProvider, deeplink: URL) -> URL {
         //deeplink redirect url
         var redirect = URLComponents()

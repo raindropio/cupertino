@@ -4,12 +4,12 @@ import UI
 import Features
 
 struct AppScene: View {
-    @StateObject private var router = AppRouter()
+    @State private var path = AppPath()
     @SceneStorage("column-visibility") private var columnVisibility = NavigationSplitViewVisibility.automatic
     
     @ViewBuilder
-    private func screen(_ path: AppRouter.Path) -> some View {
-        switch path {
+    private func screen(_ screen: AppPath.Screen) -> some View {
+        switch screen {
         case .find(let find): Find(find: find)
         case .preview(let find, let id): Preview(find: find, id: id)
         case .cached(let id): PermanentCopy(id: id)
@@ -17,31 +17,32 @@ struct AppScene: View {
         }
     }
 
-    var body: some View {        
+    var body: some View {
         NavigationSplitView(columnVisibility: $columnVisibility) {
-            SidebarScreen(selection: $router.sidebar)
+            SidebarScreen(selection: $path.sidebar)
         } detail: {
-            NavigationStack(path: $router.path) {
+            NavigationStack(path: $path.detail) {
                 Group {
-                    if let sidebar = router.sidebar {
+                    if let sidebar = path.sidebar {
                         Find(find: sidebar)
                     }
                 }
-                    .navigationDestination(for: AppRouter.Path.self, destination: screen)
+                    .navigationDestination(for: AppPath.Screen.self, destination: screen)
             }
                 //fix title appearance on iOS <=16.3
-                .toolbarTitleMenu{}.id(isPhone ? router.sidebar : nil)
+                .toolbarTitleMenu{}.id(isPhone ? path.sidebar : nil)
         }
+            //split view specific
             .navigationSplitViewUnlockSize()
             .navigationSplitViewPhoneStack()
             .navigationSplitViewFixStateReset()
             .navigationSplitViewStyle(.balanced)
             .containerSizeClass()
+            //sheets
             .collectionSheets()
             .tagSheets()
-            .modifier(AppDeepLinks())
-            .environmentObject(router)
-            .restoreSceneValue("app-sidebar", value: $router.sidebar)
-            .restoreSceneValue("app-path", value: $router.path)
+            //routing
+            .modifier(AppDeepLinks(path: $path))
+            .restoreSceneValue("app-path", value: $path)
     }
 }
