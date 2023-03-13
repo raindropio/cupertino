@@ -22,7 +22,9 @@ fileprivate struct _Menu: View {
     @EnvironmentObject private var sheet: RaindropSheet
     @EnvironmentObject private var r: RaindropsStore
     @EnvironmentObject private var dispatch: Dispatcher
+    #if canImport(UIKit)
     @Environment(\.editMode) private var editMode
+    #endif
 
     var pick: RaindropsPick
     
@@ -79,9 +81,11 @@ fileprivate struct _Menu: View {
             //favorite
             Button {
                 dispatch.sync(RaindropsAction.updateMany(pick, .important(true)))
+                #if canImport(UIKit)
                 withAnimation {
                     editMode?.wrappedValue = .inactive
                 }
+                #endif
             } label: {
                 Label("Favorite", systemImage: "heart")
             }
@@ -99,9 +103,11 @@ fileprivate struct _Menu: View {
                     Menu {
                         Button("Confirm", role: .destructive) {
                             dispatch.sync(RaindropsAction.updateMany(pick, .removeTags))
+                            #if canImport(UIKit)
                             withAnimation {
                                 editMode?.wrappedValue = .inactive
                             }
+                            #endif
                         }
                     } label: {
                         Label("Remove tags", systemImage: "tag.slash")
@@ -109,9 +115,11 @@ fileprivate struct _Menu: View {
                     
                     Button {
                         dispatch.sync(RaindropsAction.updateMany(pick, .important(false)))
+                        #if canImport(UIKit)
                         withAnimation {
                             editMode?.wrappedValue = .inactive
                         }
+                        #endif
                     } label: {
                         Label("Remove from favorites", systemImage: "heart.slash")
                     }

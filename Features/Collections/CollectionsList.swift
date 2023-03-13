@@ -1,5 +1,6 @@
 import SwiftUI
 import API
+import Backport
 
 public func CollectionsList(_ selection: Binding<Int?>, system: [Int] = []) -> some View {
     _Optional(selection: selection, system: system)
@@ -31,7 +32,6 @@ extension _Optional: View {
                         .textInputAutocapitalization(.never)
                         .keyboardType(.webSearch)
                         #endif
-                        .autoFocus()
                 } icon: {
                     Image(systemName: "magnifyingglass")
                         .imageScale(.medium)
@@ -57,6 +57,7 @@ extension _Optional: View {
                 FindCollections<Int>(search)
             }
         }
+            .backport.defaultFocus($searching, true)
             #if os(iOS)
             .listStyle(.insetGrouped)
             .headerProminence(.increased)

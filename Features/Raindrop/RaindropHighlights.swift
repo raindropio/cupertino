@@ -28,6 +28,8 @@ public struct RaindropHighlights: View {
             }
         }
             .navigationTitle(Filter.Kind.highlights.title)
+            #if canImport(UIKit)
             .navigationBarTitleDisplayMode(.inline)
+            #endif
     }
 }

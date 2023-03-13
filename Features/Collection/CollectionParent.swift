@@ -15,7 +15,9 @@ public struct CollectionParent: View {
         CollectionsList($collection.parent)
             .collectionSheets()
             .navigationTitle("Parent")
+            #if os(iOS)
             .navigationBarTitleDisplayMode(.inline)
+            #endif
             .toolbar {
                 if collection.parent != nil {
                     ToolbarItem {

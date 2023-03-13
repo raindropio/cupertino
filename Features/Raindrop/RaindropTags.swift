@@ -11,6 +11,8 @@ public struct RaindropTags: View {
     public var body: some View {
         TagsList($raindrop.tags)
             .navigationTitle("\(raindrop.tags.count) tags")
+            #if canImport(UIKit)
             .navigationBarTitleDisplayMode(.inline)
+            #endif
     }
 }

@@ -49,12 +49,22 @@ extension UserCollections {
     }
     
     fileprivate struct Empty: View {
+        #if canImport(UIKit)
         @Environment(\.editMode) private var editMode
+        #endif
         @EnvironmentObject private var sheet: CollectionSheet
+        
+        private var isEditing: Bool {
+            #if canImport(UIKit)
+            editMode?.wrappedValue == .active
+            #else
+            false
+            #endif
+        }
         
         var body: some View {
             Section {
-                if editMode?.wrappedValue != .active {
+                if !isEditing {
                     Button { sheet.create() } label: {
                         Label("New collection", systemImage: "plus")
                     }

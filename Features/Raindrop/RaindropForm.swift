@@ -35,6 +35,8 @@ extension RaindropForm: View {
             .submitLabel(.done)
             .onSubmit(commit)
             .navigationTitle((raindrop.isNew ? "New" : "Edit") + " \(raindrop.type.single.localizedLowercase)")
+            #if canImport(UIKit)
             .navigationBarTitleDisplayMode(.inline)
+            #endif
     }
 }

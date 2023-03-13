@@ -27,7 +27,9 @@ struct PurchaseStack: View {
                     try? await dispatch(SubscriptionAction.products)
                 }
                 .navigationTitle("Select billing cycle")
+                #if canImport(UIKit)
                 .navigationBarTitleDisplayMode(.inline)
+                #endif
                 .toolbar {
                     ToolbarItem(placement: .cancellationAction) {
                         Button(role: .cancel, action: dismiss.callAsFunction) {

@@ -15,7 +15,9 @@ public struct RaindropCollection: View {
         CollectionsList($raindrop.collection, system: [-1, -99])
             .collectionSheets()
             .navigationTitle("Collection")
+            #if canImport(UIKit)
             .navigationBarTitleDisplayMode(.inline)
+            #endif
             .onChange(of: raindrop.collection) { _ in
                 guard isEnabled else { return }
                 dismiss()

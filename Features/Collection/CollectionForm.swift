@@ -1,13 +1,15 @@
 import SwiftUI
 import API
 import UI
+import Backport
 
 public struct CollectionForm {
     @EnvironmentObject private var dispatch: Dispatcher
     @Environment(\.dismiss) private var dismiss
     
     @Binding var collection: UserCollection
-    
+    @FocusState var focus: FocusField?
+
     public init(_ collection: Binding<UserCollection>) {
         self._collection = collection
     }
@@ -29,7 +31,7 @@ extension CollectionForm {
 extension CollectionForm: View {
     public var body: some View {
         Form {
-            Fields(collection: $collection)
+            Fields(collection: $collection, focus: $focus)
             
             if collection.isNew {
                 SubmitButton("Create")
@@ -40,10 +42,13 @@ extension CollectionForm: View {
                 }
             }
         }
+            .backport.defaultFocus($focus, .title)
             .submitLabel(.done)
             .onSubmit(commit)
             .navigationTitle(collection.isNew ? "New collection" : "Edit collection")
+            #if canImport(UIKit)
             .navigationBarTitleDisplayMode(.inline)
+            #endif
             .toolbar {
                 if collection.isNew {
                     ToolbarItem {
@@ -53,5 +58,11 @@ extension CollectionForm: View {
                     }
                 }
             }
+    }
+}
+
+extension CollectionForm {
+    enum FocusField {
+        case title
     }
 }

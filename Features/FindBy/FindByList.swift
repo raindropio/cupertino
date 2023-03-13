@@ -4,7 +4,9 @@ import UI
 
 public struct FindByList {
     @EnvironmentObject private var dispatch: Dispatcher
+    #if canImport(UIKit)
     @Environment(\.editMode) private var editMode
+    #endif
     @Environment(\.isSearching) private var isSearching
     @AppStorage("filters-expanded") private var filtersExpanded = false
     @AppStorage("tags-expanded") private var tagsExpanded = false
@@ -29,13 +31,21 @@ extension FindByList {
             }
         }
     }
+    
+    private var isEditing: Bool {
+        #if canImport(UIKit)
+        editMode?.wrappedValue == .active
+        #else
+        false
+        #endif
+    }
 }
 
 extension FindByList: View {
     public var body: some View {
         List(selection: $selection) {
             if search.isEmpty {
-                if editMode?.wrappedValue != .active {
+                if !isEditing {
                     Section {
                         SystemCollections<FindBy>(0, -1)
                     }
@@ -57,7 +67,7 @@ extension FindByList: View {
                 )
                     .modifier(AllTags.Optional())
                 
-                if editMode?.wrappedValue != .active {
+                if !isEditing {
                     Section {
                         SystemCollections<FindBy>(-99)
                     }

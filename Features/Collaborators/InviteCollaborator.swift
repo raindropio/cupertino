@@ -1,11 +1,13 @@
 import SwiftUI
 import API
 import UI
+import Backport
 
 struct InviteCollaborator: View {
     @EnvironmentObject private var dispatch: Dispatcher
     @State private var request = InviteCollaboratorRequest(level: .member)
     @State private var send = false
+    @FocusState private var focused: Bool
     
     @Binding var collection: UserCollection
     
@@ -35,6 +37,7 @@ struct InviteCollaborator: View {
             } else {
                 Section {
                     TextField("Email", text: $request.email)
+                        .focused($focused)
                         #if canImport(UIKit)
                         .autocapitalization(.none)
                         .autocorrectionDisabled()
@@ -42,7 +45,6 @@ struct InviteCollaborator: View {
                         .keyboardType(.emailAddress)
                         .submitLabel(.send)
                         #endif
-                        .autoFocus()
                 }
                 
                 Section("Access level") {
@@ -59,6 +61,7 @@ struct InviteCollaborator: View {
                     .disabled(!request.isValid)
             }
         }
+            .backport.defaultFocus($focused, true)
             .onSubmit(submit)
             .navigationTitle("Invite")
             .animation(.default, value: request.isValid)

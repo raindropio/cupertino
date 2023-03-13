@@ -5,6 +5,7 @@ import API
 extension CollectionForm {
     struct Fields {
         @Binding var collection: UserCollection
+        var focus: FocusState<FocusField?>.Binding
     }
 }
 
@@ -14,7 +15,7 @@ extension CollectionForm.Fields: View {
             HStack {
                 TextField("Title", text: $collection.title)
                     .fontWeight(.semibold)
-                    .autoFocus()
+                    .focused(focus, equals: .title)
                 
                 Icon(collection: $collection)
             }

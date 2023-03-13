@@ -53,8 +53,10 @@ struct CollectionIconGrid: View {
             .navigationTitle("Icon")
             #if os(iOS)
             .navigationBarTitleDisplayMode(.inline)
-            #endif
             .searchable(text: $search, placement: .navigationBarDrawer(displayMode: .always))
+            #else
+            .searchable(text: $search)
+            #endif
             .toolbar {
                 ToolbarItem(placement: .destructiveAction) {
                     Button("None") {

@@ -1,10 +1,12 @@
 import SwiftUI
 import UI
 import UniformTypeIdentifiers
+import Backport
 
 struct AddURL: View {
     @Environment(\.dismiss) private var dismiss
     @State private var url: URL?
+    @FocusState private var focused
     
     var action: ([NSItemProvider]) -> Void
 
@@ -20,12 +22,13 @@ struct AddURL: View {
             Form {
                 Section {
                     URLField("https://", value: $url)
-                        .autoFocus()
+                        .focused($focused)
                 }
                 
                 SubmitButton("Save")
                     .disabled(url == nil)
             }
+                .backport.defaultFocus($focused, true)
                 .onSubmit(saveUrl)
                 .navigationTitle("Add link")
                 .navigationBarTitleDisplayMode(.inline)

@@ -1,6 +1,7 @@
 import SwiftUI
 import API
 import UI
+import Backport
 
 struct AuthSignup: View {
     @Environment(\.dismiss) private var dismiss
@@ -35,7 +36,6 @@ struct AuthSignup: View {
                     .keyboardType(.asciiCapable)
                     .submitLabel(.next)
                     #endif
-                    .autoFocus()
                     .focused($focus, equals: .name)
                 
                 TextField("Email", text: $form.email)
@@ -62,6 +62,7 @@ struct AuthSignup: View {
                 .opacity(form.isEmpty ? 1 : 0)
                 .animation(.default, value: form.isEmpty)
         }
+            .backport.defaultFocus($focus, .name)
             .onSubmit(submit)
             .navigationTitle("Create an account")
             .navigationBarTitleDisplayMode(.inline)
