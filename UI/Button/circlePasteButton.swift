@@ -10,7 +10,9 @@ fileprivate struct CPB: ViewModifier {
     func body(content: Content) -> some View {
         content
             .labelStyle(.iconOnly)
+            #if canImport(UIKit)
             .buttonBorderShape(.capsule)
+            #endif
             .background(
                 Rectangle().fill(.tint)
                     .overlay(.black.opacity(0.03))

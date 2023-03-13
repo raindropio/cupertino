@@ -15,8 +15,12 @@ extension WebPage: WKNavigationDelegate {
         if navigationResponse.isForMainFrame {
             //remove background for non text response
             let isText = navigationResponse.response.mimeType?.contains("text") ?? true
+            #if canImport(UIKit)
             view?.isOpaque = isText
             view?.backgroundColor = isText ? nil : .clear
+            #else
+            view?.setValue(isText, forKey: "drawsBackground")
+            #endif
             
             //show error for non ok response
             if let response = navigationResponse.response as? HTTPURLResponse {
@@ -34,11 +38,13 @@ extension WebPage: WKNavigationDelegate {
     
     //finish
     public func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
+        #if canImport(UIKit)
         webView.scrollView.refreshControl?.endRefreshing()
         
         //fix inset issue on some websites
         webView.scrollView.contentInset.top = 1
         webView.scrollView.contentInset.top = 0
+        #endif
     }
     
     //error
@@ -46,7 +52,9 @@ extension WebPage: WKNavigationDelegate {
         guard (error as NSError).code != NSURLErrorCancelled else { return }
         self.error = error
         self.prefersHiddenToolbars = false
+        #if canImport(UIKit)
         webView.scrollView.refreshControl?.endRefreshing()
+        #endif
     }
     
     public func webView(_ webView: WKWebView, didFail navigation: WKNavigation!, withError error: Error) {

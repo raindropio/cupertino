@@ -13,7 +13,11 @@ public struct OptionalPasteButton: View {
     }
     
     private var has: Bool {
+        #if canImport(UIKit)
         UIPasteboard.general.contains(pasteboardTypes: supportedContentTypes.map { $0.identifier })
+        #else
+        true
+        #endif
     }
     
     public var body: some View {
@@ -22,8 +26,10 @@ public struct OptionalPasteButton: View {
                 PasteButton(supportedContentTypes: supportedContentTypes, payloadAction: payloadAction)
             }
         }
+            #if canImport(UIKit)
             .onReceive(NotificationCenter.default.publisher(for: UIPasteboard.changedNotification)) { _ in
                 reload = .init()
             }
+            #endif
     }
 }

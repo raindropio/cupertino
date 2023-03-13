@@ -2,10 +2,15 @@ import SwiftUI
 
 public extension View {
     func navigationSplitViewUnlockSize() -> some View {
+        #if canImport(UIKit)
         overlay(NSVUW().opacity(0))
+        #else
+        self
+        #endif
     }
 }
 
+#if canImport(UIKit)
 fileprivate struct NSVUW: UIViewControllerRepresentable {
     func makeUIViewController(context: Context) -> VC { .init() }
     func updateUIViewController(_ controller: VC, context: Context) {}
@@ -44,3 +49,4 @@ extension NSVUW {
         }
     }
 }
+#endif

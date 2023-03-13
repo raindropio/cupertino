@@ -1,5 +1,6 @@
 import SwiftUI
 
+#if canImport(UIKit)
 class KeyboardButtons: UIInputView {
     private var hosting: UIHostingController<Hosting>
     
@@ -82,3 +83,4 @@ fileprivate struct KeyboardButtonStyle: ButtonStyle {
             .padding(.bottom, 1)
     }
 }
+#endif

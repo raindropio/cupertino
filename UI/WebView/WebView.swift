@@ -37,6 +37,7 @@ extension WebView: View {
             //dialogs
             .modifier(Dialogs(page: page))
             //allow back webview navigation
+            #if canImport(UIKit)
             .popGesture({
                 if page.canGoBack {
                     return .never
@@ -45,22 +46,23 @@ extension WebView: View {
                 }
                 return .automatic
             }())
+            #endif
     }
 }
 
 extension WebView {
-    struct Holder: UIViewRepresentable {
+    struct Holder {
         @StateObject private var prev = Prev()
 
         @ObservedObject var page: WebPage
         var request: WebRequest
         var userAgent: String?
-        
-        func makeCoordinator() -> WebPage {
-            page
+                
+        class Prev: ObservableObject {
+            var request: WebRequest?
         }
         
-        func makeUIView(context: Context) -> NativeWebView {
+        func makeView(context: Context) -> NativeWebView {
             //configuration
             let configuration = WKWebViewConfiguration()
             configuration.processPool = processPool
@@ -81,20 +83,48 @@ extension WebView {
             
             //behaviour
             view.allowsBackForwardNavigationGestures = true
+            #if canImport(UIKit)
             view.scrollView.contentInsetAdjustmentBehavior = .automatic
+            #endif
             
             return view
         }
         
-        func updateUIView(_ view: NativeWebView, context: Context) {
+        func updateView(_ view: NativeWebView, context: Context) {
             if prev.request?.url.absoluteURL != request.url.absoluteURL {
                 context.coordinator.load(request)
                 prev.request = request
             }
         }
-        
-        class Prev: ObservableObject {
-            var request: WebRequest?
-        }
     }
 }
+
+#if canImport(UIKit)
+extension WebView.Holder: UIViewRepresentable {
+    func makeCoordinator() -> WebPage {
+        page
+    }
+    
+    func makeUIView(context: Context) -> NativeWebView {
+        makeView(context: context)
+    }
+    
+    func updateUIView(_ view: NativeWebView, context: Context) {
+        updateView(view, context: context)
+    }
+}
+#else
+extension WebView.Holder: NSViewRepresentable {
+    func makeCoordinator() -> WebPage {
+        page
+    }
+    
+    func makeNSView(context: Context) -> NativeWebView {
+        makeView(context: context)
+    }
+    
+    func updateNSView(_ view: NativeWebView, context: Context) {
+        updateView(view, context: context)
+    }
+}
+#endif

@@ -12,14 +12,18 @@ public class WebPage: NSObject, ObservableObject {
             
             oldValue?.navigationDelegate = nil
             oldValue?.uiDelegate = nil
+            #if canImport(UIKit)
             oldValue?.scrollView.delegate = nil
+            #endif
             
             history = .init()
             cancellable = nil
             if let view {
                 view.navigationDelegate = self
                 view.uiDelegate = self
+                #if canImport(UIKit)
                 view.scrollView.delegate = self
+                #endif
                 
                 cancellable = Publishers.MergeMany(
                     view.publisher(for: \.estimatedProgress).removeDuplicates().map({ _ in }).eraseToAnyPublisher(),
@@ -87,10 +91,15 @@ extension WebPage {
         view?.underPageBackgroundColor.isLight == true ? .light : .dark
     }
     public var toolbarBackground: Color? {
-        guard let color = view?.underPageBackgroundColor, let viewStyle = view?.traitCollection.userInterfaceStyle else { return nil }
+        #if canImport(UIKit)
+        guard let color = view?.underPageBackgroundColor else { return nil }
+        guard let viewStyle = view?.traitCollection.userInterfaceStyle else { return nil }
         let pageStyle: UIUserInterfaceStyle = color.isLight ? .light : .dark
         guard viewStyle == pageStyle else { return nil }
         return Color(color)
+        #else
+        return nil
+        #endif
     }
     
     public func reload() { view?.reload() }

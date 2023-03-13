@@ -13,7 +13,9 @@ public extension View {
 //MARK: - Single
 fileprivate struct SingleSelectionModifier<S: Hashable>: ViewModifier {
     @EnvironmentObject private var service: ListBehaviourService<S>
+    #if canImport(UIKit)
     @Environment(\.editMode) private var editMode
+    #endif
 
     @Binding var selection: S?
     
@@ -34,18 +36,22 @@ fileprivate struct SingleSelectionModifier<S: Hashable>: ViewModifier {
                 }
             }
             //reset selection on exit edit
+            #if canImport(UIKit)
             .onChange(of: editMode?.wrappedValue) {
                 if $0 == .inactive {
                     selection = nil
                 }
             }
+            #endif
     }
 }
 
 //MARK: - Multi
 fileprivate struct MultiSelectionModifier<S: Hashable>: ViewModifier {
     @EnvironmentObject private var service: ListBehaviourService<S>
+    #if canImport(UIKit)
     @Environment(\.editMode) private var editMode
+    #endif
 
     @Binding var selection: Set<S>
 
@@ -54,11 +60,13 @@ fileprivate struct MultiSelectionModifier<S: Hashable>: ViewModifier {
             .task(id: selection) { service.selection = selection }
             .task(id: service.selection) { selection = service.selection }
             //reset selection on exit edit
+            #if canImport(UIKit)
             .onChange(of: editMode?.wrappedValue) {
                 if $0 == .inactive {
                     selection = .init()
                 }
             }
+            #endif
     }
 }
 

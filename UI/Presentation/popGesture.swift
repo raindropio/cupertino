@@ -1,5 +1,6 @@
 import SwiftUI
 
+#if canImport(UIKit)
 public extension View {
     func popGesture(_ mode: PopGestureMode = .automatic) -> some View {
         overlay(PopGesture(mode: mode).opacity(0))
@@ -87,3 +88,4 @@ extension PopGesture {
         }
     }
 }
+#endif

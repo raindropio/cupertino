@@ -17,17 +17,21 @@ class NativeWebView: WKWebView {
         publisher(for: \.underPageBackgroundColor)
             .sink { [weak self] in self?.scrollView.refreshControl?.overrideUserInterfaceStyle = ($0?.isLight ?? true) ? .light : .dark }
             .store(in: &cancelables)
+        #endif
         
         //fix white background flash
         publisher(for: \.estimatedProgress)
             .sink { [weak self] in
                 let isOpaque = $0 >= 0.4 || (self?.canGoBack == true)
                 if isOpaque != self?.isOpaque {
+                    #if canImport(UIKit)
                     self?.isOpaque = isOpaque
+                    #else
+                    self?.setValue(isOpaque, forKey: "drawsBackground")
+                    #endif
                 }
             }
             .store(in: &cancelables)
-        #endif
     }
     
     required init?(coder: NSCoder) {

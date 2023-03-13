@@ -1,3 +1,4 @@
+#if canImport(UIKit)
 import SwiftUI
 
 //MARK: - Init
@@ -169,3 +170,4 @@ fileprivate extension UISearchToken {
         representedObject = stringValue
     }
 }
+#endif

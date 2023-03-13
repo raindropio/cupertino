@@ -8,7 +8,9 @@ public extension View {
 
 fileprivate struct ItemBehaviour<T: Hashable> {
     @EnvironmentObject private var service: ListBehaviourService<T>
+    #if canImport(UIKit)
     @Environment(\.editMode) private var editMode
+    #endif
     @Environment(\.defaultMinListRowHeight) private var defaultMinListRowHeight
     @Environment(\.colorScheme) private var colorScheme
     @State private var isPressing = false
@@ -38,6 +40,7 @@ extension ItemBehaviour {
     private func onPress() {
         let selection = Set([tag])
         
+        #if canImport(UIKit)
         if editMode?.wrappedValue == .active {
             if service.selection.contains(tag) {
                 service.selection.remove(tag)
@@ -49,6 +52,9 @@ extension ItemBehaviour {
         } else {
             service.selection = selection
         }
+        #else
+        service.selection = selection
+        #endif
     }
     
     private func onPressing(_ pressing: Bool) {
@@ -59,9 +65,13 @@ extension ItemBehaviour {
 extension ItemBehaviour: ViewModifier {
     @ViewBuilder
     private func menuItems() -> some View {
+        #if canImport(UIKit)
         if editMode?.wrappedValue != .active {
             service.menu?(Set([tag]))
         }
+        #else
+        service.menu?(Set([tag]))
+        #endif
     }
     
     func body(content: Content) -> some View {

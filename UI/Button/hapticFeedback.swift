@@ -1,5 +1,6 @@
 import SwiftUI
 
+#if canImport(UIKit)
 public extension EnvironmentValues {
     var hapticFeedback: HapticFeedback {
         self[HapticFeedbackKey.self]
@@ -20,3 +21,4 @@ public class HapticFeedback {
 private struct HapticFeedbackKey: EnvironmentKey {
     static let defaultValue: HapticFeedback = .init()
 }
+#endif

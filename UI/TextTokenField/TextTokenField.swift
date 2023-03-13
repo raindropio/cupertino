@@ -1,6 +1,6 @@
 import SwiftUI
 
-public struct TextTokenField: UIViewRepresentable {
+public struct TextTokenField {
     var title: String = ""
     @Binding var value: [String]
     var suggestions: [String]
@@ -14,7 +14,10 @@ public struct TextTokenField: UIViewRepresentable {
         self._value = value
         self.suggestions = suggestions
     }
-    
+}
+
+#if canImport(UIKit)
+extension TextTokenField: UIViewRepresentable {
     public func makeUIView(context: Context) -> Native {
         .init(self, environment: context.environment)
     }
@@ -23,3 +26,14 @@ public struct TextTokenField: UIViewRepresentable {
         view.update(self, environment: context.environment)
     }
 }
+#else
+extension TextTokenField: NSViewRepresentable {
+    public func makeNSView(context: Context) -> Native {
+        .init(self, environment: context.environment)
+    }
+    
+    public func updateNSView(_ view: Native, context: Context) {
+        view.update(self, environment: context.environment)
+    }
+}
+#endif

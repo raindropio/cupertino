@@ -23,15 +23,11 @@ fileprivate struct PI: ViewModifier {
     }
 }
 
-fileprivate struct PlatformPhotoPicker: UIViewControllerRepresentable {
+fileprivate struct PlatformPhotoPicker {
     var filter: PHPickerFilter?
     var onCompletion: ([NSItemProvider]) -> Void
-
-    func makeCoordinator() -> Coordinator {
-        .init(self)
-    }
     
-    func makeUIViewController(context: Context) -> PHPickerViewController {
+    func makeViewController(context: Context) -> PHPickerViewController {
         var configuration = PHPickerConfiguration()
         configuration.filter = filter
         configuration.selectionLimit = 999
@@ -41,10 +37,40 @@ fileprivate struct PlatformPhotoPicker: UIViewControllerRepresentable {
         return controller
     }
     
-    func updateUIViewController(_ picker: PHPickerViewController, context: Context) {
+    func updateViewController(_ picker: PHPickerViewController, context: Context) {
         context.coordinator.update(self)
     }
 }
+
+#if canImport(AppKit)
+extension PlatformPhotoPicker: NSViewControllerRepresentable {
+    func makeCoordinator() -> Coordinator {
+        .init(self)
+    }
+    
+    func makeNSViewController(context: Context) -> PHPickerViewController {
+        makeViewController(context: context)
+    }
+    
+    func updateNSViewController(_ picker: PHPickerViewController, context: Context) {
+        updateViewController(picker, context: context)
+    }
+}
+#else
+extension PlatformPhotoPicker: UIViewControllerRepresentable {
+    func makeCoordinator() -> Coordinator {
+        .init(self)
+    }
+    
+    func makeUIViewController(context: Context) -> PHPickerViewController {
+        makeViewController(context: context)
+    }
+    
+    func updateUIViewController(_ picker: PHPickerViewController, context: Context) {
+        updateViewController(picker, context: context)
+    }
+}
+#endif
 
 extension PlatformPhotoPicker {
     class Coordinator: NSObject, PHPickerViewControllerDelegate {
@@ -62,7 +88,9 @@ extension PlatformPhotoPicker {
             base.onCompletion(results.map { $0.itemProvider })
                         
             if !results.isEmpty {
+                #if canImport(UIKit)
                 picker.dismiss(animated: true);
+                #endif
             }
         }
     }
