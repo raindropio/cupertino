@@ -2,8 +2,6 @@ import SwiftUI
 
 extension AuthSplash {
     struct Slide<I: View, D: View>: View {
-        @State private var anim = true
-        
         var title: String
         var colors: [Color]
         var icon: () -> I
@@ -24,14 +22,10 @@ extension AuthSplash {
                     .foregroundStyle(
                         .linearGradient(
                             colors: colors,
-                            startPoint: anim ? .topLeading : .bottomTrailing,
-                            endPoint: anim ? .bottomTrailing : .topTrailing
+                            startPoint: .topLeading,
+                            endPoint: .bottomTrailing
                         )
                     )
-                    .hueRotation(.degrees(anim ? -30 : 30))
-                    .animation(.easeInOut(duration: 3).repeatForever(), value: anim)
-                    .onAppear { anim = false }
-                    .onDisappear { anim = true }
                 
                 description()
                     .font(.title3)
@@ -41,6 +35,7 @@ extension AuthSplash {
                 .multilineTextAlignment(.center)
                 .scenePadding([.horizontal, .bottom])
                 .offset(y: -32)
+                .transition(.identity)
         }
     }
 }

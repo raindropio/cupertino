@@ -30,7 +30,7 @@ public struct Search<C: View>: View {
             }
             .modifier(Animations(refine: $refine, isActive: isActive))
             .modifier(Bar(refine: $refine))
-            .modifier(Scope(base: base, refine: $refine, isActive: isActive))
+            .modifier(Scope(base: base, refine: $refine))
             .modifier(Loading(refine: $refine, isActive: isActive))
     }
 }

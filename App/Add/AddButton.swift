@@ -26,13 +26,13 @@ fileprivate struct AB: ViewModifier {
     }
     
     private var ignore: Bool {
-        collection == -99 || isSearching || editMode?.wrappedValue == .active
+        collection == -99 || editMode?.wrappedValue == .active
     }
 
     func body(content: Content) -> some View {
         content
             .overlay(alignment: .bottomTrailing) {
-                if !hidden, !ignore {
+                if !hidden, !ignore, !isSearching {
                     OptionalPasteButton(
                         supportedContentTypes: addTypes.filter { $0 != .text },
                         payloadAction: add
@@ -76,6 +76,7 @@ fileprivate struct AB: ViewModifier {
                             Image(systemName: "plus")
                                 .fontWeight(.medium)
                         }
+                            .disabled(isSearching)
                             .popover(isPresented: $pickURL) {
                                 AddURL(action: add)
                             }

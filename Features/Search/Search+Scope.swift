@@ -7,7 +7,6 @@ extension Search {
     struct Scope: ViewModifier {
         var base: FindBy
         @Binding var refine: FindBy
-        var isActive: Bool
         
         func body(content: Content) -> some View {
             content

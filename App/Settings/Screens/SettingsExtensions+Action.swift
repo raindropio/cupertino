@@ -8,6 +8,7 @@ extension SettingsExtensions {
             "action-default-collection",
             store: UserDefaults(suiteName: Constants.appGroupName)
         ) private var collection: Int = -1
+        @State private var pick = false
 
         var body: some View {
             Section {
@@ -23,15 +24,21 @@ extension SettingsExtensions {
                         .labelStyle(.sidebar)
                         .listItemTint(.pink)
                     
-                    NavigationLink {
-                        DefaultCollection(collection: $collection)
+                    Button {
+                        pick = true
                     } label: {
                         LabeledContent("Add to") {
                             CollectionLabel(collection, withLocation: true).badge(0)
-                                .labelStyle(.titleOnly)
+                                .labelStyle(.titleAndIcon)
+                                .controlSize(.small)
                                 .fixedSize()
+                            Image(systemName: "chevron.up.chevron.down")
+                                .imageScale(.small)
                         }
                     }
+                        .sheet(isPresented: $pick) {
+                            DefaultCollection(collection: $collection)
+                        }
                 }
                     .alignmentGuide(.listRowSeparatorLeading) { _ in 0 }
             }
@@ -45,10 +52,17 @@ extension SettingsExtensions.Action {
         @Binding var collection: Int
         
         var body: some View {
-            CollectionsList($collection, system: [-1])
-                .collectionSheets()
-                .navigationTitle("Add to")
-                .navigationBarTitleDisplayMode(.inline)
+            NavigationStack {
+                CollectionsList($collection, system: [-1])
+                    .collectionSheets()
+                    .navigationTitle("Add to")
+                    .navigationBarTitleDisplayMode(.inline)
+                    .toolbar {
+                        ToolbarItem(placement: .cancellationAction) {
+                            Button("Cancel", role: .cancel, action: dismiss.callAsFunction)
+                        }
+                    }
+            }
                 .onChange(of: collection) { _ in
                     dismiss()
                 }

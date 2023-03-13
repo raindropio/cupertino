@@ -9,7 +9,7 @@ struct AuthSplash: View {
                 title: "Save Web Pages, Books & Highlights",
                 colors: [.blue, .indigo]
             ) {
-                Image(systemName: "star.square")
+                Image(systemName: "checkmark.icloud")
             } description: {
                 Text("Keep your favorite things in one place")
             }

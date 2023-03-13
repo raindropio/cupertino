@@ -43,6 +43,7 @@ struct AuthScreen: View {
                     .scenePadding(.horizontal)
             }
                 .background(Color.groupedBackground)
+                .ignoresSafeArea(.keyboard)
                 .toolbar {
                     ToolbarItem(placement: .principal) {
                         Image("logo-text")
