@@ -42,7 +42,7 @@ struct AppScene: View {
             .collectionSheets()
             .tagSheets()
             //routing
-            .modifier(AppDeepLinks(path: $path))
+            .modifier(AppDeepLink(path: $path))
             .restoreSceneValue("app-path", value: $path)
     }
 }

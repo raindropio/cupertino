@@ -17,7 +17,6 @@ fileprivate struct AB: ViewModifier {
     @State private var pickURL = false
     @State private var pickPhotos = false
     @State private var pickFiles = false
-    @State private var pickExtension = false
 
     var hidden: Bool
     var collection: Int
@@ -69,7 +68,7 @@ fileprivate struct AB: ViewModifier {
                             }
                             
                             Section("Recommended") {
-                                Button { pickExtension = true } label: {
+                                DeepLink(.settings(.extensions)) {
                                     Label("Install extension", systemImage: "puzzlepiece.extension")
                                 }
                             }
@@ -79,12 +78,6 @@ fileprivate struct AB: ViewModifier {
                         }
                             .popover(isPresented: $pickURL) {
                                 AddURL(action: add)
-                            }
-                            .popover(isPresented: $pickExtension) {
-                                NavigationStack {
-                                    SettingsExtensions()
-                                }
-                                    .frame(idealWidth: 400, idealHeight: 400)
                             }
                     }
                 }

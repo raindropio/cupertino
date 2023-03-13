@@ -2,11 +2,12 @@ import SwiftUI
 import Features
 import API
 
-struct AppDeepLinks: ViewModifier {
+struct AppDeepLink: ViewModifier {
     @EnvironmentObject private var r: RaindropsStore
     @AppStorage("browser") private var browser: PreferredBrowser = .default
     @Environment(\.openURL) private var openURL
     @State private var safari: URL?
+    @State private var settings: SettingsPath?
     
     @Binding var path: AppPath
 
@@ -47,8 +48,18 @@ struct AppDeepLinks: ViewModifier {
                     
                 case .find(let find):
                     path.push(find)
+                    
+                case .settings(let action):
+                    switch action {
+                    case .extensions:
+                        settings = .init(screen: [.extensions])
+                        
+                    case nil:
+                        settings = .init()
+                    }
                 }
             }
             .safariView(item: $safari, button: .init(id: "io.raindrop.ios.share", systemImage: "info.circle"))
+            .sheet(item: $settings, content: SettingsIOS.init)
     }
 }

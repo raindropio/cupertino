@@ -1,13 +1,14 @@
 import SwiftUI
 import UI
 
-struct SettingsScene: View {
-    @EnvironmentObject private var settings: SettingsRouter
+#if os(iOS)
+struct SettingsIOS: View {
+    @State var path: SettingsPath
 
     var body: some View {
-        NavigationStack(path: $settings.path) {
+        NavigationStack(path: $path.screen) {
             SettingsHome()
-                .navigationDestination(for: SettingsRoute.self) {
+                .navigationDestination(for: SettingsPath.Screen.self) {
                     switch $0 {
                     case .account:
                         SettingsWebApp(subpage: .account)
@@ -26,18 +27,4 @@ struct SettingsScene: View {
         }
     }
 }
-
-extension SettingsScene {
-    struct Attach: ViewModifier {
-        @StateObject private var settings = SettingsRouter()
-        
-        func body(content: Content) -> some View {
-            content
-                .sheet(isPresented: $settings.isPresented) {
-                    SettingsScene()
-                        .environmentObject(settings)
-                }
-                .environmentObject(settings)
-        }
-    }
-}
+#endif

@@ -15,4 +15,9 @@ public enum DeepLinkDestination: Equatable {
     }
     
     case find(FindBy)
+    
+    case settings(S? = nil)
+    public enum S: Equatable {
+        case extensions
+    }
 }

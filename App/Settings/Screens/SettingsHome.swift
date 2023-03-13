@@ -11,11 +11,11 @@ struct SettingsHome: View {
         List {
             Group {
                 Section {
-                    NavigationLink(value: SettingsRoute.account) {
+                    NavigationLink(value: SettingsPath.Screen.account) {
                         MeLabel()
                     }
                     
-                    NavigationLink(value: SettingsRoute.subscription) {
+                    NavigationLink(value: SettingsPath.Screen.subscription) {
                         Label("Subscription", systemImage: "bolt")
                             .badge(s.state.current?.plan.title ?? "Free")
                             .tint(.primary)
@@ -24,12 +24,12 @@ struct SettingsHome: View {
                 }
                 
                 Section {
-                    NavigationLink(value: SettingsRoute.extensions) {
+                    NavigationLink(value: SettingsPath.Screen.extensions) {
                         Label("Extensions", systemImage: "puzzlepiece.extension").tint(.primary)
                     }
                         .listItemTint(.purple)
                     
-                    NavigationLink(value: SettingsRoute.appearance) {
+                    NavigationLink(value: SettingsPath.Screen.appearance) {
                         Label("Appearance", systemImage: "square.on.circle").tint(.primary)
                     }
                         .listItemTint(.indigo)
@@ -43,11 +43,11 @@ struct SettingsHome: View {
                         Label("Integrations", systemImage: "puzzlepiece.extension").badge("+2,000").tint(.primary)
                     }
                     
-                    NavigationLink(value: SettingsRoute.import) {
+                    NavigationLink(value: SettingsPath.Screen.import) {
                         Label("Import", systemImage: "square.and.arrow.down").tint(.primary)
                     }
                     
-                    NavigationLink(value: SettingsRoute.backups) {
+                    NavigationLink(value: SettingsPath.Screen.backups) {
                         Label("Backups", systemImage: "clock.arrow.circlepath").tint(.primary)
                     }
                     
