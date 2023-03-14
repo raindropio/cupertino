@@ -10,6 +10,7 @@
 		760DD2FD2942333D00103C9E /* SaveFiles.swift in Sources */ = {isa = PBXBuildFile; fileRef = 760DD2FC2942333D00103C9E /* SaveFiles.swift */; };
 		760DD2FF294237E900103C9E /* NothingFound.swift in Sources */ = {isa = PBXBuildFile; fileRef = 760DD2FE294237E900103C9E /* NothingFound.swift */; };
 		76143B0228842C85006A7508 /* UI in Frameworks */ = {isa = PBXBuildFile; productRef = 76143B0128842C85006A7508 /* UI */; };
+		7618C96D29C073B600D4DE78 /* AuthSuccess.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7618C96C29C073B600D4DE78 /* AuthSuccess.swift */; };
 		761F4CAD299E2E86008C1E6D /* SettingsAppearance.swift in Sources */ = {isa = PBXBuildFile; fileRef = 761F4CAC299E2E86008C1E6D /* SettingsAppearance.swift */; };
 		761F6C3029A3AC99002919BC /* PermanentCopy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 761F6C2F29A3AC99002919BC /* PermanentCopy.swift */; };
 		761F6C3229A3ADA0002919BC /* Preview.swift in Sources */ = {isa = PBXBuildFile; fileRef = 761F6C3129A3ADA0002919BC /* Preview.swift */; };
@@ -150,6 +151,7 @@
 /* Begin PBXFileReference section */
 		760DD2FC2942333D00103C9E /* SaveFiles.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SaveFiles.swift; sourceTree = "<group>"; };
 		760DD2FE294237E900103C9E /* NothingFound.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NothingFound.swift; sourceTree = "<group>"; };
+		7618C96C29C073B600D4DE78 /* AuthSuccess.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthSuccess.swift; sourceTree = "<group>"; };
 		761F4CAC299E2E86008C1E6D /* SettingsAppearance.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsAppearance.swift; sourceTree = "<group>"; };
 		761F6C2F29A3AC99002919BC /* PermanentCopy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PermanentCopy.swift; sourceTree = "<group>"; };
 		761F6C3129A3ADA0002919BC /* Preview.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Preview.swift; sourceTree = "<group>"; };
@@ -316,6 +318,7 @@
 				768CA20429506D7A00AD7E62 /* AuthSplash+Slide.swift */,
 				768CA1FA294CC17800AD7E62 /* AuthLogIn.swift */,
 				768CA1FC294CCD5800AD7E62 /* AuthSignup.swift */,
+				7618C96C29C073B600D4DE78 /* AuthSuccess.swift */,
 				768CA1FE2950420D00AD7E62 /* AuthContinueWith.swift */,
 				768CA20029505A6E00AD7E62 /* AuthContinueWith+Apple.swift */,
 				768CA20229505AD600AD7E62 /* AuthContinueWith+JWT.swift */,
@@ -750,6 +753,7 @@
 				76ECFE0E294B1B5700DF15C9 /* WebHighlights+Action.swift in Sources */,
 				76F05F0C293F89EF003CCD75 /* AddButton.swift in Sources */,
 				76292CEA2951B86F000E16AA /* SettingsSubscription.swift in Sources */,
+				7618C96D29C073B600D4DE78 /* AuthSuccess.swift in Sources */,
 				768CA20129505A6E00AD7E62 /* AuthContinueWith+Apple.swift in Sources */,
 				76E51CEA299A8A1400FE7763 /* ReceiveDeepLink.swift in Sources */,
 				76BFE36F291E9F6B00DE9DB2 /* SplitViewPath.swift in Sources */,

@@ -3,7 +3,6 @@ import API
 import UI
 
 struct AuthScreen: View {
-    @EnvironmentObject private var auth: AuthStore
     @EnvironmentObject private var dispatch: Dispatcher
     @State private var login = false
     @State private var signup = false
@@ -62,10 +61,12 @@ struct AuthScreen: View {
                 }
                 .sheet(isPresented: $login) {
                     NavigationStack(root: AuthLogIn.init)
+                        .modifier(AuthSuccess())
                         .presentationDetents([.height(360)])
                 }
                 .sheet(isPresented: $signup) {
                     NavigationStack(root: AuthSignup.init)
+                        .modifier(AuthSuccess())
                 }
                 .task {
                     try? await dispatch(UserAction.reload)
