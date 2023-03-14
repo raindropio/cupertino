@@ -15,21 +15,31 @@ struct AuthScreen: View {
                 HStack(spacing: 16) {
                     Button { login = true } label: {
                         Text("Log In").frame(maxWidth: .infinity).frame(height: 32)
+                            #if canImport(UIKit)
                             .foregroundColor(.primary)
+                            #endif
                     }
                         .buttonStyle(.bordered)
+                        #if canImport(UIKit)
                         .tint(.secondary)
+                        #endif
                     
                     Button { signup = true } label: {
                         Text("Sign Up").frame(maxWidth: .infinity).frame(height: 32)
+                            #if canImport(UIKit)
                             .foregroundStyle(.background)
+                            #endif
                     }
                         .buttonStyle(.borderedProminent)
+                        #if canImport(UIKit)
                         .tint(.primary)
+                        #endif
                 }
                     .fontWeight(.medium)
                     #if canImport(UIKit)
                     .buttonBorderShape(.capsule)
+                    #else
+                    .controlSize(.large)
                     #endif
                     .scenePadding()
                     .scenePadding(.horizontal)
@@ -39,18 +49,21 @@ struct AuthScreen: View {
                     .foregroundStyle(.secondary)
                     .font(.callout)
                     .multilineTextAlignment(.center)
-                    .scenePadding(.bottom)
                     .scenePadding(.horizontal)
                     .scenePadding(.horizontal)
             }
-                .background(Color.groupedBackground)
-                .ignoresSafeArea(.keyboard)
+                .scenePadding(.vertical)
+                .navigationTitle("")
+                #if canImport(UIKit)
+                .ignoresSafeArea(edges: .top)
+                .navigationBarTitleDisplayMode(.inline)
+                #endif
                 .toolbar {
                     ToolbarItem(placement: .principal) {
                         Image("logo-text")
                     }
                     
-                    ToolbarItem {
+                    ToolbarItem(placement: .primaryAction) {
                         SafariLink(destination: URL(string: "https://help.raindrop.io")!) {
                             Label("Help", systemImage: "questionmark.circle.fill")
                                 .symbolRenderingMode(.hierarchical)

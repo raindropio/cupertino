@@ -16,6 +16,5 @@ struct SidebarScreen: View {
             .navigationBarTitleDisplayMode(.inline)
             .scopeEditMode()
             #endif
-            .navigationSplitViewColumnWidth(ideal: 450)
     }
 }

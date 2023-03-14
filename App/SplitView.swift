@@ -20,6 +20,7 @@ struct SplitView: View {
     var body: some View {
         NavigationSplitView(columnVisibility: $columnVisibility) {
             SidebarScreen(selection: $path.sidebar)
+                .navigationSplitViewColumnWidth(min: 250, ideal: 450)
         } detail: {
             NavigationStack(path: $path.detail) {
                 Group {

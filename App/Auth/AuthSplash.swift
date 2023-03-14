@@ -1,10 +1,9 @@
 import SwiftUI
+import UI
 
 struct AuthSplash: View {
-    @Environment(\.colorScheme) private var colorScheme
-    
     var body: some View {
-        TabView {
+        Carousel {
             Slide(
                 title: "Save Web Pages, Books & Highlights",
                 colors: [.blue, .indigo]
@@ -50,9 +49,5 @@ struct AuthSplash: View {
                 Text("Access your items seamlessly across all your devices\n\n")
             }
         }
-            #if canImport(UIKit)
-            .tabViewStyle(.page(indexDisplayMode: .always))
-            .indexViewStyle(.page(backgroundDisplayMode: colorScheme == .light ? .always : .never))
-            #endif
     }
 }

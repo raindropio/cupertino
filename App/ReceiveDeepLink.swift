@@ -56,7 +56,11 @@ struct ReceiveDeepLink: ViewModifier {
                     settings = .init(screen: .extensions)
                     
                 case nil:
+                    #if canImport(UIKit)
                     settings = .init()
+                    #else
+                    NSApp.sendAction(Selector(("showSettingsWindow:")), to: nil, from: nil)
+                    #endif
                 }
             }
         }

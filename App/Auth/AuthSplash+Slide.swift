@@ -33,9 +33,7 @@ extension AuthSplash {
                     .symbolVariant(.fill)
             }
                 .multilineTextAlignment(.center)
-                .scenePadding([.horizontal, .bottom])
-                .offset(y: -32)
-                .transition(.identity)
+                .scenePadding([.horizontal])
         }
     }
 }

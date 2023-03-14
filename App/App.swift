@@ -12,6 +12,21 @@ import Features
                 notAuthorized: AuthScreen.init
             )
                 .storeProvider(store)
+                #if canImport(AppKit)
+                .frame(minWidth: 600, minHeight: 400)
+                #endif
         }
+            #if canImport(AppKit)
+            .windowResizability(.contentSize)
+            .defaultPosition(.center)
+            .defaultSize(width: 800, height: 600)
+            #endif
+        
+        #if canImport(AppKit)
+        Settings {
+            SettingsLogout()
+                .storeProvider(store)
+        }
+        #endif
     }
 }
