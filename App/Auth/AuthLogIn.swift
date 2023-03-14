@@ -1,6 +1,7 @@
 import SwiftUI
 import API
 import UI
+import Backport
 
 struct AuthLogIn: View {
     @Environment(\.dismiss) private var dismiss
@@ -33,11 +34,11 @@ struct AuthLogIn: View {
                     .keyboardType(.emailAddress)
                     .submitLabel(.next)
                     #endif
-                    .focused($focus, equals: .email)
+                    .backport.focused($focus, equals: .email)
                 
                 SecureField("Password", text: $form.password)
                     .submitLabel(.done)
-                    .focused($focus, equals: .password)
+                    .backport.focused($focus, equals: .password)
                     .safeAreaInset(edge: .trailing) {
                         GroupBox {
                             SafariLink("Forgot?", destination: URL(string: "https://app.raindrop.io/account/lost")!)
@@ -54,6 +55,7 @@ struct AuthLogIn: View {
                 .opacity(form.isEmpty ? 1 : 0)
                 .animation(.default, value: form.isEmpty)
         }
+            .backport.defaultFocus($focus, .email)
             .onAppear { focus = .email } //autoFocus modifier breaks autofill
             .onSubmit(submit)
             #if canImport(UIKit)

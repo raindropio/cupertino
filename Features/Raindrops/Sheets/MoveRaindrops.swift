@@ -10,6 +10,7 @@ struct MoveRaindrops: View {
     #endif
     
     @State private var to: Int?
+    @State private var loading = false
 
     //props
     var pick: RaindropsPick
@@ -17,6 +18,9 @@ struct MoveRaindrops: View {
     //do work
     private func move() async throws {
         guard let to else { return }
+        loading = true
+        defer { loading = false }
+        
         try await dispatch(RaindropsAction.updateMany(pick, .moveTo(to)))
         self.to = nil
         dismiss()
@@ -35,6 +39,13 @@ struct MoveRaindrops: View {
             #if canImport(UIKit)
             .navigationBarTitleDisplayMode(.inline)
             #endif
+            .disabled(loading)
+            .opacity(loading ? 0.5 : 1)
+            .onChange(of: to) {
+                //auto save when only one item selected
+                guard $0 != nil, case let .some(ids) = pick, ids.count == 1 else { return }
+                Task { try? await move() }
+            }
             .toolbar {
                 ToolbarItem(placement: .primaryAction) {
                     if to != nil {

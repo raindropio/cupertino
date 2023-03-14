@@ -22,7 +22,7 @@ struct AddURL: View {
             Form {
                 Section {
                     URLField("", value: $url, prompt: Text("https://"))
-                        .focused($focused)
+                        .backport.focused($focused)
                 }
                 
                 SubmitButton("Save")

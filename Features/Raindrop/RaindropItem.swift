@@ -41,9 +41,10 @@ extension RaindropItem: View {
                 .frame(maxWidth: .infinity, alignment: .leading)
         }
             .swipeActions(edge: .leading) {
-                Link(destination: raindrop.link) {
-                    Label("Open", systemImage: "safari")
+                Button { sheet.move(.some([raindrop.id])) } label: {
+                    Label("Move", systemImage: "folder")
                 }
+                    .tint(.indigo)
             }
             .swipeActions(edge: .trailing) {
                 Button { sheet.edit(raindrop.id) } label: {

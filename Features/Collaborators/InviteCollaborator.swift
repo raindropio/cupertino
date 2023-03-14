@@ -37,7 +37,7 @@ struct InviteCollaborator: View {
             } else {
                 Section {
                     TextField("Email", text: $request.email)
-                        .focused($focused)
+                        .backport.focused($focused)
                         #if canImport(UIKit)
                         .autocapitalization(.none)
                         .autocorrectionDisabled()

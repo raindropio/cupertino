@@ -36,7 +36,7 @@ struct AuthSignup: View {
                     .keyboardType(.asciiCapable)
                     .submitLabel(.next)
                     #endif
-                    .focused($focus, equals: .name)
+                    .backport.focused($focus, equals: .name)
                 
                 TextField("Email", text: $form.email)
                     #if canImport(UIKit)
@@ -46,11 +46,11 @@ struct AuthSignup: View {
                     .keyboardType(.emailAddress)
                     .submitLabel(.next)
                     #endif
-                    .focused($focus, equals: .email)
+                    .backport.focused($focus, equals: .email)
                 
                 SecureField("Password", text: $form.password)
                     .submitLabel(.done)
-                    .focused($focus, equals: .password)
+                    .backport.focused($focus, equals: .password)
             } footer: {
                 Text("By clicking on 'Sign up' above, you are agreeing to the [Terms of Service](https://help.raindrop.io/terms) and [Privacy Policy](https://help.raindrop.io/privacy)")
             }

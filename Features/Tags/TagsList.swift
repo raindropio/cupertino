@@ -1,6 +1,7 @@
 import SwiftUI
 import API
 import UI
+import Backport
 
 public struct TagsList {
     @EnvironmentObject private var dispatch: Dispatcher
@@ -74,7 +75,7 @@ extension TagsList: View {
                 //new
                 Label {
                     TextField("Add tag", text: $new)
-                        .focused($focused)
+                        .backport.focused($focused)
                         #if canImport(UIKit)
                         .autocorrectionDisabled()
                         .textInputAutocapitalization(.never)
@@ -104,6 +105,7 @@ extension TagsList: View {
                 }
             }
         }
+            .backport.defaultFocus($focused, true)
             .onSubmit(of: .text) {
                 focused = !new.isEmpty
                 add(new)

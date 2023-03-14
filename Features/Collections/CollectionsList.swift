@@ -26,7 +26,7 @@ extension _Optional: View {
             Section {
                 Label {
                     TextField("Search", text: $search)
-                        .focused($searching)
+                        .backport.focused($searching)
                         #if canImport(UIKit)
                         .autocorrectionDisabled()
                         .textInputAutocapitalization(.never)
