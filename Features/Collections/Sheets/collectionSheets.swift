@@ -37,12 +37,15 @@ struct _CollectionSheetsModifier: ViewModifier {
             //sheets/alerts
             .sheet(item: $create) {
                 CollectionStack($0, content: CollectionForm.init)
+                    .frame(idealWidth: 400, idealHeight: 400)
             }
             .sheet(item: $edit) {
                 CollectionStack($0, content: CollectionForm.init)
+                    .frame(idealWidth: 400, idealHeight: 400)
             }
             .sheet(item: $share) {
                 CollectionStack($0, content: CollectionSharing.init)
+                    .frame(idealWidth: 400, idealHeight: 400)
             }
             .alert("Are you sure?", isPresented: $merging, presenting: merge, actions: Merge.init)
             .alert("Are you sure?", isPresented: $deleting, presenting: delete, actions: Delete.init) { _ in

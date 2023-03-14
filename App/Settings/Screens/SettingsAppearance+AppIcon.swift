@@ -1,3 +1,4 @@
+#if canImport(UIKit)
 import SwiftUI
 import API
 import UI
@@ -50,3 +51,4 @@ extension SettingsAppearance {
         }
     }
 }
+#endif

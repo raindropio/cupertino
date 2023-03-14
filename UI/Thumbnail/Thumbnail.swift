@@ -4,6 +4,7 @@ import NukeUI
 
 public struct Thumbnail {
     @State private var reload: UUID?
+    @Environment(\.displayScale) private var displayScale
     
     var url: URL?
     var width: CGFloat?
@@ -60,14 +61,14 @@ extension Thumbnail: View {
     var resize: [ImageProcessors.Resize]? {
         if let width, let height {
             return [.init(
-                size: .init(width: width, height: height),
-                unit: .points,
+                size: .init(width: width*displayScale, height: height*displayScale),
+                unit: .pixels,
                 crop: true
             )]
         } else if let width {
-            return [.init(width: width, unit: .points)]
+            return [.init(width: width * displayScale, unit: .pixels)]
         } else if let height {
-            return [.init(height: height, unit: .points)]
+            return [.init(height: height * displayScale, unit: .pixels)]
         }
         return nil
     }
@@ -83,6 +84,9 @@ extension Thumbnail: View {
     @MainActor
     var base: LazyImage<NukeUI.Image> {
         LazyImage(url: url)
+            #if canImport(AppKit)
+            .animation(nil)
+            #endif
             .processors(resize)
             .pipeline(Self.pipeline)
 //            .priority(.veryLow)

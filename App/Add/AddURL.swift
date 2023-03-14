@@ -21,7 +21,7 @@ struct AddURL: View {
         NavigationStack {
             Form {
                 Section {
-                    URLField("https://", value: $url)
+                    URLField("", value: $url, prompt: Text("https://"))
                         .focused($focused)
                 }
                 
@@ -31,7 +31,9 @@ struct AddURL: View {
                 .backport.defaultFocus($focused, true)
                 .onSubmit(saveUrl)
                 .navigationTitle("Add link")
+                #if canImport(UIKit)
                 .navigationBarTitleDisplayMode(.inline)
+                #endif
                 .toolbar {
                     ToolbarItem(placement: .cancellationAction) {
                         Button("Cancel", action: dismiss.callAsFunction)

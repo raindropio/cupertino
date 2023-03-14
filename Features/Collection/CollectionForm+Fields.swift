@@ -13,14 +13,14 @@ extension CollectionForm.Fields: View {
     var body: some View {
         Section {
             HStack {
-                TextField("Title", text: $collection.title)
+                TextField("", text: $collection.title, prompt: Text("Title"))
                     .fontWeight(.semibold)
                     .focused(focus, equals: .title)
                 
                 Icon(collection: $collection)
             }
             
-            TextField("Description", text: $collection.description, axis: .vertical)
+            TextField("", text: $collection.description, prompt: Text("Description"), axis: .vertical)
                 .preventLineBreaks(text: $collection.description)
                 .lineLimit(2...)
         }

@@ -5,8 +5,9 @@ public struct URLField {
     
     var title: String
     @Binding var value: URL?
+    var prompt: Text?
     
-    public init(_ title: String = "", value: Binding<URL>) {
+    public init(_ title: String = "", value: Binding<URL>, prompt: Text? = nil) {
         self.title = title
         self._value = .init(get: {
             value.wrappedValue
@@ -15,17 +16,19 @@ public struct URLField {
                 value.wrappedValue = url
             }
         })
+        self.prompt = prompt
     }
     
-    public init(_ title: String = "", value: Binding<URL?>) {
+    public init(_ title: String = "", value: Binding<URL?>, prompt: Text? = nil) {
         self.title = title
         self._value = value
+        self.prompt = prompt
     }
 }
 
 extension URLField: View {
     public var body: some View {
-        TextField(title, text: $temp)
+        TextField(title, text: $temp, prompt: prompt)
             .task(id: value) { temp = value?.absoluteString ?? "" }
             .task(id: temp) { value = URL(string: temp) }
             #if os(iOS)

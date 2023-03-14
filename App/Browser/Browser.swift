@@ -35,7 +35,9 @@ extension Browser: View {
             .task(id: stored) { raindrop = stored }
             .task(id: page.url, lookup)
             //browser
+            #if canImport(UIKit)
             .navigationBarTitleDisplayMode(.inline)
+            #endif
             .modifier(Toolbar(page: page, raindrop: $raindrop))
             .modifier(PageError(page: page, raindrop: $raindrop))
             .modifier(WebHighlights(page: page, raindrop: $raindrop, loading: $loading))

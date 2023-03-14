@@ -29,7 +29,9 @@ struct AuthScreen: View {
                         .tint(.primary)
                 }
                     .fontWeight(.medium)
+                    #if canImport(UIKit)
                     .buttonBorderShape(.capsule)
+                    #endif
                     .scenePadding()
                     .scenePadding(.horizontal)
                     .frame(maxWidth: 500)

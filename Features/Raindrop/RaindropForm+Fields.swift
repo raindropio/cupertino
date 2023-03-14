@@ -93,7 +93,7 @@ extension RaindropForm.Fields: View {
             
             Label {
                 if raindrop.file == nil {
-                    URLField("URL", value: $raindrop.link)
+                    URLField("URL", value: $raindrop.link, prompt: Text(""))
                         .focused($focus, equals: .link)
                 }
             } icon: {

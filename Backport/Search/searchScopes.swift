@@ -10,7 +10,9 @@ public extension Backport where Wrapped: View {
 //            content.searchScopes(scope, activation: activation.convert(), scopes)
 //        } else {
             content
+                #if canImport(UIKit)
                 .overlay(Proxy(activation: activation).opacity(0))
+                #endif
                 .searchScopes(scope, scopes: scopes)
 //        }
     }
@@ -86,40 +88,6 @@ extension Proxy {
             super.viewDidAppear(animated)
             update(base)
             animate = true
-        }
-    }
-}
-#endif
-
-#if canImport(AppKit)
-fileprivate struct Proxy: NSViewControllerRepresentable {
-    var activation: BackportSearchScopeActivation
-    
-    func makeNSViewController(context: Context) -> VC {
-        .init(self)
-    }
-
-    func updateNSViewController(_ controller: VC, context: Context) {
-        controller.update(self)
-    }
-}
-
-extension Proxy {
-    class VC: NSViewController {
-        var base: Proxy
-        
-        init(_ base: Proxy) {
-            self.base = base
-            super.init(nibName: nil, bundle: nil)
-        }
-        
-        required init?(coder: NSCoder) {
-            fatalError("init(coder:) has not been implemented")
-        }
-        
-        @MainActor
-        func update(_ base: Proxy) {
-            self.base = base
         }
     }
 }

@@ -1,7 +1,7 @@
+#if canImport(UIKit)
 import SwiftUI
 import UI
 
-#if os(iOS)
 struct SettingsIOS: View {
     @State var path: SettingsPath
 

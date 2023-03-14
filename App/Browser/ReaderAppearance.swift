@@ -43,7 +43,9 @@ extension ReaderAppearance: View {
             }
                 .listStyle(.plain)
                 .navigationTitle("Appearance")
+                #if canImport(UIKit)
                 .navigationBarTitleDisplayMode(.inline)
+                #endif
                 .toolbar {
                     ToolbarItem(placement: .confirmationAction) {
                         Button("Done", action: dismiss.callAsFunction)

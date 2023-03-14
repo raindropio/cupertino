@@ -26,7 +26,11 @@ extension Browser.Toolbar {
     }
             
     private var placement: ToolbarItemPlacement {
+        #if canImport(UIKit)
         portrait ? .bottomBar : .automatic
+        #else
+        .automatic
+        #endif
     }
 }
 
@@ -35,7 +39,9 @@ extension Browser.Toolbar: ViewModifier {
         content
         //overall
         .toolbarRole(.editor)
+        #if canImport(UIKit)
         .toolbar(page.prefersHiddenToolbars ? .hidden : .automatic, for: .navigationBar, .tabBar, .bottomBar)
+        #endif
         .animation(.default, value: page.prefersHiddenToolbars)
         //buttons
         .toolbar {

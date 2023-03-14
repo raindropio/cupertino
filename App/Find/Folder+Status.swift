@@ -15,9 +15,7 @@ extension Folder {
 }
 
 extension Folder.Status {
-    fileprivate struct Memorized: View {
-        @Environment(\.editMode) private var editMode
-        
+    fileprivate struct Memorized: View {        
         var find: FindBy
         var total: Int
         

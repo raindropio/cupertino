@@ -5,13 +5,14 @@ import Features
 
 extension SidebarScreen {
     struct Toolbar: ViewModifier {
-        @Environment(\.editMode) private var editMode
         @Environment(\.containerHorizontalSizeClass) private var sizeClass
         
         func body(content: Content) -> some View {
             content
             .meNavigationTitle()
+            #if canImport(UIKit)
             .navigationBarTitleDisplayMode(isPhone ? .automatic : .inline)
+            #endif
             .toolbar {
                 ToolbarItem(placement: .cancellationAction) {
                     DeepLink(.settings()) {
@@ -21,17 +22,12 @@ extension SidebarScreen {
                 }
                 
                 ToolbarItemGroup {
-                    if editMode?.wrappedValue != .active {
-                        Menu {
-                            //EditButton("Select")
-                            
-                            Section { CollectionsMenu() }
-                            Section { TagsMenu() }
-                        } label: {
-                            Image(systemName: "ellipsis.circle")
-                        }
-                    } else {
-                        //EditButton()
+                    Menu {
+                        //EditButton("Select")
+                        Section { CollectionsMenu() }
+                        Section { TagsMenu() }
+                    } label: {
+                        Image(systemName: "ellipsis.circle")
                     }
                 }
                 

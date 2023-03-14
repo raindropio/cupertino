@@ -3,7 +3,11 @@ import API
 
 extension View {
     func collectionsAnimation() -> some View {
+        #if canImport(UIKit)
         modifier(_Animation())
+        #else
+        self
+        #endif
     }
 }
 

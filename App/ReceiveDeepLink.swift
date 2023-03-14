@@ -27,10 +27,12 @@ struct ReceiveDeepLink: ViewModifier {
                     case .inapp:
                         path.push(.preview(find, id))
                         
+                    #if canImport(UIKit)
                     case .safari:
                         if let url = r.state.item(id)?.link {
                             safari = url
                         }
+                    #endif
                         
                     case .system:
                         if let url = r.state.item(id)?.link {
@@ -58,7 +60,9 @@ struct ReceiveDeepLink: ViewModifier {
                 }
             }
         }
+        #if canImport(UIKit)
         .safariView(item: $safari, button: .init(id: "io.raindrop.ios.share", systemImage: "info.circle"))
         .sheet(item: $settings, content: SettingsIOS.init)
+        #endif
     }
 }

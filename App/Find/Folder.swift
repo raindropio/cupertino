@@ -28,7 +28,9 @@ struct Folder<H: View>: View {
             .modifier(Toolbar(find: find, selection: $selection))
             .raindropSheets()
             .addButton(to: find.collectionId)
+            #if canImport(UIKit)
             .scopeEditMode()
+            #endif
             .onChange(of: find) { _ in
                 selection = .init()
             }

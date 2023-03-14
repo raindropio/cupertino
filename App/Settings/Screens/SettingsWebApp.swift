@@ -16,7 +16,9 @@ struct SettingsWebApp: View {
             userAgent: "RaindropMobile"
         )
 //            .navigationTitle(page.title ?? "")
+            #if canImport(UIKit)
             .navigationBarTitleDisplayMode(.inline)
+            #endif
     }
 }
 

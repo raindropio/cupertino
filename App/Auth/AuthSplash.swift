@@ -50,7 +50,9 @@ struct AuthSplash: View {
                 Text("Access your items seamlessly across all your devices\n\n")
             }
         }
+            #if canImport(UIKit)
             .tabViewStyle(.page(indexDisplayMode: .always))
             .indexViewStyle(.page(backgroundDisplayMode: colorScheme == .light ? .always : .never))
+            #endif
     }
 }

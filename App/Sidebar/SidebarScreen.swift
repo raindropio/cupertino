@@ -9,11 +9,13 @@ struct SidebarScreen: View {
     
     var body: some View {
         FindByList(selection: $selection)
-            .navigationBarTitleDisplayMode(.inline)
             .modifier(Toolbar())
             .addButton(hidden: sizeClass == .regular)
             .dropProvider()
+            #if canImport(UIKit)
+            .navigationBarTitleDisplayMode(.inline)
             .scopeEditMode()
+            #endif
             .navigationSplitViewColumnWidth(ideal: 450)
     }
 }

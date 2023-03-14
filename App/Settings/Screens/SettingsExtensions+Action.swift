@@ -56,7 +56,9 @@ extension SettingsExtensions.Action {
                 CollectionsList($collection, system: [-1])
                     .collectionSheets()
                     .navigationTitle("Add to")
+                    #if canImport(UIKit)
                     .navigationBarTitleDisplayMode(.inline)
+                    #endif
                     .toolbar {
                         ToolbarItem(placement: .cancellationAction) {
                             Button("Cancel", role: .cancel, action: dismiss.callAsFunction)

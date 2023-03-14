@@ -56,7 +56,9 @@ struct AuthLogIn: View {
         }
             .onAppear { focus = .email } //autoFocus modifier breaks autofill
             .onSubmit(submit)
+            #if canImport(UIKit)
             .navigationBarTitleDisplayMode(.inline)
+            #endif
             .navigationTitle("Welcome back")
             .toolbar {
                 ToolbarItem(placement: .cancellationAction) {

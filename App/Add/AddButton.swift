@@ -13,7 +13,9 @@ fileprivate struct AB: ViewModifier {
     @Environment(\.drop) private var drop
     @EnvironmentObject private var c: CollectionSheet
     @Environment(\.isSearching) private var isSearching
+    #if canImport(UIKit)
     @Environment(\.editMode) private var editMode
+    #endif
     @State private var pickURL = false
     @State private var pickPhotos = false
     @State private var pickFiles = false
@@ -25,12 +27,21 @@ fileprivate struct AB: ViewModifier {
         drop?(items, collection)
     }
     
+    private var isEditing: Bool {
+        #if canImport(UIKit)
+        editMode?.wrappedValue == .active
+        #else
+        false
+        #endif
+    }
+    
     private var ignore: Bool {
-        collection == -99 || editMode?.wrappedValue == .active
+        collection == -99 || isEditing
     }
 
     func body(content: Content) -> some View {
         content
+            #if canImport(UIKit)
             .overlay(alignment: .bottomTrailing) {
                 if !hidden, !ignore, !isSearching {
                     OptionalPasteButton(
@@ -43,6 +54,7 @@ fileprivate struct AB: ViewModifier {
                         .ignoresSafeArea(.keyboard)
                 }
             }
+            #endif
             .toolbar {
                 if !hidden, !ignore {
                     ToolbarItemGroup(placement: .primaryAction) {

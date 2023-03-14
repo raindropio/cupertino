@@ -23,7 +23,7 @@
 		7673C0AA295DD3B8002D4229 /* SidebarScreen+Toolbar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7673C0A9295DD3B8002D4229 /* SidebarScreen+Toolbar.swift */; };
 		76799F8B299632790042DF78 /* Folder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76799F8A299632790042DF78 /* Folder.swift */; };
 		767F098C299FD6E200349902 /* WebExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 767F0944299FD6E100349902 /* WebExtension.swift */; };
-		767F09B4299FD94B00349902 /* WebExtension.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = 767F096F299FD6E200349902 /* WebExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		767F09B4299FD94B00349902 /* WebExtension.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = 767F096F299FD6E200349902 /* WebExtension.appex */; platformFilter = ios; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		767F0B5329A3744D00349902 /* index.html in Resources */ = {isa = PBXBuildFile; fileRef = 767F0B0129A3744C00349902 /* index.html */; };
 		767F0B5429A3744D00349902 /* background.js in Resources */ = {isa = PBXBuildFile; fileRef = 767F0B0229A3744C00349902 /* background.js */; };
 		767F0B6429A3744D00349902 /* manifest.json in Resources */ = {isa = PBXBuildFile; fileRef = 767F0B1329A3744C00349902 /* manifest.json */; };
@@ -63,7 +63,7 @@
 		76BFE370291E9F6B00DE9DB2 /* SettingsPath.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76BFE36B291E9F6B00DE9DB2 /* SettingsPath.swift */; };
 		76BFE371291E9F6B00DE9DB2 /* AuthScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76BFE36C291E9F6B00DE9DB2 /* AuthScreen.swift */; };
 		76D880DF2930E1FB00D43AD9 /* ExtensionController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76D880DE2930E1FB00D43AD9 /* ExtensionController.swift */; };
-		76D880E62930E1FB00D43AD9 /* Share.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = 76D880DC2930E1FB00D43AD9 /* Share.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		76D880E62930E1FB00D43AD9 /* Share.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = 76D880DC2930E1FB00D43AD9 /* Share.appex */; platformFilter = ios; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		76DC0B9929AF6C21007B4BDF /* UniformTypeIdentifiers.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 76DC0B9829AF6C21007B4BDF /* UniformTypeIdentifiers.framework */; };
 		76DC0BA929AF6D8C007B4BDF /* Main.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76B16BCF2930E6EB00032D7D /* Main.swift */; };
 		76DC0BAA29AF6D93007B4BDF /* ExtensionController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76D880DE2930E1FB00D43AD9 /* ExtensionController.swift */; };
@@ -78,7 +78,7 @@
 		76DC0BB429AF6DA9007B4BDF /* API in Frameworks */ = {isa = PBXBuildFile; productRef = 76DC0BB329AF6DA9007B4BDF /* API */; };
 		76DC0BB629AF6DAB007B4BDF /* UI in Frameworks */ = {isa = PBXBuildFile; productRef = 76DC0BB529AF6DAB007B4BDF /* UI */; };
 		76DC0BB829AF6DAD007B4BDF /* Features in Frameworks */ = {isa = PBXBuildFile; productRef = 76DC0BB729AF6DAD007B4BDF /* Features */; };
-		76DC0BBC29AF7FE1007B4BDF /* Action.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = 76DC0B9729AF6C21007B4BDF /* Action.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		76DC0BBC29AF7FE1007B4BDF /* Action.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = 76DC0B9729AF6C21007B4BDF /* Action.appex */; platformFilter = ios; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		76DC0BC229AF84E2007B4BDF /* Action.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 76DC0BBF29AF849C007B4BDF /* Action.xcassets */; };
 		76E44C4029BA0D24009634C6 /* SettingsExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76E44C3F29BA0D24009634C6 /* SettingsExtensions.swift */; };
 		76E44C4229BA0E86009634C6 /* SettingsAppearance+AppIcon.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76E44C4129BA0E86009634C6 /* SettingsAppearance+AppIcon.swift */; };
@@ -810,6 +810,7 @@
 /* Begin PBXTargetDependency section */
 		767F09B6299FD94B00349902 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
+			platformFilter = ios;
 			target = 767F096E299FD6E200349902 /* WebExtension (iOS) */;
 			targetProxy = 767F09B5299FD94B00349902 /* PBXContainerItemProxy */;
 		};
@@ -819,11 +820,13 @@
 		};
 		76D880E52930E1FB00D43AD9 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
+			platformFilter = ios;
 			target = 76D880DB2930E1FB00D43AD9 /* Share */;
 			targetProxy = 76D880E42930E1FB00D43AD9 /* PBXContainerItemProxy */;
 		};
 		76DC0BBE29AF7FE1007B4BDF /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
+			platformFilter = ios;
 			target = 76DC0B9629AF6C21007B4BDF /* Action */;
 			targetProxy = 76DC0BBD29AF7FE1007B4BDF /* PBXContainerItemProxy */;
 		};
@@ -1016,7 +1019,7 @@
 				CODE_SIGN_ENTITLEMENTS = App/App.entitlements;
 				CODE_SIGN_IDENTITY = "-";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "Apple Development";
-				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "-";
+				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				DEAD_CODE_STRIPPING = YES;
 				DEVELOPMENT_ASSET_PATHS = "";
@@ -1038,9 +1041,10 @@
 				"LD_RUNPATH_SEARCH_PATHS[sdk=macosx*]" = "@executable_path/../Frameworks";
 				MACOSX_DEPLOYMENT_TARGET = 13.0;
 				PRODUCT_BUNDLE_IDENTIFIER = io.raindrop.ios;
+				"PRODUCT_BUNDLE_IDENTIFIER[sdk=macosx*]" = io.raindrop.safari;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = auto;
-				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator macosx";
 				SUPPORTS_MACCATALYST = NO;
 				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
@@ -1059,6 +1063,7 @@
 				CODE_SIGN_ENTITLEMENTS = App/App.entitlements;
 				CODE_SIGN_IDENTITY = "-";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "Apple Development";
+				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				DEAD_CODE_STRIPPING = YES;
 				DEVELOPMENT_ASSET_PATHS = "";
@@ -1080,9 +1085,10 @@
 				"LD_RUNPATH_SEARCH_PATHS[sdk=macosx*]" = "@executable_path/../Frameworks";
 				MACOSX_DEPLOYMENT_TARGET = 13.0;
 				PRODUCT_BUNDLE_IDENTIFIER = io.raindrop.ios;
+				"PRODUCT_BUNDLE_IDENTIFIER[sdk=macosx*]" = io.raindrop.safari;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = auto;
-				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator macosx";
 				SUPPORTS_MACCATALYST = NO;
 				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;

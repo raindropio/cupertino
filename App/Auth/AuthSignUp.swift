@@ -65,7 +65,9 @@ struct AuthSignup: View {
             .backport.defaultFocus($focus, .name)
             .onSubmit(submit)
             .navigationTitle("Create an account")
+            #if canImport(UIKit)
             .navigationBarTitleDisplayMode(.inline)
+            #endif
             .toolbar {
                 ToolbarItem(placement: .cancellationAction) {
                     Button("Cancel", role: .cancel, action: dismiss.callAsFunction)

@@ -20,7 +20,7 @@ public struct RaindropMeta: View {
             + Text("\u{00a0}• ")
             + Text(raindrop.created, formatter: .shortDateTime)
         )
-            .font(.subheadline)
+            .font(.callout)
             .foregroundStyle(.gray)
             .lineLimit(2)
             .symbolVariant(.fill)

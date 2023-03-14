@@ -9,16 +9,19 @@ extension Search {
         @Binding var refine: FindBy
         
         func body(content: Content) -> some View {
-            content
-                .backport.searchScopes($refine.collectionId, activation: .onSearchPresentation) {
-                    if base.collectionId != 0 {
+            if base.collectionId != 0 {
+                content
+                    .backport.searchScopes($refine.collectionId, activation: .onSearchPresentation) {
                         Text("Everywhere")
                             .tag(0)
                         
                         CollectionLabel(base.collectionId)
+                            .labelStyle(.titleOnly)
                             .tag(base.collectionId)
                     }
-                }
+            } else {
+                content
+            }
         }
     }
 }

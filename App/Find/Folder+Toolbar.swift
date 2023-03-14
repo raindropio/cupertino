@@ -23,7 +23,9 @@ extension Folder {
 
 extension Folder.Toolbar {
     fileprivate struct Memorized: ViewModifier {
+        #if canImport(UIKit)
         @Environment(\.editMode) private var editMode
+        #endif
         @Environment(\.isSearching) private var isSearching
         @Environment(\.containerHorizontalSizeClass) private var sizeClass
 
@@ -36,6 +38,7 @@ extension Folder.Toolbar {
             selection.count == ids.count ? .all(find): .some(selection)
         }
         
+        #if canImport(UIKit)
         private var cancelEditModeButton: some View {
             Button("Cancel", role: .cancel) {
                 withAnimation {
@@ -43,6 +46,7 @@ extension Folder.Toolbar {
                 }
             }
         }
+        #endif
         
         private var selectAllButton: some View {
             Button {
@@ -57,8 +61,6 @@ extension Folder.Toolbar {
         
         func body(content: Content) -> some View {
             content
-            .toolbarRole(.browser)
-            .navigationBarBackButtonHidden(editMode?.wrappedValue == .active)
             .toolbarTitleMenu {
                 if !find.isSearching {
                     Section {
@@ -68,6 +70,9 @@ extension Folder.Toolbar {
                 
                 Text("\(total) items")
             }
+            #if canImport(UIKit)
+            .toolbarRole(.browser)
+            .navigationBarBackButtonHidden(editMode?.wrappedValue == .active)
             .toolbar {
                 //edit mode
                 if editMode?.wrappedValue == .active {
@@ -137,6 +142,7 @@ extension Folder.Toolbar {
                     }
                 }
             }
+            #endif
         }
     }
 }
