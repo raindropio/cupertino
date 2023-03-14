@@ -39,6 +39,7 @@ extension LoadMoreRaindropsButton {
                             
                         case .loading:
                             ProgressView()
+                                .controlSize(.small)
                             
                         case .notFound:
                             Text("That's all folks!")

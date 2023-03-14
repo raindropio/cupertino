@@ -28,6 +28,10 @@ extension AuthContinueWith {
 //MARK: View
 extension AuthContinueWith: View {
     var body: some View {
+        #if canImport(AppKit)
+        Divider().padding(.vertical, 4)
+        #endif
+        
         Section {
             HStack(spacing: 16) {
                 Apple(action: process)

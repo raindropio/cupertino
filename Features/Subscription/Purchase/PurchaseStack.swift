@@ -17,6 +17,7 @@ struct PurchaseStack: View {
             Group {
                 if products.isEmpty {
                     ProgressView()
+                        .controlSize(.small)
                         .frame(maxWidth: .infinity, maxHeight: .infinity)
                 } else {
                     Products()

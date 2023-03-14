@@ -26,7 +26,7 @@ struct AuthLogIn: View {
     var body: some View {
         Form {
             Section {
-                TextField("Email", text: $form.email, prompt: Text("Email or username"))
+                TextField("Email", text: $form.email)
                     #if canImport(UIKit)
                     .autocapitalization(.none)
                     .autocorrectionDisabled()
@@ -39,13 +39,6 @@ struct AuthLogIn: View {
                 SecureField("Password", text: $form.password)
                     .submitLabel(.done)
                     .backport.focused($focus, equals: .password)
-                    .safeAreaInset(edge: .trailing) {
-                        GroupBox {
-                            SafariLink("Forgot?", destination: URL(string: "https://app.raindrop.io/account/lost")!)
-                                .font(.callout)
-                                .padding(-10)
-                        }
-                    }
             }
             
             SubmitButton("Sign in")
@@ -55,14 +48,18 @@ struct AuthLogIn: View {
                 .opacity(form.isEmpty ? 1 : 0)
                 .animation(.default, value: form.isEmpty)
         }
+            .formStyle(.fancy)
             .backport.defaultFocus($focus, .email)
-            .onAppear { focus = .email } //autoFocus modifier breaks autofill
             .onSubmit(submit)
             #if canImport(UIKit)
             .navigationBarTitleDisplayMode(.inline)
-            #endif
             .navigationTitle("Welcome back")
+            #endif
             .toolbar {
+                ToolbarItem {
+                    SafariLink("Forgot?", destination: URL(string: "https://app.raindrop.io/account/lost")!)
+                }
+                
                 ToolbarItem(placement: .cancellationAction) {
                     Button("Cancel", role: .cancel, action: dismiss.callAsFunction)
                 }

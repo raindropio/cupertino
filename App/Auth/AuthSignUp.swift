@@ -53,6 +53,7 @@ struct AuthSignup: View {
                     .backport.focused($focus, equals: .password)
             } footer: {
                 Text("By clicking on 'Sign up' above, you are agreeing to the [Terms of Service](https://help.raindrop.io/terms) and [Privacy Policy](https://help.raindrop.io/privacy)")
+                    .frame(maxHeight: .infinity)
             }
             
             SubmitButton("Sign up")
@@ -62,11 +63,12 @@ struct AuthSignup: View {
                 .opacity(form.isEmpty ? 1 : 0)
                 .animation(.default, value: form.isEmpty)
         }
+            .formStyle(.fancy)
             .backport.defaultFocus($focus, .name)
             .onSubmit(submit)
-            .navigationTitle("Create an account")
             #if canImport(UIKit)
             .navigationBarTitleDisplayMode(.inline)
+            .navigationTitle("Create an account")
             #endif
             .toolbar {
                 ToolbarItem(placement: .cancellationAction) {

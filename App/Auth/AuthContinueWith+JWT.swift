@@ -50,6 +50,8 @@ extension AuthContinueWith {
                     .clipShape(RoundedRectangle(cornerRadius: 8))
             }
                 .tint(.primary)
+                .menuIndicator(.hidden)
+                .fixedSize()
         }
     }
 }

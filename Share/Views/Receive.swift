@@ -30,6 +30,7 @@ extension Receive {
                             //loading
                             if loading {
                                 ProgressView()
+                                    .controlSize(.small)
                                     .presentationDetents([.medium])
                             }
                             //nothing found
@@ -71,6 +72,7 @@ extension Receive {
                 Group {
                     if loading {
                         ProgressView()
+                            .controlSize(.small)
                     } else {
                         AddStack(urls, to: collection)
                     }

@@ -10,6 +10,17 @@ struct AuthScreen: View {
     var body: some View {
         NavigationStack {
             VStack(spacing: 0) {
+                Image("logo-text")
+                    .frame(maxWidth: .infinity)
+                    .overlay(alignment: .trailing) {
+                        SafariLink(destination: URL(string: "https://help.raindrop.io")!) {
+                            Image(systemName: "questionmark.circle.fill")
+                                .symbolRenderingMode(.hierarchical)
+                                .imageScale(.large)
+                        }
+                            .tint(.secondary)
+                    }
+                
                 AuthSplash()
                 
                 HStack(spacing: 16) {
@@ -50,36 +61,20 @@ struct AuthScreen: View {
                     .font(.callout)
                     .multilineTextAlignment(.center)
                     .scenePadding(.horizontal)
-                    .scenePadding(.horizontal)
             }
-                .scenePadding(.vertical)
+                .scenePadding()
+                .toolbar(.hidden, for: .automatic)
                 .navigationTitle("")
-                #if canImport(UIKit)
-                .ignoresSafeArea(edges: .top)
-                .navigationBarTitleDisplayMode(.inline)
-                #endif
-                .toolbar {
-                    ToolbarItem(placement: .principal) {
-                        Image("logo-text")
-                    }
-                    
-                    ToolbarItem(placement: .primaryAction) {
-                        SafariLink(destination: URL(string: "https://help.raindrop.io")!) {
-                            Label("Help", systemImage: "questionmark.circle.fill")
-                                .symbolRenderingMode(.hierarchical)
-                                .font(.title3)
-                        }
-                            .tint(.secondary)
-                    }
-                }
                 .sheet(isPresented: $login) {
                     NavigationStack(root: AuthLogIn.init)
                         .modifier(AuthSuccess())
                         .presentationDetents([.height(360)])
+                        .frame(idealWidth: 360)
                 }
                 .sheet(isPresented: $signup) {
                     NavigationStack(root: AuthSignup.init)
                         .modifier(AuthSuccess())
+                        .frame(idealWidth: 360)
                 }
                 .task {
                     try? await dispatch(UserAction.reload)

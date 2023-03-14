@@ -45,6 +45,7 @@ struct CollectionIconGrid: View {
             .overlay {
                 if isLoading {
                     ProgressView()
+                        .controlSize(.small)
                         .frame(maxWidth: .infinity, maxHeight: .infinity)
                         .background(.regularMaterial)
                 }

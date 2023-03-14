@@ -9,15 +9,15 @@ public struct SubmitButton<Label>: View where Label: View {
         self.label = label
     }
 
-    public var body: some View {        
+    public var body: some View {
         Button(action: onSubmitAction) {
-            ZStack {
-                label()
-                    .opacity(submitting ? 0 : 1)
-                
+            HStack(spacing: 6) {
                 if submitting {
                     ProgressView()
+                        .controlSize(.small)
                 }
+                
+                label()
             }
                 .frame(minHeight: 32)
                 .frame(maxWidth: .infinity)
