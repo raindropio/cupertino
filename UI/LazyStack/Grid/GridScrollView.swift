@@ -5,13 +5,19 @@ struct GridScrollView<Content: View> {
 }
 
 extension GridScrollView: View {
-    var body: some View {        
+    var body: some View {
         ScrollView(.vertical) {
             content()
                 .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .leading)
         }
             .frame(maxWidth: .infinity, maxHeight: .infinity)
             .background(Color.groupedBackground)
+            #if canImport(AppKit)
+            .toolbarBackground(.clear, for: .windowToolbar)
+            .overlay(alignment: .topLeading) {
+                Color.white.overlay(.bar).frame(height: 0)
+            }
+            #endif
             .modifier(ColumnsReader())
     }
 }

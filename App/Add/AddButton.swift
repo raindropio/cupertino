@@ -88,6 +88,7 @@ fileprivate struct AB: ViewModifier {
                             Image(systemName: "plus")
                                 .fontWeight(.medium)
                         }
+                            .menuIndicator(.hidden)
                             .disabled(isSearching)
                             .popover(isPresented: $pickURL) {
                                 AddURL(action: add)

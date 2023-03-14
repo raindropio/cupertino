@@ -42,6 +42,7 @@ extension CollectionForm: View {
                 }
             }
         }
+            .formStyle(.fancy)
             .backport.defaultFocus($focus, .title)
             .submitLabel(.done)
             .onSubmit(commit)

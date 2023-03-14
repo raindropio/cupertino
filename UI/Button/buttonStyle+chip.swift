@@ -36,6 +36,7 @@ fileprivate struct ChipLabelStyle: LabelStyle {
                 .foregroundStyle(.tint)
             configuration.title
         }
+            .allowsHitTesting(false)
     }
 }
 

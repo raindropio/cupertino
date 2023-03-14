@@ -65,6 +65,9 @@ struct AuthScreen: View {
                 .scenePadding()
                 .toolbar(.hidden, for: .automatic)
                 .navigationTitle("")
+                #if canImport(AppKit)
+                .toolbarBackground(.clear, for: .windowToolbar)
+                #endif
                 .sheet(isPresented: $login) {
                     NavigationStack(root: AuthLogIn.init)
                         .modifier(AuthSuccess())

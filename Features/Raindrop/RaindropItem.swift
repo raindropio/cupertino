@@ -25,6 +25,7 @@ extension RaindropItem: View {
             VStack(alignment: .leading, spacing: 4) {
                 RaindropTitleExcerpt(raindrop)
                     .lineLimit(3)
+                    .allowsHitTesting(false)
                 
                 if container?.hide.contains(.tags) != true {
                     RaindropLinks(raindrop: raindrop)
@@ -36,6 +37,7 @@ extension RaindropItem: View {
                 
                 if container?.hide.contains(.info) != true {
                     RaindropMeta(raindrop)
+                        .allowsHitTesting(false)
                 }
             }
                 .frame(maxWidth: .infinity, alignment: .leading)
@@ -86,6 +88,10 @@ extension RaindropItem {
                         parts.value.1
                     }
                 }
+                    #if canImport(AppKit)
+                    .padding(.horizontal, 10)
+                    .padding(.vertical, 4)
+                    #endif
                 
             case .simple:
                 HStack(alignment: .top, spacing: 14) {
@@ -98,6 +104,10 @@ extension RaindropItem {
                         parts.value.1
                     }
                 }
+                    #if canImport(AppKit)
+                    .padding(.horizontal, 10)
+                    .padding(.vertical, 4)
+                    #endif
                 
             case .grid:
                 VStack(alignment: .leading, spacing: 0) {

@@ -69,6 +69,51 @@ fileprivate struct _DisclosureSection<C: View, H: View>: View {
     }
 }
 
+#if os(macOS)
+fileprivate struct _SectionHeader<L: View, A: View>: View {
+    @State private var hover = false
+    
+    var expandable: Bool
+    @Binding var isExpanded: Bool
+    var label: L
+    @ViewBuilder var actions: () -> A
+    
+    var body: some View {
+        HStack(spacing: 0) {
+            label
+            
+            Spacer()
+            
+            Group {
+                if isExpanded {
+                    actions()
+                        .imageScale(.large)
+                }
+                
+                Button { isExpanded.toggle() } label: {
+                    Image(systemName: "chevron.right")
+                        .imageScale(.medium)
+                        .rotationEffect(.degrees(isExpanded ? 90 : 0))
+                }
+            }
+                .opacity(hover ? 1 : 0)
+        }
+            .lineLimit(1)
+            .onHover { hover = $0 }
+            .buttonStyle(_SectionButtonStyle())
+    }
+}
+
+fileprivate struct _SectionButtonStyle: ButtonStyle {
+    public func makeBody(configuration: Configuration) -> some View {
+        configuration.label
+            .labelStyle(.iconOnly)
+            .frame(width: 32, height: 24)
+            .fixedSize()
+            .contentShape(Rectangle())
+    }
+}
+#else
 fileprivate struct _SectionHeader<L: View, A: View>: View {
     @Environment(\.headerProminence) private var prominence
     
@@ -108,3 +153,4 @@ fileprivate struct _SectionHeader<L: View, A: View>: View {
             .animation(.default, value: isExpanded)
     }
 }
+#endif

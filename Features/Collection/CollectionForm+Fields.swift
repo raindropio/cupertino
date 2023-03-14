@@ -14,23 +14,23 @@ extension CollectionForm.Fields: View {
     var body: some View {
         Section {
             HStack {
-                TextField("", text: $collection.title, prompt: Text("Title"))
+                TextField("Title", text: $collection.title)
                     .fontWeight(.semibold)
                     .backport.focused(focus, equals: .title)
                 
                 Icon(collection: $collection)
             }
             
-            TextField("", text: $collection.description, prompt: Text("Description"), axis: .vertical)
+            TextField("Description", text: $collection.description, axis: .vertical)
                 .preventLineBreaks(text: $collection.description)
                 .lineLimit(2...)
         }
         
         Section {
-            NavigationLink {
-                CollectionParent($collection)
-            } label: {
-                LabeledContent("Parent") {
+            LabeledContent("Parent") {
+                NavigationLink {
+                    CollectionParent($collection)
+                } label: {
                     if let parent = collection.parent {
                         CollectionLabel(parent, withLocation: true)
                             .badge(0)
@@ -46,10 +46,10 @@ extension CollectionForm.Fields: View {
             
             if !collection.isNew {
                 Section {
-                    NavigationLink {
-                        CollectionSharing($collection)
-                    } label: {
-                        LabeledContent("Sharing") {
+                    LabeledContent("Sharing") {
+                        NavigationLink {
+                            CollectionSharing($collection)
+                        } label: {
                             if collection.public {
                                 Circle().fill(.tint).frame(width: 8, height: 8)
                                 Text("Public")

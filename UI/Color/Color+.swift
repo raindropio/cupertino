@@ -7,7 +7,7 @@ public extension Color {
     static var secondaryGroupedBackground: Color { Color(UIColor.secondarySystemGroupedBackground) }
     #else
     static var tertiaryLabel: Color { Color(NSColor.tertiaryLabelColor) }
-    static var groupedBackground: Color { Color(NSColor.windowBackgroundColor) }
-    static var secondaryGroupedBackground: Color { Color(NSColor.alternatingContentBackgroundColors.first!) }
+    static var groupedBackground: Color { Color(NSColor.controlBackgroundColor) }
+    static var secondaryGroupedBackground: Color { Color(NSColor.windowBackgroundColor) }
     #endif
 }
