@@ -98,6 +98,7 @@ fileprivate struct _SectionHeader<L: View, A: View>: View {
             }
                 .opacity(hover ? 1 : 0)
         }
+            .padding(.trailing, 8)
             .lineLimit(1)
             .onHover { hover = $0 }
             .buttonStyle(_SectionButtonStyle())
@@ -108,7 +109,7 @@ fileprivate struct _SectionButtonStyle: ButtonStyle {
     public func makeBody(configuration: Configuration) -> some View {
         configuration.label
             .labelStyle(.iconOnly)
-            .frame(width: 32, height: 24)
+            .frame(width: 24, height: 24)
             .fixedSize()
             .contentShape(Rectangle())
     }

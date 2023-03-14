@@ -139,14 +139,25 @@ extension LazyTree: View {
                     DisclosureGroup(isExpanded: isExpanded(leaf.id)) {} label: {
                         content(items[leaf.id]!)
                     }
+                        #if canImport(AppKit)
+                        .disclosureGroupStyle(.appKit)
+                        #endif
                 } else {
                     content(items[leaf.id]!)
+                        #if canImport(AppKit)
+                        .padding(.leading, 12)
+                        #endif
                 }
             }
+                #if canImport(UIKit)
                 .padding(.leading, leaf.level * 32)
+                #else
+                .padding(.leading, leaf.level * 16)
+                #endif
                 .transition(.move(edge: .bottom).combined(with: .opacity))
                 .tag(tag(leaf.id))
         }
             .onMove { onMove($0, $1) }
     }
 }
+

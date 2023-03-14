@@ -41,7 +41,6 @@ extension Nesteds {
                         .tint(.secondary)
                         .buttonStyle(.chip)
                         .scenePadding(.horizontal)
-                        .frame(height: 44)
                         .fixedSize()
                 }
                     .padding(.vertical, 8)
