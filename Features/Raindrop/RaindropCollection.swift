@@ -17,6 +17,8 @@ public struct RaindropCollection: View {
             .navigationTitle("Collection")
             #if canImport(UIKit)
             .navigationBarTitleDisplayMode(.inline)
+            #else
+            .frame(idealHeight: 400)
             #endif
             .onChange(of: raindrop.collection) { _ in
                 guard isEnabled else { return }

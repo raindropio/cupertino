@@ -30,6 +30,8 @@ struct RaindropCoverGrid: View {
             .navigationTitle("Cover")
             #if os(iOS)
             .navigationBarTitleDisplayMode(.inline)
+            #else
+            .frame(idealHeight: 300)
             #endif
             .onChange(of: raindrop.cover) { _ in
                 dismiss()

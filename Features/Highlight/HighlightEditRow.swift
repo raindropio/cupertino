@@ -15,6 +15,7 @@ struct HighlightEditRow: View {
                         .padding(.vertical, 10)
                     
                     Text(highlight.text)
+                        .foregroundColor(.primary)
                         .textSelection(.enabled)
                         .frame(maxWidth: .infinity, alignment: .leading)
                 }

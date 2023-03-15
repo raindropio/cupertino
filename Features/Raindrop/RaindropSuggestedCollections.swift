@@ -44,13 +44,15 @@ public struct RaindropSuggestedCollections: View {
                         HStack(spacing: 10) {
                             ForEach(suggestions, id: \.self, content: row)
                         }
-                        .buttonStyle(.dotted)
-                        .controlSize(.small)
-                        .tint(.secondary)
-                        .foregroundColor(.primary)
-                        .padding(.vertical, 14)
-                        .padding(.trailing, 32)
-                        .fixedSize()
+                            .buttonStyle(.dotted)
+                            .controlSize(.small)
+                            .tint(.secondary)
+                            .foregroundColor(.primary)
+                            #if canImport(UIKit)
+                            .padding(.vertical, 14)
+                            #endif
+                            .padding(.trailing, 32)
+                            .fixedSize()
                     }
                     .mask(LinearGradient(
                         gradient: Gradient(colors: Array(repeating: .black, count: 7) + [.clear]),
@@ -60,6 +62,9 @@ public struct RaindropSuggestedCollections: View {
                 }
             }
                 .fixedSize(horizontal: false, vertical: true)
+                #if canImport(AppKit)
+                .padding(.bottom, 8)
+                #endif
                 .contentTransition(.opacity)
                 .transition(.opacity)
                 .animation(.default, value: raindrop.collection)
