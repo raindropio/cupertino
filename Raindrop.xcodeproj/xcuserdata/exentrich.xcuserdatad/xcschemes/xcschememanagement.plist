@@ -34,6 +34,11 @@
 			<key>orderHint</key>
 			<integer>5</integer>
 		</dict>
+		<key>WebExtension (macOS).xcscheme_^#shared#^_</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>6</integer>
+		</dict>
 		<key>cupertino.xcscheme_^#shared#^_</key>
 		<dict>
 			<key>orderHint</key>
@@ -43,6 +48,11 @@
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
 		<key>76154B6129C202D5002DDDEB</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>76154C5729C21039002DDDEB</key>
 		<dict>
 			<key>primary</key>
 			<true/>

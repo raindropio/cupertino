@@ -25,6 +25,14 @@
 		76154B7F29C20495002DDDEB /* API in Frameworks */ = {isa = PBXBuildFile; productRef = 76154B7E29C20495002DDDEB /* API */; };
 		76154B8129C20495002DDDEB /* Features in Frameworks */ = {isa = PBXBuildFile; productRef = 76154B8029C20495002DDDEB /* Features */; };
 		76154B8329C20495002DDDEB /* UI in Frameworks */ = {isa = PBXBuildFile; productRef = 76154B8229C20495002DDDEB /* UI */; };
+		76154C7129C21039002DDDEB /* WebExtension (macOS).appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = 76154C5829C21039002DDDEB /* WebExtension (macOS).appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		76154C7529C210E2002DDDEB /* WebExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 767F0944299FD6E100349902 /* WebExtension.swift */; };
+		76154C7629C210EC002DDDEB /* manifest.json in Resources */ = {isa = PBXBuildFile; fileRef = 767F0B1329A3744C00349902 /* manifest.json */; };
+		76154C7729C210FF002DDDEB /* index.html in Resources */ = {isa = PBXBuildFile; fileRef = 767F0B0129A3744C00349902 /* index.html */; };
+		76154C7829C21102002DDDEB /* welcome in Resources */ = {isa = PBXBuildFile; fileRef = 767F0B9429A3745A00349902 /* welcome */; };
+		76154C7929C21105002DDDEB /* assets in Resources */ = {isa = PBXBuildFile; fileRef = 767F0B9229A3745A00349902 /* assets */; };
+		76154C7A29C21107002DDDEB /* _locales in Resources */ = {isa = PBXBuildFile; fileRef = 767F0B9329A3745A00349902 /* _locales */; };
+		76154C7B29C21133002DDDEB /* background.js in Resources */ = {isa = PBXBuildFile; fileRef = 767F0B0229A3744C00349902 /* background.js */; };
 		7618C96D29C073B600D4DE78 /* AuthSuccess.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7618C96C29C073B600D4DE78 /* AuthSuccess.swift */; };
 		761F4CAD299E2E86008C1E6D /* SettingsAppearance.swift in Sources */ = {isa = PBXBuildFile; fileRef = 761F4CAC299E2E86008C1E6D /* SettingsAppearance.swift */; };
 		761F6C3029A3AC99002919BC /* PermanentCopy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 761F6C2F29A3AC99002919BC /* PermanentCopy.swift */; };
@@ -124,6 +132,13 @@
 			remoteGlobalIDString = 76154B6129C202D5002DDDEB;
 			remoteInfo = Raindrop.io;
 		};
+		76154C6F29C21039002DDDEB /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 7685A189286868AC00A4BC3C /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 76154C5729C21039002DDDEB;
+			remoteInfo = WebExtension;
+		};
 		767F09B5299FD94B00349902 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 7685A189286868AC00A4BC3C /* Project object */;
@@ -135,7 +150,7 @@
 			isa = PBXContainerItemProxy;
 			containerPortal = 7685A189286868AC00A4BC3C /* Project object */;
 			proxyType = 1;
-			remoteGlobalIDString = 767F0978299FD6E200349902;
+			remoteGlobalIDString = 76154C5729C21039002DDDEB;
 			remoteInfo = "WebExtension (macOS)";
 		};
 		76D880E42930E1FB00D43AD9 /* PBXContainerItemProxy */ = {
@@ -162,6 +177,7 @@
 			dstSubfolderSpec = 13;
 			files = (
 				76DC0BBC29AF7FE1007B4BDF /* Action (iOS).appex in Embed Foundation Extensions */,
+				76154C7129C21039002DDDEB /* WebExtension (macOS).appex in Embed Foundation Extensions */,
 				76D880E62930E1FB00D43AD9 /* Share (iOS).appex in Embed Foundation Extensions */,
 				76154B6F29C202D6002DDDEB /* Share (macOS).appex in Embed Foundation Extensions */,
 				767F09B4299FD94B00349902 /* WebExtension.appex in Embed Foundation Extensions */,
@@ -175,6 +191,7 @@
 		760DD2FC2942333D00103C9E /* SaveFiles.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SaveFiles.swift; sourceTree = "<group>"; };
 		760DD2FE294237E900103C9E /* NothingFound.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NothingFound.swift; sourceTree = "<group>"; };
 		76154B6229C202D5002DDDEB /* Share (macOS).appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = "Share (macOS).appex"; sourceTree = BUILT_PRODUCTS_DIR; };
+		76154C5829C21039002DDDEB /* WebExtension (macOS).appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = "WebExtension (macOS).appex"; sourceTree = BUILT_PRODUCTS_DIR; };
 		7618C96C29C073B600D4DE78 /* AuthSuccess.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthSuccess.swift; sourceTree = "<group>"; };
 		761F4CAC299E2E86008C1E6D /* SettingsAppearance.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsAppearance.swift; sourceTree = "<group>"; };
 		761F6C2F29A3AC99002919BC /* PermanentCopy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PermanentCopy.swift; sourceTree = "<group>"; };
@@ -270,6 +287,13 @@
 				76154B7F29C20495002DDDEB /* API in Frameworks */,
 				76154B8329C20495002DDDEB /* UI in Frameworks */,
 				76154B8129C20495002DDDEB /* Features in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		76154C5529C21039002DDDEB /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -417,6 +441,7 @@
 				767F096F299FD6E200349902 /* WebExtension.appex */,
 				76DC0B9729AF6C21007B4BDF /* Action (iOS).appex */,
 				76154B6229C202D5002DDDEB /* Share (macOS).appex */,
+				76154C5829C21039002DDDEB /* WebExtension (macOS).appex */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -570,6 +595,23 @@
 			productReference = 76154B6229C202D5002DDDEB /* Share (macOS).appex */;
 			productType = "com.apple.product-type.app-extension";
 		};
+		76154C5729C21039002DDDEB /* WebExtension (macOS) */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 76154C7429C21039002DDDEB /* Build configuration list for PBXNativeTarget "WebExtension (macOS)" */;
+			buildPhases = (
+				76154C5429C21039002DDDEB /* Sources */,
+				76154C5529C21039002DDDEB /* Frameworks */,
+				76154C5629C21039002DDDEB /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "WebExtension (macOS)";
+			productName = WebExtension;
+			productReference = 76154C5829C21039002DDDEB /* WebExtension (macOS).appex */;
+			productType = "com.apple.product-type.app-extension";
+		};
 		767F096E299FD6E200349902 /* WebExtension (iOS) */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 767F09A8299FD6E200349902 /* Build configuration list for PBXNativeTarget "WebExtension (iOS)" */;
@@ -605,6 +647,7 @@
 				767F09B929A3592300349902 /* PBXTargetDependency */,
 				76DC0BBE29AF7FE1007B4BDF /* PBXTargetDependency */,
 				76154B6E29C202D6002DDDEB /* PBXTargetDependency */,
+				76154C7029C21039002DDDEB /* PBXTargetDependency */,
 			);
 			name = Raindrop;
 			packageProductDependencies = (
@@ -673,6 +716,9 @@
 					76154B6129C202D5002DDDEB = {
 						CreatedOnToolsVersion = 14.2;
 					};
+					76154C5729C21039002DDDEB = {
+						CreatedOnToolsVersion = 14.2;
+					};
 					767F096E299FD6E200349902 = {
 						CreatedOnToolsVersion = 14.2;
 					};
@@ -707,6 +753,7 @@
 				76154B6129C202D5002DDDEB /* Share (macOS) */,
 				76DC0B9629AF6C21007B4BDF /* Action (iOS) */,
 				767F096E299FD6E200349902 /* WebExtension (iOS) */,
+				76154C5729C21039002DDDEB /* WebExtension (macOS) */,
 			);
 		};
 /* End PBXProject section */
@@ -717,6 +764,19 @@
 			buildActionMask = 2147483647;
 			files = (
 				76154B7429C203A7002DDDEB /* Share.js in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		76154C5629C21039002DDDEB /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				76154C7829C21102002DDDEB /* welcome in Resources */,
+				76154C7929C21105002DDDEB /* assets in Resources */,
+				76154C7629C210EC002DDDEB /* manifest.json in Resources */,
+				76154C7A29C21107002DDDEB /* _locales in Resources */,
+				76154C7B29C21133002DDDEB /* background.js in Resources */,
+				76154C7729C210FF002DDDEB /* index.html in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -797,6 +857,14 @@
 				76154B7D29C203B4002DDDEB /* Receive.swift in Sources */,
 				76154B7929C203B4002DDDEB /* SaveFiles.swift in Sources */,
 				76154B7729C203AF002DDDEB /* ExtensionUI.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		76154C5429C21039002DDDEB /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				76154C7529C210E2002DDDEB /* WebExtension.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -907,6 +975,11 @@
 			target = 76154B6129C202D5002DDDEB /* Share (macOS) */;
 			targetProxy = 76154B6D29C202D6002DDDEB /* PBXContainerItemProxy */;
 		};
+		76154C7029C21039002DDDEB /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 76154C5729C21039002DDDEB /* WebExtension (macOS) */;
+			targetProxy = 76154C6F29C21039002DDDEB /* PBXContainerItemProxy */;
+		};
 		767F09B6299FD94B00349902 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			platformFilter = ios;
@@ -915,6 +988,7 @@
 		};
 		767F09B929A3592300349902 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
+			target = 76154C5729C21039002DDDEB /* WebExtension (macOS) */;
 			targetProxy = 767F09B829A3592300349902 /* PBXContainerItemProxy */;
 		};
 		76D880E52930E1FB00D43AD9 /* PBXTargetDependency */ = {
@@ -942,7 +1016,6 @@
 				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 7459JWM5TY;
 				ENABLE_HARDENED_RUNTIME = YES;
 				GENERATE_INFOPLIST_FILE = YES;
@@ -955,7 +1028,6 @@
 					"@executable_path/../../../../Frameworks",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 13.0;
-				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = io.raindrop.safari.Share;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = macosx;
@@ -975,7 +1047,6 @@
 				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 7459JWM5TY;
 				ENABLE_HARDENED_RUNTIME = YES;
 				GENERATE_INFOPLIST_FILE = YES;
@@ -988,8 +1059,75 @@
 					"@executable_path/../../../../Frameworks",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 13.0;
-				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = io.raindrop.safari.Share;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx;
+				SKIP_INSTALL = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+			};
+			name = Release;
+		};
+		76154C7229C21039002DDDEB /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CODE_SIGN_ENTITLEMENTS = WebExtension/WebExtension.entitlements;
+				CODE_SIGN_IDENTITY = "-";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "Apple Development";
+				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Apple Development";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 7459JWM5TY;
+				ENABLE_HARDENED_RUNTIME = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = WebExtension/WebExtension.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = WebExtension;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+					"@executable_path/../../../../Frameworks",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 13.0;
+				OTHER_LDFLAGS = (
+					"-framework",
+					SafariServices,
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = io.raindrop.safari.extension;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx;
+				SKIP_INSTALL = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+			};
+			name = Debug;
+		};
+		76154C7329C21039002DDDEB /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CODE_SIGN_ENTITLEMENTS = WebExtension/WebExtension.entitlements;
+				CODE_SIGN_IDENTITY = "-";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "Apple Development";
+				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Apple Development";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 7459JWM5TY;
+				ENABLE_HARDENED_RUNTIME = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = WebExtension/WebExtension.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = WebExtension;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+					"@executable_path/../../../../Frameworks",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 13.0;
+				OTHER_LDFLAGS = (
+					"-framework",
+					SafariServices,
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = io.raindrop.safari.extension;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = macosx;
 				SKIP_INSTALL = YES;
@@ -1111,7 +1249,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				MARKETING_VERSION = 5.0.13;
+				MARKETING_VERSION = 5.0.14;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -1166,7 +1304,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				MARKETING_VERSION = 5.0.13;
+				MARKETING_VERSION = 5.0.14;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SWIFT_COMPILATION_MODE = wholemodule;
@@ -1391,6 +1529,15 @@
 			buildConfigurations = (
 				76154B7129C202D6002DDDEB /* Debug */,
 				76154B7229C202D6002DDDEB /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		76154C7429C21039002DDDEB /* Build configuration list for PBXNativeTarget "WebExtension (macOS)" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				76154C7229C21039002DDDEB /* Debug */,
+				76154C7329C21039002DDDEB /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

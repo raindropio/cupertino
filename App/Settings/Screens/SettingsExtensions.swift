@@ -7,7 +7,9 @@ struct SettingsExtensions: View {
     var body: some View {
         List {
             Share()
+            #if canImport(UIKit)
             Action()
+            #endif
             Safari()
         }
             .navigationTitle("Extensions")
