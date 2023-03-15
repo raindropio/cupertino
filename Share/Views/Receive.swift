@@ -54,7 +54,12 @@ extension Receive {
                     }
                 }
             }
+                #if canImport(UIKit)
                 .frame(idealWidth: 400, idealHeight: 600)
+                #else
+                .frame(width: 400)
+                .fixedSize()
+                #endif
         }
     }
 }
@@ -80,7 +85,12 @@ extension Receive {
                     .transition(.opacity)
                     .animation(.default, value: loading)
             }
+                #if canImport(UIKit)
                 .frame(idealWidth: 400, idealHeight: 400)
+                #else
+                .frame(width: 400)
+                .fixedSize()
+                #endif
         }
     }
 }

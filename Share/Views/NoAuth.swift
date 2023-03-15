@@ -12,7 +12,12 @@ struct NoAuth: View {
             Button("OK", role: .cancel, action: dismiss.callAsFunction)
         }
             .presentationDetents([.medium])
+            #if canImport(UIKit)
             .presentationUndimmed(.medium)
             .frame(idealWidth: 400, idealHeight: 400)
+            #else
+            .frame(width: 400)
+            .fixedSize()
+            #endif
     }
 }

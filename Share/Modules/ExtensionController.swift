@@ -1,6 +1,5 @@
 import SwiftUI
-import UIKit
-
+#if canImport(UIKit)
 @objc(ExtensionController)
 class ExtensionController: UIViewController {
     override func viewDidLoad() {
@@ -22,3 +21,11 @@ class ExtensionController: UIViewController {
         ])
     }
 }
+#else
+@objc(ExtensionController)
+class ExtensionController: NSViewController {
+    override func loadView() {
+        self.view = NSHostingView(rootView: ExtensionUI(service: .init(self.extensionContext)))
+    }
+}
+#endif

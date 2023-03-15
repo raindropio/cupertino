@@ -16,8 +16,8 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "76D880DB2930E1FB00D43AD9"
-               BuildableName = "Share.appex"
-               BlueprintName = "Share"
+               BuildableName = "Share (iOS).appex"
+               BlueprintName = "Share (iOS)"
                ReferencedContainer = "container:Raindrop.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
