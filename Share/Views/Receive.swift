@@ -24,7 +24,7 @@ extension Receive {
             Group {
                 if let item: Raindrop = service.decoded() {
                     RaindropStack(item, content: RaindropForm.init)
-                } else {
+                } else if !service.items.isEmpty {
                     AddDetect(service.items) { loading, urls in
                         Group {
                             //loading
@@ -52,12 +52,14 @@ extension Receive {
                             .transition(.opacity)
                             .animation(.default, value: loading)
                     }
+                } else {
+                    ProgressView().controlSize(.small)
                 }
             }
                 #if canImport(UIKit)
                 .frame(idealWidth: 400, idealHeight: 600)
                 #else
-                .frame(width: 400)
+                .frame(width: 400).frame(minHeight: 300)
                 .fixedSize()
                 #endif
         }
