@@ -54,6 +54,9 @@ fileprivate struct AB: ViewModifier {
                         .ignoresSafeArea(.keyboard)
                 }
             }
+            #else
+            .onPasteCommand(of: addTypes.filter { $0 != .text }, perform: add)
+            .importsItemProviders(addTypes.filter { $0 != .text }) { add($0); return true }
             #endif
             .toolbar {
                 if !hidden, !ignore {
