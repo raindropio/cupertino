@@ -58,8 +58,8 @@ extension TextTokenField.Native {
 
         isUserInteractionEnabled = environment.isEnabled
         
-        if placeholder != base.title {
-            placeholder = base.title
+        if placeholder != base.prompt {
+            placeholder = base.prompt
         }
         
         if tokens.map(\.stringValue) != base.value {

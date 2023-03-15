@@ -68,6 +68,9 @@ extension Browser.Toolbar: ViewModifier {
                     .popover(isPresented: $highlights) {
                         RaindropStack($raindrop, content: RaindropHighlights.init)
                             .frame(idealWidth: 400, idealHeight: 600)
+                            #if canImport(AppKit)
+                            .fixedSize()
+                            #endif
                     }
             }
             
@@ -79,6 +82,9 @@ extension Browser.Toolbar: ViewModifier {
                     .popover(isPresented: $collection) {
                         RaindropStack($raindrop, content: RaindropCollection.init)
                             .frame(idealWidth: 400, idealHeight: 600)
+                            #if canImport(AppKit)
+                            .fixedSize()
+                            #endif
                     }
                     .disabled(raindrop.isNew)
                 Spacer()
@@ -99,6 +105,9 @@ extension Browser.Toolbar: ViewModifier {
                     .popover(isPresented: $tags) {
                         RaindropStack($raindrop, content: RaindropTags.init)
                             .frame(idealWidth: 400, idealHeight: 600)
+                            #if canImport(AppKit)
+                            .fixedSize()
+                            #endif
                     }
                     .disabled(raindrop.isNew)
                 Spacer()
@@ -111,7 +120,12 @@ extension Browser.Toolbar: ViewModifier {
                 }
                     .popover(isPresented: $form) {
                         RaindropStack($raindrop, content: RaindropForm.init)
+                            #if canImport(AppKit)
+                            .frame(idealWidth: 400)
+                            .fixedSize()
+                            #else
                             .frame(idealWidth: 400, idealHeight: 600)
+                            #endif
                     }
                 Spacer()
             }

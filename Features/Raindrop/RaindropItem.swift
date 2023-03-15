@@ -88,10 +88,6 @@ extension RaindropItem {
                         parts.value.1
                     }
                 }
-                    #if canImport(AppKit)
-                    .padding(.horizontal, 10)
-                    .padding(.vertical, 4)
-                    #endif
                 
             case .simple:
                 HStack(alignment: .top, spacing: 14) {
@@ -104,10 +100,6 @@ extension RaindropItem {
                         parts.value.1
                     }
                 }
-                    #if canImport(AppKit)
-                    .padding(.horizontal, 10)
-                    .padding(.vertical, 4)
-                    #endif
                 
             case .grid:
                 VStack(alignment: .leading, spacing: 0) {

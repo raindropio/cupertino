@@ -27,9 +27,12 @@ extension RaindropForm {
                         Text("Created ") + Text(raindrop.created, formatter: .shortDateTime) + Text("\n") +
                         Text("Last modified ") + Text(raindrop.lastUpdate, formatter: .shortDateTime)
                     )
+                    .fixedSize()
                     .frame(maxWidth: .infinity)
                     .multilineTextAlignment(.center)
                     .textCase(.none)
+                    .foregroundStyle(.tertiary)
+                    .font(.callout)
                 }
             }
         }

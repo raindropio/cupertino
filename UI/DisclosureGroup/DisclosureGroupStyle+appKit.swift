@@ -1,12 +1,12 @@
 import SwiftUI
 
+#if canImport(AppKit)
 public extension DisclosureGroupStyle where Self == AppKitDisclosureStyle {
     static var appKit: Self {
         return .init()
     }
 }
 
-#if canImport(AppKit)
 public struct AppKitDisclosureStyle: DisclosureGroupStyle {
     public func makeBody(configuration: Configuration) -> some View {
         HStack(spacing: 0) {

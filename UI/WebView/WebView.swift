@@ -23,6 +23,9 @@ extension WebView: View {
             .overlay(alignment: .topLeading) {
                 ProgressBar(value: page.progress)
             }
+            //dialogs
+            .modifier(Dialogs(page: page))
+            #if canImport(UIKit)
             //fix transparent navigation bar background
             .overlay(alignment: .topLeading) {
                 Color.white
@@ -34,10 +37,7 @@ extension WebView: View {
                     .frame(height: 0)
                     .animation(nil, value: page.prefersHiddenToolbars)
             }
-            //dialogs
-            .modifier(Dialogs(page: page))
             //allow back webview navigation
-            #if canImport(UIKit)
             .popGesture({
                 if page.canGoBack {
                     return .never

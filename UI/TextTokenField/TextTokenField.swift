@@ -1,18 +1,18 @@
 import SwiftUI
 
 public struct TextTokenField {
-    var title: String = ""
     @Binding var value: [String]
     var suggestions: [String]
+    var prompt: String
     
     public init(
-        _ title: String,
         value: Binding<[String]>,
-        suggestions: [String] = []
+        suggestions: [String] = [],
+        prompt: String = ""
     ) {
-        self.title = title
         self._value = value
         self.suggestions = suggestions
+        self.prompt = prompt
     }
 }
 

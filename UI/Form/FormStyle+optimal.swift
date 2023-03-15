@@ -12,8 +12,6 @@ public struct FancyFormStyle: FormStyle {
             configuration.content
         }
             #if canImport(AppKit)
-            .textFieldStyle(.roundedBorder)
-            .controlSize(.large)
             .scenePadding()
             #endif
     }

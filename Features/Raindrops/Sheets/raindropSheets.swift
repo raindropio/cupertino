@@ -33,19 +33,35 @@ fileprivate struct _Modifier: ViewModifier {
         //sheets/alerts
         .sheet(item: $edit) { id in
             RaindropStack(id, content: RaindropForm.init)
+                #if canImport(AppKit)
+                .frame(idealWidth: 400)
+                .fixedSize()
+                #endif
         }
         .sheet(item: $highlights) { id in
             RaindropStack(id, content: RaindropHighlights.init)
+                #if canImport(AppKit)
+                .frame(idealWidth: 400)
+                .fixedSize()
+                #endif
         }
         .sheet(item: $move) { pick in
             NavigationStack {
                 MoveRaindrops(pick: pick)
             }
+                #if canImport(AppKit)
+                .frame(idealWidth: 400)
+                .fixedSize()
+                #endif
         }
         .sheet(item: $addTags) { pick in
             NavigationStack {
                 AddTagsRaindrops(pick: pick)
             }
+                #if canImport(AppKit)
+                .frame(idealWidth: 400)
+                .fixedSize()
+                #endif
         }
         .alert("Are you sure?", isPresented: $deleting, presenting: delete, actions: DeleteRaindrops.init) { _ in
             Text("Items will be moved to Trash")

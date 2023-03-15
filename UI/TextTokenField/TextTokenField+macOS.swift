@@ -17,8 +17,8 @@ extension TextTokenField {
                         
             //appearance
             tokenStyle = .squared
-            isBezeled = false
-            drawsBackground = false
+//            isBezeled = false
+//            drawsBackground = false
             
             //font
             font = .preferredFont(forTextStyle: .body)
@@ -64,8 +64,8 @@ extension TextTokenField.Native {
 
         isEnabled = environment.isEnabled
         
-        if placeholderString != base.title {
-            placeholderString = base.title
+        if placeholderString != base.prompt {
+            placeholderString = base.prompt
         }
         
         if objectValue as? [String] != base.value {

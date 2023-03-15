@@ -14,12 +14,12 @@ extension RaindropForm {
 extension RaindropForm.Fields: View {
     var body: some View {
         Section {
-            HStack(spacing: 8) {
+            HStack(alignment: .top, spacing: 8) {
                 TextField("Title", text: $raindrop.title, axis: .vertical)
                     .preventLineBreaks(text: $raindrop.title)
                     .focused($focus, equals: .title)
                     .fontWeight(.semibold)
-                    .lineLimit(5)
+                    .lineLimit(2...5)
                     .onSubmit {
                         focus = nil
                     }
@@ -36,8 +36,6 @@ extension RaindropForm.Fields: View {
                     .navigationDestination(isPresented: $cover) {
                         RaindropCoverGrid(raindrop: $raindrop)
                     }
-                    .padding(.top, 10)
-                    .frame(maxHeight: .infinity, alignment: .top)
             }
             
             TextField("Description", text: $raindrop.excerpt, axis: .vertical)
@@ -47,16 +45,19 @@ extension RaindropForm.Fields: View {
             .contentTransition(.opacity)
         
         Section {
-            NavigationLink {
-                RaindropCollection($raindrop)
-            } label: {
-                CollectionLabel(raindrop.collection, withLocation: true)
-                    .badge(0)
-                    .symbolVariant(.fill)
+            LabeledContent("Collection") {
+                NavigationLink {
+                    RaindropCollection($raindrop)
+                } label: {
+                    CollectionLabel(raindrop.collection, withLocation: true)
+                        .badge(0)
+                        .symbolVariant(.fill)
+                }
+                    .id(raindrop.collection)
             }
-                .id(raindrop.collection)
-        } header: {
-            Text("Collection")
+                #if canImport(UIKit)
+                .labelsHidden()
+                #endif
         } footer: {
             RaindropSuggestedCollections($raindrop)
         }
@@ -64,20 +65,25 @@ extension RaindropForm.Fields: View {
         
         Section {
             //tags
-            HStack {
-                Label {
-                    TagsField($raindrop.tags)
-                        .focused($focus, equals: .tags)
-                } icon: {
-                    Image(systemName: "number")
-                }
-                
+            Group {
+                #if canImport(UIKit)
                 NavigationLink {
                     RaindropTags($raindrop)
-                } label: {}
-                    .layoutPriority(-1)
+                } label: {
+                    Label {
+                        TagsField($raindrop.tags)
+                    } icon: {
+                        Image(systemName: "number")
+                    }
+                }
+                #else
+                LabeledContent("Tags") {
+                    TagsField($raindrop.tags)
+                }
+                #endif
             }
-            
+                .focused($focus, equals: .tags)
+
             //highlights
             NavigationLink {
                 RaindropHighlights($raindrop)

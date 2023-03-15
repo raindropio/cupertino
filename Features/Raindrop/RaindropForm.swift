@@ -30,12 +30,13 @@ extension RaindropForm: View {
             Fields(raindrop: $raindrop)
             Actions(raindrop: $raindrop)
         }
+            .formStyle(.fancy)
             .animation(.default, value: raindrop.collection)
             .modifier(Toolbar(raindrop: $raindrop))
             .submitLabel(.done)
             .onSubmit(commit)
-            .navigationTitle((raindrop.isNew ? "New" : "Edit") + " \(raindrop.type.single.localizedLowercase)")
             #if canImport(UIKit)
+            .navigationTitle((raindrop.isNew ? "New" : "Edit") + " \(raindrop.type.single.localizedLowercase)")
             .navigationBarTitleDisplayMode(.inline)
             #endif
     }
