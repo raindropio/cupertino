@@ -11,7 +11,9 @@ extension RaindropForm {
 
         var body: some View {
             if raindrop.isNew {
+                #if canImport(UIKit)
                 SubmitButton("Save")
+                #endif
             } else {
                 ActionButton(role: .destructive) {
                     try await dispatch(RaindropsAction.delete(raindrop.id))

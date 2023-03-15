@@ -34,8 +34,10 @@ extension CollectionForm: View {
             Fields(collection: $collection, focus: $focus)
             
             if collection.isNew {
+                #if canImport(UIKit)
                 SubmitButton("Create")
                     .disabled(!collection.isValid)
+                #endif
             } else if collection.access.level >= .member {
                 ActionButton(message: "This action will delete collection and all nested collections.\nItems will be moved to Trash.", role: .destructive, action: delete) {
                     Text("Delete collection").frame(maxWidth: .infinity)
@@ -45,13 +47,19 @@ extension CollectionForm: View {
             .formStyle(.fancy)
             .backport.defaultFocus($focus, .title)
             .submitLabel(.done)
-            .onSubmit(commit)
             .navigationTitle(collection.isNew ? "New collection" : "Edit collection")
             #if canImport(UIKit)
             .navigationBarTitleDisplayMode(.inline)
             #endif
             .toolbar {
                 if collection.isNew {
+                    #if canImport(AppKit)
+                    ToolbarItem(placement: .confirmationAction) {
+                        SubmitButton("Create")
+                            .disabled(!collection.isValid)
+                    }
+                    #endif
+                    
                     ToolbarItem {
                         SafariLink(destination: URL(string: "https://help.raindrop.io/collections")!) {
                             Label("Help", systemImage: "questionmark.circle")
@@ -59,6 +67,7 @@ extension CollectionForm: View {
                     }
                 }
             }
+            .onSubmit(commit)
     }
 }
 

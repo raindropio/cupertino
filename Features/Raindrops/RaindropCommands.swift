@@ -27,13 +27,13 @@ fileprivate struct RC: ViewModifier {
     }
 
     func body(content: Content) -> some View {
-        let items = items
-        
         content
+            #if canImport(AppKit)
             .copyable(items)
             .exportableToServices(items)
             .onDeleteCommand(perform: nothing ? nil : {
                 dispatch.sync(RaindropsAction.deleteMany(pick))
             })
+            #endif
     }
 }

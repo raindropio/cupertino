@@ -35,6 +35,9 @@ struct AddURL: View {
                 #if canImport(UIKit)
                 .navigationTitle("Add link")
                 .navigationBarTitleDisplayMode(.inline)
+                #else
+                .controlSize(.large)
+                .textFieldStyle(.roundedBorder)
                 #endif
                 .toolbar {
                     ToolbarItem(placement: .cancellationAction) {

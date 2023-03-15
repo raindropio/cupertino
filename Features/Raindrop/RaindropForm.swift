@@ -34,10 +34,17 @@ extension RaindropForm: View {
             .animation(.default, value: raindrop.collection)
             .modifier(Toolbar(raindrop: $raindrop))
             .submitLabel(.done)
-            .onSubmit(commit)
             #if canImport(UIKit)
             .navigationTitle((raindrop.isNew ? "New" : "Edit") + " \(raindrop.type.single.localizedLowercase)")
             .navigationBarTitleDisplayMode(.inline)
             #endif
+            .toolbar {
+                #if canImport(AppKit)
+                ToolbarItem(placement: .confirmationAction) {
+                    SubmitButton("Save")
+                }
+                #endif
+            }
+            .onSubmit(commit)
     }
 }
