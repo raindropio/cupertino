@@ -5,13 +5,14 @@ import Features
 
 struct SettingsExtensions: View {
     var body: some View {
-        List {
+        Form {
             Share()
             #if canImport(UIKit)
             Action()
             #endif
             Safari()
         }
+            .formStyle(.grouped)
             .navigationTitle("Extensions")
             #if canImport(UIKit)
             .navigationBarTitleDisplayMode(.inline)

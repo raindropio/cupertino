@@ -9,13 +9,14 @@ public struct SubscriptionOffer: View {
     
     public init() {}
     
-    public var body: some View {
-        List {
+    var form: some View {
+        Form {
             Picker("Plan", selection: $pro) {
                 Text("Free").tag(false)
                 Text("Pro").tag(true)
             }
                 .pickerStyle(.segmented)
+                .labelsHidden()
                 .clearSection()
             
             if pro {
@@ -24,17 +25,46 @@ public struct SubscriptionOffer: View {
                 Free()
             }
         }
+            .formStyle(.grouped)
+    }
+    
+    public var body: some View {
+        Group {
+            #if canImport(UIKit)
+            form.toolbar {
+                ToolbarItem {
+                    ActionButton("Restore") {
+                        try await dispatch(SubscriptionAction.restore)
+                    }
+                }
+            }
+            #else
+            ScrollView {
+                form
+            }
+                .frame(idealHeight: 400)
+            #endif
+        }
             .animation(nil, value: pro)
             .safeAreaInset(edge: .bottom) {
                 if pro {
-                    Button {
-                        purchase.toggle()
-                    } label: {
-                        Text("Subscribe Now")
-                            .fontWeight(.semibold)
-                            .frame(maxWidth: .infinity)
+                    HStack {
+                        #if canImport(AppKit)
+                        ActionButton("Restore") {
+                            try await dispatch(SubscriptionAction.restore)
+                        }
+                            .background(.bar)
+                        #endif
+                        
+                        Button {
+                            purchase.toggle()
+                        } label: {
+                            Text("Subscribe Now")
+                                .fontWeight(.semibold)
+                                .frame(maxWidth: .infinity)
+                        }
+                            .buttonStyle(.borderedProminent)
                     }
-                        .buttonStyle(.borderedProminent)
                         .controlSize(.large)
                         .scenePadding()
                         .scenePadding(.horizontal)
@@ -42,13 +72,7 @@ public struct SubscriptionOffer: View {
                 }
             }
             .animation(.spring(), value: pro)
-            .toolbar {
-                ToolbarItem {
-                    ActionButton("Restore") {
-                        try await dispatch(SubscriptionAction.restore)
-                    }
-                }
-            }
+            
             .sheet(isPresented: $purchase, content: PurchaseStack.init)
     }
 }

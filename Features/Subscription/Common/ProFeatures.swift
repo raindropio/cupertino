@@ -9,7 +9,7 @@ struct ProFeatures: View {
             description: "Search through the entire content of every page and PDF",
             link: URL(string: "https://help.raindrop.io/using-search#full-text-search")!
         )
-            .listItemTint(.indigo)
+            .tint(.indigo)
         
         Feature(
             systemImage: "lock.square",
@@ -17,7 +17,7 @@ struct ProFeatures: View {
             description: "Even if a page you’ve saved is taken down, you’ll still have a copy of it",
             link: URL(string: "https://help.raindrop.io/using-search#full-text-search")!
         )
-            .listItemTint(.green)
+            .tint(.green)
         
         Feature(
             systemImage: "folder.circle",
@@ -25,7 +25,7 @@ struct ProFeatures: View {
             description: "Create collection inside of a collection",
             link: URL(string: "https://help.raindrop.io/collections#nested-collections")!
         )
-            .listItemTint(.red)
+            .tint(.red)
         
         Feature(
             systemImage: "message.circle",
@@ -33,7 +33,7 @@ struct ProFeatures: View {
             description: "Add notes (annotations) to your highlights",
             link: URL(string: "https://help.raindrop.io/highlights")!
         )
-            .listItemTint(.orange)
+            .tint(.orange)
         
         Feature(
             systemImage: "hand.raised.square",
@@ -41,7 +41,7 @@ struct ProFeatures: View {
             description: "Find duplicate bookmarks and wipe them away",
             link: URL(string: "https://help.raindrop.io/using-search#duplicates")!
         )
-            .listItemTint(.purple)
+            .tint(.purple)
         
         Feature(
             systemImage: "exclamationmark.square",
@@ -49,7 +49,7 @@ struct ProFeatures: View {
             description: "Find broken links and wipe them away",
             link: URL(string: "https://help.raindrop.io/using-search#broken-links")!
         )
-            .listItemTint(.indigo)
+            .tint(.indigo)
         
         Feature(
             systemImage: "icloud.circle",
@@ -57,7 +57,7 @@ struct ProFeatures: View {
             description: "Daily backups of your data",
             link: URL(string: "https://help.raindrop.io/backups#automatic")!
         )
-            .listItemTint(.green)
+            .tint(.green)
         
         Feature(
             systemImage: "paperclip.circle",
@@ -65,7 +65,7 @@ struct ProFeatures: View {
             description: "Upload 10 Gb of files each month",
             link: URL(string: "https://help.raindrop.io/limitations")!
         )
-            .listItemTint(.orange)
+            .tint(.orange)
     }
 }
 
@@ -99,6 +99,7 @@ extension ProFeatures {
                 Image(systemName: systemImage)
                     .font(.title)
                     .symbolVariant(.fill)
+                    .foregroundStyle(.tint)
             }
         }
     }

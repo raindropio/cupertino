@@ -24,7 +24,7 @@ import Features
         
         #if canImport(AppKit)
         Settings {
-            SettingsLogout()
+            SettingsMacOS()
                 .storeProvider(store)
         }
         #endif
