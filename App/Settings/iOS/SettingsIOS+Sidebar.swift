@@ -24,19 +24,19 @@ extension SettingsIOS {
                                 .badge(s.state.current?.plan.title ?? "Free")
                                 .tint(.primary)
                         }
-                        .listItemTint(.red)
+                            .listItemTint(.red)
                     }
                     
                     Section {
                         NavigationLink(value: SettingsPath.Screen.extensions) {
                             Label("Extensions", systemImage: "puzzlepiece.extension").tint(.primary)
                         }
-                        .listItemTint(.purple)
+                            .listItemTint(.purple)
                         
-                        NavigationLink(value: SettingsPath.Screen.appearance) {
-                            Label("Appearance", systemImage: "square.on.circle").tint(.primary)
+                        NavigationLink(value: SettingsPath.Screen.appIcon) {
+                            Label("App Icon", systemImage: "square.on.circle").tint(.primary)
                         }
-                        .listItemTint(.indigo)
+                            .listItemTint(.indigo)
                         
                         SettingsBrowser()
                             .listItemTint(.cyan)
@@ -68,7 +68,7 @@ extension SettingsIOS {
                             .multilineTextAlignment(.center)
                             .scenePadding(.top)
                     }
-                    .listItemTint(.monochrome)
+                        .listItemTint(.monochrome)
                     
                     SettingsLogout()
                 }

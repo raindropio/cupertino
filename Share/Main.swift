@@ -11,5 +11,6 @@ struct Main: View {
             notAuthorized: NoAuth.init
         )
             .storeProvider(store)
+            .formStyle(.modern)
     }
 }

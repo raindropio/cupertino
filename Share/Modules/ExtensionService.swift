@@ -5,6 +5,7 @@ final class ExtensionService: ObservableObject {
     private weak var context: NSExtensionContext?
     
     let extensionType: ExtensionType = .detect()
+    @Published var loaded = false
     @Published var preprocessed: NSDictionary?
     @Published var items = [NSItemProvider]()
     
@@ -13,6 +14,7 @@ final class ExtensionService: ObservableObject {
                     
         Task {
             await load()
+            loaded = true
         }
     }
     

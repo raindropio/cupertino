@@ -53,6 +53,11 @@ struct AuthLogIn: View {
             #if canImport(UIKit)
             .navigationBarTitleDisplayMode(.inline)
             .navigationTitle("Welcome back")
+            #else
+            .formStyle(.columns)
+            .textFieldStyle(.roundedBorder)
+            .controlSize(.large)
+            .scenePadding()
             #endif
             .toolbar {
                 ToolbarItem {

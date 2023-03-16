@@ -35,7 +35,6 @@
 		76154C7B29C21133002DDDEB /* background.js in Resources */ = {isa = PBXBuildFile; fileRef = 767F0B0229A3744C00349902 /* background.js */; };
 		76154C7E29C212D3002DDDEB /* SettingsMacOS.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76154C7D29C212D3002DDDEB /* SettingsMacOS.swift */; };
 		7618C96D29C073B600D4DE78 /* AuthSuccess.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7618C96C29C073B600D4DE78 /* AuthSuccess.swift */; };
-		761F4CAD299E2E86008C1E6D /* SettingsAppearance.swift in Sources */ = {isa = PBXBuildFile; fileRef = 761F4CAC299E2E86008C1E6D /* SettingsAppearance.swift */; };
 		761F6C3029A3AC99002919BC /* PermanentCopy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 761F6C2F29A3AC99002919BC /* PermanentCopy.swift */; };
 		761F6C3229A3ADA0002919BC /* Preview.swift in Sources */ = {isa = PBXBuildFile; fileRef = 761F6C3129A3ADA0002919BC /* Preview.swift */; };
 		76292CE82951B413000E16AA /* SettingsWebApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76292CE72951B413000E16AA /* SettingsWebApp.swift */; };
@@ -106,7 +105,7 @@
 		76DC0BBC29AF7FE1007B4BDF /* Action (iOS).appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = 76DC0B9729AF6C21007B4BDF /* Action (iOS).appex */; platformFilter = ios; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		76DC0BC229AF84E2007B4BDF /* Action.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 76DC0BBF29AF849C007B4BDF /* Action.xcassets */; };
 		76E44C4029BA0D24009634C6 /* SettingsExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76E44C3F29BA0D24009634C6 /* SettingsExtensions.swift */; };
-		76E44C4229BA0E86009634C6 /* SettingsAppearance+AppIcon.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76E44C4129BA0E86009634C6 /* SettingsAppearance+AppIcon.swift */; };
+		76E44C4229BA0E86009634C6 /* SettingsAppIcon.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76E44C4129BA0E86009634C6 /* SettingsAppIcon.swift */; };
 		76E44C4429BA2002009634C6 /* SettingsExtensions+Action.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76E44C4329BA2002009634C6 /* SettingsExtensions+Action.swift */; };
 		76E44C4829BB135B009634C6 /* SettingsExtensions+Share.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76E44C4729BB135B009634C6 /* SettingsExtensions+Share.swift */; };
 		76E44C4A29BB1380009634C6 /* SettingsExtensions+Safari.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76E44C4929BB1380009634C6 /* SettingsExtensions+Safari.swift */; };
@@ -195,7 +194,6 @@
 		76154C5829C21039002DDDEB /* WebExtension (macOS).appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = "WebExtension (macOS).appex"; sourceTree = BUILT_PRODUCTS_DIR; };
 		76154C7D29C212D3002DDDEB /* SettingsMacOS.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsMacOS.swift; sourceTree = "<group>"; };
 		7618C96C29C073B600D4DE78 /* AuthSuccess.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthSuccess.swift; sourceTree = "<group>"; };
-		761F4CAC299E2E86008C1E6D /* SettingsAppearance.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsAppearance.swift; sourceTree = "<group>"; };
 		761F6C2F29A3AC99002919BC /* PermanentCopy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PermanentCopy.swift; sourceTree = "<group>"; };
 		761F6C3129A3ADA0002919BC /* Preview.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Preview.swift; sourceTree = "<group>"; };
 		76292CE72951B413000E16AA /* SettingsWebApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsWebApp.swift; sourceTree = "<group>"; };
@@ -262,7 +260,7 @@
 		76DC0BBF29AF849C007B4BDF /* Action.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Action.xcassets; sourceTree = "<group>"; };
 		76E08B6929A3976000B3202D /* Backport */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = Backport; sourceTree = "<group>"; };
 		76E44C3F29BA0D24009634C6 /* SettingsExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsExtensions.swift; sourceTree = "<group>"; };
-		76E44C4129BA0E86009634C6 /* SettingsAppearance+AppIcon.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SettingsAppearance+AppIcon.swift"; sourceTree = "<group>"; };
+		76E44C4129BA0E86009634C6 /* SettingsAppIcon.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsAppIcon.swift; sourceTree = "<group>"; };
 		76E44C4329BA2002009634C6 /* SettingsExtensions+Action.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SettingsExtensions+Action.swift"; sourceTree = "<group>"; };
 		76E44C4729BB135B009634C6 /* SettingsExtensions+Share.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SettingsExtensions+Share.swift"; sourceTree = "<group>"; };
 		76E44C4929BB1380009634C6 /* SettingsExtensions+Safari.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SettingsExtensions+Safari.swift"; sourceTree = "<group>"; };
@@ -504,8 +502,7 @@
 			children = (
 				76292CE72951B413000E16AA /* SettingsWebApp.swift */,
 				76292CE92951B86F000E16AA /* SettingsSubscription.swift */,
-				761F4CAC299E2E86008C1E6D /* SettingsAppearance.swift */,
-				76E44C4129BA0E86009634C6 /* SettingsAppearance+AppIcon.swift */,
+				76E44C4129BA0E86009634C6 /* SettingsAppIcon.swift */,
 				76292CEB2951BC52000E16AA /* SettingsBrowser.swift */,
 				76E44C3F29BA0D24009634C6 /* SettingsExtensions.swift */,
 				76E44C4729BB135B009634C6 /* SettingsExtensions+Share.swift */,
@@ -909,7 +906,6 @@
 				76292CE82951B413000E16AA /* SettingsWebApp.swift in Sources */,
 				769056F0297539080090C1EF /* Folder+Title.swift in Sources */,
 				76E44C4029BA0D24009634C6 /* SettingsExtensions.swift in Sources */,
-				761F4CAD299E2E86008C1E6D /* SettingsAppearance.swift in Sources */,
 				76F6D12529BF26EA009E7BA2 /* SettingsIOS+Sidebar.swift in Sources */,
 				768CA20329505AD600AD7E62 /* AuthContinueWith+JWT.swift in Sources */,
 				76BFE371291E9F6B00DE9DB2 /* AuthScreen.swift in Sources */,
@@ -932,7 +928,7 @@
 				769056EC297536570090C1EF /* Find.swift in Sources */,
 				76BFE36E291E9F6B00DE9DB2 /* SplitView.swift in Sources */,
 				7685A195286868AC00A4BC3C /* App.swift in Sources */,
-				76E44C4229BA0E86009634C6 /* SettingsAppearance+AppIcon.swift in Sources */,
+				76E44C4229BA0E86009634C6 /* SettingsAppIcon.swift in Sources */,
 				769056F4297547C10090C1EF /* Folder+Status.swift in Sources */,
 				76BFE370291E9F6B00DE9DB2 /* SettingsPath.swift in Sources */,
 				768CA1FD294CCD5800AD7E62 /* AuthSignup.swift in Sources */,

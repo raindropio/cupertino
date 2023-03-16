@@ -31,3 +31,10 @@ public struct AuthGroup<A: View, N: View>: View {
             }
     }
 }
+
+extension AuthGroup where N == EmptyView {
+    public init(@ViewBuilder authorized: @escaping () -> A) {
+        self.authorized = authorized
+        self.notAuthorized = { EmptyView() }
+    }
+}

@@ -18,8 +18,8 @@ struct SettingsIOS: View {
                 SettingsWebApp(subpage: .import)
             case .subscription:
                 SettingsSubscription()
-            case .appearance:
-                SettingsAppearance()
+            case .appIcon:
+                SettingsAppIcon()
             case .extensions:
                 SettingsExtensions()
             case nil:

@@ -12,7 +12,9 @@ extension SettingsPath {
         case subscription
         case backups
         case `import`
-        case appearance
+        #if canImport(UIKit)
+        case appIcon
+        #endif
         case extensions
     }
 }

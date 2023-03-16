@@ -3,11 +3,27 @@ import SwiftUI
 
 public struct Carousel<C: View>: View {
     @State private var current: Int = 0
+    @State private var hovered = false
     
     var content: () -> C
     
     public init(@ViewBuilder content: @escaping () -> C) {
         self.content = content
+    }
+    
+    func nav(_ icon: String, enabled: Bool, _ action: @escaping () -> Void) -> some View {
+        Button(action: action) {
+            Image(systemName: icon)
+                .symbolVariant(.circle.fill)
+                .symbolRenderingMode(.hierarchical)
+                .font(.title)
+                .frame(width: 32, height: 32)
+                .contentShape(Rectangle())
+        }
+            .buttonStyle(.borderless)
+            .padding()
+            .opacity(enabled ? 1 : 0)
+            .disabled(!enabled)
     }
     
     public var body: some View {
@@ -18,7 +34,7 @@ public struct Carousel<C: View>: View {
                         children[index]
                             .frame(maxWidth: .infinity, maxHeight: .infinity)
                             .opacity(current == index ? 1 : 0)
-                            .offset(x: current == index ? 0 : (current > index ? 500 : -500))
+                            .offset(x: current == index ? 0 : (current > index ? -500 : 500))
                             .transition(.opacity)
                     }
                 }
@@ -29,7 +45,7 @@ public struct Carousel<C: View>: View {
                     ForEach(children.indices, id: \.self) { index in
                         RoundedRectangle(cornerRadius: 8, style: .continuous)
                             .opacity(current == index ? 1 : 0.3)
-                            .frame(width: current == index ? 24 : 8, height: 8)
+                            .frame(width: 8, height: 8)
                             .padding(5)
                             .contentShape(Rectangle())
                             .onTapGesture {
@@ -39,7 +55,17 @@ public struct Carousel<C: View>: View {
                 }
             }
         }
+            .overlay(alignment: .leading) {
+                nav("chevron.left", enabled: hovered && current > 0) { current -= 1 }
+            }
+            .overlay(alignment: .trailing) {
+                content().variadic { children in
+                    nav("chevron.right", enabled: hovered && current < children.endIndex - 1) { current += 1 }
+                }
+            }
+            .onHover { hovered = $0 }
             .animation(.spring(), value: current)
+            .animation(.default, value: hovered)
     }
 }
 #endif

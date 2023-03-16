@@ -10,17 +10,6 @@ struct AuthScreen: View {
     var body: some View {
         NavigationStack {
             VStack(spacing: 0) {
-                Image("logo-text")
-                    .frame(maxWidth: .infinity)
-                    .overlay(alignment: .trailing) {
-                        SafariLink(destination: URL(string: "https://help.raindrop.io")!) {
-                            Image(systemName: "questionmark.circle.fill")
-                                .symbolRenderingMode(.hierarchical)
-                                .imageScale(.large)
-                        }
-                            .tint(.secondary)
-                    }
-                
                 AuthSplash()
                 
                 HStack(spacing: 16) {
@@ -62,12 +51,25 @@ struct AuthScreen: View {
                     .multilineTextAlignment(.center)
                     .scenePadding(.horizontal)
             }
-                .scenePadding()
-                .toolbar(.hidden, for: .automatic)
+                .scenePadding(.vertical)
+                .ignoresSafeArea(edges: .top)
                 .navigationTitle("")
-                #if canImport(AppKit)
-                .toolbarBackground(.clear, for: .windowToolbar)
-                #endif
+                .toolbarBackground(.clear, for: .automatic)
+                .toolbar {
+                    ToolbarItem(placement: .principal) {
+                        Image("logo-text")
+                    }
+                    
+                    ToolbarItemGroup {
+                        Spacer()
+                        SafariLink(destination: URL(string: "https://help.raindrop.io")!) {
+                            Image(systemName: "questionmark.circle.fill")
+                                .symbolRenderingMode(.hierarchical)
+                                .imageScale(.large)
+                        }
+                            .tint(.secondary)
+                    }
+                }
                 .sheet(isPresented: $login) {
                     NavigationStack(root: AuthLogIn.init)
                         .modifier(AuthSuccess())

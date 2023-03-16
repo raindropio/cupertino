@@ -68,6 +68,11 @@ struct AuthSignup: View {
             #if canImport(UIKit)
             .navigationBarTitleDisplayMode(.inline)
             .navigationTitle("Create an account")
+            #else
+            .formStyle(.columns)
+            .textFieldStyle(.roundedBorder)
+            .controlSize(.large)
+            .scenePadding()
             #endif
             .toolbar {
                 ToolbarItem(placement: .cancellationAction) {
