@@ -63,7 +63,6 @@ struct AuthSignup: View {
                 .opacity(form.isEmpty ? 1 : 0)
                 .animation(.default, value: form.isEmpty)
         }
-            .formStyle(.fancy)
             .backport.defaultFocus($focus, .name)
             .onSubmit(submit)
             #if canImport(UIKit)

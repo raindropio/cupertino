@@ -44,7 +44,7 @@ extension CollectionForm: View {
                 }
             }
         }
-            .formStyle(.fancy)
+            .formStyle(.modern)
             .backport.defaultFocus($focus, .title)
             .submitLabel(.done)
             .navigationTitle(collection.isNew ? "New collection" : "Edit collection")

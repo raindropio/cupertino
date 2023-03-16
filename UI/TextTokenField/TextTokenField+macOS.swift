@@ -17,8 +17,9 @@ extension TextTokenField {
                         
             //appearance
             tokenStyle = .squared
-//            isBezeled = false
-//            drawsBackground = false
+            isBezeled = false
+            drawsBackground = false
+            focusRingType = .none
             
             //font
             font = .preferredFont(forTextStyle: .body)

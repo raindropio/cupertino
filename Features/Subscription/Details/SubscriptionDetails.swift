@@ -65,6 +65,5 @@ public struct SubscriptionDetails: View {
                 .listItemTint(.monochrome)
         }
             .symbolVariant(.fill)
-            .formStyle(.grouped)
     }
 }

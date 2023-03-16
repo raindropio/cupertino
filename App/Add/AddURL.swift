@@ -28,7 +28,6 @@ struct AddURL: View {
                 SubmitButton("Save")
                     .disabled(url == nil)
             }
-                .formStyle(.fancy)
                 .labelsHidden()
                 .backport.defaultFocus($focused, true)
                 .onSubmit(saveUrl)

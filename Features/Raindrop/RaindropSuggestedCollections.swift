@@ -62,9 +62,6 @@ public struct RaindropSuggestedCollections: View {
                 }
             }
                 .fixedSize(horizontal: false, vertical: true)
-                #if canImport(AppKit)
-                .padding(.bottom, 8)
-                #endif
                 .contentTransition(.opacity)
                 .transition(.opacity)
                 .animation(.default, value: raindrop.collection)

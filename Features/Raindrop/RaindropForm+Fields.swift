@@ -14,12 +14,13 @@ extension RaindropForm {
 extension RaindropForm.Fields: View {
     var body: some View {
         Section {
-            HStack(alignment: .top, spacing: 8) {
-                TextField("Title", text: $raindrop.title, axis: .vertical)
+            HStack(spacing: 8) {
+                TextField(text: $raindrop.title, prompt: .init("Title"), axis: .vertical) {}
+                    .labelsHidden()
                     .preventLineBreaks(text: $raindrop.title)
                     .focused($focus, equals: .title)
                     .fontWeight(.semibold)
-                    .lineLimit(2...5)
+                    .lineLimit(5)
                     .onSubmit {
                         focus = nil
                     }
@@ -38,26 +39,23 @@ extension RaindropForm.Fields: View {
                     }
             }
             
-            TextField("Description", text: $raindrop.excerpt, axis: .vertical)
+            TextField(text: $raindrop.excerpt, prompt: .init("Description"), axis: .vertical) {}
+                .labelsHidden()
                 .focused($focus, equals: .excerpt)
                 .lineLimit(5)
         }
             .contentTransition(.opacity)
         
         Section {
-            LabeledContent("Collection") {
-                NavigationLink {
-                    RaindropCollection($raindrop)
-                } label: {
-                    CollectionLabel(raindrop.collection, withLocation: true)
-                        .badge(0)
-                        .symbolVariant(.fill)
-                }
+            NavigationLink {
+                RaindropCollection($raindrop)
+            } label: {
+                CollectionLabel(raindrop.collection, withLocation: true)
+                    .badge(0)
+                    .symbolVariant(.fill)
+                    .fixedSize()
                     .id(raindrop.collection)
             }
-                #if canImport(UIKit)
-                .labelsHidden()
-                #endif
         } footer: {
             RaindropSuggestedCollections($raindrop)
         }
@@ -65,41 +63,29 @@ extension RaindropForm.Fields: View {
         
         Section {
             //tags
-            Group {
-                #if canImport(UIKit)
-                NavigationLink {
-                    RaindropTags($raindrop)
-                } label: {
-                    Label {
-                        TagsField($raindrop.tags)
-                    } icon: {
-                        Image(systemName: "number")
-                    }
-                }
-                #else
-                LabeledContent("Tags") {
+            NavigationLink {
+                RaindropTags($raindrop)
+            } label: {
+                Label {
                     TagsField($raindrop.tags)
+                        .focused($focus, equals: .tags)
+                } icon: {
+                    Image(systemName: "number")
                 }
-                #endif
             }
-                .focused($focus, equals: .tags)
 
             //highlights
             NavigationLink {
                 RaindropHighlights($raindrop)
             } label: {
-                HStack {
-                    Label("Highlights", systemImage: Filter.Kind.highlights.systemImage)
-                    if !raindrop.highlights.isEmpty {
-                        Spacer()
-                        Text(raindrop.highlights.count, format: .number).circularBadge()
-                    }
-                }
+                Label("Highlights", systemImage: Filter.Kind.highlights.systemImage)
+                    .badge(raindrop.highlights.count)
             }
             
             Label {
                 if raindrop.file == nil {
-                    URLField("URL", value: $raindrop.link, prompt: Text(""))
+                    URLField("", value: $raindrop.link, prompt: Text("URL"))
+                        .labelsHidden()
                         .focused($focus, equals: .link)
                 }
             } icon: {

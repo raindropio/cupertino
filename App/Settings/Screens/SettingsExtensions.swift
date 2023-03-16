@@ -12,7 +12,6 @@ struct SettingsExtensions: View {
             #endif
             Safari()
         }
-            .formStyle(.grouped)
             .navigationTitle("Extensions")
             #if canImport(UIKit)
             .navigationBarTitleDisplayMode(.inline)

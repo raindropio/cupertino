@@ -23,8 +23,9 @@ extension RaindropForm {
                         .frame(maxWidth: .infinity)
                 }
                     .tint(.red)
+                    .buttonStyle(.borderless)
                 
-                Section {} header: {
+                Section {
                     (
                         Text("Created ") + Text(raindrop.created, formatter: .shortDateTime) + Text("\n") +
                         Text("Last modified ") + Text(raindrop.lastUpdate, formatter: .shortDateTime)
@@ -34,8 +35,9 @@ extension RaindropForm {
                     .multilineTextAlignment(.center)
                     .textCase(.none)
                     .foregroundStyle(.tertiary)
-                    .font(.callout)
+                    .font(.subheadline)
                 }
+                    .clearSection()
             }
         }
     }

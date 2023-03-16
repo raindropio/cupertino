@@ -25,7 +25,6 @@ public struct SubscriptionOffer: View {
                 Free()
             }
         }
-            .formStyle(.grouped)
     }
     
     public var body: some View {

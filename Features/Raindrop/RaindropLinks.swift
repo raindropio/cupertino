@@ -29,7 +29,7 @@ struct RaindropLinks: View {
                     DeepLink(.collection(.open(raindrop.collection))) {
                         CollectionLabel(raindrop.collection).badge(0)
                     }
-                        .tint(.secondary)
+                        .tint(.gray)
                 }
                 
                 //important
