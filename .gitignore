@@ -32,4 +32,5 @@ DerivedData/
 /*.gcno
 
 # Web Extension
-WebExtension/dist/
+WebExtension/ios/
+WebExtension/macos/
