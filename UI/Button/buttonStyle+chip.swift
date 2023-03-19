@@ -51,5 +51,6 @@ public struct ChipMenuButtonStyle: MenuStyle {
     public func makeBody(configuration: Configuration) -> some View {
         Menu(configuration)
             .modifier(ChipStyleModifier())
+            .buttonStyle(.borderless)
     }
 }

@@ -3,11 +3,27 @@ import SwiftUI
 public extension View {
     /// Style Section's appropriately for .grid layout. Ignored for .list layout
     func lazyStackSection() -> some View {
+        #if canImport(UIKit)
+        modifier(iOS())
+        #else
         modifier(LSS())
+        #endif
     }
 }
 
 fileprivate struct LSS: ViewModifier {
+    func body(content: Content) -> some View {
+        content
+            .font(.callout)
+            .foregroundStyle(.secondary)
+            .labelStyle(LSSLabelStyle())
+            .buttonStyle(.borderless)
+            .frame(maxWidth: .infinity, alignment: .leading)
+    }
+}
+
+#if canImport(UIKit)
+fileprivate struct iOS: ViewModifier {
     @Environment(\.lazyStackLayout) private var layout
     
     func body(content: Content) -> some View {
@@ -16,15 +32,12 @@ fileprivate struct LSS: ViewModifier {
             content
             
         default:
-            content
-                .font(.callout)
-                .foregroundStyle(.secondary)
-                .labelStyle(LSSLabelStyle())
-                .frame(maxWidth: .infinity, alignment: .leading)
+            content.modifier(LSS())
                 ._safeAreaInsets(.init(top: 2, leading: 16, bottom: 2, trailing: 16))
         }
     }
 }
+#endif
 
 fileprivate struct LSSLabelStyle: LabelStyle {
     public func makeBody(configuration: Configuration) -> some View {
@@ -43,4 +56,3 @@ fileprivate struct LSSLabelStyle: LabelStyle {
         Divider()
     }
 }
-

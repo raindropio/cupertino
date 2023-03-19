@@ -40,7 +40,9 @@ extension GridColumns {
             LazyVGrid(columns: gridItems, alignment: .leading, spacing: spacing, content: content)
                 .scenePadding(.horizontal)
                 .padding(.vertical, spacing / 2)
+                #if canImport(UIKit)
                 .animation(.default, value: gridItems.count)
+                #endif
         }
     }
 }

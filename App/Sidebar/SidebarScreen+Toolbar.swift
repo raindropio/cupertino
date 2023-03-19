@@ -20,6 +20,12 @@ extension SidebarScreen {
                     }
                 }
                 
+                if sizeClass == .compact {
+                    ToolbarItem(placement: .primaryAction) {
+                        AddButton()
+                    }
+                }
+                
                 ToolbarItemGroup {
                     Menu {
                         Section { CollectionsMenu() }

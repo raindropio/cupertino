@@ -40,6 +40,7 @@ extension ViewConfigRaindropsButton {
                     .frame(minWidth: 54, maxHeight: .infinity)
             }
                 .symbolVariant(.fill)
+                .help("Layout")
         }
     }
 }

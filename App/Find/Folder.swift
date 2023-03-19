@@ -27,7 +27,7 @@ struct Folder<H: View>: View {
             .modifier(Title(find: find))
             .modifier(Toolbar(find: find, selection: $selection))
             .raindropSheets()
-            .addButton(to: find.collectionId)
+            .pasteCommands(to: find.collectionId)
             #if canImport(UIKit)
             .scopeEditMode()
             #endif

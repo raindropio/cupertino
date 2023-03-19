@@ -69,30 +69,30 @@ fileprivate struct _Modifier: ViewModifier {
     }
 }
 
-class RaindropSheet: ObservableObject {
+public class RaindropSheet: ObservableObject {
     fileprivate let edit: PassthroughSubject<Raindrop.ID, Never> = PassthroughSubject()
     fileprivate let highlights: PassthroughSubject<Raindrop.ID, Never> = PassthroughSubject()
     fileprivate let move: PassthroughSubject<RaindropsPick, Never> = PassthroughSubject()
     fileprivate let addTags: PassthroughSubject<RaindropsPick, Never> = PassthroughSubject()
     fileprivate let delete: PassthroughSubject<RaindropsPick, Never> = PassthroughSubject()
     
-    func edit(_ id: Raindrop.ID) {
+    public func edit(_ id: Raindrop.ID) {
         edit.send(id)
     }
     
-    func highlights(_ id: Raindrop.ID) {
+    public func highlights(_ id: Raindrop.ID) {
         highlights.send(id)
     }
     
-    func move(_ pick: RaindropsPick) {
+    public func move(_ pick: RaindropsPick) {
         move.send(pick)
     }
     
-    func addTags(_ pick: RaindropsPick) {
+    public func addTags(_ pick: RaindropsPick) {
         addTags.send(pick)
     }
     
-    func delete(_ pick: RaindropsPick) {
+    public func delete(_ pick: RaindropsPick) {
         delete.send(pick)
     }
 }

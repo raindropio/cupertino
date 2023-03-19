@@ -26,6 +26,10 @@ extension RaindropsState {
 }
 
 extension RaindropsState {
+    public func ids(_ find: FindBy) -> [Raindrop.ID] {
+        self[find].ids
+    }
+    
     public func items(_ find: FindBy) -> [Raindrop] {
         self[find].ids.compactMap { items[$0] }
     }

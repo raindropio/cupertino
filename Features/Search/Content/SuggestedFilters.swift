@@ -41,6 +41,7 @@ extension SuggestedFilters {
                                     FilterRow(item)
                                 }
                             }
+                                .labelStyle(.titleOnly)
                         } label: {
                             Label {
                                 Text("Tags")
@@ -67,6 +68,7 @@ extension SuggestedFilters {
                                     FilterRow(item)
                                 }
                             }
+                                .labelStyle(.titleOnly)
                         } label: {
                             Label {
                                 Text("Creation date")

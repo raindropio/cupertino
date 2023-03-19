@@ -10,7 +10,7 @@ struct SidebarScreen: View {
     var body: some View {
         FindByList(selection: $selection)
             .modifier(Toolbar())
-            .addButton(hidden: sizeClass == .regular)
+            .pasteCommands(enabled: sizeClass == .compact)
             .dropProvider()
             #if canImport(UIKit)
             .navigationBarTitleDisplayMode(.inline)

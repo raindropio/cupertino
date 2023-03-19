@@ -19,7 +19,7 @@ struct AuthSplash: View {
             ) {
                 Image(systemName: "tray.full")
             } description: {
-                Text("Group related items within the same context. Remove duplicate & broken links.")
+                Text("Group related items within the same context. Remove duplicate & broken links")
             }
             
             Slide(
@@ -28,7 +28,7 @@ struct AuthSplash: View {
             ) {
                 Image(systemName: "sparkle.magnifyingglass")
             } description: {
-                Text("Search through the entire content of a pages you’ve saved.")
+                Text("Search through the entire content of a pages you’ve saved")
             }
             
             Slide(

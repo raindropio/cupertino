@@ -23,19 +23,25 @@ extension SortRaindropsButton {
         var sort: SortBy
         
         var body: some View {
-            Picker(
-                "Sort",
-                selection: .init(get: {
-                    sort
-                }, set: { by in
-                    dispatch.sync(RaindropsAction.sort(find, by))
-                })
-            ) {
-                ForEach(SortBy.someCases(for: find)) {
-                    Label($0.title, systemImage: $0.systemImage)
-                        .tag($0)
-                }
+            Menu {
+                Picker(
+                    selection: .init(get: {
+                        sort
+                    }, set: { by in
+                        dispatch.sync(RaindropsAction.sort(find, by))
+                    })
+                ) {
+                    ForEach(SortBy.someCases(for: find)) {
+                        Label($0.title, systemImage: $0.systemImage)
+                            .tag($0)
+                    }
+                } label: {}
+                    .pickerStyle(.inline)
+                    .labelStyle(.titleAndIcon)
+            } label: {
+                Label(sort.title, systemImage: sort.systemImage)
             }
+                .help("Sort")
         }
     }
 }

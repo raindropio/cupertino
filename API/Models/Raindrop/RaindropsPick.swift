@@ -17,6 +17,13 @@ public enum RaindropsPick: Equatable {
         case .some(_): return false
         }
     }
+    
+    public var isEmpty: Bool {
+        switch self {
+        case .all(_): return false
+        case .some(let ids): return ids.isEmpty
+        }
+    }
 }
 
 extension RaindropsPick: Identifiable {

@@ -5,11 +5,11 @@ public struct EditButton<L> : View where L : View {
     @Environment(\.editMode) private var editMode
     var label: (EditMode) -> L
     
-    public init(_ label: @escaping (EditMode) -> L) {
+    public init(@ViewBuilder _ label: @escaping (EditMode) -> L) {
         self.label = label
     }
     
-    public init(_ label: @escaping () -> L) {
+    public init(@ViewBuilder _ label: @escaping () -> L) {
         self.label = { _ in label() }
     }
     

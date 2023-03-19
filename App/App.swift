@@ -23,7 +23,6 @@ import Features
             .defaultSize(width: 800, height: 600)
             .commands {
                 SidebarCommands()
-                ToolbarCommands()
             }
             #endif
         
