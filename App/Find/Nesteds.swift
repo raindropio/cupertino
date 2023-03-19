@@ -32,22 +32,17 @@ extension Nesteds {
         
         var body: some View {
             if !items.isEmpty {
-                ScrollView(.horizontal, showsIndicators: false) {
-                    LazyHStack(spacing: 12) {
-                        ForEach(items, content: item)
-                    }
-                        .tint(.secondary)
-                        .buttonStyle(.chip)
-                        .scenePadding(.horizontal)
-                        .fixedSize()
+                StripStack {
+                    ForEach(items, content: item)
                 }
-                    .padding(.vertical, 8)
-                    .clearSection()
+                    .tint(.secondary)
+                    .buttonStyle(.chip)
                     .disabled(isEditing)
                     .fixedSize(horizontal: false, vertical: true)
                     .animation(.default, value: animation)
+                    .listRowSeparator(.hidden)
+                    .listRowBackground(Color.clear)
             }
         }
     }
 }
-

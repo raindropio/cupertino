@@ -32,8 +32,8 @@ extension SuggestedFilters {
         var created: [Filter]
         
         var body: some View {
-            ScrollView(.horizontal, showsIndicators: false) {
-                HStack(spacing: 12) {
+            StripStack {
+                Group {
                     if !tags.isEmpty {
                         Menu {
                             ForEach(tags) { item in
@@ -50,7 +50,6 @@ extension SuggestedFilters {
                                 Image(systemName: "number")
                             }
                         }
-                        .badge(tags.count)
                     }
                     
                     ForEach(simple) { item in
@@ -81,15 +80,12 @@ extension SuggestedFilters {
                             .listItemTint(Filter.Kind.created("").color)
                     }
                 }
-                .transition(.move(edge: .trailing))
-                .scenePadding(.horizontal)
+                    .transition(.move(edge: .trailing))
+            }
                 .buttonStyle(.chip)
                 .menuStyle(.chip)
-                .fixedSize()
-            }
-            .padding(.vertical, 8)
-            .clearSection()
-            .fixedSize(horizontal: false, vertical: true)
+                .listRowSeparator(.hidden)
+                .fixedSize(horizontal: false, vertical: true)
         }
     }
 }

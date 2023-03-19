@@ -71,7 +71,6 @@ extension RaindropsContainer { fileprivate struct Memorized: View {
             content: content
         )
             .raindropsAnimation()
-            .listStyle(.plain)
             .refreshable {
                 try? await dispatch(RaindropsAction.load(find))
             }

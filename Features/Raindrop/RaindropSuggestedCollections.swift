@@ -40,25 +40,16 @@ public struct RaindropSuggestedCollections: View {
         if raindrop.collection == -1 {
             ZStack {
                 if !suggestions.isEmpty {
-                    ScrollView(.horizontal, showsIndicators: false) {
-                        HStack(spacing: 10) {
-                            ForEach(suggestions, id: \.self, content: row)
-                        }
-                            .buttonStyle(.dotted)
-                            .controlSize(.small)
-                            .tint(.secondary)
-                            .foregroundColor(.primary)
+                    StripStack {
+                        ForEach(suggestions, id: \.self, content: row)
                             #if canImport(UIKit)
                             .padding(.vertical, 14)
                             #endif
-                            .padding(.trailing, 32)
-                            .fixedSize()
                     }
-                    .mask(LinearGradient(
-                        gradient: Gradient(colors: Array(repeating: .black, count: 7) + [.clear]),
-                        startPoint: .leading,
-                        endPoint: .trailing
-                    ))
+                        .buttonStyle(.dotted)
+                        .controlSize(.small)
+                        .tint(.secondary)
+                        .foregroundColor(.primary)
                 }
             }
                 .fixedSize(horizontal: false, vertical: true)

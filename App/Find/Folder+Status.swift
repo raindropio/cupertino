@@ -33,18 +33,19 @@ extension Folder.Status {
                     
                     ViewConfigRaindropsButton(find)
                         .labelStyle(.iconOnly)
+                        .frame(minWidth: 50, alignment: .trailing)
                         .fixedSize()
                 }
-                .pickerStyle(.menu)
-                .imageScale(.large)
-                .labelsHidden()
-                .lineLimit(1)
-                .scenePadding(.leading)
+                    .pickerStyle(.menu)
+                    .imageScale(.large)
+                    .labelsHidden()
+                    .lineLimit(1)
             }
-            .font(.callout)
-            .controlSize(.small)
-            .clearSection()
-            .contentTransition(.identity)
+                .font(.callout)
+                .controlSize(.small)
+                .contentTransition(.identity)
+                .listRowSeparator(.hidden)
+                .listRowBackground(Color.clear)
         }
     }
 }

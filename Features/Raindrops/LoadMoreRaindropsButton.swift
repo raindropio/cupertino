@@ -29,10 +29,10 @@ extension LoadMoreRaindropsButton {
         
         var body: some View {
             if total > 0 {
-                VStack {
-                    Button {
-                        dispatch.sync(RaindropsAction.more(find))
-                    } label: {
+                Button {
+                    dispatch.sync(RaindropsAction.more(find))
+                } label: {
+                    Group {
                         switch more {
                         case .idle:
                             Label("Load more", systemImage: "arrow.clockwise")
@@ -49,12 +49,10 @@ extension LoadMoreRaindropsButton {
                                 .tint(.red)
                         }
                     }
-                    .frame(maxWidth: .infinity)
+                        .frame(maxWidth: .infinity)
                 }
-                .frame(height: 32)
-                .disabled(more == .notFound)
-                .scenePadding(.horizontal)
-                .clearSection()
+                    .disabled(more == .notFound)
+                    .buttonStyle(.borderless)
             }
         }
     }

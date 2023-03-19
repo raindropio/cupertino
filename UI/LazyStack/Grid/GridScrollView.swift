@@ -7,8 +7,17 @@ struct GridScrollView<Content: View> {
 extension GridScrollView: View {
     var body: some View {
         ScrollView(.vertical) {
-            content()
-                .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .leading)
+            content().variadic {
+                $0
+                    #if canImport(UIKit)
+                    .padding(.vertical, 8)
+                    .scenePadding(.horizontal)
+                    #else
+                    .padding(.vertical, 6)
+                    .padding(.horizontal, 12)
+                    #endif
+                    .frame(maxWidth: .infinity, alignment: .leading)
+            }
         }
             .frame(maxWidth: .infinity, maxHeight: .infinity)
             .background(Color.groupedBackground)

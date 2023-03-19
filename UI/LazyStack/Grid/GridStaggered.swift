@@ -55,8 +55,6 @@ extension GridStaggered {
                     }
                 }
             }
-                .scenePadding(.horizontal)
-                .padding(.vertical, spacing / 2)
         }
     }
 }

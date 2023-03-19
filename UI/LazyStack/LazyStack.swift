@@ -34,7 +34,13 @@ extension LazyStack: View {
         Group {
             switch layout {
             case .list:
-                List(selection: $selection, content: content)
+                List(selection: $selection) {
+                    content()
+                        #if canImport(AppKit)
+                        .listRowInsets(.init(top: 6, leading: 4, bottom: 6, trailing: 4))
+                        #endif
+                }
+                    .listStyle(.plain)
                     .contextMenu(forSelectionType: ID.self, menu: contextMenu, primaryAction: itemTap)
                 
             case .grid(_, _):

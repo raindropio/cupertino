@@ -18,7 +18,6 @@ fileprivate struct LSS: ViewModifier {
             .foregroundStyle(.secondary)
             .labelStyle(LSSLabelStyle())
             .buttonStyle(.borderless)
-            .frame(maxWidth: .infinity, alignment: .leading)
     }
 }
 
@@ -33,7 +32,6 @@ fileprivate struct iOS: ViewModifier {
             
         default:
             content.modifier(LSS())
-                ._safeAreaInsets(.init(top: 2, leading: 16, bottom: 2, trailing: 16))
         }
     }
 }

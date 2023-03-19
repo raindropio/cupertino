@@ -37,7 +37,6 @@ extension ViewConfigRaindropsButton {
             } label: {
                 Label(view.title, systemImage: view.systemImage)
                     .foregroundStyle(.tint)
-                    .frame(minWidth: 54, maxHeight: .infinity)
             }
                 .symbolVariant(.fill)
                 .help("Layout")
