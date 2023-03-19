@@ -15,9 +15,9 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "76154B6129C202D5002DDDEB"
-               BuildableName = "Share (macOS).appex"
-               BlueprintName = "Share (macOS)"
+               BlueprintIdentifier = "767F096E299FD6E200349902"
+               BuildableName = "WebExtension.appex"
+               BlueprintName = "WebExtension iOS"
                ReferencedContainer = "container:Raindrop.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
@@ -29,9 +29,9 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "7685A190286868AC00A4BC3C"
-               BuildableName = "Raindrop.app"
-               BlueprintName = "Raindrop"
+               BlueprintIdentifier = "767F096E299FD6E200349902"
+               BuildableName = "WebExtension.appex"
+               BlueprintName = "WebExtension iOS"
                ReferencedContainer = "container:Raindrop.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
@@ -57,16 +57,20 @@
       debugServiceExtension = "internal"
       allowLocationSimulation = "YES"
       launchAutomaticallySubstyle = "2">
-      <BuildableProductRunnable
-         runnableDebuggingMode = "0">
+      <RemoteRunnable
+         runnableDebuggingMode = "1"
+         BundleIdentifier = "com.apple.mobilesafari"
+         RemotePath = "/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Library/Developer/CoreSimulator/Profiles/Runtimes/iOS.simruntime/Contents/Resources/RuntimeRoot/Applications/MobileSafari.app">
+      </RemoteRunnable>
+      <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "7685A190286868AC00A4BC3C"
-            BuildableName = "Raindrop.app"
-            BlueprintName = "Raindrop"
+            BlueprintIdentifier = "767F096E299FD6E200349902"
+            BuildableName = "WebExtension.appex"
+            BlueprintName = "WebExtension iOS"
             ReferencedContainer = "container:Raindrop.xcodeproj">
          </BuildableReference>
-      </BuildableProductRunnable>
+      </MacroExpansion>
    </LaunchAction>
    <ProfileAction
       buildConfiguration = "Release"
@@ -79,9 +83,9 @@
          runnableDebuggingMode = "0">
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "7685A190286868AC00A4BC3C"
-            BuildableName = "Raindrop.app"
-            BlueprintName = "Raindrop"
+            BlueprintIdentifier = "767F096E299FD6E200349902"
+            BuildableName = "WebExtension.appex"
+            BlueprintName = "WebExtension iOS"
             ReferencedContainer = "container:Raindrop.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
