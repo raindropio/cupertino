@@ -4,13 +4,17 @@ import UI
 import Features
 
 struct SettingsMacOS: View {
-//    @State var path: SettingsPath
+//    @State var path: SettingsPath?
 
     var body: some View {
         //selection: $path.screen
         TabView {
+            SettingsMacGeneral()
+                .tabItem { Label("General", systemImage: "gear") }
+                .tag(Optional<SettingsPath.Screen>.none)
+            
             AuthGroup {
-                SettingsLogout()
+                SettingsAccount()
                     .tabItem { Label("Account", systemImage: "person.crop.circle") }
                     .tag(SettingsPath.Screen.account)
                 
@@ -25,10 +29,12 @@ struct SettingsMacOS: View {
             
             AuthGroup {
                 SettingsWebApp(subpage: .import)
+                    .frame(height: 400)
                     .tabItem { Label("Import", systemImage: "square.and.arrow.down") }
                     .tag(SettingsPath.Screen.import)
                 
                 SettingsWebApp(subpage: .backups)
+                    .frame(height: 400)
                     .tabItem { Label("Backups", systemImage: "clock.arrow.circlepath") }
                     .tag(SettingsPath.Screen.backups)
             }

@@ -11,7 +11,7 @@ struct SettingsIOS: View {
         } detail: {
             switch path.screen {
             case .account:
-                SettingsWebApp(subpage: .account)
+                SettingsAccount()
             case .backups:
                 SettingsWebApp(subpage: .backups)
             case .import:

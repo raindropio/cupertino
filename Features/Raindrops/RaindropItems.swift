@@ -56,5 +56,9 @@ extension RaindropItems { fileprivate struct Memorized: View {
             insertOf: find.isSearching ? [] : addTypes,
             loadMore: loadMore
         )
+            .listRowSeparator(.visible)
+            #if canImport(UIKit)
+            .listRowSeparatorTint(.primary.opacity(0.07))
+            #endif
     }
 }}

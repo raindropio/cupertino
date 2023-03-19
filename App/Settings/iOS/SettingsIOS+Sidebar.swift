@@ -69,8 +69,6 @@ extension SettingsIOS {
                             .scenePadding(.top)
                     }
                         .listItemTint(.monochrome)
-                    
-                    SettingsLogout()
                 }
                 .environment(\.defaultMinListRowHeight, 40)
             }

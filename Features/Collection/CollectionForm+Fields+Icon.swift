@@ -12,10 +12,7 @@ extension CollectionForm.Fields {
                 CollectionIcon(collection, fallbackImageName: "photo.on.rectangle")
                     .frame(height: 34)
             }
-                .buttonStyle(.bordered)
-                #if canImport(UIKit)
-                .buttonBorderShape(.roundedRectangle(radius: 6))
-                #endif
+                .buttonStyle(.chip)
                 .navigationDestination(isPresented: $show) {
                     CollectionIconGrid(selection: $collection.cover, suggest: collection.title)
                 }

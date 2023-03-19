@@ -57,6 +57,7 @@ struct CollectionIconGrid: View {
             .searchable(text: $search, placement: .navigationBarDrawer(displayMode: .always))
             #else
             .searchable(text: $search)
+            .frame(idealHeight: 300)
             #endif
             .toolbar {
                 ToolbarItem(placement: .destructiveAction) {

@@ -9,7 +9,7 @@ struct ButtonBaseModifier: ViewModifier {
     static let padding: [ControlSize: CGFloat]          = [.large: 16,  .regular: 14,   .small: 10, .mini: 10]
     static let corner: [ControlSize?: CGFloat]          = [.large: 10,  .regular: 8,    .small: 15, .mini: 15, nil: 15]
     #else
-    static let height: [ControlSize: CGFloat]           = [.large: 28,  .regular: 20,   .small: 16, .mini: 12]
+    static let height: [ControlSize: CGFloat]           = [.large: 32,  .regular: 24,   .small: 18, .mini: 14]
     static let padding: [ControlSize: CGFloat]          = [.large: 8,   .regular: 8,    .small: 6,  .mini: 4]
     static let corner: [ControlSize?: CGFloat]          = [.large: 6,   .regular: 6,    .small: 4,  .mini: 2, nil: 2]
     #endif

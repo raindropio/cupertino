@@ -3,7 +3,11 @@ import API
 
 extension View {
     func raindropsAnimation() -> some View {
+        #if canImport(UIKit)
         modifier(RaindropsAnimation())
+        #else
+        self
+        #endif
     }
 }
 
