@@ -616,6 +616,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 76154C7429C21039002DDDEB /* Build configuration list for PBXNativeTarget "WebExtension (macOS)" */;
 			buildPhases = (
+				76C5730F29C70660004934AF /* Download latest app/extension prod build to ./bundle folder */,
 				76154C5429C21039002DDDEB /* Sources */,
 				76154C5529C21039002DDDEB /* Frameworks */,
 				76154C5629C21039002DDDEB /* Resources */,
@@ -839,6 +840,25 @@
 
 /* Begin PBXShellScriptBuildPhase section */
 		767F0AFD29A368C200349902 /* Download latest app/extension prod build to ./bundle folder */ = {
+			isa = PBXShellScriptBuildPhase;
+			alwaysOutOfDate = 1;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			name = "Download latest app/extension prod build to ./bundle folder";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "chmod +x $PROJECT_DIR/WebExtension/download.command\n$PROJECT_DIR/WebExtension/download.command\n";
+		};
+		76C5730F29C70660004934AF /* Download latest app/extension prod build to ./bundle folder */ = {
 			isa = PBXShellScriptBuildPhase;
 			alwaysOutOfDate = 1;
 			buildActionMask = 2147483647;
@@ -1272,7 +1292,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				MARKETING_VERSION = 5.0.15;
+				MARKETING_VERSION = 5.0.16;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -1327,7 +1347,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				MARKETING_VERSION = 5.0.15;
+				MARKETING_VERSION = 5.0.16;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SWIFT_COMPILATION_MODE = wholemodule;
