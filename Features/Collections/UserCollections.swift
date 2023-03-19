@@ -49,18 +49,8 @@ extension UserCollections {
     }
     
     fileprivate struct Empty: View {
-        #if canImport(UIKit)
-        @Environment(\.editMode) private var editMode
-        #endif
+        @IsEditing private var isEditing
         @EnvironmentObject private var sheet: CollectionSheet
-        
-        private var isEditing: Bool {
-            #if canImport(UIKit)
-            editMode?.wrappedValue == .active
-            #else
-            false
-            #endif
-        }
         
         var body: some View {
             Section {

@@ -6,7 +6,7 @@ import Features
 
 extension Folder.Toolbar {
     struct Editing: ViewModifier {
-        @Environment(\.editMode) private var editMode
+        @IsEditing private var isEditing
         @Environment(\.isSearching) private var isSearching
         @Environment(\.containerHorizontalSizeClass) private var sizeClass
         @EnvironmentObject private var dispatch: Dispatcher
@@ -15,15 +15,11 @@ extension Folder.Toolbar {
         var pick: RaindropsPick
         var toggleAll: () -> Void
         
-        private var isActive: Bool {
-            editMode?.wrappedValue == .active
-        }
-        
         private var editButtonPlacement: ToolbarItemPlacement {
             if isSearching, sizeClass == .compact {
                 return .status
             }
-            return editMode?.wrappedValue == .active ? .cancellationAction : .automatic
+            return isEditing ? .cancellationAction : .automatic
         }
         
         private var selectAllButtonPlacement: ToolbarItemPlacement {
@@ -35,7 +31,7 @@ extension Folder.Toolbar {
         
         func body(content: Content) -> some View {
             content
-            .navigationBarBackButtonHidden(editMode?.wrappedValue == .active)
+            .navigationBarBackButtonHidden(isEditing)
             .toolbar {
                 //start/cancel
                 ToolbarItem(placement: editButtonPlacement) {
@@ -49,7 +45,7 @@ extension Folder.Toolbar {
                 }
                 
                 //edit mode
-                if isActive {
+                if isEditing {
                     //select/deselect all
                     ToolbarItem(placement: selectAllButtonPlacement) {
                         Button(action: toggleAll) {

@@ -19,9 +19,7 @@ struct Nesteds: View {
 
 extension Nesteds {
     struct Memorized: View {
-        #if canImport(UIKit)
-        @Environment(\.editMode) private var editMode
-        #endif
+        @IsEditing private var isEditing
         var items: [UserCollection]
         var animation: UUID
         
@@ -45,9 +43,7 @@ extension Nesteds {
                 }
                     .padding(.vertical, 8)
                     .clearSection()
-                    #if canImport(UIKit)
-                    .disabled(editMode?.wrappedValue == .active)
-                    #endif
+                    .disabled(isEditing)
                     .fixedSize(horizontal: false, vertical: true)
                     .animation(.default, value: animation)
             }

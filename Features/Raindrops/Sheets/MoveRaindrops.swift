@@ -5,9 +5,7 @@ import UI
 struct MoveRaindrops: View {
     @EnvironmentObject private var dispatch: Dispatcher
     @Environment(\.dismiss) private var dismiss
-    #if canImport(UIKit)
-    @Environment(\.editMode) private var editMode
-    #endif
+    @IsEditing private var isEditing
     
     @State private var to: Int?
     @State private var loading = false
@@ -25,11 +23,9 @@ struct MoveRaindrops: View {
         self.to = nil
         dismiss()
         
-        #if canImport(UIKit)
         withAnimation {
-            editMode?.wrappedValue = .inactive
+            isEditing = false
         }
-        #endif
     }
     
     var body: some View {

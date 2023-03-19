@@ -22,9 +22,7 @@ fileprivate struct _Menu: View {
     @EnvironmentObject private var sheet: RaindropSheet
     @EnvironmentObject private var r: RaindropsStore
     @EnvironmentObject private var dispatch: Dispatcher
-    #if canImport(UIKit)
-    @Environment(\.editMode) private var editMode
-    #endif
+    @IsEditing private var isEditing
 
     var pick: RaindropsPick
     
@@ -83,7 +81,7 @@ fileprivate struct _Menu: View {
                 dispatch.sync(RaindropsAction.updateMany(pick, .important(true)))
                 #if canImport(UIKit)
                 withAnimation {
-                    editMode?.wrappedValue = .inactive
+                    isEditing = false
                 }
                 #endif
             } label: {
@@ -105,7 +103,7 @@ fileprivate struct _Menu: View {
                             dispatch.sync(RaindropsAction.updateMany(pick, .removeTags))
                             #if canImport(UIKit)
                             withAnimation {
-                                editMode?.wrappedValue = .inactive
+                                isEditing = false
                             }
                             #endif
                         }
@@ -117,7 +115,7 @@ fileprivate struct _Menu: View {
                         dispatch.sync(RaindropsAction.updateMany(pick, .important(false)))
                         #if canImport(UIKit)
                         withAnimation {
-                            editMode?.wrappedValue = .inactive
+                            isEditing = false
                         }
                         #endif
                     } label: {

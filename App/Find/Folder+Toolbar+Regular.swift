@@ -7,6 +7,7 @@ extension Folder.Toolbar {
     struct Regular: ViewModifier {
         @EnvironmentObject private var dispatch: Dispatcher
         @Environment(\.containerHorizontalSizeClass) private var sizeClass
+        @IsEditing private var isEditing
 
         var find: FindBy
         var pick: RaindropsPick
@@ -26,8 +27,10 @@ extension Folder.Toolbar {
                         }
                     }
                     
-                    ToolbarItem(placement: .primaryAction) {
-                        AddButton(collection: find.collectionId)
+                    if !isEditing {
+                        ToolbarItem(placement: .primaryAction) {
+                            AddButton(collection: find.collectionId)
+                        }
                     }
                     
                     ToolbarTitleMenu {

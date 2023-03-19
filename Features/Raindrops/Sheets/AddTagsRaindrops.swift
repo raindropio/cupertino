@@ -5,9 +5,7 @@ import UI
 struct AddTagsRaindrops: View {
     @EnvironmentObject private var dispatch: Dispatcher
     @Environment(\.dismiss) private var dismiss
-    #if canImport(UIKit)
-    @Environment(\.editMode) private var editMode
-    #endif
+    @IsEditing private var isEditing
     
     @State private var tags = [String]()
 
@@ -20,11 +18,9 @@ struct AddTagsRaindrops: View {
         try await dispatch(RaindropsAction.updateMany(pick, .addTags(tags)))
         
         dismiss()
-        #if canImport(UIKit)
         withAnimation {
-            editMode?.wrappedValue = .inactive
+            isEditing = false
         }
-        #endif
     }
     
     var body: some View {

@@ -10,10 +10,10 @@ extension View {
 }
 
 fileprivate struct AB: ViewModifier {
+    @IsEditing private var isEditing
     @Environment(\.drop) private var drop
     #if canImport(UIKit)
     @Environment(\.isSearching) private var isSearching
-    @Environment(\.editMode) private var editMode
     #endif
     
     var enabled: Bool
@@ -29,7 +29,7 @@ fileprivate struct AB: ViewModifier {
         content
             #if canImport(UIKit)
             .overlay(alignment: .bottomTrailing) {
-                if collection != -99, editMode?.wrappedValue != .active, !isSearching {
+                if collection != -99, !isEditing, !isSearching {
                     OptionalPasteButton(
                         supportedContentTypes: types,
                         payloadAction: add

@@ -10,9 +10,6 @@ public extension View {
 }
 
 fileprivate struct _Modifier: ViewModifier {
-    #if canImport(UIKit)
-    @Environment(\.editMode) private var editMode
-    #endif
     @StateObject private var sheet = RaindropSheet()
     @State private var edit: Raindrop.ID?
     @State private var highlights: Raindrop.ID?

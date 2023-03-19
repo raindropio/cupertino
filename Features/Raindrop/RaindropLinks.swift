@@ -5,9 +5,7 @@ import UI
 struct RaindropLinks: View {
     @Environment(\.openDeepLink) private var openDeepLink
     @Environment(\.raindropsContainer) private var container
-    #if canImport(UIKit)
-    @Environment(\.editMode) private var editMode
-    #endif
+    @IsEditing private var isEditing
 
     var raindrop: Raindrop
     
@@ -63,9 +61,7 @@ struct RaindropLinks: View {
                 .controlSize(.small)
                 .imageScale(.small)
                 .padding(.vertical, 4)
-                #if canImport(UIKit)
-                .disabled(editMode?.wrappedValue == .active)
-                #endif
+                .disabled(isEditing)
         }
     }
 }
