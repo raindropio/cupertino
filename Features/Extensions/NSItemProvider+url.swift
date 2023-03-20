@@ -1,5 +1,6 @@
 import Foundation
 import CoreTransferable
+import UIKit
 
 extension Array where Element == NSItemProvider {
     //detect URLs of files or web pages (including from text)
@@ -18,13 +19,18 @@ extension Array where Element == NSItemProvider {
 extension NSItemProvider {
     //detect single URL of file or web page (including from text)
     public func url() async throws -> URL? {
-        try await self.loadTransferable(type: AnyURL.self).rawValue
+        //support edge cases
+        if let url = try? await self.loadTransferable(type: URLFromData.self).rawValue {
+            return url
+        }
+        
+        //will work for almost any case
+        return try await self.loadTransferable(type: DirectURL.self).rawValue
     }
 }
 
-fileprivate struct AnyURL: Transferable {
+fileprivate struct DirectURL: Transferable {
     private var string: String { rawValue.absoluteString }
-    private var data: Data { rawValue.dataRepresentation }
 
     let rawValue: URL
     
@@ -55,16 +61,6 @@ fileprivate struct AnyURL: Transferable {
         }
     }
     
-    //youtube specific
-    @Sendable init(_ data: Data) throws {
-        let text = try NSKeyedUnarchiver.unarchivedObject(ofClass: NSString.self, from: data) as? String
-        if let text {
-            try self.init(text)
-        } else {
-            throw MyError.ignore
-        }
-    }
-    
     static let shouldAttemptToOpenInPlace: Bool = {
         let version = ProcessInfo().operatingSystemVersion
         return version.majorVersion >= 16 && version.minorVersion >= 4
@@ -74,14 +70,47 @@ fileprivate struct AnyURL: Transferable {
         ProxyRepresentation(exporting: \.rawValue, importing: self.init)
         
         FileRepresentation(importedContentType: .fileURL, shouldAttemptToOpenInPlace: shouldAttemptToOpenInPlace, importing: self.init)
-        FileRepresentation(importedContentType: .image, shouldAttemptToOpenInPlace: shouldAttemptToOpenInPlace, importing: self.init)
         FileRepresentation(importedContentType: .video, shouldAttemptToOpenInPlace: shouldAttemptToOpenInPlace, importing: self.init)
         FileRepresentation(importedContentType: .movie, shouldAttemptToOpenInPlace: shouldAttemptToOpenInPlace, importing: self.init)
         FileRepresentation(importedContentType: .audio, shouldAttemptToOpenInPlace: shouldAttemptToOpenInPlace, importing: self.init)
         FileRepresentation(importedContentType: .pdf, shouldAttemptToOpenInPlace: shouldAttemptToOpenInPlace, importing: self.init)
+        FileRepresentation(importedContentType: .image, shouldAttemptToOpenInPlace: shouldAttemptToOpenInPlace, importing: self.init)
         
         ProxyRepresentation(exporting: \.string, importing: self.init)
-        DataRepresentation(contentType: .text, exporting: \.data, importing: self.init)
+    }
+    
+    enum MyError: Error {
+        case ignore
+    }
+}
+
+fileprivate struct URLFromData: Transferable {
+    let rawValue: URL
+    
+    @Sendable init(_ data: Data) throws {
+        //screenshot specific
+        if let image = try? NSKeyedUnarchiver.unarchivedObject(ofClass: UIImage.self, from: data),
+            let data = image.pngData() {
+            let url = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0]
+                .appendingPathComponent("\(UUID().uuidString).png")
+            try data.write(to: url)
+            self.rawValue = url
+            return
+        }
+        
+        //youtube specific
+        if let text = try NSKeyedUnarchiver.unarchivedObject(ofClass: NSString.self, from: data) as? String,
+           let detected: URL = URL.detect(from: text) {
+            self.rawValue = detected
+            return
+        }
+        
+        throw MyError.ignore
+    }
+    
+    static var transferRepresentation: some TransferRepresentation {
+        DataRepresentation(importedContentType: .image, importing: self.init)
+        DataRepresentation(importedContentType: .text, importing: self.init)
     }
     
     enum MyError: Error {
