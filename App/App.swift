@@ -18,9 +18,9 @@ import Features
                 #endif
         }
             #if canImport(AppKit)
-            .windowResizability(.contentSize)
+            .windowResizability(.automatic)
             .defaultPosition(.center)
-            .defaultSize(width: 800, height: 600)
+            .defaultSize(width: 900, height: 700)
             .commands {
                 SidebarCommands()
             }
@@ -32,6 +32,7 @@ import Features
                 .formStyle(.modern)
                 .storeProvider(store)
         }
+            .defaultPosition(.center)
         #endif
     }
 }

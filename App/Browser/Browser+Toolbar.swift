@@ -65,7 +65,7 @@ extension Browser.Toolbar: ViewModifier {
                             }
                         }
                 }
-                    .popover(isPresented: $highlights) {
+                    .sheet(isPresented: $highlights) {
                         RaindropStack($raindrop, content: RaindropHighlights.init)
                             .frame(idealWidth: 400, idealHeight: 600)
                             #if canImport(AppKit)
@@ -79,7 +79,7 @@ extension Browser.Toolbar: ViewModifier {
                 Button { collection.toggle() } label: {
                     Image(systemName: "folder")
                 }
-                    .popover(isPresented: $collection) {
+                    .sheet(isPresented: $collection) {
                         RaindropStack($raindrop, content: RaindropCollection.init)
                             .frame(idealWidth: 400, idealHeight: 600)
                             #if canImport(AppKit)
@@ -102,7 +102,7 @@ extension Browser.Toolbar: ViewModifier {
                             }
                         }
                 }
-                    .popover(isPresented: $tags) {
+                    .sheet(isPresented: $tags) {
                         RaindropStack($raindrop, content: RaindropTags.init)
                             .frame(idealWidth: 400, idealHeight: 600)
                             #if canImport(AppKit)
@@ -118,7 +118,7 @@ extension Browser.Toolbar: ViewModifier {
                 Button { form.toggle() } label: {
                     Image(systemName: raindrop.isNew ? "plus.circle" : "info.circle")
                 }
-                    .popover(isPresented: $form) {
+                    .sheet(isPresented: $form) {
                         RaindropStack($raindrop, content: RaindropForm.init)
                             #if canImport(AppKit)
                             .frame(idealWidth: 400)

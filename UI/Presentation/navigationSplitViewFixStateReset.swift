@@ -3,7 +3,11 @@ import SwiftUI
 public extension View {
     /// When app goes to background on iPad NavigationSplitView resets sidebar state. This modifier fixes this bug
     func navigationSplitViewFixStateReset() -> some View {
+        #if canImport(UIKit)
         modifier(FixSceneBackground())
+        #else
+        self
+        #endif
     }
 }
 

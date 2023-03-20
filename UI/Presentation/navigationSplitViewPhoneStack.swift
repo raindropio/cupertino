@@ -2,7 +2,11 @@ import SwiftUI
 
 public extension View {
     func navigationSplitViewPhoneStack() -> some View {
+        #if canImport(UIKit)
         modifier(NSVPS())
+        #else
+        self
+        #endif
     }
 }
 
