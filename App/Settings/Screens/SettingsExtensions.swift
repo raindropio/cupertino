@@ -7,9 +7,6 @@ struct SettingsExtensions: View {
     var body: some View {
         Form {
             Share()
-            #if canImport(UIKit)
-            Action()
-            #endif
             Safari()
         }
             .navigationTitle("Extensions")
