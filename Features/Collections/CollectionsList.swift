@@ -57,7 +57,6 @@ extension _Optional: View {
                 FindCollections<Int>(search)
             }
         }
-            .backport.defaultFocus($searching, true)
             #if os(iOS)
             .listStyle(.insetGrouped)
             .headerProminence(.increased)
