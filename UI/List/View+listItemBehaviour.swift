@@ -9,7 +9,6 @@ public extension View {
 fileprivate struct ItemBehaviour<T: Hashable> {
     @EnvironmentObject private var service: ListBehaviourService<T>
     @IsEditing private var isEditing
-    @Environment(\.defaultMinListRowHeight) private var defaultMinListRowHeight
     @Environment(\.colorScheme) private var colorScheme
     @State private var isPressing = false
 

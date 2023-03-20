@@ -74,7 +74,6 @@ extension FindByList: View {
             #if os(iOS)
             .listStyle(.insetGrouped)
             .headerProminence(search.isEmpty ? .increased : .standard)
-            .environment(\.defaultMinListRowHeight, 44)
             #endif
             .labelStyle(.sidebar)
             .collectionsAnimation()

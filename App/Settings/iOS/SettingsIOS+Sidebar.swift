@@ -70,7 +70,6 @@ extension SettingsIOS {
                     }
                         .listItemTint(.monochrome)
                 }
-                .environment(\.defaultMinListRowHeight, 40)
             }
             .listStyle(.insetGrouped)
             .safeAreaInset(edge: .top) { Color.clear.frame(height: 4) }

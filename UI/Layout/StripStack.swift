@@ -32,7 +32,7 @@ public struct StripStack<C: View> {
 extension StripStack: View {
     public var body: some View {
         ScrollView(.horizontal, showsIndicators: false) {
-            HStack(spacing: spacing ?? defaultSpacing[controlSize], content: content)
+            LazyHStack(spacing: spacing ?? defaultSpacing[controlSize], content: content)
                 .padding(.trailing, 32)
                 .frame(maxWidth: .infinity, alignment: .leading)
         }

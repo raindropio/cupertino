@@ -33,54 +33,51 @@ extension SuggestedFilters {
         
         var body: some View {
             StripStack {
-                Group {
-                    if !tags.isEmpty {
-                        Menu {
-                            ForEach(tags) { item in
-                                SearchCompletionButton(item, replace: false) {
-                                    FilterRow(item)
-                                }
-                            }
-                                .labelStyle(.titleOnly)
-                        } label: {
-                            Label {
-                                Text("Tags")
-                                    .foregroundColor(.primary)
-                            } icon: {
-                                Image(systemName: "number")
+                if !tags.isEmpty {
+                    Menu {
+                        ForEach(tags) { item in
+                            SearchCompletionButton(item, replace: false) {
+                                FilterRow(item)
                             }
                         }
-                    }
-                    
-                    ForEach(simple) { item in
-                        SearchCompletionButton(item, replace: false) {
-                            FilterRow(item)
+                            .labelStyle(.titleOnly)
+                    } label: {
+                        Label {
+                            Text("Tags")
+                                .foregroundColor(.primary)
+                        } icon: {
+                            Image(systemName: "number")
                         }
-                            .tint(item.color)
-                            .listItemTint(item.color)
-                    }
-                    
-                    if !created.isEmpty {
-                        Menu {
-                            ForEach(created) { item in
-                                SearchCompletionButton(item, replace: false) {
-                                    FilterRow(item)
-                                }
-                            }
-                                .labelStyle(.titleOnly)
-                        } label: {
-                            Label {
-                                Text("Creation date")
-                                    .foregroundColor(.primary)
-                            } icon: {
-                                Image(systemName: "calendar")
-                            }
-                        }
-                            .tint(Filter.Kind.created("").color)
-                            .listItemTint(Filter.Kind.created("").color)
                     }
                 }
-                    .transition(.move(edge: .trailing))
+                
+                ForEach(simple) { item in
+                    SearchCompletionButton(item, replace: false) {
+                        FilterRow(item)
+                    }
+                        .tint(item.color)
+                        .listItemTint(item.color)
+                }
+                
+                if !created.isEmpty {
+                    Menu {
+                        ForEach(created) { item in
+                            SearchCompletionButton(item, replace: false) {
+                                FilterRow(item)
+                            }
+                        }
+                            .labelStyle(.titleOnly)
+                    } label: {
+                        Label {
+                            Text("Creation date")
+                                .foregroundColor(.primary)
+                        } icon: {
+                            Image(systemName: "calendar")
+                        }
+                    }
+                        .tint(Filter.Kind.created("").color)
+                        .listItemTint(Filter.Kind.created("").color)
+                }
             }
                 .buttonStyle(.chip)
                 .menuStyle(.chip)

@@ -2,8 +2,6 @@ import Foundation
 
 extension RaindropsState {
     public struct Segment: Equatable, Codable {
-        static let blank = Self()
-
         public var ids = [Raindrop.ID]()
         public var sort = SortBy.sort
         public var page = 0
@@ -67,7 +65,7 @@ extension RaindropsState {
     
     //access specific group by state[find].ids, etc
     subscript(find: FindBy) -> Segment {
-        get { segments[find] ?? Segment.blank }
+        get { segments[find] ?? .init() }
         set {
             segments[find] = newValue
         }

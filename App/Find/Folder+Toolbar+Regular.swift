@@ -19,15 +19,15 @@ extension Folder.Toolbar {
                 .toolbarRole(.browser)
                 #endif
                 .toolbar {
-                    ToolbarItemGroup {
-                        if sizeClass == .regular {
-                            SortRaindropsButton(find)
-                            ViewConfigRaindropsButton(find)
-                            Spacer()
-                        }
-                    }
-                    
                     if !isEditing {
+                        ToolbarItemGroup {
+                            if sizeClass == .regular {
+                                SortRaindropsButton(find)
+                                ViewConfigRaindropsButton(find)
+                                Spacer()
+                            }
+                        }
+                    
                         ToolbarItemGroup(placement: .primaryAction) {
                             AddButton(collection: find.collectionId)
                             if sizeClass == .regular {
@@ -36,8 +36,8 @@ extension Folder.Toolbar {
                         }
                     }
                     
-                    ToolbarTitleMenu {
-                        if !find.isSearching {
+                    if !find.isSearching {
+                        ToolbarTitleMenu {
                             CollectionsMenu(find.collectionId)
                         }
                     }
