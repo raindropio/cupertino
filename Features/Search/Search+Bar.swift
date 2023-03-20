@@ -16,9 +16,9 @@ extension Search {
                     token: FilterRow.init
                 )
                 #if canImport(UIKit)
-                .autocorrectionDisabled()
                 .textInputAutocapitalization(.never)
                 .keyboardType(.webSearch)
+                .submitLabel(.search)
                 #endif
                 .searchCompletionButtons(
                     text: $refine.text,

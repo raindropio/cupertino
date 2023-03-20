@@ -54,7 +54,6 @@ struct EmptyRaindrops: View {
             
             case .loading:
                 ProgressView()
-                    .controlSize(.small)
                     .scenePadding()
                 
             case .error:

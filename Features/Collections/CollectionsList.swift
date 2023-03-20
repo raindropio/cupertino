@@ -28,9 +28,9 @@ extension _Optional: View {
                     TextField("Search", text: $search)
                         .backport.focused($searching)
                         #if canImport(UIKit)
-                        .autocorrectionDisabled()
                         .textInputAutocapitalization(.never)
                         .keyboardType(.webSearch)
+                        .submitLabel(.search)
                         #endif
                 } icon: {
                     Image(systemName: "magnifyingglass")

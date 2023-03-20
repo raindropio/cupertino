@@ -22,7 +22,6 @@ struct Receive: View {
                         //loading
                         if loading {
                             ProgressView()
-                                .controlSize(.small)
                                 .presentationDetents([.medium])
                         }
                         //nothing found

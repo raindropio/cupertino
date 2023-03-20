@@ -25,7 +25,11 @@ fileprivate struct ChipStyleModifier: ViewModifier {
                 .tint.opacity(isPressed ? 0.4 : 0.2),
                 in: RoundedRectangle(cornerRadius: ButtonBaseModifier.corner[controlSize]!, style: .continuous)
             )
-            .contentShape(Rectangle())
+            .contentShape(
+                .hoverEffect,
+                RoundedRectangle(cornerRadius: ButtonBaseModifier.corner[controlSize]!, style: .continuous)
+            )
+            .hoverEffect()
     }
 }
 

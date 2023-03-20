@@ -26,7 +26,11 @@ fileprivate struct DottedStyleModifier: ViewModifier {
                     .strokeBorder(style: StrokeStyle(lineWidth: 0.5, dash: [2]))
                     .foregroundStyle(.tint.opacity(isPressed ? 1 : 0.5))
             )
-            .contentShape(Rectangle())
+            .contentShape(
+                .hoverEffect,
+                RoundedRectangle(cornerRadius: ButtonBaseModifier.corner[controlSize]!, style: .continuous)
+            )
+            .hoverEffect()
     }
 }
 

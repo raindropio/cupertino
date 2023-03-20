@@ -54,17 +54,18 @@ extension Browser.Toolbar: ViewModifier {
             }
             
             //highlights
-            ToolbarItemGroup {
-                Button { highlights.toggle() } label: {
-                    Image(systemName: Filter.Kind.highlights.systemImage)
-                        .overlay(alignment: .topTrailing) {
-                            if !raindrop.highlights.isEmpty {
-                                Text(raindrop.highlights.count, format: .number)
-                                    .circularBadge()
-                                    .offset(x: 11, y: -11)
+            if !raindrop.highlights.isEmpty {
+                ToolbarItem {
+                    Button { highlights.toggle() } label: {
+                        Image(systemName: Filter.Kind.highlights.systemImage)
+                            .overlay(alignment: .topTrailing) {
+                                if !raindrop.highlights.isEmpty {
+                                    Text(raindrop.highlights.count, format: .number)
+                                        .circularBadge()
+                                        .offset(x: 11, y: -11)
+                                }
                             }
-                        }
-                }
+                    }
                     .sheet(isPresented: $highlights) {
                         RaindropStack($raindrop, content: RaindropHighlights.init)
                             .frame(idealWidth: 400, idealHeight: 600)
@@ -72,6 +73,12 @@ extension Browser.Toolbar: ViewModifier {
                             .fixedSize()
                             #endif
                     }
+                }
+            }
+            
+            ToolbarItem {
+                ShareLink(item: page.url ?? .init(string: "about:blank")!)
+                    .disabled(page.url == nil)
             }
             
             //move
@@ -130,13 +137,6 @@ extension Browser.Toolbar: ViewModifier {
                 Spacer()
             }
             
-            //share
-            ToolbarItemGroup(placement: placement) {
-                ShareLink(item: page.url ?? .init(string: "about:blank")!)
-                    .disabled(page.url == nil)
-                Spacer()
-            }
-            
             //delete
             ToolbarItemGroup(placement: placement) {
                 ActionButton {
@@ -146,6 +146,15 @@ extension Browser.Toolbar: ViewModifier {
                     Image(systemName: "trash")
                 }
                     .disabled(raindrop.isNew)
+                Spacer()
+            }
+            
+            //open
+            ToolbarItemGroup(placement: placement) {
+                Link(destination: page.url ?? .init(string: "about:blank")!) {
+                    Image(systemName: "safari")
+                }
+                    .disabled(page.url == nil)
             }
         }
     }

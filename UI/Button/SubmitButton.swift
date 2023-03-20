@@ -14,7 +14,6 @@ public struct SubmitButton<Label>: View where Label: View {
             HStack(spacing: 6) {
                 if submitting {
                     ProgressView()
-                        .controlSize(.small)
                 }
                 
                 label()

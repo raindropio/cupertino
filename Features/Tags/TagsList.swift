@@ -77,9 +77,9 @@ extension TagsList: View {
                     TextField("Add tag", text: $new)
                         .backport.focused($focused)
                         #if canImport(UIKit)
-                        .autocorrectionDisabled()
                         .textInputAutocapitalization(.never)
                         .keyboardType(.webSearch)
+                        .submitLabel(.search)
                         #endif
                 } icon: {
                     Button { focused = true } label: {

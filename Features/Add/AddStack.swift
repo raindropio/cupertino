@@ -57,7 +57,6 @@ extension AddStack: View {
                     } else {
                         if urls.count == 1 {
                             ProgressView()
-                                .controlSize(.small)
                         } else {
                             ProgressView(
                                 value: Double(completed.count),

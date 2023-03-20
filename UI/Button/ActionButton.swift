@@ -68,7 +68,6 @@ extension ActionButton: View {
             
             if loading {
                 ProgressView()
-                    .controlSize(.small)
             }
         }
     }

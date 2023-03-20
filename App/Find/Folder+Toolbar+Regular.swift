@@ -28,8 +28,11 @@ extension Folder.Toolbar {
                     }
                     
                     if !isEditing {
-                        ToolbarItem(placement: .primaryAction) {
+                        ToolbarItemGroup(placement: .primaryAction) {
                             AddButton(collection: find.collectionId)
+                            if sizeClass == .regular {
+                                Spacer()
+                            }
                         }
                     }
                     
