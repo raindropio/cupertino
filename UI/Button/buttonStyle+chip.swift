@@ -25,11 +25,13 @@ fileprivate struct ChipStyleModifier: ViewModifier {
                 .tint.opacity(isPressed ? 0.4 : 0.2),
                 in: RoundedRectangle(cornerRadius: ButtonBaseModifier.corner[controlSize]!, style: .continuous)
             )
+            #if canImport(UIKit)
             .contentShape(
                 .hoverEffect,
                 RoundedRectangle(cornerRadius: ButtonBaseModifier.corner[controlSize]!, style: .continuous)
             )
             .hoverEffect()
+            #endif
     }
 }
 
