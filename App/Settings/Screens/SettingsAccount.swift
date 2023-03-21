@@ -1,6 +1,7 @@
 import SwiftUI
 import API
 import UI
+import Features
 
 struct SettingsAccount: View {
     @EnvironmentObject private var u: UserStore
@@ -14,22 +15,19 @@ struct SettingsAccount: View {
                     LabeledContent("Email", value: me.email)
                     LabeledContent("ID", value: me.id, format: .number)
                     LabeledContent("Member since", value: me.registered, format: .dateTime)
+                } header: {
+                    UserAvatar(me, width: 72)
+                        .frame(maxWidth: .infinity)
+                        .scenePadding(.bottom)
                 }
                 
-                Section {
-                    SafariLink(destination: URL(string: "https://app.raindrop.io/settings/account")!) {
-                        Text("Edit").frame(maxWidth: .infinity)
-                    }
-                    
-                    ActionButton(role: .destructive) {
+                ControlGroup {
+                    SafariLink("Edit", destination: URL(string: "https://app.raindrop.io/settings/account")!)
+                    ActionButton("Logout", role: .destructive) {
                         try await dispatch(AuthAction.logout)
-                    } label: {
-                        Text("Logout").frame(maxWidth: .infinity)
                     }
-                        .tint(.red)
                 }
-                    .alignmentGuide(.listRowSeparatorLeading) { _ in 0 }
-                    .buttonStyle(.borderless)
+                    .controlGroupStyle(.horizontal)
             } else {
                 Text("Not logged in")
             }

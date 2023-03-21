@@ -18,9 +18,7 @@ struct CollaboratorItem: View {
                 HStack {
                     Text(collaborator.name)
                     Spacer()
-                    if collaborator.me {
-                        Text("Me").circularBadge()
-                    }
+                    Text("Me")
                 }
                 
                 Group {

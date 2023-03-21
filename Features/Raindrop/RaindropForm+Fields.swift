@@ -54,8 +54,8 @@ extension RaindropForm.Fields: View {
                     .badge(0)
                     .symbolVariant(.fill)
                     .fixedSize()
-                    .id(raindrop.collection)
             }
+                .id(raindrop.collection)
         } footer: {
             RaindropSuggestedCollections($raindrop)
         }
@@ -79,23 +79,18 @@ extension RaindropForm.Fields: View {
                 RaindropHighlights($raindrop)
             } label: {
                 Label("Highlights", systemImage: Filter.Kind.highlights.systemImage)
-                    .badge(raindrop.highlights.count)
+                    .badge(NumberInCircle(raindrop.highlights.count).foregroundColor(Filter.Kind.highlights.color))
             }
             
-            Label {
-                if raindrop.file == nil {
+            //url
+            if raindrop.file == nil {
+                Label {
                     URLField("", value: $raindrop.link, prompt: Text("URL"))
                         .labelsHidden()
                         .focused($focus, equals: .link)
+                } icon: {
+                    Image(systemName: "lock.fill")
                 }
-            } icon: {
-                Button { raindrop.important.toggle() } label: {
-                    Image(systemName: "heart")
-                        .symbolVariant(raindrop.important ? .fill : .none)
-                        .imageScale(.medium)
-                }
-                    .buttonStyle(.borderless)
-                    .tint(raindrop.important ? .accentColor : .secondary)
             }
         }
             .listItemTint(.monochrome)

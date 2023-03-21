@@ -15,17 +15,24 @@ extension RaindropForm {
                 SubmitButton("Save")
                 #endif
             } else {
-                ActionButton(role: .destructive) {
-                    try await dispatch(RaindropsAction.delete(raindrop.id))
-                    dismiss()
-                } label: {
-                    Text(raindrop.collection == -99 ? "Delete" : "Move to Trash")
-                        .frame(maxWidth: .infinity)
-                }
-                    .tint(.red)
-                    .buttonStyle(.borderless)
-                
                 Section {
+                    ControlGroup {
+                        Button { raindrop.important.toggle() } label: {
+                            Image(systemName: "heart")
+                        }
+                            .symbolVariant(raindrop.important ? .fill : .none)
+                            .tint(raindrop.important ? .accentColor : .secondary)
+                        
+                        ActionButton(role: .destructive, confirm: false) {
+                            try await dispatch(RaindropsAction.delete(raindrop.id))
+                            dismiss()
+                        } label: {
+                            Image(systemName: "trash")
+                        }
+                    }
+                        .imageScale(.medium)
+                        .controlGroupStyle(.horizontal)
+                } footer: {
                     (
                         Text("Created ") + Text(raindrop.created, formatter: .shortDateTime) + Text("\n") +
                         Text("Last modified ") + Text(raindrop.lastUpdate, formatter: .shortDateTime)
@@ -36,8 +43,8 @@ extension RaindropForm {
                     .textCase(.none)
                     .foregroundStyle(.tertiary)
                     .font(.subheadline)
+                    .scenePadding(.top)
                 }
-                    .clearSection()
             }
         }
     }

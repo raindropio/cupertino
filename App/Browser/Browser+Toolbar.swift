@@ -52,11 +52,8 @@ extension Browser.Toolbar: ViewModifier {
                     Button { highlights.toggle() } label: {
                         Image(systemName: Filter.Kind.highlights.systemImage)
                             .overlay(alignment: .topTrailing) {
-                                if !raindrop.highlights.isEmpty {
-                                    Text(raindrop.highlights.count, format: .number)
-                                        .circularBadge()
-                                        .offset(x: 11, y: -11)
-                                }
+                                NumberInCircle(raindrop.highlights.count)
+                                    .offset(x: 11, y: -11)
                             }
                     }
                     .sheet(isPresented: $highlights) {
@@ -95,11 +92,8 @@ extension Browser.Toolbar: ViewModifier {
                 Button { tags.toggle() } label: {
                     Image(systemName: "number")
                         .overlay(alignment: .topTrailing) {
-                            if !raindrop.tags.isEmpty {
-                                Text(raindrop.tags.count, format: .number)
-                                    .circularBadge()
-                                    .offset(x: 11, y: -11)
-                            }
+                            NumberInCircle(raindrop.tags.count)
+                                .offset(x: 11, y: -11)
                         }
                 }
                     .sheet(isPresented: $tags) {
