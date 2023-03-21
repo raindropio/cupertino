@@ -26,7 +26,7 @@ public struct SystemCollection: CollectionType {
     public var color: Color? {
         switch id {
         case -1: return .green
-        case -99: return .secondary
+        case -99: return .gray
         default: return nil
         }
     }

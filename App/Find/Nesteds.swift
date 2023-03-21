@@ -36,7 +36,7 @@ extension Nesteds {
                 StripStack {
                     ForEach(items, content: item)
                 }
-                    .tint(.secondary)
+                    .tint(.gray)
                     .buttonStyle(.chip)
                     .disabled(isEditing)
                     .fixedSize(horizontal: false, vertical: true)

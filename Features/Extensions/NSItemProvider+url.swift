@@ -1,6 +1,8 @@
 import Foundation
 import CoreTransferable
+#if canImport(UIKit)
 import UIKit
+#endif
 
 extension Array where Element == NSItemProvider {
     //detect URLs of files or web pages (including from text)
@@ -89,6 +91,7 @@ fileprivate struct URLFromData: Transferable {
     
     @Sendable init(_ data: Data) throws {
         //screenshot specific
+        #if canImport(UIKit)
         if let image = try? NSKeyedUnarchiver.unarchivedObject(ofClass: UIImage.self, from: data),
             let data = image.pngData() {
             let url = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0]
@@ -97,6 +100,7 @@ fileprivate struct URLFromData: Transferable {
             self.rawValue = url
             return
         }
+        #endif
         
         //youtube specific
         if let text = try NSKeyedUnarchiver.unarchivedObject(ofClass: NSString.self, from: data) as? String,

@@ -23,9 +23,8 @@ struct EmptyRaindrops: View {
                         switch find.collectionId {
                         case -1:
                             EmptyState(
-                                message:
-                                    Text("The **Unsorted** is your default collection in Raindrop.io.\n\n") +
-                                    Text("When you add an item, it goes straight to your Unsorted unless you specify that the item goes into a specific collection")
+                                "No items yet",
+                                message: Text("Items which aren’t in any collections are placed here")
                             ) {
                                 Image(systemName: "tray")
                             }
@@ -54,6 +53,9 @@ struct EmptyRaindrops: View {
             
             case .loading:
                 ProgressView()
+                    #if canImport(AppKit)
+                    .controlSize(.small)
+                    #endif
                     .scenePadding()
                 
             case .error:

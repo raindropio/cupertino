@@ -2,6 +2,7 @@ import SwiftUI
 
 public struct SafariLink<L: View> {
     @State private var show = false
+    @Environment(\.openURL) private var openURL
     
     var destination: URL
     var label: () -> L
@@ -33,7 +34,7 @@ extension SafariLink: View {
 #else
 extension SafariLink: View {
     public var body: some View {
-        Link(destination: destination, label: label)
+        Button(action: { openURL(destination) }, label: label)
     }
 }
 #endif

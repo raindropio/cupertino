@@ -9,6 +9,7 @@ extension Browser {
         @Environment(\.verticalSizeClass) private var verticalSizeClass
         @EnvironmentObject private var dispatch: Dispatcher
         @Environment(\.dismiss) private var dismiss
+        @Environment(\.openURL) private var openURL
 
         @State private var collection = false
         @State private var tags = false
@@ -45,14 +46,6 @@ extension Browser.Toolbar: ViewModifier {
         .animation(.default, value: page.prefersHiddenToolbars)
         //buttons
         .toolbar {
-            ToolbarTitleMenu {
-                if let url = page.url {
-                    Link(destination: url) {
-                        Label("Open in browser", systemImage: "arrow.up.forward")
-                    }
-                }
-            }
-            
             //highlights
             if !raindrop.highlights.isEmpty {
                 ToolbarItem {
@@ -151,7 +144,11 @@ extension Browser.Toolbar: ViewModifier {
             
             //open
             ToolbarItemGroup(placement: placement) {
-                Link(destination: page.url ?? .init(string: "about:blank")!) {
+                Button {
+                    if let url = page.url {
+                        openURL(url)
+                    }
+                } label: {
                     Image(systemName: "safari")
                 }
                     .disabled(page.url == nil)

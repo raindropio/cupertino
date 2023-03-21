@@ -40,7 +40,7 @@ public enum RaindropType: String, Codable, CaseIterable {
     }
     
     public var color: Color { switch self {
-        case .link: return .secondary
+        case .link: return .gray
         case .article: return .orange
         case .image: return .green
         case .video: return .purple

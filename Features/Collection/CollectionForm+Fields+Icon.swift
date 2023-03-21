@@ -13,6 +13,7 @@ extension CollectionForm.Fields {
                     .frame(height: 34)
             }
                 .buttonStyle(.chip)
+                .tint(.gray)
                 .navigationDestination(isPresented: $show) {
                     CollectionIconGrid(selection: $collection.cover, suggest: collection.title)
                 }

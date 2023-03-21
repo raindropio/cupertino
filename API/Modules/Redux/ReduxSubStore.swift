@@ -11,6 +11,7 @@ public actor ReduxSubStore<R: Reducer>: ObservableObject {
         state = working
     }
     
+    @_optimize(none) //otherwise sometime crash in production
     private func didChange(_ oldValue: R.S) {
         guard working != oldValue else { return }
         Task {

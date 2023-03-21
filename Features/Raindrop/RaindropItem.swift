@@ -6,6 +6,11 @@ struct RaindropItem {
     @EnvironmentObject private var sheet: RaindropSheet
     @EnvironmentObject private var dispatch: Dispatcher
     @Environment(\.raindropsContainer) private var container
+    #if canImport(UIKit)
+    @ScaledMetric private var spacing = 4
+    #else
+    @ScaledMetric private var spacing = 3
+    #endif
     
     var raindrop: Raindrop
     
@@ -22,7 +27,7 @@ extension RaindropItem: View {
                    .equatable()
             }
             
-            VStack(alignment: .leading, spacing: 4) {
+            VStack(alignment: .leading, spacing: spacing) {
                 RaindropTitleExcerpt(raindrop)
                     .lineLimit(3)
                     .allowsHitTesting(false)
@@ -70,6 +75,12 @@ extension RaindropItem: View {
 extension RaindropItem {
     struct Layout<C: View, D: View>: View {
         @Environment(\.raindropsContainer) private var container
+        #if canImport(UIKit)
+        @ScaledMetric private var spacing = 12
+        #else
+        @ScaledMetric private var spacing = 10
+        #endif
+        
         @ViewBuilder var content: () -> TupleView<(C, D)>
         
         var body: some View {
@@ -77,7 +88,7 @@ extension RaindropItem {
             
             switch container?.view {
             case .list, nil:
-                HStack(alignment: .top, spacing: 14) {
+                HStack(alignment: .top, spacing: spacing) {
                     if container?.coverRight == true {
                         parts.value.1
                     }
@@ -90,7 +101,7 @@ extension RaindropItem {
                 }
                 
             case .simple:
-                HStack(alignment: .top, spacing: 14) {
+                HStack(alignment: .top, spacing: spacing) {
                     if container?.coverRight == true {
                         parts.value.1
                     }
@@ -105,7 +116,7 @@ extension RaindropItem {
                 VStack(alignment: .leading, spacing: 0) {
                     parts.value.0
                     parts.value.1
-                        .padding(container?.hide.allExceptCover == true ? 0 : 12)
+                        .padding(container?.hide.allExceptCover == true ? 0 : spacing)
                 }
                 
             case .masonry:
@@ -113,7 +124,7 @@ extension RaindropItem {
                     parts.value.0
                         .transaction { $0.animation = nil }
                     parts.value.1
-                        .padding(container?.hide.allExceptCover == true ? 0 : 12)
+                        .padding(container?.hide.allExceptCover == true ? 0 : spacing)
                 }
             }
         }

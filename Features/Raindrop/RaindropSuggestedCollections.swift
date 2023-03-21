@@ -48,7 +48,7 @@ public struct RaindropSuggestedCollections: View {
                     }
                         .buttonStyle(.dotted)
                         .controlSize(.small)
-                        .tint(.secondary)
+                        .tint(.gray)
                         .foregroundColor(.primary)
                 }
             }

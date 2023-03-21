@@ -52,6 +52,7 @@ extension LoadMoreRaindropsButton {
                 }
                     .disabled(more == .notFound)
                     .buttonStyle(.borderless)
+                    .listRowSeparator(.hidden)
             }
         }
     }
