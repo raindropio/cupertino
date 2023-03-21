@@ -44,6 +44,7 @@ extension Folder.Status {
                 .font(.callout)
                 .controlSize(.small)
                 .contentTransition(.identity)
+                .listSectionSeparator(.hidden)
                 .listRowSeparator(.hidden)
                 .listRowBackground(Color.clear)
         }
