@@ -4,22 +4,26 @@ import Combine
 public actor ReduxSubStore<R: Reducer>: ObservableObject {
     private var reducer = R()
     
-    @MainActor public var state: R.S
+    @MainActor @Published public var state: R.S
     private var working = R.S() { didSet { didChange(oldValue) } }
+    private var stateIsUpdating = false //prevent simultanious access to state
     
     @MainActor init() {
         state = working
     }
     
-    @_optimize(none) //otherwise sometime crash in production
     private func didChange(_ oldValue: R.S) {
-        guard working != oldValue else { return }
-        Task {
-            await MainActor.run { [working] in
-                state = working
-                self.objectWillChange.send()
-            }
+        guard working != oldValue, !stateIsUpdating else { return }
+        let newState = working
+        Task(priority: .userInitiated) {
+            defer { stateIsUpdating = false }
+            stateIsUpdating = true
+            await update(newState)
         }
+    }
+    
+    @MainActor private func update(_ newState: R.S) {
+        state = newState
     }
     
     func reduce(_ some: Any) throws -> ReduxAction? {
