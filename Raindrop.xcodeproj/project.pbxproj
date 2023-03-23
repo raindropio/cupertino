@@ -458,7 +458,7 @@
 			isa = PBXGroup;
 			children = (
 				7685A1A428687C6000A4BC3C /* App */,
-				76D880DD2930E1FB00D43AD9 /* Share */,
+				76D880DD2930E1FB00D43AD9 /* Extension */,
 				767F0943299FD6E100349902 /* WebExtension */,
 				767AC1162925196F00766998 /* Features */,
 				7685A1AC286880F600A4BC3C /* API */,
@@ -560,7 +560,7 @@
 			path = Modules;
 			sourceTree = "<group>";
 		};
-		76D880DD2930E1FB00D43AD9 /* Share */ = {
+		76D880DD2930E1FB00D43AD9 /* Extension */ = {
 			isa = PBXGroup;
 			children = (
 				76F282B82934C41D00D00363 /* Views */,
@@ -573,7 +573,7 @@
 				7621511429CC4F70009314B7 /* Action.entitlements */,
 				769FFF0229CC4C8500C2E6DA /* Action.xcassets */,
 			);
-			path = Share;
+			path = Extension;
 			sourceTree = "<group>";
 		};
 		76F05F0A293F89D4003CCD75 /* Add */ = {
@@ -1075,7 +1075,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
-				CODE_SIGN_ENTITLEMENTS = Share/Share.entitlements;
+				CODE_SIGN_ENTITLEMENTS = Extension/Share.entitlements;
 				CODE_SIGN_IDENTITY = "-";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "Apple Development";
 				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Apple Development";
@@ -1084,7 +1084,7 @@
 				DEVELOPMENT_TEAM = 7459JWM5TY;
 				ENABLE_HARDENED_RUNTIME = YES;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = Share/Share.plist;
+				INFOPLIST_FILE = Extension/Share.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = Raindrop.io;
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -1106,7 +1106,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
-				CODE_SIGN_ENTITLEMENTS = Share/Share.entitlements;
+				CODE_SIGN_ENTITLEMENTS = Extension/Share.entitlements;
 				CODE_SIGN_IDENTITY = "-";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "Apple Development";
 				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Apple Development";
@@ -1115,7 +1115,7 @@
 				DEVELOPMENT_TEAM = 7459JWM5TY;
 				ENABLE_HARDENED_RUNTIME = YES;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = Share/Share.plist;
+				INFOPLIST_FILE = Extension/Share.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = Raindrop.io;
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -1470,14 +1470,14 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = ActionIcon;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
-				CODE_SIGN_ENTITLEMENTS = Share/Action.entitlements;
+				CODE_SIGN_ENTITLEMENTS = Extension/Action.entitlements;
 				CODE_SIGN_IDENTITY = "-";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "Apple Development";
 				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 7459JWM5TY;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = Share/Action.plist;
+				INFOPLIST_FILE = Extension/Action.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = "Add to Unsorted";
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
 				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
@@ -1501,14 +1501,14 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = ActionIcon;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
-				CODE_SIGN_ENTITLEMENTS = Share/Action.entitlements;
+				CODE_SIGN_ENTITLEMENTS = Extension/Action.entitlements;
 				CODE_SIGN_IDENTITY = "-";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "Apple Development";
 				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 7459JWM5TY;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = Share/Action.plist;
+				INFOPLIST_FILE = Extension/Action.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = "Add to Unsorted";
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
 				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
@@ -1533,11 +1533,11 @@
 			buildSettings = {
 				APPLICATION_EXTENSION_API_ONLY = YES;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
-				CODE_SIGN_ENTITLEMENTS = Share/Share.entitlements;
+				CODE_SIGN_ENTITLEMENTS = Extension/Share.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 7459JWM5TY;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = share/Share.plist;
+				INFOPLIST_FILE = Extension/Share.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = Raindrop.io;
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
 				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
@@ -1561,11 +1561,11 @@
 			buildSettings = {
 				APPLICATION_EXTENSION_API_ONLY = YES;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
-				CODE_SIGN_ENTITLEMENTS = Share/Share.entitlements;
+				CODE_SIGN_ENTITLEMENTS = Extension/Share.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 7459JWM5TY;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = share/Share.plist;
+				INFOPLIST_FILE = Extension/Share.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = Raindrop.io;
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
 				IPHONEOS_DEPLOYMENT_TARGET = 16.0;

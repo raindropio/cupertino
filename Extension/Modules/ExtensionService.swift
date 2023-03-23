@@ -10,8 +10,13 @@ final class ExtensionService: ObservableObject {
     @Published var items = [NSItemProvider]()
     
     init(_ context: NSExtensionContext? = nil) {
+        DispatchQueue.main.asyncAfter(deadline: .now() + 3) { [weak self] in
+            guard self?.loaded == false else { return }
+            fatalError("Extension took too much time to load")
+        }
+        
         self.context = context
-                    
+
         Task {
             await load()
             await MainActor.run {
