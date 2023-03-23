@@ -48,6 +48,20 @@
 		7618C96D29C073B600D4DE78 /* AuthSuccess.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7618C96C29C073B600D4DE78 /* AuthSuccess.swift */; };
 		761F6C3029A3AC99002919BC /* PermanentCopy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 761F6C2F29A3AC99002919BC /* PermanentCopy.swift */; };
 		761F6C3229A3ADA0002919BC /* Preview.swift in Sources */ = {isa = PBXBuildFile; fileRef = 761F6C3129A3ADA0002919BC /* Preview.swift */; };
+		7621510329CC4DA8009314B7 /* Main.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76B16BCF2930E6EB00032D7D /* Main.swift */; };
+		7621510529CC4DB7009314B7 /* NoAuth.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76F282B92934C43200D00363 /* NoAuth.swift */; };
+		7621510629CC4DB7009314B7 /* NothingFound+AddText.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76BF915929AB952C001445E5 /* NothingFound+AddText.swift */; };
+		7621510729CC4DB7009314B7 /* Receive.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76F282BB2934C76A00D00363 /* Receive.swift */; };
+		7621510829CC4DB7009314B7 /* NothingFound.swift in Sources */ = {isa = PBXBuildFile; fileRef = 760DD2FE294237E900103C9E /* NothingFound.swift */; };
+		7621510929CC4DB7009314B7 /* NothingFound+Generic.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76BF915B29AB955D001445E5 /* NothingFound+Generic.swift */; };
+		7621510A29CC4DB7009314B7 /* SaveFiles.swift in Sources */ = {isa = PBXBuildFile; fileRef = 760DD2FC2942333D00103C9E /* SaveFiles.swift */; };
+		7621510B29CC4DBC009314B7 /* ExtensionUI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76F282B42934C24B00D00363 /* ExtensionUI.swift */; };
+		7621510C29CC4DBC009314B7 /* ExtensionService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76F282B62934C25400D00363 /* ExtensionService.swift */; };
+		7621510D29CC4DBC009314B7 /* ExtensionController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76D880DE2930E1FB00D43AD9 /* ExtensionController.swift */; };
+		7621510F29CC4E2B009314B7 /* API in Frameworks */ = {isa = PBXBuildFile; productRef = 7621510E29CC4E2B009314B7 /* API */; };
+		7621511129CC4E2B009314B7 /* Features in Frameworks */ = {isa = PBXBuildFile; productRef = 7621511029CC4E2B009314B7 /* Features */; };
+		7621511329CC4E2B009314B7 /* UI in Frameworks */ = {isa = PBXBuildFile; productRef = 7621511229CC4E2B009314B7 /* UI */; };
+		7621511629CC537C009314B7 /* SettingsExtensions+Action.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7621511529CC537C009314B7 /* SettingsExtensions+Action.swift */; };
 		76292CE82951B413000E16AA /* SettingsWebApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76292CE72951B413000E16AA /* SettingsWebApp.swift */; };
 		76292CEA2951B86F000E16AA /* SettingsSubscription.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76292CE92951B86F000E16AA /* SettingsSubscription.swift */; };
 		76292CEC2951BC52000E16AA /* SettingsBrowser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76292CEB2951BC52000E16AA /* SettingsBrowser.swift */; };
@@ -76,6 +90,9 @@
 		769056F62975499D0090C1EF /* Nesteds.swift in Sources */ = {isa = PBXBuildFile; fileRef = 769056F52975499D0090C1EF /* Nesteds.swift */; };
 		7697437429718A6100322290 /* Features in Frameworks */ = {isa = PBXBuildFile; productRef = 7697437329718A6100322290 /* Features */; };
 		7697437629718A6900322290 /* Features in Frameworks */ = {isa = PBXBuildFile; productRef = 7697437529718A6900322290 /* Features */; };
+		769FFF0029CC4C8500C2E6DA /* UniformTypeIdentifiers.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 76DC0B9829AF6C21007B4BDF /* UniformTypeIdentifiers.framework */; };
+		769FFF0329CC4C8500C2E6DA /* Action.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 769FFF0229CC4C8500C2E6DA /* Action.xcassets */; };
+		769FFF0C29CC4C8500C2E6DA /* Action iOS.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = 769FFEFF29CC4C8500C2E6DA /* Action iOS.appex */; platformFilter = ios; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		76B16BD02930E6EB00032D7D /* Main.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76B16BCF2930E6EB00032D7D /* Main.swift */; };
 		76B16BD42930F34D00032D7D /* API in Frameworks */ = {isa = PBXBuildFile; productRef = 76B16BD32930F34D00032D7D /* API */; };
 		76B16BD62930F43900032D7D /* Share.js in Resources */ = {isa = PBXBuildFile; fileRef = 76B16BD52930F43900032D7D /* Share.js */; };
@@ -140,6 +157,13 @@
 			remoteGlobalIDString = 76154C5729C21039002DDDEB;
 			remoteInfo = "WebExtension macOS";
 		};
+		769FFF0A29CC4C8500C2E6DA /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 7685A189286868AC00A4BC3C /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 769FFEFE29CC4C8500C2E6DA;
+			remoteInfo = SaveToUnsorted;
+		};
 		76D880E42930E1FB00D43AD9 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 7685A189286868AC00A4BC3C /* Project object */;
@@ -157,6 +181,7 @@
 			dstSubfolderSpec = 13;
 			files = (
 				76154C7129C21039002DDDEB /* WebExtension macOS.appex in Embed Foundation Extensions */,
+				769FFF0C29CC4C8500C2E6DA /* Action iOS.appex in Embed Foundation Extensions */,
 				76D880E62930E1FB00D43AD9 /* Share iOS.appex in Embed Foundation Extensions */,
 				76154B6F29C202D6002DDDEB /* Share macOS.appex in Embed Foundation Extensions */,
 				767F09B4299FD94B00349902 /* WebExtension.appex in Embed Foundation Extensions */,
@@ -192,6 +217,8 @@
 		7618C96C29C073B600D4DE78 /* AuthSuccess.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthSuccess.swift; sourceTree = "<group>"; };
 		761F6C2F29A3AC99002919BC /* PermanentCopy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PermanentCopy.swift; sourceTree = "<group>"; };
 		761F6C3129A3ADA0002919BC /* Preview.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Preview.swift; sourceTree = "<group>"; };
+		7621511429CC4F70009314B7 /* Action.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Action.entitlements; sourceTree = "<group>"; };
+		7621511529CC537C009314B7 /* SettingsExtensions+Action.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SettingsExtensions+Action.swift"; sourceTree = "<group>"; };
 		76292CE72951B413000E16AA /* SettingsWebApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsWebApp.swift; sourceTree = "<group>"; };
 		76292CE92951B86F000E16AA /* SettingsSubscription.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsSubscription.swift; sourceTree = "<group>"; };
 		76292CEB2951BC52000E16AA /* SettingsBrowser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsBrowser.swift; sourceTree = "<group>"; };
@@ -225,6 +252,9 @@
 		769056F129753E520090C1EF /* Folder+Toolbar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Folder+Toolbar.swift"; sourceTree = "<group>"; };
 		769056F3297547C10090C1EF /* Folder+Status.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Folder+Status.swift"; sourceTree = "<group>"; };
 		769056F52975499D0090C1EF /* Nesteds.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Nesteds.swift; sourceTree = "<group>"; };
+		769FFEFF29CC4C8500C2E6DA /* Action iOS.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = "Action iOS.appex"; sourceTree = BUILT_PRODUCTS_DIR; };
+		769FFF0229CC4C8500C2E6DA /* Action.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Action.xcassets; sourceTree = "<group>"; };
+		769FFF0929CC4C8500C2E6DA /* Action.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Action.plist; sourceTree = "<group>"; };
 		76B16BCF2930E6EB00032D7D /* Main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Main.swift; sourceTree = "<group>"; };
 		76B16BD52930F43900032D7D /* Share.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = Share.js; sourceTree = "<group>"; };
 		76B16BDA29310D9500032D7D /* Share.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Share.entitlements; sourceTree = "<group>"; };
@@ -295,6 +325,17 @@
 				76143B0228842C85006A7508 /* UI in Frameworks */,
 				7697437429718A6100322290 /* Features in Frameworks */,
 				768CA1F7294CC10900AD7E62 /* StoreKit.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		769FFEFC29CC4C8500C2E6DA /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				7621511329CC4E2B009314B7 /* UI in Frameworks */,
+				7621511129CC4E2B009314B7 /* Features in Frameworks */,
+				769FFF0029CC4C8500C2E6DA /* UniformTypeIdentifiers.framework in Frameworks */,
+				7621510F29CC4E2B009314B7 /* API in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -436,6 +477,7 @@
 				767F096F299FD6E200349902 /* WebExtension.appex */,
 				76154B6229C202D5002DDDEB /* Share macOS.appex */,
 				76154C5829C21039002DDDEB /* WebExtension macOS.appex */,
+				769FFEFF29CC4C8500C2E6DA /* Action iOS.appex */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -494,6 +536,7 @@
 				76292CEB2951BC52000E16AA /* SettingsBrowser.swift */,
 				76E44C3F29BA0D24009634C6 /* SettingsExtensions.swift */,
 				76E44C4729BB135B009634C6 /* SettingsExtensions+Share.swift */,
+				7621511529CC537C009314B7 /* SettingsExtensions+Action.swift */,
 				76E44C4929BB1380009634C6 /* SettingsExtensions+Safari.swift */,
 			);
 			path = Screens;
@@ -526,6 +569,9 @@
 				76D880E32930E1FB00D43AD9 /* Share.plist */,
 				76B16BDA29310D9500032D7D /* Share.entitlements */,
 				76B16BD52930F43900032D7D /* Share.js */,
+				769FFF0929CC4C8500C2E6DA /* Action.plist */,
+				7621511429CC4F70009314B7 /* Action.entitlements */,
+				769FFF0229CC4C8500C2E6DA /* Action.xcassets */,
 			);
 			path = Share;
 			sourceTree = "<group>";
@@ -640,6 +686,7 @@
 				767F09B929A3592300349902 /* PBXTargetDependency */,
 				76154B6E29C202D6002DDDEB /* PBXTargetDependency */,
 				76154C7029C21039002DDDEB /* PBXTargetDependency */,
+				769FFF0B29CC4C8500C2E6DA /* PBXTargetDependency */,
 			);
 			name = Raindrop;
 			packageProductDependencies = (
@@ -650,6 +697,28 @@
 			productName = cupertino;
 			productReference = 7685A191286868AC00A4BC3C /* Raindrop.app */;
 			productType = "com.apple.product-type.application";
+		};
+		769FFEFE29CC4C8500C2E6DA /* Action iOS */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 769FFF0F29CC4C8500C2E6DA /* Build configuration list for PBXNativeTarget "Action iOS" */;
+			buildPhases = (
+				769FFEFB29CC4C8500C2E6DA /* Sources */,
+				769FFEFC29CC4C8500C2E6DA /* Frameworks */,
+				769FFEFD29CC4C8500C2E6DA /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "Action iOS";
+			packageProductDependencies = (
+				7621510E29CC4E2B009314B7 /* API */,
+				7621511029CC4E2B009314B7 /* Features */,
+				7621511229CC4E2B009314B7 /* UI */,
+			);
+			productName = SaveToUnsorted;
+			productReference = 769FFEFF29CC4C8500C2E6DA /* Action iOS.appex */;
+			productType = "com.apple.product-type.app-extension";
 		};
 		76D880DB2930E1FB00D43AD9 /* Share iOS */ = {
 			isa = PBXNativeTarget;
@@ -695,6 +764,9 @@
 					7685A190286868AC00A4BC3C = {
 						CreatedOnToolsVersion = 14.0;
 					};
+					769FFEFE29CC4C8500C2E6DA = {
+						CreatedOnToolsVersion = 14.2;
+					};
 					76D880DB2930E1FB00D43AD9 = {
 						CreatedOnToolsVersion = 14.1;
 					};
@@ -718,6 +790,7 @@
 				7685A190286868AC00A4BC3C /* Raindrop */,
 				76D880DB2930E1FB00D43AD9 /* Share iOS */,
 				76154B6129C202D5002DDDEB /* Share macOS */,
+				769FFEFE29CC4C8500C2E6DA /* Action iOS */,
 				767F096E299FD6E200349902 /* WebExtension iOS */,
 				76154C5729C21039002DDDEB /* WebExtension macOS */,
 			);
@@ -765,6 +838,14 @@
 			files = (
 				7685A199286868AD00A4BC3C /* Assets.xcassets in Resources */,
 				76B673862993A52A007A412A /* highlights.js in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		769FFEFD29CC4C8500C2E6DA /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				769FFF0329CC4C8500C2E6DA /* Action.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -879,6 +960,7 @@
 				76F6D12529BF26EA009E7BA2 /* SettingsIOS+Sidebar.swift in Sources */,
 				76154C8029C34794002DDDEB /* Folder+Toolbar+Editing.swift in Sources */,
 				768CA20329505AD600AD7E62 /* AuthContinueWith+JWT.swift in Sources */,
+				7621511629CC537C009314B7 /* SettingsExtensions+Action.swift in Sources */,
 				76BFE371291E9F6B00DE9DB2 /* AuthScreen.swift in Sources */,
 				76E44C4829BB135B009634C6 /* SettingsExtensions+Share.swift in Sources */,
 				76ECFDFE2947848500DF15C9 /* Browser+PageError.swift in Sources */,
@@ -907,6 +989,23 @@
 				768CA1FD294CCD5800AD7E62 /* AuthSignup.swift in Sources */,
 				76F6D12329BF1B84009E7BA2 /* SettingsIOS.swift in Sources */,
 				76799F8B299632790042DF78 /* Folder.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		769FFEFB29CC4C8500C2E6DA /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				7621510829CC4DB7009314B7 /* NothingFound.swift in Sources */,
+				7621510D29CC4DBC009314B7 /* ExtensionController.swift in Sources */,
+				7621510C29CC4DBC009314B7 /* ExtensionService.swift in Sources */,
+				7621510529CC4DB7009314B7 /* NoAuth.swift in Sources */,
+				7621510329CC4DA8009314B7 /* Main.swift in Sources */,
+				7621510A29CC4DB7009314B7 /* SaveFiles.swift in Sources */,
+				7621510629CC4DB7009314B7 /* NothingFound+AddText.swift in Sources */,
+				7621510929CC4DB7009314B7 /* NothingFound+Generic.swift in Sources */,
+				7621510729CC4DB7009314B7 /* Receive.swift in Sources */,
+				7621510B29CC4DBC009314B7 /* ExtensionUI.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -956,6 +1055,12 @@
 			);
 			target = 76154C5729C21039002DDDEB /* WebExtension macOS */;
 			targetProxy = 767F09B829A3592300349902 /* PBXContainerItemProxy */;
+		};
+		769FFF0B29CC4C8500C2E6DA /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			platformFilter = ios;
+			target = 769FFEFE29CC4C8500C2E6DA /* Action iOS */;
+			targetProxy = 769FFF0A29CC4C8500C2E6DA /* PBXContainerItemProxy */;
 		};
 		76D880E52930E1FB00D43AD9 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
@@ -1360,6 +1465,69 @@
 			};
 			name = Release;
 		};
+		769FFF0D29CC4C8500C2E6DA /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = ActionIcon;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CODE_SIGN_ENTITLEMENTS = Share/Action.entitlements;
+				CODE_SIGN_IDENTITY = "-";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "Apple Development";
+				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Apple Development";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 7459JWM5TY;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = Share/Action.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = "Add to Unsorted";
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = io.raindrop.ios.extension;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		769FFF0E29CC4C8500C2E6DA /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = ActionIcon;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CODE_SIGN_ENTITLEMENTS = Share/Action.entitlements;
+				CODE_SIGN_IDENTITY = "-";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "Apple Development";
+				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Apple Development";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 7459JWM5TY;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = Share/Action.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = "Add to Unsorted";
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = io.raindrop.ios.extension;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
 		76D880E82930E1FB00D43AD9 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -1465,6 +1633,15 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
+		769FFF0F29CC4C8500C2E6DA /* Build configuration list for PBXNativeTarget "Action iOS" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				769FFF0D29CC4C8500C2E6DA /* Debug */,
+				769FFF0E29CC4C8500C2E6DA /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		76D880EA2930E1FB00D43AD9 /* Build configuration list for PBXNativeTarget "Share iOS" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
@@ -1490,6 +1667,18 @@
 			productName = Features;
 		};
 		76154B8229C20495002DDDEB /* UI */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = UI;
+		};
+		7621510E29CC4E2B009314B7 /* API */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = API;
+		};
+		7621511029CC4E2B009314B7 /* Features */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = Features;
+		};
+		7621511229CC4E2B009314B7 /* UI */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = UI;
 		};

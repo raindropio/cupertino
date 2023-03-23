@@ -17,7 +17,6 @@ extension SettingsExtensions {
                 }
                     .alignmentGuide(.listRowSeparatorLeading) { _ in 0 }
                     .labelStyle(.sidebar)
-                    .listItemTint(.red)
                 
                 DefaultCollection()
                 

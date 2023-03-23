@@ -14,7 +14,9 @@ final class ExtensionService: ObservableObject {
                     
         Task {
             await load()
-            loaded = true
+            await MainActor.run {
+                loaded = true
+            }
         }
     }
     
