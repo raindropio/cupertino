@@ -25,6 +25,7 @@ struct Collaboration: View {
             }
         } footer: {
             Text("Work together on collections privately with colleagues, friends and family. [Learn more](https://help.raindrop.io/collaboration/)")
+                .openLinksInSafari()
         }
             .task(id: collection.id) {
                 try? await dispatch(CollaboratorsAction.load(collection.id))

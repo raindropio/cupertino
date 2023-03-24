@@ -1,4 +1,5 @@
 import SwiftUI
+import Backport
 
 struct ExtensionUI: View {
     @StateObject var service: ExtensionService
@@ -8,6 +9,8 @@ struct ExtensionUI: View {
             .sheet(isPresented: $service.loaded, onDismiss: service.close) {
                 Main()
                     .environmentObject(service)
+                    .backport.presentationCompactAdaptation(.none)
+                    .backport.presentationBackgroundInteraction(.enabled)
             }
     }
 }

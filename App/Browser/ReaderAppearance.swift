@@ -2,6 +2,7 @@ import SwiftUI
 import API
 import UI
 import Features
+import Backport
 
 struct ReaderAppearance {
     @AppStorage(ReaderOptions.StorageKey) private var options = ReaderOptions()
@@ -53,6 +54,7 @@ extension ReaderAppearance: View {
                 }
         }
             .presentationDetents([.medium])
+            .backport.presentationCompactAdaptation(.none)
             .frame(idealWidth: 300, idealHeight: 400)
     }
 }

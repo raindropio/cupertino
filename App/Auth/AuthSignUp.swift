@@ -53,6 +53,7 @@ struct AuthSignup: View {
                     .backport.focused($focus, equals: .password)
             } footer: {
                 Text("By clicking on 'Sign up' above, you are agreeing to the [Terms of Service](https://help.raindrop.io/terms) and [Privacy Policy](https://help.raindrop.io/privacy)")
+                    .openLinksInSafari()
                     .frame(maxHeight: .infinity)
             }
             

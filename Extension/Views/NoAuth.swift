@@ -13,7 +13,6 @@ struct NoAuth: View {
         }
             .presentationDetents([.medium])
             #if canImport(UIKit)
-            .presentationUndimmed(.medium)
             .frame(idealWidth: 400, idealHeight: 400)
             #else
             .frame(width: 400)

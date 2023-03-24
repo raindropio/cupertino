@@ -1,6 +1,7 @@
 import SwiftUI
 import API
 import Features
+import Backport
 
 struct Receive: View {
     @EnvironmentObject private var service: ExtensionService
@@ -94,6 +95,7 @@ extension Receive {
             }
                 #if canImport(UIKit)
                 .presentationDetents([.fraction(0.333)])
+                .backport.presentationCompactAdaptation(.sheet)
                 .frame(idealWidth: 400, idealHeight: 400)
                 #else
                 .frame(width: 400)

@@ -1,6 +1,7 @@
 import SwiftUI
 import UI
 import API
+import Backport
 
 struct CollectionIconGrid: View {
     @Environment(\.dismiss) private var dismiss
@@ -41,6 +42,7 @@ struct CollectionIconGrid: View {
             )
                 .equatable()
         }
+            .backport.scrollBounceBehavior(.basedOnSize, axes: [.horizontal, .vertical])
             .ignoresSafeArea(.keyboard)
             .overlay {
                 if isLoading {

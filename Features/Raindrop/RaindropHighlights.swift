@@ -24,7 +24,6 @@ public struct RaindropHighlights: View {
                     ForEach($raindrop.highlights, content: HighlightEditRow.init)
                         .listSectionSeparator(.hidden)
                 }
-                    .listStyle(.plain)
             }
         }
             .navigationTitle(Filter.Kind.highlights.title)

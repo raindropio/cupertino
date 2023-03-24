@@ -1,4 +1,5 @@
 import SwiftUI
+import Backport
 
 #if canImport(UIKit)
 fileprivate let defaultSpacing: [ControlSize: CGFloat] = [
@@ -36,6 +37,7 @@ extension StripStack: View {
                 .padding(.trailing, 32)
                 .frame(maxWidth: .infinity, alignment: .leading)
         }
+            .backport.scrollBounceBehavior(.basedOnSize, axes: [.horizontal, .vertical])
             .mask(LinearGradient(
                 gradient: Gradient(colors: Array(repeating: .black, count: 7) + [.clear]),
                 startPoint: .leading,

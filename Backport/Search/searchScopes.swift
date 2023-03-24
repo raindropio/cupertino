@@ -6,15 +6,15 @@ public extension Backport where Wrapped: View {
         activation: BackportSearchScopeActivation,
         @ViewBuilder _ scopes: @escaping () -> S
     ) -> some View {
-//        if #available(iOS 16.4, *) {
-//            content.searchScopes(scope, activation: activation.convert(), scopes)
-//        } else {
+        if #available(iOS 16.4, macOS 13.3, *) {
+            content.searchScopes(scope, activation: activation.convert(), scopes)
+        } else {
             content
                 #if canImport(UIKit)
                 .overlay(Proxy(activation: activation).opacity(0))
                 #endif
                 .searchScopes(scope, scopes: scopes)
-//        }
+        }
     }
 }
 
@@ -23,14 +23,14 @@ public enum BackportSearchScopeActivation {
     case onTextEntry
     case onSearchPresentation
     
-//        @available(iOS 16.4, *)
-//        func convert() -> SwiftUI.SearchScopeActivation {
-//            switch self {
-//            case .automatic: return .automatic
-//            case .onTextEntry: return .onTextEntry
-//            case .onSearchPresentation: return .onSearchPresentation
-//            }
-//        }
+    @available(iOS 16.4, *)
+    func convert() -> SwiftUI.SearchScopeActivation {
+        switch self {
+        case .automatic: return .automatic
+        case .onTextEntry: return .onTextEntry
+        case .onSearchPresentation: return .onSearchPresentation
+        }
+    }
     
     #if canImport(UIKit)
     func uiKit() -> UISearchController.ScopeBarActivation {

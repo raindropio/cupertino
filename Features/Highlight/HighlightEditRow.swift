@@ -6,7 +6,7 @@ struct HighlightEditRow: View {
     
     var body: some View {
         if !highlight.text.isEmpty {
-            VStack(spacing: 4) {
+            Section {
                 HStack(spacing: 12) {
                     RoundedRectangle(cornerRadius: 3)
                         .fill(highlight.color.ui)
@@ -19,37 +19,35 @@ struct HighlightEditRow: View {
                         .textSelection(.enabled)
                         .frame(maxWidth: .infinity, alignment: .leading)
                 }
+                    .padding(.top, 6)
+                    .swipeActions(edge: .leading, allowsFullSwipe: false) {
+                        ForEach(Highlight.Color.bestCases.filter { $0 != highlight.color }, id: \.rawValue) { color in
+                            Button {
+                                highlight.color = color
+                            } label: {
+                                Image(systemName: "pencil.tip")
+                            }
+                            .tint(color.ui)
+                        }
+                    }
+                    .swipeActions(edge: .trailing) {
+                        Button(role: .destructive) {
+                            highlight.text = ""
+                        } label: {
+                            Image(systemName: "trash")
+                        }
+                    }
+                    .listRowSeparator(.hidden)
                 
                 ProGroup {
                     TextField("Note", text: $highlight.note, axis: .vertical)
                         .preventLineBreaks(text: $highlight.note)
                 }
-                
+            } footer: {
                 Text(highlight.created, formatter: .shortDateTime)
                     .lineLimit(1)
-                    .font(.subheadline)
-                    .foregroundStyle(.tertiary)
                     .frame(maxWidth: .infinity, alignment: .trailing)
-                    .padding(.bottom, 4)
-            }
-            .padding(.vertical, 8)
-            .alignmentGuide(.listRowSeparatorLeading) { _ in 0 }
-            .swipeActions(edge: .leading, allowsFullSwipe: false) {
-                ForEach(Highlight.Color.bestCases.filter { $0 != highlight.color }, id: \.rawValue) { color in
-                    Button {
-                        highlight.color = color
-                    } label: {
-                        Image(systemName: "pencil.tip")
-                    }
-                    .tint(color.ui)
-                }
-            }
-            .swipeActions(edge: .trailing) {
-                Button(role: .destructive) {
-                    highlight.text = ""
-                } label: {
-                    Image(systemName: "trash")
-                }
+
             }
         }
     }

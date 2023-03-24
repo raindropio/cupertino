@@ -1,4 +1,5 @@
 import SwiftUI
+import Backport
 
 #if canImport(UIKit)
 class KeyboardButtons: UIInputView {
@@ -56,6 +57,7 @@ extension KeyboardButtons {
                     }
                     .transition(.scale(scale: 0).combined(with: .opacity))
                 }
+                    .backport.scrollBounceBehavior(.basedOnSize, axes: [.horizontal, .vertical])
                     .buttonStyle(KeyboardButtonStyle())
                     .padding(.vertical, sizeClass == .regular ? 12 : 8)
                     .padding(.horizontal, sizeClass == .regular ? 14 : 8)

@@ -28,6 +28,7 @@ extension CollectionSharing {
                 }
             } footer: {
                 Text("Share collection with the entire web. Sign-up is not required. [Learn more](https://help.raindrop.io/public-page/)")
+                    .openLinksInSafari()
                     .padding(.bottom)
             }
                 .listItemTint(.monochrome)
