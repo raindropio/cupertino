@@ -24,7 +24,7 @@ public struct Thumbnail {
         configuration.dataCachePolicy = .storeAll
         configuration.isDecompressionEnabled = true
         configuration.isUsingPrepareForDisplay = true
-        configuration.isRateLimiterEnabled = true
+        configuration.isRateLimiterEnabled = false
         configuration.isProgressiveDecodingEnabled = true
         return .init(configuration: configuration)
     }()

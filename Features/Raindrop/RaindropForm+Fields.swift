@@ -14,7 +14,7 @@ extension RaindropForm {
 extension RaindropForm.Fields: View {
     var body: some View {
         Section {
-            HStack(spacing: 8) {
+            HStack(spacing: 12) {
                 TextField(text: $raindrop.title, prompt: .init("Title"), axis: .vertical) {}
                     .labelsHidden()
                     .preventLineBreaks(text: $raindrop.title)

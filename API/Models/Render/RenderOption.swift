@@ -4,7 +4,7 @@ import UIKit
 import AppKit
 #endif
 
-public enum RenderOption {
+public enum RenderOption: Equatable {
     case format(Format)
     case optimalSize
     case width(Double)
