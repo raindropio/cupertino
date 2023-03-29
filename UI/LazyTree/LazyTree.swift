@@ -76,20 +76,28 @@ extension LazyTree {
 }
 
 extension LazyTree {
-    var tree: [Leaf] {
+    func tree() -> [Leaf] {
         root
             .compactMap { items[$0] }
             .flatMap { branch($0) }
     }
     
     func branch(_ item: I, level: Double = 0) -> [Leaf] {
-        let more = childrens(item.id, level: level+1)
+        let expandable = expandable(item.id)
         
         return [.init(
             id: item.id,
-            expandable: !more.isEmpty,
+            expandable: expandable,
             level: level
-        )] + (item[keyPath: expanded] ? more : [])
+        )] + (
+            expandable && item[keyPath: expanded] ?
+                childrens(item.id, level: level+1)
+            : []
+        )
+    }
+    
+    func expandable(_ parentId: I.ID) -> Bool {
+        items.first { $0.value[keyPath: parent] == parentId } != nil
     }
     
     func childrens(_ parentId: I.ID, level: Double) -> [Leaf] {
@@ -108,7 +116,7 @@ extension LazyTree {
     }
     
     func onMove(_ indices: IndexSet, _ to: Int) {
-        let tree = tree
+        let tree = tree()
         let ids = indices.map { tree[$0].id }
         
         let target: I? = to < tree.count ? items[tree[to].id] : nil
@@ -133,6 +141,8 @@ extension LazyTree: Equatable {
 
 extension LazyTree: View {
     public var body: some View {
+        let tree = tree()
+        
         ForEach(tree) { leaf in
             Group {
                 if leaf.expandable {
@@ -157,7 +167,6 @@ extension LazyTree: View {
                 .transition(.move(edge: .bottom).combined(with: .opacity))
                 .tag(tag(leaf.id))
         }
-            .onMove { onMove($0, $1) }
+            .onMove(perform: onMove)
     }
 }
-
