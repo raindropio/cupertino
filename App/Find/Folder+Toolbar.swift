@@ -21,11 +21,11 @@ extension Folder {
         func body(content: Content) -> some View {
             content
                 .modifier(
-                    Regular(find: find, pick: pick, toggleAll: toggleAll)
+                    Regular(find: find, pick: pick)
                 )
                 #if canImport(UIKit)
                 .modifier(
-                    Editing(find: find, pick: pick, toggleAll: toggleAll)
+                    Editing(find: find, pick: pick, total: r.state.total(find), toggleAll: toggleAll)
                 )
                 #endif
                 .raindropCommands(pick)

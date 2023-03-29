@@ -13,54 +13,52 @@ extension Folder.Toolbar {
 
         var find: FindBy
         var pick: RaindropsPick
+        var total: Int
         var toggleAll: () -> Void
-        
-        private var editButtonPlacement: ToolbarItemPlacement {
-            if isSearching, sizeClass == .compact {
-                return .status
-            }
-            return isEditing ? .cancellationAction : .automatic
-        }
-        
-        private var selectAllButtonPlacement: ToolbarItemPlacement {
-            if isSearching, sizeClass == .compact {
-                return .status
-            }
-            return .primaryAction
-        }
         
         func body(content: Content) -> some View {
             content
             .navigationBarBackButtonHidden(isEditing)
             .toolbar {
-                //start/cancel
-                ToolbarItem(placement: editButtonPlacement) {
-                    EditButton {
-                        if $0 == .active {
-                            Text("Cancel")
-                        } else {
-                            Label("Select", systemImage: "checkmark.circle")
+                if total > 0 {
+                    //start/cancel
+                    ToolbarItem(placement: isEditing ? .cancellationAction : .automatic) {
+                        EditButton {
+                            if $0 == .active {
+                                Text("Cancel")
+                            } else {
+                                Image(systemName: "checkmark.circle")
+                            }
+                        }
+                    }
+                    
+                    //edit mode
+                    if isEditing {
+                        //select/deselect all
+                        ToolbarItem(placement: sizeClass == .compact ? .bottomBar : .primaryAction) {
+                            Button(pick.isAll ? "Deselect all" : "Select all", action: toggleAll)
+                        }
+                        
+                        //actions
+                        ToolbarItemGroup(placement: .bottomBar) {
+                            RaindropsMenu(pick)
                         }
                     }
                 }
-                
-                //edit mode
-                if isEditing {
-                    //select/deselect all
-                    ToolbarItem(placement: selectAllButtonPlacement) {
-                        Button(action: toggleAll) {
-                            Label(
-                                pick.isAll ? "Deselect all" : "Select all",
-                                systemImage: pick.isAll ? "checklist.unchecked" : "checklist.checked"
-                            )
-                        }
-                            .labelStyle(.titleOnly)
+            }
+            //special case for iphone searching
+            .safeAreaInset(edge: .bottom, alignment: .trailing) {
+                if sizeClass == .compact, total > 0, isSearching, find.isSearching {
+                    Button {
+                        UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
+                        withAnimation { isEditing = !isEditing }
+                    } label: {
+                        Image(systemName: isEditing ? "xmark" : "checkmark.circle.fill")
+                            .imageScale(.large)
                     }
-                    
-                    //actions
-                    ToolbarItemGroup(placement: .bottomBar) {
-                        RaindropsMenu(pick)
-                    }
+                        .buttonStyle(.borderedProminent)
+                        .buttonBorderShape(.capsule)
+                        .scenePadding()
                 }
             }
         }

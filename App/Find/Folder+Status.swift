@@ -15,7 +15,7 @@ extension Folder {
 }
 
 extension Folder.Status {
-    fileprivate struct Memorized: View {        
+    fileprivate struct Memorized: View {
         var find: FindBy
         var total: Int
         

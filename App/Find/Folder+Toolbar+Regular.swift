@@ -11,7 +11,6 @@ extension Folder.Toolbar {
 
         var find: FindBy
         var pick: RaindropsPick
-        var toggleAll: () -> Void
         
         func body(content: Content) -> some View {
             content
