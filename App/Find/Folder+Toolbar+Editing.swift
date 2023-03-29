@@ -35,7 +35,7 @@ extension Folder.Toolbar {
                     //edit mode
                     if isEditing {
                         //select/deselect all
-                        ToolbarItem(placement: sizeClass == .compact ? .bottomBar : .primaryAction) {
+                        ToolbarItem(placement: (sizeClass == .compact && isSearching) ? .bottomBar : .primaryAction) {
                             Button(pick.isAll ? "Deselect all" : "Select all", action: toggleAll)
                         }
                         
