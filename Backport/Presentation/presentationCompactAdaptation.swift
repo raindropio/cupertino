@@ -17,7 +17,7 @@ public enum BackportPresentationAdaptation {
     case sheet
     case fullScreenCover
     
-    @available(iOS 16.4, *)
+    @available(iOS 16.4, macOS 13.3, *)
     var sui: SwiftUI.PresentationAdaptation {
         switch self {
         case .automatic: return .automatic

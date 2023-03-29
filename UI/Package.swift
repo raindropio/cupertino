@@ -15,7 +15,7 @@ let package = Package(
     dependencies: [
         .package(
             url: "https://github.com/kean/Nuke.git",
-            from: "11.3.1"
+            from: "12.1.0"
         )
     ],
     targets: [

@@ -2,10 +2,15 @@ import SwiftUI
 
 public extension View {
     func openLinksInSafari() -> some View {
+        #if os(iOS)
         modifier(OLIS())
+        #else
+        self
+        #endif
     }
 }
 
+#if os(iOS)
 fileprivate struct OLIS: ViewModifier {
     @State private var url: URL?
     
@@ -15,3 +20,4 @@ fileprivate struct OLIS: ViewModifier {
             .safariView(item: $url)
     }
 }
+#endif

@@ -15,7 +15,7 @@ public enum BackportPresentationBackgroundInteraction {
     case enabled
     case disabled
     
-    @available(iOS 16.4, *)
+    @available(iOS 16.4, macOS 13.3, *)
     var sui: SwiftUI.PresentationBackgroundInteraction {
         switch self {
         case .automatic: return .automatic

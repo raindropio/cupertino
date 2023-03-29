@@ -15,7 +15,7 @@ public enum BackportScrollBounceBehavior {
     case always
     case basedOnSize
     
-    @available(iOS 16.4, *)
+    @available(iOS 16.4, macOS 13.3, *)
     var sui: SwiftUI.ScrollBounceBehavior {
         switch self {
         case .automatic: return .automatic

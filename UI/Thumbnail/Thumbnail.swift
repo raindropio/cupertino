@@ -2,16 +2,18 @@ import SwiftUI
 import Nuke
 import NukeUI
 
+#if os(macOS)
+fileprivate let scaleFactor: CGFloat = NSScreen.main?.backingScaleFactor ?? 1
+#else
+fileprivate let scaleFactor: CGFloat = 1
+#endif
+
 public struct Thumbnail {
-    @State private var reload: UUID?
-    @Environment(\.displayScale) private var displayScale
-    
     var url: URL?
     var width: CGFloat?
     var height: CGFloat?
-    var aspectRatio: Double?
+    var aspectRatio: CGFloat?
     
-    static var cacheAspect = [URL: CGFloat]()
     static let pipeline: ImagePipeline = {
         ImageCache.shared.costLimit = 1024 * 1024 * 150 //150mb memory cache
         
@@ -20,12 +22,13 @@ public struct Thumbnail {
             sizeLimit: ImageCache.shared.costLimit
         )
         configuration.dataCachePolicy = .storeAll
-        configuration.isDecompressionEnabled = false
+        configuration.isDecompressionEnabled = true
+        configuration.isUsingPrepareForDisplay = true
         configuration.isRateLimiterEnabled = true
         configuration.isProgressiveDecodingEnabled = true
-        return ImagePipeline(configuration: configuration)
+        return .init(configuration: configuration)
     }()
-        
+    
     public init(
         _ url: URL? = nil,
         width: Double,
@@ -39,7 +42,7 @@ public struct Thumbnail {
     public init(
         _ url: URL? = nil,
         width: Double,
-        aspectRatio: Double? = nil
+        aspectRatio: CGFloat? = nil
     ) {
         self.url = url
         self.width = width
@@ -49,7 +52,7 @@ public struct Thumbnail {
     public init(
         _ url: URL? = nil,
         height: Double,
-        aspectRatio: Double? = nil
+        aspectRatio: CGFloat? = nil
     ) {
         self.url = url
         self.height = height
@@ -57,110 +60,49 @@ public struct Thumbnail {
     }
 }
 
-extension Thumbnail: View {
-    var resize: [ImageProcessors.Resize]? {
+extension Thumbnail: Equatable {
+    
+}
+
+extension Thumbnail {
+    private var resize: [ImageProcessors.Resize] {
         if let width, let height {
-            return [.init(
-                size: .init(width: width*displayScale, height: height*displayScale),
-                unit: .pixels,
-                crop: true
-            )]
+            return [.init(size: .init(width: width * scaleFactor, height: height * scaleFactor), crop: true)]
         } else if let width {
-            return [.init(width: width * displayScale, unit: .pixels)]
+            return [.init(width: width * scaleFactor)]
         } else if let height {
-            return [.init(height: height * displayScale, unit: .pixels)]
+            return [.init(height: height * scaleFactor)]
         }
-        return nil
-    }
-    
-    func saveAspectRatio(_ result: ImageResponse) {
-        guard let url, Self.cacheAspect[url] == nil
-        else { return }
-        
-        Self.cacheAspect[url] = result.image.size.width / result.image.size.height
-        reload = .init()
-    }
-    
-    @MainActor
-    var base: LazyImage<NukeUI.Image> {
-        LazyImage(url: url)
-            #if canImport(AppKit)
-            .animation(nil)
-            #endif
-            .processors(resize)
-            .pipeline(Self.pipeline)
-//            .priority(.veryLow)
-            .onDisappear(.lowerPriority)
-    }
-    
-    public var body: some View {
-        //fixed size
-        if let width, let height {
-            base
-                .frame(width: width, height: height)
-                .fixedSize()
-        }
-        //aspect ratio
-        else if let aspectRatio {
-            ZStack {
-                base.layoutPriority(-1)
-                Color.clear.aspectRatio(aspectRatio, contentMode: .fit)
-                    .frame(maxWidth: .infinity)
-                    .fixedSize(horizontal: width == nil, vertical: height == nil)
-            }
-        }
-        //downsampled
-        else {
-            base
-                .onSuccess(saveAspectRatio)
-                .aspectRatio(
-                    url != nil ? Self.cacheAspect[url!] : 1.77,
-                    contentMode: .fit
-                )
-                .frame(height: height)
-                .fixedSize(horizontal: width == nil, vertical: height == nil)
-                .tag(reload)
-        }
+        return []
     }
 }
 
-
-struct Thumbnail_Previews: PreviewProvider {
-    struct P: View {
-        @State private var selection: Set<URL> = .init()
-
-        var items = [
-            Item(id: URL(string: "https://rdl.ink/render/https%3A%2F%2Fpublic-files.gumroad.com%2Fvariants%2Fd4aj5t65fudxb6na9slqtnmldtb8%2Fbaaca0eb0e33dc4f9d45910b8c86623f0144cea0fe0c2093c546d17d535752eb?width=1000&height=1000&dpr=3")!),
-            Item(id: URL(string: "https://rdl.ink/render/https%3A%2F%2Fd2pas86kykpvmq.cloudfront.net%2Ftwitter%2Fabstract.png?width=1000&height=1000&dpr=3")!),
-            Item(id: URL(string: "https://rdl.ink/render/https%3A%2F%2Fuploads-ssl.webflow.com%2F60bf6532b298ace2d2bb8a9d%2F629739f69a2044612aa77212_OG%2520image%2520(1200-630).jpg?width=1000&height=1000&dpr=3")!),
-            Item(id: URL(string: "https://rdl.ink/render/https%3A%2F%2Ffffuel.co%2Fimages%2Fcover.png?width=1000&height=1000&dpr=3")!),
-            Item(id: URL(string: "https://rdl.ink/render/https%3A%2F%2Fup.raindrop.io%2Fraindrop%2Ffiles%2F126%2F906%2F55%2F12690655.jpg?width=1000&height=1000&dpr=3")!)
-        ]
-        
-        struct Item: Identifiable, Hashable {
-            var id: URL
-        }
-        
-        var body: some View {
-            LazyStack(.grid(250, true), selection: $selection) { _ in
-                
-            } content: {
-                DataSource(items) { item in
-                    VStack(alignment: .leading, spacing: 0) {
-                        Thumbnail(item.id, width: 250)
-                        VStack(alignment: .leading, spacing: 4) {
-                            Text(item.id.absoluteString)
-                            Text(item.id.absoluteString)
-//                            Spacer(minLength: 0)
-                            Text("Footer")
-                        }
-                    }
-                } loadMore: {}
+extension Thumbnail: View {
+    public var body: some View {
+        ZStack {
+            LazyImage(request: .init(url: url, processors: resize)) {
+                if let image = $0.image {
+                    image
+                        .resizable()
+                        .antialiased(false)
+                        .interpolation(.low)
+                        .scaledToFill()
+                } else if $0.error != nil {
+                    Color.gray
+                }
             }
+                .onDisappear(.lowerPriority)
+                .layoutPriority(-1)
+            
+            Group {
+                if let width, let height {
+                    Color.clear.frame(width: width, height: height)
+                } else if let aspectRatio {
+                    Color.clear.aspectRatio(aspectRatio, contentMode: .fit)
+                }
+            }
+                .fixedSize(horizontal: width == nil, vertical: height == nil)
         }
-    }
-    
-    static var previews: some View {
-        P()
+            .clipped()
     }
 }

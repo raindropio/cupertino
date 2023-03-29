@@ -23,7 +23,7 @@ public enum BackportSearchScopeActivation {
     case onTextEntry
     case onSearchPresentation
     
-    @available(iOS 16.4, *)
+    @available(iOS 16.4, macOS 13.3, *)
     func convert() -> SwiftUI.SearchScopeActivation {
         switch self {
         case .automatic: return .automatic

@@ -6,7 +6,7 @@ extension ImagePicker {
         var selected: Bool = false
         var width: Double?
         var height: Double?
-        var aspectRatio: Double?
+        var aspectRatio: CGFloat?
         
         var body: some View {
             Group {

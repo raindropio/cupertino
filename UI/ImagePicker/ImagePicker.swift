@@ -5,7 +5,7 @@ public struct ImagePicker {
     @Binding var selection: URL?
     var width: Double?
     var height: Double?
-    var aspectRatio: Double?
+    var aspectRatio: CGFloat?
     var namespace: Namespace.ID?
     
     public init(
