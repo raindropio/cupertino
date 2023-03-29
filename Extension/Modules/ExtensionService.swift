@@ -1,6 +1,7 @@
 import SwiftUI
 import UniformTypeIdentifiers
 
+@MainActor
 final class ExtensionService: ObservableObject {
     private weak var context: NSExtensionContext?
     
@@ -18,10 +19,8 @@ final class ExtensionService: ObservableObject {
         self.context = context
 
         Task {
+            defer { loaded = true }
             await load()
-            await MainActor.run {
-                loaded = true
-            }
         }
     }
     
@@ -57,9 +56,10 @@ enum ExtensionType {
 }
 
 extension ExtensionService {
-    @MainActor
     private func load() async {
-        guard let context else { return }
+        guard let context else {
+            fatalError("No extension context")
+        }
         
         for input in context.inputItems {
             guard let input = input as? NSExtensionItem else { continue }
@@ -78,7 +78,6 @@ extension ExtensionService {
         }
     }
     
-    @MainActor
     private func loadPreprocessed(_ attachment: NSItemProvider) async {
         let item = try? await attachment.loadItem(forTypeIdentifier: UTType.propertyList.identifier)
         if let item = item as? NSDictionary,

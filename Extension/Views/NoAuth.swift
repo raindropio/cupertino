@@ -1,5 +1,6 @@
 import SwiftUI
 import UI
+import Backport
 
 struct NoAuth: View {
     @Environment(\.dismiss) private var dismiss
@@ -12,6 +13,7 @@ struct NoAuth: View {
             Button("OK", role: .cancel, action: dismiss.callAsFunction)
         }
             .presentationDetents([.medium])
+            .backport.presentationBackground(.regularMaterial)
             #if canImport(UIKit)
             .frame(idealWidth: 400, idealHeight: 400)
             #else

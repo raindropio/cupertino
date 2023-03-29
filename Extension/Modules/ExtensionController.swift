@@ -4,6 +4,10 @@ import SwiftUI
 class ExtensionController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        //Appearance
+        view.backgroundColor = .clear
+        sheetPresentationController?.largestUndimmedDetentIdentifier = .medium
 
         //SwiftUI
         let ui = UIHostingController(rootView: ExtensionUI(service: .init(self.extensionContext)))

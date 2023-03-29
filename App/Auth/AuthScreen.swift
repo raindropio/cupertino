@@ -45,7 +45,7 @@ struct AuthScreen: View {
                     .scenePadding(.horizontal)
                     .frame(maxWidth: 500)
                 
-                Text("We keep your [data safe](https://help.raindrop.io/about#privacy), never sold. No\u{00a0}limits. Starting from $0.")
+                Text("We keep your [data safe](https://help.raindrop.io/about#privacy), never sold.\nNo\u{00a0}limits. Starting from $0.")
                     .openLinksInSafari()
                     .foregroundStyle(.secondary)
                     .font(.callout)

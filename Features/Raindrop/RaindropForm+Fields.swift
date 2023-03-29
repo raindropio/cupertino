@@ -87,6 +87,8 @@ extension RaindropForm.Fields: View {
                 Label {
                     URLField("", value: $raindrop.link, prompt: Text("URL"))
                         .labelsHidden()
+                        .allowsTightening(true)
+                        .minimumScaleFactor(0.8)
                         .focused($focus, equals: .link)
                 } icon: {
                     Image(systemName: "lock.fill")

@@ -38,7 +38,6 @@ extension Receive {
                             //loading
                             if loading {
                                 ProgressView()
-                                    .presentationDetents([.medium])
                             }
                             //nothing found
                             else if urls.isEmpty {
@@ -95,6 +94,7 @@ extension Receive {
             }
                 #if canImport(UIKit)
                 .presentationDetents([.fraction(0.333)])
+                .backport.presentationBackground(.regularMaterial)
                 .backport.presentationCompactAdaptation(.sheet)
                 .frame(idealWidth: 400, idealHeight: 400)
                 #else
