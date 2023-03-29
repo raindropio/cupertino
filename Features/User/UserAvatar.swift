@@ -8,7 +8,7 @@ public struct UserAvatar<U: UserType>: View {
     
     public init(_ user: U?, width: Double? = nil) {
         self.user = user
-        self.width = width ?? 25.0
+        self.width = width ?? 28.0
     }
     
     public var body: some View {
@@ -19,7 +19,7 @@ public struct UserAvatar<U: UserType>: View {
             Image(systemName: "person.crop.circle")
                 .resizable()
                 .scaledToFit()
-                .frame(width: width, height: width)
+                .frame(width: width-3, height: width-3)
                 .symbolVariant(.fill)
         }
     }

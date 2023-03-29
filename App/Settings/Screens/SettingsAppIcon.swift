@@ -19,7 +19,7 @@ struct SettingsAppIcon: View {
     @MainActor
     private func update() async {
         guard selection != UIApplication.shared.alternateIconName else { return }
-        try? await UIApplication.shared.setAlternateIconName(selection)
+        try! await UIApplication.shared.setAlternateIconName(selection)
     }
     
     var body: some View {

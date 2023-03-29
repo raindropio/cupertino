@@ -1,6 +1,7 @@
 import SwiftUI
 import UI
 import API
+import Backport
 import StoreKit
 
 struct PurchaseStack: View {
@@ -30,6 +31,7 @@ struct PurchaseStack: View {
                 #if canImport(UIKit)
                 .navigationBarTitleDisplayMode(.inline)
                 #endif
+                .backport.presentationBackground(.regularMaterial)
                 .toolbar {
                     ToolbarItem(placement: .cancellationAction) {
                         Button(role: .cancel, action: dismiss.callAsFunction) {

@@ -1,6 +1,7 @@
 import SwiftUI
 import API
 import UniformTypeIdentifiers
+import Backport
 
 public extension View {
     func dropProvider() -> some View {
@@ -51,6 +52,7 @@ fileprivate struct DropProviderModifier: ViewModifier {
             ) {
                 AddStack(urls, to: collection)
                     .presentationDetents([.height(200)])
+                    .backport.presentationBackground(.regularMaterial)
             }
     }
 }

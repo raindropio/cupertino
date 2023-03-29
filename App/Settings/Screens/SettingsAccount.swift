@@ -11,10 +11,10 @@ struct SettingsAccount: View {
         Form {
             if let me = u.state.me {
                 Section {
-                    LabeledContent("Username", value: me.name)
-                    LabeledContent("Email", value: me.email)
-                    LabeledContent("ID", value: me.id, format: .number)
-                    LabeledContent("Member since", value: me.registered, format: .dateTime)
+                    LabeledContent("Username", value: me.name).textSelection(.enabled)
+                    LabeledContent("Email", value: me.email).textSelection(.enabled)
+                    LabeledContent("ID", value: "\(me.id)").textSelection(.enabled)
+                    LabeledContent("Registered", value: me.registered, format: .relative(presentation: .named))
                 } header: {
                     UserAvatar(me, width: 72)
                         .frame(maxWidth: .infinity)

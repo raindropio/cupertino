@@ -15,8 +15,5 @@ struct SettingsExtensions: View {
             #endif
         }
             .navigationTitle("Extensions")
-            #if canImport(UIKit)
-            .navigationBarTitleDisplayMode(.inline)
-            #endif
     }
 }

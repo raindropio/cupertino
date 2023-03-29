@@ -71,7 +71,6 @@ public struct SubscriptionOffer: View {
                 }
             }
             .animation(.spring(), value: pro)
-            
             .sheet(isPresented: $purchase, content: PurchaseStack.init)
     }
 }
