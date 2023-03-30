@@ -74,7 +74,8 @@ extension Browser.Toolbar: ViewModifier {
             //move
             ToolbarItemGroup(placement: placement) {
                 Button { collection.toggle() } label: {
-                    Image(systemName: "folder")
+                    CollectionLabel(raindrop.collection)
+                        .labelStyle(.iconOnly)
                 }
                     .sheet(isPresented: $collection) {
                         RaindropStack($raindrop, content: RaindropCollection.init)

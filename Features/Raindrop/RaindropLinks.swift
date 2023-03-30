@@ -34,7 +34,6 @@ struct RaindropLinks: View {
                 if raindrop.important {
                     Button { tapFilter(.important) } label: {
                         Image(systemName: Filter.Kind.important.systemImage)
-                            .symbolVariant(.fill)
                             .foregroundStyle(.tint)
                     }
                         .tint(Filter.Kind.important.color)
@@ -60,6 +59,7 @@ struct RaindropLinks: View {
                 .buttonStyle(.chip)
                 .controlSize(.small)
                 .imageScale(.small)
+                .symbolVariant(.fill)
                 .padding(.vertical, 4)
                 .disabled(isEditing)
         }

@@ -88,7 +88,9 @@ extension Thumbnail: View {
                         .interpolation(.low)
                         .scaledToFill()
                 } else if $0.error != nil {
-                    Color.gray
+                    if (width != nil && height != nil) || aspectRatio != nil {
+                        Color.primary.opacity(0.1)
+                    }
                 }
             }
                 .onDisappear(.lowerPriority)

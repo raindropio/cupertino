@@ -2,7 +2,15 @@ import SwiftUI
 import API
 import UI
 
-struct CollectionIcon<C: CollectionType>: View {
+public func CollectionIcon(_ collection: UserCollection, fallbackImageName: String? = nil) -> some View {
+    CI(cover: collection.cover, systemImage: fallbackImageName ?? collection.systemImage)
+}
+
+public func CollectionIcon(_ collection: SystemCollection) -> some View {
+    CI(systemImage: collection.systemImage)
+}
+
+fileprivate struct CI: View {
     @Environment(\.controlSize) private var controlSize
     
     var cover: URL?
@@ -21,23 +29,5 @@ struct CollectionIcon<C: CollectionType>: View {
             }
         }
             .fixedSize()
-    }
-}
-
-extension CollectionIcon where C == UserCollection {
-    init(_ collection: C) {
-        cover = collection.cover
-        systemImage = collection.systemImage
-    }
-    
-    init(_ collection: C, fallbackImageName: String) {
-        cover = collection.cover
-        systemImage = fallbackImageName
-    }
-}
-
-extension CollectionIcon where C == SystemCollection {
-    init(_ collection: C) {
-        systemImage = collection.systemImage
     }
 }
