@@ -42,7 +42,7 @@ extension FindBy {
     }
     
     public var searchLocalized: String {
-        (filters.map{ $0.title } + (text.isEmpty ? [] : [text]))
+        (filters.map{ $0.title } + (text.isEmpty ? [] : ["\"\(text)\""]))
             .joined(separator: ", ")
             .trimmingCharacters(in: .whitespacesAndNewlines)
     }

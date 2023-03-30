@@ -2,12 +2,12 @@ import SwiftUI
 
 public extension View {
     /// Prefer to put this modifier to last
-    func restoreSceneValue<V: Codable>(_ key: String, value: Binding<V>) -> some View {
+    func restoreSceneValue<V: Codable & Equatable>(_ key: String, value: Binding<V>) -> some View {
         modifier(RestoreSceneValue(key, value: value))
     }
 }
 
-fileprivate struct RestoreSceneValue<V: Codable>: ViewModifier {
+fileprivate struct RestoreSceneValue<V: Codable & Equatable>: ViewModifier {
     @Environment(\.scenePhase) private var scenePhase
     @SceneStorage private var sceneId: String
     @State private var loaded = false
@@ -34,7 +34,9 @@ fileprivate struct RestoreSceneValue<V: Codable>: ViewModifier {
             let data = FileManager.default.contents(atPath: fileURL.path),
             let decoded = try? decoder.decode(V.self, from: data)
         else { return }
-        value = decoded
+        if decoded != value {
+            value = decoded
+        }
     }
     
     private func save() {
@@ -56,8 +58,13 @@ fileprivate struct RestoreSceneValue<V: Codable>: ViewModifier {
             .onAppear(perform: restore)
             .onDisappear(perform: save)
             .onChange(of: scenePhase) {
-                if $0 == .background {
+                switch $0 {
+                case .active: //important on ipad
+                    restore()
+                case .background:
                     save()
+                default:
+                    break
                 }
             }
     }

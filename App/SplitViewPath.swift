@@ -3,7 +3,7 @@ import API
 import UI
 import Features
 
-struct SplitViewPath: Codable {
+struct SplitViewPath: Codable, Equatable {
     var sidebar: FindBy? = .init()
     var detail: [Screen] = []
 }

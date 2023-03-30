@@ -68,6 +68,7 @@
 		765F23FE2991409500282298 /* Browser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 765F23FD2991409500282298 /* Browser.swift */; };
 		7673C0AA295DD3B8002D4229 /* SidebarScreen+Toolbar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7673C0A9295DD3B8002D4229 /* SidebarScreen+Toolbar.swift */; };
 		76799F8B299632790042DF78 /* Folder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76799F8A299632790042DF78 /* Folder.swift */; };
+		767D019A29D5A82400C6DA0E /* SidebarScreen+Search.swift in Sources */ = {isa = PBXBuildFile; fileRef = 767D019929D5A82400C6DA0E /* SidebarScreen+Search.swift */; };
 		767F098C299FD6E200349902 /* WebExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 767F0944299FD6E100349902 /* WebExtension.swift */; };
 		767F09B4299FD94B00349902 /* WebExtension.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = 767F096F299FD6E200349902 /* WebExtension.appex */; platformFilter = ios; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		7685A195286868AC00A4BC3C /* App.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7685A194286868AC00A4BC3C /* App.swift */; };
@@ -229,6 +230,7 @@
 		7673C0A9295DD3B8002D4229 /* SidebarScreen+Toolbar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SidebarScreen+Toolbar.swift"; sourceTree = "<group>"; };
 		76799F8A299632790042DF78 /* Folder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Folder.swift; sourceTree = "<group>"; };
 		767AC1162925196F00766998 /* Features */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = Features; sourceTree = "<group>"; };
+		767D019929D5A82400C6DA0E /* SidebarScreen+Search.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SidebarScreen+Search.swift"; sourceTree = "<group>"; };
 		767F0944299FD6E100349902 /* WebExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebExtension.swift; sourceTree = "<group>"; };
 		767F096F299FD6E200349902 /* WebExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = WebExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
 		767F0974299FD6E200349902 /* WebExtension.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = WebExtension.plist; sourceTree = "<group>"; };
@@ -438,6 +440,7 @@
 			children = (
 				76864FB5291EA059000B9B45 /* SidebarScreen.swift */,
 				7673C0A9295DD3B8002D4229 /* SidebarScreen+Toolbar.swift */,
+				767D019929D5A82400C6DA0E /* SidebarScreen+Search.swift */,
 			);
 			path = Sidebar;
 			sourceTree = "<group>";
@@ -942,6 +945,7 @@
 				76ECFE0C294B1B5700DF15C9 /* WebHighlights+Event.swift in Sources */,
 				76154C7E29C212D3002DDDEB /* SettingsMacOS.swift in Sources */,
 				76292CF82952F2CB000E16AA /* PreferredBrowser.swift in Sources */,
+				767D019A29D5A82400C6DA0E /* SidebarScreen+Search.swift in Sources */,
 				76B6738029928AB1007A412A /* Browser+Toolbar.swift in Sources */,
 				768CA20529506D7A00AD7E62 /* AuthSplash+Slide.swift in Sources */,
 				7673C0AA295DD3B8002D4229 /* SidebarScreen+Toolbar.swift in Sources */,
@@ -1408,6 +1412,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "@executable_path/Frameworks";
 				"LD_RUNPATH_SEARCH_PATHS[sdk=macosx*]" = "@executable_path/../Frameworks";
 				MACOSX_DEPLOYMENT_TARGET = 13.0;
+				MARKETING_VERSION = 5.0.26;
 				PRODUCT_BUNDLE_IDENTIFIER = io.raindrop.ios;
 				"PRODUCT_BUNDLE_IDENTIFIER[sdk=macosx*]" = io.raindrop.safari;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -1452,6 +1457,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "@executable_path/Frameworks";
 				"LD_RUNPATH_SEARCH_PATHS[sdk=macosx*]" = "@executable_path/../Frameworks";
 				MACOSX_DEPLOYMENT_TARGET = 13.0;
+				MARKETING_VERSION = 5.0.26;
 				PRODUCT_BUNDLE_IDENTIFIER = io.raindrop.ios;
 				"PRODUCT_BUNDLE_IDENTIFIER[sdk=macosx*]" = io.raindrop.safari;
 				PRODUCT_NAME = "$(TARGET_NAME)";

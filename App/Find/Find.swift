@@ -8,7 +8,7 @@ struct Find: View {
     
     var body: some View {
         Search(find) { refine, isSearching in
-            Folder(find: refine) {                
+            Folder(find: refine) {
                 if isSearching {
                     SearchSuggestions(refine)
                         .controlSize(.small)

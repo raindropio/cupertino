@@ -5,11 +5,14 @@ import Features
 
 struct SidebarScreen: View {
     @Environment(\.containerHorizontalSizeClass) private var sizeClass
+    @State private var search = ""
+    
     @Binding var selection: FindBy?
     
     var body: some View {
-        FindByList(selection: $selection)
+        FindByList(selection: $selection, search: search)
             .modifier(Toolbar())
+            .modifier(Search(selection: $selection, search: $search))
             .pasteCommands(enabled: sizeClass == .compact)
             .dropProvider()
             #if canImport(UIKit)

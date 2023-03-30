@@ -63,6 +63,12 @@ extension FindByList: View {
                     }
                 }
             } else {
+                Section("Find items") {
+                    Label(search, systemImage: "magnifyingglass")
+                        .listItemTint(.monochrome)
+                        .tag(FindBy(search))
+                }
+                
                 FindCollections<FindBy>(search)
                 
                 Section("Tags") {
