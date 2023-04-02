@@ -38,6 +38,7 @@ extension Receive {
                             //loading
                             if loading {
                                 ProgressView()
+                                    .backport.presentationBackground(.clear)
                             }
                             //nothing found
                             else if urls.isEmpty {
@@ -79,6 +80,7 @@ extension Receive {
                 Group {
                     if loading {
                         ProgressView()
+                            .backport.presentationBackground(.clear)
                     }
                     //nothing found
                     else if urls.isEmpty {

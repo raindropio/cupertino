@@ -39,10 +39,10 @@ struct HighlightEditRow: View {
                     }
                     .listRowSeparator(.hidden)
                 
-                ProGroup {
-                    TextField("Note", text: $highlight.note, axis: .vertical)
-                        .preventLineBreaks(text: $highlight.note)
-                }
+                TextField("Note", text: $highlight.note, axis: .vertical)
+                    .preventLineBreaks(text: $highlight.note)
+                    .proEnabled()
+                    .textSelection(.enabled)
             } footer: {
                 Text(highlight.created, formatter: .shortDateTime)
                     .lineLimit(1)
