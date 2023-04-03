@@ -11,6 +11,7 @@ extension User: Codable {
         case registered
         case password
         case files
+        case tfa
         
         case apple, google, facebook, twitter, vkontakte
         case dropbox, gdrive
@@ -27,6 +28,7 @@ extension User: Codable {
         registered = try container.decode(type(of: registered), forKey: .registered)
         password = (try? container.decode(type(of: password), forKey: .password)) ?? false
         files = try container.decode(type(of: files), forKey: .files)
+        tfa = (try? container.decode(type(of: tfa), forKey: .tfa)) ?? TFA()
         
         apple = (try? container.decode(type(of: apple), forKey: .apple)) ?? Connect()
         google = (try? container.decode(type(of: google), forKey: .google)) ?? Connect()
@@ -47,7 +49,8 @@ extension User: Codable {
         try container.encode(registered, forKey: .registered)
         try container.encode(password, forKey: .password)
         try container.encode(files, forKey: .files)
-        
+        try container.encode(tfa, forKey: .tfa)
+
         try container.encode(apple, forKey: .apple)
         try container.encode(google, forKey: .google)
         try container.encode(facebook, forKey: .facebook)

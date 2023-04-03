@@ -1,7 +1,7 @@
 import Foundation
 
 extension User {
-    public struct Connect: Equatable, Codable, Hashable {
+    public struct TFA: Equatable, Codable, Hashable {
         public var enabled = false
     }
 }

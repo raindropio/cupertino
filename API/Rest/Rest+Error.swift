@@ -6,6 +6,7 @@ public enum RestError: LocalizedError, Equatable {
     case forbidden
     case notFound
     case invalid(String? = nil)
+    case tfaRequired(token: String)
     
     case appleAuthCredentialsInvalid
     case jwtAuthCallbackURLInvalid
@@ -21,6 +22,7 @@ public enum RestError: LocalizedError, Equatable {
         case .forbidden: return "You don't have access"
         case .notFound: return "Nothing found"
         case .invalid(let message): return message ?? "Invalid request"
+        case .tfaRequired(_): return "2FA required"
             
         case .appleAuthCredentialsInvalid: return "can't get apple sign in credentials"
         case .jwtAuthCallbackURLInvalid: return "callback url doesn't have token"

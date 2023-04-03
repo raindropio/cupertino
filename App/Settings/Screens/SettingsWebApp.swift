@@ -23,9 +23,12 @@ struct SettingsWebApp: View {
 }
 
 extension SettingsWebApp {
-    enum Subpage: String {
+    enum Subpage: String, Identifiable {
         case account
         case backups
         case `import`
+        case tfa
+        
+        var id: Self { self }
     }
 }

@@ -10,6 +10,7 @@ public enum AuthAction: ReduxAction {
     case logout
     case apple(ASAuthorization)
     case jwt(URL)
+    case tfa(token: String, code: String)
 }
 
 public enum CollaboratorsAction: ReduxAction {

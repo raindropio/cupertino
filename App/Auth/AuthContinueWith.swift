@@ -9,6 +9,7 @@ struct AuthContinueWith {
     @EnvironmentObject private var dispatch: Dispatcher
     @State private var loading = false
     @State private var error: Error?
+    @State private var tfa: String?
 }
 
 extension AuthContinueWith {
@@ -17,6 +18,8 @@ extension AuthContinueWith {
             loading = true
             do {
                 try await dispatch(action)
+            } catch RestError.tfaRequired(let token) {
+                tfa = token
             } catch {
                 self.error = error
             }
@@ -47,5 +50,6 @@ extension AuthContinueWith: View {
             ) { } message: {
                 Text(error?.localizedDescription ?? "")
             }
+            .modifier(AuthTFA(token: tfa))
     }
 }

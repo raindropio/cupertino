@@ -2,10 +2,12 @@ import SwiftUI
 import API
 import UI
 import Features
+import Backport
 
 struct SettingsAccount: View {
     @EnvironmentObject private var u: UserStore
     @EnvironmentObject private var dispatch: Dispatcher
+    @State private var edit: SettingsWebApp.Subpage?
 
     var body: some View {
         Form {
@@ -21,8 +23,19 @@ struct SettingsAccount: View {
                         .scenePadding(.bottom)
                 }
                 
+                if me.tfa.enabled {
+                    Section {
+                        Button("Manage Two-Factor Authentication") {
+                            edit = .tfa
+                        }
+                    }
+                }
+                
                 ControlGroup {
-                    SafariLink("Edit", destination: URL(string: "https://app.raindrop.io/settings/account")!)
+                    Button("Edit") {
+                        edit = .account
+                    }
+
                     ActionButton("Logout", role: .destructive) {
                         try await dispatch(AuthAction.logout)
                     }
@@ -33,5 +46,21 @@ struct SettingsAccount: View {
             }
         }
             .navigationTitle("Account")
+            .refreshable {
+                try? await dispatch(UserAction.reload)
+            }
+            .reload {
+                try? await dispatch(UserAction.reload)
+            }
+            .sheet(item: $edit) { subpage in
+                NavigationStack {
+                    SettingsWebApp(subpage: subpage)
+                        .toolbar {
+                            ToolbarItem(placement: .cancellationAction) {
+                                Button("Cancel") { edit = nil }
+                            }
+                        }
+                }
+            }
     }
 }

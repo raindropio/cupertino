@@ -4,10 +4,14 @@ import AuthenticationServices
 //MARK: - Login
 extension Rest {
     public func authLogin(_ body: AuthLoginRequest) async throws {
-        let res: ResultResponse = try await fetch.post(
+        let res: AuthResponse = try await fetch.post(
             "auth/email/login",
             body: body
         )
+        
+        if let tfa = res.tfa {
+            throw RestError.tfaRequired(token: tfa)
+        }
         
         guard res.result == true
         else { throw RestError.unauthorized }
@@ -58,7 +62,7 @@ extension Rest {
             throw RestError.appleAuthCredentialsInvalid
         }
         
-        let res: ResultResponse = try await fetch.get(
+        let res: AuthResponse = try await fetch.get(
             "auth/apple/native",
             query: [
                 .init(name: "code", value: codeString),
@@ -66,6 +70,10 @@ extension Rest {
                 .init(name: "display_name", value: "\(fullName.familyName ?? "") \(fullName.givenName ?? "") \(fullName.middleName ?? "")".trimmingCharacters(in: .whitespacesAndNewlines))
             ]
         )
+        
+        if let tfa = res.tfa {
+            throw RestError.tfaRequired(token: tfa)
+        }
         
         guard res.result == true
         else { throw RestError.unauthorized }
@@ -128,5 +136,22 @@ extension Rest {
     
     fileprivate struct JWTTokenBody: Codable {
         var token: String
+    }
+}
+
+//MARK: - 2FA
+extension Rest {
+    public func authTfa(token: String, code: String) async throws {
+        let res: ResultResponse = try await fetch.post(
+            "auth/tfa/\(token)",
+            body: TFABody(code: code)
+        )
+        
+        guard res.result == true
+        else { throw RestError.unauthorized }
+    }
+    
+    fileprivate struct TFABody: Codable {
+        var code: String
     }
 }

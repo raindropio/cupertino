@@ -29,6 +29,9 @@ extension AuthReducer {
                 
             case .jwt(let callbackUrl):
                 try await jwt(state: state, callbackUrl: callbackUrl)
+                
+            case .tfa(let token, let code):
+                try await tfa(state: state, token: token, code: code)
             }
         }
         
