@@ -70,7 +70,7 @@ extension LazyTree where T == I.ID {
 extension LazyTree {
     struct Leaf: Identifiable {
         var id: I.ID
-        var expandable: Bool = false
+        var expanded: Bool?
         var level: Double = 0
     }
 }
@@ -87,7 +87,7 @@ extension LazyTree {
         
         return [.init(
             id: item.id,
-            expandable: expandable,
+            expanded: expandable ? item[keyPath: expanded] : nil,
             level: level
         )] + (
             expandable && item[keyPath: expanded] ?
@@ -109,12 +109,6 @@ extension LazyTree {
 }
 
 extension LazyTree {
-    func isExpanded(_ id: I.ID) -> Binding<Bool> {
-        .init { items[id]?[keyPath: expanded] ?? false } set: { _ in
-            toggle(id)
-        }
-    }
-    
     func onMove(_ indices: IndexSet, _ to: Int) {
         let tree = tree()
         let ids = indices.map { tree[$0].id }
@@ -143,29 +137,17 @@ extension LazyTree: View {
     public var body: some View {
         let tree = tree()
         
-        ForEach(tree) { leaf in
-            Group {
-                if leaf.expandable {
-                    DisclosureGroup(isExpanded: isExpanded(leaf.id)) {} label: {
-                        content(items[leaf.id]!)
-                    }
-                        #if canImport(AppKit)
-                        .disclosureGroupStyle(.appKit)
-                        #endif
-                } else {
-                    content(items[leaf.id]!)
-                        #if canImport(AppKit)
-                        .padding(.leading, 12)
-                        #endif
-                }
+        ForEach(tree) {
+            LazyTreeItem($0, expanded: \.expanded, toggle: toggle) {
+                content(items[$0.id]!)
             }
                 #if canImport(UIKit)
-                .padding(.leading, leaf.level * 32)
+                .padding(.leading, $0.level * 32)
                 #else
-                .padding(.leading, leaf.level * 16)
+                .padding(.leading, $0.level * 16)
                 #endif
                 .transition(.move(edge: .bottom).combined(with: .opacity))
-                .tag(tag(leaf.id))
+                .tag(tag($0.id))
         }
             .onMove(perform: onMove)
     }
