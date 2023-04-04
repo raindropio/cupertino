@@ -4,57 +4,72 @@ import API
 import Backport
 
 struct AuthTFA: ViewModifier {
-    @EnvironmentObject private var dispatch: Dispatcher
-    @State private var show = false
-    @FocusState private var focused: Bool
-    @State private var code = ""
-    
-    var token: String?
+    @StateObject private var service = Service()
     
     func body(content: Content) -> some View {
-        content
-            .task(id: token) {
-                show = token != nil
-                code = ""
+        Group {
+            if let token = service.token {
+                Stack(token: token)
+            } else {
+                content
+                    .environmentObject(service)
             }
-            .sheet(isPresented: $show) {
-                NavigationStack {
-                    Form {
-                        Section("Authenticator app code") {
-                            TextField("", text: $code)
-                                .textContentType(.oneTimeCode)
-                                .keyboardType(.numberPad)
-                                .backport.focused($focused)
-                        }
-                        
-                        SubmitButton("Login")
-                            .disabled(code.isEmpty)
+        }
+            .animation(.default, value: service.token != nil)
+    }
+}
+
+extension AuthTFA {
+    class Service: ObservableObject {
+        @Published var token: String?
+        
+        func callAsFunction(_ token: String) {
+            self.token = token
+        }
+    }
+}
+
+extension AuthTFA {
+    struct Stack: View {
+        @Environment(\.dismiss) private var dismiss
+        @EnvironmentObject private var dispatch: Dispatcher
+        @FocusState private var focused: Bool
+        @State private var code = ""
+
+        var token: String
+        
+        var body: some View {
+            NavigationStack {
+                Form {
+                    Section {
+                        TextField("", text: $code, prompt: Text("Authenticator app code"))
+                            .textContentType(.oneTimeCode)
+                            .keyboardType(.numberPad)
+                            .backport.focused($focused)
                     }
-                        .backport.defaultFocus($focused, true)
-                        .backport.scrollBounceBehavior(.basedOnSize)
-                        .navigationTitle("2FA")
-                        .toolbar {
-                            ToolbarItem(placement: .cancellationAction) {
-                                Button("Cancel") { show = false }
-                            }
-                            
-                            ToolbarItem {
-                                if let token {
-                                    SafariLink("Disable", destination: URL(string: "https://app.raindrop.io/account/tfa/revoke/\(token)")!)
-                                }
-                            }
-                            
-                            ToolbarItem {
-                                SafariLink("Help", destination: URL(string: "https://help.raindrop.io/tfa")!)
-                            }
+                    
+                    SubmitButton("Log in")
+                        .disabled(code.isEmpty)
+                    
+                    Section {
+                        SafariLink(role: .destructive, destination: URL(string: "https://app.raindrop.io/account/tfa/revoke/\(token)")!) {
+                            Text("Can't access your 2FA device?").frame(maxWidth: .infinity)
                         }
-                        .onSubmit {
-                            if let token {
-                                try await dispatch(AuthAction.tfa(token: token, code: code))
-                            }
-                        }
+                    }
                 }
-                    .presentationDetents([.fraction(0.333)])
+                    .backport.defaultFocus($focused, true)
+                    .autoSubmit(code.count == 6)
+                    .onSubmit {
+                        try await dispatch(AuthAction.tfa(token: token, code: code))
+                        focused = true
+                    }
+                    .navigationTitle("Two-Factor Auth")
+                    .toolbar {
+                        ToolbarItem(placement: .cancellationAction) {
+                            Button("Cancel", action: dismiss.callAsFunction)
+                        }
+                    }
             }
+        }
     }
 }

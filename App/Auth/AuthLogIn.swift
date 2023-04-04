@@ -7,8 +7,8 @@ struct AuthLogIn: View {
     @Environment(\.dismiss) private var dismiss
     @EnvironmentObject private var auth: AuthStore
     @EnvironmentObject private var dispatch: Dispatcher
+    @EnvironmentObject private var tfa: AuthTFA.Service
     @State private var form = AuthLoginRequest()
-    @State private var tfa: String?
     
     enum Focus: CaseIterable { case email, password }
     @FocusState private var focus: Focus?
@@ -23,7 +23,7 @@ struct AuthLogIn: View {
             do {
                 try await dispatch(AuthAction.login(form))
             } catch RestError.tfaRequired(let token) {
-                tfa = token
+                tfa(token)
             } catch {
                 throw error
             }
@@ -75,6 +75,5 @@ struct AuthLogIn: View {
                     Button("Cancel", role: .cancel, action: dismiss.callAsFunction)
                 }
             }
-            .modifier(AuthTFA(token: tfa))
     }
 }

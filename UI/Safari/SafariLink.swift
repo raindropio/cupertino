@@ -5,16 +5,19 @@ public struct SafariLink<L: View> {
     @Environment(\.openURL) private var openURL
     
     var destination: URL
+    var role: ButtonRole?
     var label: () -> L
     
-    public init(destination: URL, label: @escaping () -> L) {
+    public init(role: ButtonRole? = nil, destination: URL, label: @escaping () -> L) {
+        self.role = role
         self.destination = destination
         self.label = label
     }
 }
 
 extension SafariLink where L == Text {
-    public init<S: StringProtocol>(_ title: S, destination: URL) {
+    public init<S: StringProtocol>(_ title: S, role: ButtonRole? = nil, destination: URL) {
+        self.role = role
         self.destination = destination
         self.label = { Text(title) }
     }
@@ -27,14 +30,14 @@ extension SafariLink: View {
     }
     
     public var body: some View {
-        Button(action: press, label: label)
+        Button(role: role, action: press, label: label)
             .safariView(isPresented: $show, url: destination)
     }
 }
 #else
 extension SafariLink: View {
     public var body: some View {
-        Button(action: { openURL(destination) }, label: label)
+        Button(role: role, action: { openURL(destination) }, label: label)
     }
 }
 #endif
