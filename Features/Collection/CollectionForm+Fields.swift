@@ -44,7 +44,6 @@ extension CollectionForm.Fields: View {
                     }
                 }
             }
-                .proEnabled()
             
             if !collection.isNew {
                 NavigationLink {

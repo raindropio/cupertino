@@ -20,14 +20,6 @@ struct ProFeatures: View {
             .tint(.green)
         
         Feature(
-            systemImage: "folder.circle",
-            title: "Nested Collections",
-            description: "Create collection inside of a collection",
-            link: URL(string: "https://help.raindrop.io/collections#nested-collections")!
-        )
-            .tint(.red)
-        
-        Feature(
             systemImage: "message.circle",
             title: "Annotations",
             description: "Add notes (annotations) to your highlights",
