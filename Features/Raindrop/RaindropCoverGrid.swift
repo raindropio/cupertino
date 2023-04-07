@@ -35,8 +35,43 @@ struct RaindropCoverGrid: View {
             #else
             .frame(idealHeight: 300)
             #endif
+            .toolbar {
+                ToolbarItem {
+                    AddButton(raindrop: $raindrop)
+                }
+            }
             .onChange(of: raindrop.cover) { _ in
                 dismiss()
             }
+    }
+}
+
+extension RaindropCoverGrid {
+    struct AddButton: View {
+        @State private var show = false
+        @State private var url = ""
+        @Binding var raindrop: Raindrop
+        
+        private func action() {
+            guard let url = URL(string: url) else { return }
+            guard !raindrop.media.contains(where: { $0.link == url }) else { return }
+            
+            raindrop.media.append(.init(url))
+            raindrop.cover = url
+        }
+
+        var body: some View {
+            Button { show.toggle() } label: {
+                Image(systemName: "plus")
+            }
+                .alert("New cover", isPresented: $show) {
+                    TextField("URL", text: $url)
+                        .keyboardType(.URL)
+                        .submitLabel(.done)
+                    
+                    Button("Add", action: action)
+                    Button("Cancel", role: .cancel) {}
+                } message: {}
+        }
     }
 }
