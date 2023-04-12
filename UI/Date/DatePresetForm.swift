@@ -23,6 +23,8 @@ struct DatePresetForm: View {
                             } icon: {
                                 Image(systemName: preset.systemImage)
                                     .foregroundColor(preset.color)
+                                    .symbolVariant(.fill)
+                                    .font(.headline)
                             }
                         }
                     }

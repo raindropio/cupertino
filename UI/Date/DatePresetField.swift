@@ -59,7 +59,7 @@ extension DatePresetField: View {
             LabeledContent(content: {
                 if let selection {
                     if displayedComponents.contains(.date), displayedComponents.contains(.hourAndMinute) {
-                        Text(selection, format: .dateTime)
+                        Text(selection, formatter: .shortDateTime)
                     } else {
                         Text(selection, style: displayedComponents.contains(.date) ? .date : .time)
                     }

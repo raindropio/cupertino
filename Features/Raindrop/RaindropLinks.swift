@@ -18,6 +18,7 @@ struct RaindropLinks: View {
         if (
             raindrop.collection != container?.find.collectionId ||
             raindrop.important ||
+            raindrop.reminder != nil ||
             !raindrop.highlights.isEmpty ||
             !raindrop.tags.isEmpty
         ) {
@@ -39,9 +40,22 @@ struct RaindropLinks: View {
                         .tint(Filter.Kind.important.color)
                 }
                 
+                //reminder
+                if let date = raindrop.reminder?.date {
+                    Button {} label: {
+                        Label {
+                            Text(date, formatter: .shortDateTime)
+                        } icon: {
+                            Image(systemName: Filter.Kind.reminder.systemImage)
+                        }
+                    }
+                        .tint(Filter.Kind.reminder.color)
+                        .allowsHitTesting(false)
+                }
+                
                 //highlights
                 if !raindrop.highlights.isEmpty {
-                    Button { tapFilter(.highlights) } label: {
+                    Button {} label: {
                         Label("\(raindrop.highlights.count)", systemImage: Filter.Kind.highlights.systemImage)
                     }
                         .tint(Filter.Kind.highlights.color)
