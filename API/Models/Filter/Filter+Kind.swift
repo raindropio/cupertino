@@ -6,6 +6,7 @@ extension Filter {
         case important
         case type(RaindropType)
         case created(String)
+        case reminder
         case highlights
         case broken
         case duplicate(of: Raindrop.ID? = nil)
@@ -19,6 +20,7 @@ extension Filter {
             case .important: return "important:true"
             case .type(let type): return "type:\(type.rawValue)"
             case .created(let date): return "created:\(date)"
+            case .reminder: return "reminder:true"
             case .highlights: return "highlights:true"
             case .broken: return "broken:true"
             case .duplicate: return "duplicate:true"
@@ -34,6 +36,7 @@ extension Filter {
             case .important: return "Favorites"
             case .type(let type): return type.title
             case .created(let date): return CreatedDateFormatter.format(date)
+            case .reminder: return "Reminders"
             case .highlights: return "Highlights"
             case .broken: return "Broken links"
             case .duplicate: return "Duplicates"
@@ -49,6 +52,7 @@ extension Filter {
             case .important: return "heart"
             case .type(let type): return type.systemImage
             case .created(_): return "calendar"
+            case .reminder: return "bell"
             case .highlights: return "pencil.tip.crop.circle"
             case .broken: return "exclamationmark.square"
             case .duplicate: return "square.2.layers.3d.top.filled"
@@ -64,6 +68,7 @@ extension Filter {
             case .important: return .red
             case .type(let type): return type.color
             case .created(_): return .gray
+            case .reminder: return .yellow
             case .highlights: return .purple
             case .notag: return .gray
             case .broken: return .pink

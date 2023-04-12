@@ -12,6 +12,7 @@ extension Raindrop: Codable, EncodableWithConfiguration {
         case media
         case type
         case tags
+        case reminder
         case highlights
         case created
         case lastUpdate
@@ -43,6 +44,7 @@ extension Raindrop: Codable, EncodableWithConfiguration {
         media = (try? container.decode(Swift.type(of: media), forKey: .media)) ?? []
         type = (try? container.decode(Swift.type(of: type), forKey: .type)) ?? .link
         tags = (try? container.decode(Swift.type(of: tags), forKey: .tags)) ?? []
+        reminder = try? container.decode(Swift.type(of: reminder), forKey: .reminder)
         highlights = (try? container.decode(Swift.type(of: highlights), forKey: .highlights)) ?? []
         created = (try? container.decode(Swift.type(of: created), forKey: .created)) ?? .init()
         lastUpdate = (try? container.decode(Swift.type(of: lastUpdate), forKey: .lastUpdate)) ?? .init()
@@ -123,6 +125,10 @@ extension Raindrop: Codable, EncodableWithConfiguration {
         
         if compare?.tags != tags {
             try container.encode(tags, forKey: .tags)
+        }
+        
+        if compare?.reminder != reminder {
+            try container.encode(reminder, forKey: .reminder)
         }
         
         if compare?.highlights != highlights {

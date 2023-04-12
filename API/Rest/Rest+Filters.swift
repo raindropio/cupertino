@@ -17,6 +17,11 @@ extension Rest {
             filters.append(.init(.important, count: important.count))
         }
         
+        //reminder
+        if let reminder = res.reminder, reminder.count > 0 {
+            filters.append(.init(.reminder, count: reminder.count))
+        }
+        
         //highlights
         if let highlights = res.highlights, highlights.count > 0 {
             filters.append(.init(.highlights, count: highlights.count))
@@ -88,6 +93,7 @@ extension Rest {
         var file: Element?
         var duplicate: Element?
         var highlights: Element?
+        var reminder: Element?
         
         struct Element: Codable {
             var _id: String?

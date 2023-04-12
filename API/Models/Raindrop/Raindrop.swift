@@ -11,6 +11,7 @@ public struct Raindrop: Identifiable, Hashable {
     public var media = [Media]()
     public var type: RaindropType = .link
     public var tags = [String]()
+    public var reminder: Reminder?
     public var highlights = [Highlight]()
     public var created = Date()
     public var lastUpdate = Date()

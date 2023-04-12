@@ -73,7 +73,15 @@ extension RaindropForm.Fields: View {
                     Image(systemName: "number")
                 }
             }
-
+            
+            //reminder
+            DatePresetField(
+                selection: .init { raindrop.reminder?.date } set: { if let date = $0 { raindrop.reminder = .init(date) } else { raindrop.reminder = nil } },
+                in: .now...
+            ) {
+                Label(raindrop.reminder == nil ? "Add reminder" : "Reminder", systemImage: Filter.Kind.reminder.systemImage)
+            }
+            
             //highlights
             NavigationLink {
                 RaindropHighlights($raindrop)
