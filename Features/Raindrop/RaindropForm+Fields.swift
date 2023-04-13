@@ -75,11 +75,16 @@ extension RaindropForm.Fields: View {
             }
             
             //reminder
-            DatePresetField(
-                selection: .init { raindrop.reminder?.date } set: { if let date = $0 { raindrop.reminder = .init(date) } else { raindrop.reminder = nil } },
-                in: .now...
-            ) {
-                Label(raindrop.reminder == nil ? "Add reminder" : "Reminder", systemImage: Filter.Kind.reminder.systemImage)
+            ProGroup {
+                DatePresetField(
+                    selection: .init { raindrop.reminder?.date } set: { if let date = $0 { raindrop.reminder = .init(date) } else { raindrop.reminder = nil } },
+                    in: .now...
+                ) {
+                    Label(raindrop.reminder == nil ? "Add reminder" : "Reminder", systemImage: Filter.Kind.reminder.systemImage)
+                }
+            } free: {
+                Label("Reminder", systemImage: Filter.Kind.reminder.systemImage)
+                    .badge("Pro only")
             }
             
             //highlights

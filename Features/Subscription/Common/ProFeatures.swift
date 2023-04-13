@@ -12,6 +12,14 @@ struct ProFeatures: View {
             .tint(.indigo)
         
         Feature(
+            systemImage: "bell.square",
+            title: "Reminders",
+            description: "Alert you about your most time-sensitive bookmarks",
+            link: URL(string: "https://help.raindrop.io/reminders")!
+        )
+            .tint(.red)
+        
+        Feature(
             systemImage: "lock.square",
             title: "Permanent Library",
             description: "Even if a page you’ve saved is taken down, you’ll still have a copy of it",

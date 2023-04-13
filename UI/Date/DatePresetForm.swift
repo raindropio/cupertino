@@ -31,15 +31,14 @@ struct DatePresetForm: View {
                 }
             }
             
-            if let date = selection {
-                DatePicker(
-                    selection: .init { date } set: { selection = $0 },
-                    in: (minimumDate ?? .distantPast) ... (maximumDate ?? .distantFuture),
-                    displayedComponents: displayedComponents
-                ) {}
-                    .datePickerStyle(.graphical)
-            }
+            DatePicker(
+                selection: .init { selection ?? .now } set: { selection = $0 },
+                in: (minimumDate ?? .distantPast) ... (maximumDate ?? .distantFuture),
+                displayedComponents: displayedComponents
+            ) {}
+                .datePickerStyle(.graphical)
         }
             .backport.scrollBounceBehavior(.basedOnSize)
+            .animation(.default, value: selection)
     }
 }

@@ -1,6 +1,7 @@
 import SwiftUI
 import API
 import UI
+import Backport
 
 public struct SubscriptionOffer: View {
     @EnvironmentObject private var dispatch: Dispatcher
@@ -30,13 +31,15 @@ public struct SubscriptionOffer: View {
     public var body: some View {
         Group {
             #if canImport(UIKit)
-            form.toolbar {
-                ToolbarItem {
-                    ActionButton("Restore") {
-                        try await dispatch(SubscriptionAction.restore)
+            form
+                .backport.scrollBounceBehavior(.basedOnSize)
+                .toolbar {
+                    ToolbarItem {
+                        ActionButton("Restore") {
+                            try await dispatch(SubscriptionAction.restore)
+                        }
                     }
                 }
-            }
             #else
             ScrollView {
                 form
