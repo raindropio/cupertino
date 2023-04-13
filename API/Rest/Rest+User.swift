@@ -11,3 +11,15 @@ extension Rest {
         var user: User
     }
 }
+
+//MARK: - Pusher
+extension Rest {
+    public func userPusherAuthToken() async throws -> String {
+        let res: UserPusherAuthResponse = try await fetch.get("user/pusher/auth")
+        return res.token
+    }
+    
+    fileprivate struct UserPusherAuthResponse: Decodable {
+        var token: String
+    }
+}

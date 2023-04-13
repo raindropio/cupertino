@@ -3,6 +3,7 @@ import API
 import Features
 
 @main struct RaindropApp: App {
+    @UIApplicationDelegateAdaptor(AppDelegate.self) var appDelegate
     @StateObject private var store = Store()
 
     var body: some Scene {

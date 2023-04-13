@@ -40,6 +40,8 @@ struct SplitView: View {
             //sheets
             .collectionSheets()
             .tagSheets()
+            //pushes
+            .modifier(Pushes())
             //routing
             .modifier(ReceiveDeepLink(path: $path))
             .restoreSceneValue("app-path", value: $path)

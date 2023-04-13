@@ -65,6 +65,10 @@
 		76292CEA2951B86F000E16AA /* SettingsSubscription.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76292CE92951B86F000E16AA /* SettingsSubscription.swift */; };
 		76292CEC2951BC52000E16AA /* SettingsBrowser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76292CEB2951BC52000E16AA /* SettingsBrowser.swift */; };
 		76292CF82952F2CB000E16AA /* PreferredBrowser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76292CF72952F2CB000E16AA /* PreferredBrowser.swift */; };
+		7653AD2D29E6C0AB0046E654 /* PushNotifications in Frameworks */ = {isa = PBXBuildFile; productRef = 7653AD2C29E6C0AB0046E654 /* PushNotifications */; };
+		7653AD2F29E6C0D00046E654 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7653AD2E29E6C0D00046E654 /* AppDelegate.swift */; };
+		7653AD3129E6C44C0046E654 /* Pushes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7653AD3029E6C44C0046E654 /* Pushes.swift */; };
+		7653AD3429E6E1400046E654 /* PusherTokenProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7653AD3329E6E1400046E654 /* PusherTokenProvider.swift */; };
 		76570ADB29DB221E002E5BA1 /* AuthTFA.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76570ADA29DB221E002E5BA1 /* AuthTFA.swift */; };
 		765F23FE2991409500282298 /* Browser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 765F23FD2991409500282298 /* Browser.swift */; };
 		7673C0AA295DD3B8002D4229 /* SidebarScreen+Toolbar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7673C0A9295DD3B8002D4229 /* SidebarScreen+Toolbar.swift */; };
@@ -226,6 +230,9 @@
 		76292CEB2951BC52000E16AA /* SettingsBrowser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsBrowser.swift; sourceTree = "<group>"; };
 		76292CF72952F2CB000E16AA /* PreferredBrowser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreferredBrowser.swift; sourceTree = "<group>"; };
 		7639A6AE286889DB00A76FE9 /* UI */ = {isa = PBXFileReference; lastKnownFileType = text; path = UI; sourceTree = SOURCE_ROOT; };
+		7653AD2E29E6C0D00046E654 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		7653AD3029E6C44C0046E654 /* Pushes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Pushes.swift; sourceTree = "<group>"; };
+		7653AD3329E6E1400046E654 /* PusherTokenProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PusherTokenProvider.swift; sourceTree = "<group>"; };
 		76570ADA29DB221E002E5BA1 /* AuthTFA.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthTFA.swift; sourceTree = "<group>"; };
 		765F0DDB287EE0FB001E34CA /* App.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = App.plist; sourceTree = "<group>"; };
 		765F23FD2991409500282298 /* Browser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Browser.swift; sourceTree = "<group>"; };
@@ -326,6 +333,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				76F8755429D469DD007C5620 /* UI in Frameworks */,
+				7653AD2D29E6C0AB0046E654 /* PushNotifications in Frameworks */,
 				76EC67EA29D46A54007AE635 /* API in Frameworks */,
 				7697437429718A6100322290 /* Features in Frameworks */,
 				768CA1F7294CC10900AD7E62 /* StoreKit.framework in Frameworks */,
@@ -389,6 +397,15 @@
 				7600147529C75A3C00CD490C /* SettingsMacGeneral.swift */,
 			);
 			path = macOS;
+			sourceTree = "<group>";
+		};
+		7653AD3229E6E1280046E654 /* Pushes */ = {
+			isa = PBXGroup;
+			children = (
+				7653AD3029E6C44C0046E654 /* Pushes.swift */,
+				7653AD3329E6E1400046E654 /* PusherTokenProvider.swift */,
+			);
+			path = Pushes;
 			sourceTree = "<group>";
 		};
 		765F23FC2991408C00282298 /* Browser */ = {
@@ -497,7 +514,9 @@
 				769056EA2975364E0090C1EF /* Find */,
 				767AC111292514C500766998 /* Sidebar */,
 				767AC10F2925147E00766998 /* Settings */,
+				7653AD3229E6E1280046E654 /* Pushes */,
 				7685A194286868AC00A4BC3C /* App.swift */,
+				7653AD2E29E6C0D00046E654 /* AppDelegate.swift */,
 				76BFE369291E9F6B00DE9DB2 /* SplitView.swift */,
 				76BFE36A291E9F6B00DE9DB2 /* SplitViewPath.swift */,
 				76E51CE9299A8A1400FE7763 /* ReceiveDeepLink.swift */,
@@ -699,6 +718,7 @@
 				7697437329718A6100322290 /* Features */,
 				76F8755329D469DD007C5620 /* UI */,
 				76EC67E929D46A54007AE635 /* API */,
+				7653AD2C29E6C0AB0046E654 /* PushNotifications */,
 			);
 			productName = cupertino;
 			productReference = 7685A191286868AC00A4BC3C /* Raindrop.app */;
@@ -788,6 +808,7 @@
 			);
 			mainGroup = 7685A188286868AC00A4BC3C;
 			packageReferences = (
+				7653AD2B29E6C0AB0046E654 /* XCRemoteSwiftPackageReference "push-notifications-swift" */,
 			);
 			productRefGroup = 7685A192286868AC00A4BC3C /* Products */;
 			projectDirPath = "";
@@ -979,6 +1000,7 @@
 				76292CEA2951B86F000E16AA /* SettingsSubscription.swift in Sources */,
 				7618C96D29C073B600D4DE78 /* AuthSuccess.swift in Sources */,
 				768CA20129505A6E00AD7E62 /* AuthContinueWith+Apple.swift in Sources */,
+				7653AD3129E6C44C0046E654 /* Pushes.swift in Sources */,
 				76E51CEA299A8A1400FE7763 /* ReceiveDeepLink.swift in Sources */,
 				76BFE36F291E9F6B00DE9DB2 /* SplitViewPath.swift in Sources */,
 				761F6C3029A3AC99002919BC /* PermanentCopy.swift in Sources */,
@@ -988,10 +1010,12 @@
 				769056F229753E520090C1EF /* Folder+Toolbar.swift in Sources */,
 				768CA1F9294CC15600AD7E62 /* AuthSplash.swift in Sources */,
 				769056EC297536570090C1EF /* Find.swift in Sources */,
+				7653AD3429E6E1400046E654 /* PusherTokenProvider.swift in Sources */,
 				76BFE36E291E9F6B00DE9DB2 /* SplitView.swift in Sources */,
 				7685A195286868AC00A4BC3C /* App.swift in Sources */,
 				76E44C4229BA0E86009634C6 /* SettingsAppIcon.swift in Sources */,
 				769056F4297547C10090C1EF /* Folder+Status.swift in Sources */,
+				7653AD2F29E6C0D00046E654 /* AppDelegate.swift in Sources */,
 				76BFE370291E9F6B00DE9DB2 /* SettingsPath.swift in Sources */,
 				76154C8429C349F7002DDDEB /* PasteCommands.swift in Sources */,
 				768CA1FD294CCD5800AD7E62 /* AuthSignup.swift in Sources */,
@@ -1408,6 +1432,7 @@
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.productivity";
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
 				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "Upload photos to Raindrop.io (only after user select particular image)";
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				"INFOPLIST_KEY_UILaunchScreen_Generation[sdk=iphoneos*]" = YES;
 				"INFOPLIST_KEY_UILaunchScreen_Generation[sdk=iphonesimulator*]" = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
@@ -1452,6 +1477,7 @@
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.productivity";
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
 				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "Upload photos to Raindrop.io (only after user select particular image)";
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				"INFOPLIST_KEY_UILaunchScreen_Generation[sdk=iphoneos*]" = YES;
 				"INFOPLIST_KEY_UILaunchScreen_Generation[sdk=iphonesimulator*]" = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
@@ -1661,6 +1687,17 @@
 		};
 /* End XCConfigurationList section */
 
+/* Begin XCRemoteSwiftPackageReference section */
+		7653AD2B29E6C0AB0046E654 /* XCRemoteSwiftPackageReference "push-notifications-swift" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/pusher/push-notifications-swift";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 4.0.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
 /* Begin XCSwiftPackageProductDependency section */
 		76154B7E29C20495002DDDEB /* API */ = {
 			isa = XCSwiftPackageProductDependency;
@@ -1685,6 +1722,11 @@
 		7621511229CC4E2B009314B7 /* UI */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = UI;
+		};
+		7653AD2C29E6C0AB0046E654 /* PushNotifications */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 7653AD2B29E6C0AB0046E654 /* XCRemoteSwiftPackageReference "push-notifications-swift" */;
+			productName = PushNotifications;
 		};
 		7697437329718A6100322290 /* Features */ = {
 			isa = XCSwiftPackageProductDependency;
