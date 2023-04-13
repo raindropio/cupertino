@@ -4,6 +4,7 @@ import API
 
 class AppDelegate: NSObject, UIApplicationDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
+        AppPushes.shared.start()
         PushNotifications.shared.start(instanceId: Constants.pusherInstanceId)
         return true
     }

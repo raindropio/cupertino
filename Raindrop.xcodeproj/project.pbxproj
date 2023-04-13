@@ -67,8 +67,7 @@
 		76292CF82952F2CB000E16AA /* PreferredBrowser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76292CF72952F2CB000E16AA /* PreferredBrowser.swift */; };
 		7653AD2D29E6C0AB0046E654 /* PushNotifications in Frameworks */ = {isa = PBXBuildFile; productRef = 7653AD2C29E6C0AB0046E654 /* PushNotifications */; };
 		7653AD2F29E6C0D00046E654 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7653AD2E29E6C0D00046E654 /* AppDelegate.swift */; };
-		7653AD3129E6C44C0046E654 /* Pushes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7653AD3029E6C44C0046E654 /* Pushes.swift */; };
-		7653AD3429E6E1400046E654 /* PusherTokenProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7653AD3329E6E1400046E654 /* PusherTokenProvider.swift */; };
+		7653AD3129E6C44C0046E654 /* ReceivePush.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7653AD3029E6C44C0046E654 /* ReceivePush.swift */; };
 		76570ADB29DB221E002E5BA1 /* AuthTFA.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76570ADA29DB221E002E5BA1 /* AuthTFA.swift */; };
 		765F23FE2991409500282298 /* Browser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 765F23FD2991409500282298 /* Browser.swift */; };
 		7673C0AA295DD3B8002D4229 /* SidebarScreen+Toolbar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7673C0A9295DD3B8002D4229 /* SidebarScreen+Toolbar.swift */; };
@@ -99,6 +98,7 @@
 		76B16BD02930E6EB00032D7D /* Main.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76B16BCF2930E6EB00032D7D /* Main.swift */; };
 		76B16BD42930F34D00032D7D /* API in Frameworks */ = {isa = PBXBuildFile; productRef = 76B16BD32930F34D00032D7D /* API */; };
 		76B16BD62930F43900032D7D /* Share.js in Resources */ = {isa = PBXBuildFile; fileRef = 76B16BD52930F43900032D7D /* Share.js */; };
+		76B4AC5029E7F19E00B9C4E8 /* AppPushes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76B4AC4F29E7F19E00B9C4E8 /* AppPushes.swift */; };
 		76B6737E29928308007A412A /* Browse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76B6737D29928308007A412A /* Browse.swift */; };
 		76B6738029928AB1007A412A /* Browser+Toolbar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76B6737F29928AB1007A412A /* Browser+Toolbar.swift */; };
 		76B6738229928FE6007A412A /* ReaderAppearance.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76B6738129928FE6007A412A /* ReaderAppearance.swift */; };
@@ -231,8 +231,7 @@
 		76292CF72952F2CB000E16AA /* PreferredBrowser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreferredBrowser.swift; sourceTree = "<group>"; };
 		7639A6AE286889DB00A76FE9 /* UI */ = {isa = PBXFileReference; lastKnownFileType = text; path = UI; sourceTree = SOURCE_ROOT; };
 		7653AD2E29E6C0D00046E654 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		7653AD3029E6C44C0046E654 /* Pushes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Pushes.swift; sourceTree = "<group>"; };
-		7653AD3329E6E1400046E654 /* PusherTokenProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PusherTokenProvider.swift; sourceTree = "<group>"; };
+		7653AD3029E6C44C0046E654 /* ReceivePush.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReceivePush.swift; sourceTree = "<group>"; };
 		76570ADA29DB221E002E5BA1 /* AuthTFA.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthTFA.swift; sourceTree = "<group>"; };
 		765F0DDB287EE0FB001E34CA /* App.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = App.plist; sourceTree = "<group>"; };
 		765F23FD2991409500282298 /* Browser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Browser.swift; sourceTree = "<group>"; };
@@ -269,6 +268,7 @@
 		76B16BCF2930E6EB00032D7D /* Main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Main.swift; sourceTree = "<group>"; };
 		76B16BD52930F43900032D7D /* Share.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = Share.js; sourceTree = "<group>"; };
 		76B16BDA29310D9500032D7D /* Share.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Share.entitlements; sourceTree = "<group>"; };
+		76B4AC4F29E7F19E00B9C4E8 /* AppPushes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppPushes.swift; sourceTree = "<group>"; };
 		76B6737D29928308007A412A /* Browse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Browse.swift; sourceTree = "<group>"; };
 		76B6737F29928AB1007A412A /* Browser+Toolbar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Browser+Toolbar.swift"; sourceTree = "<group>"; };
 		76B6738129928FE6007A412A /* ReaderAppearance.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReaderAppearance.swift; sourceTree = "<group>"; };
@@ -399,15 +399,6 @@
 			path = macOS;
 			sourceTree = "<group>";
 		};
-		7653AD3229E6E1280046E654 /* Pushes */ = {
-			isa = PBXGroup;
-			children = (
-				7653AD3029E6C44C0046E654 /* Pushes.swift */,
-				7653AD3329E6E1400046E654 /* PusherTokenProvider.swift */,
-			);
-			path = Pushes;
-			sourceTree = "<group>";
-		};
 		765F23FC2991408C00282298 /* Browser */ = {
 			isa = PBXGroup;
 			children = (
@@ -514,12 +505,13 @@
 				769056EA2975364E0090C1EF /* Find */,
 				767AC111292514C500766998 /* Sidebar */,
 				767AC10F2925147E00766998 /* Settings */,
-				7653AD3229E6E1280046E654 /* Pushes */,
 				7685A194286868AC00A4BC3C /* App.swift */,
 				7653AD2E29E6C0D00046E654 /* AppDelegate.swift */,
+				76B4AC4F29E7F19E00B9C4E8 /* AppPushes.swift */,
 				76BFE369291E9F6B00DE9DB2 /* SplitView.swift */,
 				76BFE36A291E9F6B00DE9DB2 /* SplitViewPath.swift */,
 				76E51CE9299A8A1400FE7763 /* ReceiveDeepLink.swift */,
+				7653AD3029E6C44C0046E654 /* ReceivePush.swift */,
 				7685A19A286868AD00A4BC3C /* App.entitlements */,
 				765F0DDB287EE0FB001E34CA /* App.plist */,
 				7685A198286868AD00A4BC3C /* Assets.xcassets */,
@@ -973,6 +965,7 @@
 				76B6738029928AB1007A412A /* Browser+Toolbar.swift in Sources */,
 				768CA20529506D7A00AD7E62 /* AuthSplash+Slide.swift in Sources */,
 				7673C0AA295DD3B8002D4229 /* SidebarScreen+Toolbar.swift in Sources */,
+				76B4AC5029E7F19E00B9C4E8 /* AppPushes.swift in Sources */,
 				769056F62975499D0090C1EF /* Nesteds.swift in Sources */,
 				768CA1FB294CC17800AD7E62 /* AuthLogIn.swift in Sources */,
 				768CA1FF2950420D00AD7E62 /* AuthContinueWith.swift in Sources */,
@@ -1000,7 +993,7 @@
 				76292CEA2951B86F000E16AA /* SettingsSubscription.swift in Sources */,
 				7618C96D29C073B600D4DE78 /* AuthSuccess.swift in Sources */,
 				768CA20129505A6E00AD7E62 /* AuthContinueWith+Apple.swift in Sources */,
-				7653AD3129E6C44C0046E654 /* Pushes.swift in Sources */,
+				7653AD3129E6C44C0046E654 /* ReceivePush.swift in Sources */,
 				76E51CEA299A8A1400FE7763 /* ReceiveDeepLink.swift in Sources */,
 				76BFE36F291E9F6B00DE9DB2 /* SplitViewPath.swift in Sources */,
 				761F6C3029A3AC99002919BC /* PermanentCopy.swift in Sources */,
@@ -1010,7 +1003,6 @@
 				769056F229753E520090C1EF /* Folder+Toolbar.swift in Sources */,
 				768CA1F9294CC15600AD7E62 /* AuthSplash.swift in Sources */,
 				769056EC297536570090C1EF /* Find.swift in Sources */,
-				7653AD3429E6E1400046E654 /* PusherTokenProvider.swift in Sources */,
 				76BFE36E291E9F6B00DE9DB2 /* SplitView.swift in Sources */,
 				7685A195286868AC00A4BC3C /* App.swift in Sources */,
 				76E44C4229BA0E86009634C6 /* SettingsAppIcon.swift in Sources */,
