@@ -76,7 +76,9 @@ extension TextTokenField.Native {
         var available = base.suggestions.filter { !base.value.contains($0) }
         let filter = text?.localizedLowercase.trimmingCharacters(in: .whitespacesAndNewlines) ?? ""
         if !filter.isEmpty {
-            available = available.filter { $0.localizedLowercase.contains(filter) }
+            available = available
+                .filter { $0.localizedLowercase.contains(filter) }
+                .sorted { $0.localizedLowercase.range(of: filter)!.lowerBound < $1.localizedLowercase.range(of: filter)!.lowerBound }
         }
         
         keyboardButtons.update(available)

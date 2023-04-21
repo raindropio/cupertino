@@ -199,6 +199,9 @@ extension Fetch {
         components.path = path
         components.queryItems = query
         
+        //fix `+` query encoding
+        components.percentEncodedQuery = components.percentEncodedQuery?.replacingOccurrences(of: "+", with: "%2B")
+        
         guard let url = components.url(relativeTo: base)
         else { throw FetchError.invalidRequest(nil) }
         
