@@ -49,7 +49,7 @@ extension SubscriptionReducer {
         if let action = action as? UserAction {
             switch action {
             case .reloaded(_):
-                return load(state: &state)
+                return A.load
                 
             default:
                 break

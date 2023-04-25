@@ -3,7 +3,7 @@ import Foundation
 public struct ConfigState: ReduxState {
     public init() {}
     
-    @Cached("cfg-raindrops") public var raindrops = ConfigRaindrops()
+    @Persisted("cfg-raindrops") public var raindrops = ConfigRaindrops()
 }
 
 extension ConfigState: Codable {

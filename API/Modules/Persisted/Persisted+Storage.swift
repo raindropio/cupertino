@@ -1,7 +1,7 @@
 import Foundation
 import Combine
 
-extension Cached {
+extension Persisted {
     class Storage<Value: Codable & Equatable>: Equatable {
         static func == (lhs: Storage<Value>, rhs: Storage<Value>) -> Bool {
             true
@@ -11,11 +11,21 @@ extension Cached {
         private let decoder = JSONDecoder()
         private let publisher: PassthroughSubject<Value, Never> = PassthroughSubject()
         private var bag = Set<AnyCancellable>()
-        private var fileUrl: URL
+        private var fileUrl: URL?
         
         init(_ key: String) {
-            fileUrl = FileManager.default.containerURL(forSecurityApplicationGroupIdentifier: Constants.appGroupName)!
-                .appendingPathComponent("Library/Caches/\(key).json", isDirectory: false)
+            let folder = FileManager.default.containerURL(forSecurityApplicationGroupIdentifier: Constants.appGroupName)!
+                .appendingPathComponent("Library/Persisted")
+
+            do {
+                try FileManager.default.createDirectory(
+                    at: folder,
+                    withIntermediateDirectories: false,
+                    attributes: nil
+                )
+            } catch CocoaError.fileWriteFileExists {} catch { return }
+
+            fileUrl = folder.appendingPathComponent("\(key).json", isDirectory: false)
             
             publisher
                 .subscribe(on: DispatchQueue.global(qos: .background))
@@ -28,6 +38,7 @@ extension Cached {
         
         func load(transform: ((Value) -> Value)? = nil) -> Value? {
             guard
+                let fileUrl,
                 let data = FileManager.default.contents(atPath: fileUrl.path),
                 let decoded = try? decoder.decode(Value.self, from: data)
             else { return nil }
@@ -44,6 +55,7 @@ extension Cached {
         }
         
         private func persist(_ value: Value) {
+            guard let fileUrl else { return }
             try? FileManager.default.removeItem(at: fileUrl)
             
             if let encoded = try? encoder.encode(value) {

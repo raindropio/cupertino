@@ -1,11 +1,11 @@
 import Foundation
 
 public struct FiltersState: ReduxState {
-    @Cached("ffs-simple") var simple = [FindBy: [Filter]]()
-    @Cached("ffs-tags") var tags = [FindBy: [Filter]]()
-    @Cached("ffs-created") var created = [FindBy: [Filter]]()
+    @Persisted("ffs-simple") var simple = [FindBy: [Filter]]()
+    @Persisted("ffs-tags") var tags = [FindBy: [Filter]]()
+    @Persisted("ffs-created") var created = [FindBy: [Filter]]()
     
-    @Cached("ffs-sort") public var sort = TagsSort.title
+    @Persisted("ffs-sort") public var sort = TagsSort.title
     public var animation = UUID()
     
     public init() {}

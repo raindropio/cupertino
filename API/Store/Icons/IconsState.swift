@@ -1,7 +1,7 @@
 import Foundation
 
 public struct IconsState: ReduxState {
-    @Cached("ico-icons") var icons = [String: [URL]]()
+    @Persisted("ico-icons") var icons = [String: [URL]]()
     var loading = [String: Bool]()
     
     public init() {}

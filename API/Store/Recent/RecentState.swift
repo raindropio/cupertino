@@ -1,8 +1,8 @@
 import Foundation
 
 public struct RecentState: ReduxState {
-    @Cached("res-search") var search = [String]()
-    @Cached("res-tags") public var tags = [String]()
+    @Persisted("res-search") var search = [String]()
+    @Persisted("res-tags") public var tags = [String]()
     public var animation = UUID()
 
     public init() { }

@@ -4,10 +4,10 @@ import SwiftUI
 public struct RaindropsState: ReduxState {
     typealias Segments = [ FindBy : Segment ]
 
-    @Cached("rns-items") var items = [ Raindrop.ID: Raindrop ]()
-    @Cached("rns-segments", restore) var segments = Segments()
-    @Cached("rns-links") var lookups = [ URL: Raindrop.ID ]()
-    @Cached("rns-suggestions") var suggestions = [ URL: RaindropSuggestions ]()
+    @Persisted("rns-items") var items = [ Raindrop.ID: Raindrop ]()
+    @Persisted("rns-segments", restore) var segments = Segments()
+    @Persisted("rns-links") var lookups = [ URL: Raindrop.ID ]()
+    @Persisted("rns-suggestions") var suggestions = [ URL: RaindropSuggestions ]()
     public var animation = UUID()
 
     public init() {}

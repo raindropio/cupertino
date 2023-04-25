@@ -1,5 +1,5 @@
 public struct UserState: ReduxState {
-    @Cached("us-me") public var me: User? = nil
+    @Persisted("us-me") public var me: User? = nil
     
     public init() { }
     

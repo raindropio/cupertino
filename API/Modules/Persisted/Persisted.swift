@@ -1,7 +1,7 @@
 import Foundation
 
 @propertyWrapper
-public struct Cached<Value: Codable & Equatable>: Equatable {
+public struct Persisted<Value: Codable & Equatable>: Equatable {
     typealias Restore = ((Value) -> Value)?
 
     private var _value: Value

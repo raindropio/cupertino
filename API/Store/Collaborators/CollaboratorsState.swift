@@ -1,7 +1,7 @@
 import Foundation
 
 public struct CollaboratorsState: ReduxState {
-    @Cached("clb-users") var users = [UserCollection.ID: [Collaborator]]()
+    @Persisted("clb-users") var users = [UserCollection.ID: [Collaborator]]()
     var loading = [UserCollection.ID: Bool]()
     
     public init() {}

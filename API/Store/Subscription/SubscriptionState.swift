@@ -1,7 +1,7 @@
 import StoreKit
 
 public struct SubscriptionState: ReduxState {
-    @Cached("su-cu") public var current: Subscription? = nil
+    @Persisted("su-cu") public var current: Subscription? = nil
     public var products: [Product] = []
     
     public init() { }
