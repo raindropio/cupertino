@@ -33,10 +33,13 @@ extension SettingsIOS {
                         }
                             .listItemTint(.purple)
                         
-                        NavigationLink(value: SettingsPath.Screen.appIcon) {
-                            Label("App Icon", systemImage: "square.on.circle").tint(.primary)
-                        }
+                        //Crashing on iPad
+                        if isPhone {
+                            NavigationLink(value: SettingsPath.Screen.appIcon) {
+                                Label("App Icon", systemImage: "square.on.circle").tint(.primary)
+                            }
                             .listItemTint(.indigo)
+                        }
                         
                         SettingsBrowser()
                             .listItemTint(.cyan)
