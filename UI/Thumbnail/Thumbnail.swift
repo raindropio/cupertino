@@ -8,6 +8,8 @@ fileprivate let scaleFactor: CGFloat = NSScreen.main?.backingScaleFactor ?? 1
 fileprivate let scaleFactor: CGFloat = 1
 #endif
 
+fileprivate var aspectCache: [URL: CGFloat] = [:]
+
 public struct Thumbnail {
     var url: URL?
     var width: CGFloat?
@@ -75,6 +77,17 @@ extension Thumbnail {
         }
         return []
     }
+    
+    private func onCompletion(_ result: Result<ImageResponse, Error>) {
+        switch result {
+        case .success(let res):
+            if aspectRatio == nil, let url {
+                aspectCache[url] = res.image.size.width / res.image.size.height
+            }
+        default:
+            return
+        }
+    }
 }
 
 extension Thumbnail: View {
@@ -91,9 +104,12 @@ extension Thumbnail: View {
                     if (width != nil && height != nil) || aspectRatio != nil {
                         Color.primary.opacity(0.1)
                     }
+                } else if aspectRatio == nil, let url, let ar = aspectCache[url] {                    
+                    Rectangle().aspectRatio(ar, contentMode: .fit)
                 }
             }
                 .onDisappear(.lowerPriority)
+                .onCompletion(onCompletion)
                 .layoutPriority(-1)
             
             Group {
