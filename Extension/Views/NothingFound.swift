@@ -1,6 +1,7 @@
 import SwiftUI
 import UI
 import API
+import Backport
 
 struct NothingFound: View {
     @EnvironmentObject private var service: ExtensionService
@@ -14,5 +15,6 @@ struct NothingFound: View {
             }
         }
             .presentationDetents([.medium])
+            .backport.presentationBackground(.regularMaterial)
     }
 }

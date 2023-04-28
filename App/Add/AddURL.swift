@@ -30,6 +30,7 @@ struct AddURL: View {
             }
                 .labelsHidden()
                 .backport.defaultFocus($focused, true)
+                .backport.scrollBounceBehavior(.basedOnSize)
                 .onSubmit(saveUrl)
                 #if canImport(UIKit)
                 .navigationTitle("Add link")

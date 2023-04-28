@@ -42,21 +42,26 @@ extension AuthTFA {
             NavigationStack {
                 Form {
                     Section {
-                        TextField("", text: $code, prompt: Text("Authenticator app code"))
+                        TextField("", text: $code, prompt: Text("Code"))
                             .textContentType(.oneTimeCode)
                             .keyboardType(.numberPad)
+                            .font(.title)
+                            .multilineTextAlignment(.center)
+                            .padding(.vertical, 6)
                             .backport.focused($focused)
                     }
                     
-                    SubmitButton("Log in")
-                        .disabled(code.isEmpty)
+                    SubmitButton("Continue")
+                        .disabled(code.count != 6)
                     
                     Section {
                         SafariLink(role: .destructive, destination: URL(string: "https://app.raindrop.io/account/tfa/revoke/\(token)")!) {
-                            Text("Can't access your 2FA device?").frame(maxWidth: .infinity)
+                            Text("Can't access your 2FA device/app?").frame(maxWidth: .infinity)
                         }
                     }
+                        .listRowBackground(Color.clear)
                 }
+                    .backport.scrollBounceBehavior(.basedOnSize)
                     .backport.defaultFocus($focused, true)
                     .autoSubmit(code.count == 6)
                     .onSubmit {
@@ -64,6 +69,7 @@ extension AuthTFA {
                         focused = true
                     }
                     .navigationTitle("Two-Factor Auth")
+                    .navigationBarTitleDisplayMode(.inline)
                     .toolbar {
                         ToolbarItem(placement: .cancellationAction) {
                             Button("Cancel", action: dismiss.callAsFunction)

@@ -56,6 +56,7 @@ struct AuthLogIn: View {
                 .animation(.default, value: form.isEmpty)
         }
             .backport.defaultFocus($focus, .email)
+            .backport.scrollBounceBehavior(.basedOnSize)
             .onSubmit(submit)
             #if canImport(UIKit)
             .navigationBarTitleDisplayMode(.inline)

@@ -6,21 +6,33 @@ final class ExtensionService: ObservableObject {
     private weak var context: NSExtensionContext?
     
     let extensionType: ExtensionType = .detect()
-    @Published var loaded = false
     @Published var preprocessed: NSDictionary?
     @Published var items = [NSItemProvider]()
     
     init(_ context: NSExtensionContext? = nil) {
-        DispatchQueue.main.asyncAfter(deadline: .now() + 3) { [weak self] in
-            guard self?.loaded == false else { return }
-            fatalError("Extension took too much time to load")
+        self.context = context
+    }
+    
+    @Sendable
+    func load() async {        
+        guard let context else {
+            fatalError("No extension context")
         }
         
-        self.context = context
-
-        Task {
-            defer { loaded = true }
-            await load()
+        for input in context.inputItems {
+            guard let input = input as? NSExtensionItem else { continue }
+            guard let attachments = input.attachments else { continue }
+                        
+            for attachment in attachments {
+                //preprocessed javascript
+                if attachment.hasItemConformingToTypeIdentifier(UTType.propertyList.identifier) {
+                    await loadPreprocessed(attachment)
+                    return
+                }
+                else {
+                    items.append(attachment)
+                }
+            }
         }
     }
     
@@ -56,28 +68,6 @@ enum ExtensionType {
 }
 
 extension ExtensionService {
-    private func load() async {
-        guard let context else {
-            fatalError("No extension context")
-        }
-        
-        for input in context.inputItems {
-            guard let input = input as? NSExtensionItem else { continue }
-            guard let attachments = input.attachments else { continue }
-                        
-            for attachment in attachments {
-                //preprocessed javascript
-                if attachment.hasItemConformingToTypeIdentifier(UTType.propertyList.identifier) {
-                    await loadPreprocessed(attachment)
-                    return
-                }
-                else {
-                    items.append(attachment)
-                }
-            }
-        }
-    }
-    
     private func loadPreprocessed(_ attachment: NSItemProvider) async {
         let item = try? await attachment.loadItem(forTypeIdentifier: UTType.propertyList.identifier)
         if let item = item as? NSDictionary,

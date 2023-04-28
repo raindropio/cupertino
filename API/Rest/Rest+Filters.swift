@@ -113,7 +113,7 @@ extension Rest {
         }
         
         let _: ResultResponse = try await fetch.put(
-            "tags",
+            "tags/0",
             body: TagsUpdateRequest(tags: tags, replace: newName)
         )
     }
@@ -132,7 +132,7 @@ extension Rest {
         }
         
         let _: ResultResponse = try await fetch.delete(
-            "tags",
+            "tags/0",
             body: TagsDeleteRequest(tags: tags)
         )
     }
