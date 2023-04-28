@@ -27,6 +27,9 @@ extension AuthReducer {
             case .apple(let authorization):
                 try await apple(state: state, authorization: authorization)
                 
+            case .google(let accessToken):
+                try await google(state: state, accessToken: accessToken)
+                
             case .jwt(let callbackUrl):
                 try await jwt(state: state, callbackUrl: callbackUrl)
                 

@@ -38,6 +38,7 @@ extension AuthContinueWith: View {
         Section {
             HStack(spacing: 16) {
                 Apple(action: process)
+                Google(action: process)
                 JWT(action: process)
             }
         }

@@ -9,6 +9,7 @@ public enum AuthAction: ReduxAction {
     case signup(AuthSignupRequest)
     case logout
     case apple(ASAuthorization)
+    case google(String)
     case jwt(URL)
     case tfa(token: String, code: String)
 }

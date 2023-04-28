@@ -2,6 +2,10 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
+	<key>GIDClientID</key>
+	<string>685439359098-aeteqkdclrmjollpcb8v6rg04ajhq9p1.apps.googleusercontent.com</string>
+	<key>GIDServerClientID</key>
+	<string>685439359098-o4gtsi4d97buj0v0124p3uledd21n3n5.apps.googleusercontent.com</string>
 	<key>CFBundleURLTypes</key>
 	<array>
 		<dict>
@@ -12,6 +16,16 @@
 			<key>CFBundleURLSchemes</key>
 			<array>
 				<string>raindrop</string>
+			</array>
+		</dict>
+		<dict>
+			<key>CFBundleTypeRole</key>
+			<string>Editor</string>
+			<key>CFBundleURLName</key>
+			<string>google-auth</string>
+			<key>CFBundleURLSchemes</key>
+			<array>
+				<string>com.googleusercontent.apps.685439359098-aeteqkdclrmjollpcb8v6rg04ajhq9p1</string>
 			</array>
 		</dict>
 	</array>

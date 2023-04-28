@@ -80,6 +80,25 @@ extension Rest {
     }
 }
 
+//MARK: - Google
+extension Rest {
+    public func authGoogle(accessToken: String) async throws {
+        let res: AuthResponse = try await fetch.get(
+            "auth/google/native",
+            query: [
+                .init(name: "access_token", value: accessToken)
+            ]
+        )
+        
+        if let tfa = res.tfa {
+            throw RestError.tfaRequired(token: tfa)
+        }
+        
+        guard res.result == true
+        else { throw RestError.unauthorized }
+    }
+}
+
 //MARK: - Native
 extension Rest {
     public enum AuthNativeProvider: String {

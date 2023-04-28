@@ -26,10 +26,6 @@ extension AuthContinueWith {
             Menu {
                 Button("Continue with") {}.disabled(true)
                 
-                Button { start(.google) } label: {
-                    Label("Google", systemImage: "g.circle.fill")
-                }
-                
                 Button { start(.facebook) } label: {
                     Label("Facebook", image: "facebook-circle-fill")
                 }

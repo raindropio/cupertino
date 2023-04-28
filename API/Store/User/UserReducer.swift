@@ -23,7 +23,7 @@ extension UserReducer {
         //Auth
         if let action = action as? AuthAction {
             switch action {
-            case .login(_), .apple(_), .jwt(_), .tfa(_, _):
+            case .login(_), .apple(_), .google(_), .jwt(_), .tfa(_, _):
                 return A.reload
                 
             case .logout:

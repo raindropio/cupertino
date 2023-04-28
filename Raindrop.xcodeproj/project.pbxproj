@@ -132,6 +132,8 @@
 		76F8755429D469DD007C5620 /* UI in Frameworks */ = {isa = PBXBuildFile; productRef = 76F8755329D469DD007C5620 /* UI */; };
 		76F8755629D46A09007C5620 /* UI in Frameworks */ = {isa = PBXBuildFile; productRef = 76F8755529D46A09007C5620 /* UI */; };
 		76F8755829D46A0E007C5620 /* Features in Frameworks */ = {isa = PBXBuildFile; productRef = 76F8755729D46A0E007C5620 /* Features */; };
+		76FECCBF29FBDA3B00639D39 /* AuthContinueWith+Google.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76FECCBE29FBDA3B00639D39 /* AuthContinueWith+Google.swift */; };
+		76FECCC129FBDA9A00639D39 /* SignInWithGoogle in Frameworks */ = {isa = PBXBuildFile; productRef = 76FECCC029FBDA9A00639D39 /* SignInWithGoogle */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -279,6 +281,7 @@
 		76BFE36A291E9F6B00DE9DB2 /* SplitViewPath.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SplitViewPath.swift; sourceTree = "<group>"; };
 		76BFE36B291E9F6B00DE9DB2 /* SettingsPath.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsPath.swift; sourceTree = "<group>"; };
 		76BFE36C291E9F6B00DE9DB2 /* AuthScreen.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuthScreen.swift; sourceTree = "<group>"; };
+		76D00FB329FBD76A005BDD38 /* SignInWithGoogle */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = SignInWithGoogle; sourceTree = "<group>"; };
 		76D880DC2930E1FB00D43AD9 /* Share iOS.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = "Share iOS.appex"; sourceTree = BUILT_PRODUCTS_DIR; };
 		76D880DE2930E1FB00D43AD9 /* ExtensionController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtensionController.swift; sourceTree = "<group>"; };
 		76D880E32930E1FB00D43AD9 /* Share.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Share.plist; sourceTree = "<group>"; };
@@ -301,6 +304,7 @@
 		76F282BB2934C76A00D00363 /* Receive.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Receive.swift; sourceTree = "<group>"; };
 		76F6D12229BF1B84009E7BA2 /* SettingsIOS.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsIOS.swift; sourceTree = "<group>"; };
 		76F6D12429BF26EA009E7BA2 /* SettingsIOS+Sidebar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SettingsIOS+Sidebar.swift"; sourceTree = "<group>"; };
+		76FECCBE29FBDA3B00639D39 /* AuthContinueWith+Google.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AuthContinueWith+Google.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -335,6 +339,7 @@
 				76F8755429D469DD007C5620 /* UI in Frameworks */,
 				7653AD2D29E6C0AB0046E654 /* PushNotifications in Frameworks */,
 				76EC67EA29D46A54007AE635 /* API in Frameworks */,
+				76FECCC129FBDA9A00639D39 /* SignInWithGoogle in Frameworks */,
 				7697437429718A6100322290 /* Features in Frameworks */,
 				768CA1F7294CC10900AD7E62 /* StoreKit.framework in Frameworks */,
 			);
@@ -440,6 +445,7 @@
 				7618C96C29C073B600D4DE78 /* AuthSuccess.swift */,
 				768CA1FE2950420D00AD7E62 /* AuthContinueWith.swift */,
 				768CA20029505A6E00AD7E62 /* AuthContinueWith+Apple.swift */,
+				76FECCBE29FBDA3B00639D39 /* AuthContinueWith+Google.swift */,
 				768CA20229505AD600AD7E62 /* AuthContinueWith+JWT.swift */,
 				76570ADA29DB221E002E5BA1 /* AuthTFA.swift */,
 			);
@@ -478,6 +484,7 @@
 				7685A1AC286880F600A4BC3C /* API */,
 				76E08B6929A3976000B3202D /* Backport */,
 				7639A6AE286889DB00A76FE9 /* UI */,
+				76D00FB329FBD76A005BDD38 /* SignInWithGoogle */,
 				7685A192286868AC00A4BC3C /* Products */,
 				7685A1AD2868810D00A4BC3C /* Frameworks */,
 			);
@@ -711,6 +718,7 @@
 				76F8755329D469DD007C5620 /* UI */,
 				76EC67E929D46A54007AE635 /* API */,
 				7653AD2C29E6C0AB0046E654 /* PushNotifications */,
+				76FECCC029FBDA9A00639D39 /* SignInWithGoogle */,
 			);
 			productName = cupertino;
 			productReference = 7685A191286868AC00A4BC3C /* Raindrop.app */;
@@ -976,6 +984,7 @@
 				7600147429C75A3200CD490C /* SettingsAccount.swift in Sources */,
 				76E44C4A29BB1380009634C6 /* SettingsExtensions+Safari.swift in Sources */,
 				76292CE82951B413000E16AA /* SettingsWebApp.swift in Sources */,
+				76FECCBF29FBDA3B00639D39 /* AuthContinueWith+Google.swift in Sources */,
 				769056F0297539080090C1EF /* Folder+Title.swift in Sources */,
 				76E44C4029BA0D24009634C6 /* SettingsExtensions.swift in Sources */,
 				76F6D12529BF26EA009E7BA2 /* SettingsIOS+Sidebar.swift in Sources */,
@@ -1338,7 +1347,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				MARKETING_VERSION = 5.0.35;
+				MARKETING_VERSION = 5.0.36;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -1393,7 +1402,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				MARKETING_VERSION = 5.0.35;
+				MARKETING_VERSION = 5.0.36;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SWIFT_COMPILATION_MODE = wholemodule;
@@ -1741,6 +1750,10 @@
 		76F8755729D46A0E007C5620 /* Features */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = Features;
+		};
+		76FECCC029FBDA9A00639D39 /* SignInWithGoogle */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = SignInWithGoogle;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};
