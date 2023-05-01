@@ -1,9 +1,16 @@
 import UIKit
 import PushNotifications
 import API
+import Sentry
 
 class AppDelegate: NSObject, UIApplicationDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
+        SentrySDK.start { options in
+            options.dsn = Constants.sentryDsn
+            //options.debug = true
+            options.tracesSampleRate = 0.1
+        }
+        
         AppPushes.shared.start()
         PushNotifications.shared.start(instanceId: Constants.pusherInstanceId)
         return true
