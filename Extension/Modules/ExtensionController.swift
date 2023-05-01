@@ -11,8 +11,9 @@ class ExtensionController: UIViewController {
         //sentry
         SentrySDK.start { options in
             options.dsn = Constants.sentryDsn
-            options.debug = true
+            //options.debug = true
             options.tracesSampleRate = 0.1
+            options.enableCaptureFailedRequests = false
         }
         
         //Appearance

@@ -9,6 +9,7 @@ class AppDelegate: NSObject, UIApplicationDelegate {
             options.dsn = Constants.sentryDsn
             //options.debug = true
             options.tracesSampleRate = 0.1
+            options.enableCaptureFailedRequests = false
         }
         
         AppPushes.shared.start()

@@ -6,7 +6,6 @@ public struct RaindropsState: ReduxState {
 
     @Persisted("rns-items") var items = [ Raindrop.ID: Raindrop ]()
     @Persisted("rns-segments", restore) var segments = Segments()
-    @Persisted("rns-links") var lookups = [ URL: Raindrop.ID ]()
     @Persisted("rns-suggestions") var suggestions = [ URL: RaindropSuggestions ]()
     public var animation = UUID()
 
@@ -19,21 +18,13 @@ extension RaindropsState {
     }
     
     public func item(_ url: URL) -> Raindrop? {
-        let id = lookups[url.compact]        
-        guard let id else { return nil }
-        return items[id]
+        let compact = url.compact
+        return items.first {
+            $1.link.compact == compact
+        }?.value
     }
     
     public func suggestions(_ url: URL) -> RaindropSuggestions {
         suggestions[url.compact] ?? .init()
-    }
-    
-    public func waitLookup(_ url: URL) -> Bool {
-        //known id, but no item
-        if let id = lookups[url.compact], items[id] == nil {
-            return true
-        }
-        //no lookups
-        return lookups.isEmpty
     }
 }

@@ -43,9 +43,6 @@ extension RaindropsReducer {
             case .updated(let raindrop):
                 updated(state: &state, raindrop: raindrop)
                 
-            case .linksLoaded(let lookups):
-                linksLoaded(state: &state, lookups: lookups)
-                
             //Delete
             case .delete(let id):
                 return A.deleteMany(.some([id]))
@@ -106,38 +103,35 @@ extension RaindropsReducer {
         //Raindrops
         if let action = action as? A {
             switch action {
-                //Load
+            //Load
             case .reload(let find):
                 return await reload(state: state, find: find)
                 
-                //More
+            //More
             case .moreLoad(let find):
                 return await moreLoad(state: state, find: find)
                 
-                //Update
+            //Update
             case .update(let modified):
                 return try await update(state: state, modified: modified)
                 
-                //Add web url or file urls
-            case .links:
-                return await links(state: state)
-                
+            //Add web url or file urls
             case .add(let urls, let collection, let completed, let failed):
                 return try await add(state: state, urls: urls, collection: collection, completed: completed, failed: failed)
                 
-                //Delete Many
+            //Delete Many
             case .deleteMany(let pick):
                 return try await deleteMany(state: state, pick: pick)
                 
-                //Create Many
+            //Create Many
             case .createMany(let items):
                 return try await createMany(state: state, items: items)
                 
-                //Update Many
+            //Update Many
             case .updateMany(let pick, let operation):
                 return try await updateMany(state: state, pick: pick, operation: operation)
                 
-                //Item
+            //Item
             case .lookup(let url):
                 return await lookup(state: state, url: url)
                 

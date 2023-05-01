@@ -15,7 +15,6 @@ extension RaindropsReducer {
     //MARK: - Receive updated raindrop from server
     func updated(state: inout S, raindrop: Raindrop) {
         state.items[raindrop.id] = raindrop
-        state.lookups[raindrop.link.compact] = raindrop.id
         state.updateSegments(raindrop)
         state.animation = .init()
     }

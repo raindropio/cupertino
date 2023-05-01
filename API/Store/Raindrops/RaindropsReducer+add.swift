@@ -8,10 +8,12 @@ extension RaindropsReducer {
                 
         var newRaindrops = [Raindrop]()
         
+        let existing = try await rest.raindropsGetId(urls: urls)
+        
         let chunks = urls
             //ignore existing
             .filter { url in
-                if state.lookups[url.compact] != nil {
+                if existing[url.compact] != nil {
                     completed?.wrappedValue.insert(url)
                     return false
                 }

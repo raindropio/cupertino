@@ -8,7 +8,6 @@ extension RaindropsReducer {
         state.updateSegments(
             items.compactMap {
                 state.items[$0.id] = $0
-                state.lookups[$0.link.compact] = $0.id
                 return state.items[$0.id]
             }
         )

@@ -100,8 +100,6 @@ public enum RaindropsAction: ReduxAction {
     case deleteMany(RaindropsPick)
     case deletedMany(RaindropsPick)
     //multi
-    case links
-    case linksLoaded([URL: Raindrop.ID])
     case add(Set<URL>, collection: Int? = nil, completed: Binding<Set<URL>>? = nil, failed: Binding<Set<URL>>? = nil)
     case createMany([Raindrop])
     case createdMany([Raindrop])

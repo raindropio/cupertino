@@ -1,10 +1,8 @@
 extension RaindropsReducer {
     func deleteMany(state: S, pick: RaindropsPick) async throws -> ReduxAction? {
-        let count = try await rest.raindropsDelete(pick: pick)
-        if count > 0 {
-            return A.deletedMany(pick)
-        }
-        return nil
+        let _ = try await rest.raindropsDelete(pick: pick)
+        //ignore count response, sometime user remove already removed items
+        return A.deletedMany(pick)
     }
     
     func deletedMany(state: inout S, pick: RaindropsPick) {
