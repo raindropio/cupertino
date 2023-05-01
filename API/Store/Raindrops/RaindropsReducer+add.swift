@@ -5,10 +5,17 @@ extension RaindropsReducer {
         //nothing to add
         guard !urls.isEmpty
         else { return nil }
-                
+        
         var newRaindrops = [Raindrop]()
         
-        let existing = try await rest.raindropsGetId(urls: urls)
+        //check existing
+        var existing = [URL: Raindrop.ID]()
+        do {
+            existing = try await rest.raindropsGetId(urls: urls)
+        } catch {
+            failed?.wrappedValue = urls
+            throw error
+        }
         
         let chunks = urls
             //ignore existing

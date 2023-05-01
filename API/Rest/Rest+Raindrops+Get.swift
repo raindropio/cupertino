@@ -46,8 +46,8 @@ extension Rest {
         var map = [URL: Raindrop.ID]()
         
         for item in res.duplicates {
-            map[item.link] = item.id
-            map[item.link.compact] = item.id
+            map[item.link] = item._id
+            map[item.link.compact] = item._id
         }
         
         return map
@@ -61,7 +61,7 @@ extension Rest {
         var duplicates: [Duplicate]
         
         struct Duplicate: Decodable {
-            var id: Raindrop.ID
+            var _id: Raindrop.ID
             var link: URL
         }
     }
