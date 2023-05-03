@@ -59,7 +59,7 @@ fileprivate struct ByURL<C: View>: View {
     @EnvironmentObject private var r: RaindropsStore
     @EnvironmentObject private var dispatch: Dispatcher
     @State private var draft = Raindrop.new()
-    @State private var loading = false
+    @State private var loading = true
     private var blank = Raindrop.new()
         
     var url: URL
@@ -112,19 +112,6 @@ fileprivate struct Stack<C: View>: View {
     var loading = false
     var content: (Binding<Raindrop>) -> C
     
-    //load meta for new
-    @Sendable
-    private func getMeta() async {
-        guard draft.isNew else { return }
-        let rest = Rest()
-        let meta = try? await rest.importUrlParse(draft.link)
-        if let meta, draft.isNew {
-            withAnimation {
-                draft.enrich(from: meta)
-            }
-        }
-    }
-    
     //auto-save for existing bookmarks
     private func saveOnClose() {
         guard !draft.isNew else { return }
@@ -135,15 +122,16 @@ fileprivate struct Stack<C: View>: View {
         NavigationStack {
             content($draft)
                 .disabled(loading)
-                .animation(.easeInOut(duration: 0.3), value: [loading, draft.isNew])
+                .animation(.easeInOut(duration: 0.2), value: [loading, draft.isNew])
                 .toolbar {
                     ToolbarItem(placement: draft.isNew ? .cancellationAction : .confirmationAction) {
                         Button(draft.isNew ? "Cancel" : "Done", action: dismiss.callAsFunction)
                     }
                 }
         }
-            .interactiveDismissDisabled(draft.isNew)
-            .task(id: draft.isNew, getMeta)
+            .task(id: draft.isNew, priority: .background) {
+                try? await dispatch(RaindropsAction.enrich($draft))
+            }
             .onDisappear(perform: saveOnClose)
     }
 }

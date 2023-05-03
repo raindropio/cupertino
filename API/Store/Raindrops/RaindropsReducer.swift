@@ -138,6 +138,9 @@ extension RaindropsReducer {
             case .suggest(let raindrop):
                 return await suggest(state: state, raindrop: raindrop)
                 
+            case .enrich(let raindrop):
+                try await enrich(state: state, raindrop: raindrop)
+                
             default:
                 break
             }

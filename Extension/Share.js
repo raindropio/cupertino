@@ -167,8 +167,7 @@ function getItem() {
 Parser.prototype = {
     run: function(arguments) {
         let item = {
-            link: location.href,
-            title: document.title
+            link: location.href
         }
 
         try{
@@ -176,6 +175,9 @@ Parser.prototype = {
         } catch(e) {
             console.log(e)
         }
+
+        if (!item.title)
+            item.title = document.title || ''
 
         arguments.completionFunction(item)
     }

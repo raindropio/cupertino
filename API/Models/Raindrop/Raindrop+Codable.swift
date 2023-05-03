@@ -36,7 +36,7 @@ extension Raindrop: Codable, EncodableWithConfiguration {
         let container = try decoder.container(keyedBy: CodingKeys.self)
 
         id = (try? container.decode(Swift.type(of: id), forKey: ._id)) ?? 0
-        title = try container.decode(Swift.type(of: title), forKey: .title)
+        title = (try? container.decode(Swift.type(of: title), forKey: .title)) ?? ""
         excerpt = (try? container.decode(Swift.type(of: excerpt), forKey: .excerpt)) ?? ""
         link = (try? container.decode(Swift.type(of: link), forKey: .link)) ?? URL(string: "http://incorrect.url")!
         domain = (try? container.decode(Swift.type(of: domain), forKey: .domain)) ?? ""

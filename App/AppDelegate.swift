@@ -10,6 +10,8 @@ class AppDelegate: NSObject, UIApplicationDelegate {
             //options.debug = true
             options.tracesSampleRate = 0.1
             options.enableCaptureFailedRequests = false
+            options.enableFileIOTracing = false
+            options.enableAppHangTracking = false
         }
         
         AppPushes.shared.start()

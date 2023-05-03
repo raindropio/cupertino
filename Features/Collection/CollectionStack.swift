@@ -45,7 +45,6 @@ fileprivate struct Stack<C: View>: View {
                     }
                 }
         }
-            .interactiveDismissDisabled(draft.isNew)
             .onDisappear(perform: saveOnClose)
     }
 }

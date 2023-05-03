@@ -1,5 +1,13 @@
 import Foundation
 
+fileprivate let session: URLSession = {
+    let configuration = URLSessionConfiguration.default
+    configuration.httpMaximumConnectionsPerHost = 100
+    configuration.multipathServiceType = .handover
+    configuration.waitsForConnectivity = true
+    return .init(configuration: configuration)
+}()
+
 final class DefaultFetchDelegate: FetchDelegate {
     let decoder = JSONDecoder()
     let encoder = JSONEncoder()
@@ -8,7 +16,6 @@ final class DefaultFetchDelegate: FetchDelegate {
 final class Fetch {
     private let base: URL
     private var delegate: FetchDelegate = DefaultFetchDelegate()
-    private let session: URLSession = URLSession(configuration: .default)
     
     init(_ base: URL) {
         self.base = base

@@ -14,6 +14,8 @@ class ExtensionController: UIViewController {
             //options.debug = true
             options.tracesSampleRate = 0.1
             options.enableCaptureFailedRequests = false
+            options.enableFileIOTracing = false
+            options.enableAppHangTracking = false
         }
         
         //Appearance
@@ -43,8 +45,11 @@ class ExtensionController: NSViewController {
         //sentry
         SentrySDK.start { options in
             options.dsn = Constants.sentryDsn
-            options.debug = true
+            //options.debug = true
             options.tracesSampleRate = 0.1
+            options.enableCaptureFailedRequests = false
+            options.enableFileIOTracing = false
+            options.enableAppHangTracking = false
         }
         
         self.view = NSHostingView(rootView: ExtensionUI(service: .init(self.extensionContext)))

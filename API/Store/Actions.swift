@@ -88,6 +88,7 @@ public enum RaindropsAction: ReduxAction {
     case loaded(Raindrop)
     case suggest(Raindrop)
     case suggested(URL, RaindropSuggestions)
+    case enrich(Binding<Raindrop>)
     //create
     case create(Raindrop) // -> createMany
     //update

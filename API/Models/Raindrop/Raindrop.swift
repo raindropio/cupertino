@@ -52,28 +52,6 @@ extension Raindrop {
 
 //Mutating
 extension Raindrop {
-    public mutating func enrich(from meta: Self) {
-        if title.isEmpty {
-            title = meta.title
-        }
-        
-        if excerpt.isEmpty {
-            excerpt = meta.excerpt
-        }
-        
-        if cover == nil {
-            cover = meta.cover
-        }
-        
-        if media.isEmpty {
-            media = meta.media
-        }
-        
-        if type != meta.type {
-            type = meta.type
-        }
-    }
-    
     public mutating func append(highlights: [Highlight]) {
         guard !highlights.isEmpty else { return }
         
