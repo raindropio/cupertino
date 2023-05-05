@@ -14,7 +14,6 @@ public struct User: UserType, Identifiable, Equatable, Hashable {
     public var apple = Connect()
     public var google = Connect()
     public var facebook = Connect()
-    public var twitter = Connect()
     public var vkontakte = Connect()
     public var dropbox = Connect()
     public var gdrive = Connect()

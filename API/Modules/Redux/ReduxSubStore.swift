@@ -15,7 +15,7 @@ public actor ReduxSubStore<R: Reducer>: ObservableObject {
     private func didChange(_ oldValue: R.S) {
         guard working != oldValue, !stateIsUpdating else { return }
         let newState = working
-        Task(priority: .userInitiated) {
+        Task {
             defer { stateIsUpdating = false }
             stateIsUpdating = true
             await update(newState)

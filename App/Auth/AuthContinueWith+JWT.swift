@@ -30,10 +30,6 @@ extension AuthContinueWith {
                     Label("Facebook", image: "facebook-circle-fill")
                 }
                 
-                Button { start(.twitter) } label: {
-                    Label("Twitter", image: "twitter-fill")
-                }
-                
                 Button { start(.vkontakte) } label: {
                     Label("VK", image: "vk-fill")
                 }

@@ -182,6 +182,14 @@ extension Fetch {
         guard let url = req.url
         else { throw FetchError.invalidRequest(nil) }
         
+//        #if DEBUG
+//        let start = Date()
+//        defer {
+//            let took = Date().timeIntervalSince(start)
+//            print(req.httpMethod ?? "", req.url?.absoluteString ?? "", String(format: "%.2f", took))
+//        }
+//        #endif
+        
         //get and validate
         var result: (Data, URLResponse)
         

@@ -1,4 +1,4 @@
-import SwiftUI
+import Foundation
 
 protocol ReduxStore: Actor, ObservableObject {
     @MainActor init()

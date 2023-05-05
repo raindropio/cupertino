@@ -13,7 +13,7 @@ extension User: Codable {
         case files
         case tfa
         
-        case apple, google, facebook, twitter, vkontakte
+        case apple, google, facebook, vkontakte
         case dropbox, gdrive
     }
     
@@ -33,7 +33,6 @@ extension User: Codable {
         apple = (try? container.decode(type(of: apple), forKey: .apple)) ?? Connect()
         google = (try? container.decode(type(of: google), forKey: .google)) ?? Connect()
         facebook = (try? container.decode(type(of: facebook), forKey: .facebook)) ?? Connect()
-        twitter = (try? container.decode(type(of: twitter), forKey: .twitter)) ?? Connect()
         vkontakte = (try? container.decode(type(of: vkontakte), forKey: .vkontakte)) ?? Connect()
         dropbox = (try? container.decode(type(of: dropbox), forKey: .dropbox)) ?? Connect()
         gdrive = (try? container.decode(type(of: gdrive), forKey: .gdrive)) ?? Connect()
@@ -54,7 +53,6 @@ extension User: Codable {
         try container.encode(apple, forKey: .apple)
         try container.encode(google, forKey: .google)
         try container.encode(facebook, forKey: .facebook)
-        try container.encode(twitter, forKey: .twitter)
         try container.encode(vkontakte, forKey: .vkontakte)
         try container.encode(dropbox, forKey: .dropbox)
         try container.encode(gdrive, forKey: .gdrive)

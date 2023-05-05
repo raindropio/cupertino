@@ -102,7 +102,7 @@ extension Rest {
 //MARK: - Native
 extension Rest {
     public enum AuthNativeProvider: String {
-        case google, facebook, twitter, vkontakte
+        case google, facebook, vkontakte
     }
     
     /// returns URL that can be opened in web browser, after success makes redirect to **deeplink** with JWT token. Then this deeplink can be used in `authJWTEnd` method

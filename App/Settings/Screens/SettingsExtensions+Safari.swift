@@ -17,7 +17,7 @@ extension SettingsExtensions {
                     .labelStyle(.sidebar)
                     .listItemTint(.teal)
                 
-                SafariLink("Enable", destination: URL(string: "https://help.raindrop.io/mobile-app#share-ios-safari")!)
+                Link("Enable", destination: URL(string: "https://help.raindrop.io/mobile-app#share-ios-safari")!)
             }
         }
     }
