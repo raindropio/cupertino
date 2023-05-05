@@ -7,7 +7,7 @@ public final class LogReducer: Reducer {
 
 extension LogReducer {
     public func reduce(state: inout S, action: ReduxAction) throws -> ReduxAction? {
-        print(type(of: action), action)
+        //print(type(of: action), action)
         return nil
     }
     

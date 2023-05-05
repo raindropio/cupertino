@@ -15,6 +15,9 @@ extension ConfigReducer {
             case .reloaded(let config):
                 reloaded(state: &state, config: config)
                 
+            case .updateCollections(let collections):
+                return update(state: &state, collections: collections)
+                
             case .updateRaindrops(let raindrops):
                 return update(state: &state, raindrops: raindrops)
                 

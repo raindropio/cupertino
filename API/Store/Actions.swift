@@ -60,6 +60,7 @@ public enum CollectionsAction: ReduxAction {
 public enum ConfigAction: ReduxAction {
     case load
     case reloaded(ConfigState)
+    case updateCollections(ConfigCollections)
     case updateRaindrops(ConfigRaindrops)
     case save
 }
