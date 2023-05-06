@@ -33,7 +33,10 @@ fileprivate struct AutoDismiss: ViewModifier {
     func body(content: Content) -> some View {
         content.onChange(of: selection) {
             if $0?.collectionId == 0, $0?.text.isEmpty == false {
-                dismissSearch()
+                //make sure to run async, otherwise crash
+                Task {
+                    dismissSearch()
+                }
             }
         }
     }

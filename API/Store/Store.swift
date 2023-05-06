@@ -2,9 +2,7 @@ import SwiftUI
 
 public actor Store: ReduxStore {
     @MainActor public var dispatcher = Dispatcher()
-    #if DEBUG
     @MainActor public var log = LogStore()
-    #endif
     @MainActor public var auth = AuthStore()
     @MainActor public var collaborators = CollaboratorsStore()
     @MainActor public var collections = CollectionsStore()

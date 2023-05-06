@@ -194,7 +194,7 @@ extension Fetch {
         var result: (Data, URLResponse)
         
         do {
-            result = try await session.data(for: req)
+            result = try await session.reuse(for: req)
         } catch {
             try Task.checkCancellation()
             throw FetchError.invalidResponse(url, error.localizedDescription)
