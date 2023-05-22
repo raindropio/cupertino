@@ -45,17 +45,6 @@ extension SubscriptionReducer {
             }
         }
         
-        //User
-        if let action = action as? UserAction {
-            switch action {
-            case .reloaded(_):
-                return A.load
-                
-            default:
-                break
-            }
-        }
-        
         return nil
     }
     

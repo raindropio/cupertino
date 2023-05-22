@@ -6,6 +6,7 @@ import Features
 
 extension SettingsIOS {
     struct Sidebar: View {
+        @EnvironmentObject private var dispatch: Dispatcher
         @EnvironmentObject private var s: SubscriptionStore
         @Environment(\.dismiss) private var dismiss
         
@@ -25,6 +26,9 @@ extension SettingsIOS {
                                 .tint(.primary)
                         }
                             .listItemTint(.red)
+                            .reload {
+                                try? await dispatch(SubscriptionAction.load)
+                            }
                     }
                     
                     Section {
