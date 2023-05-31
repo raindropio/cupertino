@@ -5,6 +5,7 @@ extension Raindrop: Codable, EncodableWithConfiguration {
         case _id
         case title
         case excerpt
+        case note
         case link
         case domain
         case collection
@@ -38,6 +39,7 @@ extension Raindrop: Codable, EncodableWithConfiguration {
         id = (try? container.decode(Swift.type(of: id), forKey: ._id)) ?? 0
         title = (try? container.decode(Swift.type(of: title), forKey: .title)) ?? ""
         excerpt = (try? container.decode(Swift.type(of: excerpt), forKey: .excerpt)) ?? ""
+        note = (try? container.decode(Swift.type(of: note), forKey: .note)) ?? ""
         link = (try? container.decode(Swift.type(of: link), forKey: .link)) ?? URL(string: "http://incorrect.url")!
         domain = (try? container.decode(Swift.type(of: domain), forKey: .domain)) ?? ""
         cover = try? container.decode(Swift.type(of: cover), forKey: .cover)
@@ -101,6 +103,10 @@ extension Raindrop: Codable, EncodableWithConfiguration {
         
         if compare?.excerpt != excerpt {
             try container.encode(excerpt, forKey: .excerpt)
+        }
+        
+        if compare?.note != note {
+            try container.encode(note, forKey: .note)
         }
         
         if compare?.link != link {

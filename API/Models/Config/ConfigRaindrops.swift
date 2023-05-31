@@ -13,12 +13,13 @@ public struct ConfigRaindrops: Equatable {
 
 extension ConfigRaindrops {
     public enum Element: String, CaseIterable {
-        case title, excerpt, cover, tags, info
+        case title, note, excerpt, cover, tags, info
         
         public var title: String {
             switch self {
             case .title: return "Title"
             case .excerpt: return "Description"
+            case .note: return "Note"
             case .cover: return "Thumbnail"
             case .tags: return "Filters"
             case .info: return "Date, domain & type"

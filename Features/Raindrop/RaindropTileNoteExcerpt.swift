@@ -2,7 +2,7 @@ import SwiftUI
 import API
 import UI
 
-public struct RaindropTitleExcerpt: View {
+public struct RaindropTitleNoteExcerpt: View {
     @Environment(\.raindropsContainer) private var container
     var raindrop: Raindrop
     
@@ -17,10 +17,14 @@ public struct RaindropTitleExcerpt: View {
                     .fontWeight(.semibold)
             }
             
-            if !raindrop.excerpt.isEmpty, container?.hide.contains(.excerpt) != true {
-                Text(raindrop.excerpt)
-                    .font(.callout)
+            Group {
+                if !raindrop.note.isEmpty, container?.hide.contains(.note) != true {
+                    Text(LocalizedStringKey(raindrop.note))
+                } else if !raindrop.excerpt.isEmpty, container?.hide.contains(.excerpt) != true {
+                    Text(raindrop.excerpt)
+                }
             }
+                .font(.callout)
         }
             .fixedSize(horizontal: false, vertical: true)
             .contentTransition(.identity)

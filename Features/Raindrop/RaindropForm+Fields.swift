@@ -13,39 +13,57 @@ extension RaindropForm {
 
 extension RaindropForm.Fields: View {
     var body: some View {
-        Section {
-            HStack(spacing: 12) {
+        HStack(alignment: .top, spacing: 16) {
+            Button { cover.toggle() } label: {
+                Thumbnail(
+                    (raindrop.isNew ? raindrop.cover : Rest.renderImage(raindrop.cover, options: .optimalSize)) ?? Rest.renderImage(raindrop.link, options: .optimalSize),
+                    width: 63,
+                    height: 54
+                )
+                    .cornerRadius(6)
+            }
+                .buttonStyle(.borderless)
+                .navigationDestination(isPresented: $cover) {
+                    RaindropCoverGrid(raindrop: $raindrop)
+                }
+            
+            VStack(spacing: 4) {
+                //title
                 TextField(text: $raindrop.title, prompt: .init("Title"), axis: .vertical) {}
-                    .labelsHidden()
                     .preventLineBreaks(text: $raindrop.title)
                     .focused($focus, equals: .title)
                     .fontWeight(.semibold)
                     .lineLimit(5)
-                    .onSubmit {
-                        focus = nil
-                    }
                 
-                Button { cover.toggle() } label: {
-                    Thumbnail(
-                        (raindrop.isNew ? raindrop.cover : Rest.renderImage(raindrop.cover, options: .optimalSize)) ?? Rest.renderImage(raindrop.link, options: .optimalSize),
-                        width: 56,
-                        height: 48
-                    )
-                    .cornerRadius(3)
+                //excerpt
+                if !raindrop.excerpt.isEmpty || focus == .title || focus == .excerpt {
+                    TextField(text: $raindrop.excerpt, prompt: .init("Add description"), axis: .vertical) {}
+                        .preventLineBreaks(text: $raindrop.excerpt)
+                        .focused($focus, equals: .excerpt)
+                        .lineLimit(focus == .excerpt ? nil : 1)
+                        .foregroundStyle(.secondary)
+                        .font(.subheadline)
                 }
-                    .buttonStyle(.borderless)
-                    .navigationDestination(isPresented: $cover) {
-                        RaindropCoverGrid(raindrop: $raindrop)
-                    }
             }
-            
-            TextField(text: $raindrop.excerpt, prompt: .init("Description"), axis: .vertical) {}
                 .labelsHidden()
-                .focused($focus, equals: .excerpt)
-                .lineLimit(5)
+                .frame(minHeight: 54)
+                .onSubmit {
+                    focus = nil
+                }
+        }
+            .contentTransition(.opacity)
+            .clearSection()
+        
+        //note
+        Section {
+            TextField(text: $raindrop.note, prompt: .init("Note"), axis: .vertical) {}
+                .labelsHidden()
+                .focused($focus, equals: .note)
+                .lineLimit(3...)
         }
             .contentTransition(.opacity)
         
+        //collection
         Section {
             NavigationLink {
                 RaindropCollection($raindrop)
@@ -116,6 +134,7 @@ extension RaindropForm.Fields {
     enum FocusField {
         case title
         case excerpt
+        case note
         case collection
         case tags
         case link

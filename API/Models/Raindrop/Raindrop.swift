@@ -6,6 +6,7 @@ public struct Raindrop: Identifiable, Hashable {
     public var domain: String = ""
     public var title: String
     public var excerpt = ""
+    public var note = ""
     public var collection: Int = -1
     public var cover: URL?
     public var media = [Media]()

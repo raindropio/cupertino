@@ -28,7 +28,7 @@ extension RaindropItem: View {
             }
             
             VStack(alignment: .leading, spacing: spacing) {
-                RaindropTitleExcerpt(raindrop)
+                RaindropTitleNoteExcerpt(raindrop)
                     .lineLimit(3)
                     .allowsHitTesting(false)
                 
