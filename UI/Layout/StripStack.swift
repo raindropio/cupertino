@@ -38,11 +38,14 @@ extension StripStack: View {
                 .frame(maxWidth: .infinity, alignment: .leading)
         }
             .backport.scrollBounceBehavior(.basedOnSize, axes: [.horizontal, .vertical])
-            .mask(LinearGradient(
-                gradient: Gradient(colors: Array(repeating: .black, count: 7) + [.clear]),
-                startPoint: .leading,
-                endPoint: .trailing
-            ))
+            .mask {
+                LinearGradient(
+                    gradient: Gradient(colors: Array(repeating: .black, count: 7) + [.clear]),
+                    startPoint: .leading,
+                    endPoint: .trailing
+                )
+                    .allowsHitTesting(false)
+            }
     }
 }
 #else

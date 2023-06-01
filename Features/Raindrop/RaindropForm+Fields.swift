@@ -20,9 +20,10 @@ extension RaindropForm.Fields: View {
                     width: 63,
                     height: 54
                 )
+                    .background(.quaternary)
                     .cornerRadius(6)
             }
-                .buttonStyle(.borderless)
+                .buttonStyle(.plain)
                 .navigationDestination(isPresented: $cover) {
                     RaindropCoverGrid(raindrop: $raindrop)
                 }
@@ -40,9 +41,17 @@ extension RaindropForm.Fields: View {
                     TextField(text: $raindrop.excerpt, prompt: .init("Add description"), axis: .vertical) {}
                         .preventLineBreaks(text: $raindrop.excerpt)
                         .focused($focus, equals: .excerpt)
-                        .lineLimit(focus == .excerpt ? nil : 1)
                         .foregroundStyle(.secondary)
                         .font(.subheadline)
+                        .lineLimit(focus == .excerpt ? 5 : 1)
+                        .mask {
+                            LinearGradient(
+                                gradient: Gradient(colors: Array(repeating: .black, count: 5) + (focus == .excerpt ? [] : [.clear])),
+                                startPoint: .leading,
+                                endPoint: .trailing
+                            )
+                                .allowsHitTesting(false)
+                        }
                 }
             }
                 .labelsHidden()
