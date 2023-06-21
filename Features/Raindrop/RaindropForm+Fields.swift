@@ -5,7 +5,8 @@ import UI
 extension RaindropForm {
     struct Fields {
         @State private var cover = false
-        
+        @State private var highlights = false
+
         @Binding var raindrop: Raindrop
         @FocusState var focus: FocusField?
     }
@@ -13,58 +14,57 @@ extension RaindropForm {
 
 extension RaindropForm.Fields: View {
     var body: some View {
-        HStack(alignment: .top, spacing: 16) {
-            Button { cover.toggle() } label: {
-                Thumbnail(
-                    (raindrop.isNew ? raindrop.cover : Rest.renderImage(raindrop.cover, options: .optimalSize)) ?? Rest.renderImage(raindrop.link, options: .optimalSize),
-                    width: 63,
-                    height: 54
-                )
-                    .background(.quaternary)
-                    .cornerRadius(6)
-            }
-                .buttonStyle(.plain)
-                .navigationDestination(isPresented: $cover) {
-                    RaindropCoverGrid(raindrop: $raindrop)
-                }
-            
-            VStack(spacing: 4) {
-                //title
-                TextField(text: $raindrop.title, prompt: .init("Title"), axis: .vertical) {}
-                    .preventLineBreaks(text: $raindrop.title)
-                    .focused($focus, equals: .title)
-                    .fontWeight(.semibold)
-                    .lineLimit(5)
-                
-                //excerpt
-                if !raindrop.excerpt.isEmpty || focus == .title || focus == .excerpt {
-                    TextField(text: $raindrop.excerpt, prompt: .init("Add description"), axis: .vertical) {}
-                        .preventLineBreaks(text: $raindrop.excerpt)
-                        .focused($focus, equals: .excerpt)
-                        .foregroundStyle(.secondary)
-                        .font(.subheadline)
-                        .lineLimit(focus == .excerpt ? 5 : 1)
-                        .mask {
-                            LinearGradient(
-                                gradient: Gradient(colors: Array(repeating: .black, count: 5) + (focus == .excerpt ? [] : [.clear])),
-                                startPoint: .leading,
-                                endPoint: .trailing
-                            )
-                                .allowsHitTesting(false)
-                        }
-                }
-            }
-                .labelsHidden()
-                .frame(minHeight: 54)
-                .onSubmit {
-                    focus = nil
-                }
-        }
-            .contentTransition(.opacity)
-            .clearSection()
-        
-        //note
         Section {
+            //title, excerpt
+            HStack(alignment: .top, spacing: 16) {
+                VStack(spacing: 4) {
+                    //title
+                    TextField(text: $raindrop.title, prompt: .init("Title"), axis: .vertical) {}
+                        .preventLineBreaks(text: $raindrop.title)
+                        .focused($focus, equals: .title)
+                        .fontWeight(.semibold)
+                        .lineLimit(5)
+                    
+                    //excerpt
+                    if !raindrop.excerpt.isEmpty || focus == .title || focus == .excerpt {
+                        TextField(text: $raindrop.excerpt, prompt: .init("Add description"), axis: .vertical) {}
+                            .preventLineBreaks(text: $raindrop.excerpt)
+                            .focused($focus, equals: .excerpt)
+                            .foregroundStyle(.secondary)
+                            .font(.subheadline)
+                            .lineLimit(focus == .excerpt ? 5 : 1)
+                            .mask {
+                                LinearGradient(
+                                    gradient: Gradient(colors: Array(repeating: .black, count: 5) + (focus == .excerpt ? [] : [.clear])),
+                                    startPoint: .leading,
+                                    endPoint: .trailing
+                                )
+                                    .allowsHitTesting(false)
+                            }
+                    }
+                }
+                    .labelsHidden()
+                    .frame(minHeight: 54)
+                    .onSubmit {
+                        focus = nil
+                    }
+                
+                Button { cover.toggle() } label: {
+                    Thumbnail(
+                        (raindrop.isNew ? raindrop.cover : Rest.renderImage(raindrop.cover, options: .optimalSize)) ?? Rest.renderImage(raindrop.link, options: .optimalSize),
+                        width: 63,
+                        height: 54
+                    )
+                        .background(.quaternary)
+                        .cornerRadius(6)
+                }
+                    .buttonStyle(.plain)
+                    .navigationDestination(isPresented: $cover) {
+                        RaindropCoverGrid(raindrop: $raindrop)
+                    }
+            }
+            
+            //note
             TextField(text: $raindrop.note, prompt: .init("Note"), axis: .vertical) {}
                 .labelsHidden()
                 .focused($focus, equals: .note)
@@ -107,19 +107,8 @@ extension RaindropForm.Fields: View {
                     selection: .init { raindrop.reminder?.date } set: { if let date = $0 { raindrop.reminder = .init(date) } else { raindrop.reminder = nil } },
                     in: .now...
                 ) {
-                    Label(raindrop.reminder == nil ? "Add reminder" : "Reminder", systemImage: Filter.Kind.reminder.systemImage)
+                    Label("Reminder", systemImage: Filter.Kind.reminder.systemImage)
                 }
-            } free: {
-                Label("Reminder", systemImage: Filter.Kind.reminder.systemImage)
-                    .badge("Pro only")
-            }
-            
-            //highlights
-            NavigationLink {
-                RaindropHighlights($raindrop)
-            } label: {
-                Label("Highlights", systemImage: Filter.Kind.highlights.systemImage)
-                    .badge(NumberInCircle(raindrop.highlights.count).foregroundColor(Filter.Kind.highlights.color))
             }
             
             //url
