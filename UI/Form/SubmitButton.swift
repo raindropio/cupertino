@@ -3,6 +3,7 @@ import SwiftUI
 public struct SubmitButton<Label>: View where Label: View {
     @Environment(\.onSubmitAction) private var onSubmitAction
     @Environment(\.submitting) private var submitting
+    @Environment(\.isEnabled) private var isEnabled
     @ViewBuilder private var label: () -> Label
     
     public init(@ViewBuilder label: @escaping () -> Label) {
@@ -18,12 +19,11 @@ public struct SubmitButton<Label>: View where Label: View {
                 
                 label()
             }
-                .frame(minHeight: 32)
                 .frame(maxWidth: .infinity)
         }
             .buttonStyle(.borderedProminent)
             .fontWeight(.semibold)
-            .clearSection()
+            .listRowBackground(isEnabled ? Color.accentColor : Color.black.opacity(0))
     }
 }
 

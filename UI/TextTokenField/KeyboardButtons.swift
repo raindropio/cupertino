@@ -8,7 +8,7 @@ class KeyboardButtons: UIInputView {
     init(_ items: [String], onPress: @escaping (String) -> Void) {
         //init
         self.hosting = .init(rootView: .init(items: items, onPress: onPress))
-        super.init(frame: .init(x: 0, y: 0, width: 100, height: 50), inputViewStyle: .keyboard)
+        super.init(frame: .init(x: 0, y: 0, width: 100, height: 45.0), inputViewStyle: .keyboard)
         
         //subview
         hosting.view.backgroundColor = .clear
@@ -17,7 +17,8 @@ class KeyboardButtons: UIInputView {
         //constraints
         hosting.view.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
-            hosting.view.widthAnchor.constraint(equalTo: widthAnchor)
+            hosting.view.widthAnchor.constraint(equalTo: widthAnchor),
+            hosting.view.heightAnchor.constraint(equalTo: heightAnchor)
         ])
     }
     
@@ -42,27 +43,26 @@ extension KeyboardButtons {
                 
         var body: some View {
             ScrollView(.horizontal, showsIndicators: false) {
-                LazyHStack(spacing: 6) {
+                LazyHStack(spacing: 0) {
                     ForEach(items, id: \.self) { item in
                         if item.isEmpty {
-                            Rectangle().fill(.quaternary)
-                                .frame(width: 1)
-                                .padding(6)
+                            Color.clear.frame(width: 24)
                         } else {
                             Button(item) {
                                 onPress(item)
                                 hapticFeedback(.rigid)
                             }
+                            Divider()
                         }
                     }
-                    .transition(.scale(scale: 0).combined(with: .opacity))
                 }
-                    .backport.scrollBounceBehavior(.basedOnSize, axes: [.horizontal, .vertical])
-                    .buttonStyle(KeyboardButtonStyle())
-                    .padding(.vertical, sizeClass == .regular ? 12 : 8)
-                    .padding(.horizontal, sizeClass == .regular ? 14 : 8)
+                    .padding(.top, 5)
             }
-            .animation(.spring(), value: items.count)
+                .buttonStyle(KeyboardButtonStyle())
+                .animation(.spring(), value: items.count)
+                .backport.scrollBounceBehavior(.basedOnSize, axes: [.horizontal, .vertical])
+                .frame(maxWidth: .infinity, maxHeight: .infinity)
+                .ignoresSafeArea()
         }
     }
 }
@@ -72,17 +72,15 @@ fileprivate struct KeyboardButtonStyle: ButtonStyle {
     
     func makeBody(configuration: Configuration) -> some View {
         configuration.label
-            .padding(.horizontal, 10)
-            .padding(.vertical, 8)
+            .padding(.horizontal, 15)
+            .frame(maxHeight: .infinity)
+            .foregroundColor(.primary)
             .background(
                 RoundedRectangle(cornerRadius: 5, style: .continuous)
-                    .fill(.white)
-                    .opacity(colorScheme == .dark ? (configuration.isPressed ? 0.1 : 0.3) : (configuration.isPressed ? 0.5 : 1))
-                    .shadow(color: .black.opacity(colorScheme == .dark ? 1 : 0.3), radius: 0, y: 1)
+                    .fill(configuration.isPressed ? AnyShapeStyle(.tertiary) : AnyShapeStyle(.clear))
                     .animation(nil, value: configuration.isPressed)
             )
-            .foregroundColor(.primary)
-            .padding(.bottom, 1)
+            .transition(.scale(scale: 0).combined(with: .opacity))
     }
 }
 #endif

@@ -20,7 +20,7 @@ enum DatePreset: CaseIterable {
     var title: String {
         switch self {
         case .tomorrow: return "Tomorrow"
-        case .thisWeekend: return "This Weeknd"
+        case .thisWeekend: return "This Weekend"
         case .nextWeek: return "Next Week"
         case .someday: return "Someday"
         case .none: return "None"

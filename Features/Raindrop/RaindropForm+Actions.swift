@@ -10,11 +10,7 @@ extension RaindropForm {
         @Binding var raindrop: Raindrop
 
         var body: some View {
-            if raindrop.isNew {
-                #if canImport(UIKit)
-                SubmitButton("Save")
-                #endif
-            } else {
+            if !raindrop.isNew {
                 Section {
                     ControlGroup {
                         Button { raindrop.important.toggle() } label: {

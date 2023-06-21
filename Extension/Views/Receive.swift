@@ -63,6 +63,8 @@ extension Receive {
             }
                 #if canImport(UIKit)
                 .frame(idealWidth: 400, idealHeight: 600)
+                .presentationDetents([.fraction(0.75), .large])
+                .presentationDragIndicator(.hidden)
                 #else
                 .frame(width: 400).frame(minHeight: 300)
                 .fixedSize()

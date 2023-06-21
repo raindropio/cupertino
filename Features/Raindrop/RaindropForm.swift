@@ -1,5 +1,6 @@
 import SwiftUI
 import API
+import Backport
 import UI
 
 public struct RaindropForm {
@@ -30,19 +31,19 @@ extension RaindropForm: View {
             Fields(raindrop: $raindrop)
             Actions(raindrop: $raindrop)
         }
+            .backport.scrollBounceBehavior(.basedOnSize, axes: .vertical)
             .animation(.default, value: raindrop.collection)
             .modifier(Toolbar(raindrop: $raindrop))
-            .submitLabel(.done)
             .navigationTitle((raindrop.isNew ? "New" : "Edit") + " \(raindrop.type.single.localizedLowercase)")
             #if canImport(UIKit)
             .navigationBarTitleDisplayMode(.inline)
             #endif
             .toolbar {
-                #if canImport(AppKit)
-                ToolbarItem(placement: .confirmationAction) {
-                    SubmitButton("Save")
+                if raindrop.isNew {
+                    ToolbarItem(placement: .confirmationAction) {
+                        SubmitButton("Save")
+                    }
                 }
-                #endif
             }
             .onSubmit(commit)
     }
