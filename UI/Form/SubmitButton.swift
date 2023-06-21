@@ -24,6 +24,7 @@ public struct SubmitButton<Label>: View where Label: View {
             .buttonStyle(.borderedProminent)
             .fontWeight(.semibold)
             .listRowBackground(isEnabled ? Color.accentColor : Color.black.opacity(0))
+            .listRowInsets(.init())
     }
 }
 

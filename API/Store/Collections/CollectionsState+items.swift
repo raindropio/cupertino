@@ -26,7 +26,7 @@ extension CollectionsState {
             let parent = user[parentId]
         else { return [] }
         
-        return [parent] + location(of: parent)
+        return ([parent] + location(of: parent)).reversed()
     }
     
     public func location(of collection: UserCollection) -> CGroup? {

@@ -34,6 +34,7 @@ public struct RaindropSuggestedCollections: View {
             CollectionLabel(id)
                 .badge(0)
         }
+            .collectionTint(id)
     }
     
     public var body: some View {
@@ -46,7 +47,7 @@ public struct RaindropSuggestedCollections: View {
                             .padding(.vertical, 14)
                             #endif
                     }
-                        .buttonStyle(.dotted)
+                        .buttonStyle(.bordered)
                         .controlSize(.small)
                         .tint(.gray)
                         .foregroundColor(.primary)

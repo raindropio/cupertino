@@ -45,7 +45,7 @@ struct AddURL: View {
                     }
                 }
         }
-            .presentationDetents([.height(224)])
+            .presentationDetents([.fraction(0.333)])
             .frame(idealWidth: 400, idealHeight: 200)
     }
 }

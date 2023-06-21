@@ -42,8 +42,7 @@ extension RaindropForm {
                 }
                     .imageScale(.large)
                     .controlGroupStyle(.horizontal)
-                    .controlSize(.large)
-                    .padding(.vertical, 8)
+                    .frame(height: 35)
                     .cornerRadius(8)
             } footer: {
                 if !raindrop.isNew {

@@ -5,8 +5,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/openid/AppAuth-iOS.git",
       "state" : {
-        "revision" : "0eadcdec4ddb121865f3d66917549194afce1f2b",
-        "version" : "1.6.1"
+        "revision" : "71cde449f13d453227e687458144bde372d30fc7",
+        "version" : "1.6.2"
       }
     },
     {
@@ -95,8 +95,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/getsentry/sentry-cocoa.git",
       "state" : {
-        "revision" : "e6dcfba32f2861438b82c7ad34e058b23c83daf6",
-        "version" : "8.6.0"
+        "revision" : "d277532e1c8af813981ba01f591b15bbdd735615",
+        "version" : "8.8.0"
       }
     }
   ],

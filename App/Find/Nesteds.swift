@@ -29,6 +29,7 @@ extension Nesteds {
                     .badge(0)
             }
                 .dropConsumer(to: collection)
+                .collectionTint(collection.id)
         }
         
         var body: some View {

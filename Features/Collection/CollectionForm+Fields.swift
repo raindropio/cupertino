@@ -38,7 +38,6 @@ extension CollectionForm.Fields: View {
                             .badge(0)
                             .labelStyle(.titleAndIcon)
                             .controlSize(.small)
-                            .fixedSize()
                     } else {
                         Text("None")
                     }
