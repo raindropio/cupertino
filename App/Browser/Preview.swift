@@ -20,11 +20,11 @@ struct Preview: View {
         .init(
             {
                 switch raindrop.type {
-                case .link:
-                    return raindrop.link
+                case .article, .book:
+                    return Rest.raindropPreview(raindrop.id, options: reader)
                     
                 default:
-                    return Rest.raindropPreview(raindrop.id, options: reader)
+                    return raindrop.link
                 }
             }(),
             canonical: raindrop.link,
