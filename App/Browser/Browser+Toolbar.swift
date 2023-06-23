@@ -67,8 +67,11 @@ extension Browser.Toolbar: ViewModifier {
             }
             
             ToolbarItem {
-                ShareLink(item: page.url ?? .init(string: "about:blank")!)
-                    .disabled(page.url == nil)
+                if raindrop.isNew, let url = page.url {
+                    ShareLink(item: url)
+                } else {
+                    ShareRaindropLink(raindrop)
+                }
             }
             
             //move

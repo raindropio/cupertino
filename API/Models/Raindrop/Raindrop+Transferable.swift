@@ -9,6 +9,20 @@ extension UTType {
 extension Raindrop: Transferable {
     public static var transferRepresentation: some TransferRepresentation {
         CodableRepresentation(contentType: .raindrop)
-        ProxyRepresentation(exporting: \.link)
+        
+        ProxyRepresentation{ raindrop -> URL in
+            if raindrop.file != nil {
+                let (url, _) = try await URLSession.shared.download(from: raindrop.link, actualFileName: true)
+                return url
+            }
+            return raindrop.link
+        } backport: { raindrop in
+            raindrop.link
+        }
+    }
+    
+    public var sharePreview: SharePreview<Never,Never> {
+        .init(title)
     }
 }
+

@@ -64,7 +64,7 @@ fileprivate struct _Menu: View {
             CopyButton(items: items.map { $0.link })
 
             //share
-            ShareLink(items: items.map { $0.link })
+            ShareRaindropLink(items)
             
             //move
             Button { sheet.move(pick) } label: {
