@@ -53,7 +53,7 @@ extension Filter {
             case .type(let type): return type.systemImage
             case .created(_): return "calendar"
             case .reminder: return "bell"
-            case .highlights: return "pencil.tip.crop.circle"
+            case .highlights: return "quote.bubble"
             case .broken: return "exclamationmark.square"
             case .duplicate: return "square.2.layers.3d.top.filled"
             case .notag: return "circlebadge.2"

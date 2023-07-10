@@ -1,18 +1,16 @@
 import SwiftUI
+import Backport
 
 struct ExtensionUI: View {
     @StateObject var service: ExtensionService
     @State private var show = false
     
     var body: some View {
-        Group {
-            if !show {
-                ProgressView()
-                    .progressViewStyle(.circular)
-            } else {
-                Color.clear
+        Color.clear
+            .contentShape(Rectangle())
+            .onTapGesture {
+                show = false
             }
-        }
             //load and show sheet
             .task(priority: .userInitiated) {
                 defer { show = true }
@@ -31,6 +29,7 @@ struct ExtensionUI: View {
             .sheet(isPresented: $show) {
                 Main()
                     .environmentObject(service)
+                    .backport.presentationBackgroundInteraction(.enabled)
             }
     }
 }

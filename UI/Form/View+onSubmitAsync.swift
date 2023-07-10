@@ -30,7 +30,7 @@ fileprivate struct OnSubmitAsync: ViewModifier {
         content
             .disabled(submitting)
             .environment(\.submitting, submitting)
-            .animation(.easeInOut(duration: 0.2), value: submitting)
+            .animation(.default, value: submitting)
             .onSubmit {
                 Task { try? await submit() }
             }

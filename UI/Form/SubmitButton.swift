@@ -12,12 +12,12 @@ public struct SubmitButton<Label>: View where Label: View {
 
     public var body: some View {
         Button(action: onSubmitAction) {
-            HStack(spacing: 6) {
-                if submitting {
-                    ProgressView()
-                }
+            ZStack {
+                ProgressView()
+                    .opacity(submitting ? 1 : 0)
                 
                 label()
+                    .opacity(submitting ? 0 : 1)
             }
                 .frame(maxWidth: .infinity)
         }

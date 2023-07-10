@@ -51,6 +51,7 @@ public struct RaindropSuggestedCollections: View {
                         .controlSize(.small)
                         .tint(.gray)
                         .foregroundColor(.primary)
+                        .labelStyle(.titleOnly)
                 }
             }
                 .fixedSize(horizontal: false, vertical: true)

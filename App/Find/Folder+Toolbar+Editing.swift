@@ -18,7 +18,7 @@ extension Folder.Toolbar {
         
         func body(content: Content) -> some View {
             content
-            .navigationBarBackButtonHidden(isEditing)
+            //.navigationBarBackButtonHidden(isEditing)
             .toolbar {
                 if total > 0 {
                     //start/cancel

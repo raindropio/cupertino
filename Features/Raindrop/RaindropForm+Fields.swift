@@ -55,8 +55,12 @@ extension RaindropForm.Fields: View {
                         width: 63,
                         height: 54
                     )
-                        .background(.quaternary)
                         .cornerRadius(6)
+                        .overlay(
+                            RoundedRectangle(cornerRadius: 6, style: .continuous)
+                                .inset(by: 0.5)
+                                .stroke(.quaternary, lineWidth: 0.5)
+                        )
                 }
                     .buttonStyle(.plain)
                     .navigationDestination(isPresented: $cover) {
@@ -110,19 +114,38 @@ extension RaindropForm.Fields: View {
                     Label("Reminder", systemImage: Filter.Kind.reminder.systemImage)
                 }
             }
+                .listItemTint(raindrop.reminder != nil ? .fixed(Filter.Kind.reminder.color) : .monochrome)
+                .symbolVariant(raindrop.reminder != nil ? .fill : .none)
             
-            //url
-            if raindrop.file == nil {
-                Label {
+            //highlights
+            NavigationLink {
+                RaindropHighlights($raindrop)
+            } label: {
+                Label(Filter.Kind.highlights.title, systemImage: Filter.Kind.highlights.systemImage)
+                    .badge(raindrop.highlights.count)
+            }
+                .listItemTint(!raindrop.highlights.isEmpty ? .fixed(Filter.Kind.highlights.color) : .monochrome)
+                .symbolVariant(!raindrop.highlights.isEmpty ? .fill : .none)
+            
+            //url and favorite
+            Label {
+                if raindrop.file == nil {
                     URLField("", value: $raindrop.link, prompt: Text("URL"))
                         .labelsHidden()
                         .allowsTightening(true)
                         .minimumScaleFactor(0.8)
                         .focused($focus, equals: .link)
-                } icon: {
-                    Image(systemName: "lock.fill")
+                } else {
+                    Text("File").foregroundStyle(.secondary)
                 }
+            } icon: {
+                Button { raindrop.important.toggle() } label: {
+                    Image(systemName: "heart")
+                }
+                    .buttonStyle(.plain)
             }
+                .listItemTint(raindrop.important ? .fixed(.accentColor) : .monochrome)
+                .symbolVariant(raindrop.important ? .fill : .none)
         }
             .listItemTint(.monochrome)
     }

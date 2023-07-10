@@ -37,6 +37,7 @@ extension RaindropForm: View {
             .navigationTitle((raindrop.isNew ? "New" : "Edit") + " \(raindrop.type.single.localizedLowercase)")
             #if canImport(UIKit)
             .navigationBarTitleDisplayMode(.inline)
+            ._safeAreaInsets(.init(top: -15, leading: 0, bottom: 0, trailing: 0))
             #endif
             .toolbar {
                 if raindrop.isNew {
