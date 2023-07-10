@@ -7,7 +7,9 @@ struct PlatformSafariView: UIViewControllerRepresentable {
     var button: SafariActivityButton? = nil
     
     func makeCoordinator() -> Coordinator {
-        .init()
+        SFSafariViewController.prewarmConnections(to: [url])
+
+        return .init()
     }
 
     func makeUIViewController(context: Context) -> SFSafariViewController {

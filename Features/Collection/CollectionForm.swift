@@ -40,7 +40,7 @@ extension CollectionForm: View {
                 #endif
             } else if collection.access.level >= .member {
                 ActionButton(message: "This action will delete collection and all nested collections.\nItems will be moved to Trash.", role: .destructive, action: delete) {
-                    Text("Delete collection").frame(maxWidth: .infinity)
+                    Text("Delete").frame(maxWidth: .infinity)
                 }
                     .buttonStyle(.borderless)
                     .tint(.red)

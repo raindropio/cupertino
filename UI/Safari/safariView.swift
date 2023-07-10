@@ -3,14 +3,14 @@ import SwiftUI
 
 public extension View {
     func safariView(isPresented: Binding<Bool>, url: URL, button: SafariActivityButton? = nil) -> some View {
-        sheet(isPresented: isPresented) {
+        fullScreenCover(isPresented: isPresented) {
             PlatformSafariView(url: url, button: button)
                 .ignoresSafeArea()
         }
     }
     
     func safariView(item: Binding<URL?>, button: SafariActivityButton? = nil) -> some View {
-        sheet(item: ItemURL.binding(item)) {
+        fullScreenCover(item: ItemURL.binding(item)) {
             PlatformSafariView(url: $0.id, button: button)
                 .ignoresSafeArea()
         }

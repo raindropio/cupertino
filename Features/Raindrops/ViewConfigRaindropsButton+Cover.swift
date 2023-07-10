@@ -36,8 +36,8 @@ extension ViewConfigRaindropsButton {
             Section {
                 switch view {
                 case .list, .simple:
-                    Toggle(isOn: right) {
-                        Label("Thumbnail right", systemImage: "rectangle.righthalf.inset.filled.arrow.right")
+                    Button { right.wrappedValue.toggle() } label: {
+                        Label("Thumbnail \(right.wrappedValue ? "left" : "right")", systemImage: "rectangle.\(right.wrappedValue ? "left" : "right")half.inset.filled.arrow.\(right.wrappedValue ? "left" : "right")")
                     }
                     
                 case .grid, .masonry:
