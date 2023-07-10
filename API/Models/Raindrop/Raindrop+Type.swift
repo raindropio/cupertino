@@ -30,11 +30,11 @@ public enum RaindropType: String, Codable, CaseIterable {
     public var systemImage: String {
         switch self {
         case .link: return "link"
-        case .article: return "square.text.square"
+        case .article: return "doc.plaintext"
         case .image: return "photo"
         case .audio: return "music.note"
-        case .video: return "play.square"
-        case .document: return "doc.text"
+        case .video: return "play"
+        case .document: return "doc"
         case .book: return "book"
         }
     }

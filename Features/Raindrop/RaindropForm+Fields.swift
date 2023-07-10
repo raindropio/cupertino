@@ -58,7 +58,6 @@ extension RaindropForm.Fields: View {
                         .cornerRadius(6)
                         .overlay(
                             RoundedRectangle(cornerRadius: 6, style: .continuous)
-                                .inset(by: 0.5)
                                 .stroke(.quaternary, lineWidth: 0.5)
                         )
                 }
