@@ -12,6 +12,8 @@ struct FindCollections<T: Hashable>: View {
             user: c.state.find(search),
             tag: tag
         )
+        
+        CreateCollection(search: search)
     }
 }
 
@@ -48,5 +50,22 @@ extension FindCollections where T == FindBy {
     init(_ search: String) {
         self.search = search
         self.tag = { .init($0) }
+    }
+}
+
+fileprivate struct CreateCollection: View {
+    @EnvironmentObject private var dispatch: Dispatcher
+    var search: String
+
+    var body: some View {
+        Section {
+            ActionButton {
+                var collection = UserCollection.new()
+                collection.title = search
+                try await dispatch(CollectionsAction.create(collection))
+            } label: {
+                Label("Create \(search)", systemImage: "folder.badge.plus")
+            }
+        }
     }
 }

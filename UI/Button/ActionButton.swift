@@ -60,7 +60,7 @@ extension ActionButton: View {
         Button(
             role: role,
             action: {
-                Task { await press() }
+                Task.detached { await press() }
             },
             label: status
         )

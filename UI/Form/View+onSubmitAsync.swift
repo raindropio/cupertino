@@ -32,7 +32,7 @@ fileprivate struct OnSubmitAsync: ViewModifier {
             .environment(\.submitting, submitting)
             .animation(.default, value: submitting)
             .onSubmit {
-                Task { try? await submit() }
+                Task.detached { try? await submit() }
             }
             .alert(
                 "Error",
