@@ -34,6 +34,7 @@ struct SplitView: View {
                 .toolbarTitleMenu{}.id(isPhone ? path.sidebar : nil)
         }
             //split view specific
+            .navigationSplitViewFixLostState()
             .navigationSplitViewUnlockSize()
             .navigationSplitViewPhoneStack()
             .containerSizeClass()

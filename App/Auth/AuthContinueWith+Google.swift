@@ -15,7 +15,7 @@ extension AuthContinueWith {
         }
         
         var body: some View {
-            SignInWithGoogleButton(.compact, onCompletion: googleAuth)
+            SignInWithGoogleButton(.continue, onCompletion: googleAuth)
                 .opacity(isEnabled ? 1 : 0.4)
         }
     }

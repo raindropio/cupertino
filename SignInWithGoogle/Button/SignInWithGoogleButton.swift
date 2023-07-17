@@ -46,12 +46,13 @@ extension SignInWithGoogleButton: View {
                 Text(label.text)
                     .foregroundColor(.primary)
             }
-                .minimumScaleFactor(0.8)
+                .minimumScaleFactor(0.7)
                 .fontWeight(.medium)
                 .lineLimit(1)
-                .frame(maxHeight: .infinity)
+                .frame(maxWidth: .infinity, maxHeight: .infinity)
         }
             .buttonStyle(.bordered)
+            .frame(maxWidth: .infinity)
             .onOpenURL {
                 GIDSignIn.sharedInstance.handle($0)
             }

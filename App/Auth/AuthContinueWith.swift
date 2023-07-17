@@ -31,16 +31,23 @@ extension AuthContinueWith {
 //MARK: View
 extension AuthContinueWith: View {
     var body: some View {
-        #if canImport(AppKit)
-        Divider().padding(.vertical, 4)
-        #endif
-        
         Section {
-            HStack(spacing: 16) {
-                Apple(action: process)
-                Google(action: process)
-                JWT(action: process)
+            VStack(spacing: 12) {
+                Group {
+                    Apple(action: process)
+                    Google(action: process)
+                    JWT(action: process)
+                }
+                .frame(height: 45)
             }
+        } header: {
+            HStack(spacing: 24) {
+                VStack { Divider() }.frame(maxWidth: .infinity)
+                Text("Or")
+                VStack { Divider() }.frame(maxWidth: .infinity)
+            }
+                .padding(.vertical)
+                .padding(.bottom)
         }
             .clearSection()
             .disabled(loading)

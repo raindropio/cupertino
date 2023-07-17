@@ -23,27 +23,21 @@ extension AuthContinueWith {
         }
         
         var body: some View {
-            Menu {
-                Button("Continue with") {}.disabled(true)
-                
+            HStack {
                 Button { start(.facebook) } label: {
                     Label("Facebook", image: "facebook-circle-fill")
+                        .foregroundColor(.secondary)
+                        .frame(maxWidth: .infinity, maxHeight: .infinity)
                 }
                 
                 Button { start(.vkontakte) } label: {
                     Label("VK", image: "vk-fill")
+                        .foregroundColor(.secondary)
+                        .frame(maxWidth: .infinity, maxHeight: .infinity)
                 }
-            } label: {
-                Image(systemName: "ellipsis")
-                    .fontWeight(.bold)
-                    .foregroundColor(.secondary)
-                    .frame(width: height, height: height)
-                    .background(.secondary.opacity(0.15))
-                    .clipShape(RoundedRectangle(cornerRadius: 8))
             }
-                .tint(.primary)
-                .menuIndicator(.hidden)
-                .fixedSize()
+                .buttonStyle(.bordered)
+                .labelStyle(.iconOnly)
         }
     }
 }

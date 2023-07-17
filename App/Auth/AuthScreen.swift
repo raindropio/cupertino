@@ -75,7 +75,6 @@ struct AuthScreen: View {
                     NavigationStack(root: AuthLogIn.init)
                         .modifier(AuthTFA())
                         .modifier(AuthSuccess())
-                        .presentationDetents([.height(360)])
                         .frame(idealWidth: 360)
                 }
                 .sheet(isPresented: $signup) {

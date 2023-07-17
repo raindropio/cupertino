@@ -26,6 +26,9 @@ extension NSVUW {
             
             svc.minimumPrimaryColumnWidth = 0
             svc.maximumPrimaryColumnWidth = view.frame.width / 2
+            if svc.maximumPrimaryColumnWidth < 400 {
+                svc.maximumPrimaryColumnWidth = view.frame.width * 0.9
+            }
                         
             if svc.style == .tripleColumn {
                 svc.minimumSupplementaryColumnWidth = 0

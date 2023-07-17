@@ -59,8 +59,6 @@ fileprivate struct RestoreSceneValue<V: Codable & Equatable>: ViewModifier {
             .onDisappear(perform: save)
             .onChange(of: scenePhase) {
                 switch $0 {
-                case .active: //important on ipad
-                    restore()
                 case .background:
                     save()
                 default:

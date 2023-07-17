@@ -5,7 +5,7 @@ import Features
 
 extension Browser {
     struct Toolbar {
-        @Environment(\.horizontalSizeClass) private var horizontalSizeClass
+        @Environment(\.containerHorizontalSizeClass) private var horizontalSizeClass
         @Environment(\.verticalSizeClass) private var verticalSizeClass
         @EnvironmentObject private var dispatch: Dispatcher
         @Environment(\.dismiss) private var dismiss

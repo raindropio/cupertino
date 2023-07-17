@@ -46,10 +46,13 @@ struct AuthLogIn: View {
                 SecureField("Password", text: $form.password)
                     .submitLabel(.done)
                     .backport.focused($focus, equals: .password)
+            } footer: {
+                SafariLink("Forgot password?", destination: URL(string: "https://app.raindrop.io/account/lost")!)
+                    .controlSize(.small)
+                    .frame(maxWidth: .infinity, alignment: .trailing)
             }
             
-            SubmitButton("Sign in")
-                .disabled(!form.isValid)
+            SubmitButton("Continue")
             
             AuthContinueWith()
                 .opacity(form.isEmpty ? 1 : 0)
@@ -68,10 +71,6 @@ struct AuthLogIn: View {
             .scenePadding()
             #endif
             .toolbar {
-                ToolbarItem {
-                    SafariLink("Forgot?", destination: URL(string: "https://app.raindrop.io/account/lost")!)
-                }
-                
                 ToolbarItem(placement: .cancellationAction) {
                     Button("Cancel", role: .cancel, action: dismiss.callAsFunction)
                 }
