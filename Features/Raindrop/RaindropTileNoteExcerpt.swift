@@ -15,6 +15,7 @@ public struct RaindropTitleNoteExcerpt: View {
             if container?.hide.contains(.title) != true {
                 Text(raindrop.title)
                     .fontWeight(.semibold)
+                    .allowsHitTesting(false)
             }
             
             Group {
@@ -22,6 +23,7 @@ public struct RaindropTitleNoteExcerpt: View {
                     Text(LocalizedStringKey(raindrop.note))
                 } else if !raindrop.excerpt.isEmpty, container?.hide.contains(.excerpt) != true {
                     Text(raindrop.excerpt)
+                        .allowsHitTesting(false)
                 }
             }
                 .font(.callout)

@@ -36,7 +36,7 @@ struct SettingsAccount: View {
                         edit = .account
                     }
 
-                    ActionButton("Logout", role: .destructive) {
+                    ActionButton("Logout", role: .destructive, confirm: false) {
                         try await dispatch(AuthAction.logout)
                     }
                 }
