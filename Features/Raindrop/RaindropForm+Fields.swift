@@ -52,7 +52,7 @@ extension RaindropForm.Fields: View {
                 Button { cover.toggle() } label: {
                     Thumbnail(
                         (raindrop.isNew ? raindrop.cover : Rest.renderImage(raindrop.cover, options: .optimalSize)) ?? Rest.renderImage(raindrop.link, options: .optimalSize),
-                        width: 63,
+                        width: 54,
                         height: 54
                     )
                         .cornerRadius(6)
@@ -143,7 +143,7 @@ extension RaindropForm.Fields: View {
                 }
                     .buttonStyle(.plain)
             }
-                .listItemTint(raindrop.important ? .fixed(.accentColor) : .monochrome)
+                .listItemTint(raindrop.important ? .fixed(Filter.Kind.important.color) : .monochrome)
                 .symbolVariant(raindrop.important ? .fill : .none)
         }
             .listItemTint(.monochrome)

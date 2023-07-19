@@ -29,8 +29,6 @@ extension RaindropForm {
                     .frame(maxWidth: .infinity)
                     .multilineTextAlignment(.center)
                     .textCase(.none)
-                    .foregroundStyle(.tertiary)
-                    .font(.subheadline)
                     .scenePadding(.top)
                 }
             }

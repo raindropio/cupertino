@@ -71,9 +71,7 @@ extension AuthTFA {
                     .navigationTitle("Two-Factor Auth")
                     .navigationBarTitleDisplayMode(.inline)
                     .toolbar {
-                        ToolbarItem(placement: .cancellationAction) {
-                            Button("Cancel", action: dismiss.callAsFunction)
-                        }
+                        CancelToolbarItem()
                     }
             }
         }

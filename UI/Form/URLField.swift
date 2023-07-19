@@ -6,8 +6,9 @@ public struct URLField {
     var title: String
     @Binding var value: URL?
     var prompt: Text?
+    var axis: Axis?
     
-    public init(_ title: String = "", value: Binding<URL>, prompt: Text? = nil) {
+    public init(_ title: String = "", value: Binding<URL>, prompt: Text? = nil, axis: Axis? = nil) {
         self.title = title
         self._value = .init(get: {
             value.wrappedValue
@@ -17,18 +18,27 @@ public struct URLField {
             }
         })
         self.prompt = prompt
+        self.axis = axis
     }
     
-    public init(_ title: String = "", value: Binding<URL?>, prompt: Text? = nil) {
+    public init(_ title: String = "", value: Binding<URL?>, prompt: Text? = nil, axis: Axis? = nil) {
         self.title = title
         self._value = value
         self.prompt = prompt
+        self.axis = axis
     }
 }
 
 extension URLField: View {
     public var body: some View {
-        TextField(title, text: $temp, prompt: prompt)
+        Group {
+            if let axis {
+                TextField(title, text: $temp, prompt: prompt, axis: axis)
+                    .preventLineBreaks(text: $temp)
+            } else {
+                TextField(title, text: $temp, prompt: prompt)
+            }
+        }
             .task(id: value) { temp = value?.absoluteString ?? "" }
             .task(id: temp) { value = URL(string: temp) }
             #if os(iOS)

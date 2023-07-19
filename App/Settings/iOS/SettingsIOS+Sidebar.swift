@@ -83,9 +83,7 @@ extension SettingsIOS {
             .navigationTitle("Settings")
             .labelStyle(.sidebar)
             .toolbar {
-                ToolbarItem(placement: .confirmationAction) {
-                    Button("Done", action: dismiss.callAsFunction)
-                }
+                DoneToolbarItem()
             }
         }
     }

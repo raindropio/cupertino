@@ -3,7 +3,6 @@ import API
 import UI
 
 struct SettingsWebApp: View {
-    @Environment(\.dismiss) private var dismiss
     @StateObject private var page = WebPage()
     var subpage: Subpage
     
@@ -20,12 +19,6 @@ struct SettingsWebApp: View {
             #if canImport(UIKit)
             .navigationBarTitleDisplayMode(.inline)
             #endif
-            .onChange(of: page.url) {
-                //fix AppStore review
-                if $0 == URL(string: "https://raindrop.io/pro/buy") {
-                    dismiss()
-                }
-            }
     }
 }
 

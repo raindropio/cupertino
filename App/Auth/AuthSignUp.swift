@@ -76,9 +76,7 @@ struct AuthSignup: View {
             .scenePadding()
             #endif
             .toolbar {
-                ToolbarItem(placement: .cancellationAction) {
-                    Button("Cancel", role: .cancel, action: dismiss.callAsFunction)
-                }
+                CancelToolbarItem()
             }
     }
 }

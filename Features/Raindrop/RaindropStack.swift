@@ -1,5 +1,6 @@
 import SwiftUI
 import API
+import UI
 
 public func RaindropStack<C: View>(_ id: Raindrop.ID, content: @escaping (Binding<Raindrop>) -> C) -> some View {
     ById(id: id, content: content)
@@ -124,8 +125,10 @@ fileprivate struct Stack<C: View>: View {
                 .disabled(loading)
                 .animation(.easeInOut(duration: 0.2), value: [loading, draft.isNew])
                 .toolbar {
-                    ToolbarItem(placement: draft.isNew ? .cancellationAction : .confirmationAction) {
-                        Button(draft.isNew ? "Cancel" : "Done", action: dismiss.callAsFunction)
+                    if draft.isNew {
+                        CancelToolbarItem()
+                    } else {
+                        DoneToolbarItem()
                     }
                 }
         }

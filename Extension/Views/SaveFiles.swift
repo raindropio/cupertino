@@ -1,11 +1,10 @@
 import SwiftUI
 import API
+import UI
 import Features
 import Backport
 
 struct SaveFiles: View {
-    @Environment(\.dismiss) private var dismiss
-    
     var urls: Set<URL>
     @State var collection: Int?
     
@@ -24,9 +23,7 @@ struct SaveFiles: View {
                         .navigationBarTitleDisplayMode(.inline)
                         #endif
                         .toolbar {
-                            ToolbarItem(placement: .cancellationAction) {
-                                Button("Cancel", role: .cancel, action: dismiss.callAsFunction)
-                            }
+                            CancelToolbarItem()
                         }
                 }
             }

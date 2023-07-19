@@ -40,9 +40,7 @@ struct AddURL: View {
                 .textFieldStyle(.roundedBorder)
                 #endif
                 .toolbar {
-                    ToolbarItem(placement: .cancellationAction) {
-                        Button("Cancel", action: dismiss.callAsFunction)
-                    }
+                    CancelToolbarItem()
                 }
         }
             .presentationDetents([.fraction(0.333)])

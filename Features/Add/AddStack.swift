@@ -83,13 +83,7 @@ extension AddStack: View {
                 .navigationBarTitleDisplayMode(.inline)
                 #endif
                 .toolbar {
-                    ToolbarItem(placement: .cancellationAction) {
-                        Button(action: dismiss.callAsFunction) {
-                            Image(systemName: "xmark.circle.fill")
-                                .symbolRenderingMode(.hierarchical)
-                        }
-                            .tint(.secondary)
-                    }
+                    CancelToolbarItem()
                 }
         }
             .animation(.spring(), value: isCompleteAll)

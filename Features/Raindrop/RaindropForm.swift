@@ -42,7 +42,11 @@ extension RaindropForm: View {
             .toolbar {
                 if raindrop.isNew {
                     ToolbarItem(placement: .confirmationAction) {
-                        SubmitButton("Save")
+                        SubmitButton {
+                            Text("Save")
+                                .padding(.horizontal, 3)
+                        }
+                            .buttonBorderShape(.capsule)
                     }
                 }
             }

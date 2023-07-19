@@ -4,6 +4,8 @@ public struct SubmitButton<Label>: View where Label: View {
     @Environment(\.onSubmitAction) private var onSubmitAction
     @Environment(\.submitting) private var submitting
     @Environment(\.isEnabled) private var isEnabled
+    @Environment(\.defaultMinListRowHeight) private var defaultMinListRowHeight
+
     @ViewBuilder private var label: () -> Label
     
     public init(@ViewBuilder label: @escaping () -> Label) {
@@ -19,12 +21,11 @@ public struct SubmitButton<Label>: View where Label: View {
                 label()
                     .opacity(submitting ? 0 : 1)
             }
-                .frame(maxWidth: .infinity)
+                .frame(maxWidth: .infinity, maxHeight: .infinity)
         }
             .buttonStyle(.borderedProminent)
             .fontWeight(.semibold)
-            .listRowBackground(isEnabled ? Color.accentColor : Color.black.opacity(0))
-            .listRowInsets(.init())
+            .clearSection()
     }
 }
 

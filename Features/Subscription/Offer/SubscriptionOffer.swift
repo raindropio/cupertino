@@ -29,24 +29,27 @@ public struct SubscriptionOffer: View {
     }
     
     public var body: some View {
-        Group {
-            #if canImport(UIKit)
-            form
-                .backport.scrollBounceBehavior(.basedOnSize)
-                .toolbar {
-                    ToolbarItem {
-                        ActionButton("Restore") {
-                            try await dispatch(SubscriptionAction.restore)
+        if purchase {
+            PurchaseStack()
+        } else {
+            Group {
+                #if canImport(UIKit)
+                form
+                    .backport.scrollBounceBehavior(.basedOnSize)
+                    .toolbar {
+                        ToolbarItem {
+                            ActionButton("Restore") {
+                                try await dispatch(SubscriptionAction.restore)
+                            }
                         }
                     }
+                #else
+                ScrollView {
+                    form
                 }
-            #else
-            ScrollView {
-                form
-            }
                 .frame(idealHeight: 400)
-            #endif
-        }
+                #endif
+            }
             .animation(nil, value: pro)
             .safeAreaInset(edge: .bottom) {
                 if pro {
@@ -55,7 +58,7 @@ public struct SubscriptionOffer: View {
                         ActionButton("Restore") {
                             try await dispatch(SubscriptionAction.restore)
                         }
-                            .background(.bar)
+                        .background(.bar)
                         #endif
                         
                         Button {
@@ -65,15 +68,15 @@ public struct SubscriptionOffer: View {
                                 .fontWeight(.semibold)
                                 .frame(maxWidth: .infinity)
                         }
-                            .buttonStyle(.borderedProminent)
+                        .buttonStyle(.borderedProminent)
                     }
-                        .controlSize(.large)
-                        .scenePadding()
-                        .scenePadding(.horizontal)
-                        .transition(.move(edge: .bottom).combined(with: .offset(y: 20)))
+                    .controlSize(.large)
+                    .scenePadding()
+                    .scenePadding(.horizontal)
+                    .transition(.move(edge: .bottom).combined(with: .offset(y: 20)))
                 }
             }
             .animation(.spring(), value: pro)
-            .sheet(isPresented: $purchase, content: PurchaseStack.init)
+        }
     }
 }

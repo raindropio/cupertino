@@ -40,8 +40,10 @@ fileprivate struct Stack<C: View>: View {
         NavigationStack {
             content($draft)
                 .toolbar {
-                    ToolbarItem(placement: draft.isNew ? .cancellationAction : .confirmationAction) {
-                        Button(draft.isNew ? "Cancel" : "Done", action: dismiss.callAsFunction)
+                    if draft.isNew {
+                        CancelToolbarItem()
+                    } else {
+                        DoneToolbarItem()
                     }
                 }
         }

@@ -48,9 +48,7 @@ extension ReaderAppearance: View {
                 .navigationBarTitleDisplayMode(.inline)
                 #endif
                 .toolbar {
-                    ToolbarItem(placement: .confirmationAction) {
-                        Button("Done", action: dismiss.callAsFunction)
-                    }
+                    DoneToolbarItem()
                 }
         }
             .presentationDetents([.medium])

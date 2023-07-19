@@ -14,35 +14,18 @@ struct PurchaseStack: View {
     }
     
     var body: some View {
-        NavigationStack {
-            Group {
-                if products.isEmpty {
-                    ProgressView()
-                        .frame(maxWidth: .infinity, maxHeight: .infinity)
-                } else {
-                    Products()
-                }
+        Group {
+            if products.isEmpty {
+                ProgressView()
+                    .frame(maxWidth: .infinity, maxHeight: .infinity)
+            } else {
+                Products()
             }
-                .animation(.default, value: products.isEmpty)
-                .reload {
-                    try? await dispatch(SubscriptionAction.products)
-                }
-                .navigationTitle("Select billing cycle")
-                #if canImport(UIKit)
-                .navigationBarTitleDisplayMode(.inline)
-                #endif
-                .backport.presentationBackground(.regularMaterial)
-                .toolbar {
-                    ToolbarItem(placement: .cancellationAction) {
-                        Button(role: .cancel, action: dismiss.callAsFunction) {
-                            Image(systemName: "xmark.circle.fill")
-                                .font(.title3)
-                        }
-                            .foregroundStyle(.tertiary)
-                    }
-                }
         }
-            .presentationDetents([.height(300)])
+            .animation(.default, value: products.isEmpty)
+            .reload {
+                try? await dispatch(SubscriptionAction.products)
+            }
             .tint(.red)
     }
 }

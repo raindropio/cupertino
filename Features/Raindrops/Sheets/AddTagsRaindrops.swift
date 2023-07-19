@@ -41,9 +41,7 @@ struct AddTagsRaindrops: View {
                     }
                 }
                 
-                ToolbarItem(placement: .cancellationAction) {
-                    Button("Cancel", action: dismiss.callAsFunction)
-                }
+                CancelToolbarItem()
             }
     }
 }

@@ -33,6 +33,7 @@ public struct RaindropSuggestedCollections: View {
         } label: {
             CollectionLabel(id)
                 .badge(0)
+                .frame(maxWidth: 175)
         }
             .collectionTint(id)
     }

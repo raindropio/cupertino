@@ -54,9 +54,7 @@ struct MoveRaindrops: View {
                     }
                 }
                 
-                ToolbarItem(placement: .cancellationAction) {
-                    Button("Cancel", action: dismiss.callAsFunction)
-                }
+                CancelToolbarItem()
             }
     }
 }

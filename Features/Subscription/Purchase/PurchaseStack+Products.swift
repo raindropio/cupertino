@@ -26,9 +26,15 @@ extension PurchaseStack {
                         }
                             .badge(product.displayPrice)
                     }
+                } header: {
+                    Text("Select billing cycle")
                 } footer: {
-                    Text("\nAuto-renewable. You will get access to all features in all supported platforms.\n\n") +
-                    Text("All content you made in PRO remains available in free when subscription is canceled.")
+                    (
+                        Text("\nAuto-renewable. You will get access to all features in all supported platforms.\n\n") +
+                        Text("All content you made in PRO remains available in free when subscription is canceled.")
+                    )
+                    .frame(maxWidth: .infinity)
+                    .multilineTextAlignment(.center)
                 }
             }
         }
