@@ -63,7 +63,7 @@ struct AuthLogIn: View {
             .onSubmit(submit)
             #if canImport(UIKit)
             .navigationBarTitleDisplayMode(.inline)
-            .navigationTitle("Welcome back")
+            .navigationTitle("Log In")
             #else
             .formStyle(.columns)
             .textFieldStyle(.roundedBorder)

@@ -36,7 +36,6 @@ extension AuthContinueWith: View {
                 Group {
                     Apple(action: process)
                     Google(action: process)
-                    JWT(action: process)
                 }
                 .frame(height: 45)
             }

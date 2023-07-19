@@ -40,7 +40,7 @@ extension SignInWithGoogleButton: View {
     public var body: some View {
         Button(action: onPress) {
             HStack(spacing: 5) {
-                Image(systemName: "g.circle.fill")
+                Image("google-symbol", bundle: .module)
                     .foregroundColor(.red)
                 
                 Text(label.text)
