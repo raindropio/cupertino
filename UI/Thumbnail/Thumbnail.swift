@@ -17,11 +17,9 @@ public struct Thumbnail {
     var aspectRatio: CGFloat?
     
     static let pipeline: ImagePipeline = {
-        ImageCache.shared.costLimit = 1024 * 1024 * 150 //150mb memory cache
-        
         var configuration = ImagePipeline.Configuration.withDataCache(
             name: "\(Bundle.main.bundleIdentifier!).thumbnail",
-            sizeLimit: ImageCache.shared.costLimit
+            sizeLimit: 1024 * 1024 * 1000 //1000mb disk cache
         )
         configuration.dataCachePolicy = .storeAll
         configuration.isDecompressionEnabled = true
@@ -59,6 +57,12 @@ public struct Thumbnail {
         self.url = url
         self.height = height
         self.aspectRatio = aspectRatio
+    }
+    
+    public init(
+        _ url: URL? = nil
+    ) {
+        self.url = url
     }
 }
 
@@ -104,10 +108,11 @@ extension Thumbnail: View {
                     if (width != nil && height != nil) || aspectRatio != nil {
                         Color.primary.opacity(0.1)
                     }
-                } else if aspectRatio == nil, let url, let ar = aspectCache[url] {                    
+                } else if aspectRatio == nil, let url, let ar = aspectCache[url] {
                     Rectangle().aspectRatio(ar, contentMode: .fit)
                 }
             }
+                .pipeline(Self.pipeline)
                 .onDisappear(.lowerPriority)
                 .onCompletion(onCompletion)
                 .layoutPriority(-1)

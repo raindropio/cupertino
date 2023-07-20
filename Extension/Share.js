@@ -149,7 +149,7 @@ function getItem() {
 
     //highlights
     try {
-        const selectedText = window.getSelection().getRangeAt(0).toString().trim()
+        const selectedText = window.getSelection().toString().trim()
         if (selectedText != '')
             item.highlights = [{ _id: String(new Date().getTime()), text: selectedText }]
     } catch(e) {}

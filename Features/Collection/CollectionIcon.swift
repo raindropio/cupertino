@@ -22,7 +22,12 @@ fileprivate struct CI: View {
                 #if os(macOS)
                 Thumbnail(cover, width: 16, height: 16)
                 #else
-                Thumbnail(cover, width: controlSize == .small ? 16 : 25, height: controlSize == .small ? 16 : 25)
+                //use resize on server to prevent large data load
+                Thumbnail(Rest.renderImage(cover, options: .width(25), .height(25)))
+                    .frame(
+                        width: controlSize == .small ? 16 : 25,
+                        height: controlSize == .small ? 16 : 25
+                    )
                 #endif
             } else {
                 Image(systemName: systemImage)
