@@ -62,9 +62,9 @@ extension SettingsIOS {
                             Label("Backups", systemImage: "clock.arrow.circlepath").tint(.primary)
                         }
                         
-                        SafariLink(destination: URL(string: "https://raindrop.io/download")!) {
-                            Label("Desktop app", systemImage: "desktopcomputer").tint(.primary)
-                        }
+//                        SafariLink(destination: URL(string: "https://raindrop.io/download")!) {
+//                            Label("Desktop app", systemImage: "desktopcomputer").tint(.primary)
+//                        }
                         
                         SafariLink(destination: URL(string: "https://help.raindrop.io/")!) {
                             Label("Help", systemImage: "questionmark.circle").tint(.primary)
