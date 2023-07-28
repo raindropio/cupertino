@@ -4,7 +4,6 @@ import UI
 
 extension RaindropForm {
     struct Fields {
-        @EnvironmentObject private var cfg: ConfigStore
         @State private var cover = false
         @State private var highlights = false
 
@@ -27,24 +26,20 @@ extension RaindropForm.Fields: View {
                         .lineLimit(5)
                     
                     //excerpt
-                    if cfg.state.raindrops.hide[.list]?.contains(.excerpt) == false {
-                        if !raindrop.excerpt.isEmpty || focus == .title || focus == .excerpt {
-                            TextField(text: $raindrop.excerpt, prompt: .init("Add description"), axis: .vertical) {}
-                                .preventLineBreaks(text: $raindrop.excerpt)
-                                .focused($focus, equals: .excerpt)
-                                .foregroundStyle(.secondary)
-                                .font(.subheadline)
-                                .lineLimit(focus == .excerpt ? 5 : 1)
-                                .mask {
-                                    LinearGradient(
-                                        gradient: Gradient(colors: Array(repeating: .black, count: 5) + (focus == .excerpt ? [] : [.clear])),
-                                        startPoint: .leading,
-                                        endPoint: .trailing
-                                    )
-                                    .allowsHitTesting(false)
-                                }
+                    TextField(text: $raindrop.excerpt, prompt: .init("Add description"), axis: .vertical) {}
+                        .preventLineBreaks(text: $raindrop.excerpt)
+                        .focused($focus, equals: .excerpt)
+                        .foregroundStyle(.secondary)
+                        .font(.subheadline)
+                        .lineLimit(focus == .excerpt ? 5 : 1)
+                        .mask {
+                            LinearGradient(
+                                gradient: Gradient(colors: Array(repeating: .black, count: 5) + (focus == .excerpt ? [] : [.clear])),
+                                startPoint: .leading,
+                                endPoint: .trailing
+                            )
+                            .allowsHitTesting(false)
                         }
-                    }
                 }
                     .labelsHidden()
                     .frame(minHeight: 54)
