@@ -26,6 +26,13 @@ public struct Thumbnail {
         configuration.isUsingPrepareForDisplay = true
         configuration.isRateLimiterEnabled = false
         configuration.isProgressiveDecodingEnabled = true
+        
+        configuration.dataLoadingQueue.maxConcurrentOperationCount = 100
+        configuration.imageDecodingQueue.maxConcurrentOperationCount = 100
+        configuration.imageEncodingQueue.maxConcurrentOperationCount = 100
+        configuration.imageProcessingQueue.maxConcurrentOperationCount = 100
+        configuration.imageDecompressingQueue.maxConcurrentOperationCount = 100
+        
         return .init(configuration: configuration)
     }()
     
@@ -109,7 +116,7 @@ extension Thumbnail: View {
                         Color.primary.opacity(0.1)
                     }
                 } else if aspectRatio == nil, let url, let ar = aspectCache[url] {
-                    Rectangle().aspectRatio(ar, contentMode: .fit)
+                    Rectangle().fill(.clear).aspectRatio(ar, contentMode: .fit)
                 }
             }
                 .pipeline(Self.pipeline)
