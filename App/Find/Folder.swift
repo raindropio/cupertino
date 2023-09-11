@@ -16,10 +16,6 @@ struct Folder<H: View>: View {
             header()
             
             if !compact {
-                if sizeClass == .compact {
-                    Status(find: find)
-                }
-                
                 RaindropItems(find)
                 LoadMoreRaindropsButton(find)
             }

@@ -92,7 +92,6 @@
 		769056EC297536570090C1EF /* Find.swift in Sources */ = {isa = PBXBuildFile; fileRef = 769056EB297536570090C1EF /* Find.swift */; };
 		769056F0297539080090C1EF /* Folder+Title.swift in Sources */ = {isa = PBXBuildFile; fileRef = 769056EF297539080090C1EF /* Folder+Title.swift */; };
 		769056F229753E520090C1EF /* Folder+Toolbar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 769056F129753E520090C1EF /* Folder+Toolbar.swift */; };
-		769056F4297547C10090C1EF /* Folder+Status.swift in Sources */ = {isa = PBXBuildFile; fileRef = 769056F3297547C10090C1EF /* Folder+Status.swift */; };
 		769056F62975499D0090C1EF /* Nesteds.swift in Sources */ = {isa = PBXBuildFile; fileRef = 769056F52975499D0090C1EF /* Nesteds.swift */; };
 		7697437429718A6100322290 /* Features in Frameworks */ = {isa = PBXBuildFile; productRef = 7697437329718A6100322290 /* Features */; };
 		769FFF0029CC4C8500C2E6DA /* UniformTypeIdentifiers.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 76DC0B9829AF6C21007B4BDF /* UniformTypeIdentifiers.framework */; };
@@ -264,7 +263,6 @@
 		769056EB297536570090C1EF /* Find.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Find.swift; sourceTree = "<group>"; };
 		769056EF297539080090C1EF /* Folder+Title.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Folder+Title.swift"; sourceTree = "<group>"; };
 		769056F129753E520090C1EF /* Folder+Toolbar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Folder+Toolbar.swift"; sourceTree = "<group>"; };
-		769056F3297547C10090C1EF /* Folder+Status.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Folder+Status.swift"; sourceTree = "<group>"; };
 		769056F52975499D0090C1EF /* Nesteds.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Nesteds.swift; sourceTree = "<group>"; };
 		769FFEFF29CC4C8500C2E6DA /* Action iOS.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = "Action iOS.appex"; sourceTree = BUILT_PRODUCTS_DIR; };
 		769FFF0229CC4C8500C2E6DA /* Action.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Action.xcassets; sourceTree = "<group>"; };
@@ -545,7 +543,6 @@
 			children = (
 				769056EB297536570090C1EF /* Find.swift */,
 				76799F8A299632790042DF78 /* Folder.swift */,
-				769056F3297547C10090C1EF /* Folder+Status.swift */,
 				769056EF297539080090C1EF /* Folder+Title.swift */,
 				769056F129753E520090C1EF /* Folder+Toolbar.swift */,
 				76154C8729C354E5002DDDEB /* Folder+Toolbar+Regular.swift */,
@@ -1024,7 +1021,6 @@
 				76BFE36E291E9F6B00DE9DB2 /* SplitView.swift in Sources */,
 				7685A195286868AC00A4BC3C /* App.swift in Sources */,
 				76E44C4229BA0E86009634C6 /* SettingsAppIcon.swift in Sources */,
-				769056F4297547C10090C1EF /* Folder+Status.swift in Sources */,
 				7653AD2F29E6C0D00046E654 /* AppDelegate.swift in Sources */,
 				76BFE370291E9F6B00DE9DB2 /* SettingsPath.swift in Sources */,
 				76154C8429C349F7002DDDEB /* PasteCommands.swift in Sources */,
@@ -1356,7 +1352,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				MARKETING_VERSION = 5.1.12;
+				MARKETING_VERSION = 5.1.13;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -1411,7 +1407,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				MARKETING_VERSION = 5.1.12;
+				MARKETING_VERSION = 5.1.13;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SWIFT_COMPILATION_MODE = wholemodule;

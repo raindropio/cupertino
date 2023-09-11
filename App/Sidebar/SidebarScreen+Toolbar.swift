@@ -26,13 +26,9 @@ extension SidebarScreen {
                     }
                 }
                 
-                ToolbarItemGroup {
-                    Menu {
-                        Section { CollectionsMenu() }
-                        Section { TagsMenu() }
-                    } label: {
-                        Image(systemName: "ellipsis.circle")
-                    }
+                ToolbarItemGroup(placement: .secondaryAction) {
+                    Section { CollectionsMenu() }
+                    Section { TagsMenu() }
                 }
             }
             #endif

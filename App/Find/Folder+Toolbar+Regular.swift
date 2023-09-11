@@ -8,9 +8,16 @@ extension Folder.Toolbar {
         @EnvironmentObject private var dispatch: Dispatcher
         @Environment(\.containerHorizontalSizeClass) private var sizeClass
         @IsEditing private var isEditing
+        @Environment(\.isSearching) private var isSearching
 
         var find: FindBy
         var pick: RaindropsPick
+        
+        @ViewBuilder
+        private func secondaries() -> some View {
+            SortRaindropsButton(find)
+            ViewConfigRaindropsButton(find)
+        }
         
         func body(content: Content) -> some View {
             content
@@ -19,20 +26,20 @@ extension Folder.Toolbar {
                 #endif
                 .toolbar {
                     if !isEditing {
-                        ToolbarItemGroup {
-                            if sizeClass == .regular {
-                                SortRaindropsButton(find)
-                                ViewConfigRaindropsButton(find)
-                                Spacer()
-                            }
-                        }
+                        ToolbarItemGroup(placement: sizeClass == .compact ? .secondaryAction : .automatic, content: secondaries)
+                    }
                     
-                        ToolbarItemGroup(placement: .primaryAction) {
-                            AddButton(collection: find.collectionId)
-                            if sizeClass == .regular {
-                                Spacer()
+                    if isSearching, sizeClass == .compact {
+                        ToolbarItem(placement: .bottomBar) {
+                            Menu(content: secondaries) {
+                                Image(systemName: "ellipsis.circle")
                             }
                         }
+                    }
+                    
+                    ToolbarItemGroup(placement: .primaryAction) {
+                        AddButton(collection: find.collectionId)
+                            .disabled(isEditing)
                     }
                     
                     if !find.isSearching {

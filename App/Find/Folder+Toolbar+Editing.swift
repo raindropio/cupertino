@@ -18,47 +18,35 @@ extension Folder.Toolbar {
         
         func body(content: Content) -> some View {
             content
-            //.navigationBarBackButtonHidden(isEditing)
             .toolbar {
                 if total > 0 {
-                    //start/cancel
-                    ToolbarItem(placement: isEditing ? .cancellationAction : .automatic) {
-                        EditButton {
-                            if $0 == .active {
-                                Text("Cancel")
-                            } else {
-                                Image(systemName: "checkmark.circle")
-                            }
-                        }
-                    }
-                    
-                    //edit mode
-                    if isEditing {
-                        //select/deselect all
-                        ToolbarItem(placement: (sizeClass == .compact && isSearching) ? .bottomBar : .primaryAction) {
+                    ToolbarItemGroup(
+                        placement: sizeClass == .regular ? .automatic : ( (isEditing || isSearching) ? .bottomBar : .secondaryAction )
+                    ) {
+                        if isEditing {
                             Button(pick.isAll ? "Deselect all" : "Select all", action: toggleAll)
                         }
                         
-                        //actions
-                        ToolbarItemGroup(placement: .bottomBar) {
-                            RaindropsMenu(pick)
+                        EditButton {
+                            Text($0 == .active ? "Cancel" : "Select")
+                        }
+                            .labelStyle(.titleOnly)
+                    }
+                    
+                    if !pick.isEmpty {
+                        ToolbarItemGroup(placement: .status) {
+                            if sizeClass == .compact {
+                                Menu {
+                                    RaindropsMenu(pick)
+                                } label: {
+                                    Text("Actions")
+                                        .fontWeight(.semibold)
+                                }
+                            } else {
+                                RaindropsMenu(pick)
+                            }
                         }
                     }
-                }
-            }
-            //special case for iphone searching
-            .safeAreaInset(edge: .bottom, alignment: .trailing) {
-                if sizeClass == .compact, total > 0, isSearching, find.isSearching {
-                    Button {
-                        UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
-                        withAnimation { isEditing = !isEditing }
-                    } label: {
-                        Image(systemName: isEditing ? "xmark" : "checkmark.circle.fill")
-                            .imageScale(.large)
-                    }
-                        .buttonStyle(.borderedProminent)
-                        .buttonBorderShape(.capsule)
-                        .scenePadding()
                 }
             }
         }

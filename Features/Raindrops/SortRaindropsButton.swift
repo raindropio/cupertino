@@ -39,7 +39,7 @@ extension SortRaindropsButton {
                     .pickerStyle(.inline)
                     .labelStyle(.titleAndIcon)
             } label: {
-                Label(sort.title, systemImage: sort.systemImage)
+                Label("Sort", systemImage: sort.systemImage)
             }
                 .help("Sort")
         }
