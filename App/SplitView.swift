@@ -43,6 +43,6 @@ struct SplitView: View {
             .modifier(ReceivePush())
             //routing
             .modifier(ReceiveDeepLink(path: $path))
-            .restoreSceneValue("app-path", value: $path)
+//            .restoreSceneValue("app-path", value: $path)
     }
 }
