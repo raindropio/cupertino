@@ -28,10 +28,10 @@ public struct Thumbnail {
         configuration.isProgressiveDecodingEnabled = true
         
         configuration.dataLoadingQueue.maxConcurrentOperationCount = 100
-        configuration.imageDecodingQueue.maxConcurrentOperationCount = 100
-        configuration.imageEncodingQueue.maxConcurrentOperationCount = 100
-        configuration.imageProcessingQueue.maxConcurrentOperationCount = 100
-        configuration.imageDecompressingQueue.maxConcurrentOperationCount = 100
+        configuration.imageDecodingQueue.maxConcurrentOperationCount = 10
+        configuration.imageEncodingQueue.maxConcurrentOperationCount = 10
+        configuration.imageProcessingQueue.maxConcurrentOperationCount = 10
+        configuration.imageDecompressingQueue.maxConcurrentOperationCount = 10
         
         return .init(configuration: configuration)
     }()

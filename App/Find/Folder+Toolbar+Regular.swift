@@ -42,9 +42,19 @@ extension Folder.Toolbar {
                             .disabled(isEditing)
                     }
                     
-                    if !find.isSearching {
-                        ToolbarTitleMenu {
-                            CollectionsMenu(find.collectionId)
+                    if sizeClass == .compact {
+                        ToolbarItemGroup(placement: .secondaryAction) {
+                            Section {
+                                CollectionsMenu(find.collectionId)
+                            }
+                        }
+                    } else {
+                        ToolbarItemGroup {
+                            Menu {
+                                CollectionsMenu(find.collectionId)
+                            } label: {
+                                Image(systemName: "ellipsis.circle")
+                            }
                         }
                     }
                 }

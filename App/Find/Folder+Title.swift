@@ -39,9 +39,6 @@ extension Folder.Title {
         func body(content: Content) -> some View {
             content
                 .navigationTitle(scope)
-                #if canImport(UIKit)
-                .navigationBarTitleDisplayMode(.inline)
-                #endif
         }
     }
 }

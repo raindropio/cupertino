@@ -15,8 +15,7 @@ extension SidebarScreen {
             .toolbar {
                 ToolbarItem(placement: .cancellationAction) {
                     DeepLink(.settings()) {
-                        MeLabel()
-                            .labelStyle(.iconOnly)
+                        Image(systemName: "person.crop.circle")
                     }
                 }
                 

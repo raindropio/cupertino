@@ -30,8 +30,6 @@ struct SplitView: View {
                 }
                     .navigationDestination(for: SplitViewPath.Screen.self, destination: screen)
             }
-                //fix title appearance on iOS <=16.3
-                .toolbarTitleMenu{}.id(isPhone ? path.sidebar : nil)
         }
             //split view specific
             .navigationSplitViewFixLostState()
