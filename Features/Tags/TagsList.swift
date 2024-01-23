@@ -59,49 +59,47 @@ extension TagsList {
 
 extension TagsList: View {
     public var body: some View {
-        List {
-            Section {
-                //selected
-                ForEach(selected, id: \.self) { tag in
-                    Button { delete(tag) } label: {
-                        Label {
-                            Text(tag).foregroundColor(.primary)
-                        } icon: {
-                            Image(systemName: "checkmark")
+        VStack(spacing: 0) {
+            TextField("Add tag", text: $new)
+                .backport.focused($focused)
+                #if canImport(UIKit)
+                .textInputAutocapitalization(.never)
+                .keyboardType(.webSearch)
+                .submitLabel(.search)
+                .textFieldStyle(.roundedBorder)
+                .scenePadding(.horizontal)
+                .scenePadding(.bottom)
+                #endif
+            
+            Divider()
+            
+            List {
+                Section {
+                    //selected
+                    ForEach(selected, id: \.self) { tag in
+                        Button { delete(tag) } label: {
+                            Label {
+                                Text(tag).foregroundColor(.primary)
+                            } icon: {
+                                Image(systemName: "checkmark")
+                            }
                         }
                     }
                 }
                 
-                //new
-                Label {
-                    TextField("Add tag", text: $new)
-                        .backport.focused($focused)
-                        #if canImport(UIKit)
-                        .textInputAutocapitalization(.never)
-                        .keyboardType(.webSearch)
-                        .submitLabel(.search)
-                        #endif
-                } icon: {
-                    Button { focused = true } label: {
-                        Image(systemName: "plus")
-                    }
-                        .tint(.gray)
-                }
-                    .listRowBackground(Color.primary.opacity(0.07))
-            }
-            
-            //suggestions
-            Section {
-                ForEach(suggestions, id: \.title) { filter in
-                    Button { add(filter.title) } label: {
-                        Text(filter.title).foregroundColor(.primary)
-                    }
+                //suggestions
+                Section {
+                    ForEach(suggestions, id: \.title) { filter in
+                        Button { add(filter.title) } label: {
+                            Text(filter.title).foregroundColor(.primary)
+                        }
                         .swipeActions { TagsMenu(filter) }
                         .badge(filter.count)
-                }
-            } header: {
-                if !suggestions.isEmpty {
-                    Text("Other")
+                    }
+                } header: {
+                    if !suggestions.isEmpty {
+                        Text("Other")
+                    }
                 }
             }
         }
