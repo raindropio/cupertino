@@ -22,10 +22,12 @@ extension RenderOption: RawRepresentable {
             ]
             
         case .optimalSize:
-            #if canImport(UIKit)
+            #if canImport(UIScreen)
             let maxSize = Int(min(UIScreen.main.bounds.width, UIScreen.main.bounds.height) / 2)
-            #else
+            #elseif canImport(AppKit)
             let maxSize = Int(min(NSScreen.main?.frame.width ?? 1000, NSScreen.main?.frame.height ?? 1000) / 4)
+            #else
+            let maxSize = 1000
             #endif
             
             return [

@@ -1,6 +1,6 @@
 import SwiftUI
 
-#if os(iOS)
+#if canImport(UIKit)
 public struct EditButton<L> : View where L : View {
     @Environment(\.editMode) private var editMode
     var label: (EditMode) -> L

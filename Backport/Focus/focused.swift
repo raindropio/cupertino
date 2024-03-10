@@ -8,13 +8,13 @@ public extension Backport where Wrapped: View {
     func focused<Value: Hashable>(_ binding: FocusState<Value>.Binding, equals value: Value) -> some View {
         content
             .focused(binding, equals: value)
-            #if os(iOS)
+            #if canImport(UIKit)
             .overlay(Proxy(value: value).opacity(0))
             #endif
     }
 }
 
-#if os(iOS)
+#if canImport(UIKit)
 fileprivate struct Proxy<V: Hashable>: UIViewRepresentable {
     var value: V
     @Environment(\.backportDefaultFocus) private var defaultFocus

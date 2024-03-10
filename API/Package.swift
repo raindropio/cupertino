@@ -1,11 +1,12 @@
-// swift-tools-version: 5.7
+// swift-tools-version: 5.9
 import PackageDescription
 
 let package = Package(
     name: "API",
     platforms: [
         .macOS("12.0"),
-        .iOS("15.0")
+        .iOS("15.0"),
+        .visionOS("1.0")
     ],
     products: [
         .library(

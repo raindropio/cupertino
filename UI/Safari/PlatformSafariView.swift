@@ -1,4 +1,4 @@
-#if canImport(UIKit)
+#if os(iOS)
 import SwiftUI
 import SafariServices
 
@@ -34,7 +34,7 @@ struct PlatformSafariView: UIViewControllerRepresentable {
         var environment: EnvironmentValues?
         
         func safariViewControllerDidFinish(_ controller: SFSafariViewController) {
-            environment?.dismiss()
+//            environment?.dismiss()
         }
     }
 }

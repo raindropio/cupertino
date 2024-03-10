@@ -79,7 +79,7 @@ extension AddStack: View {
             }
                 .scenePadding()
                 .navigationTitle("Add to \(c.state.title(collection))")
-                #if os(iOS)
+                #if canImport(UIKit)
                 .navigationBarTitleDisplayMode(.inline)
                 #endif
                 .toolbar {

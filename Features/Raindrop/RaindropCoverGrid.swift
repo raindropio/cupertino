@@ -30,7 +30,7 @@ struct RaindropCoverGrid: View {
             .backport.scrollBounceBehavior(.basedOnSize, axes: [.horizontal, .vertical])
             .ignoresSafeArea(.keyboard)
             .navigationTitle("Cover")
-            #if os(iOS)
+            #if canImport(UIKit)
             .navigationBarTitleDisplayMode(.inline)
             #else
             .frame(idealHeight: 300)
@@ -66,8 +66,10 @@ extension RaindropCoverGrid {
             }
                 .alert("New cover", isPresented: $show) {
                     TextField("URL", text: $url)
+                        #if canImport(UIKit)
                         .keyboardType(.URL)
                         .submitLabel(.done)
+                        #endif
                     
                     Button("Add", action: action)
                     Button("Cancel", role: .cancel) {}

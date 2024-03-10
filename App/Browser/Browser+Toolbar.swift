@@ -58,7 +58,7 @@ extension Browser.Toolbar: ViewModifier {
                     }
                     .sheet(isPresented: $highlights) {
                         RaindropStack($raindrop, content: RaindropHighlights.init)
-                            .frame(idealWidth: 400, idealHeight: 600)
+                            .frame(idealWidth: 600, idealHeight: 600)
                             #if canImport(AppKit)
                             .fixedSize()
                             #endif
@@ -82,7 +82,7 @@ extension Browser.Toolbar: ViewModifier {
                 }
                     .sheet(isPresented: $collection) {
                         RaindropStack($raindrop, content: RaindropCollection.init)
-                            .frame(idealWidth: 400, idealHeight: 600)
+                            .frame(idealWidth: 600, idealHeight: 600)
                             #if canImport(AppKit)
                             .fixedSize()
                             #endif
@@ -102,7 +102,7 @@ extension Browser.Toolbar: ViewModifier {
                 }
                     .sheet(isPresented: $tags) {
                         RaindropStack($raindrop, content: RaindropTags.init)
-                            .frame(idealWidth: 400, idealHeight: 600)
+                            .frame(idealWidth: 600, idealHeight: 600)
                             #if canImport(AppKit)
                             .fixedSize()
                             #endif
@@ -122,7 +122,7 @@ extension Browser.Toolbar: ViewModifier {
                             .frame(idealWidth: 400)
                             .fixedSize()
                             #else
-                            .frame(idealWidth: 400, idealHeight: 600)
+                            .frame(idealWidth: 600, idealHeight: 600)
                             #endif
                     }
                 Spacer()

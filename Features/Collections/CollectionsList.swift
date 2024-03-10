@@ -57,7 +57,7 @@ extension _Optional: View {
                 FindCollections<Int>(search)
             }
         }
-            #if os(iOS)
+            #if canImport(UIKit)
             .listStyle(.insetGrouped)
             .headerProminence(.increased)
             #endif

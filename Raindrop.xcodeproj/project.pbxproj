@@ -23,7 +23,6 @@
 		7613DF6D29C713FD00980E48 /* assets in Resources */ = {isa = PBXBuildFile; fileRef = 7613DF6A29C713FD00980E48 /* assets */; };
 		7613DF6E29C713FD00980E48 /* _locales in Resources */ = {isa = PBXBuildFile; fileRef = 7613DF6B29C713FD00980E48 /* _locales */; };
 		7613DF6F29C713FD00980E48 /* welcome in Resources */ = {isa = PBXBuildFile; fileRef = 7613DF6C29C713FD00980E48 /* welcome */; };
-		76154B6F29C202D6002DDDEB /* Share macOS.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = 76154B6229C202D5002DDDEB /* Share macOS.appex */; platformFilters = (macos, ); settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		76154B7329C2039F002DDDEB /* Main.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76B16BCF2930E6EB00032D7D /* Main.swift */; };
 		76154B7429C203A7002DDDEB /* Share.js in Resources */ = {isa = PBXBuildFile; fileRef = 76B16BD52930F43900032D7D /* Share.js */; };
 		76154B7529C203AF002DDDEB /* ExtensionService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76F282B62934C25400D00363 /* ExtensionService.swift */; };
@@ -38,7 +37,6 @@
 		76154B7F29C20495002DDDEB /* API in Frameworks */ = {isa = PBXBuildFile; productRef = 76154B7E29C20495002DDDEB /* API */; };
 		76154B8129C20495002DDDEB /* Features in Frameworks */ = {isa = PBXBuildFile; productRef = 76154B8029C20495002DDDEB /* Features */; };
 		76154B8329C20495002DDDEB /* UI in Frameworks */ = {isa = PBXBuildFile; productRef = 76154B8229C20495002DDDEB /* UI */; };
-		76154C7129C21039002DDDEB /* WebExtension macOS.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = 76154C5829C21039002DDDEB /* WebExtension macOS.appex */; platformFilters = (macos, ); settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		76154C7529C210E2002DDDEB /* WebExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 767F0944299FD6E100349902 /* WebExtension.swift */; };
 		76154C7E29C212D3002DDDEB /* SettingsMacOS.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76154C7D29C212D3002DDDEB /* SettingsMacOS.swift */; };
 		76154C8029C34794002DDDEB /* Folder+Toolbar+Editing.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76154C7F29C34794002DDDEB /* Folder+Toolbar+Editing.swift */; };
@@ -65,7 +63,7 @@
 		76292CEA2951B86F000E16AA /* SettingsSubscription.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76292CE92951B86F000E16AA /* SettingsSubscription.swift */; };
 		76292CEC2951BC52000E16AA /* SettingsBrowser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76292CEB2951BC52000E16AA /* SettingsBrowser.swift */; };
 		76292CF82952F2CB000E16AA /* PreferredBrowser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76292CF72952F2CB000E16AA /* PreferredBrowser.swift */; };
-		7653AD2D29E6C0AB0046E654 /* PushNotifications in Frameworks */ = {isa = PBXBuildFile; productRef = 7653AD2C29E6C0AB0046E654 /* PushNotifications */; };
+		7653AD2D29E6C0AB0046E654 /* PushNotifications in Frameworks */ = {isa = PBXBuildFile; platformFilter = ios; productRef = 7653AD2C29E6C0AB0046E654 /* PushNotifications */; };
 		7653AD2F29E6C0D00046E654 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7653AD2E29E6C0D00046E654 /* AppDelegate.swift */; };
 		7653AD3129E6C44C0046E654 /* ReceivePush.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7653AD3029E6C44C0046E654 /* ReceivePush.swift */; };
 		76570ADB29DB221E002E5BA1 /* AuthTFA.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76570ADA29DB221E002E5BA1 /* AuthTFA.swift */; };
@@ -78,7 +76,7 @@
 		76799F8B299632790042DF78 /* Folder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76799F8A299632790042DF78 /* Folder.swift */; };
 		767D019A29D5A82400C6DA0E /* SidebarScreen+Search.swift in Sources */ = {isa = PBXBuildFile; fileRef = 767D019929D5A82400C6DA0E /* SidebarScreen+Search.swift */; };
 		767F098C299FD6E200349902 /* WebExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 767F0944299FD6E100349902 /* WebExtension.swift */; };
-		767F09B4299FD94B00349902 /* WebExtension.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = 767F096F299FD6E200349902 /* WebExtension.appex */; platformFilter = ios; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		767F09B4299FD94B00349902 /* WebExtension.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = 767F096F299FD6E200349902 /* WebExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		7685A195286868AC00A4BC3C /* App.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7685A194286868AC00A4BC3C /* App.swift */; };
 		7685A199286868AD00A4BC3C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7685A198286868AD00A4BC3C /* Assets.xcassets */; };
 		76864FBD291EA059000B9B45 /* SidebarScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76864FB5291EA059000B9B45 /* SidebarScreen.swift */; };
@@ -96,7 +94,7 @@
 		7697437429718A6100322290 /* Features in Frameworks */ = {isa = PBXBuildFile; productRef = 7697437329718A6100322290 /* Features */; };
 		769FFF0029CC4C8500C2E6DA /* UniformTypeIdentifiers.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 76DC0B9829AF6C21007B4BDF /* UniformTypeIdentifiers.framework */; };
 		769FFF0329CC4C8500C2E6DA /* Action.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 769FFF0229CC4C8500C2E6DA /* Action.xcassets */; };
-		769FFF0C29CC4C8500C2E6DA /* Action iOS.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = 769FFEFF29CC4C8500C2E6DA /* Action iOS.appex */; platformFilter = ios; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		769FFF0C29CC4C8500C2E6DA /* Action iOS.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = 769FFEFF29CC4C8500C2E6DA /* Action iOS.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		76B16BD02930E6EB00032D7D /* Main.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76B16BCF2930E6EB00032D7D /* Main.swift */; };
 		76B16BD42930F34D00032D7D /* API in Frameworks */ = {isa = PBXBuildFile; productRef = 76B16BD32930F34D00032D7D /* API */; };
 		76B16BD62930F43900032D7D /* Share.js in Resources */ = {isa = PBXBuildFile; fileRef = 76B16BD52930F43900032D7D /* Share.js */; };
@@ -112,7 +110,7 @@
 		76BFE370291E9F6B00DE9DB2 /* SettingsPath.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76BFE36B291E9F6B00DE9DB2 /* SettingsPath.swift */; };
 		76BFE371291E9F6B00DE9DB2 /* AuthScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76BFE36C291E9F6B00DE9DB2 /* AuthScreen.swift */; };
 		76D880DF2930E1FB00D43AD9 /* ExtensionController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76D880DE2930E1FB00D43AD9 /* ExtensionController.swift */; };
-		76D880E62930E1FB00D43AD9 /* Share iOS.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = 76D880DC2930E1FB00D43AD9 /* Share iOS.appex */; platformFilter = ios; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		76D880E62930E1FB00D43AD9 /* Share iOS.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = 76D880DC2930E1FB00D43AD9 /* Share iOS.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		76E44C4029BA0D24009634C6 /* SettingsExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76E44C3F29BA0D24009634C6 /* SettingsExtensions.swift */; };
 		76E44C4229BA0E86009634C6 /* SettingsAppIcon.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76E44C4129BA0E86009634C6 /* SettingsAppIcon.swift */; };
 		76E44C4829BB135B009634C6 /* SettingsExtensions+Share.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76E44C4729BB135B009634C6 /* SettingsExtensions+Share.swift */; };
@@ -135,17 +133,10 @@
 		76F8755629D46A09007C5620 /* UI in Frameworks */ = {isa = PBXBuildFile; productRef = 76F8755529D46A09007C5620 /* UI */; };
 		76F8755829D46A0E007C5620 /* Features in Frameworks */ = {isa = PBXBuildFile; productRef = 76F8755729D46A0E007C5620 /* Features */; };
 		76FECCBF29FBDA3B00639D39 /* AuthContinueWith+Google.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76FECCBE29FBDA3B00639D39 /* AuthContinueWith+Google.swift */; };
-		76FECCC129FBDA9A00639D39 /* SignInWithGoogle in Frameworks */ = {isa = PBXBuildFile; productRef = 76FECCC029FBDA9A00639D39 /* SignInWithGoogle */; };
+		76FECCC129FBDA9A00639D39 /* SignInWithGoogle in Frameworks */ = {isa = PBXBuildFile; platformFilter = ios; productRef = 76FECCC029FBDA9A00639D39 /* SignInWithGoogle */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		76154B6D29C202D6002DDDEB /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 7685A189286868AC00A4BC3C /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 76154B6129C202D5002DDDEB;
-			remoteInfo = Raindrop.io;
-		};
 		76154C6F29C21039002DDDEB /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 7685A189286868AC00A4BC3C /* Project object */;
@@ -159,13 +150,6 @@
 			proxyType = 1;
 			remoteGlobalIDString = 767F096E299FD6E200349902;
 			remoteInfo = "WebExtension iOS";
-		};
-		767F09B829A3592300349902 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 7685A189286868AC00A4BC3C /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 76154C5729C21039002DDDEB;
-			remoteInfo = "WebExtension macOS";
 		};
 		769FFF0A29CC4C8500C2E6DA /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -190,10 +174,8 @@
 			dstPath = "";
 			dstSubfolderSpec = 13;
 			files = (
-				76154C7129C21039002DDDEB /* WebExtension macOS.appex in Embed Foundation Extensions */,
 				769FFF0C29CC4C8500C2E6DA /* Action iOS.appex in Embed Foundation Extensions */,
 				76D880E62930E1FB00D43AD9 /* Share iOS.appex in Embed Foundation Extensions */,
-				76154B6F29C202D6002DDDEB /* Share macOS.appex in Embed Foundation Extensions */,
 				767F09B4299FD94B00349902 /* WebExtension.appex in Embed Foundation Extensions */,
 			);
 			name = "Embed Foundation Extensions";
@@ -710,8 +692,6 @@
 			dependencies = (
 				76D880E52930E1FB00D43AD9 /* PBXTargetDependency */,
 				767F09B6299FD94B00349902 /* PBXTargetDependency */,
-				767F09B929A3592300349902 /* PBXTargetDependency */,
-				76154B6E29C202D6002DDDEB /* PBXTargetDependency */,
 				76154C7029C21039002DDDEB /* PBXTargetDependency */,
 				769FFF0B29CC4C8500C2E6DA /* PBXTargetDependency */,
 			);
@@ -1067,14 +1047,6 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
-		76154B6E29C202D6002DDDEB /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			platformFilters = (
-				macos,
-			);
-			target = 76154B6129C202D5002DDDEB /* Share macOS */;
-			targetProxy = 76154B6D29C202D6002DDDEB /* PBXContainerItemProxy */;
-		};
 		76154C7029C21039002DDDEB /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = 76154C5729C21039002DDDEB /* WebExtension macOS */;
@@ -1082,27 +1054,16 @@
 		};
 		767F09B6299FD94B00349902 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			platformFilter = ios;
 			target = 767F096E299FD6E200349902 /* WebExtension iOS */;
 			targetProxy = 767F09B5299FD94B00349902 /* PBXContainerItemProxy */;
 		};
-		767F09B929A3592300349902 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			platformFilters = (
-				macos,
-			);
-			target = 76154C5729C21039002DDDEB /* WebExtension macOS */;
-			targetProxy = 767F09B829A3592300349902 /* PBXContainerItemProxy */;
-		};
 		769FFF0B29CC4C8500C2E6DA /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			platformFilter = ios;
 			target = 769FFEFE29CC4C8500C2E6DA /* Action iOS */;
 			targetProxy = 769FFF0A29CC4C8500C2E6DA /* PBXContainerItemProxy */;
 		};
 		76D880E52930E1FB00D43AD9 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			platformFilter = ios;
 			target = 76D880DB2930E1FB00D43AD9 /* Share iOS */;
 			targetProxy = 76D880E42930E1FB00D43AD9 /* PBXContainerItemProxy */;
 		};
@@ -1263,9 +1224,13 @@
 				PRODUCT_NAME = WebExtension;
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator xros xrsimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = "1,2,7";
 			};
 			name = Debug;
 		};
@@ -1293,9 +1258,13 @@
 				PRODUCT_NAME = WebExtension;
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator xros xrsimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = "1,2,7";
 				VALIDATE_PRODUCT = YES;
 			};
 			name = Release;
@@ -1450,12 +1419,12 @@
 				PRODUCT_BUNDLE_IDENTIFIER = io.raindrop.ios;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = auto;
-				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator xros xrsimulator";
 				SUPPORTS_MACCATALYST = NO;
 				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = "1,2,7";
 			};
 			name = Debug;
 		};
@@ -1494,12 +1463,12 @@
 				PRODUCT_BUNDLE_IDENTIFIER = io.raindrop.ios;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = auto;
-				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator xros xrsimulator";
 				SUPPORTS_MACCATALYST = NO;
 				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = "1,2,7";
 			};
 			name = Release;
 		};
@@ -1528,9 +1497,13 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator xros xrsimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = "1,2,7";
 			};
 			name = Debug;
 		};
@@ -1559,9 +1532,13 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator xros xrsimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = "1,2,7";
 				VALIDATE_PRODUCT = YES;
 			};
 			name = Release;
@@ -1588,9 +1565,13 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator xros xrsimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = "1,2,7";
 			};
 			name = Debug;
 		};
@@ -1616,9 +1597,13 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator xros xrsimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = "1,2,7";
 				VALIDATE_PRODUCT = YES;
 			};
 			name = Release;

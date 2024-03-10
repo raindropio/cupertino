@@ -41,7 +41,7 @@ extension URLField: View {
         }
             .task(id: value) { temp = value?.absoluteString ?? "" }
             .task(id: temp) { value = URL(string: temp) }
-            #if os(iOS)
+            #if canImport(UIKit)
             .keyboardType(.URL)
             .textContentType(.URL)
             .textInputAutocapitalization(.never)

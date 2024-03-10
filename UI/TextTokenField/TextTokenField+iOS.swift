@@ -36,9 +36,11 @@ extension TextTokenField {
             spellCheckingType = .no
             
             //suggestions view
+            #if os(iOS)
             inputAccessoryView = KeyboardButtons(base.suggestions, onPress: onSuggestionPress)
             inputAssistantItem.leadingBarButtonGroups = []
             inputAssistantItem.trailingBarButtonGroups = []
+            #endif
             
             //events
             self.addTarget(self, action: #selector(textFieldDidChange(_:)), for: .editingChanged)
@@ -70,6 +72,7 @@ extension TextTokenField.Native {
     }
     
     private func updateSuggestions() {
+        #if os(iOS)
         guard let keyboardButtons = inputAccessoryView as? KeyboardButtons
         else { return }
         
@@ -82,6 +85,7 @@ extension TextTokenField.Native {
         }
         
         keyboardButtons.update(available)
+        #endif
     }
     
     private func onSuggestionPress(_ suggestion: String) {

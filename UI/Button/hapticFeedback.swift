@@ -1,6 +1,6 @@
 import SwiftUI
 
-#if canImport(UIKit)
+#if os(iOS)
 public extension EnvironmentValues {
     var hapticFeedback: HapticFeedback {
         self[HapticFeedbackKey.self]

@@ -20,7 +20,9 @@ class ExtensionController: UIViewController {
         
         //Appearance
         view.backgroundColor = .clear
+        #if os(iOS)
         sheetPresentationController?.largestUndimmedDetentIdentifier = .medium
+        #endif
 
         //SwiftUI
         let ui = UIHostingController(rootView: ExtensionUI(service: .init(self.extensionContext)))

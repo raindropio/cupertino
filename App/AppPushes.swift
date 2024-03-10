@@ -1,5 +1,7 @@
 import UIKit
+#if os(iOS)
 import PushNotifications
+#endif
 import API
 
 final class AppPushes: NSObject {
@@ -50,6 +52,7 @@ extension AppPushes: UNUserNotificationCenterDelegate {
 //MARK: - User Registration
 extension AppPushes {
     func link(userId: User.ID) {
+        #if os(iOS)
         PushNotifications.shared.registerForRemoteNotifications()
         PushNotifications.shared.setUserId("\(userId)", tokenProvider: self) { error in
             #if DEBUG
@@ -60,18 +63,22 @@ extension AppPushes {
             }
             #endif
         }
+        #endif
     }
     
     func unlink() {
+        #if os(iOS)
         PushNotifications.shared.clearAllState {
             #if DEBUG
             print("Unlink Pusher Beams")
             #endif
         }
+        #endif
     }
 }
 
 //MARK: - Pusher Beam Token Provider
+#if os(iOS)
 extension AppPushes: TokenProvider {
     func fetchToken(userId: String, completionHandler completion: @escaping (String, Error?) -> Void) throws {
         Task {
@@ -84,3 +91,4 @@ extension AppPushes: TokenProvider {
         }
     }
 }
+#endif

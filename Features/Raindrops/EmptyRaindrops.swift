@@ -44,7 +44,6 @@ struct EmptyRaindrops: View {
                                 Image(systemName: "star")
                             } actions: {
                                 SafariLink("Learn more", destination: URL(string: "https://help.raindrop.io/mobile-app")!)
-                                    .tint(.secondary)
                                     .controlSize(.small)
                             }
                         }

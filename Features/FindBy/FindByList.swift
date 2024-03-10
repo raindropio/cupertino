@@ -77,7 +77,7 @@ extension FindByList: View {
                     .modifier(AllTags.Optional(search: search))
             }
         }
-            #if os(iOS)
+            #if canImport(UIKit)
             .listStyle(.insetGrouped)
             .headerProminence(search.isEmpty ? .increased : .standard)
             #endif

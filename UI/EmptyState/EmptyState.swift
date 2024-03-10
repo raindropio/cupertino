@@ -49,7 +49,7 @@ extension EmptyState: View {
             if let actions {
                 actions()
                     .buttonStyle(.bordered)
-                    #if os(iOS)
+                    #if canImport(UIKit)
                     .buttonBorderShape(.capsule)
                     #endif
                     .tint(.accentColor)

@@ -23,7 +23,7 @@ extension SafariLink where L == Text {
     }
 }
 
-#if canImport(UIKit)
+#if os(iOS)
 extension SafariLink: View {
     private func press() {
         show.toggle()

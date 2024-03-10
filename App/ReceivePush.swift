@@ -1,7 +1,9 @@
 import SwiftUI
 import API
 import UI
+#if os(iOS)
 import PushNotifications
+#endif
 
 struct ReceivePush: ViewModifier {
     @EnvironmentObject private var user: UserStore

@@ -3,13 +3,13 @@ import SwiftUI
 public extension Backport where Wrapped: View {
     func fixSearchAppearance() -> some View {
         content
-            #if os(iOS)
+            #if canImport(UIKit)
             .overlay(Proxy().opacity(0))
             #endif
     }
 }
 
-#if os(iOS)
+#if canImport(UIKit)
 fileprivate struct Proxy: UIViewControllerRepresentable {
     func makeUIViewController(context: Context) -> VC { .init() }
     func updateUIViewController(_ controller: VC, context: Context) {}

@@ -46,7 +46,9 @@ extension DatePresetField: View {
                 maximumDate: maximumDate,
                 displayedComponents: displayedComponents
             )
+                #if canImport(UIKit)
                 .navigationBarTitleDisplayMode(.inline)
+                #endif
                 .toolbar {
                     ToolbarItem(placement: .principal) {
                         label()

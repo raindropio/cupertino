@@ -53,7 +53,7 @@ struct CollectionIconGrid: View {
             }
             .animation(.default, value: isLoading)
             .navigationTitle("Icon")
-            #if os(iOS)
+            #if canImport(UIKit)
             .navigationBarTitleDisplayMode(.inline)
             .searchable(text: $search, placement: .navigationBarDrawer(displayMode: .always))
             #else

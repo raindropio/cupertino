@@ -35,7 +35,9 @@ class KeyboardButtons: UIInputView {
 
 extension KeyboardButtons {
     private struct Hosting: View {
+        #if os(iOS)
         @Environment(\.hapticFeedback) private var hapticFeedback
+        #endif
         @Environment(\.horizontalSizeClass) private var sizeClass
         
         var items: [String] = []
@@ -50,7 +52,9 @@ extension KeyboardButtons {
                         } else {
                             Button(item) {
                                 onPress(item)
+                                #if os(iOS)
                                 hapticFeedback(.rigid)
+                                #endif
                             }
                             Divider()
                         }

@@ -46,7 +46,9 @@ extension RaindropForm: View {
                             Text("Save")
                                 .padding(.horizontal, 3)
                         }
+                            #if canImport(UIKit)
                             .buttonBorderShape(.capsule)
+                            #endif
                     }
                 }
             }

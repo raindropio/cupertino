@@ -10,9 +10,11 @@ public enum RenderOption: Equatable {
     case width(Double)
     case height(Double)
     
-    #if canImport(UIKit)
+    #if canImport(UIScreen)
     case dpr(Double = UIScreen.main.scale)
-    #else
+    #elseif canImport(AppKit)
     case dpr(Double = .init(NSScreen.main?.backingScaleFactor ?? 1))
+    #else
+    case dpr(Double = 3.0)
     #endif
 }

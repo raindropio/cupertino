@@ -3,7 +3,9 @@ import Foundation
 fileprivate let session: URLSession = {
     let configuration = URLSessionConfiguration.default
     configuration.httpMaximumConnectionsPerHost = 100
+    #if canImport(UIKit)
     configuration.multipathServiceType = .handover
+    #endif
     configuration.waitsForConnectivity = true
     return .init(configuration: configuration)
 }()

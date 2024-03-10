@@ -15,7 +15,7 @@ public struct CollectionParent: View {
         CollectionsList($collection.parent)
             .collectionSheets()
             .navigationTitle("Parent")
-            #if os(iOS)
+            #if canImport(UIKit)
             .navigationBarTitleDisplayMode(.inline)
             #endif
             .toolbar {

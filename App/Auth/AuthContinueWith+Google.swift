@@ -1,5 +1,7 @@
 import SwiftUI
+#if os(iOS)
 import SignInWithGoogle
+#endif
 import API
 
 extension AuthContinueWith {
@@ -15,8 +17,10 @@ extension AuthContinueWith {
         }
         
         var body: some View {
+            #if os(iOS)
             SignInWithGoogleButton(.continue, onCompletion: googleAuth)
                 .opacity(isEnabled ? 1 : 0.4)
+            #endif
         }
     }
 }

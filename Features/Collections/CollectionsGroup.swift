@@ -52,6 +52,9 @@ struct CollectionsGroup<T: Hashable>: View {
                 Image(systemName: "plus")
             }
                 .fontWeight(.medium)
+                #if os(visionOS)
+                .buttonStyle(.plain)
+                #endif
         }
     }
 }

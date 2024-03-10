@@ -29,7 +29,9 @@ extension Nesteds {
                     .badge(0)
             }
                 .dropConsumer(to: collection)
+                #if os(iOS)
                 .collectionTint(collection.id)
+                #endif
         }
         
         var body: some View {
@@ -37,8 +39,10 @@ extension Nesteds {
                 StripStack {
                     ForEach(items, content: item)
                 }
+                    #if os(iOS)
                     .tint(.gray)
                     .buttonStyle(.chip)
+                    #endif
                     .disabled(isEditing)
                     .fixedSize(horizontal: false, vertical: true)
                     .animation(.default, value: animation)

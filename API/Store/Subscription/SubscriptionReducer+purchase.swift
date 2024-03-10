@@ -12,6 +12,7 @@ extension SubscriptionReducer {
 
 extension SubscriptionReducer {
     func purchasing(state: S, userRef: User.ID, product: Product) async throws -> ReduxAction? {
+        #if os(iOS)
         let result = try await product.purchase(options: [
             //.simulatesAskToBuyInSandbox(true),
             .custom(key: "userRef", value: Double(userRef))
@@ -37,6 +38,9 @@ extension SubscriptionReducer {
         @unknown default:
             throw RestError.purchaseUnknownStatus
         }
+        #else
+        throw RestError.purchaseUnknownStatus
+        #endif
     }
 }
 

@@ -53,6 +53,6 @@ extension ReaderAppearance: View {
         }
             .presentationDetents([.medium])
             .backport.presentationCompactAdaptation(.none)
-            .frame(idealWidth: 300, idealHeight: 400)
+            .frame(idealWidth: 500, idealHeight: 400)
     }
 }

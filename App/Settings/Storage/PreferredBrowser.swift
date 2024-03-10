@@ -1,6 +1,6 @@
 enum PreferredBrowser: String, CaseIterable {
     case inapp
-    #if canImport(UIKit)
+    #if os(iOS)
     case safari
     #endif
     case system
@@ -12,7 +12,7 @@ enum PreferredBrowser: String, CaseIterable {
     var title: String {
         switch self {
         case .inapp: return "In app"
-        #if canImport(UIKit)
+        #if os(iOS)
         case .safari: return "Safari"
         #endif
         case .system: return "System default"

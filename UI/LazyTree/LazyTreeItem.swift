@@ -35,7 +35,11 @@ extension LazyTreeItem: View {
                         .imageScale(.medium)
                         .rotationEffect(.degrees(expanded ? 0 : -90))
                 }
+                    #if os(visionOS)
+                    .buttonStyle(.plain)
+                    #else
                     .buttonStyle(.borderless)
+                    #endif
             }
         }
     }

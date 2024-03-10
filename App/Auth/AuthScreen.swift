@@ -15,23 +15,23 @@ struct AuthScreen: View {
                 HStack(spacing: 16) {
                     Button { login = true } label: {
                         Text("Log In").frame(maxWidth: .infinity).frame(height: 32)
-                            #if canImport(UIKit)
+                            #if os(iOS)
                             .foregroundColor(.primary)
                             #endif
                     }
                         .buttonStyle(.bordered)
-                        #if canImport(UIKit)
+                        #if os(iOS)
                         .tint(.secondary)
                         #endif
                     
                     Button { signup = true } label: {
                         Text("Sign Up").frame(maxWidth: .infinity).frame(height: 32)
-                            #if canImport(UIKit)
+                            #if os(iOS)
                             .foregroundStyle(.background)
                             #endif
                     }
                         .buttonStyle(.borderedProminent)
-                        #if canImport(UIKit)
+                        #if os(iOS)
                         .tint(.primary)
                         #endif
                 }
@@ -46,7 +46,6 @@ struct AuthScreen: View {
                     .frame(maxWidth: 500)
                 
                 Text("We keep your [data safe](https://help.raindrop.io/about#privacy), never sold.\nNo\u{00a0}limits. Starting from $0.")
-                    .openLinksInSafari()
                     .foregroundStyle(.secondary)
                     .font(.callout)
                     .multilineTextAlignment(.center)
@@ -64,11 +63,12 @@ struct AuthScreen: View {
                     ToolbarItemGroup {
                         Spacer()
                         SafariLink(destination: URL(string: "https://help.raindrop.io/about")!) {
-                            Image(systemName: "questionmark.circle.fill")
-                                .symbolRenderingMode(.hierarchical)
+                            Image(systemName: "questionmark.circle")
                                 .imageScale(.large)
                         }
+                            #if os(iOS)
                             .tint(.secondary)
+                            #endif
                     }
                 }
                 .sheet(isPresented: $login) {
