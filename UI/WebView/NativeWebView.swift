@@ -37,4 +37,8 @@ class NativeWebView: WKWebView {
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
+
+    deinit {
+        cancelables.forEach { $0.cancel() }
+    }
 }

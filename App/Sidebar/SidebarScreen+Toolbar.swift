@@ -15,7 +15,7 @@ extension SidebarScreen {
             .toolbar {
                 ToolbarItem(placement: .cancellationAction) {
                     DeepLink(.settings()) {
-                        Image(systemName: "person.crop.circle")
+                        Image(systemName: "gearshape")
                     }
                 }
                 

@@ -27,8 +27,7 @@ struct Preview: View {
                     return raindrop.link
                 }
             }(),
-            canonical: raindrop.link,
-            caching: .returnCacheDataElseLoad
+            canonical: raindrop.link
         )
     }
     

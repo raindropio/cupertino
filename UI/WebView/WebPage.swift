@@ -80,6 +80,10 @@ public class WebPage: NSObject, ObservableObject {
             }
         }
     }
+
+    deinit {
+        cancellable?.cancel()
+    }
 }
 
 extension WebPage {

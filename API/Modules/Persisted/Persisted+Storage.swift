@@ -35,6 +35,10 @@ extension Persisted {
                 .sink(receiveValue: persist)
                 .store(in: &bag)
         }
+
+        deinit {
+            bag.forEach { $0.cancel() }
+        }
         
         func load(transform: ((Value) -> Value)? = nil) -> Value? {
             guard
