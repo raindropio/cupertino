@@ -15,7 +15,7 @@ struct NoAuth: View {
             .presentationDetents([.medium])
             .backport.presentationBackground(.regularMaterial)
             #if canImport(UIKit)
-            .frame(idealWidth: 400, idealHeight: 400)
+            .frame(idealWidth: 600, idealHeight: 600)
             #else
             .frame(width: 400)
             .fixedSize()

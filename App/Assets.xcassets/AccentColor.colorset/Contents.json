@@ -6,6 +6,18 @@
         "reference" : "systemBlueColor"
       },
       "idiom" : "universal"
+    },
+    {
+      "color" : {
+        "color-space" : "extended-srgb",
+        "components" : {
+          "alpha" : "1.000",
+          "blue" : "1.000",
+          "green" : "0.686",
+          "red" : "0.398"
+        }
+      },
+      "idiom" : "vision"
     }
   ],
   "info" : {
