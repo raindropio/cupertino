@@ -28,9 +28,8 @@ extension Folder.Toolbar {
                         }
                         
                         EditButton {
-                            Text($0 == .active ? "Cancel" : "Select")
+                            Label($0 == .active ? "Cancel" : "Select", systemImage: $0 == .active ? "xmark.circle" : "checkmark.circle")
                         }
-                            .labelStyle(.titleOnly)
                     }
                     
                     if !pick.isEmpty {

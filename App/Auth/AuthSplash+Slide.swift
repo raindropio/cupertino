@@ -19,6 +19,7 @@ extension AuthSplash {
                         .fontWeight(.bold)
                         .font(.largeTitle)
                 }
+                    #if !os(visionOS)
                     .foregroundStyle(
                         .linearGradient(
                             colors: colors,
@@ -26,9 +27,11 @@ extension AuthSplash {
                             endPoint: .bottomTrailing
                         )
                     )
+                    #endif
                 
                 description()
                     .font(.title3)
+                    .fontWeight(.regular)
                     .imageScale(.small)
                     .symbolVariant(.fill)
             }

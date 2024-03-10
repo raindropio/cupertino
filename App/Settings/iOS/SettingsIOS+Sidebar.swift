@@ -37,13 +37,12 @@ extension SettingsIOS {
                         }
                             .listItemTint(.purple)
                         
-                        //Crashing on iPad
-                        if isPhone {
-                            NavigationLink(value: SettingsPath.Screen.appIcon) {
-                                Label("App Icon", systemImage: "square.on.circle").tint(.primary)
-                            }
-                            .listItemTint(.indigo)
+                        #if os(iOS)
+                        NavigationLink(value: SettingsPath.Screen.appIcon) {
+                            Label("App Icon", systemImage: "square.on.circle").tint(.primary)
                         }
+                            .listItemTint(.indigo)
+                        #endif
                         
                         SettingsBrowser()
                             .listItemTint(.cyan)
