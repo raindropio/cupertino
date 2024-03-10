@@ -71,6 +71,7 @@ extension Browser.Toolbar: ViewModifier {
                     ShareLink(item: url)
                 } else {
                     ShareRaindropLink(raindrop)
+                        .equatable()
                 }
             }
             

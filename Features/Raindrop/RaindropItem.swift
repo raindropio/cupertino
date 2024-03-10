@@ -65,6 +65,7 @@ extension RaindropItem: View {
                     .tint(.red)
                 
                 ShareRaindropLink(raindrop)
+                    .equatable()
                     .tint(.blue)
             }
             .draggable(raindrop)

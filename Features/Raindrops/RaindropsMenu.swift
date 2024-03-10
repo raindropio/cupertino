@@ -65,6 +65,7 @@ fileprivate struct _Menu: View {
 
             //share
             ShareRaindropLink(items)
+                .equatable()
             
             //move
             Button { sheet.move(pick) } label: {
