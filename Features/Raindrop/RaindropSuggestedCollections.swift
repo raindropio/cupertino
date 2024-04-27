@@ -13,55 +13,60 @@ public struct RaindropSuggestedCollections: View {
         self._raindrop = raindrop
     }
     
-    //load suggestions
-    @Sendable private func suggest() async {
-        try? await dispatch(RaindropsAction.suggest(raindrop))
-    }
-    
     private var suggestions: [UserCollection.ID] {
         var ids = r.state.suggestions(raindrop.link).collections
             .filter { $0 != lastUsedCollection }
         if let lastUsedCollection, lastUsedCollection > 0, lastUsedCollection != raindrop.collection {
-            ids.insert(lastUsedCollection, at: 0)
+            ids.append(lastUsedCollection)
         }
         return ids
     }
     
-    private func row(_ id: Int) -> some View {
-        Button {
-            raindrop.collection = id
-        } label: {
-            CollectionLabel(id)
-                .badge(0)
-                .frame(maxWidth: 175)
-        }
-            .collectionTint(id)
-    }
-    
     public var body: some View {
-        if raindrop.collection == -1 {
-            ZStack {
-                if !suggestions.isEmpty {
-                    StripStack {
-                        ForEach(suggestions, id: \.self, content: row)
-                            #if canImport(UIKit)
-                            .padding(.vertical, 14)
-                            #endif
-                    }
-                        .buttonStyle(.bordered)
-                        .controlSize(.small)
-                        .tint(.gray)
-                        .foregroundColor(.primary)
-                        .labelStyle(.titleOnly)
-                }
+        Memorized(raindrop: $raindrop, suggestions: suggestions)
+    }
+}
+
+extension RaindropSuggestedCollections {
+    fileprivate struct Memorized: View {
+        @Binding var raindrop: Raindrop
+        var suggestions: [UserCollection.ID]
+        
+        func row(_ id: Int) -> some View {
+            Button {
+                raindrop.collection = id
+            } label: {
+                CollectionLabel(id)
+                    .badge(0)
+                    .frame(maxWidth: 175)
             }
-                .fixedSize(horizontal: false, vertical: true)
-                .contentTransition(.opacity)
-                .transition(.opacity)
-                .animation(.default, value: raindrop.collection)
-                .animation(.default, value: !suggestions.isEmpty)
-                .task(suggest)
-                .clearSection()
+                .collectionTint(id)
+        }
+        
+        var body: some View {
+            if raindrop.collection < 0 {
+                ZStack {
+                    if !suggestions.isEmpty {
+                        StripStack {
+                            ForEach(suggestions, id: \.self, content: row)
+                                #if canImport(UIKit)
+                                .padding(.vertical, 14)
+                                #endif
+                        }
+                            .buttonStyle(.bordered)
+                            .controlSize(.small)
+                            .tint(.gray)
+                            .foregroundColor(.primary)
+                            .labelStyle(.titleOnly)
+                    }
+                }
+                    .fixedSize(horizontal: false, vertical: true)
+                    .contentTransition(.opacity)
+                    .transition(.opacity)
+                    .animation(.default, value: raindrop.collection)
+                    .animation(.default, value: !suggestions.isEmpty)
+                    .clearSection()
+            }
         }
     }
 }

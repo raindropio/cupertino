@@ -8,6 +8,16 @@ public struct MeLabel: View {
     public init() {}
 
     public var body: some View {
-        UserRow(user.state.me)
+        Memorized(user: user.state.me)
+    }
+}
+
+extension MeLabel {
+    fileprivate struct Memorized: View {
+        var user: User?
+        
+        public var body: some View {
+            UserRow(user)
+        }
     }
 }

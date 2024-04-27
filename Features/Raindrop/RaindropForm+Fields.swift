@@ -89,8 +89,8 @@ extension RaindropForm.Fields: View {
         }
             .listItemTint(.monochrome)
         
+        //tags
         Section {
-            //tags
             NavigationLink {
                 RaindropTags($raindrop)
             } label: {
@@ -101,7 +101,12 @@ extension RaindropForm.Fields: View {
                     Image(systemName: "number")
                 }
             }
-            
+        } footer: {
+            RaindropSuggestedTags($raindrop)
+        }
+            .listItemTint(.monochrome)
+        
+        Section {
             //reminder
             ProGroup {
                 DatePresetField(

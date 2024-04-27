@@ -13,9 +13,22 @@ extension Search {
         func body(content: Content) -> some View {
             content
                 .animation(.default, value: refine.isSearching || isActive)
-                .animation(.default, value: f.state.animation)
-                .animation(.default, value: c.state.animation)
-                .animation(.default, value: rc.state.animation)
+                .modifier(Memorized(f: f.state.animation, c: c.state.animation, rc: rc.state.animation))
+        }
+    }
+}
+
+extension Search.Animations {
+    fileprivate struct Memorized: ViewModifier {
+        var f: UUID
+        var c: UUID
+        var rc: UUID
+        
+        func body(content: Content) -> some View {
+            content
+                .animation(.default, value: f)
+                .animation(.default, value: c)
+                .animation(.default, value: rc)
         }
     }
 }

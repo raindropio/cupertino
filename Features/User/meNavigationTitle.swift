@@ -11,7 +11,17 @@ struct MeNavigationTitle: ViewModifier {
     @EnvironmentObject private var u: UserStore
 
     func body(content: Content) -> some View {
-        content
-            .navigationTitle(u.state.me?.name ?? "")
+        content.modifier(Memorized(name: u.state.me?.name))
+    }
+}
+
+extension MeNavigationTitle {
+    fileprivate struct Memorized: ViewModifier {
+        var name: String?
+        
+        func body(content: Content) -> some View {
+            content
+                .navigationTitle(name ?? "")
+        }
     }
 }

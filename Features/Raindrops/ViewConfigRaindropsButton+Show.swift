@@ -3,17 +3,31 @@ import API
 
 extension ViewConfigRaindropsButton {
     struct Show: View {
-        @EnvironmentObject private var dispatch: Dispatcher
         @EnvironmentObject private var cfg: ConfigStore
         
         var find: FindBy
         var view: CollectionView
         
+        var body: some View {
+            Memorized(raindrops: cfg.state.raindrops, hide: cfg.state.raindrops.hide, find: find, view: view)
+        }
+    }
+}
+
+extension ViewConfigRaindropsButton.Show {
+    fileprivate struct Memorized: View {
+        @EnvironmentObject private var dispatch: Dispatcher
+
+        var raindrops: ConfigRaindrops
+        var hide: [CollectionView: Set<ConfigRaindrops.Element>]
+        var find: FindBy
+        var view: CollectionView
+        
         private func isOn(_ element: ConfigRaindrops.Element) -> Binding<Bool> {
             .init {
-                cfg.state.raindrops.hide[view]?.contains(element) != true
+                hide[view]?.contains(element) != true
             } set: {
-                var config = cfg.state.raindrops
+                var config = raindrops
                 if $0 {
                     config.hide[view]?.remove(element)
                 } else {

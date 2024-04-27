@@ -8,11 +8,22 @@ struct PrefetchRaindropsCovers: ViewModifier {
     
     func body(content: Content) -> some View {
         content
-            .prefetchThumbnails(items: r.state.items(find)) {
-                Rest.renderImage(
-                    $0.cover ?? $0.link,
-                    options: .optimalSize
-                )
-            }
+            .modifier(Memorized(items: r.state.items(find)))
+    }
+}
+
+extension PrefetchRaindropsCovers {
+    fileprivate struct Memorized: ViewModifier {
+        var items: [Raindrop]
+        
+        func body(content: Content) -> some View {
+            content
+                .prefetchThumbnails(items: items) {
+                    Rest.renderImage(
+                        $0.cover ?? $0.link,
+                        options: .optimalSize
+                    )
+                }
+        }
     }
 }
