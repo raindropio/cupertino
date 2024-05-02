@@ -39,7 +39,7 @@ extension SettingsExtensions.Share {
                 pick = true
             } label: {
                 LabeledContent("Default collection") {
-                    CollectionLabel(collection, withLocation: true).badge(0)
+                    CollectionLabel(collection, withLocation: true)
                         .labelStyle(.titleAndIcon)
                         .controlSize(.small)
                         .fixedSize()

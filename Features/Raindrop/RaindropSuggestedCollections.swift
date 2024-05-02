@@ -37,7 +37,6 @@ extension RaindropSuggestedCollections {
                 raindrop.collection = id
             } label: {
                 CollectionLabel(id)
-                    .badge(0)
                     .frame(maxWidth: 175)
             }
                 .collectionTint(id)

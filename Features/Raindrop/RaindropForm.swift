@@ -57,7 +57,7 @@ extension RaindropForm: View {
                     }
                 }
             }
-            .task(suggest)
+            .task(id: raindrop.lastUpdate, suggest)
             .onSubmit(commit)
     }
 }

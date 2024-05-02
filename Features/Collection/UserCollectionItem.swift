@@ -18,6 +18,7 @@ public struct UserCollectionItem: View {
     
     public var body: some View {
         CollectionLabel(collection, withLocation: withLocation)
+            .badge(collection.count)
             .dropConsumer(to: collection)
             .swipeActions(edge: .trailing) {
                 Button {

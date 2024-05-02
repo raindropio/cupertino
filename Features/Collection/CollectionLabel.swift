@@ -39,7 +39,6 @@ fileprivate struct System: View {
         } icon: {
             CollectionIcon(collection)
         }
-            .badge(collection.count)
             .fixedSize(horizontal: false, vertical: true)
             .listItemTint(collection.color)
     }
@@ -68,7 +67,6 @@ fileprivate struct User: View {
         } icon: {
             CollectionIcon(collection)
         }
-            .badge(collection.count)
             .fixedSize(horizontal: false, vertical: true)
             .listItemTint(.monochrome)
     }

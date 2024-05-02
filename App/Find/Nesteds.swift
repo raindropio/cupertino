@@ -26,7 +26,7 @@ extension Nesteds {
         func item(_ collection: UserCollection) -> some View {
             DeepLink(.collection(.open(collection.id))) {
                 CollectionLabel(collection)
-                    .badge(0)
+                    .symbolVariant(.fill)
             }
                 .dropConsumer(to: collection)
                 #if os(iOS)

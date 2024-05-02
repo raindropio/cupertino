@@ -21,7 +21,7 @@ public struct Thumbnail {
             name: "\(Bundle.main.bundleIdentifier!).thumbnail",
             sizeLimit: 1024 * 1024 * 1000 //1000mb disk cache
         )
-        configuration.dataCachePolicy = .storeAll
+        configuration.dataCachePolicy = .storeEncodedImages
         configuration.isDecompressionEnabled = true
         configuration.isUsingPrepareForDisplay = true
         configuration.isRateLimiterEnabled = false

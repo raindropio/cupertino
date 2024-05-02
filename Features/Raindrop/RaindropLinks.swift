@@ -26,7 +26,7 @@ struct RaindropLinks: View {
                 //collection
                 if raindrop.collection != container?.find.collectionId {
                     DeepLink(.collection(.open(raindrop.collection))) {
-                        CollectionLabel(raindrop.collection).badge(0)
+                        CollectionLabel(raindrop.collection)
                     }
                         .tint(.gray)
                 }

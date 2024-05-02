@@ -35,7 +35,6 @@ extension CollectionForm.Fields: View {
                 LabeledContent("Parent") {
                     if let parent = collection.parent {
                         CollectionLabel(parent, withLocation: true)
-                            .badge(0)
                             .labelStyle(.titleAndIcon)
                             .controlSize(.small)
                     } else {

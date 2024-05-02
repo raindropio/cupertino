@@ -10,6 +10,7 @@ struct SystemCollectionItem: View {
     
     var body: some View {
         CollectionLabel(collection)
+            .badge(collection.count)
             .dropConsumer(to: collection.id)
     }
 }
