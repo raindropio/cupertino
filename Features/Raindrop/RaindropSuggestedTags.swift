@@ -29,7 +29,7 @@ extension RaindropSuggestedTags {
         var suggestions: [String]
         
         func row(_ tag: String) -> some View {
-            Button("+\(tag)") {
+            Button(tag) {
                 raindrop.tags.append(tag)
             }
         }
@@ -44,7 +44,7 @@ extension RaindropSuggestedTags {
                                 .padding(.vertical, 14)
                                 #endif
                         }
-                        .buttonStyle(.bordered)
+                        .buttonStyle(.dotted)
                         .controlSize(.small)
                         .tint(.gray)
                         .foregroundColor(.primary)

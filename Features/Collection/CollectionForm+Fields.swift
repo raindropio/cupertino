@@ -24,7 +24,6 @@ extension CollectionForm.Fields: View {
             
             TextField(text: $collection.description, prompt: .init("Description"), axis: .vertical) {}
                 .labelsHidden()
-                .preventLineBreaks(text: $collection.description)
                 .lineLimit(2...)
         }
         

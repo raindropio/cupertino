@@ -1,18 +1,8 @@
 import Foundation
 
 extension Rest {
-    fileprivate static var cache: [URL: URL] = [:]
-
     public static func renderImage(_ url: URL?, options: RenderOption...) -> URL? {
         guard let url else { return nil }
-        
-        //read cache
-        let caching = options == [.optimalSize]
-        if caching {
-            if let cached = cache[url] {
-                return cached
-            }
-        }
         
         guard url.host != base.render.host else { return url }
         
@@ -27,11 +17,6 @@ extension Rest {
             + [.init(name: "url", value: url.absoluteString)]
         
         guard let imageUrl = components.url else { return url }
-        
-        //save to cache
-        if caching {
-            cache[url] = imageUrl
-        }
         
         return imageUrl
     }

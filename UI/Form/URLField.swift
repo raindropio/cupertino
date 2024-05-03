@@ -34,7 +34,6 @@ extension URLField: View {
         Group {
             if let axis {
                 TextField(title, text: $temp, prompt: prompt, axis: axis)
-                    .preventLineBreaks(text: $temp)
             } else {
                 TextField(title, text: $temp, prompt: prompt)
             }

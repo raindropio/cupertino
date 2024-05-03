@@ -5,7 +5,6 @@ import UI
 public struct RaindropSuggestedCollections: View {
     @EnvironmentObject private var r: RaindropsStore
     @EnvironmentObject private var dispatch: Dispatcher
-    @AppStorage("last-used-collection") private var lastUsedCollection: Int?
     
     @Binding var raindrop: Raindrop
     
@@ -14,12 +13,7 @@ public struct RaindropSuggestedCollections: View {
     }
     
     private var suggestions: [UserCollection.ID] {
-        var ids = r.state.suggestions(raindrop.link).collections
-            .filter { $0 != lastUsedCollection }
-        if let lastUsedCollection, lastUsedCollection > 0, lastUsedCollection != raindrop.collection {
-            ids.append(lastUsedCollection)
-        }
-        return ids
+        return r.state.suggestions(raindrop.link).collections
     }
     
     public var body: some View {

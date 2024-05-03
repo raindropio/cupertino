@@ -20,14 +20,12 @@ extension RaindropForm.Fields: View {
                 VStack(spacing: 4) {
                     //title
                     TextField(text: $raindrop.title, prompt: .init("Title"), axis: .vertical) {}
-                        .preventLineBreaks(text: $raindrop.title)
                         .focused($focus, equals: .title)
                         .fontWeight(.semibold)
                         .lineLimit(5)
                     
                     //excerpt
                     TextField(text: $raindrop.excerpt, prompt: .init("Add description"), axis: .vertical) {}
-                        .preventLineBreaks(text: $raindrop.excerpt)
                         .focused($focus, equals: .excerpt)
                         .foregroundStyle(.secondary)
                         .font(.subheadline)

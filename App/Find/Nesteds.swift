@@ -29,9 +29,6 @@ extension Nesteds {
                     .symbolVariant(.fill)
             }
                 .dropConsumer(to: collection)
-                #if os(iOS)
-                .collectionTint(collection.id)
-                #endif
         }
         
         var body: some View {

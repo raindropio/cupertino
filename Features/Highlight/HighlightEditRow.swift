@@ -40,7 +40,6 @@ struct HighlightEditRow: View {
                     .listRowSeparator(.hidden)
                 
                 TextField("Note", text: $highlight.note, axis: .vertical)
-                    .preventLineBreaks(text: $highlight.note)
                     .proEnabled()
                     .textSelection(.enabled)
             } footer: {

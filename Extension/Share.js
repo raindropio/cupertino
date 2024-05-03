@@ -51,6 +51,7 @@ function grabImages() {
             if (images.length >= 9) break
             if (!img.complete || !img.src || img.src.includes('.svg')) continue
             if (!img.offsetParent) continue //is hidden
+            if (img.closest('header, footer, aside')) continue //minor image
     
             const width = Math.min(img.naturalWidth, img.width)
             const height = Math.min(img.naturalHeight, img.height)
@@ -134,11 +135,15 @@ function getItem() {
         ...grabImages()
     ].filter((value, index, self)=>self.indexOf(value) === index)
 
-    if (images.length)
+    if (images.length) {
         item.media = images.map(link=>({
             type: 'image',
             link
         }))
+
+        if (!item.cover)
+            item.cover = images[0]
+    }
 
     //limit length
     if (item.title && item.title.length)
@@ -149,7 +154,7 @@ function getItem() {
 
     //highlights
     try {
-        const selectedText = window.getSelection().toString().trim()
+        const selectedText = window.getSelection().getRangeAt(0).toString().trim()
         if (selectedText != '')
             item.highlights = [{ _id: String(new Date().getTime()), text: selectedText }]
     } catch(e) {}
