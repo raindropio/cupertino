@@ -1,15 +1,5 @@
 import Foundation
 
-fileprivate let session: URLSession = {
-    let configuration = URLSessionConfiguration.default
-    configuration.httpMaximumConnectionsPerHost = 100
-    #if canImport(UIKit)
-    configuration.multipathServiceType = .handover
-    #endif
-    configuration.waitsForConnectivity = true
-    return .init(configuration: configuration)
-}()
-
 final class DefaultFetchDelegate: FetchDelegate {
     let decoder = JSONDecoder()
     let encoder = JSONEncoder()
@@ -184,20 +174,23 @@ extension Fetch {
         guard let url = req.url
         else { throw FetchError.invalidRequest(nil) }
         
-//        #if DEBUG
-//        let start = Date()
-//        defer {
-//            let took = Date().timeIntervalSince(start)
-//            print(req.httpMethod ?? "", req.url?.absoluteString ?? "", String(format: "%.2f", took))
-//        }
-//        #endif
+        #if DEBUG
+        print(req.httpMethod ?? "", req.url?.absoluteString ?? "", "start")
+        #endif
         
         //get and validate
         var result: (Data, URLResponse)
         
         do {
-            result = try await session.reuse(for: req)
+            result = try await URLSession.shared.reuse(for: req)
+            
+            #if DEBUG
+            print(req.httpMethod ?? "", req.url?.absoluteString ?? "", result)
+            #endif
         } catch {
+            #if DEBUG
+            print(req.httpMethod ?? "", req.url?.absoluteString ?? "", error.localizedDescription)
+            #endif
             try Task.checkCancellation()
             throw FetchError.invalidResponse(url, error.localizedDescription)
         }
