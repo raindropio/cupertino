@@ -2,8 +2,8 @@ import Foundation
 
 extension Raindrop {
     public struct File: Codable, Equatable, Hashable {
-        var name: String
-        var size: Int = 0
-        var type: String = "application/octet-stream"
+        public var name: String
+        public var size: Int = 0
+        public var type: String = "application/octet-stream"
     }
 }

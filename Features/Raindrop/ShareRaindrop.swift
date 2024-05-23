@@ -1,5 +1,6 @@
 import SwiftUI
 import API
+import UI
 
 public struct ShareRaindropLink: View, Equatable {
     var raindrops: [Raindrop]
@@ -13,9 +14,12 @@ public struct ShareRaindropLink: View, Equatable {
     }
     
     public var body: some View {
-        if raindrops.count == 1, let raindrop = raindrops.first {
-            ShareLink(item: raindrop.link, subject: .init(raindrop.title), message: .init(raindrop.note), preview: SharePreview(raindrop.title))
+        //file specific
+        if raindrops.count == 1, let raindrop = raindrops.first, raindrop.file != nil {
+            //ShareLink(item: raindrop, preview: SharePreview(raindrop.file?.name ?? "", image: Image(systemName: "cloud")))
+            ShareRemoteFile(raindrop.link, fileName: raindrop.file?.name)
         } else {
+            //crashing when copy share action on iOS 17 when using SharePreview - ShareLink(items: raindrops) { SharePreview($0.title) }
             ShareLink(items: raindrops.map { $0.link })
         }
     }

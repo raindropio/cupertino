@@ -168,6 +168,20 @@ extension Fetch {
     }
 }
 
+//MARK: - Head
+extension Fetch {
+    func head(
+        _ path: String,
+        query: [URLQueryItem]? = nil
+    ) async throws -> URLResponse {
+        let (_, res) = try await request(
+            try urlRequest(path, method: "DELETE", query: query)
+        )
+        
+        return res
+    }
+}
+
 //MARK: - Universal request
 extension Fetch {
     func request(_ req: URLRequest) async throws -> (Data, URLResponse) {

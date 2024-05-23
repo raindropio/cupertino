@@ -4,8 +4,8 @@ import PackageDescription
 let package = Package(
     name: "API",
     platforms: [
-        .macOS("12.0"),
-        .iOS("15.0"),
+        .macOS("13.0"),
+        .iOS("16.0"),
         .visionOS("1.0")
     ],
     products: [
