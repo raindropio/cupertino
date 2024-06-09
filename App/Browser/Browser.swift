@@ -40,5 +40,8 @@ extension Browser: View {
             .modifier(Toolbar(page: page, raindrop: $raindrop))
             .modifier(PageError(page: page, raindrop: $raindrop))
             .modifier(WebHighlights(page: page, raindrop: $raindrop, loading: $loading))
+            #if DEBUG
+            .captureLogs(page)
+            #endif
     }
 }

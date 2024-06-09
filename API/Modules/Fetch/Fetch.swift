@@ -188,9 +188,9 @@ extension Fetch {
         guard let url = req.url
         else { throw FetchError.invalidRequest(nil) }
         
-        #if DEBUG
-        print(req.httpMethod ?? "", req.url?.absoluteString ?? "", "start")
-        #endif
+//        #if DEBUG
+//        print(req.httpMethod ?? "", req.url?.absoluteString ?? "", "start")
+//        #endif
         
         //get and validate
         var result: (Data, URLResponse)
@@ -198,9 +198,9 @@ extension Fetch {
         do {
             result = try await URLSession.shared.reuse(for: req)
             
-            #if DEBUG
-            print(req.httpMethod ?? "", req.url?.absoluteString ?? "", result)
-            #endif
+//            #if DEBUG
+//            print(req.httpMethod ?? "", req.url?.absoluteString ?? "", result)
+//            #endif
         } catch {
             #if DEBUG
             print(req.httpMethod ?? "", req.url?.absoluteString ?? "", error.localizedDescription)

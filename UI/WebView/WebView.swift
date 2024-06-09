@@ -18,7 +18,7 @@ public struct WebView {
 extension WebView: View {
     public var body: some View {
         Holder(page: page, request: request, userAgent: userAgent)
-            .ignoresSafeArea()
+            .ignoresSafeArea(edges: [.top, .horizontal])
             //progress bar
             .overlay(alignment: .topLeading) {
                 ProgressBar(value: page.progress)
