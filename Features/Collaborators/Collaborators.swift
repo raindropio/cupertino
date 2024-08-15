@@ -12,7 +12,6 @@ struct Collaborators: View {
         co.state.users(collection.id)
     }
     
-    @Sendable
     private func unshareCollection() async throws {
         try await dispatch(CollaboratorsAction.deleteAll(collection.id))
     }
@@ -23,7 +22,9 @@ struct Collaborators: View {
                 CollaboratorItem(collection: collection, collaborator: $0)
             }
             
-            ActionButton("Remove all collaborators", role: .destructive, action: unshareCollection)
+            ActionButton("Remove all collaborators", role: .destructive) {
+                try await unshareCollection()
+            }
         }
     }
 }

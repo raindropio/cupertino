@@ -44,6 +44,7 @@ extension CollectionForm: View {
                 }
                     .buttonStyle(.borderless)
                     .tint(.red)
+                    .listRowBackground(Color.red.opacity(0.1))
             }
         }
             .formStyle(.modern)

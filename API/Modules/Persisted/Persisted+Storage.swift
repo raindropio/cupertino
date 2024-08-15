@@ -2,14 +2,14 @@ import Foundation
 import Combine
 
 extension Persisted {
-    class Storage<Value: Codable & Equatable>: Equatable {
-        static func == (lhs: Storage<Value>, rhs: Storage<Value>) -> Bool {
+    class Storage<V: Codable & Equatable>: Equatable {
+        static func == (lhs: Storage<V>, rhs: Storage<V>) -> Bool {
             true
         }
         
         private let encoder = JSONEncoder()
         private let decoder = JSONDecoder()
-        private let publisher: PassthroughSubject<Value, Never> = PassthroughSubject()
+        private let publisher: PassthroughSubject<V, Never> = PassthroughSubject()
         private var bag = Set<AnyCancellable>()
         private var fileUrl: URL?
         
@@ -40,11 +40,11 @@ extension Persisted {
             bag.forEach { $0.cancel() }
         }
         
-        func load(transform: ((Value) -> Value)? = nil) -> Value? {
+        func load(transform: ((V) -> V)? = nil) -> V? {
             guard
                 let fileUrl,
                 let data = FileManager.default.contents(atPath: fileUrl.path),
-                let decoded = try? decoder.decode(Value.self, from: data)
+                let decoded = try? decoder.decode(V.self, from: data)
             else { return nil }
             
             if let transform {
@@ -54,11 +54,11 @@ extension Persisted {
             return decoded
         }
         
-        func save(_ value: Value) {
+        func save(_ value: V) {
             publisher.send(value)
         }
         
-        private func persist(_ value: Value) {
+        private func persist(_ value: V) {
             guard let fileUrl else { return }
             try? FileManager.default.removeItem(at: fileUrl)
             

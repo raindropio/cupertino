@@ -15,7 +15,6 @@ struct SettingsAppIcon: View {
     private static let available = [nil, "Flow", "Holo", "Blue", "Black", "Zen", "Pinky"]
     @State private var selection = UIApplication.shared.alternateIconName
     
-    @Sendable
     @MainActor
     private func update() async {
         guard selection != UIApplication.shared.alternateIconName else { return }
@@ -44,7 +43,7 @@ struct SettingsAppIcon: View {
                 }
             } label: {}
                 .pickerStyle(.inline)
-                .task(id: selection, update)
+                .task(id: selection) { await update() }
                 .listSectionSeparator(.hidden)
         }
             .listStyle(.plain)

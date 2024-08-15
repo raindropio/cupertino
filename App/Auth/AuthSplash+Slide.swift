@@ -9,16 +9,10 @@ extension AuthSplash {
         
         var body: some View {
             VStack(spacing: 16) {
-                Group {
-                    icon()
-                        .symbolVariant(.fill)
-                        .font(.system(size: 72, weight: .medium))
-                        .padding(.bottom, 8)
-                    
-                    Text(title)
-                        .fontWeight(.bold)
-                        .font(.largeTitle)
-                }
+                icon()
+                    .symbolVariant(.fill)
+                    .font(.system(size: 72, weight: .medium))
+                    .padding(.bottom, 8)
                     #if !os(visionOS)
                     .foregroundStyle(
                         .linearGradient(
@@ -29,11 +23,16 @@ extension AuthSplash {
                     )
                     #endif
                 
+                Text(title)
+                    .fontWeight(.bold)
+                    .font(.largeTitle)
+                
                 description()
                     .font(.title3)
                     .fontWeight(.regular)
                     .imageScale(.small)
                     .symbolVariant(.fill)
+                    .foregroundStyle(.secondary)
             }
                 .multilineTextAlignment(.center)
                 .scenePadding(.horizontal)

@@ -11,7 +11,6 @@ struct InviteCollaborator: View {
     
     @Binding var collection: UserCollection
     
-    @Sendable
     private func submit() async throws {
         guard request.isValid else { return }
         try await dispatch(CollaboratorsAction.invite(collection.id, request))
@@ -62,7 +61,7 @@ struct InviteCollaborator: View {
             }
         }
             .backport.defaultFocus($focused, true)
-            .onSubmit(submit)
+            .onSubmit { try await submit() }
             .navigationTitle("Invite")
             .animation(.default, value: request.isValid)
             .animation(.default, value: send)

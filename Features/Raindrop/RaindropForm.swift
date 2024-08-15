@@ -25,7 +25,7 @@ extension RaindropForm {
     }
     
     //load suggestions
-    @Sendable private func suggest() async {
+    private func suggest() async {
         try? await dispatch(RaindropsAction.suggest(raindrop))
     }
 }
@@ -57,7 +57,7 @@ extension RaindropForm: View {
                     }
                 }
             }
-            .task(id: raindrop.lastUpdate, suggest)
+            .task(id: raindrop.lastUpdate) { await suggest() }
             .onSubmit(commit)
     }
 }

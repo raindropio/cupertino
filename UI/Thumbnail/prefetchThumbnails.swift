@@ -18,7 +18,7 @@ fileprivate struct PT<I: Collection>: ViewModifier {
     var items: I
     var transform: (I.Element) -> URL?
     
-    @Sendable func onChange() async {
+    func onChange() async {
         let prefetch = items
             .compactMap {
                 if let url = transform($0), !prefetched.contains(url) {
@@ -33,6 +33,8 @@ fileprivate struct PT<I: Collection>: ViewModifier {
     }
     
     func body(content: Content) -> some View {
-        content.task(id: items.count, priority: .background, debounce: 0.3, onChange)
+        content.task(id: items.count, priority: .background, debounce: 0.3) {
+            await onChange()
+        }
     }
 }

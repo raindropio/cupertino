@@ -31,6 +31,7 @@ extension RaindropForm {
                     .textCase(.none)
                     .scenePadding(.top)
                 }
+                    .listRowBackground(Color.red.opacity(0.1))
             }
         }
     }

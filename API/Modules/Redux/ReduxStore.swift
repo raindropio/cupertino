@@ -1,7 +1,6 @@
 import Foundation
 
 protocol ReduxStore: Actor, ObservableObject {
-    @MainActor init()
     func dispatch(_ some: Any) async throws
     func dispatch(_ some: Any, store: KeyPath<Self, ReduxSubStore<some Reducer>>) async throws
 }

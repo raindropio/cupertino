@@ -85,7 +85,7 @@ fileprivate struct ByURL<C: View>: View {
     }
     
     //maybe existing?
-    @Sendable private func lookup() async {
+    private func lookup() async {
         loading = true
         
         try? await dispatch(RaindropsAction.lookup(url))
@@ -100,7 +100,7 @@ fileprivate struct ByURL<C: View>: View {
         Stack(draft: $draft, loading: loading, content: content)
             .onAppear { draft = stored }
             .task(id: stored) { draft = stored }
-            .task(id: url, lookup)
+            .task(id: url) { await lookup() }
     }
 }
 

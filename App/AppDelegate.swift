@@ -3,19 +3,9 @@ import UIKit
 import PushNotifications
 #endif
 import API
-import Sentry
 
 class AppDelegate: NSObject, UIApplicationDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
-        SentrySDK.start { options in
-            options.dsn = Constants.sentryDsn
-            //options.debug = true
-            options.tracesSampleRate = 0.1
-            options.enableCaptureFailedRequests = false
-            options.enableFileIOTracing = false
-            options.enableAppHangTracking = false
-        }
-        
         AppPushes.shared.start()
         #if os(iOS)
         PushNotifications.shared.start(instanceId: Constants.pusherInstanceId)

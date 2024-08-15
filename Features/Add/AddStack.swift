@@ -26,7 +26,6 @@ extension AddStack {
         completed.count == urls.count
     }
     
-    @Sendable
     private func upload() async {
         uploading = true
         defer { uploading = false }
@@ -89,7 +88,9 @@ extension AddStack: View {
             .animation(.spring(), value: isCompleteAll)
             .interactiveDismissDisabled(!isCompleteAll)
             //start uploading
-            .task(id: urls, priority: .background, upload)
+            .task(id: urls, priority: .background) {
+                await upload()
+            }
             //auto close when complete all
             .task(id: isCompleteAll) {
                 if isCompleteAll {

@@ -67,10 +67,6 @@
 		7653AD2F29E6C0D00046E654 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7653AD2E29E6C0D00046E654 /* AppDelegate.swift */; };
 		7653AD3129E6C44C0046E654 /* ReceivePush.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7653AD3029E6C44C0046E654 /* ReceivePush.swift */; };
 		76570ADB29DB221E002E5BA1 /* AuthTFA.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76570ADA29DB221E002E5BA1 /* AuthTFA.swift */; };
-		76593E6229FFD80200C97A37 /* Sentry in Frameworks */ = {isa = PBXBuildFile; productRef = 76593E6129FFD80200C97A37 /* Sentry */; };
-		76593E6629FFD99F00C97A37 /* Sentry in Frameworks */ = {isa = PBXBuildFile; productRef = 76593E6529FFD99F00C97A37 /* Sentry */; };
-		76593E6829FFD9A600C97A37 /* Sentry in Frameworks */ = {isa = PBXBuildFile; productRef = 76593E6729FFD9A600C97A37 /* Sentry */; };
-		76593E6A29FFD9AA00C97A37 /* Sentry in Frameworks */ = {isa = PBXBuildFile; productRef = 76593E6929FFD9AA00C97A37 /* Sentry */; };
 		765F23FE2991409500282298 /* Browser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 765F23FD2991409500282298 /* Browser.swift */; };
 		7673C0AA295DD3B8002D4229 /* SidebarScreen+Toolbar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7673C0A9295DD3B8002D4229 /* SidebarScreen+Toolbar.swift */; };
 		76799F8B299632790042DF78 /* Folder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76799F8A299632790042DF78 /* Folder.swift */; };
@@ -297,7 +293,6 @@
 				76154B7F29C20495002DDDEB /* API in Frameworks */,
 				76154B8329C20495002DDDEB /* UI in Frameworks */,
 				76154B8129C20495002DDDEB /* Features in Frameworks */,
-				76593E6829FFD9A600C97A37 /* Sentry in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -324,7 +319,6 @@
 				76EC67EA29D46A54007AE635 /* API in Frameworks */,
 				76FECCC129FBDA9A00639D39 /* SignInWithGoogle in Frameworks */,
 				7697437429718A6100322290 /* Features in Frameworks */,
-				76593E6229FFD80200C97A37 /* Sentry in Frameworks */,
 				768CA1F7294CC10900AD7E62 /* StoreKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -333,7 +327,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				76593E6A29FFD9AA00C97A37 /* Sentry in Frameworks */,
 				7621511329CC4E2B009314B7 /* UI in Frameworks */,
 				7621511129CC4E2B009314B7 /* Features in Frameworks */,
 				769FFF0029CC4C8500C2E6DA /* UniformTypeIdentifiers.framework in Frameworks */,
@@ -348,7 +341,6 @@
 				76F8755829D46A0E007C5620 /* Features in Frameworks */,
 				76B16BD42930F34D00032D7D /* API in Frameworks */,
 				76F8755629D46A09007C5620 /* UI in Frameworks */,
-				76593E6629FFD99F00C97A37 /* Sentry in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -636,7 +628,6 @@
 				76154B7E29C20495002DDDEB /* API */,
 				76154B8029C20495002DDDEB /* Features */,
 				76154B8229C20495002DDDEB /* UI */,
-				76593E6729FFD9A600C97A37 /* Sentry */,
 			);
 			productName = Raindrop.io;
 			productReference = 76154B6229C202D5002DDDEB /* Share macOS.appex */;
@@ -702,7 +693,6 @@
 				76EC67E929D46A54007AE635 /* API */,
 				7653AD2C29E6C0AB0046E654 /* PushNotifications */,
 				76FECCC029FBDA9A00639D39 /* SignInWithGoogle */,
-				76593E6129FFD80200C97A37 /* Sentry */,
 			);
 			productName = cupertino;
 			productReference = 7685A191286868AC00A4BC3C /* Raindrop.app */;
@@ -725,7 +715,6 @@
 				7621510E29CC4E2B009314B7 /* API */,
 				7621511029CC4E2B009314B7 /* Features */,
 				7621511229CC4E2B009314B7 /* UI */,
-				76593E6929FFD9AA00C97A37 /* Sentry */,
 			);
 			productName = SaveToUnsorted;
 			productReference = 769FFEFF29CC4C8500C2E6DA /* Action iOS.appex */;
@@ -748,7 +737,6 @@
 				76B16BD32930F34D00032D7D /* API */,
 				76F8755529D46A09007C5620 /* UI */,
 				76F8755729D46A0E007C5620 /* Features */,
-				76593E6529FFD99F00C97A37 /* Sentry */,
 			);
 			productName = share;
 			productReference = 76D880DC2930E1FB00D43AD9 /* Share iOS.appex */;
@@ -762,7 +750,7 @@
 			attributes = {
 				BuildIndependentTargetsInParallel = 1;
 				LastSwiftUpdateCheck = 1420;
-				LastUpgradeCheck = 1430;
+				LastUpgradeCheck = 1540;
 				TargetAttributes = {
 					76154B6129C202D5002DDDEB = {
 						CreatedOnToolsVersion = 14.2;
@@ -795,7 +783,6 @@
 			mainGroup = 7685A188286868AC00A4BC3C;
 			packageReferences = (
 				7653AD2B29E6C0AB0046E654 /* XCRemoteSwiftPackageReference "push-notifications-swift" */,
-				76593E6029FFD80200C97A37 /* XCRemoteSwiftPackageReference "sentry-cocoa" */,
 			);
 			productRefGroup = 7685A192286868AC00A4BC3C /* Products */;
 			projectDirPath = "";
@@ -1143,6 +1130,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 7459JWM5TY;
 				ENABLE_HARDENED_RUNTIME = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = WebExtension/WebExtension.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = WebExtension;
@@ -1177,6 +1165,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 7459JWM5TY;
 				ENABLE_HARDENED_RUNTIME = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = WebExtension/WebExtension.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = WebExtension;
@@ -1206,6 +1195,7 @@
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 7459JWM5TY;
+				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = WebExtension/WebExtension.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = Raindrop.io;
@@ -1224,13 +1214,13 @@
 				PRODUCT_NAME = WebExtension;
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
-				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator xros xrsimulator";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
 				SUPPORTS_MACCATALYST = NO;
 				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2,7";
+				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
 		};
@@ -1240,6 +1230,7 @@
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 7459JWM5TY;
+				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = WebExtension/WebExtension.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = Raindrop.io;
@@ -1258,13 +1249,13 @@
 				PRODUCT_NAME = WebExtension;
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
-				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator xros xrsimulator";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
 				SUPPORTS_MACCATALYST = NO;
 				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2,7";
+				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;
 			};
 			name = Release;
@@ -1273,6 +1264,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";
@@ -1307,6 +1299,7 @@
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_NO_COMMON_BLOCKS = YES;
@@ -1321,7 +1314,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				MARKETING_VERSION = 5.1.25;
+				MARKETING_VERSION = 5.1.26;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -1334,6 +1327,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";
@@ -1368,6 +1362,7 @@
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
@@ -1376,7 +1371,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				MARKETING_VERSION = 5.1.25;
+				MARKETING_VERSION = 5.1.26;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SWIFT_COMPILATION_MODE = wholemodule;
@@ -1685,14 +1680,6 @@
 				minimumVersion = 4.0.0;
 			};
 		};
-		76593E6029FFD80200C97A37 /* XCRemoteSwiftPackageReference "sentry-cocoa" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/getsentry/sentry-cocoa.git";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 8.0.0;
-			};
-		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -1724,26 +1711,6 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 7653AD2B29E6C0AB0046E654 /* XCRemoteSwiftPackageReference "push-notifications-swift" */;
 			productName = PushNotifications;
-		};
-		76593E6129FFD80200C97A37 /* Sentry */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 76593E6029FFD80200C97A37 /* XCRemoteSwiftPackageReference "sentry-cocoa" */;
-			productName = Sentry;
-		};
-		76593E6529FFD99F00C97A37 /* Sentry */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 76593E6029FFD80200C97A37 /* XCRemoteSwiftPackageReference "sentry-cocoa" */;
-			productName = Sentry;
-		};
-		76593E6729FFD9A600C97A37 /* Sentry */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 76593E6029FFD80200C97A37 /* XCRemoteSwiftPackageReference "sentry-cocoa" */;
-			productName = Sentry;
-		};
-		76593E6929FFD9AA00C97A37 /* Sentry */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 76593E6029FFD80200C97A37 /* XCRemoteSwiftPackageReference "sentry-cocoa" */;
-			productName = Sentry;
 		};
 		7697437329718A6100322290 /* Features */ = {
 			isa = XCSwiftPackageProductDependency;

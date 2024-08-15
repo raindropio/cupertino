@@ -61,7 +61,6 @@ struct WebHighlights {
         }
     }
     
-    @Sendable
     private func reload() async {
         guard page.progress == 1 else { return }
         
@@ -79,7 +78,7 @@ extension WebHighlights: ViewModifier {
         content
             .injectJavaScript(page, file: Self.highlightsJs)
             .onWebMessage(page, channel: Self.channel, receive: onMessageFromPage)
-            .task(id: page.progress, reload)
-            .task(id: raindrop.highlights, reload)
+            .task(id: page.progress) { await reload() }
+            .task(id: raindrop.highlights) { await reload() }
     }
 }

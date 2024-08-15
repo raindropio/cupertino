@@ -12,7 +12,6 @@ struct AuthSignup: View {
     enum Focus: CaseIterable { case name, email, password }
     @FocusState private var focus: Focus?
     
-    @Sendable
     private func submit() async throws {
         if form.name.isEmpty {
             focus = .name
@@ -65,7 +64,7 @@ struct AuthSignup: View {
                 .animation(.default, value: form.isEmpty)
         }
             .backport.defaultFocus($focus, .name)
-            .onSubmit(submit)
+            .onSubmit { try await submit() }
             #if canImport(UIKit)
             .navigationBarTitleDisplayMode(.inline)
             .navigationTitle("Create an account")

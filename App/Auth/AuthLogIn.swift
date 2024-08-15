@@ -13,7 +13,6 @@ struct AuthLogIn: View {
     enum Focus: CaseIterable { case email, password }
     @FocusState private var focus: Focus?
     
-    @Sendable
     private func submit() async throws {
         if form.email.isEmpty {
             focus = .email
@@ -60,7 +59,7 @@ struct AuthLogIn: View {
         }
             .backport.defaultFocus($focus, .email)
             .backport.scrollBounceBehavior(.basedOnSize)
-            .onSubmit(submit)
+            .onSubmit { try await submit() }
             #if canImport(UIKit)
             .navigationBarTitleDisplayMode(.inline)
             .navigationTitle("Log In")

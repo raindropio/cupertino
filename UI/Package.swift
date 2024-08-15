@@ -1,4 +1,4 @@
-// swift-tools-version: 5.9
+// swift-tools-version: 5.10
 import PackageDescription
 
 let package = Package(
@@ -16,7 +16,7 @@ let package = Package(
     dependencies: [
         .package(
             url: "https://github.com/kean/Nuke.git",
-            from: "12.6.0"
+            from: "12.8.0"
         )
     ],
     targets: [

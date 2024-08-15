@@ -18,7 +18,6 @@ public struct AddDetect<V: View> {
 }
 
 extension AddDetect {
-    @Sendable
     func convert() async {
         loading = true
         
@@ -39,6 +38,8 @@ extension AddDetect {
 extension AddDetect: View {
     public var body: some View {
         content(loading, urls)
-            .task(id: items, priority: .background, convert)
+            .task(id: items, priority: .background) {
+                await convert()
+            }
     }
 }

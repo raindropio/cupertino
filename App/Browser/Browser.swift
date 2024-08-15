@@ -19,7 +19,7 @@ extension Browser {
         return r.state.item(url) ?? .new(link: url)
     }
     
-    @Sendable private func lookup() async {
+    private func lookup() async {
         defer { loading = false }
         guard let url = page.url else { return }
         loading = true
@@ -32,7 +32,7 @@ extension Browser: View {
         WebView(page, request: start)
             //raindrop
             .task(id: stored) { raindrop = stored }
-            .task(id: page.url, lookup)
+            .task(id: page.url) { await lookup() }
             //browser
             #if canImport(UIKit)
             .navigationBarTitleDisplayMode(.inline)

@@ -9,7 +9,6 @@ extension Search {
         @Binding var refine: FindBy
         var isActive: Bool
         
-        @Sendable
         func reload() async {
             guard isActive else { return }
             try? await dispatch([
@@ -20,8 +19,8 @@ extension Search {
 
         func body(content: Content) -> some View {
             content
-                .task(id: refine, priority: .background, debounce: 0.3, reload)
-                .task(id: isActive, priority: .background, debounce: 0.3, reload)
+                .task(id: refine, priority: .background, debounce: 0.3) { await reload() }
+                .task(id: isActive, priority: .background, debounce: 0.3) { await reload() }
         }
     }
 }

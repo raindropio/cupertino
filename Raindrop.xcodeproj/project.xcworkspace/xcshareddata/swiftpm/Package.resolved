@@ -1,4 +1,5 @@
 {
+  "originHash" : "63ab1926bc2e98fc6677205f0d0aefc075d34e7301faa8006579378280e7f7ab",
   "pins" : [
     {
       "identity" : "appauth-ios",
@@ -41,8 +42,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/google/gtm-session-fetcher.git",
       "state" : {
-        "revision" : "0382ca27f22fb3494cf657d8dc356dc282cd1193",
-        "version" : "3.4.1"
+        "revision" : "a2ab612cb980066ee56d90d60d8462992c07f24b",
+        "version" : "3.5.0"
       }
     },
     {
@@ -68,8 +69,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/kean/Nuke.git",
       "state" : {
-        "revision" : "7395c7a9dcd390bbcfad17a731d8d529602702c6",
-        "version" : "12.7.0"
+        "revision" : "0ead44350d2737db384908569c012fe67c421e4d",
+        "version" : "12.8.0"
       }
     },
     {
@@ -89,16 +90,7 @@
         "revision" : "0374352e6a54071a4e3d2ddf674ba56a84630ba6",
         "version" : "4.0.0"
       }
-    },
-    {
-      "identity" : "sentry-cocoa",
-      "kind" : "remoteSourceControl",
-      "location" : "https://github.com/getsentry/sentry-cocoa.git",
-      "state" : {
-        "revision" : "7fc7ca43967e2980d8691a8e017c118a84133aac",
-        "version" : "8.26.0"
-      }
     }
   ],
-  "version" : 2
+  "version" : 3
 }
