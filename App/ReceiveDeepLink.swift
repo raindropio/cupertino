@@ -25,7 +25,7 @@ struct ReceiveDeepLink: ViewModifier {
                 case .open(let find, let id):
                     switch browser {
                     case .inapp:
-                        if let url = r.state.item(id)?.link {
+                        if let url = r.state.item(id)?.link, r.state.item(id)?.type.readable != true {
                             //check if there an app that can handle this url directly
                             UIApplication.shared.open(url, options: [.universalLinksOnly: true]) { success in
                                 if !success {

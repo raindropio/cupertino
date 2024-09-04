@@ -46,7 +46,9 @@ fileprivate struct Reload<ID: Equatable>: ViewModifier {
                     .task(id: id, priority: priority, debounce: debounce, action)
             } else {
                 content
-                    .task(priority: priority, action)
+                    .task(priority: priority){
+                        await action()
+                    }
             }
         }
             #if os(macOS)

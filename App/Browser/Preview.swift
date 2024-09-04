@@ -19,11 +19,9 @@ struct Preview: View {
     private var request: WebRequest {
         .init(
             {
-                switch raindrop.type {
-                case .article, .book:
+                if raindrop.type.readable {
                     return Rest.raindropPreview(raindrop.id, options: reader)
-                    
-                default:
+                } else {
                     return raindrop.link
                 }
             }(),
@@ -43,7 +41,7 @@ struct Preview: View {
         Browser(page: page, start: request)
             .navigationTitle(title)
             .toolbar {
-                if !page.canGoBack, (raindrop.type == .article || raindrop.type == .book) {
+                if !page.canGoBack, raindrop.type.readable {
                     ToolbarItemGroup {
                         Button { appearance.toggle() } label: {
                             Image(systemName: "textformat.size")

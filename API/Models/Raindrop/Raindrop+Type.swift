@@ -48,6 +48,16 @@ public enum RaindropType: String, Codable, CaseIterable {
         case .audio: return .indigo
         case .book: return .brown
     }}
+    
+    public var readable: Bool { switch self {
+        case .link: return false
+        case .article: return true
+        case .image: return false
+        case .video: return false
+        case .document: return false
+        case .audio: return false
+        case .book: return true
+    }}
 }
 
 extension RaindropType: ExpressibleByStringLiteral {
