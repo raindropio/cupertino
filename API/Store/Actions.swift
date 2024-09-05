@@ -140,4 +140,5 @@ public enum SubscriptionAction: ReduxAction {
 public enum UserAction: ReduxAction {
     case reload
     case reloaded(User)
+    case connectFCMDevice(_ token: String)
 }

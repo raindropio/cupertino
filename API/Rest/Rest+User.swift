@@ -12,14 +12,13 @@ extension Rest {
     }
 }
 
-//MARK: - Pusher
+//MARK: - FCM
 extension Rest {
-    public func userPusherAuthToken() async throws -> String {
-        let res: UserPusherAuthResponse = try await fetch.get("user/pusher/auth")
-        return res.token
+    public func userConnectFCMDevice(token: String) async throws {
+        try await fetch.post("user/connect/fcm_device", body: UserConnectFCMDevice(token: token))
     }
     
-    fileprivate struct UserPusherAuthResponse: Decodable {
+    fileprivate struct UserConnectFCMDevice: Encodable {
         var token: String
     }
 }

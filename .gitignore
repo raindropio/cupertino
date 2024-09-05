@@ -34,3 +34,5 @@ DerivedData/
 # Web Extension
 WebExtension/ios/
 WebExtension/macos/
+
+GoogleService-Info.plist

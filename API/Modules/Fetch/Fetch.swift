@@ -70,6 +70,16 @@ extension Fetch {
         return try decode(data: data)
     }
     
+    func post<R: Encodable>(
+        _ path: String,
+        query: [URLQueryItem]? = nil,
+        body: R
+    ) async throws {
+        _ = try await request(
+            try urlRequest(path, method: "POST", query: query, body: body)
+        )
+    }
+    
     func post<T: Decodable>(
         _ path: String,
         query: [URLQueryItem]? = nil

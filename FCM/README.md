@@ -1,7 +1,7 @@
-import UIKit
-import API
-import FCM
+# Firebase Cloud Messaging
 
+## How to use?
+```swift
 class AppDelegate: NSObject, UIApplicationDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         FCM.shared.start()
@@ -17,3 +17,14 @@ class AppDelegate: NSObject, UIApplicationDelegate {
         FCM.shared.handleNotification(userInfo: userInfo)
     }
 }
+```
+
+```swift
+view
+    .onFCMToken { token in
+        print("fcm token", token)
+    }
+    .onFCMMessage { message in
+        print("message", message)
+    }
+```

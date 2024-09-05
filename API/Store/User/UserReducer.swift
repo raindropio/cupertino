@@ -44,6 +44,9 @@ extension UserReducer {
             case .reload:
                 return try await reload(state: state)
                 
+            case .connectFCMDevice(let token):
+                try await connectFCMDevice(state: state, token: token)
+                
             default:
                 break
             }

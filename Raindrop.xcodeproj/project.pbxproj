@@ -63,11 +63,11 @@
 		76292CEA2951B86F000E16AA /* SettingsSubscription.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76292CE92951B86F000E16AA /* SettingsSubscription.swift */; };
 		76292CEC2951BC52000E16AA /* SettingsBrowser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76292CEB2951BC52000E16AA /* SettingsBrowser.swift */; };
 		76292CF82952F2CB000E16AA /* PreferredBrowser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76292CF72952F2CB000E16AA /* PreferredBrowser.swift */; };
-		7653AD2D29E6C0AB0046E654 /* PushNotifications in Frameworks */ = {isa = PBXBuildFile; platformFilter = ios; productRef = 7653AD2C29E6C0AB0046E654 /* PushNotifications */; };
 		7653AD2F29E6C0D00046E654 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7653AD2E29E6C0D00046E654 /* AppDelegate.swift */; };
-		7653AD3129E6C44C0046E654 /* ReceivePush.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7653AD3029E6C44C0046E654 /* ReceivePush.swift */; };
+		7653AD3129E6C44C0046E654 /* PushNotifications.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7653AD3029E6C44C0046E654 /* PushNotifications.swift */; };
 		76570ADB29DB221E002E5BA1 /* AuthTFA.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76570ADA29DB221E002E5BA1 /* AuthTFA.swift */; };
 		765F23FE2991409500282298 /* Browser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 765F23FD2991409500282298 /* Browser.swift */; };
+		767300EC2C88A3A40026B2EF /* FCM in Frameworks */ = {isa = PBXBuildFile; productRef = 767300EB2C88A3A40026B2EF /* FCM */; };
 		7673C0AA295DD3B8002D4229 /* SidebarScreen+Toolbar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7673C0A9295DD3B8002D4229 /* SidebarScreen+Toolbar.swift */; };
 		76799F8B299632790042DF78 /* Folder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76799F8A299632790042DF78 /* Folder.swift */; };
 		767D019A29D5A82400C6DA0E /* SidebarScreen+Search.swift in Sources */ = {isa = PBXBuildFile; fileRef = 767D019929D5A82400C6DA0E /* SidebarScreen+Search.swift */; };
@@ -94,7 +94,6 @@
 		76B16BD02930E6EB00032D7D /* Main.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76B16BCF2930E6EB00032D7D /* Main.swift */; };
 		76B16BD42930F34D00032D7D /* API in Frameworks */ = {isa = PBXBuildFile; productRef = 76B16BD32930F34D00032D7D /* API */; };
 		76B16BD62930F43900032D7D /* Share.js in Resources */ = {isa = PBXBuildFile; fileRef = 76B16BD52930F43900032D7D /* Share.js */; };
-		76B4AC5029E7F19E00B9C4E8 /* AppPushes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76B4AC4F29E7F19E00B9C4E8 /* AppPushes.swift */; };
 		76B6737E29928308007A412A /* Browse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76B6737D29928308007A412A /* Browse.swift */; };
 		76B6738029928AB1007A412A /* Browser+Toolbar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76B6737F29928AB1007A412A /* Browser+Toolbar.swift */; };
 		76B6738229928FE6007A412A /* ReaderAppearance.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76B6738129928FE6007A412A /* ReaderAppearance.swift */; };
@@ -113,6 +112,7 @@
 		76E44C4A29BB1380009634C6 /* SettingsExtensions+Safari.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76E44C4929BB1380009634C6 /* SettingsExtensions+Safari.swift */; };
 		76E51CEA299A8A1400FE7763 /* ReceiveDeepLink.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76E51CE9299A8A1400FE7763 /* ReceiveDeepLink.swift */; };
 		76E7AAB129B5D37B00520500 /* AddURL.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76E7AAB029B5D37B00520500 /* AddURL.swift */; };
+		76E88D992C887BDD00700FF9 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 76E88D982C887BDD00700FF9 /* GoogleService-Info.plist */; };
 		76EC67EA29D46A54007AE635 /* API in Frameworks */ = {isa = PBXBuildFile; productRef = 76EC67E929D46A54007AE635 /* API */; };
 		76ECFDFE2947848500DF15C9 /* Browser+PageError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76ECFDFD2947848500DF15C9 /* Browser+PageError.swift */; };
 		76ECFE0C294B1B5700DF15C9 /* WebHighlights+Event.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76ECFE09294B1B5700DF15C9 /* WebHighlights+Event.swift */; };
@@ -213,7 +213,7 @@
 		76292CF72952F2CB000E16AA /* PreferredBrowser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreferredBrowser.swift; sourceTree = "<group>"; };
 		7639A6AE286889DB00A76FE9 /* UI */ = {isa = PBXFileReference; lastKnownFileType = text; path = UI; sourceTree = SOURCE_ROOT; };
 		7653AD2E29E6C0D00046E654 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		7653AD3029E6C44C0046E654 /* ReceivePush.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReceivePush.swift; sourceTree = "<group>"; };
+		7653AD3029E6C44C0046E654 /* PushNotifications.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PushNotifications.swift; sourceTree = "<group>"; };
 		76570ADA29DB221E002E5BA1 /* AuthTFA.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthTFA.swift; sourceTree = "<group>"; };
 		765F0DDB287EE0FB001E34CA /* App.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = App.plist; sourceTree = "<group>"; };
 		765F23FD2991409500282298 /* Browser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Browser.swift; sourceTree = "<group>"; };
@@ -248,7 +248,6 @@
 		76B16BCF2930E6EB00032D7D /* Main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Main.swift; sourceTree = "<group>"; };
 		76B16BD52930F43900032D7D /* Share.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = Share.js; sourceTree = "<group>"; };
 		76B16BDA29310D9500032D7D /* Share.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Share.entitlements; sourceTree = "<group>"; };
-		76B4AC4F29E7F19E00B9C4E8 /* AppPushes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppPushes.swift; sourceTree = "<group>"; };
 		76B6737D29928308007A412A /* Browse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Browse.swift; sourceTree = "<group>"; };
 		76B6737F29928AB1007A412A /* Browser+Toolbar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Browser+Toolbar.swift"; sourceTree = "<group>"; };
 		76B6738129928FE6007A412A /* ReaderAppearance.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReaderAppearance.swift; sourceTree = "<group>"; };
@@ -271,6 +270,8 @@
 		76E44C4929BB1380009634C6 /* SettingsExtensions+Safari.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SettingsExtensions+Safari.swift"; sourceTree = "<group>"; };
 		76E51CE9299A8A1400FE7763 /* ReceiveDeepLink.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReceiveDeepLink.swift; sourceTree = "<group>"; };
 		76E7AAB029B5D37B00520500 /* AddURL.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddURL.swift; sourceTree = "<group>"; };
+		76E88D982C887BDD00700FF9 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		76E88D9D2C889D7600700FF9 /* FCM */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = FCM; sourceTree = "<group>"; };
 		76ECFDFD2947848500DF15C9 /* Browser+PageError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Browser+PageError.swift"; sourceTree = "<group>"; };
 		76ECFE09294B1B5700DF15C9 /* WebHighlights+Event.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "WebHighlights+Event.swift"; sourceTree = "<group>"; };
 		76ECFE0A294B1B5700DF15C9 /* WebHighlights+Action.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "WebHighlights+Action.swift"; sourceTree = "<group>"; };
@@ -315,9 +316,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				76F8755429D469DD007C5620 /* UI in Frameworks */,
-				7653AD2D29E6C0AB0046E654 /* PushNotifications in Frameworks */,
 				76EC67EA29D46A54007AE635 /* API in Frameworks */,
 				76FECCC129FBDA9A00639D39 /* SignInWithGoogle in Frameworks */,
+				767300EC2C88A3A40026B2EF /* FCM in Frameworks */,
 				7697437429718A6100322290 /* Features in Frameworks */,
 				768CA1F7294CC10900AD7E62 /* StoreKit.framework in Frameworks */,
 			);
@@ -462,6 +463,7 @@
 				76E08B6929A3976000B3202D /* Backport */,
 				7639A6AE286889DB00A76FE9 /* UI */,
 				76D00FB329FBD76A005BDD38 /* SignInWithGoogle */,
+				76E88D9D2C889D7600700FF9 /* FCM */,
 				7685A192286868AC00A4BC3C /* Products */,
 				7685A1AD2868810D00A4BC3C /* Frameworks */,
 			);
@@ -491,11 +493,11 @@
 				767AC10F2925147E00766998 /* Settings */,
 				7685A194286868AC00A4BC3C /* App.swift */,
 				7653AD2E29E6C0D00046E654 /* AppDelegate.swift */,
-				76B4AC4F29E7F19E00B9C4E8 /* AppPushes.swift */,
 				76BFE369291E9F6B00DE9DB2 /* SplitView.swift */,
 				76BFE36A291E9F6B00DE9DB2 /* SplitViewPath.swift */,
 				76E51CE9299A8A1400FE7763 /* ReceiveDeepLink.swift */,
-				7653AD3029E6C44C0046E654 /* ReceivePush.swift */,
+				7653AD3029E6C44C0046E654 /* PushNotifications.swift */,
+				76E88D982C887BDD00700FF9 /* GoogleService-Info.plist */,
 				7685A19A286868AD00A4BC3C /* App.entitlements */,
 				765F0DDB287EE0FB001E34CA /* App.plist */,
 				7685A198286868AD00A4BC3C /* Assets.xcassets */,
@@ -673,6 +675,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 7685A1A0286868AD00A4BC3C /* Build configuration list for PBXNativeTarget "Raindrop" */;
 			buildPhases = (
+				762665E22C89B18E007E8948 /* GoogleService-Info.plist from GOOGLE_SERVICE_INFO_BASE64 environment */,
 				7685A18D286868AC00A4BC3C /* Sources */,
 				7685A18E286868AC00A4BC3C /* Frameworks */,
 				7685A18F286868AC00A4BC3C /* Resources */,
@@ -691,8 +694,8 @@
 				7697437329718A6100322290 /* Features */,
 				76F8755329D469DD007C5620 /* UI */,
 				76EC67E929D46A54007AE635 /* API */,
-				7653AD2C29E6C0AB0046E654 /* PushNotifications */,
 				76FECCC029FBDA9A00639D39 /* SignInWithGoogle */,
+				767300EB2C88A3A40026B2EF /* FCM */,
 			);
 			productName = cupertino;
 			productReference = 7685A191286868AC00A4BC3C /* Raindrop.app */;
@@ -782,7 +785,6 @@
 			);
 			mainGroup = 7685A188286868AC00A4BC3C;
 			packageReferences = (
-				7653AD2B29E6C0AB0046E654 /* XCRemoteSwiftPackageReference "push-notifications-swift" */,
 			);
 			productRefGroup = 7685A192286868AC00A4BC3C /* Products */;
 			projectDirPath = "";
@@ -839,6 +841,7 @@
 			files = (
 				7685A199286868AD00A4BC3C /* Assets.xcassets in Resources */,
 				76B673862993A52A007A412A /* highlights.js in Resources */,
+				76E88D992C887BDD00700FF9 /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -861,6 +864,24 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
+		762665E22C89B18E007E8948 /* GoogleService-Info.plist from GOOGLE_SERVICE_INFO_BASE64 environment */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			name = "GoogleService-Info.plist from GOOGLE_SERVICE_INFO_BASE64 environment";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "if [ -n \"$GOOGLE_SERVICE_INFO_BASE64\" ]; then\n    echo \"$GOOGLE_SERVICE_INFO_BASE64\" | base64 --decode > \"${PROJECT_DIR}/App/GoogleService-Info.plist\"\nfi\n";
+		};
 		767F0AFD29A368C200349902 /* Download latest app/extension prod build to ./bundle folder */ = {
 			isa = PBXShellScriptBuildPhase;
 			alwaysOutOfDate = 1;
@@ -947,7 +968,6 @@
 				76B6738029928AB1007A412A /* Browser+Toolbar.swift in Sources */,
 				768CA20529506D7A00AD7E62 /* AuthSplash+Slide.swift in Sources */,
 				7673C0AA295DD3B8002D4229 /* SidebarScreen+Toolbar.swift in Sources */,
-				76B4AC5029E7F19E00B9C4E8 /* AppPushes.swift in Sources */,
 				769056F62975499D0090C1EF /* Nesteds.swift in Sources */,
 				768CA1FB294CC17800AD7E62 /* AuthLogIn.swift in Sources */,
 				768CA1FF2950420D00AD7E62 /* AuthContinueWith.swift in Sources */,
@@ -975,7 +995,7 @@
 				76292CEA2951B86F000E16AA /* SettingsSubscription.swift in Sources */,
 				7618C96D29C073B600D4DE78 /* AuthSuccess.swift in Sources */,
 				768CA20129505A6E00AD7E62 /* AuthContinueWith+Apple.swift in Sources */,
-				7653AD3129E6C44C0046E654 /* ReceivePush.swift in Sources */,
+				7653AD3129E6C44C0046E654 /* PushNotifications.swift in Sources */,
 				76E51CEA299A8A1400FE7763 /* ReceiveDeepLink.swift in Sources */,
 				76BFE36F291E9F6B00DE9DB2 /* SplitViewPath.swift in Sources */,
 				761F6C3029A3AC99002919BC /* PermanentCopy.swift in Sources */,
@@ -1314,7 +1334,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				MARKETING_VERSION = 5.1.28;
+				MARKETING_VERSION = 5.1.29;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -1371,7 +1391,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				MARKETING_VERSION = 5.1.28;
+				MARKETING_VERSION = 5.1.29;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SWIFT_COMPILATION_MODE = wholemodule;
@@ -1671,17 +1691,6 @@
 		};
 /* End XCConfigurationList section */
 
-/* Begin XCRemoteSwiftPackageReference section */
-		7653AD2B29E6C0AB0046E654 /* XCRemoteSwiftPackageReference "push-notifications-swift" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/pusher/push-notifications-swift";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 4.0.0;
-			};
-		};
-/* End XCRemoteSwiftPackageReference section */
-
 /* Begin XCSwiftPackageProductDependency section */
 		76154B7E29C20495002DDDEB /* API */ = {
 			isa = XCSwiftPackageProductDependency;
@@ -1707,10 +1716,9 @@
 			isa = XCSwiftPackageProductDependency;
 			productName = UI;
 		};
-		7653AD2C29E6C0AB0046E654 /* PushNotifications */ = {
+		767300EB2C88A3A40026B2EF /* FCM */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 7653AD2B29E6C0AB0046E654 /* XCRemoteSwiftPackageReference "push-notifications-swift" */;
-			productName = PushNotifications;
+			productName = FCM;
 		};
 		7697437329718A6100322290 /* Features */ = {
 			isa = XCSwiftPackageProductDependency;
