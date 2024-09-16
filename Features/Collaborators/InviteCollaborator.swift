@@ -1,69 +1,36 @@
 import SwiftUI
 import API
 import UI
-import Backport
 
 struct InviteCollaborator: View {
     @EnvironmentObject private var dispatch: Dispatcher
-    @State private var request = InviteCollaboratorRequest(level: .member)
-    @State private var send = false
-    @FocusState private var focused: Bool
+    @State private var link: URL?
     
     @Binding var collection: UserCollection
     
-    private func submit() async throws {
-        guard request.isValid else { return }
-        try await dispatch(CollaboratorsAction.invite(collection.id, request))
-        send = true
-    }
-    
     var body: some View {
         Form {
-            if send {
+            if let link {
                 EmptyState(
-                    "Invitation sent to \(request.email)",
-                    message: Text("The invitee must *click on the link* provided in the email to get started")
+                    "Share invitation link",
+                    message: Text("Share this link with the person you want to invite to the collection.\n\nPlease note, this link can only be used once and will expire in a week.")
                 ) {
-                    Image(systemName: "envelope")
+                    Image(systemName: "person.badge.plus")
                         .foregroundColor(.green)
                 } actions: {
-                    Button("Invite more") {
-                        request = .init(level: request.level)
-                        send = false
-                    }
-                        .buttonStyle(.borderless)
+                    ShareLink(item: link)
                 }
             } else {
-                Section {
-                    TextField("Email", text: $request.email)
-                        .backport.focused($focused)
-                        #if canImport(UIKit)
-                        .autocapitalization(.none)
-                        .autocorrectionDisabled()
-                        .textContentType(.emailAddress)
-                        .keyboardType(.emailAddress)
-                        .submitLabel(.send)
-                        #endif
+                ActionButton(CollectionAccess.Level.member.title) {
+                    try await dispatch(CollaboratorsAction.invite(collection.id, .init(level: .member), link: $link))
                 }
                 
-                Section("Access level") {
-                    Picker(selection: $request.level) {
-                        Text(CollectionAccess.Level.member.title)
-                            .tag(CollectionAccess.Level.member)
-                        Text(CollectionAccess.Level.viewer.title)
-                            .tag(CollectionAccess.Level.viewer)
-                    } label: {}
-                        .pickerStyle(.inline)
+                ActionButton(CollectionAccess.Level.viewer.title) {
+                    try await dispatch(CollaboratorsAction.invite(collection.id, .init(level: .viewer), link: $link))
                 }
-                
-                SubmitButton("Send invite")
-                    .disabled(!request.isValid)
             }
         }
-            .backport.defaultFocus($focused, true)
-            .onSubmit { try await submit() }
             .navigationTitle("Invite")
-            .animation(.default, value: request.isValid)
-            .animation(.default, value: send)
+            .animation(.default, value: link)
     }
 }

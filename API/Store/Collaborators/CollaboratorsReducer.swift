@@ -47,8 +47,8 @@ extension CollaboratorsReducer {
             case .reload(let collectionId):
                 return await reload(state: state, collectionId: collectionId)
                             
-            case .invite(let collectionId, let request):
-                try await invite(state: state, collectionId: collectionId, request: request)
+            case .invite(let collectionId, let request, let link):
+                try await invite(state: state, collectionId: collectionId, request: request, link: link)
                 
             case .deleteAll(let collectionId):
                 return try await deleteAll(state: state, collectionId: collectionId)

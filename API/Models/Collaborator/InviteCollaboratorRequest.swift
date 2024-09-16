@@ -1,14 +1,11 @@
-public struct InviteCollaboratorRequest {
-    public var email: String
+public struct InviteCollaboratorRequest: Equatable {
     public var level: CollectionAccess.Level
     
-    public init(email: String = "", level: CollectionAccess.Level) {
-        self.email = email
+    public init(level: CollectionAccess.Level) {
         self.level = level
     }
     
     public var isValid: Bool {
-        email.contains("@") && email.contains(".") && email.count > 2
-            && level >= .viewer && level < .owner
+        level >= .viewer && level < .owner
     }
 }

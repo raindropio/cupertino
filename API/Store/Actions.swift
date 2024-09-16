@@ -19,7 +19,7 @@ public enum CollaboratorsAction: ReduxAction {
     case reload(UserCollection.ID)
     case reloaded(UserCollection.ID, [Collaborator])
     case reloadFailed(UserCollection.ID, Error)
-    case invite(UserCollection.ID, InviteCollaboratorRequest)
+    case invite(UserCollection.ID, InviteCollaboratorRequest, link: Binding<URL?>)
     case deleteAll(UserCollection.ID)
     case change(UserCollection.ID, userId: Collaborator.ID, level: CollectionAccess.Level)
     case changed(UserCollection.ID, userId: Collaborator.ID, level: CollectionAccess.Level)

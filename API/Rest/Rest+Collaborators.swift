@@ -10,8 +10,13 @@ extension Rest {
 
 //MARK: - Invite
 extension Rest {
-    public func collaboratorInvite(_ collectionId: UserCollection.ID, request: InviteCollaboratorRequest) async throws {
-        let _: ResultResponse = try await fetch.post("collection/\(collectionId)/sharing", body: request)
+    public func collaboratorInvite(_ collectionId: UserCollection.ID, request: InviteCollaboratorRequest) async throws -> URL {
+        let res: CollaboratorInviteResponse = try await fetch.post("collection/\(collectionId)/sharing", body: request)
+        return res.link
+    }
+    
+    fileprivate struct CollaboratorInviteResponse: Decodable {
+        var link: URL
     }
 }
 
