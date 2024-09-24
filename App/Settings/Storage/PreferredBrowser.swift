@@ -11,7 +11,7 @@ enum PreferredBrowser: String, CaseIterable {
     
     var title: String {
         switch self {
-        case .inapp: return "In app"
+        case .inapp: return "Raindrop.io"
         #if os(iOS)
         case .safari: return "Safari"
         #endif

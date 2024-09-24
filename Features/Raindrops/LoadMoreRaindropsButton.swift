@@ -41,7 +41,7 @@ extension LoadMoreRaindropsButton {
                             ProgressView()
                             
                         case .notFound:
-                            Text("That's all folks!")
+                            Text("\(total) bookmarks")
                             
                         case .error:
                             Label("Error", systemImage: "exclamationmark.triangle")
