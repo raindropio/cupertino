@@ -10,7 +10,7 @@ public extension View {
 }
 
 struct InifiniteScrollModifier<D: RandomAccessCollection>: ViewModifier where D.Element: Identifiable {
-    @State private var page: Int = 0
+    @State private var now = false
     
     let ids: [AnyHashable]
     let action: () async -> Void
@@ -23,18 +23,16 @@ struct InifiniteScrollModifier<D: RandomAccessCollection>: ViewModifier where D.
     func onElementAppear(_ id: AnyHashable) {
         guard let index = ids.firstIndex(of: id)
         else { return }
-        
-        if index >= ids.count - 15 {
-            page = ids.count
-        }
+        now = index >= ids.count - 15
     }
     
     func body(content: Content) -> some View {
         content
             .onPreferenceChange(InfiniteScrollElementId.self, perform: onElementAppear)
-            .task(id: page, priority: .background) {
-                guard page > 0 else { return }
-                await action()
+            .task(id: now, priority: .background) {
+                if now {
+                    await action()
+                }
             }
     }
 }

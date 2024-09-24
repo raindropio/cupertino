@@ -23,18 +23,16 @@ extension RaindropForm {
         try await dispatch(raindrop.isNew ? RaindropsAction.create(raindrop) : RaindropsAction.update(raindrop))
         dismiss()
     }
-    
-    //load suggestions
-    private func suggest() async {
-        try? await dispatch(RaindropsAction.suggest(raindrop))
-    }
 }
 
 extension RaindropForm: View {
     public var body: some View {
-        Form {
-            Fields(raindrop: $raindrop)
-            Actions(raindrop: $raindrop)
+        RaindropSuggestedLoad(raindrop: raindrop) { suggestions in
+            Form {
+                Fields(raindrop: $raindrop, suggestions: suggestions)
+                Actions(raindrop: $raindrop)
+            }
+                .animation(.default, value: suggestions)
         }
             .backport.scrollBounceBehavior(.basedOnSize, axes: .vertical)
             .animation(.default, value: raindrop.collection)
@@ -57,7 +55,6 @@ extension RaindropForm: View {
                     }
                 }
             }
-            .task(id: raindrop.lastUpdate) { await suggest() }
             .onSubmit(commit)
     }
 }

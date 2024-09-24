@@ -3,7 +3,6 @@ import Foundation
 fileprivate let keychainKeyName = "raindrop" //warning: this name can be showed to user in macos!!
 
 extension AuthReducer {
-    @MainActor
     func restore() {
         let query = [
             kSecClass: kSecClassGenericPassword,

@@ -1,23 +1,23 @@
 import SwiftUI
 
-public actor Store: ReduxStore {
-    @MainActor public var dispatcher = Dispatcher()
-    @MainActor public var log = LogStore()
-    @MainActor public var auth = AuthStore()
-    @MainActor public var collaborators = CollaboratorsStore()
-    @MainActor public var collections = CollectionsStore()
-    @MainActor public var config = ConfigStore()
-    @MainActor public var filters = FiltersStore()
-    @MainActor public var icons = IconsStore()
-    @MainActor public var raindrops = RaindropsStore()
-    @MainActor public var recent = RecentStore()
-    @MainActor public var subscription = SubscriptionStore()
-    @MainActor public var user = UserStore()
+public final class Store: ObservableObject, ReduxStore {
+    @Published public var dispatcher = Dispatcher()
+    @Published public var log = LogStore()
+    @Published public var auth = AuthStore()
+    @Published public var collaborators = CollaboratorsStore()
+    @Published public var collections = CollectionsStore()
+    @Published public var config = ConfigStore()
+    @Published public var filters = FiltersStore()
+    @Published public var icons = IconsStore()
+    @Published public var raindrops = RaindropsStore()
+    @Published public var recent = RecentStore()
+    @Published public var subscription = SubscriptionStore()
+    @Published public var user = UserStore()
 
-    @MainActor public init() {
+    public init() {
         dispatcher.store = self
     }
-    
+
     public func dispatch(_ some: Any) async throws {
         do {
             try await dispatch(some, store: \.log)

@@ -6,7 +6,7 @@ extension Rest {
         guard let mimeType = res.mimeType, mimeType.contains("json")
         else { return }
         
-        let failed: FailedResponse = try fetch.decode(data: data)
+        let failed: FailedResponse = try await fetch.decode(data: data)
         
         switch failed.status {
         case 400: throw RestError.invalid(failed.errorMessage)

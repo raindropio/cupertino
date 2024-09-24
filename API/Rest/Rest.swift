@@ -1,6 +1,6 @@
 import Foundation
 
-public actor Rest: FetchDelegate {
+public class Rest: FetchDelegate {
     public static let base = Base()
     
     public struct Base {

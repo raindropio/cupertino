@@ -1,5 +1,12 @@
 import Foundation
 
+private let session = URLSession(configuration: {
+    let configuration = URLSessionConfiguration.default
+    configuration.httpMaximumConnectionsPerHost = 999
+    configuration.httpShouldUsePipelining = true
+    return configuration
+}())
+
 final class DefaultFetchDelegate: FetchDelegate {
     let decoder = JSONDecoder()
     let encoder = JSONEncoder()
@@ -28,7 +35,7 @@ extension Fetch {
             try urlRequest(path, method: "GET", query: query)
         )
                 
-        return try decode(data: data)
+        return try await decode(data: data)
     }
     
     func get(
@@ -55,7 +62,7 @@ extension Fetch {
             try urlRequest(path, method: "POST", query: query, body: body, configuration: configuration)
         )
         
-        return try decode(data: data)
+        return try await decode(data: data)
     }
     
     func post<T: Decodable, R: Encodable>(
@@ -67,7 +74,7 @@ extension Fetch {
             try urlRequest(path, method: "POST", query: query, body: body)
         )
         
-        return try decode(data: data)
+        return try await decode(data: data)
     }
     
     func post<R: Encodable>(
@@ -88,7 +95,7 @@ extension Fetch {
             try urlRequest(path, method: "POST", query: query)
         )
         
-        return try decode(data: data)
+        return try await decode(data: data)
     }
 }
 
@@ -104,7 +111,7 @@ extension Fetch {
             try urlRequest(path, method: "PUT", query: query, body: body, configuration: configuration)
         )
         
-        return try decode(data: data)
+        return try await decode(data: data)
     }
     
     func put<T: Decodable, R: Encodable>(
@@ -116,7 +123,7 @@ extension Fetch {
             try urlRequest(path, method: "PUT", query: query, body: body)
         )
         
-        return try decode(data: data)
+        return try await decode(data: data)
     }
     
     func put<T: Decodable>(
@@ -127,7 +134,7 @@ extension Fetch {
             try urlRequest(path, method: "PUT", query: query)
         )
         
-        return try decode(data: data)
+        return try await decode(data: data)
     }
     
     func put<T: Decodable>(
@@ -139,7 +146,7 @@ extension Fetch {
             try urlRequest(path, method: "PUT", query: query, formData: formData)
         )
         
-        return try decode(data: data)
+        return try await decode(data: data)
     }
 }
 
@@ -154,7 +161,7 @@ extension Fetch {
             try urlRequest(path, method: "DELETE", query: query, body: body)
         )
         
-        return try decode(data: data)
+        return try await decode(data: data)
     }
     
     func delete<T: Decodable>(
@@ -165,7 +172,7 @@ extension Fetch {
             try urlRequest(path, method: "DELETE", query: query)
         )
         
-        return try decode(data: data)
+        return try await decode(data: data)
     }
     
     func delete(
@@ -206,7 +213,7 @@ extension Fetch {
         var result: (Data, URLResponse)
         
         do {
-            result = try await URLSession.shared.reuse(for: req)
+            result = try await session.data(for: req)
             
 //            #if DEBUG
 //            print(req.httpMethod ?? "", req.url?.absoluteString ?? "", result)
@@ -308,13 +315,11 @@ extension Fetch {
     }
 }
 
-//MARK: - Decode in separate thread
 extension Fetch {
-    func decode<T: Decodable>(data: Data) throws -> T {
-        do {
-            return try delegate.decoder.decode(T.self, from: data)
-        } catch {
-            throw FetchError.decoding("\(error)")
-        }
+    func decode<T: Decodable>(data: Data) async throws -> T {
+        return try await Task { @Sendable () -> T in
+            return try self.delegate.decoder.decode(T.self, from: data)
+        }.value
     }
 }
+

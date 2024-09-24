@@ -8,11 +8,15 @@ extension RaindropsReducer {
         }
         guard let id else { return nil }
         
-        let item = try? await rest.raindropGet(id: id)
-        if let item {
-            return A.loaded(item)
-        } else {
-            return A.deletedMany(.some([id]))
+        do {
+            let item = try await rest.raindropGet(id: id)
+            if let item {
+                return A.loaded(item)
+            } else {
+                return A.deletedMany(.some([id]))
+            }
+        } catch {
+            return nil
         }
     }
 }

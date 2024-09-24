@@ -1,7 +1,7 @@
 import SwiftUI
 
-public actor Dispatcher: ObservableObject {
-    @MainActor var store: Store?
+public class Dispatcher: ObservableObject {
+    var store: Store?
     
     //async version
     public func callAsFunction(_ action: ReduxAction) async throws {

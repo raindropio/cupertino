@@ -32,7 +32,7 @@ struct AuthLogIn: View {
     var body: some View {
         Form {
             Section {
-                TextField("Email", text: $form.email)
+                TextField("Email or username", text: $form.email)
                     #if canImport(UIKit)
                     .autocapitalization(.none)
                     .autocorrectionDisabled()

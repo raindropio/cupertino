@@ -4,7 +4,7 @@ public final class AuthReducer: Reducer {
     
     let rest = Rest()
     
-    @MainActor public init() {
+    public init() {
         restore()
     }
 }

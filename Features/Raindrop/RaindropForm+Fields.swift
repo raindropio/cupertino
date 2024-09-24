@@ -8,6 +8,7 @@ extension RaindropForm {
         @State private var highlights = false
 
         @Binding var raindrop: Raindrop
+        var suggestions: RaindropSuggestions
         @FocusState var focus: FocusField?
     }
 }
@@ -82,7 +83,7 @@ extension RaindropForm.Fields: View {
             }
                 .id(raindrop.collection)
         } footer: {
-            RaindropSuggestedCollections($raindrop)
+            RaindropSuggestedCollections(raindrop: $raindrop, suggestions: suggestions)
         }
             .listItemTint(.monochrome)
         
@@ -99,7 +100,7 @@ extension RaindropForm.Fields: View {
                 }
             }
         } footer: {
-            RaindropSuggestedTags($raindrop)
+            RaindropSuggestedTags(raindrop: $raindrop, suggestions: suggestions)
         }
             .listItemTint(.monochrome)
         

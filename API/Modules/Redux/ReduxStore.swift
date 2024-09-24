@@ -1,13 +1,13 @@
 import Foundation
 
-protocol ReduxStore: Actor, ObservableObject {
+protocol ReduxStore: ObservableObject {
     func dispatch(_ some: Any) async throws
     func dispatch(_ some: Any, store: KeyPath<Self, ReduxSubStore<some Reducer>>) async throws
 }
 
 extension ReduxStore {
     func dispatch(_ some: Any, store: KeyPath<Self, ReduxSubStore<some Reducer>>) async throws {
-        if let next = try await self[keyPath: store].reduce(some) {
+        if let next = try self[keyPath: store].reduce(some) {
             try await dispatch(next)
         }
         //TODO: can be inaccessible if reducer fail

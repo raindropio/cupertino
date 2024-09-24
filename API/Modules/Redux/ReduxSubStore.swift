@@ -1,34 +1,27 @@
 import SwiftUI
 import Combine
 
-public actor ReduxSubStore<R: Reducer>: ObservableObject {
+public class ReduxSubStore<R: Reducer>: ObservableObject {
     private var reducer = R()
-    
-    @MainActor @Published public var state = R.S()
-    private var working = R.S() { didSet { didChange(oldValue) } }
-    private var stateIsUpdating = false //prevent simultanious access to state
-    
-    private func didChange(_ oldValue: R.S) {
-        guard working != oldValue, !stateIsUpdating else { return }
-        let newState = working
-        Task(priority: .low) {
-            defer { stateIsUpdating = false }
-            stateIsUpdating = true
-            await update(newState)
-        }
-    }
-    
-    @MainActor private func update(_ newState: R.S) {
-        state = newState
-    }
-    
+    private let queue = DispatchQueue(label: "ReduxSubStore.\(R.self)")
+    @Published public private(set) var state = R.S()
+
     func reduce(_ some: Any) throws -> ReduxAction? {
-        if let action = some as? ReduxAction {
-            return try reducer.reduce(state: &working, action: action)
+        return try queue.sync {
+            if let action = some as? ReduxAction {
+                var newState = state
+                let result = try reducer.reduce(state: &newState, action: action)
+                if newState != state {
+                    DispatchQueue.main.async {
+                        self.state = newState
+                    }
+                }
+                return result
+            }
+            return nil
         }
-        return nil
     }
-    
+
     func middleware(_ some: Any) async throws -> ReduxAction? {
         #if DEBUG
         let start = Date()
@@ -39,12 +32,17 @@ public actor ReduxSubStore<R: Reducer>: ObservableObject {
             }
         }
         #endif
-        
-        if let action = some as? ReduxAction {
-            return try await reducer.middleware(state: working, action: action)
+
+        let currentState = try await withCheckedThrowingContinuation { continuation in
+            queue.async {
+                continuation.resume(returning: self.state)
+            }
         }
-        else if let error = some as? Error {
-            return try await reducer.middleware(state: working, error: error)
+
+        if let action = some as? ReduxAction {
+            return try await reducer.middleware(state: currentState, action: action)
+        } else if let error = some as? Error {
+            return try await reducer.middleware(state: currentState, error: error)
         }
         return nil
     }
