@@ -66,7 +66,7 @@ extension _Optional: View {
             .contextMenu(forSelectionType: FindBy.self) { selection in
                 CollectionsMenu(selection)
             }
-            .reload {
+            .reload(priority: .background) {
                 try? await dispatch(CollectionsAction.load)
             }
     }

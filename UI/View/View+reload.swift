@@ -36,7 +36,7 @@ fileprivate struct Reload<ID: Equatable>: ViewModifier {
     var action: @Sendable () async -> Void
     
     func becomeActive(_ output: NotificationCenter.Publisher.Output) {
-        Task(priority: priority, operation: action)
+        Task.detached(priority: priority, operation: action)
     }
     
     func body(content: Content) -> some View {

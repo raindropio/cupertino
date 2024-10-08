@@ -92,7 +92,7 @@ extension FindByList: View {
             .refreshable {
                 try? await dispatch(CollectionsAction.load, FiltersAction.reload())
             }
-            .reload {
+            .reload(priority: .background) {
                 try? await dispatch(CollectionsAction.load, FiltersAction.reload())
             }
     }

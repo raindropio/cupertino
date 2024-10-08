@@ -114,7 +114,7 @@ extension TagsList: View {
             .onAppear {
                 focused = true
             }
-            .reload {
+            .reload(priority: .background) {
                 try? await dispatch(
                     FiltersAction.reload(),
                     RecentAction.reload()

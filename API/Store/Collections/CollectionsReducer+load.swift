@@ -1,11 +1,7 @@
 extension CollectionsReducer {
     //MARK: - 1
     func load(state: inout S) -> ReduxAction? {
-        guard state.status != .loading
-        else { return nil }
-        
         state.status = .loading
-        
         return A.reload
     }
     

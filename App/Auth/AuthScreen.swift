@@ -83,7 +83,7 @@ struct AuthScreen: View {
                         .modifier(AuthSuccess())
                         .frame(idealWidth: 360)
                 }
-                .task {
+                .task(priority: .background) {
                     try? await dispatch(UserAction.reload)
                 }
         }
