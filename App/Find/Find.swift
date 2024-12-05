@@ -17,7 +17,6 @@ struct Find: View {
                 }
             }
         }
-            .id(find)
             .dropProvider()
     }
 }

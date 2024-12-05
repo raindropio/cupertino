@@ -54,7 +54,7 @@ public enum RaindropType: String, Codable, CaseIterable {
         case .article: return true
         case .image: return false
         case .video: return false
-        case .document: return false
+        case .document: return true
         case .audio: return false
         case .book: return true
     }}

@@ -3,10 +3,21 @@ import SwiftUI
 public extension View {
     func navigationSplitViewUnlockSize() -> some View {
         #if canImport(UIKit)
-        overlay(NSVUW().opacity(0))
+        modifier(NSVUS())
         #else
         self
         #endif
+    }
+}
+
+fileprivate struct NSVUS: ViewModifier {
+    func body(content: Content) -> some View {
+        if isPhone {
+            content
+        } else {
+            content
+                .overlay(NSVUW().opacity(0))
+        }
     }
 }
 

@@ -23,18 +23,15 @@ struct SplitView: View {
                 .navigationSplitViewColumnWidth(min: 250, ideal: 450)
         } detail: {
             NavigationStack(path: $path.detail) {
-                Group {
-                    if let sidebar = path.sidebar {
-                        Find(find: sidebar)
-                    }
+                if let sidebar = path.sidebar {
+                    Find(find: sidebar)
+                        .navigationDestination(for: SplitViewPath.Screen.self, destination: screen)
                 }
-                    .navigationDestination(for: SplitViewPath.Screen.self, destination: screen)
             }
         }
             //split view specific
             .navigationSplitViewFixLostState()
             .navigationSplitViewUnlockSize()
-            .navigationSplitViewPhoneStack()
             .containerSizeClass()
             //sheets
             .collectionSheets()
