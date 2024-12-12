@@ -32,10 +32,10 @@ extension RaindropForm: View {
                 Fields(raindrop: $raindrop, suggestions: suggestions)
                 Actions(raindrop: $raindrop)
             }
-                .animation(.default, value: suggestions)
+                .safeAnimation(.default, value: suggestions)
         }
             .backport.scrollBounceBehavior(.basedOnSize, axes: .vertical)
-            .animation(.default, value: raindrop.collection)
+            .safeAnimation(.default, value: raindrop.collection)
             .modifier(Toolbar(raindrop: $raindrop))
             .navigationTitle((raindrop.isNew ? "New" : "Edit") + " \(raindrop.type.single.localizedLowercase)")
             #if canImport(UIKit)

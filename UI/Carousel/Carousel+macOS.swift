@@ -64,8 +64,8 @@ public struct Carousel<C: View>: View {
                 }
             }
             .onHover { hovered = $0 }
-            .animation(.spring(), value: current)
-            .animation(.default, value: hovered)
+            .safeAnimation(.spring(), value: current)
+            .safeAnimation(.default, value: hovered)
     }
 }
 #endif

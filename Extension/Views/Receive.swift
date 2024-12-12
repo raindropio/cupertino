@@ -57,7 +57,7 @@ extension Receive {
                             }
                         }
                             .transition(.opacity)
-                            .animation(.default, value: loading)
+                            .safeAnimation(.default, value: loading)
                     }
                 }
             }
@@ -94,7 +94,7 @@ extension Receive {
                     }
                 }
                     .transition(.opacity)
-                    .animation(.default, value: loading)
+                    .safeAnimation(.default, value: loading)
             }
                 #if canImport(UIKit)
                 .presentationDetents([.fraction(0.333)])

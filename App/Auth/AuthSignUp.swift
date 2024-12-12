@@ -61,7 +61,7 @@ struct AuthSignup: View {
             
             AuthContinueWith()
                 .opacity(form.isEmpty ? 1 : 0)
-                .animation(.default, value: form.isEmpty)
+                .safeAnimation(.default, value: form.isEmpty)
         }
             .backport.defaultFocus($focus, .name)
             .onSubmit { try await submit() }

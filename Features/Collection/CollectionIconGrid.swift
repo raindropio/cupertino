@@ -51,7 +51,7 @@ struct CollectionIconGrid: View {
                         .background(.regularMaterial)
                 }
             }
-            .animation(.default, value: isLoading)
+            .safeAnimation(.default, value: isLoading)
             .navigationTitle("Icon")
             #if canImport(UIKit)
             .navigationBarTitleDisplayMode(.inline)

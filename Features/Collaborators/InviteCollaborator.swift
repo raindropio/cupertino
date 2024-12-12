@@ -31,6 +31,6 @@ struct InviteCollaborator: View {
             }
         }
             .navigationTitle("Invite")
-            .animation(.default, value: link)
+            .safeAnimation(.default, value: link)
     }
 }

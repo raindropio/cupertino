@@ -43,7 +43,7 @@ extension Browser.Toolbar: ViewModifier {
         #if canImport(UIKit)
         .toolbar(page.prefersHiddenToolbars ? .hidden : .automatic, for: .navigationBar, .tabBar, .bottomBar)
         #endif
-        .animation(.default, value: page.prefersHiddenToolbars)
+        .safeAnimation(.default, value: page.prefersHiddenToolbars)
         //buttons
         .toolbar {
             //highlights

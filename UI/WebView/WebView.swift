@@ -35,7 +35,7 @@ extension WebView: View {
                     )
                     .overlay(page.toolbarBackground)
                     .frame(height: 0)
-                    .animation(nil, value: page.prefersHiddenToolbars)
+                    .safeAnimation(nil, value: page.prefersHiddenToolbars)
             }
             //allow back webview navigation
             .popGesture({

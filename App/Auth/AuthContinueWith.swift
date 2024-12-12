@@ -50,7 +50,7 @@ extension AuthContinueWith: View {
         }
             .clearSection()
             .disabled(loading)
-            .animation(.easeInOut(duration: 0.2), value: loading)
+            .safeAnimation(.easeInOut(duration: 0.2), value: loading)
             .alert(
                 "Error",
                 isPresented: .init { error != nil } set: { if !$0 { error = nil } }

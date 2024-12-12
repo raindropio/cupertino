@@ -108,8 +108,8 @@ extension TagsList: View {
                 focused = !new.isEmpty
                 add(new)
             }
-            .animation(.default, value: selected)
-            .animation(.default, value: suggestions)
+            .safeAnimation(.default, value: selected)
+            .safeAnimation(.default, value: suggestions)
             .tagSheets()
             .onAppear {
                 focused = true

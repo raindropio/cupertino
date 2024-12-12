@@ -19,7 +19,7 @@ extension SubscriptionOffer {
                         .font(.callout)
                         .foregroundStyle(.secondary)
                         .contentTransition(.numericText())
-                        .animation(.default, value: s.state.lowestDisplayPrice)
+                        .safeAnimation(.default, value: s.state.lowestDisplayPrice)
                 }
                     .scenePadding(.horizontal)
                     .frame(maxWidth: .infinity)

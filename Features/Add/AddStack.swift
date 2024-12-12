@@ -85,7 +85,7 @@ extension AddStack: View {
                     CancelToolbarItem()
                 }
         }
-            .animation(.spring(), value: isCompleteAll)
+            .safeAnimation(.spring(), value: isCompleteAll)
             .interactiveDismissDisabled(!isCompleteAll)
             //start uploading
             .task(id: urls, priority: .background) {

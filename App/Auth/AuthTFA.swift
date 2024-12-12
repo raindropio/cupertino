@@ -15,7 +15,7 @@ struct AuthTFA: ViewModifier {
                     .environmentObject(service)
             }
         }
-            .animation(.default, value: service.token != nil)
+            .safeAnimation(.default, value: service.token != nil)
     }
 }
 

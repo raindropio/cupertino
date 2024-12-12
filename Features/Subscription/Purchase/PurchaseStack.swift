@@ -22,7 +22,7 @@ struct PurchaseStack: View {
                 Products()
             }
         }
-            .animation(.default, value: products.isEmpty)
+            .safeAnimation(.default, value: products.isEmpty)
             .reload {
                 try? await dispatch(SubscriptionAction.products)
             }

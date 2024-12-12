@@ -82,10 +82,11 @@ extension FindByList: View {
             .headerProminence(search.isEmpty ? .increased : .standard)
             #endif
             .labelStyle(.sidebar)
-            .collectionsAnimation()
-            .tagAnimations()
-            .animation(.default, value: filtersExpanded)
-            .animation(.default, value: tagsExpanded)
+            //animations unstable, sometime crash
+            //.collectionsAnimation()
+            //.tagAnimations()
+            .safeAnimation(.default, value: filtersExpanded)
+            .safeAnimation(.default, value: tagsExpanded)
             //menu
             .contextMenu(forSelectionType: FindBy.self, menu: contextMenu)
             //reload

@@ -15,7 +15,7 @@ public struct CollectionSharing: View {
             Collaboration(collection: $collection)
         }
             .headerProminence(.increased)
-            .animation(.default, value: collection.public)
+            .safeAnimation(.default, value: collection.public)
             .navigationTitle("Sharing")
             #if canImport(UIKit)
             .navigationBarTitleDisplayMode(.inline)

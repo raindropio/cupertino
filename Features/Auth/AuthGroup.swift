@@ -25,7 +25,7 @@ public struct AuthGroup<A: View, N: View>: View {
             }
         }
             .transition(.opacity)
-            .animation(.default, value: user.state.authorized)
+            .safeAnimation(.default, value: user.state.authorized)
             .task {
                 try? await dispatch(UserAction.reload)
             }

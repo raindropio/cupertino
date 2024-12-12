@@ -4,7 +4,6 @@ import API
 import UI
 
 struct Folder<H: View>: View {
-    @Environment(\.containerHorizontalSizeClass) private var sizeClass
     @State private var selection: Set<Raindrop.ID> = .init()
     
     var find: FindBy

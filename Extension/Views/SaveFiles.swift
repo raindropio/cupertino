@@ -29,6 +29,6 @@ struct SaveFiles: View {
             }
         }
             .transition(.opacity)
-            .animation(.default, value: collection)
+            .safeAnimation(.default, value: collection)
     }
 }

@@ -21,7 +21,7 @@ extension TagAnimations {
         
         func body(content: Content) -> some View {
             content
-                .animation(.default, value: animation)
+                .safeAnimation(.default, value: animation)
         }
     }
 }

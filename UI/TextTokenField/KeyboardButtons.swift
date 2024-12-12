@@ -63,7 +63,7 @@ extension KeyboardButtons {
                     .padding(.top, 5)
             }
                 .buttonStyle(KeyboardButtonStyle())
-                .animation(.spring(), value: items.count)
+                .safeAnimation(.spring(), value: items.count)
                 .backport.scrollBounceBehavior(.basedOnSize, axes: [.horizontal, .vertical])
                 .frame(maxWidth: .infinity, maxHeight: .infinity)
                 .ignoresSafeArea()
@@ -82,7 +82,7 @@ fileprivate struct KeyboardButtonStyle: ButtonStyle {
             .background(
                 RoundedRectangle(cornerRadius: 5, style: .continuous)
                     .fill(configuration.isPressed ? AnyShapeStyle(.tertiary) : AnyShapeStyle(.clear))
-                    .animation(nil, value: configuration.isPressed)
+                    .safeAnimation(nil, value: configuration.isPressed)
             )
             .transition(.scale(scale: 0).combined(with: .opacity))
     }

@@ -39,6 +39,6 @@ struct DatePresetForm: View {
                 .datePickerStyle(.graphical)
         }
             .backport.scrollBounceBehavior(.basedOnSize)
-            .animation(.default, value: selection)
+            .safeAnimation(.default, value: selection)
     }
 }

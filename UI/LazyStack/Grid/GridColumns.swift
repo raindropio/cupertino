@@ -39,7 +39,7 @@ extension GridColumns {
         var body: some View {
             LazyVGrid(columns: gridItems, alignment: .leading, spacing: spacing, content: content)
                 #if canImport(UIKit)
-                .animation(.default, value: gridItems.count)
+                .safeAnimation(.default, value: gridItems.count)
                 #endif
         }
     }

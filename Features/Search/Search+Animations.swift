@@ -12,7 +12,7 @@ extension Search {
         
         func body(content: Content) -> some View {
             content
-                .animation(.default, value: refine.isSearching || isActive)
+                .safeAnimation(.default, value: refine.isSearching || isActive)
                 .modifier(Memorized(f: f.state.animation, c: c.state.animation, rc: rc.state.animation))
         }
     }
@@ -26,9 +26,9 @@ extension Search.Animations {
         
         func body(content: Content) -> some View {
             content
-                .animation(.default, value: f)
-                .animation(.default, value: c)
-                .animation(.default, value: rc)
+                .safeAnimation(.default, value: f)
+                .safeAnimation(.default, value: c)
+                .safeAnimation(.default, value: rc)
         }
     }
 }

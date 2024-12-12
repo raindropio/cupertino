@@ -25,7 +25,7 @@ extension RaindropsAnimation {
         
         func body(content: Content) -> some View {
             content
-                .animation(.easeInOut(duration: 0.3), value: animation)
+                .safeAnimation(.easeInOut(duration: 0.3), value: animation)
         }
     }
 }

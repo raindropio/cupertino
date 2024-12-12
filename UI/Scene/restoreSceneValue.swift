@@ -41,9 +41,12 @@ fileprivate struct RestoreSceneValue<V: Codable & Equatable>: ViewModifier {
     
     private func save() {
         guard let fileURL else { return }
-        try? FileManager.default.removeItem(at: fileURL)
+
         if let encoded = try? encoder.encode(value) {
-            FileManager.default.createFile(atPath: fileURL.path, contents: encoded, attributes: nil)
+            Task {
+                try? FileManager.default.removeItem(at: fileURL)
+                FileManager.default.createFile(atPath: fileURL.path, contents: encoded, attributes: nil)
+            }
         }
     }
     

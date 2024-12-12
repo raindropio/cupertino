@@ -151,7 +151,7 @@ fileprivate struct _SectionHeader<L: View, A: View>: View {
         }
             .lineLimit(1)
             .imageScale(prominence == .increased ? .large : .medium)
-            .animation(.default, value: isExpanded)
+            .safeAnimation(.default, value: isExpanded)
     }
 }
 #endif

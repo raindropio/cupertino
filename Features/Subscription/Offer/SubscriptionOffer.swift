@@ -50,7 +50,7 @@ public struct SubscriptionOffer: View {
                 .frame(idealHeight: 400)
                 #endif
             }
-            .animation(nil, value: pro)
+            .safeAnimation(nil, value: pro)
             .safeAreaInset(edge: .bottom) {
                 if pro {
                     HStack {
@@ -76,7 +76,7 @@ public struct SubscriptionOffer: View {
                     .transition(.move(edge: .bottom).combined(with: .offset(y: 20)))
                 }
             }
-            .animation(.spring(), value: pro)
+            .safeAnimation(.spring(), value: pro)
         }
     }
 }

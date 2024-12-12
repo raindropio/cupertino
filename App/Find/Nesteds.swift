@@ -42,7 +42,7 @@ extension Nesteds {
                     #endif
                     .disabled(isEditing)
                     .fixedSize(horizontal: false, vertical: true)
-                    .animation(.default, value: animation)
+                    .safeAnimation(.default, value: animation)
                     .listRowSeparator(.hidden)
                     .listRowBackground(Color.clear)
             }

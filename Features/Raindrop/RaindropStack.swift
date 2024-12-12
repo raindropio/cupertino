@@ -123,7 +123,7 @@ fileprivate struct Stack<C: View>: View {
         NavigationStack {
             content($draft)
                 .disabled(loading)
-                .animation(.easeInOut(duration: 0.2), value: [loading, draft.isNew])
+                .safeAnimation(.easeInOut(duration: 0.2), value: [loading, draft.isNew])
                 .toolbar {
                     if draft.isNew {
                         CancelToolbarItem()

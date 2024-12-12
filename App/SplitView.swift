@@ -18,34 +18,19 @@ struct SplitView: View {
     }
 
     var body: some View {
-        Group {
-            if isPhone {
-                NavigationStack(path: $path.detail) {
-                    SidebarScreen(selection: $path.sidebar)
-                        .onChange(of: path.sidebar) {
-                            if let page = $0 {
-                                path.push(page)
-                            }
-                        }
+        NavigationSplitView(columnVisibility: $columnVisibility) {
+            SidebarScreen(selection: $path.sidebar)
+                .navigationSplitViewColumnWidth(min: 250, ideal: 450)
+        } detail: {
+            NavigationStack(path: $path.detail) {
+                if let sidebar = path.sidebar {
+                    Find(find: sidebar)
                         .navigationDestination(for: SplitViewPath.Screen.self, destination: screen)
                 }
-            } else {
-                NavigationSplitView(columnVisibility: $columnVisibility) {
-                    SidebarScreen(selection: $path.sidebar)
-                        .navigationSplitViewColumnWidth(min: 250, ideal: 450)
-                } detail: {
-                    NavigationStack(path: $path.detail) {
-                        if let sidebar = path.sidebar {
-                            Find(find: sidebar)
-                                .navigationDestination(for: SplitViewPath.Screen.self, destination: screen)
-                        }
-                    }
-                }
-                    //split view specific
-                    .navigationSplitViewFixLostState()
-                    .navigationSplitViewUnlockSize()
             }
         }
+            //split view specific
+            .navigationSplitViewUnlockSize()
             .containerSizeClass()
             //sheets
             .collectionSheets()
@@ -54,6 +39,6 @@ struct SplitView: View {
             .modifier(PushNotifications())
             //routing
             .modifier(ReceiveDeepLink(path: $path))
-//            .restoreSceneValue("app-path", value: $path)
+            .restoreSceneValue("app-path", value: $path)
     }
 }
