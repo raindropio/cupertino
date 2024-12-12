@@ -4,8 +4,8 @@ import UI
 import Features
 
 struct SplitViewPath: Codable, Equatable {
-    var sidebar: FindBy? = .init()
-    var detail: [Screen] = []
+    var sidebar: FindBy? = isPhone ? nil : .init()
+    var detail: [Screen] = isPhone ? [.find(.init())] : []
 }
 
 extension SplitViewPath {
@@ -19,9 +19,13 @@ extension SplitViewPath {
 
 extension SplitViewPath {
     mutating func push(_ find: FindBy) {
-        if sidebar == nil || !isPhone {
-            sidebar = find
-            return
+        if isPhone {
+            sidebar = nil
+        } else {
+            if sidebar == nil {
+                sidebar = find
+                return
+            }
         }
         
         if detail.last != .find(find) {
@@ -30,7 +34,9 @@ extension SplitViewPath {
     }
     
     mutating func push(_ screen: Screen) {
-        if sidebar == nil { sidebar = .init() }
+        if !isPhone {
+            if sidebar == nil { sidebar = .init() }
+        }
         if detail.last != screen {
             detail += [screen]
         }

@@ -18,20 +18,34 @@ struct SplitView: View {
     }
 
     var body: some View {
-        NavigationSplitView(columnVisibility: $columnVisibility) {
-            SidebarScreen(selection: $path.sidebar)
-                .navigationSplitViewColumnWidth(min: 250, ideal: 450)
-        } detail: {
-            NavigationStack(path: $path.detail) {
-                if let sidebar = path.sidebar {
-                    Find(find: sidebar)
+        Group {
+            if isPhone {
+                NavigationStack(path: $path.detail) {
+                    SidebarScreen(selection: $path.sidebar)
+                        .onChange(of: path.sidebar) {
+                            if let page = $0 {
+                                path.push(page)
+                            }
+                        }
                         .navigationDestination(for: SplitViewPath.Screen.self, destination: screen)
                 }
+            } else {
+                NavigationSplitView(columnVisibility: $columnVisibility) {
+                    SidebarScreen(selection: $path.sidebar)
+                        .navigationSplitViewColumnWidth(min: 250, ideal: 450)
+                } detail: {
+                    NavigationStack(path: $path.detail) {
+                        if let sidebar = path.sidebar {
+                            Find(find: sidebar)
+                                .navigationDestination(for: SplitViewPath.Screen.self, destination: screen)
+                        }
+                    }
+                }
+                    //split view specific
+                    .navigationSplitViewFixLostState()
+                    .navigationSplitViewUnlockSize()
             }
         }
-            //split view specific
-            .navigationSplitViewFixLostState()
-            .navigationSplitViewUnlockSize()
             .containerSizeClass()
             //sheets
             .collectionSheets()
