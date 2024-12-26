@@ -66,8 +66,9 @@ extension WebView {
             //configuration
             let configuration = WKWebViewConfiguration()
             configuration.processPool = processPool
-            configuration.mediaTypesRequiringUserActionForPlayback = .audio
+            configuration.mediaTypesRequiringUserActionForPlayback = []
             configuration.applicationNameForUserAgent = userAgent
+            configuration.allowsInlineMediaPlayback = true
             
             //reuse cookies
             let cookies = HTTPCookieStorage.shared.cookies ?? []

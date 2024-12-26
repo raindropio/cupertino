@@ -52,10 +52,10 @@ public enum RaindropType: String, Codable, CaseIterable {
     public var readable: Bool { switch self {
         case .link: return false
         case .article: return true
-        case .image: return false
-        case .video: return false
+        case .image: return true
+        case .video: return true
         case .document: return true
-        case .audio: return false
+        case .audio: return true
         case .book: return true
     }}
 }
