@@ -6,22 +6,37 @@ public struct RaindropSuggestedTags: View {
     @Binding var raindrop: Raindrop
     var suggestions: RaindropSuggestions
     
-    private var items: [String] {
+    private var existing: [String] {
         return suggestions.tags.filter {
             !raindrop.tags.contains($0)
         }
     }
     
-    func row(_ tag: String) -> some View {
-        Button(tag) {
+    private var new: [String] {
+        return suggestions.new_tags.filter {
+            !raindrop.tags.contains($0)
+        }
+    }
+    
+    func row(_ tag: String, isNew: Bool = false) -> some View {
+        Button {
             raindrop.tags.append(tag)
+        } label: {
+            if isNew {
+                Label(tag, systemImage: "plus")
+            } else {
+                Text(tag)
+            }
         }
     }
     
     public var body: some View {
-        if !items.isEmpty {
+        if (!existing.isEmpty || !new.isEmpty) {
             StripStack {
-                ForEach(items, id: \.self, content: row)
+                Group {
+                    ForEach(existing, id: \.self) { row($0) }
+                    ForEach(new, id: \.self) { row($0, isNew: true) }
+                }
                     #if canImport(UIKit)
                     .padding(.vertical, 14)
                     #endif
