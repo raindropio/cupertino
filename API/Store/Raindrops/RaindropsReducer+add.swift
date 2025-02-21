@@ -47,14 +47,11 @@ extension RaindropsReducer {
                             }
                             //web url
                             else {
-                                var item = try? await self.rest.importUrlParse(url)
-                                if item == nil {
-                                    item = .new(link: url)
-                                }
+                                var item = Raindrop.new(link: url)
                                 if let collection {
-                                    item?.collection = collection
+                                    item.collection = collection
                                 }
-                                raindrop = try await self.rest.raindropCreate(raindrop: item!)
+                                raindrop = try await self.rest.raindropCreate(raindrop: item)
                             }
                             
                             completed?.wrappedValue.insert(url)

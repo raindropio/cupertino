@@ -12,6 +12,11 @@ public struct RaindropMeta: View {
     public var body: some View {
         (
             (
+                raindrop.pleaseParse != nil ?
+                    Text(Image(systemName: "arrow.trianglehead.2.clockwise.rotate.90")) + Text("\u{00a0}") :
+                    Text("")
+            )
+            + (
                 raindrop.type != .link ?
                     Text(Image(systemName: raindrop.type.systemImage)) + Text("\u{00a0}") :
                     Text("")
