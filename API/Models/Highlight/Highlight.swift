@@ -6,6 +6,6 @@ public struct Highlight: Identifiable, Hashable {
     public var note: String = ""
     public var created = Date()
     public var color: Color = .yellow
-    public var index: Int?
+    public var position: Int = 0
     public var creatorRef: CreatorRef?
 }

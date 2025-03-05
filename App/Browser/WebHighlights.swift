@@ -43,6 +43,9 @@ struct WebHighlights {
             if let color = updated.color {
                 raindrop.highlights[index].color = color
             }
+            if let position = updated.position {
+                raindrop.highlights[index].position = position
+            }
             
             try? await dispatch(RaindropsAction.update(raindrop))
             

@@ -13,7 +13,7 @@ extension WebHighlights {
             var text: String?
             var note: String?
             var color: Highlight.Color?
-            var index: Int?
+            var position: Int?
         }
     }
 }

@@ -5,6 +5,7 @@ extension Highlight: Codable {
         case note
         case created
         case color
+        case position
         case creatorRef
     }
     
@@ -16,6 +17,7 @@ extension Highlight: Codable {
         note = try container.decodeIfPresent(type(of: note), forKey: .note) ?? ""
         created = (try? container.decode(type(of: created), forKey: .created)) ?? .init()
         color = (try? container.decode(type(of: color), forKey: .color)) ?? .yellow
+        position = (try? container.decode(type(of: position), forKey: .position)) ?? 0
         creatorRef = try? container.decode(type(of: creatorRef), forKey: .creatorRef)
     }
     
@@ -26,6 +28,7 @@ extension Highlight: Codable {
         try container.encode(note, forKey: .note)
         try container.encode(created, forKey: .created)
         try container.encode(color, forKey: .color)
+        try container.encode(position, forKey: .position)
         try container.encodeIfPresent(creatorRef, forKey: .creatorRef)
     }
 }
