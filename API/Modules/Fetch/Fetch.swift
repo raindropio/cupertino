@@ -285,9 +285,12 @@ extension Fetch {
     ) throws -> URLRequest {
         var req = try urlRequest(path, method: method, query: query)
         
-        let boundary = "Boundary-\(NSUUID().uuidString)"
-        req.httpBody = try formData.encode(boundary)
-        req.addValue("multipart/form-data; boundary=\(boundary)", forHTTPHeaderField: "Content-Type")
+        let boundary = "Boundary-\(UUID().uuidString)"
+        let (stream, length) = try formData.buildStream(boundary: boundary)
+
+        req.httpBodyStream = stream
+        req.setValue("multipart/form-data; boundary=\(boundary)", forHTTPHeaderField: "Content-Type")
+        req.setValue(String(length), forHTTPHeaderField: "Content-Length")
         
         return req
     }

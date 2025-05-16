@@ -16,8 +16,12 @@ extension URL {
         let components = NSURLComponents.init(url: self, resolvingAgainstBaseURL: true)
         guard let components else { return self }
         
+        //keep hash for SPA
+        if components.fragment?.contains("/") == false {
+            components.fragment = nil
+        }
+        
         components.scheme = nil
-        components.fragment = nil
         components.user = nil
         components.password = nil
         components.host = (components.host ?? "").replacingOccurrences(of: "www.", with: "")

@@ -14,33 +14,52 @@ struct FormData {
 }
 
 extension FormData {
-    func encode(_ boundary: String) throws -> Data {
+    func buildStream(boundary: String) throws -> (InputStream, UInt64) {
         let lineBreak = "\r\n"
-        var body = Data()
-        
+
+        var length: UInt64 = 0
+        var pieces: [InputStream] = []
+
+        func addPiece(_ string: String) {
+            let data = Data(string.utf8)
+            length += UInt64(data.count)
+            pieces.append(InputStream(data: data))
+        }
+
         for (key, value) in params {
-            //File url
             if let url = value as? URL {
-                let fileName = url.lastPathComponent
-                let mimeType = UTType(filenameExtension: url.pathExtension)?.preferredMIMEType ?? "application/octet-stream"
-                
-                body.append("--\(boundary + lineBreak)")
-                body.append("Content-Disposition: form-data; name=\"\(key)\"; filename=\"\(fileName)\"\(lineBreak)")
-                body.append("Content-Type: \(mimeType + lineBreak + lineBreak)")
-                body.append(try Data(contentsOf: url))
-                body.append(lineBreak)
-            }
-            //Any string'able
-            else if let string = value as? CustomStringConvertible {
-                body.append("--\(boundary + lineBreak)")
-                body.append("Content-Disposition: form-data; name=\"\(key)\"\(lineBreak)\(lineBreak)")
-                body.append("\(string)\(lineBreak)")
+                // Header
+                let fileName   = url.lastPathComponent
+                let mimeType   = UTType(filenameExtension: url.pathExtension)?.preferredMIMEType
+                                 ?? "application/octet-stream"
+
+                addPiece("--\(boundary)\(lineBreak)")
+                addPiece("""
+                         Content-Disposition: form-data; name="\(key)"; filename="\(fileName)"\(lineBreak)\
+                         Content-Type: \(mimeType)\(lineBreak)\(lineBreak)
+                         """)
+
+                // File body (streaming)
+                guard let fileStream = InputStream(url: url) else {
+                    throw URLError(.fileDoesNotExist)
+                }
+                let size = try FileManager.default.attributesOfItem(atPath: url.path)[.size] as? NSNumber
+                length += size?.uint64Value ?? 0
+                pieces.append(fileStream)
+
+                // Trailing CRLF
+                addPiece(lineBreak)
+            } else {
+                // Simple field
+                addPiece("--\(boundary)\(lineBreak)")
+                addPiece("Content-Disposition: form-data; name=\"\(key)\"\(lineBreak)\(lineBreak)")
+                addPiece("\(value)\(lineBreak)")
             }
         }
-        
-        body.append("--\(boundary)--\(lineBreak)")
-        
-        return body
+
+        addPiece("--\(boundary)--\(lineBreak)")
+
+        return (MultipartBodyStream(pieces), length)
     }
 }
 
