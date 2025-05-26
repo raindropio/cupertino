@@ -37,7 +37,7 @@
                 || ANY $attachment.registeredTypeIdentifiers UTI-CONFORMS-TO "com.microsoft.powerpoint.ppt"
                 || ANY $attachment.registeredTypeIdentifiers UTI-CONFORMS-TO "com.adobe.encapsulated-postscript"
 				)
-				).@count == $extensionItem.attachments.@count
+				).@count &gt; 0
 				).@count &gt; 0</string>
 			<key>NSExtensionJavaScriptPreprocessingFile</key>
 			<string>Share</string>
