@@ -79,7 +79,6 @@ extension RaindropForm.Fields: View {
             } label: {
                 CollectionLabel(raindrop.collection, withLocation: true)
                     .symbolVariant(.fill)
-                    .fixedSize()
             }
                 .id(raindrop.collection)
         } footer: {

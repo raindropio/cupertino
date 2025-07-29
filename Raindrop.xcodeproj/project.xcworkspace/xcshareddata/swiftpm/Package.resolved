@@ -1,5 +1,5 @@
 {
-  "originHash" : "5e65b82a82fb58a317748f82552a4a1badfd6bf1e3a3fbbac35a92413b757eb0",
+  "originHash" : "69182df0e58fda92a8db59ab4c9384bb4c568d2e45e162ff4cc33b37ad761477",
   "pins" : [
     {
       "identity" : "abseil-cpp-binary",
@@ -110,6 +110,15 @@
       }
     },
     {
+      "identity" : "kingfisher",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/onevcat/Kingfisher",
+      "state" : {
+        "revision" : "2015fda791daa72c8058619545a593bf8c1dd59f",
+        "version" : "8.5.0"
+      }
+    },
+    {
       "identity" : "leveldb",
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/firebase/leveldb.git",
@@ -125,15 +134,6 @@
       "state" : {
         "revision" : "b7e1104502eca3a213b46303391ca4d3bc8ddec1",
         "version" : "2.30910.0"
-      }
-    },
-    {
-      "identity" : "nuke",
-      "kind" : "remoteSourceControl",
-      "location" : "https://github.com/kean/Nuke.git",
-      "state" : {
-        "revision" : "a4413f67ddc8c96948d88463ce21dce0ce80da04",
-        "version" : "13.0.0-beta.1"
       }
     },
     {

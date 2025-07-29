@@ -1,11 +1,10 @@
 import SwiftUI
-import Nuke
-import NukeUI
+import Kingfisher
 
 #if os(macOS)
 fileprivate let scaleFactor: CGFloat = NSScreen.main?.backingScaleFactor ?? 1
 #else
-fileprivate let scaleFactor: CGFloat = 1
+fileprivate let scaleFactor: CGFloat = UIScreen.main.scale
 #endif
 
 fileprivate var aspectCache: [URL: CGFloat] = [:]
@@ -15,124 +14,78 @@ public struct Thumbnail {
     var width: CGFloat?
     var height: CGFloat?
     var aspectRatio: CGFloat?
-    
-    static let pipeline: ImagePipeline = {
-        var configuration = ImagePipeline.Configuration.withDataCache(
-            name: "\(Bundle.main.bundleIdentifier!).thumbnail",
-            sizeLimit: 1024 * 1024 * 1000 //1000mb disk cache
-        )
-        configuration.dataCachePolicy = .storeEncodedImages
-        configuration.isDecompressionEnabled = true
-        configuration.isUsingPrepareForDisplay = true
-        configuration.isRateLimiterEnabled = false
-        configuration.isProgressiveDecodingEnabled = true
-        
-        configuration.dataLoadingQueue.maxConcurrentOperationCount = 100
-        configuration.imageDecodingQueue.maxConcurrentOperationCount = 10
-        configuration.imageEncodingQueue.maxConcurrentOperationCount = 10
-        configuration.imageProcessingQueue.maxConcurrentOperationCount = 10
-        configuration.imageDecompressingQueue.maxConcurrentOperationCount = 10
-        
-        return .init(configuration: configuration)
-    }()
-    
-    public init(
-        _ url: URL? = nil,
-        width: Double,
-        height: Double
-    ) {
+
+    public init(_ url: URL? = nil, width: Double, height: Double) {
         self.url = url
         self.width = width
         self.height = height
     }
-    
-    public init(
-        _ url: URL? = nil,
-        width: Double,
-        aspectRatio: CGFloat? = nil
-    ) {
+
+    public init(_ url: URL? = nil, width: Double, aspectRatio: CGFloat? = nil) {
         self.url = url
         self.width = width
         self.aspectRatio = aspectRatio
     }
-    
-    public init(
-        _ url: URL? = nil,
-        height: Double,
-        aspectRatio: CGFloat? = nil
-    ) {
+
+    public init(_ url: URL? = nil, height: Double, aspectRatio: CGFloat? = nil) {
         self.url = url
         self.height = height
         self.aspectRatio = aspectRatio
     }
-    
-    public init(
-        _ url: URL? = nil
-    ) {
+
+    public init(_ url: URL? = nil) {
         self.url = url
     }
 }
 
-extension Thumbnail: Equatable {
-    
-}
-
-extension Thumbnail {
-    private var resize: [ImageProcessors.Resize] {
-        if let width, let height {
-            return [.init(size: .init(width: width * scaleFactor, height: height * scaleFactor), crop: true)]
-        } else if let width {
-            return [.init(width: width * scaleFactor)]
-        } else if let height {
-            return [.init(height: height * scaleFactor)]
-        }
-        return []
-    }
-    
-    private func onCompletion(_ result: Result<ImageResponse, Error>) {
-        switch result {
-        case .success(let res):
-            if aspectRatio == nil, let url {
-                aspectCache[url] = res.image.size.width / res.image.size.height
-            }
-        default:
-            return
-        }
-    }
-}
+extension Thumbnail: Equatable {}
 
 extension Thumbnail: View {
     public var body: some View {
         ZStack {
-            LazyImage(request: .init(url: url, processors: resize)) {
-                if let image = $0.image {
-                    image
-                        .resizable()
-                        .antialiased(false)
-                        .interpolation(.low)
-                        .scaledToFill()
-                } else if $0.error != nil {
+            KFImage(url)
+                .setProcessor(processor)
+                .onSuccess(onSuccess)
+                .placeholder {
                     if (width != nil && height != nil) || aspectRatio != nil {
                         Color.primary.opacity(0.1)
                     }
-                } else if aspectRatio == nil, let url, let ar = aspectCache[url] {
-                    Rectangle().fill(.clear).aspectRatio(ar, contentMode: .fit)
                 }
-            }
-                .pipeline(Self.pipeline)
-                .onDisappear(.lowerPriority)
-                .onCompletion(onCompletion)
+                .resizable()
+                .interpolation(.low)
+                .antialiased(false)
+                .scaledToFill()
                 .layoutPriority(-1)
-            
+
             Group {
                 if let width, let height {
                     Color.clear.frame(width: width, height: height)
                 } else if let aspectRatio {
                     Color.clear.aspectRatio(aspectRatio, contentMode: .fit)
+                } else if let url, let ar = aspectCache[url] {
+                    Color.clear.aspectRatio(ar, contentMode: .fit)
                 }
             }
-                .fixedSize(horizontal: width == nil, vertical: height == nil)
+            .fixedSize(horizontal: width == nil, vertical: height == nil)
         }
-            .clipped()
+        .clipped()
+    }
+    
+    private func onSuccess(_ result: RetrieveImageResult) {
+        if aspectRatio == nil, let url {
+            aspectCache[url] = result.image.size.width / result.image.size.height
+        }
+    }
+
+    private var processor: ImageProcessor {
+        if let width, let height {
+            return ResizingImageProcessor(referenceSize: CGSize(width: width * scaleFactor, height: height * scaleFactor), mode: .aspectFill)
+        } else if let width {
+            return ResizingImageProcessor(referenceSize: CGSize(width: width * scaleFactor, height: .greatestFiniteMagnitude), mode: .aspectFit)
+        } else if let height {
+            return ResizingImageProcessor(referenceSize: CGSize(width: .greatestFiniteMagnitude, height: height * scaleFactor), mode: .aspectFit)
+        } else {
+            return DefaultImageProcessor.default
+        }
     }
 }

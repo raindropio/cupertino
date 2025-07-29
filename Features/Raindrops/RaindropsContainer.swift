@@ -50,7 +50,6 @@ public struct RaindropsContainer<C: View>: View {
                 coverRight: cfg.state.raindrops.coverRight,
                 coverWidth: coverWidth
             ))
-            .modifier(PrefetchRaindropsCovers(find: find))
     }
 }
 

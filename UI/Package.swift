@@ -15,15 +15,15 @@ let package = Package(
     ],
     dependencies: [
         .package(
-            url: "https://github.com/kean/Nuke.git",
-            from: "13.0.0-beta.1"
+            url: "https://github.com/onevcat/Kingfisher",
+            from: "8.5.0"
         )
     ],
     targets: [
         .target(
             name: "UI",
             dependencies: [
-                .product(name: "NukeUI", package: "Nuke")
+                .product(name: "Kingfisher", package: "Kingfisher")
             ],
             path: ""
         )
