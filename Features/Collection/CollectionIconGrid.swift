@@ -1,7 +1,6 @@
 import SwiftUI
 import UI
 import API
-import Backport
 
 struct CollectionIconGrid: View {
     @Environment(\.dismiss) private var dismiss
@@ -42,8 +41,7 @@ struct CollectionIconGrid: View {
             )
                 .equatable()
         }
-            .backport.scrollBounceBehavior(.basedOnSize, axes: [.horizontal, .vertical])
-            .ignoresSafeArea(.keyboard)
+            .scrollBounceBehavior(.basedOnSize, axes: [.horizontal, .vertical])
             .overlay {
                 if isLoading {
                     ProgressView()
@@ -55,7 +53,7 @@ struct CollectionIconGrid: View {
             .navigationTitle("Icon")
             #if canImport(UIKit)
             .navigationBarTitleDisplayMode(.inline)
-            .searchable(text: $search, placement: .navigationBarDrawer(displayMode: .always))
+            .searchable(text: $search)
             #else
             .searchable(text: $search)
             .frame(idealHeight: 300)

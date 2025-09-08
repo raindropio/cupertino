@@ -10,6 +10,7 @@ extension Browser {
         @EnvironmentObject private var dispatch: Dispatcher
         @Environment(\.dismiss) private var dismiss
         @Environment(\.openURL) private var openURL
+        @Environment(\.colorScheme) private var colorScheme
 
         @State private var collection = false
         @State private var tags = false
@@ -42,6 +43,8 @@ extension Browser.Toolbar: ViewModifier {
         .toolbarRole(.editor)
         #if canImport(UIKit)
         .toolbar(page.prefersHiddenToolbars ? .hidden : .automatic, for: .navigationBar, .tabBar, .bottomBar)
+        .toolbarBackground(.visible, for: .navigationBar, .tabBar, .bottomBar)
+        .toolbarColorScheme(page.toolbarColorScheme == colorScheme ? nil : page.toolbarColorScheme, for: .navigationBar, .tabBar, .bottomBar)
         #endif
         .safeAnimation(.default, value: page.prefersHiddenToolbars)
         //buttons
@@ -75,81 +78,115 @@ extension Browser.Toolbar: ViewModifier {
                 }
             }
             
-            //move
-            ToolbarItemGroup(placement: placement) {
-                Button { collection.toggle() } label: {
-                    Image(systemName: "folder")
+            Group {
+                if #available(iOS 26.0, *) {
+                    ToolbarSpacer(.flexible, placement: placement)
                 }
-                    .sheet(isPresented: $collection) {
-                        RaindropStack($raindrop, content: RaindropCollection.init)
-                            .frame(idealWidth: 600, idealHeight: 600)
-                            #if canImport(AppKit)
-                            .fixedSize()
-                            #endif
+                
+                //move
+                ToolbarItemGroup(placement: placement) {
+                    Button { collection.toggle() } label: {
+                        Image(systemName: "folder")
                     }
-                    .disabled(raindrop.isNew)
-                Spacer()
-            }
-            
-            //add tags
-            ToolbarItemGroup(placement: placement) {
-                Button { tags.toggle() } label: {
-                    Image(systemName: "number")
-                        .overlay(alignment: .topTrailing) {
-                            NumberInCircle(raindrop.tags.count)
-                                .offset(x: 11, y: -11)
+                        .sheet(isPresented: $collection) {
+                            RaindropStack($raindrop, content: RaindropCollection.init)
+                                .frame(idealWidth: 600, idealHeight: 600)
+                                #if canImport(AppKit)
+                                .fixedSize()
+                                #endif
                         }
-                }
-                    .sheet(isPresented: $tags) {
-                        RaindropStack($raindrop, content: RaindropTags.init)
-                            .frame(idealWidth: 600, idealHeight: 600)
-                            #if canImport(AppKit)
-                            .fixedSize()
-                            #endif
+                        .disabled(raindrop.isNew)
+                    
+                    if #unavailable(iOS 26.0) {
+                        Spacer()
                     }
-                    .disabled(raindrop.isNew)
-                Spacer()
-            }
-            
-            //edit/add
-            ToolbarItemGroup(placement: placement) {
-                Button { form.toggle() } label: {
-                    Image(systemName: raindrop.isNew ? "plus.circle" : "info.circle")
                 }
-                    .sheet(isPresented: $form) {
-                        RaindropStack($raindrop, content: RaindropForm.init)
-                            #if canImport(AppKit)
-                            .frame(idealWidth: 400)
-                            .fixedSize()
-                            #else
-                            .frame(idealWidth: 600, idealHeight: 600)
-                            #endif
+                
+                if #available(iOS 26.0, *) {
+                    ToolbarSpacer(.flexible, placement: placement)
+                }
+                
+                //add tags
+                ToolbarItemGroup(placement: placement) {
+                    Button { tags.toggle() } label: {
+                        Image(systemName: "number")
+                            .overlay(alignment: .topTrailing) {
+                                NumberInCircle(raindrop.tags.count)
+                                    .offset(x: 11, y: -11)
+                            }
                     }
-                Spacer()
-            }
-            
-            //delete
-            ToolbarItemGroup(placement: placement) {
-                ActionButton {
-                    try await dispatch(RaindropsAction.delete(raindrop.id))
-                    dismiss()
-                } label: {
-                    Image(systemName: "trash")
-                }
-                    .disabled(raindrop.isNew)
-                Spacer()
-            }
-            
-            //open
-            ToolbarItemGroup(placement: placement) {
-                Button {
-                    if let url = page.url {
-                        openURL(url)
+                        .sheet(isPresented: $tags) {
+                            RaindropStack($raindrop, content: RaindropTags.init)
+                                .frame(idealWidth: 600, idealHeight: 600)
+                                #if canImport(AppKit)
+                                .fixedSize()
+                                #endif
+                        }
+                        .disabled(raindrop.isNew)
+                    
+                    if #unavailable(iOS 26.0) {
+                        Spacer()
                     }
-                } label: {
-                    Image(systemName: "safari")
                 }
-                    .disabled(page.url == nil)
+                
+                if #available(iOS 26.0, *) {
+                    ToolbarSpacer(.flexible, placement: placement)
+                }
+                
+                //edit/add
+                ToolbarItemGroup(placement: placement) {
+                    Button { form.toggle() } label: {
+                        Image(systemName: raindrop.isNew ? "plus.circle" : "info.circle")
+                    }
+                        .sheet(isPresented: $form) {
+                            RaindropStack($raindrop, content: RaindropForm.init)
+                                #if canImport(AppKit)
+                                .frame(idealWidth: 400)
+                                .fixedSize()
+                                #else
+                                .frame(idealWidth: 600, idealHeight: 600)
+                                #endif
+                        }
+                    
+                    if #unavailable(iOS 26.0) {
+                        Spacer()
+                    }
+                }
+                
+                if #available(iOS 26.0, *) {
+                    ToolbarSpacer(.flexible, placement: placement)
+                }
+                
+                //delete
+                ToolbarItemGroup(placement: placement) {
+                    ActionButton {
+                        try await dispatch(RaindropsAction.delete(raindrop.id))
+                        dismiss()
+                    } label: {
+                        Image(systemName: "trash")
+                    }
+                        .disabled(raindrop.isNew)
+                    
+                    if #unavailable(iOS 26.0) {
+                        Spacer()
+                    }
+                }
+                
+                if #available(iOS 26.0, *) {
+                    ToolbarSpacer(.flexible, placement: placement)
+                }
+                
+                //open
+                ToolbarItemGroup(placement: placement) {
+                    Button {
+                        if let url = page.url {
+                            openURL(url)
+                        }
+                    } label: {
+                        Image(systemName: "safari")
+                    }
+                        .disabled(page.url == nil)
+                }
             }
         }
     }

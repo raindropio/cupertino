@@ -1,5 +1,4 @@
 import SwiftUI
-import Backport
 
 struct ExtensionUI: View {
     @StateObject var service: ExtensionService
@@ -29,7 +28,7 @@ struct ExtensionUI: View {
             .sheet(isPresented: $show) {
                 Main()
                     .environmentObject(service)
-                    .backport.presentationBackgroundInteraction(.enabled)
+                    .presentationBackgroundInteraction(.enabled)
             }
     }
 }

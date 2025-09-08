@@ -3,11 +3,11 @@ var Parser = function() {};
 
 //------------------------
 function getMeta() {
-    const elem = document.querySelector(
+    const elem = [...document.querySelectorAll(
         [...arguments]
             .map(key=>`meta[name="${key}"], meta[property="${key}"]`)
             .join(', ')
-    )
+    )].at(-1) //last occurrence
     if (!elem) return null
 
     const value = elem.value || elem.content
@@ -22,6 +22,7 @@ function getJsonLd() {
             const json = JSON.parse(elem.innerText) || {}
             if (typeof json['@context'] != 'string' || !json['@context'].includes('schema.org')) continue
             if (json.url && !similarURL(json.url)) continue
+            if (json['@id'] && URL.canParse(json['@id']) && !similarURL(json['@id'])) continue
 
             if (json.name || json.headline){
                 item = json
@@ -78,6 +79,16 @@ function similarURL(url) {
     return true
 }
 
+function htmlDecode(input) {
+    try {
+        var doc = new DOMParser().parseFromString(input||'', 'text/html');
+        return doc.documentElement.textContent;
+    } catch(e) {
+        console.error(e)
+        return input
+    }
+}
+
 function getItem() {
     let item = {
         link: location.href
@@ -102,8 +113,8 @@ function getItem() {
     else if (ld.name || ld.headline)
         item = {
             ...item,
-            title: ld.name || ld.headline,
-            excerpt: ld.description,
+            title: htmlDecode(ld.name || ld.headline),
+            excerpt: htmlDecode(ld.description),
             cover: ld.image && ld.image.url
         }
     //fallback. do not set any data from meta tags here!!

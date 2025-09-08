@@ -5,7 +5,7 @@ let package = Package(
     name: "UI",
     platforms: [
         .macOS("13.0"),
-        .iOS("16.0"),
+        .iOS("16.4"),
         .visionOS("1.0")
     ],
     products: [

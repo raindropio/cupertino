@@ -1,7 +1,6 @@
 import SwiftUI
 import API
 import Features
-import Backport
 
 struct Receive: View {
     @EnvironmentObject private var service: ExtensionService
@@ -38,7 +37,7 @@ extension Receive {
                             //loading
                             if loading {
                                 ProgressView()
-                                    .backport.presentationBackground(.clear)
+                                    .presentationBackground(.clear)
                             }
                             //nothing found
                             else if urls.isEmpty {
@@ -82,7 +81,7 @@ extension Receive {
                 Group {
                     if loading {
                         ProgressView()
-                            .backport.presentationBackground(.clear)
+                            .presentationBackground(.clear)
                     }
                     //nothing found
                     else if urls.isEmpty {
@@ -98,8 +97,8 @@ extension Receive {
             }
                 #if canImport(UIKit)
                 .presentationDetents([.fraction(0.333)])
-                .backport.presentationBackground(.regularMaterial)
-                .backport.presentationCompactAdaptation(.sheet)
+                .presentationBackground(.regularMaterial)
+                .presentationCompactAdaptation(.sheet)
                 .frame(idealWidth: 400, idealHeight: 400)
                 #else
                 .frame(width: 400)

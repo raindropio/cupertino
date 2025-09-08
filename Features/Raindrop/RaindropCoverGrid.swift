@@ -1,7 +1,6 @@
 import SwiftUI
 import UI
 import API
-import Backport
 
 struct RaindropCoverGrid: View {
     @Environment(\.dismiss) private var dismiss
@@ -27,7 +26,7 @@ struct RaindropCoverGrid: View {
             )
                 .equatable()
         }
-            .backport.scrollBounceBehavior(.basedOnSize, axes: [.horizontal, .vertical])
+            .scrollBounceBehavior(.basedOnSize, axes: [.horizontal, .vertical])
             .ignoresSafeArea(.keyboard)
             .navigationTitle("Cover")
             #if canImport(UIKit)

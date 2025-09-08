@@ -9,7 +9,6 @@ extension Search {
         
         func body(content: Content) -> some View {
             content
-                .backport.fixSearchAppearance()
                 .searchable(
                     text: $refine.text,
                     tokens: $refine.filters,

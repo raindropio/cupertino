@@ -61,7 +61,7 @@ extension AuthTFA {
                     }
                         .listRowBackground(Color.clear)
                 }
-                    .backport.scrollBounceBehavior(.basedOnSize)
+                    .scrollBounceBehavior(.basedOnSize)
                     .backport.defaultFocus($focused, true)
                     .autoSubmit(code.count == 6)
                     .onSubmit {

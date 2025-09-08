@@ -1,5 +1,4 @@
 import SwiftUI
-import Backport
 
 #if canImport(UIKit)
 class KeyboardButtons: UIInputView {
@@ -64,7 +63,7 @@ extension KeyboardButtons {
             }
                 .buttonStyle(KeyboardButtonStyle())
                 .safeAnimation(.spring(), value: items.count)
-                .backport.scrollBounceBehavior(.basedOnSize, axes: [.horizontal, .vertical])
+                .scrollBounceBehavior(.basedOnSize, axes: [.horizontal, .vertical])
                 .frame(maxWidth: .infinity, maxHeight: .infinity)
                 .ignoresSafeArea()
         }

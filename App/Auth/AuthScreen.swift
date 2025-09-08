@@ -60,8 +60,7 @@ struct AuthScreen: View {
                         Image("logo-text")
                     }
                     
-                    ToolbarItemGroup {
-                        Spacer()
+                    ToolbarItem {
                         SafariLink(destination: URL(string: "https://help.raindrop.io/about")!) {
                             Image(systemName: "questionmark.circle")
                                 .imageScale(.large)

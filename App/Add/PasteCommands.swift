@@ -36,7 +36,8 @@ fileprivate struct AB: ViewModifier {
                     )
                         .circlePasteButton()
                         .transition(.opacity)
-                        .padding(.horizontal, 20)
+                        .padding(.horizontal, 24)
+                        .padding(.vertical, 24)
                         .ignoresSafeArea(.keyboard)
                 }
             }

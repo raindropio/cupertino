@@ -52,7 +52,7 @@ extension ReaderAppearance: View {
                 }
         }
             .presentationDetents([.medium])
-            .backport.presentationCompactAdaptation(.none)
+            .presentationCompactAdaptation(.none)
             .frame(idealWidth: 500, idealHeight: 400)
     }
 }

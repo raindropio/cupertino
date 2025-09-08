@@ -1,10 +1,10 @@
 import SwiftUI
 import WebKit
-
-let processPool = WKProcessPool()
+import Backport
 
 public struct WebView {
     @ObservedObject public var page: WebPage
+    @Environment(\.horizontalSizeClass) private var horizontalSizeClass
     var request: WebRequest
     var userAgent: String?
     
@@ -16,37 +16,36 @@ public struct WebView {
 }
 
 extension WebView: View {
+    private var ignoreEdges: Edge.Set {
+        if #available(iOS 24.0, *) {
+            return .bottom
+        }
+        return page.prefersHiddenToolbars ? .bottom : []
+    }
+    
     public var body: some View {
-        Holder(page: page, request: request, userAgent: userAgent)
-            .ignoresSafeArea(edges: [.top, .horizontal])
-            //progress bar
-            .overlay(alignment: .topLeading) {
-                ProgressBar(value: page.progress)
-            }
-            //dialogs
-            .modifier(Dialogs(page: page))
-            #if canImport(UIKit)
-            //fix transparent navigation bar background
-            .overlay(alignment: .topLeading) {
-                Color.white
-                    .overlay(
-                        .regularMaterial
-                        .opacity((page.toolbarBackground == nil || page.prefersHiddenToolbars) ? 1 : 0.01)
-                    )
-                    .overlay(page.toolbarBackground)
-                    .frame(height: 0)
-                    .safeAnimation(nil, value: page.prefersHiddenToolbars)
-            }
-            //allow back webview navigation
-            .popGesture({
-                if page.canGoBack {
-                    return .never
-                } else if page.prefersHiddenToolbars {
-                    return .always
+        ZStack {
+            page.toolbarBackground
+                .ignoresSafeArea()
+            
+            Holder(page: page, request: request, userAgent: userAgent)
+                .ignoresSafeArea(.all, edges: ignoreEdges)
+                //progress bar
+                .overlay(alignment: .topLeading) {
+                    ProgressBar(value: page.progress)
                 }
-                return .automatic
-            }())
-            #endif
+                //dialogs
+                .modifier(Dialogs(page: page))
+                //allow back webview navigation
+                .popGesture({
+                    if page.canGoBack {
+                        return .never
+                    } else if page.prefersHiddenToolbars {
+                        return .always
+                    }
+                    return .automatic
+                }())
+        }
     }
 }
 
@@ -65,7 +64,6 @@ extension WebView {
         func makeView(context: Context) -> NativeWebView {
             //configuration
             let configuration = WKWebViewConfiguration()
-            configuration.processPool = processPool
             configuration.mediaTypesRequiringUserActionForPlayback = []
             configuration.applicationNameForUserAgent = userAgent
             configuration.allowsInlineMediaPlayback = true

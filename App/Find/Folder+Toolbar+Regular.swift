@@ -8,15 +8,16 @@ extension Folder.Toolbar {
         @EnvironmentObject private var dispatch: Dispatcher
         @Environment(\.containerHorizontalSizeClass) private var sizeClass
         @IsEditing private var isEditing
-        @Environment(\.isSearching) private var isSearching
 
         var find: FindBy
         var pick: RaindropsPick
         
-        @ViewBuilder
-        private func secondaries() -> some View {
-            SortRaindropsButton(find)
-            ViewConfigRaindropsButton(find)
+        private var addPlacement: ToolbarItemPlacement {
+            if #available(iOS 26.0, *) {
+                .bottomBar
+            } else {
+                .automatic
+            }
         }
         
         func body(content: Content) -> some View {
@@ -25,35 +26,38 @@ extension Folder.Toolbar {
                 .toolbarRole(.browser)
                 #endif
                 .toolbar {
+                    if #available(iOS 26.0, *) {
+                        DefaultToolbarItem(kind: .search, placement: .bottomBar)
+                        ToolbarSpacer(placement: .bottomBar)
+                    }
+                    
                     if !isEditing {
-                        ToolbarItemGroup(placement: sizeClass == .compact ? .secondaryAction : .automatic, content: secondaries)
-                    }
-                    
-                    if isSearching, sizeClass == .compact {
-                        ToolbarItem(placement: .bottomBar) {
-                            Menu(content: secondaries) {
-                                Image(systemName: "ellipsis.circle")
-                            }
+                        ToolbarItemGroup(placement: addPlacement) {
+                            AddButton(collection: find.collectionId)
                         }
-                    }
-                    
-                    ToolbarItemGroup(placement: .primaryAction) {
-                        AddButton(collection: find.collectionId)
-                            .disabled(isEditing)
-                    }
-                    
-                    if sizeClass == .compact {
+                        
                         ToolbarItemGroup(placement: .secondaryAction) {
-                            Section {
-                                CollectionsMenu(find.collectionId)
+                            EditButton {
+                                Label("Select", systemImage: "checkmark.circle")
                             }
-                        }
-                    } else {
-                        ToolbarItemGroup {
-                            Menu {
-                                CollectionsMenu(find.collectionId)
-                            } label: {
-                                Image(systemName: "ellipsis.circle")
+                                                
+                            Section {
+                                SortRaindropsButton(find)
+                                ViewConfigRaindropsButton(find)
+                            }
+                            
+                            if (find.collectionId > 0) {
+                                if sizeClass == .compact {
+                                    Section {
+                                        CollectionsMenu(find.collectionId)
+                                    }
+                                } else {
+                                    Menu {
+                                        CollectionsMenu(find.collectionId)
+                                    } label: {
+                                        Image(systemName: "ellipsis.circle")
+                                    }
+                                }
                             }
                         }
                     }

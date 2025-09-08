@@ -2,7 +2,6 @@ import SwiftUI
 import API
 import UI
 import Features
-import Backport
 
 struct SaveFiles: View {
     var urls: Set<URL>
@@ -13,7 +12,7 @@ struct SaveFiles: View {
             if let collection {
                 AddStack(urls, to: collection)
                     .presentationDetents([.fraction(0.333)])
-                    .backport.presentationBackground(.regularMaterial)
+                    .presentationBackground(.regularMaterial)
             } else {
                 NavigationStack {
                     CollectionsList($collection, system: [-1])

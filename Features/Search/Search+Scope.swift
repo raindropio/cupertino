@@ -1,7 +1,6 @@
 import SwiftUI
 import API
 import UI
-import Backport
 
 extension Search {
     struct Scope: ViewModifier {
@@ -9,9 +8,9 @@ extension Search {
         @Binding var refine: FindBy
         
         func body(content: Content) -> some View {
-            if base.collectionId != 0 {
-                content
-                    .backport.searchScopes($refine.collectionId, activation: .onSearchPresentation) {
+            content
+                .searchScopes($refine.collectionId, activation: .onSearchPresentation) {
+                    if base.collectionId != 0 {
                         Text("Everywhere")
                             .tag(0)
                         
@@ -19,9 +18,7 @@ extension Search {
                             .labelStyle(.titleOnly)
                             .tag(base.collectionId)
                     }
-            } else {
-                content
-            }
+                }
         }
     }
 }

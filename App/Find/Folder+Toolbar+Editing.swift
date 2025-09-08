@@ -7,7 +7,6 @@ import Features
 extension Folder.Toolbar {
     struct Editing: ViewModifier {
         @IsEditing private var isEditing
-        @Environment(\.isSearching) private var isSearching
         @Environment(\.containerHorizontalSizeClass) private var sizeClass
         @EnvironmentObject private var dispatch: Dispatcher
 
@@ -18,33 +17,36 @@ extension Folder.Toolbar {
         
         func body(content: Content) -> some View {
             content
+            .navigationBarBackButtonHidden(isEditing)
             .toolbar {
-                if total > 0 {
-                    ToolbarItemGroup(
-                        placement: sizeClass == .regular ? .automatic : ( (isEditing || isSearching) ? .bottomBar : .secondaryAction )
-                    ) {
-                        if isEditing {
-                            Button(pick.isAll ? "Deselect all" : "Select all", action: toggleAll)
-                        }
-                        
-                        EditButton {
-                            Label($0 == .active ? "Cancel" : "Select", systemImage: $0 == .active ? "xmark.circle" : "checkmark.circle")
-                        }
+                if isEditing {
+                    ToolbarItem(placement: .cancellationAction) {
+                        Button(pick.isAll ? "Deselect all" : "Select all", action: toggleAll)
                     }
                     
                     if !pick.isEmpty {
-                        ToolbarItemGroup(placement: .status) {
-                            if sizeClass == .compact {
-                                Menu {
-                                    RaindropsMenu(pick)
-                                } label: {
-                                    Text("Actions")
-                                        .fontWeight(.semibold)
-                                }
-                            } else {
+                        ToolbarItemGroup {
+                            Menu {
                                 RaindropsMenu(pick)
+                            } label: {
+                                Text("Actions")
+                                    .fontWeight(.semibold)
                             }
                         }
+                        
+                        if #available(iOS 26.0, *) {
+                            ToolbarSpacer()
+                        }
+                    }
+                    
+                    ToolbarItem(placement: .confirmationAction) {
+                        EditButton {
+                            Label("Done", systemImage: "checkmark")
+                        }
+                    }
+                    
+                    if #available(iOS 26.0, *) {
+                        ToolbarSpacer()
                     }
                 }
             }

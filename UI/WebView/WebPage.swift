@@ -32,6 +32,7 @@ public class WebPage: NSObject, ObservableObject {
                     view.publisher(for: \.canGoForward).removeDuplicates().map({ _ in }).eraseToAnyPublisher(),
                     view.publisher(for: \.title).removeDuplicates().map({ _ in }).eraseToAnyPublisher(),
                     view.publisher(for: \.underPageBackgroundColor).removeDuplicates().map({ _ in }).eraseToAnyPublisher(),
+                    view.publisher(for: \.themeColor).removeDuplicates().map({ _ in }).eraseToAnyPublisher(),
                     view.backForwardList.publisher(for: \.currentItem).removeDuplicates().map({ _ in }).eraseToAnyPublisher()
                 )
                     .sink(receiveValue: changed)
@@ -91,15 +92,13 @@ extension WebPage {
     public var canGoBack: Bool { view?.canGoBack ?? false }
     public var canGoForward: Bool { view?.canGoForward ?? false }
     public var title: String? { view?.title }
-    public var colorScheme: ColorScheme {
-        view?.underPageBackgroundColor.isLight == true ? .light : .dark
+    public var toolbarColorScheme: ColorScheme? {
+        guard let color = view?.themeColor ?? view?.underPageBackgroundColor else { return nil }
+        return color.isLight == true ? .light : .dark
     }
     public var toolbarBackground: Color? {
         #if canImport(UIKit)
-        guard let color = view?.underPageBackgroundColor else { return nil }
-        guard let viewStyle = view?.traitCollection.userInterfaceStyle else { return nil }
-        let pageStyle: UIUserInterfaceStyle = color.isLight ? .light : .dark
-        guard viewStyle == pageStyle else { return nil }
+        guard let color = view?.themeColor ?? view?.underPageBackgroundColor else { return nil }
         return Color(color)
         #else
         return nil

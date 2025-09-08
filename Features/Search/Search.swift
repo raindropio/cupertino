@@ -1,6 +1,7 @@
 import SwiftUI
 import API
 import UI
+import Backport
 
 public struct Search<C: View>: View {
     @State private var refine: FindBy = .init()
@@ -32,5 +33,6 @@ public struct Search<C: View>: View {
             .modifier(Bar(refine: $refine))
             .modifier(Scope(base: base, refine: $refine))
             .modifier(Loading(refine: $refine, isActive: isActive))
+            .backport.searchPresentationToolbarBehavior(.avoidHidingContent)
     }
 }
