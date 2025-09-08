@@ -11,19 +11,22 @@ let package = Package(
     products: [
         .library(
             name: "UI",
-            targets: ["UI"]),
+            targets: ["UI"]
+        ),
     ],
     dependencies: [
         .package(
             url: "https://github.com/onevcat/Kingfisher",
             from: "8.5.0"
-        )
+        ),
+        .package(path: "Backport"),
     ],
     targets: [
         .target(
             name: "UI",
             dependencies: [
-                .product(name: "Kingfisher", package: "Kingfisher")
+                .product(name: "Kingfisher", package: "Kingfisher"),
+                .byName(name: "Backport")
             ],
             path: ""
         )

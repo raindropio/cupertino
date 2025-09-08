@@ -21,7 +21,7 @@ extension Folder {
         func body(content: Content) -> some View {
             content
                 .modifier(
-                    Regular(find: find, pick: pick)
+                    Regular(find: find, pick: pick, total: r.state.total(find))
                 )
                 #if canImport(UIKit)
                 .modifier(

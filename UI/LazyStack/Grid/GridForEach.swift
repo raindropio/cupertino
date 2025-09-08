@@ -20,7 +20,7 @@ extension GridForEach: View {
                 .infiniteScrollElement(element.id)
                 .listItemBehaviour(element.id)
                 .background(Color.secondaryGroupedBackground)
-                .clipShape(RoundedRectangle(cornerRadius: 5))
+                .clipShape(RoundedRectangle(cornerRadius: 10))
         }
     }
 }

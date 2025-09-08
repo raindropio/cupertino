@@ -11,7 +11,8 @@ extension Folder.Toolbar {
 
         var find: FindBy
         var pick: RaindropsPick
-        
+        var total: Int
+
         private var addPlacement: ToolbarItemPlacement {
             if #available(iOS 26.0, *) {
                 .bottomBar
@@ -32,7 +33,7 @@ extension Folder.Toolbar {
                     }
                     
                     if !isEditing {
-                        ToolbarItemGroup(placement: addPlacement) {
+                        ToolbarItem(placement: addPlacement) {
                             AddButton(collection: find.collectionId)
                         }
                         
@@ -40,6 +41,7 @@ extension Folder.Toolbar {
                             EditButton {
                                 Label("Select", systemImage: "checkmark.circle")
                             }
+                                .disabled(total == 0)
                                                 
                             Section {
                                 SortRaindropsButton(find)

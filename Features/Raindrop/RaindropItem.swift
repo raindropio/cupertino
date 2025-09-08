@@ -93,7 +93,7 @@ extension RaindropItem {
                         parts.value.1
                     }
                     parts.value.0
-                        .cornerRadius(3)
+                        .cornerRadius(6)
                         .padding(.top, 4)
                     if container?.coverRight == false {
                         parts.value.1
@@ -106,7 +106,7 @@ extension RaindropItem {
                         parts.value.1
                     }
                     parts.value.0
-                        .padding(.top, 4)
+                        .padding(.top, 6)
                     if container?.coverRight == false {
                         parts.value.1
                     }

@@ -7,7 +7,7 @@ struct ButtonBaseModifier: ViewModifier {
     #if canImport(UIKit)
     static let height: [ControlSize: CGFloat]           = [.large: 50,  .regular: 38,   .small: 30, .mini: 30]
     static let padding: [ControlSize: CGFloat]          = [.large: 16,  .regular: 14,   .small: 10, .mini: 10]
-    static let corner: [ControlSize?: CGFloat]          = [.large: 10,  .regular: 8,    .small: 15, .mini: 15, nil: 15]
+    static let corner: [ControlSize?: CGFloat]          = [.large: 20,  .regular: 10,   .small: 15, .mini: 15, nil: 15]
     #else
     static let height: [ControlSize: CGFloat]           = [.large: 32,  .regular: 24,   .small: 18, .mini: 14]
     static let padding: [ControlSize: CGFloat]          = [.large: 8,   .regular: 8,    .small: 6,  .mini: 4]

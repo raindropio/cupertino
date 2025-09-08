@@ -1,4 +1,5 @@
 import SwiftUI
+import Backport
 
 #if canImport(UIKit)
 class KeyboardButtons: UIInputView {
@@ -46,16 +47,17 @@ extension KeyboardButtons {
             ScrollView(.horizontal, showsIndicators: false) {
                 LazyHStack(spacing: 0) {
                     ForEach(items, id: \.self) { item in
-                        if item.isEmpty {
-                            Color.clear.frame(width: 24)
-                        } else {
+                        if !item.isEmpty {
+                            if item != items.first {
+                                Circle().fill(.secondary).frame(width: 6, height: 6).padding(4)
+                            }
+
                             Button(item) {
                                 onPress(item)
                                 #if os(iOS)
                                 hapticFeedback(.rigid)
                                 #endif
                             }
-                            Divider()
                         }
                     }
                 }
@@ -64,6 +66,7 @@ extension KeyboardButtons {
                 .buttonStyle(KeyboardButtonStyle())
                 .safeAnimation(.spring(), value: items.count)
                 .scrollBounceBehavior(.basedOnSize, axes: [.horizontal, .vertical])
+                .backport.glassEffect()
                 .frame(maxWidth: .infinity, maxHeight: .infinity)
                 .ignoresSafeArea()
         }
