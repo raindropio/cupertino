@@ -106,6 +106,7 @@
 		76BFE371291E9F6B00DE9DB2 /* AuthScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76BFE36C291E9F6B00DE9DB2 /* AuthScreen.swift */; };
 		76D880DF2930E1FB00D43AD9 /* ExtensionController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76D880DE2930E1FB00D43AD9 /* ExtensionController.swift */; };
 		76D880E62930E1FB00D43AD9 /* Share iOS.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = 76D880DC2930E1FB00D43AD9 /* Share iOS.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		76DD83A82E6F396800AE2973 /* AppIcon.icon in Resources */ = {isa = PBXBuildFile; fileRef = 76DD83A72E6F396800AE2973 /* AppIcon.icon */; };
 		76E44C4029BA0D24009634C6 /* SettingsExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76E44C3F29BA0D24009634C6 /* SettingsExtensions.swift */; };
 		76E44C4229BA0E86009634C6 /* SettingsAppIcon.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76E44C4129BA0E86009634C6 /* SettingsAppIcon.swift */; };
 		76E44C4829BB135B009634C6 /* SettingsExtensions+Share.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76E44C4729BB135B009634C6 /* SettingsExtensions+Share.swift */; };
@@ -263,6 +264,7 @@
 		76D880DE2930E1FB00D43AD9 /* ExtensionController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtensionController.swift; sourceTree = "<group>"; };
 		76D880E32930E1FB00D43AD9 /* Share.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Share.plist; sourceTree = "<group>"; };
 		76DC0B9829AF6C21007B4BDF /* UniformTypeIdentifiers.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UniformTypeIdentifiers.framework; path = System/Library/Frameworks/UniformTypeIdentifiers.framework; sourceTree = SDKROOT; };
+		76DD83A72E6F396800AE2973 /* AppIcon.icon */ = {isa = PBXFileReference; lastKnownFileType = folder.iconcomposer.icon; path = AppIcon.icon; sourceTree = "<group>"; };
 		76E08B6929A3976000B3202D /* Backport */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = Backport; sourceTree = "<group>"; };
 		76E44C3F29BA0D24009634C6 /* SettingsExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsExtensions.swift; sourceTree = "<group>"; };
 		76E44C4129BA0E86009634C6 /* SettingsAppIcon.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsAppIcon.swift; sourceTree = "<group>"; };
@@ -499,6 +501,7 @@
 				7653AD3029E6C44C0046E654 /* PushNotifications.swift */,
 				7685A19A286868AD00A4BC3C /* App.entitlements */,
 				765F0DDB287EE0FB001E34CA /* App.plist */,
+				76DD83A72E6F396800AE2973 /* AppIcon.icon */,
 				7685A198286868AD00A4BC3C /* Assets.xcassets */,
 				76E88D982C887BDD00700FF9 /* GoogleService-Info.plist */,
 			);
@@ -840,6 +843,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				7685A199286868AD00A4BC3C /* Assets.xcassets in Resources */,
+				76DD83A82E6F396800AE2973 /* AppIcon.icon in Resources */,
 				76B673862993A52A007A412A /* highlights.js in Resources */,
 				76E88D992C887BDD00700FF9 /* GoogleService-Info.plist in Resources */,
 			);

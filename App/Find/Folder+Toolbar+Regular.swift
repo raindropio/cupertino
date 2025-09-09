@@ -35,6 +35,7 @@ extension Folder.Toolbar {
                     if !isEditing {
                         ToolbarItem(placement: addPlacement) {
                             AddButton(collection: find.collectionId)
+                                .tint(.accentColor)
                         }
                         
                         ToolbarItemGroup(placement: .secondaryAction) {
@@ -42,7 +43,7 @@ extension Folder.Toolbar {
                                 Label("Select", systemImage: "checkmark.circle")
                             }
                                 .disabled(total == 0)
-                                                
+
                             Section {
                                 SortRaindropsButton(find)
                                 ViewConfigRaindropsButton(find)

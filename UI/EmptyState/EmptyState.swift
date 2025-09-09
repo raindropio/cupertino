@@ -1,4 +1,5 @@
 import SwiftUI
+import Backport
 
 public struct EmptyState<I: View, A: View> {
     var title: String = ""
@@ -48,11 +49,7 @@ extension EmptyState: View {
             
             if let actions {
                 actions()
-                    .buttonStyle(.bordered)
-                    #if canImport(UIKit)
-                    .buttonBorderShape(.capsule)
-                    #endif
-                    .tint(.accentColor)
+                    .buttonStyle(Backport.glassProminent)
             }
         }
             .padding()

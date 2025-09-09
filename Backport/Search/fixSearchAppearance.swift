@@ -1,6 +1,6 @@
 import SwiftUI
 
-public extension Backport where Wrapped: View {
+public extension Backported where Wrapped: View {
     func fixSearchAppearance() -> some View {
         content
             #if canImport(UIKit)

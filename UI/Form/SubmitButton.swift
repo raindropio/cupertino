@@ -1,4 +1,5 @@
 import SwiftUI
+import Backport
 
 public struct SubmitButton<Label>: View where Label: View {
     @Environment(\.onSubmitAction) private var onSubmitAction
@@ -23,7 +24,7 @@ public struct SubmitButton<Label>: View where Label: View {
             }
                 .frame(maxWidth: .infinity, maxHeight: .infinity)
         }
-            .buttonStyle(.borderedProminent)
+            .buttonStyle(Backport.glassProminent)
             .fontWeight(.semibold)
             .clearSection()
     }

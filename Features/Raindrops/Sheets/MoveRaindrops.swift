@@ -43,14 +43,12 @@ struct MoveRaindrops: View {
                 Task { try? await move() }
             }
             .toolbar {
-                ToolbarItem(placement: .primaryAction) {
+                ToolbarItem(placement: .confirmationAction) {
                     if to != nil {
-                        ActionButton("Confirm", action: move)
-                            .fontWeight(.semibold)
-                            .buttonStyle(.borderedProminent)
-                            #if canImport(UIKit)
-                            .buttonBorderShape(.capsule)
-                            #endif
+                        ActionButton(action: move) {
+                            Label("Confirm", systemImage: "checkmark")
+                        }
+                        .labelStyle(.toolbar)
                     }
                 }
                 

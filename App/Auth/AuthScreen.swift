@@ -1,6 +1,7 @@
 import SwiftUI
 import API
 import UI
+import Backport
 
 struct AuthScreen: View {
     @EnvironmentObject private var dispatch: Dispatcher
@@ -15,25 +16,13 @@ struct AuthScreen: View {
                 HStack(spacing: 16) {
                     Button { login = true } label: {
                         Text("Log In").frame(maxWidth: .infinity).frame(height: 32)
-                            #if os(iOS)
-                            .foregroundColor(.primary)
-                            #endif
                     }
-                        .buttonStyle(.bordered)
-                        #if os(iOS)
-                        .tint(.secondary)
-                        #endif
+                        .buttonStyle(Backport.glass)
                     
                     Button { signup = true } label: {
                         Text("Sign Up").frame(maxWidth: .infinity).frame(height: 32)
-                            #if os(iOS)
-                            .foregroundStyle(.background)
-                            #endif
                     }
-                        .buttonStyle(.borderedProminent)
-                        #if os(iOS)
-                        .tint(.primary)
-                        #endif
+                        .buttonStyle(Backport.glassProminent)
                 }
                     .fontWeight(.medium)
                     #if canImport(UIKit)

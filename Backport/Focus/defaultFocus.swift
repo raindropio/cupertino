@@ -1,6 +1,6 @@
 import SwiftUI
 
-public extension Backport where Wrapped: View {
+public extension Backported where Wrapped: View {
     func defaultFocus<V>(_ binding: FocusState<V>.Binding, _ value: V, priority: DefaultFocusEvaluationPriority = .automatic) -> some View {
         content
             #if canImport(AppKit)

@@ -7,7 +7,8 @@ public struct CancelToolbarItem: ToolbarContent {
 
     public var body: some ToolbarContent {
         ToolbarItem(placement: .cancellationAction) {
-            Button("Cancel", role: .cancel, action: dismiss.callAsFunction)
+            Button("Cancel", systemImage: "xmark", role: .cancel, action: dismiss.callAsFunction)
+                .labelStyle(.toolbar)
         }
     }
 }

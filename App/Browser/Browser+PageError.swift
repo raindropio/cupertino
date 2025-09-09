@@ -2,6 +2,7 @@ import SwiftUI
 import API
 import UI
 import Features
+import Backport
 
 extension Browser {
     struct PageError: ViewModifier {
@@ -31,11 +32,9 @@ extension Browser {
                         }
                             .frame(maxWidth: .infinity, alignment: .leading)
                         
-                        Button(action: page.reload) {
-                            Label("Reload", systemImage: "arrow.clockwise")
-                        }
+                        Button("Reload", systemImage: "arrow.clockwise", action: page.reload)
                             .labelStyle(.iconOnly)
-                            .buttonStyle(.borderedProminent)
+                            .buttonStyle(Backport.glassProminent)
                     }
                         .scenePadding()
                         .frame(maxWidth: .infinity, alignment: .leading)

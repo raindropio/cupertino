@@ -6,10 +6,6 @@ struct ExtensionUI: View {
     
     var body: some View {
         Color.clear
-            .contentShape(Rectangle())
-            .onTapGesture {
-                show = false
-            }
             //load and show sheet
             .task(priority: .userInitiated) {
                 defer { show = true }
@@ -20,15 +16,10 @@ struct ExtensionUI: View {
                 defer { show = true }
                 try? await Task.sleep(nanoseconds: 3_000_000_000)
             }
-            //close extension when sheet dismissed
-            .onChange(of: show) {
-                if !$0 { service.close() }
-            }
-            //sheet
-            .sheet(isPresented: $show) {
+            .sheet(isPresented: $show, onDismiss: service.close) {
                 Main()
                     .environmentObject(service)
-                    .presentationBackgroundInteraction(.enabled)
+                    .presentationBackgroundInteraction(.enabled(upThrough: .large))
             }
     }
 }

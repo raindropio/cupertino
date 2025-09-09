@@ -10,7 +10,7 @@ class ExtensionController: UIViewController {
         //Appearance
         view.backgroundColor = .clear
         #if os(iOS)
-        sheetPresentationController?.largestUndimmedDetentIdentifier = .medium
+        sheetPresentationController?.largestUndimmedDetentIdentifier = .large
         #endif
 
         //SwiftUI
@@ -27,6 +27,16 @@ class ExtensionController: UIViewController {
             ui.view.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             ui.view.centerYAnchor.constraint(equalTo: view.centerYAnchor)
         ])
+    }
+    
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        var v: UIView? = view
+        for _ in 0..<5 {
+            v?.isOpaque = false
+            v?.backgroundColor = .clear
+            v = v?.superview
+        }
     }
 }
 #else

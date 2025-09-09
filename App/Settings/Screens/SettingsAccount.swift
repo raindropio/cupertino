@@ -57,7 +57,8 @@ struct SettingsAccount: View {
                     SettingsWebApp(subpage: subpage)
                         .toolbar {
                             ToolbarItem(placement: .cancellationAction) {
-                                Button("Cancel") { edit = nil }
+                                Button("Cancel", systemImage: "xmark", role: .cancel) { edit = nil }
+                                    .labelStyle(.toolbar)
                             }
                         }
                 }

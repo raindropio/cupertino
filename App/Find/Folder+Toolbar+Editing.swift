@@ -43,6 +43,7 @@ extension Folder.Toolbar {
                         EditButton {
                             Label("Done", systemImage: "checkmark")
                         }
+                            .labelStyle(.toolbar)
                     }
                     
                     if #available(iOS 26.0, *) {

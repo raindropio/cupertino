@@ -42,14 +42,10 @@ extension ViewConfigRaindropsButton {
                     
                 case .grid, .masonry:
                     if sizeClass == .regular {
-                        Button(action: zoomIn) {
-                            Label("Zoom in", systemImage: "plus.magnifyingglass")
-                        }
+                        Button("Zoom in", systemImage: "plus.magnifyingglass", action: zoomIn)
                             .disabled(cfg.state.raindrops.coverSize >= 7)
                         
-                        Button(action: zoomOut) {
-                            Label("Zoom out", systemImage: "minus.magnifyingglass")
-                        }
+                        Button("Zoom out", systemImage: "minus.magnifyingglass", action: zoomOut)
                             .disabled(cfg.state.raindrops.coverSize <= 1)
                     }
                 }

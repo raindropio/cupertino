@@ -1,6 +1,6 @@
 import SwiftUI
 
-public extension Backport where Wrapped: View {
+public extension Backported where Wrapped: View {
     @ViewBuilder func searchPresentationToolbarBehavior(_ behavior: BackportSearchPresentationToolbarBehavior) -> some View {
         if #available(iOS 17.1, macOS 14.1, *) {
             content.searchPresentationToolbarBehavior(behavior.sui)

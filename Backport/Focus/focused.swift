@@ -1,6 +1,6 @@
 import SwiftUI
 
-public extension Backport where Wrapped: View {
+public extension Backported where Wrapped: View {
     func focused(_ condition: FocusState<Bool>.Binding) -> some View {
         focused(condition, equals: true)
     }

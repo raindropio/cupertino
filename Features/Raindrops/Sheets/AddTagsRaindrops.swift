@@ -30,14 +30,13 @@ struct AddTagsRaindrops: View {
             .navigationBarTitleDisplayMode(.inline)
             #endif
             .toolbar {
-                ToolbarItem(placement: .primaryAction) {
+                ToolbarItem(placement: .confirmationAction) {
                     if !tags.isEmpty {
-                        ActionButton("Confirm", action: add)
+                        ActionButton(action: add) {
+                            Label("Confirm", systemImage: "checkmark")
+                        }
                             .fontWeight(.semibold)
-                            .buttonStyle(.borderedProminent)
-                            #if canImport(UIKit)
-                            .buttonBorderShape(.capsule)
-                            #endif
+                            .labelStyle(.toolbar)
                     }
                 }
                 

@@ -7,8 +7,9 @@ public struct DoneToolbarItem: ToolbarContent {
 
     public var body: some ToolbarContent {
         ToolbarItem(placement: .confirmationAction) {
-            Button("Done", action: dismiss.callAsFunction)
+            Button("Done", systemImage: "checkmark", action: dismiss.callAsFunction)
                 .fontWeight(.semibold)
+                .labelStyle(.toolbar)
         }
     }
 }

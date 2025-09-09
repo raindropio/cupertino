@@ -22,7 +22,6 @@ extension NothingFound {
                     SafariLink("Learn more", destination: URL(string: "https://help.raindrop.io/highlights#add")!)
                     
                     Button("OK, got it", role: .cancel, action: dismiss.callAsFunction)
-                        .buttonStyle(.borderedProminent)
                         .fontWeight(.semibold)
                 }
             }

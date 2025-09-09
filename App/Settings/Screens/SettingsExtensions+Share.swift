@@ -43,8 +43,6 @@ extension SettingsExtensions.Share {
                         .labelStyle(.titleAndIcon)
                         .controlSize(.small)
                         .fixedSize()
-                    Image(systemName: "chevron.up.chevron.down")
-                        .imageScale(.small)
                 }
             }
                 .tint(.primary)
@@ -58,9 +56,10 @@ extension SettingsExtensions.Share {
                             #endif
                             .toolbar {
                                 ToolbarItem(placement: .cancellationAction) {
-                                    Button("Cancel", role: .cancel) {
+                                    Button("Cancel", systemImage: "xmark", role: .cancel) {
                                         pick = false
                                     }
+                                        .labelStyle(.toolbar)
                                 }
                             }
                     }

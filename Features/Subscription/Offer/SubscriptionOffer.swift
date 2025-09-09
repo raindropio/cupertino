@@ -1,6 +1,7 @@
 import SwiftUI
 import API
 import UI
+import Backport
 
 public struct SubscriptionOffer: View {
     @EnvironmentObject private var dispatch: Dispatcher
@@ -67,7 +68,7 @@ public struct SubscriptionOffer: View {
                                 .fontWeight(.semibold)
                                 .frame(maxWidth: .infinity)
                         }
-                        .buttonStyle(.borderedProminent)
+                        .buttonStyle(Backport.glassProminent)
                     }
                     .controlSize(.large)
                     .scenePadding()
