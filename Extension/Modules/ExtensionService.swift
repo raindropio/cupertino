@@ -8,13 +8,17 @@ final class ExtensionService: ObservableObject {
     let extensionType: ExtensionType = .detect()
     @Published var preprocessed: NSDictionary?
     @Published var items = [NSItemProvider]()
+    @Published var loading = true
     
     init(_ context: NSExtensionContext? = nil) {
         self.context = context
+        Task { await load() }
     }
     
     @Sendable
-    func load() async {        
+    func load() async {
+        defer { loading = false }
+        
         guard let context else {
             fatalError("No extension context")
         }

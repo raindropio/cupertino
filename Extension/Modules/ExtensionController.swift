@@ -3,7 +3,7 @@ import API
 
 #if canImport(UIKit)
 @objc(ExtensionController)
-class ExtensionController: UIViewController {
+class ExtensionController: UIViewController, UIAdaptivePresentationControllerDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -27,17 +27,30 @@ class ExtensionController: UIViewController {
             ui.view.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             ui.view.centerYAnchor.constraint(equalTo: view.centerYAnchor)
         ])
+        
+        presentationController!.delegate = self
     }
     
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
+        makeSheetTransparent()
+    }
+
+    func presentationControllerWillDismiss(_ pc: UIPresentationController) {
+        makeSheetTransparent()
+        pc.presentedViewController.transitionCoordinator?.animate(
+            alongsideTransition: { _ in self.makeSheetTransparent() }
+        )
+    }
+
+    func makeSheetTransparent() {
         var v: UIView? = view
         for _ in 0..<5 {
             v?.isOpaque = false
             v?.backgroundColor = .clear
             v = v?.superview
         }
-    }
+   }
 }
 #else
 @objc(ExtensionController)

@@ -23,11 +23,9 @@ extension Folder {
                 .modifier(
                     Regular(find: find, pick: pick, total: r.state.total(find))
                 )
-                #if canImport(UIKit)
                 .modifier(
-                    Editing(find: find, pick: pick, total: r.state.total(find), toggleAll: toggleAll)
+                    Editing(find: find, pick: pick, toggleAll: toggleAll)
                 )
-                #endif
                 .raindropCommands(pick)
         }
     }

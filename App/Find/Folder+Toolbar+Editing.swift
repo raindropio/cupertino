@@ -12,7 +12,6 @@ extension Folder.Toolbar {
 
         var find: FindBy
         var pick: RaindropsPick
-        var total: Int
         var toggleAll: () -> Void
         
         func body(content: Content) -> some View {

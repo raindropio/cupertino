@@ -6,12 +6,17 @@ struct Receive: View {
     @EnvironmentObject private var service: ExtensionService
     
     var body: some View {
-        switch service.extensionType {
-        case .share:
-            Share()
-            
-        case .action:
-            Action()
+        if service.loading {
+            ProgressView()
+                .presentationBackground(.clear)
+        } else {
+            switch service.extensionType {
+            case .share:
+                Share()
+                
+            case .action:
+                Action()
+            }
         }
     }
 }

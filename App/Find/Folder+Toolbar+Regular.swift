@@ -38,12 +38,18 @@ extension Folder.Toolbar {
                                 .tint(.accentColor)
                         }
                         
-                        ToolbarItemGroup(placement: .secondaryAction) {
-                            EditButton {
-                                Label("Select", systemImage: "checkmark.circle")
+                        if total > 0 {
+                            ToolbarItem {
+                                EditButton("Select")
+                                    .labelStyle(.titleOnly)
                             }
-                                .disabled(total == 0)
-
+                            
+                            if #available(iOS 26.0, *) {
+                                ToolbarSpacer()
+                            }
+                        }
+                        
+                        ToolbarItemGroup(placement: .secondaryAction) {
                             Section {
                                 SortRaindropsButton(find)
                                 ViewConfigRaindropsButton(find)
