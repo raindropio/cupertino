@@ -27,12 +27,14 @@ struct PermanentCopy: View {
         if raindrop.cache?.status != .ready {
             EmptyState(
                 "No permanent copy",
-                message: Text(raindrop.cache?.status?.title ?? ""),
+                message: Text(raindrop.cache?.status?.title ?? "Permanent copy is not created yet"),
                 icon: {
                     Image(systemName: "icloud.slash")
                         .foregroundStyle(.red)
                 }
-            )
+            ) {
+                Link("Learn more", destination: URL(string: "https://help.raindrop.io/permanent-copy")!)
+            }
         } else {
             Browser(page: page, start: request)
                 .navigationTitle(title)

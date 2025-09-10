@@ -1,4 +1,5 @@
 # Raindrop.io iOS app
+SwiftUI iOS app for [Raindrop.io](https://raindrop.io)
 
 ## Development
 - Add `App/GoogleService-Info.plist` file from Firebase
