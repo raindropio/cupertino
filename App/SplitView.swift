@@ -10,7 +10,7 @@ struct SplitView: View {
     @ViewBuilder
     private func screen(_ screen: SplitViewPath.Screen) -> some View {
         switch screen {
-        case .find(let find): Find(find: find)
+        case .find(let find): FolderStateful(find: find)
         case .preview(let find, let id): Preview(find: find, id: id)
         case .cached(let id): PermanentCopy(id: id)
         case .browse(let url): Browse(url: url)
@@ -23,8 +23,8 @@ struct SplitView: View {
                 .navigationSplitViewColumnWidth(min: 250, ideal: 450)
         } detail: {
             NavigationStack(path: $path.detail) {
-                if let sidebar = path.sidebar {
-                    Find(find: sidebar)
+                if path.sidebar != nil {
+                    Folder(find: .init(get: { path.sidebar! }, set: { path.sidebar = $0 }))
                         .navigationDestination(for: SplitViewPath.Screen.self, destination: screen)
                 }
             }

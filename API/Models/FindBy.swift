@@ -91,4 +91,10 @@ extension FindBy {
         copy.text = ""
         return copy
     }
+    
+    public func excludingFilters() -> Self {
+        var copy = self
+        copy.filters = []
+        return copy
+    }
 }

@@ -9,7 +9,7 @@ extension Folder.Toolbar {
         @Environment(\.containerHorizontalSizeClass) private var sizeClass
         @IsEditing private var isEditing
 
-        var find: FindBy
+        @Binding var find: FindBy
         var pick: RaindropsPick
         var total: Int
 
@@ -23,9 +23,6 @@ extension Folder.Toolbar {
         
         func body(content: Content) -> some View {
             content
-                #if canImport(UIKit)
-                .toolbarRole(.browser)
-                #endif
                 .toolbar {
                     if #available(iOS 26.0, *) {
                         DefaultToolbarItem(kind: .search, placement: .bottomBar)
@@ -49,24 +46,26 @@ extension Folder.Toolbar {
                             }
                         }
                         
-                        ToolbarItemGroup(placement: .secondaryAction) {
-                            Section {
-                                SortRaindropsButton(find)
-                                ViewConfigRaindropsButton(find)
+                        if sizeClass == .regular {
+                            ToolbarItem {
+                                FilterRaindropsButton($find)
                             }
                             
-                            if (find.collectionId > 0) {
-                                if sizeClass == .compact {
-                                    Section {
-                                        CollectionsMenu(find.collectionId)
-                                    }
-                                } else {
-                                    Menu {
-                                        CollectionsMenu(find.collectionId)
-                                    } label: {
-                                        Image(systemName: "ellipsis.circle")
-                                    }
-                                }
+                            if #available(iOS 26.0, *) {
+                                ToolbarSpacer()
+                            }
+                        }
+                        
+                        ToolbarItemGroup(placement: .secondaryAction) {
+                            if sizeClass == .compact {
+                                FilterRaindropsButton($find)
+                            }
+                            
+                            SortRaindropsButton(find)
+                            ViewConfigRaindropsButton(find)
+                            
+                            Section {
+                                CollectionsMenu(find.collectionId)
                             }
                         }
                     }

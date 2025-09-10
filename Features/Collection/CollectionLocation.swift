@@ -7,6 +7,7 @@ struct CollectionLocation: View {
 
     var body: some View {
         Memorized(
+            collection: collection,
             location: collections.state.location(of: collection)
         )
     }
@@ -14,16 +15,15 @@ struct CollectionLocation: View {
 
 extension CollectionLocation {
     fileprivate struct Memorized: View {
+        var collection: UserCollection
         var location: [UserCollection]
         
         var body: some View {
-            if !location.isEmpty {
-                Text(
-                    location
-                        .map { $0.title }
-                        .joined(separator: " / ")
-                ) + Text(" / ")
-            }
+            Text(
+                location
+                    .map { $0.title }
+                    .joined(separator: " / ")
+            ) + Text(!location.isEmpty ? " / " : "") + Text(collection.title+" ")
         }
     }
 }

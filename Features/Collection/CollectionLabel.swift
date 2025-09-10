@@ -50,24 +50,18 @@ fileprivate struct User: View {
     
     public var body: some View {
         Label {
-            HStack(spacing: 0) {
+            Group {
                 if withLocation {
                     CollectionLocation(collection: collection)
-                        .lineLimit(1)
-                        .truncationMode(.head)
-                        .foregroundStyle(.secondary)
+                } else {
+                    Text(collection.title+" ")
                 }
-                
-                Text(collection.title+" ")
-                    .lineLimit(1)
-                    .layoutPriority(1)
-                    .fixedSize(horizontal: false, vertical: true)
             }
-                .fixedSize(horizontal: false, vertical: true)
+                .lineLimit(1)
+                .truncationMode(.head)
         } icon: {
             CollectionIcon(collection)
         }
-            .fixedSize(horizontal: false, vertical: true)
             .listItemTint(.monochrome)
     }
 }

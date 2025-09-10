@@ -18,16 +18,11 @@ extension Folder {
 extension Folder.Title {
     fileprivate struct Memorized: ViewModifier {
         @Environment(\.isSearching) private var isSearching
-        @IsEditing private var isEditing
 
         var find: FindBy
         var title: String
         
         var scope: String {
-            if isEditing {
-                return ""
-            }
-            
             if find.isSearching {
                 if isSearching {
                     return "Search"
@@ -44,7 +39,6 @@ extension Folder.Title {
         func body(content: Content) -> some View {
             content
                 .navigationTitle(scope)
-                .navigationBarTitleDisplayMode(isEditing ? .inline : .automatic)
         }
     }
 }

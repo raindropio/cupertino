@@ -45,7 +45,7 @@ class ExtensionController: UIViewController, UIAdaptivePresentationControllerDel
 
     func makeSheetTransparent() {
         var v: UIView? = view
-        for _ in 0..<5 {
+        for _ in 0..<10 {
             v?.isOpaque = false
             v?.backgroundColor = .clear
             v = v?.superview

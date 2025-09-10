@@ -83,7 +83,6 @@
 		768CA1FF2950420D00AD7E62 /* AuthContinueWith.swift in Sources */ = {isa = PBXBuildFile; fileRef = 768CA1FE2950420D00AD7E62 /* AuthContinueWith.swift */; };
 		768CA20129505A6E00AD7E62 /* AuthContinueWith+Apple.swift in Sources */ = {isa = PBXBuildFile; fileRef = 768CA20029505A6E00AD7E62 /* AuthContinueWith+Apple.swift */; };
 		768CA20529506D7A00AD7E62 /* AuthSplash+Slide.swift in Sources */ = {isa = PBXBuildFile; fileRef = 768CA20429506D7A00AD7E62 /* AuthSplash+Slide.swift */; };
-		769056EC297536570090C1EF /* Find.swift in Sources */ = {isa = PBXBuildFile; fileRef = 769056EB297536570090C1EF /* Find.swift */; };
 		769056F0297539080090C1EF /* Folder+Title.swift in Sources */ = {isa = PBXBuildFile; fileRef = 769056EF297539080090C1EF /* Folder+Title.swift */; };
 		769056F229753E520090C1EF /* Folder+Toolbar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 769056F129753E520090C1EF /* Folder+Toolbar.swift */; };
 		769056F62975499D0090C1EF /* Nesteds.swift in Sources */ = {isa = PBXBuildFile; fileRef = 769056F52975499D0090C1EF /* Nesteds.swift */; };
@@ -239,7 +238,6 @@
 		768CA1FE2950420D00AD7E62 /* AuthContinueWith.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthContinueWith.swift; sourceTree = "<group>"; };
 		768CA20029505A6E00AD7E62 /* AuthContinueWith+Apple.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AuthContinueWith+Apple.swift"; sourceTree = "<group>"; };
 		768CA20429506D7A00AD7E62 /* AuthSplash+Slide.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AuthSplash+Slide.swift"; sourceTree = "<group>"; };
-		769056EB297536570090C1EF /* Find.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Find.swift; sourceTree = "<group>"; };
 		769056EF297539080090C1EF /* Folder+Title.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Folder+Title.swift"; sourceTree = "<group>"; };
 		769056F129753E520090C1EF /* Folder+Toolbar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Folder+Toolbar.swift"; sourceTree = "<group>"; };
 		769056F52975499D0090C1EF /* Nesteds.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Nesteds.swift; sourceTree = "<group>"; };
@@ -520,7 +518,6 @@
 		769056EA2975364E0090C1EF /* Find */ = {
 			isa = PBXGroup;
 			children = (
-				769056EB297536570090C1EF /* Find.swift */,
 				76799F8A299632790042DF78 /* Folder.swift */,
 				769056EF297539080090C1EF /* Folder+Title.swift */,
 				769056F129753E520090C1EF /* Folder+Toolbar.swift */,
@@ -1009,7 +1006,6 @@
 				7600147629C75A3C00CD490C /* SettingsMacGeneral.swift in Sources */,
 				769056F229753E520090C1EF /* Folder+Toolbar.swift in Sources */,
 				768CA1F9294CC15600AD7E62 /* AuthSplash.swift in Sources */,
-				769056EC297536570090C1EF /* Find.swift in Sources */,
 				76BFE36E291E9F6B00DE9DB2 /* SplitView.swift in Sources */,
 				7685A195286868AC00A4BC3C /* App.swift in Sources */,
 				76E44C4229BA0E86009634C6 /* SettingsAppIcon.swift in Sources */,

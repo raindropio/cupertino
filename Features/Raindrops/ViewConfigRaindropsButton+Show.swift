@@ -38,11 +38,9 @@ extension ViewConfigRaindropsButton.Show {
         }
         
         var body: some View {
-            Menu("View options") {
-                Section("Show fields:") {
-                    ForEach(ConfigRaindrops.Element.allCases, id: \.rawValue) {
-                        Toggle($0.title, isOn: isOn($0))
-                    }
+            Section("Show fields:") {
+                ForEach(ConfigRaindrops.Element.allCases, id: \.rawValue) {
+                    Toggle($0.title, isOn: isOn($0))
                 }
             }
         }

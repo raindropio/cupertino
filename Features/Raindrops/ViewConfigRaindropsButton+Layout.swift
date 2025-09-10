@@ -10,7 +10,6 @@ extension ViewConfigRaindropsButton {
         
         var body: some View {
             Picker(
-                "Layout",
                 selection: .init(get: {
                     view
                 }, set: { view in
@@ -21,7 +20,7 @@ extension ViewConfigRaindropsButton {
                     Label($0.title, systemImage: $0.systemImage)
                         .tag($0)
                 }
-            }
+            } label: {}
                 .pickerStyle(.inline)
         }
     }

@@ -11,10 +11,8 @@ public class ReduxSubStore<R: Reducer>: ObservableObject {
             if let action = some as? ReduxAction {
                 var newState = state
                 let result = try reducer.reduce(state: &newState, action: action)
-                if newState != state {
-                    DispatchQueue.main.async {
-                        self.state = newState
-                    }
+                DispatchQueue.main.sync {
+                    self.state = newState
                 }
                 return result
             }
