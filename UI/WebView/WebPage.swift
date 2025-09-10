@@ -24,6 +24,7 @@ public class WebPage: NSObject, ObservableObject {
                 #if canImport(UIKit)
                 view.scrollView.delegate = self
                 #endif
+                view.isOpaque = false
                 
                 cancellable = Publishers.MergeMany(
                     view.publisher(for: \.estimatedProgress).removeDuplicates().map({ _ in }).eraseToAnyPublisher(),

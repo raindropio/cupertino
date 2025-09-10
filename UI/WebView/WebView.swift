@@ -27,7 +27,7 @@ extension WebView: View {
         ZStack {
             page.toolbarBackground
                 .ignoresSafeArea()
-            
+
             Holder(page: page, request: request, userAgent: userAgent)
                 .ignoresSafeArea(.all, edges: ignoreEdges)
                 //progress bar
