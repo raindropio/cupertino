@@ -36,12 +36,12 @@ extension Folder.Toolbar {
                         }
                         
                         if total > 0 {
-                            ToolbarItem {
-                                EditButton("Select")
-                                    .labelStyle(.titleOnly)
-                            }
-                            
                             if #available(iOS 26.0, *) {
+                                ToolbarItem {
+                                    EditButton("Select")
+                                        .labelStyle(.titleOnly)
+                                }
+                                
                                 ToolbarSpacer()
                             }
                         }
@@ -57,6 +57,10 @@ extension Folder.Toolbar {
                         }
                         
                         ToolbarItemGroup(placement: .secondaryAction) {
+                            if #unavailable(iOS 26.0) {
+                                EditButton("Select")
+                            }
+                            
                             if sizeClass == .compact {
                                 FilterRaindropsButton($find)
                             }

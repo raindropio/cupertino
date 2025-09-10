@@ -84,7 +84,7 @@ extension FilterRaindropsButton {
                     }
                 }
             }
-                .tint(find.filters.isEmpty ? .primary : .accentColor)
+                .tint(find.filters.isEmpty ? nil : .accentColor)
                 .help("Filter")
         }
     }
