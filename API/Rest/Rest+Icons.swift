@@ -3,7 +3,7 @@ import Foundation
 //MARK: - Get
 extension Rest {
     public func iconsGet(_ filter: String = "") async throws -> [URL] {
-        let res: ItemsResponse<Theme> = try await fetch.get("collections/covers/\(filter)")
+        let res: ItemsResponse<Theme> = try await fetch.get("collections/covers/\(filter.addingPercentEncoding(withAllowedCharacters: .urlHostAllowed) ?? "")")
         var icons = [URL]()
         
         res.items.forEach { theme in
