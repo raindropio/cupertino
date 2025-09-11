@@ -65,8 +65,10 @@ extension WebView {
             //configuration
             let configuration = WKWebViewConfiguration()
             configuration.mediaTypesRequiringUserActionForPlayback = []
-            configuration.applicationNameForUserAgent = userAgent
             configuration.allowsInlineMediaPlayback = true
+            
+            //user-agent should include build-in safari browser for better compatability
+            configuration.applicationNameForUserAgent = userAgent ?? "Version/18.0 Mobile/15E148 Safari/605.1.15"
             
             //reuse cookies
             let cookies = HTTPCookieStorage.shared.cookies ?? []

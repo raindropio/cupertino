@@ -17,7 +17,7 @@ public class SendWebMessage {
         let data = try encoder.encode(message)
         let serialized = String(data: data, encoding: .utf8)
         if let serialized {
-            try await page.evaluateJavaScript("window.\(channel)Send(\(serialized)); true")
+            try await page.evaluateJavaScript("window.\(channel)Send?.(\(serialized)); true")
         }
     }
 }
