@@ -58,7 +58,7 @@ fileprivate struct User: View {
                 }
             }
                 .lineLimit(1)
-                .truncationMode(.head)
+                .truncationMode(.middle)
         } icon: {
             CollectionIcon(collection)
         }
