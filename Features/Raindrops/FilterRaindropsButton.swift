@@ -34,58 +34,122 @@ extension FilterRaindropsButton {
         var simple: [Filter]
         var created: [Filter]
         
-        private func toggle(_ item: Filter) -> Binding<Bool> {
-            return .init(
-                get: { find.filters.contains(item) },
+        @Environment(\.dismiss) private var dismiss
+        @State private var show = false
+        
+        private func toggle(_ item: Filter) {
+            if find.filters.contains(item) {
+                find.filters = find.filters.filter { $0 != item }
+            } else {
+                find.filters.append(item)
+            }
+        }
+        
+        private var selectedCreated: Binding<Filter?> {
+            .init(
+                get: {
+                    find.filters.first {
+                        if case .created = $0.kind {
+                            return true
+                        }
+                        return false
+                    }
+                },
                 set: {
-                    if $0 { find.filters.append(item) }
-                    else { find.filters = find.filters.filter { $0 != item } }
+                    find.filters = find.filters.filter {
+                        if case .created = $0.kind {
+                            return false
+                        }
+                        return true
+                    }
+                    if let filter = $0 {
+                        find.filters.append(filter)
+                    }
                 }
             )
         }
         
+        private func activeBadge(_ item: Filter) -> Text {
+            let active = find.filters.contains(item)
+            
+            return .init(active ? "✓" : String(item.count))
+                .foregroundColor(active ? .accentColor : .secondary)
+                .fontWeight(active ? .semibold : nil)
+        }
+                
         var body: some View {
-            Menu("Filter", systemImage: find.filters.isEmpty ? "line.3.horizontal.decrease" : "line.3.horizontal.decrease.circle.fill") {
-                if !find.filters.isEmpty {
-                    Button("Clear filters", systemImage: "xmark", role: .destructive) {
-                        find.filters = []
-                    }
-                }
-                
-                if !created.isEmpty {
-                    Section("Attributes") {
-                        ForEach(simple) { item in
-                            Toggle(isOn: toggle(item)) {
-                                FilterRow(item)
-                            }
-                            .tint(item.color)
-                            .listItemTint(item.color)
-                        }
-                    }
-                }
-                
-                if !tags.isEmpty {
-                    Section("Tags") {
-                        ForEach(tags) { item in
-                            Toggle(isOn: toggle(item)) {
-                                FilterRow(item)
-                            }
-                        }
-                    }
-                }
-                
-                if !created.isEmpty {
-                    Section("Creation date") {
-                        ForEach(created) { item in
-                            Toggle(isOn: toggle(item)) {
-                                FilterRow(item)
-                            }
-                        }
-                    }
-                }
+            Button("Filter", systemImage: find.filters.isEmpty ? "line.3.horizontal.decrease" : "line.3.horizontal.decrease.circle.fill") {
+                show = true
             }
                 .tint(find.filters.isEmpty ? nil : .accentColor)
                 .help("Filter")
+                .sheet(isPresented: $show) {
+                    NavigationStack {
+                        List {
+                            Picker("Created", systemImage: "calendar", selection: selectedCreated) {
+                                Text("Any time")
+                                    .tag(nil as Filter?)
+                                
+                                ForEach(created) { item in
+                                    Text(item.title)
+                                        .tag(item)
+                                }
+                            }
+                                .disabled(created.isEmpty)
+                            
+                            if !created.isEmpty {
+                                Section {
+                                    ForEach(simple) { item in
+                                        Button {
+                                            toggle(item)
+                                        } label: {
+                                            Label {
+                                                Text(item.title).foregroundColor(.primary)
+                                            } icon: {
+                                                Image(systemName: item.systemImage)
+                                            }
+                                        }
+                                        .badge(activeBadge(item))
+                                        .listItemTint(item.color)
+                                    }
+                                }
+                            }
+                            
+                            if !tags.isEmpty {
+                                Section("Tags") {
+                                    ForEach(tags) { item in
+                                        Button {
+                                            toggle(item)
+                                        } label: {
+                                            Label {
+                                                Text(item.title).foregroundColor(.primary)
+                                            } icon: {
+                                                Image(systemName: item.systemImage)
+                                            }
+                                        }
+                                        .badge(activeBadge(item))
+                                    }
+                                }
+                            }
+                        }
+                        .symbolVariant(.fill)
+                        .navigationTitle("Filter")
+                        .navigationBarTitleDisplayMode(.inline)
+                        .toolbar {
+                            ToolbarItem(placement: .cancellationAction) {
+                                if !find.filters.isEmpty {
+                                    Button("Reset") {
+                                        find.filters = []
+                                    }
+                                }
+                            }
+                            
+                            DoneToolbarItem()
+                        }
+                        .presentationDetents(UIDevice.current.userInterfaceIdiom == .phone ? [.medium, .large] : [.large])
+                        .animation(.default, value: find.filters.count)
+                    }
+                }
         }
     }
 }
