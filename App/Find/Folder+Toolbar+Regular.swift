@@ -8,6 +8,7 @@ extension Folder.Toolbar {
         @EnvironmentObject private var dispatch: Dispatcher
         @Environment(\.containerHorizontalSizeClass) private var sizeClass
         @IsEditing private var isEditing
+        @State private var showFilterComposer = false
 
         @Binding var find: FindBy
         var pick: RaindropsPick
@@ -48,7 +49,7 @@ extension Folder.Toolbar {
                         
                         if sizeClass == .regular {
                             ToolbarItem {
-                                FilterRaindropsButton($find)
+                                FilterRaindropsButton($find, show: $showFilterComposer)
                             }
                             
                             if #available(iOS 26.0, *) {
@@ -62,7 +63,7 @@ extension Folder.Toolbar {
                             }
                             
                             if sizeClass == .compact {
-                                FilterRaindropsButton($find)
+                                FilterRaindropsButton($find, show: $showFilterComposer)
                             }
                             
                             SortRaindropsButton(find)
@@ -73,6 +74,9 @@ extension Folder.Toolbar {
                             }
                         }
                     }
+                }
+                .sheet(isPresented: $showFilterComposer) {
+                    FiltersComposer($find)
                 }
         }
     }
