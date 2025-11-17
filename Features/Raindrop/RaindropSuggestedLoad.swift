@@ -19,6 +19,5 @@ struct RaindropSuggestedLoad<C: View>: View {
     var body: some View {
         content(suggestions)
             .task(priority: .background) { await load() }
-            .task(id: raindrop.lastUpdate) { await load() }
     }
 }

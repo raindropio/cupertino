@@ -16,36 +16,24 @@ public struct WebView {
 }
 
 extension WebView: View {
-    private var ignoreEdges: Edge.Set {
-        if #available(iOS 24.0, *) {
-            return .bottom
-        }
-        return page.prefersHiddenToolbars ? .bottom : []
-    }
-    
     public var body: some View {
-        ZStack {
-            page.toolbarBackground
-                .ignoresSafeArea()
-
-            Holder(page: page, request: request, userAgent: userAgent)
-                .ignoresSafeArea(.all, edges: ignoreEdges)
-                //progress bar
-                .overlay(alignment: .topLeading) {
-                    ProgressBar(value: page.progress)
+        Holder(page: page, request: request, userAgent: userAgent)
+            .ignoresSafeArea(.all, edges: [.top, .bottom])
+            //progress bar
+            .overlay(alignment: .topLeading) {
+                ProgressBar(value: page.progress)
+            }
+            //dialogs
+            .modifier(Dialogs(page: page))
+            //allow back webview navigation
+            .popGesture({
+                if page.canGoBack {
+                    return .never
+                } else if page.prefersHiddenToolbars {
+                    return .always
                 }
-                //dialogs
-                .modifier(Dialogs(page: page))
-                //allow back webview navigation
-                .popGesture({
-                    if page.canGoBack {
-                        return .never
-                    } else if page.prefersHiddenToolbars {
-                        return .always
-                    }
-                    return .automatic
-                }())
-        }
+                return .automatic
+            }())
     }
 }
 

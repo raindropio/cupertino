@@ -19,6 +19,7 @@ struct Receive: View {
 extension Receive {
     struct Share: View {
         @EnvironmentObject private var service: ExtensionService
+        @EnvironmentObject private var c: CollectionsStore
         @AppStorage("extension-default-collection", store: UserDefaults(suiteName: Constants.appGroupName)) private var collection: Int = -1
         
         var decoded: Raindrop? {
@@ -60,6 +61,11 @@ extension Receive {
             }
                 .presentationDetents(UIDevice.current.userInterfaceIdiom == .phone ? [.fraction(0.75), .large] : [.large])
                 .presentationDragIndicator(.hidden)
+                .onAppear {
+                    if c.state.user[collection] == nil {
+                        collection = -1
+                    }
+                }
         }
     }
 }

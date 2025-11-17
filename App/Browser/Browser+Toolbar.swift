@@ -42,11 +42,20 @@ extension Browser.Toolbar: ViewModifier {
         //overall
         .toolbarRole(.editor)
         #if canImport(UIKit)
-        .toolbar(page.prefersHiddenToolbars ? .hidden : .automatic, for: .navigationBar, .tabBar, .bottomBar)
+        .toolbar(page.prefersHiddenToolbars ? .hidden : .automatic, for: .tabBar, .bottomBar)
         .toolbarBackground(.visible, for: .navigationBar, .tabBar, .bottomBar)
         .toolbarColorScheme(page.toolbarColorScheme == colorScheme ? nil : page.toolbarColorScheme, for: .navigationBar, .tabBar, .bottomBar)
+        //fix transparent navigation bar background
+        .overlay(alignment: .top) {
+            GeometryReader { geo in
+                page.toolbarBackground
+                    .frame(height: geo.safeAreaInsets.top)
+                    .offset(y: -geo.safeAreaInsets.top)
+            }
+            .allowsHitTesting(false)
+        }
         #endif
-        .safeAnimation(.default, value: page.prefersHiddenToolbars)
+        .animation(.default, value: page.prefersHiddenToolbars)
         //buttons
         .toolbar {
             //highlights
