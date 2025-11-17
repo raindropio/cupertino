@@ -8,7 +8,9 @@ struct Receive: View {
     var body: some View {
         switch service.extensionType {
         case .share:
-            Share()
+            DefaultCollection {
+                Share(collection: $0)
+            }
             
         case .action:
             Action()
@@ -17,10 +19,20 @@ struct Receive: View {
 }
 
 extension Receive {
+    struct DefaultCollection<C: View>: View {
+        @EnvironmentObject private var c: CollectionsStore
+        @AppStorage("extension-default-collection", store: UserDefaults(suiteName: Constants.appGroupName)) private var defaultCollection: Int = -1
+        
+        var content: (Int) -> C
+        
+        var body: some View {
+            content(c.state.user[defaultCollection] == nil ? -1 : defaultCollection)
+        }
+    }
+    
     struct Share: View {
         @EnvironmentObject private var service: ExtensionService
-        @EnvironmentObject private var c: CollectionsStore
-        @AppStorage("extension-default-collection", store: UserDefaults(suiteName: Constants.appGroupName)) private var collection: Int = -1
+        var collection: Int
         
         var decoded: Raindrop? {
             var item: Raindrop? = service.decoded()
@@ -61,11 +73,6 @@ extension Receive {
             }
                 .presentationDetents(UIDevice.current.userInterfaceIdiom == .phone ? [.fraction(0.75), .large] : [.large])
                 .presentationDragIndicator(.hidden)
-                .onAppear {
-                    if c.state.user[collection] == nil {
-                        collection = -1
-                    }
-                }
         }
     }
 }
