@@ -19,19 +19,10 @@ class NativeWebView: WKWebView {
             .store(in: &cancelables)
         #endif
         
-        //fix white background flash
-        publisher(for: \.estimatedProgress)
-            .sink { [weak self] in
-                let isOpaque = $0 >= 0.4 || (self?.canGoBack == true)
-                if isOpaque != self?.isOpaque {
-                    #if canImport(UIKit)
-                    self?.isOpaque = isOpaque
-                    #else
-                    self?.setValue(isOpaque, forKey: "drawsBackground")
-                    #endif
-                }
-            }
-            .store(in: &cancelables)
+//        scrollView.contentInsetAdjustmentBehavior = .never
+//        scrollView.automaticallyAdjustsScrollIndicatorInsets = false
+//        scrollView.contentInset = .init(top: 0, left: 0, bottom: 0, right: 0)
+//        scrollView.scrollIndicatorInsets = .init(top: 128, left: 0, bottom: 0, right: 0)
     }
     
     required init?(coder: NSCoder) {

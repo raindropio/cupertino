@@ -42,52 +42,44 @@ extension Browser.Toolbar: ViewModifier {
         //overall
         .toolbarRole(.editor)
         #if canImport(UIKit)
-        .toolbar(page.prefersHiddenToolbars ? .hidden : .automatic, for: .tabBar, .bottomBar)
-        .toolbarBackground(.visible, for: .navigationBar, .tabBar, .bottomBar)
-        .toolbarColorScheme(page.toolbarColorScheme == colorScheme ? nil : page.toolbarColorScheme, for: .navigationBar, .tabBar, .bottomBar)
-        //fix transparent navigation bar background
-        .overlay(alignment: .top) {
-            GeometryReader { geo in
-                page.toolbarBackground
-                    .frame(height: geo.safeAreaInsets.top)
-                    .offset(y: -geo.safeAreaInsets.top)
-            }
-            .allowsHitTesting(false)
-        }
-        #endif
+        .toolbar(page.prefersHiddenToolbars ? .hidden : .automatic, for: .bottomBar)
+        .toolbarBackground(raindrop.type.readable ? .clear : page.toolbarBackground ?? .clear, for: .navigationBar, .bottomBar)
+        .toolbarColorScheme(page.toolbarColorScheme == colorScheme ? nil : page.toolbarColorScheme, for: .navigationBar, .bottomBar)
+        .backport.toolbarBackgroundVisibility(raindrop.type.readable ? .automatic : .visible, for: .navigationBar)
+        .backport.toolbarBackgroundVisibility(raindrop.type.readable ? .automatic : .visible, for: .bottomBar)
         .animation(.default, value: page.prefersHiddenToolbars)
+        #endif
         //buttons
         .toolbar {
             //highlights
-            if !raindrop.highlights.isEmpty {
-                ToolbarItem {
-                    Button { highlights.toggle() } label: {
-                        Image(systemName: Filter.Kind.highlights.systemImage)
-                            .overlay(alignment: .topTrailing) {
-                                NumberInCircle(raindrop.highlights.count)
-                                    .offset(x: 11, y: -11)
-                            }
-                    }
-                    .sheet(isPresented: $highlights) {
-                        RaindropStack($raindrop, content: RaindropHighlights.init)
-                            .frame(idealWidth: 600, idealHeight: 600)
-                            #if canImport(AppKit)
-                            .fixedSize()
-                            #endif
-                    }
-                }
-            }
-            
             ToolbarItem {
-                if raindrop.isNew, let url = page.url {
-                    ShareLink(item: url)
-                } else {
-                    ShareRaindropLink(raindrop)
-                        .equatable()
+                Button { highlights.toggle() } label: {
+                    Image(systemName: Filter.Kind.highlights.systemImage)
+                }
+                .badge(raindrop.highlights.count)
+                .sheet(isPresented: $highlights) {
+                    RaindropStack($raindrop, content: RaindropHighlights.init)
+                        .frame(idealWidth: 600, idealHeight: 600)
+                        #if canImport(AppKit)
+                        .fixedSize()
+                        #endif
                 }
             }
             
             Group {
+                ToolbarItemGroup(placement: placement) {
+                    if raindrop.isNew, let url = page.url {
+                        ShareLink(item: url)
+                    } else {
+                        ShareRaindropLink(raindrop)
+                            .equatable()
+                    }
+                    
+                    if #unavailable(iOS 26.0) {
+                        Spacer()
+                    }
+                }
+                
                 if #available(iOS 26.0, *) {
                     ToolbarSpacer(.flexible, placement: placement)
                 }
@@ -109,10 +101,6 @@ extension Browser.Toolbar: ViewModifier {
                     if #unavailable(iOS 26.0) {
                         Spacer()
                     }
-                }
-                
-                if #available(iOS 26.0, *) {
-                    ToolbarSpacer(.flexible, placement: placement)
                 }
                 
                 //add tags
@@ -138,10 +126,6 @@ extension Browser.Toolbar: ViewModifier {
                     }
                 }
                 
-                if #available(iOS 26.0, *) {
-                    ToolbarSpacer(.flexible, placement: placement)
-                }
-                
                 //edit/add
                 ToolbarItemGroup(placement: placement) {
                     Button { form.toggle() } label: {
@@ -160,10 +144,6 @@ extension Browser.Toolbar: ViewModifier {
                     if #unavailable(iOS 26.0) {
                         Spacer()
                     }
-                }
-                
-                if #available(iOS 26.0, *) {
-                    ToolbarSpacer(.flexible, placement: placement)
                 }
                 
                 //delete
@@ -198,5 +178,6 @@ extension Browser.Toolbar: ViewModifier {
                 }
             }
         }
+        
     }
 }

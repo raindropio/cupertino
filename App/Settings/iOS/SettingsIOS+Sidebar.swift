@@ -9,7 +9,8 @@ extension SettingsIOS {
         @EnvironmentObject private var dispatch: Dispatcher
         @EnvironmentObject private var s: SubscriptionStore
         @Environment(\.dismiss) private var dismiss
-        
+        @AppStorage(PreferredBrowser.key) private var browser: PreferredBrowser = .default
+
         @Binding var selection: SettingsPath.Screen?
         
         var body: some View {
@@ -44,7 +45,10 @@ extension SettingsIOS {
                             .listItemTint(.indigo)
                         #endif
                         
-                        SettingsBrowser()
+                        NavigationLink(value: SettingsPath.Screen.browser) {
+                            Label("Browser", systemImage: "safari").tint(.primary)
+                                .badge(browser.title)
+                        }
                             .listItemTint(.cyan)
                     }
                     

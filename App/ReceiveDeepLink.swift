@@ -4,12 +4,28 @@ import API
 
 struct ReceiveDeepLink: ViewModifier {
     @EnvironmentObject private var r: RaindropsStore
-    @AppStorage("browser") private var browser: PreferredBrowser = .default
+    @AppStorage(PreferredBrowser.key) private var browser: PreferredBrowser = .default
+    @AppStorage(UniversalLinks.key) private var universalLinks: UniversalLinks = .default
     @Environment(\.openURL) private var openURL
     @State private var safari: URL?
     @State private var settings: SettingsPath?
     
     @Binding var path: SplitViewPath
+    
+    private func openLink(find: FindBy, id: Raindrop.ID) {
+        switch browser {
+        case .inapp:
+            path.push(.preview(find, id))
+        case .safari:
+            if let url = r.state.item(id)?.link {
+                safari = url
+            }
+        case .system:
+            if let url = r.state.item(id)?.link {
+                openURL(url)
+            }
+        }
+    }
 
     func body(content: Content) -> some View {
         content.onDeepLink {
@@ -23,30 +39,14 @@ struct ReceiveDeepLink: ViewModifier {
             case .raindrop(let action):
                 switch action {
                 case .open(let find, let id):
-                    switch browser {
-                    case .inapp:
-                        //check if there an app that can handle this url directly (excluding articles)
-                        if let url = r.state.item(id)?.link, r.state.item(id)?.type != .article {
-                            UIApplication.shared.open(url, options: [.universalLinksOnly: true]) { success in
-                                if !success {
-                                    path.push(.preview(find, id))
-                                }
+                    if universalLinks == .enabled, let url = r.state.item(id)?.link {
+                        UIApplication.shared.open(url, options: [.universalLinksOnly: true]) { success in
+                            if !success {
+                                openLink(find: find, id: id)
                             }
-                        } else {
-                            path.push(.preview(find, id))
                         }
-                        
-                    #if os(iOS)
-                    case .safari:
-                        if let url = r.state.item(id)?.link {
-                            safari = url
-                        }
-                    #endif
-                        
-                    case .system:
-                        if let url = r.state.item(id)?.link {
-                            openURL(url)
-                        }
+                    } else {
+                        openLink(find: find, id: id)
                     }
                     
                 case .cache(let id):

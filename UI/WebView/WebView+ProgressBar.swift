@@ -10,8 +10,9 @@ extension WebView {
                 .shadow(color: .accentColor.opacity(0.5), radius: 3, y: 1)
                 .scaleEffect(x: value, anchor: .leading)
                 .safeAnimation(.spring(), value: value)
-                .opacity(value < 1 ? 1 : 0)
+                .opacity(value < 1 ? 1 : 0.01)
                 .safeAnimation(.default, value: value)
+                .allowsHitTesting(false)
         }
     }
 }

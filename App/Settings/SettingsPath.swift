@@ -16,5 +16,6 @@ extension SettingsPath {
         case appIcon
         #endif
         case extensions
+        case browser
     }
 }

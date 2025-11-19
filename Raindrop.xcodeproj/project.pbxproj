@@ -76,6 +76,7 @@
 		7685A195286868AC00A4BC3C /* App.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7685A194286868AC00A4BC3C /* App.swift */; };
 		7685A199286868AD00A4BC3C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7685A198286868AD00A4BC3C /* Assets.xcassets */; };
 		76864FBD291EA059000B9B45 /* SidebarScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76864FB5291EA059000B9B45 /* SidebarScreen.swift */; };
+		768A11572ECC762000DA8843 /* UniversalLinks.swift in Sources */ = {isa = PBXBuildFile; fileRef = 768A11562ECC761A00DA8843 /* UniversalLinks.swift */; };
 		768CA1F7294CC10900AD7E62 /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 768CA1F6294CC10900AD7E62 /* StoreKit.framework */; };
 		768CA1F9294CC15600AD7E62 /* AuthSplash.swift in Sources */ = {isa = PBXBuildFile; fileRef = 768CA1F8294CC15600AD7E62 /* AuthSplash.swift */; };
 		768CA1FB294CC17800AD7E62 /* AuthLogIn.swift in Sources */ = {isa = PBXBuildFile; fileRef = 768CA1FA294CC17800AD7E62 /* AuthLogIn.swift */; };
@@ -231,6 +232,7 @@
 		7685A19A286868AD00A4BC3C /* App.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = App.entitlements; sourceTree = "<group>"; };
 		7685A1AC286880F600A4BC3C /* API */ = {isa = PBXFileReference; lastKnownFileType = text; path = API; sourceTree = SOURCE_ROOT; };
 		76864FB5291EA059000B9B45 /* SidebarScreen.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SidebarScreen.swift; sourceTree = "<group>"; };
+		768A11562ECC761A00DA8843 /* UniversalLinks.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UniversalLinks.swift; sourceTree = "<group>"; };
 		768CA1F6294CC10900AD7E62 /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
 		768CA1F8294CC15600AD7E62 /* AuthSplash.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthSplash.swift; sourceTree = "<group>"; };
 		768CA1FA294CC17800AD7E62 /* AuthLogIn.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthLogIn.swift; sourceTree = "<group>"; };
@@ -547,6 +549,7 @@
 		7697437A2971945000322290 /* Storage */ = {
 			isa = PBXGroup;
 			children = (
+				768A11562ECC761A00DA8843 /* UniversalLinks.swift */,
 				76292CF72952F2CB000E16AA /* PreferredBrowser.swift */,
 			);
 			path = Storage;
@@ -997,6 +1000,7 @@
 				76292CEA2951B86F000E16AA /* SettingsSubscription.swift in Sources */,
 				7618C96D29C073B600D4DE78 /* AuthSuccess.swift in Sources */,
 				768CA20129505A6E00AD7E62 /* AuthContinueWith+Apple.swift in Sources */,
+				768A11572ECC762000DA8843 /* UniversalLinks.swift in Sources */,
 				7653AD3129E6C44C0046E654 /* PushNotifications.swift in Sources */,
 				76E51CEA299A8A1400FE7763 /* ReceiveDeepLink.swift in Sources */,
 				76BFE36F291E9F6B00DE9DB2 /* SplitViewPath.swift in Sources */,

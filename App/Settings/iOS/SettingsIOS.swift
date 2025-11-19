@@ -23,6 +23,8 @@ struct SettingsIOS: View {
                     SettingsAppIcon()
                 case .extensions:
                     SettingsExtensions()
+                case .browser:
+                    SettingsBrowser()
                 case nil:
                     Color.clear
                 }

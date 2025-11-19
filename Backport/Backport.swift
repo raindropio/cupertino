@@ -10,6 +10,10 @@ public extension View {
     var backport: Backported<Self> { .init(self) }
 }
 
+public extension ToolbarContent {
+    var backport: Backported<Self> { .init(self) }
+}
+
 public enum Backport {}
 
 public extension NSObjectProtocol {
