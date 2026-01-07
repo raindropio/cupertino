@@ -10,7 +10,7 @@ public struct AddStack {
     
     @State private var uploading = false
     @State private var completed = Set<URL>()
-    @State private var failed = Set<URL>()
+    @State private var failed = [URL: RestError]()
     
     var urls: Set<URL>
     @State var collection: Int
@@ -70,6 +70,13 @@ extension AddStack: View {
                     .transition(.scale(scale: 1.5).combined(with: .opacity))
                 
                 if !failed.isEmpty {
+                    if let error = failed.values.first {
+                        Text(error.localizedDescription)
+                            .font(.callout)
+                            .foregroundStyle(.secondary)
+                            .multilineTextAlignment(.center)
+                    }
+
                     ActionButton(action: upload) {
                         Label("Retry failed", systemImage: "arrow.clockwise")
                     }

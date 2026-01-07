@@ -1,7 +1,7 @@
 import SwiftUI
 
 extension RaindropsReducer {
-    func add(state: S, urls: Set<URL>, collection: Int?, completed: Binding<Set<URL>>?, failed: Binding<Set<URL>>?) async throws -> ReduxAction? {
+    func add(state: S, urls: Set<URL>, collection: Int?, completed: Binding<Set<URL>>?, failed: Binding<[URL: RestError]>?) async throws -> ReduxAction? {
         //nothing to add
         guard !urls.isEmpty
         else { return nil }
@@ -13,7 +13,10 @@ extension RaindropsReducer {
         do {
             existing = try await rest.raindropsGetId(urls: urls)
         } catch {
-            failed?.wrappedValue = urls
+            let restError = (error as? RestError) ?? .unknown(error.localizedDescription)
+            for url in urls {
+                failed?.wrappedValue[url] = restError
+            }
             throw error
         }
         
@@ -58,7 +61,7 @@ extension RaindropsReducer {
                             return raindrop
                         } catch {
                             print(error, url)
-                            failed?.wrappedValue.insert(url)
+                            failed?.wrappedValue[url] = (error as? RestError) ?? .unknown(error.localizedDescription)
                             return nil
                         }
                     }
