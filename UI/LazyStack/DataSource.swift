@@ -9,15 +9,15 @@ public struct DataSource<D: RandomAccessCollection & Hashable, C: View> where D.
     let reorder: ((D.Element.ID, Int) -> Void)?
     let insert: ((Int, [NSItemProvider]) -> Void)?
     let insertOf: [UTType]
-    let loadMore: () async -> Void
-    
+    let loadMore: () -> Void
+
     public init(
         _ data: D,
         content: @escaping (D.Element) -> C,
         reorder: ((D.Element.ID, Int) -> Void)? = nil,
         insert: ((Int, [NSItemProvider]) -> Void)? = nil,
         insertOf: [UTType] = [],
-        loadMore: @escaping () async -> Void
+        loadMore: @escaping () -> Void
     ) {
         self.data = data
         self.content = content

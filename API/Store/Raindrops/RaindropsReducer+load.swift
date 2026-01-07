@@ -43,7 +43,7 @@ extension RaindropsReducer {
     //MARK: - 4
     func reloaded(state: inout S, find: FindBy, items: [Raindrop], total: Int) {
         //add to items dictionary and update group
-        items.forEach { state.items[$0.id] = $0 }
+        state.items.merge(items.map { ($0.id, $0) }) { _, new in new }
         
         //do not override if data is not modified (useful for pagination)
         let oldIds = state[find].ids

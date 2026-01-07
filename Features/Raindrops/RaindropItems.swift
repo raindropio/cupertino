@@ -43,8 +43,8 @@ extension RaindropItems { fileprivate struct Memorized: View {
         drop?(items, find.collectionId)
     }
     
-    func loadMore() async {
-        try? await dispatch(RaindropsAction.more(find))
+    func loadMore() {
+        dispatch.sync(RaindropsAction.more(find))
     }
     
     var body: some View {

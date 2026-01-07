@@ -1,70 +1,57 @@
 import Foundation
-import Combine
+#if canImport(UIKit)
+import UIKit
+#endif
 
 extension Persisted {
-    class Storage<V: Codable & Equatable>: Equatable {
-        static func == (lhs: Storage<V>, rhs: Storage<V>) -> Bool {
-            true
-        }
-        
+    final class Storage: Equatable {
+        static func == (lhs: Storage, rhs: Storage) -> Bool { lhs === rhs }
+
         private let encoder = JSONEncoder()
         private let decoder = JSONDecoder()
-        private let publisher: PassthroughSubject<V, Never> = PassthroughSubject()
-        private var bag = Set<AnyCancellable>()
-        private var fileUrl: URL?
-        
+        private let fileUrl: URL?
+        private var pending: Value?
+        private var isDirty = false
+
         init(_ key: String) {
-            let folder = FileManager.default.containerURL(forSecurityApplicationGroupIdentifier: Constants.appGroupName)!
+            let folder = FileManager.default
+                .containerURL(forSecurityApplicationGroupIdentifier: Constants.appGroupName)!
                 .appendingPathComponent("Library/Persisted")
+            try? FileManager.default.createDirectory(at: folder, withIntermediateDirectories: true)
+            fileUrl = folder.appendingPathComponent("\(key).json")
 
-            do {
-                try FileManager.default.createDirectory(
-                    at: folder,
-                    withIntermediateDirectories: false,
-                    attributes: nil
-                )
-            } catch CocoaError.fileWriteFileExists {} catch { return }
-
-            fileUrl = folder.appendingPathComponent("\(key).json", isDirectory: false)
-            
-            publisher
-                .subscribe(on: DispatchQueue.global(qos: .background))
-                .debounce(for: .seconds(1), scheduler: DispatchQueue.global(qos: .background))
-                .removeDuplicates()
-                .receive(on: DispatchQueue.global(qos: .background))
-                .sink(receiveValue: persist)
-                .store(in: &bag)
+            #if canImport(UIKit)
+            NotificationCenter.default.addObserver(
+                self,
+                selector: #selector(flush),
+                name: UIApplication.didEnterBackgroundNotification,
+                object: nil
+            )
+            #endif
         }
 
         deinit {
-            bag.forEach { $0.cancel() }
+            NotificationCenter.default.removeObserver(self)
         }
-        
-        func load(transform: ((V) -> V)? = nil) -> V? {
-            guard
-                let fileUrl,
-                let data = FileManager.default.contents(atPath: fileUrl.path),
-                let decoded = try? decoder.decode(V.self, from: data)
+
+        func load(transform: ((Value) -> Value)?) -> Value? {
+            guard let fileUrl,
+                  let data = try? Data(contentsOf: fileUrl),
+                  let value = try? decoder.decode(Value.self, from: data)
             else { return nil }
-            
-            if let transform {
-                return transform(decoded)
-            }
-            
-            return decoded
+            return transform?(value) ?? value
         }
-        
-        func save(_ value: V) {
-            publisher.send(value)
+
+        func save(_ value: Value) {
+            pending = value
+            isDirty = true
         }
-        
-        private func persist(_ value: V) {
-            guard let fileUrl else { return }
-            try? FileManager.default.removeItem(at: fileUrl)
-            
-            if let encoded = try? encoder.encode(value) {
-                FileManager.default.createFile(atPath: fileUrl.path, contents: encoded, attributes: nil)
-            }
+
+        @objc private func flush() {
+            guard isDirty, let fileUrl, let value = pending else { return }
+            guard let data = try? encoder.encode(value) else { return }
+            try? data.write(to: fileUrl, options: .atomic)
+            isDirty = false
         }
     }
 }

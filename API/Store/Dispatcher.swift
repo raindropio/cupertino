@@ -1,7 +1,7 @@
 import SwiftUI
 
 public class Dispatcher: ObservableObject {
-    var store: Store?
+    weak var store: Store?
     
     //async version
     public func callAsFunction(_ action: ReduxAction) async throws {

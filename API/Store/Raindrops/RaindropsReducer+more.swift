@@ -62,7 +62,7 @@ extension RaindropsReducer {
         }
         
         //add to items dictionary and update group
-        items.forEach { state.items[$0.id] = $0 }
+        state.items.merge(items.map { ($0.id, $0) }) { _, new in new }
         
         state[find].ids = state[find].ids + items.map(\.id)
         state[find].page = page

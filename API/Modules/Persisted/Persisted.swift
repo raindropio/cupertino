@@ -5,7 +5,7 @@ public struct Persisted<Value: Codable & Equatable>: Equatable {
     typealias Restore = ((Value) -> Value)?
 
     private var _value: Value
-    private var storage: Storage<Value>
+    private var storage: Storage
     
     init(wrappedValue: Value, _ cacheKey: String, _ restore: Restore = nil) {
         self.storage = .init(cacheKey)

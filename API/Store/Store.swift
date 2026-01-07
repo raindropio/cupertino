@@ -1,5 +1,6 @@
 import SwiftUI
 
+@MainActor
 public final class Store: ObservableObject, ReduxStore {
     @Published public var dispatcher = Dispatcher()
     @Published public var log = LogStore()
@@ -20,17 +21,23 @@ public final class Store: ObservableObject, ReduxStore {
 
     public func dispatch(_ some: Any) async throws {
         do {
-            try await dispatch(some, store: \.log)
-            try await dispatch(some, store: \.auth)
-            try await dispatch(some, store: \.raindrops)
-            try await dispatch(some, store: \.collections)
-            try await dispatch(some, store: \.collaborators)
-            try await dispatch(some, store: \.config)
-            try await dispatch(some, store: \.filters)
-            try await dispatch(some, store: \.icons)
-            try await dispatch(some, store: \.recent)
-            try await dispatch(some, store: \.subscription)
-            try await dispatch(some, store: \.user)
+            // Sequential: Log → Auth → User (dependency chain for auth/cookies)
+            try await process(some, store: \.log)
+            try await process(some, store: \.auth)
+            try await process(some, store: \.user)
+
+            // Parallel: remaining stores (all have valid auth state)
+            try await withThrowingTaskGroup(of: Void.self) { group in
+                group.addTask { try await self.process(some, store: \.raindrops) }
+                group.addTask { try await self.process(some, store: \.collections) }
+                group.addTask { try await self.process(some, store: \.collaborators) }
+                group.addTask { try await self.process(some, store: \.config) }
+                group.addTask { try await self.process(some, store: \.filters) }
+                group.addTask { try await self.process(some, store: \.icons) }
+                group.addTask { try await self.process(some, store: \.recent) }
+                group.addTask { try await self.process(some, store: \.subscription) }
+                try await group.waitForAll()
+            }
         } catch {
             try await dispatch(error)
             throw error

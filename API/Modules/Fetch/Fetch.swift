@@ -2,8 +2,9 @@ import Foundation
 
 private let session = URLSession(configuration: {
     let configuration = URLSessionConfiguration.default
-    configuration.httpMaximumConnectionsPerHost = 999
-    configuration.httpShouldUsePipelining = true
+    configuration.timeoutIntervalForRequest = 30
+    configuration.timeoutIntervalForResource = 300 // 5 min for large uploads
+    configuration.waitsForConnectivity = true
     return configuration
 }())
 
@@ -35,7 +36,7 @@ extension Fetch {
             try urlRequest(path, method: "GET", query: query)
         )
                 
-        return try await decode(data: data)
+        return try decode(data: data)
     }
     
     func get(
@@ -62,7 +63,7 @@ extension Fetch {
             try urlRequest(path, method: "POST", query: query, body: body, configuration: configuration)
         )
         
-        return try await decode(data: data)
+        return try decode(data: data)
     }
     
     func post<T: Decodable, R: Encodable>(
@@ -74,7 +75,7 @@ extension Fetch {
             try urlRequest(path, method: "POST", query: query, body: body)
         )
         
-        return try await decode(data: data)
+        return try decode(data: data)
     }
     
     func post<R: Encodable>(
@@ -95,7 +96,7 @@ extension Fetch {
             try urlRequest(path, method: "POST", query: query)
         )
         
-        return try await decode(data: data)
+        return try decode(data: data)
     }
 }
 
@@ -111,7 +112,7 @@ extension Fetch {
             try urlRequest(path, method: "PUT", query: query, body: body, configuration: configuration)
         )
         
-        return try await decode(data: data)
+        return try decode(data: data)
     }
     
     func put<T: Decodable, R: Encodable>(
@@ -123,7 +124,7 @@ extension Fetch {
             try urlRequest(path, method: "PUT", query: query, body: body)
         )
         
-        return try await decode(data: data)
+        return try decode(data: data)
     }
     
     func put<T: Decodable>(
@@ -134,7 +135,7 @@ extension Fetch {
             try urlRequest(path, method: "PUT", query: query)
         )
         
-        return try await decode(data: data)
+        return try decode(data: data)
     }
     
     func put<T: Decodable>(
@@ -146,7 +147,7 @@ extension Fetch {
             try urlRequest(path, method: "PUT", query: query, formData: formData)
         )
         
-        return try await decode(data: data)
+        return try decode(data: data)
     }
 }
 
@@ -161,7 +162,7 @@ extension Fetch {
             try urlRequest(path, method: "DELETE", query: query, body: body)
         )
         
-        return try await decode(data: data)
+        return try decode(data: data)
     }
     
     func delete<T: Decodable>(
@@ -172,7 +173,7 @@ extension Fetch {
             try urlRequest(path, method: "DELETE", query: query)
         )
         
-        return try await decode(data: data)
+        return try decode(data: data)
     }
     
     func delete(
@@ -192,9 +193,9 @@ extension Fetch {
         query: [URLQueryItem]? = nil
     ) async throws -> URLResponse {
         let (_, res) = try await request(
-            try urlRequest(path, method: "DELETE", query: query)
+            try urlRequest(path, method: "HEAD", query: query)
         )
-        
+
         return res
     }
 }
@@ -205,19 +206,22 @@ extension Fetch {
         guard let url = req.url
         else { throw FetchError.invalidRequest(nil) }
         
-//        #if DEBUG
-//        print(req.httpMethod ?? "", req.url?.absoluteString ?? "", "start")
-//        #endif
-        
+        #if DEBUG
+        let start = Date()
+        #endif
+
         //get and validate
         var result: (Data, URLResponse)
-        
+
         do {
             result = try await session.data(for: req)
-            
-//            #if DEBUG
-//            print(req.httpMethod ?? "", req.url?.absoluteString ?? "", result)
-//            #endif
+
+            #if DEBUG
+            let elapsed = Date().timeIntervalSince(start)
+            if elapsed > 0.5 {
+                print("Slow request: \(req.httpMethod ?? "") \(req.url?.absoluteString ?? "") took \(String(format: "%.2f", elapsed))s")
+            }
+            #endif
         } catch {
             #if DEBUG
             print(req.httpMethod ?? "", req.url?.absoluteString ?? "", error.localizedDescription)
@@ -319,10 +323,8 @@ extension Fetch {
 }
 
 extension Fetch {
-    func decode<T: Decodable>(data: Data) async throws -> T {
-        return try await Task { @Sendable () -> T in
-            return try self.delegate.decoder.decode(T.self, from: data)
-        }.value
+    func decode<T: Decodable>(data: Data) throws -> T {
+        try delegate.decoder.decode(T.self, from: data)
     }
 }
 
