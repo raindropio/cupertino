@@ -25,7 +25,10 @@ let package = Package(
             dependencies: [
                 .product(name: "FirebaseMessaging", package: "firebase-ios-sdk")
             ],
-            path: ""
+            path: "",
+            swiftSettings: [
+                .enableUpcomingFeature("ApproachableConcurrency")
+            ]
         )
     ]
 )

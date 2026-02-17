@@ -28,7 +28,10 @@ let package = Package(
                 .product(name: "Kingfisher", package: "Kingfisher"),
                 .byName(name: "Backport")
             ],
-            path: ""
+            path: "",
+            swiftSettings: [
+                .enableUpcomingFeature("ApproachableConcurrency")
+            ]
         )
     ]
 )

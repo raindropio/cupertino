@@ -24,7 +24,10 @@ let package = Package(
             dependencies: [
                 .product(name: "GoogleSignIn", package: "GoogleSignIn-iOS")
             ],
-            path: ""
+            path: "",
+            swiftSettings: [
+                .enableUpcomingFeature("ApproachableConcurrency")
+            ]
         )
     ]
 )

@@ -26,7 +26,10 @@ let package = Package(
                 .byName(name: "Backport"),
                 .byName(name: "UI")
             ],
-            path: ""
+            path: "",
+            swiftSettings: [
+                .enableUpcomingFeature("ApproachableConcurrency")
+            ]
         )
     ]
 )

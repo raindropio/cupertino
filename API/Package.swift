@@ -26,7 +26,10 @@ let package = Package(
             dependencies: [
 //                .product(name: "Collections", package: "swift-collections")
             ],
-            path: ""
+            path: "",
+            swiftSettings: [
+                .enableUpcomingFeature("ApproachableConcurrency")
+            ]
         )
     ]
 )

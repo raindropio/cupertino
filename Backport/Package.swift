@@ -20,7 +20,10 @@ let package = Package(
             name: "Backport",
             dependencies: [
             ],
-            path: ""
+            path: "",
+            swiftSettings: [
+                .enableUpcomingFeature("ApproachableConcurrency")
+            ]
         )
     ]
 )

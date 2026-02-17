@@ -24,8 +24,8 @@ struct SplitView: View {
         } detail: {
             NavigationStack(path: $path.detail) {
                 Group {
-                    if path.sidebar != nil {
-                        Folder(find: .init(get: { path.sidebar! }, set: { path.sidebar = $0 }))
+                    if let sidebar = path.sidebar {
+                        Folder(find: .init(get: { sidebar }, set: { path.sidebar = $0 }))
                     }
                 }
                 .navigationDestination(for: SplitViewPath.Screen.self, destination: screen)
