@@ -1,13 +1,14 @@
 import SwiftUI
 import Kingfisher
+import os
 
 #if os(macOS)
-fileprivate let scaleFactor: CGFloat = NSScreen.main?.backingScaleFactor ?? 1
+fileprivate var scaleFactor: CGFloat { NSScreen.main?.backingScaleFactor ?? 1 }
 #else
-fileprivate let scaleFactor: CGFloat = UIScreen.main.scale
+fileprivate var scaleFactor: CGFloat { UIScreen.main.scale }
 #endif
 
-fileprivate var aspectCache: [URL: CGFloat] = [:]
+fileprivate let aspectCache = OSAllocatedUnfairLock(initialState: [URL: CGFloat]())
 
 public struct Thumbnail {
     var url: URL?
@@ -45,6 +46,8 @@ extension Thumbnail: View {
         ZStack {
             KFImage(url)
                 .setProcessor(processor)
+                .cancelOnDisappear(true)
+                .loadDiskFileSynchronously()
                 .onSuccess(onSuccess)
                 .placeholder {
                     if (width != nil && height != nil) || aspectRatio != nil {
@@ -62,7 +65,7 @@ extension Thumbnail: View {
                     Color.clear.frame(width: width, height: height)
                 } else if let aspectRatio {
                     Color.clear.aspectRatio(aspectRatio, contentMode: .fit)
-                } else if let url, let ar = aspectCache[url] {
+                } else if let url, let ar = aspectCache.withLock({ $0[url] }) {
                     Color.clear.aspectRatio(ar, contentMode: .fit)
                 }
             }
@@ -73,17 +76,17 @@ extension Thumbnail: View {
     
     private func onSuccess(_ result: RetrieveImageResult) {
         if aspectRatio == nil, let url {
-            aspectCache[url] = result.image.size.width / result.image.size.height
+            aspectCache.withLock { $0[url] = result.image.size.width / result.image.size.height }
         }
     }
 
     private var processor: ImageProcessor {
         if let width, let height {
-            return ResizingImageProcessor(referenceSize: CGSize(width: width * scaleFactor, height: height * scaleFactor), mode: .aspectFill)
+            return DownsamplingImageProcessor(size: CGSize(width: width * scaleFactor, height: height * scaleFactor))
         } else if let width {
-            return ResizingImageProcessor(referenceSize: CGSize(width: width * scaleFactor, height: .greatestFiniteMagnitude), mode: .aspectFit)
+            return DownsamplingImageProcessor(size: CGSize(width: width * scaleFactor, height: .greatestFiniteMagnitude))
         } else if let height {
-            return ResizingImageProcessor(referenceSize: CGSize(width: .greatestFiniteMagnitude, height: height * scaleFactor), mode: .aspectFit)
+            return DownsamplingImageProcessor(size: CGSize(width: .greatestFiniteMagnitude, height: height * scaleFactor))
         } else {
             return DefaultImageProcessor.default
         }

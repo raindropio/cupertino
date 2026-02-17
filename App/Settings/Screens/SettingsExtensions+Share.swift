@@ -63,7 +63,7 @@ extension SettingsExtensions.Share {
                                 }
                             }
                     }
-                        .onChange(of: collection) { _ in
+                        .onChange(of: collection) {
                             pick = false
                         }
                 }

@@ -30,7 +30,7 @@ struct Folder: View {
             #if canImport(UIKit)
             .scopeEditMode()
             #endif
-            .onChange(of: find) { _ in
+            .onChange(of: find) {
                 selection = .init()
             }
             .dropProvider()

@@ -31,8 +31,8 @@ fileprivate struct AutoDismiss: ViewModifier {
     @Binding var selection: FindBy?
     
     func body(content: Content) -> some View {
-        content.onChange(of: selection) {
-            if $0?.collectionId == 0, $0?.text.isEmpty == false {
+        content.onChange(of: selection) { old, new in
+            if new?.collectionId == 0, new?.text.isEmpty == false {
                 //make sure to run async, otherwise crash
                 Task {
                     dismissSearch()

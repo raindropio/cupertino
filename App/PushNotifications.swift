@@ -10,7 +10,7 @@ struct PushNotifications: ViewModifier {
    
     func body(content: Content) -> some View {
         content
-            .onChange(of: user.state.me) { _ in
+            .onChange(of: user.state.me) {
                 FCM.shared.reloadToken()
             }
             .onFCMToken { token in
