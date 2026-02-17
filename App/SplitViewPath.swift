@@ -19,6 +19,18 @@ extension SplitViewPath {
 }
 
 extension SplitViewPath {
+    var lastFind: FindBy? {
+        for screen in detail.reversed() {
+            switch screen {
+            case .find(let find), .preview(let find, _):
+                return find
+            default:
+                continue
+            }
+        }
+        return sidebar
+    }
+    
     var preferredCompactColumn: NavigationSplitViewColumn {
         if sidebar != nil || !detail.isEmpty { return .detail }
         return .sidebar

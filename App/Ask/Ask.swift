@@ -8,9 +8,21 @@ struct Ask: View {
     @Environment(\.openURL) private var openURL
     @Environment(\.horizontalSizeClass) private var horizontalSizeClass
     @Environment(\.dismiss) private var dismiss
-    private let aiChat = URL(string: "https://beta-ai.raindrop.io/ai?closable=true")!
-
     @Binding var path: SplitViewPath
+
+    private var aiChat: URL {
+        var components = URLComponents(string: "https://beta-ai.raindrop.io/ai")!
+        components.queryItems = [.init(name: "closable", value: "true")]
+
+        switch path.detail.last {
+        case .preview(_, let id), .cached(let id):
+            components.queryItems?.append(.init(name: "raindropId", value: String(id)))
+        default:
+            break
+        }
+
+        return components.url!
+    }
 
     var body: some View {
         WebView(

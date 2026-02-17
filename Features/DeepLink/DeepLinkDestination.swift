@@ -7,6 +7,7 @@ public enum DeepLinkDestination: Equatable {
         case open(FindBy, Raindrop.ID)
         case preview(FindBy, Raindrop.ID)
         case cache(Raindrop.ID)
+        case ask(Raindrop.ID)
     }
     
     case collection(C)

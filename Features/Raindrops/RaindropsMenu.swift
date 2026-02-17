@@ -44,6 +44,10 @@ fileprivate struct _Menu: View {
                         Label("Open", systemImage: "safari")
                     }
                     
+                    DeepLink(.raindrop(.ask(item.id))) {
+                        Label("Ask", systemImage: "sparkle")
+                    }
+                    
                     if item.file == nil {
                         DeepLink(.raindrop(.cache(item.id))) {
                             Label("Permanent copy", systemImage: "clock.arrow.circlepath")

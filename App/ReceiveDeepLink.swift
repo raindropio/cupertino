@@ -54,6 +54,10 @@ struct ReceiveDeepLink: ViewModifier {
                     
                 case .preview(let find, let id):
                     path.push(.preview(find, id))
+                    
+                case .ask(let id):
+                    path.push(.preview(path.lastFind ?? .init(), id))
+                    path.ask = true
                 }
                 
             case .find(let find):
