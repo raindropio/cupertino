@@ -35,10 +35,15 @@ struct SplitView: View {
                 Ask(path: $path)
                     .inspectorColumnWidth(min: 250, ideal: 450)
             }
-            //auto hide sidebar for ask
+            //auto hide sidebar / ask
             .onChange(of: path.ask) { _, next in
                 if next {
                     columnVisibility = .detailOnly
+                }
+            }
+            .onChange(of: columnVisibility) { _, next in
+                if next != .detailOnly && path.ask {
+                    path.ask = false
                 }
             }
             //split view specific
