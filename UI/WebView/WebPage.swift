@@ -75,6 +75,8 @@ public class WebPage: NSObject, ObservableObject {
     @Published var confirm: Confirm?
     @Published var prompt: Prompt?
 
+    var navigationDecisionHandler: ((WKNavigationAction, Bool) -> WKNavigationActionPolicy)?
+
     private func changed() {
         Task {
             await MainActor.run {

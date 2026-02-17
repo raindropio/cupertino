@@ -6,7 +6,7 @@ import Features
 struct SplitView: View {
     @State private var path = SplitViewPath()
     @SceneStorage("column-visibility") private var columnVisibility = NavigationSplitViewVisibility.automatic
-    
+
     @ViewBuilder
     private func screen(_ screen: SplitViewPath.Screen) -> some View {
         switch screen {
@@ -18,17 +18,29 @@ struct SplitView: View {
     }
 
     var body: some View {
-        NavigationSplitView(columnVisibility: $columnVisibility) {
+        NavigationSplitView(columnVisibility: $columnVisibility, preferredCompactColumn: .constant(path.preferredCompactColumn)) {
             SidebarScreen(selection: $path.sidebar)
                 .navigationSplitViewColumnWidth(min: 250, ideal: 450)
         } detail: {
             NavigationStack(path: $path.detail) {
-                if path.sidebar != nil {
-                    Folder(find: .init(get: { path.sidebar! }, set: { path.sidebar = $0 }))
-                        .navigationDestination(for: SplitViewPath.Screen.self, destination: screen)
+                Group {
+                    if path.sidebar != nil {
+                        Folder(find: .init(get: { path.sidebar! }, set: { path.sidebar = $0 }))
+                    }
                 }
+                .navigationDestination(for: SplitViewPath.Screen.self, destination: screen)
             }
         }
+            .inspector(isPresented: $path.ask){
+                Ask(path: $path)
+                    .inspectorColumnWidth(min: 250, ideal: 450)
+            }
+            //auto hide sidebar for ask
+            .onChange(of: path.ask) { _, next in
+                if next {
+                    columnVisibility = .detailOnly
+                }
+            }
             //split view specific
             .navigationSplitViewUnlockSize()
             .containerSizeClass()

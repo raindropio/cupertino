@@ -4,8 +4,11 @@ import UI
 import Features
 
 struct Preview: View {
+    @Environment(\.containerHorizontalSizeClass) private var horizontalSizeClass
+    @Environment(\.verticalSizeClass) private var verticalSizeClass
     @StateObject private var page = WebPage()
     @EnvironmentObject private var r: RaindropsStore
+    @EnvironmentObject private var dispatch: Dispatcher
     @AppStorage(ReaderOptions.StorageKey) private var reader = ReaderOptions()
     @State private var appearance = false
 
@@ -39,6 +42,7 @@ struct Preview: View {
     
     var body: some View {
         Browser(page: page, start: request)
+            .task { try? await dispatch(RaindropsAction.lookupById(id)) }
             .navigationTitle(title)
             .toolbar {
                 if !page.canGoBack, raindrop.type.readable {
@@ -48,6 +52,7 @@ struct Preview: View {
                         }
                         .popover(isPresented: $appearance, content: ReaderAppearance.init)
                     }
+                        .backport.sharedBackgroundVisibility(verticalSizeClass == .regular && horizontalSizeClass == .compact ? .hidden : .visible)
                 }
             }
     }

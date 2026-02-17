@@ -10,6 +10,7 @@ extension Browser {
         @EnvironmentObject private var dispatch: Dispatcher
         @Environment(\.dismiss) private var dismiss
         @Environment(\.openURL) private var openURL
+        @Environment(\.openDeepLink) private var openDeepLink
         @Environment(\.colorScheme) private var colorScheme
 
         @State private var collection = false
@@ -65,15 +66,29 @@ extension Browser.Toolbar: ViewModifier {
                         #endif
                 }
             }
+            .backport.sharedBackgroundVisibility(portrait ? .hidden : .visible)
+            
+            //share
+            ToolbarItem {
+                if raindrop.isNew, let url = page.url {
+                    ShareLink(item: url)
+                } else {
+                    ShareRaindropLink(raindrop)
+                        .equatable()
+                }
+            }
+                .backport.sharedBackgroundVisibility(portrait ? .hidden : .visible)
             
             Group {
+                if #available(iOS 26.0, *) {
+                    ToolbarSpacer(.flexible, placement: placement)
+                }
+                
                 ToolbarItemGroup(placement: placement) {
-                    if raindrop.isNew, let url = page.url {
-                        ShareLink(item: url)
-                    } else {
-                        ShareRaindropLink(raindrop)
-                            .equatable()
+                    Button("Ask", systemImage: "sparkle") {
+                        openDeepLink?(.ask)
                     }
+                        .tint(.pink)
                     
                     if #unavailable(iOS 26.0) {
                         Spacer()

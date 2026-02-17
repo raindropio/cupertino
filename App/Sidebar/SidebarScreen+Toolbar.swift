@@ -6,7 +6,8 @@ import Features
 extension SidebarScreen {
     struct Toolbar: ViewModifier {
         @Environment(\.containerHorizontalSizeClass) private var sizeClass
-        
+        @Environment(\.openDeepLink) private var openDeepLink
+
         private var addPlacement: ToolbarItemPlacement {
             if #available(iOS 26.0, *) {
                 .bottomBar
@@ -21,7 +22,17 @@ extension SidebarScreen {
             .meNavigationTitle()
             .navigationBarTitleDisplayMode(isPhone ? .automatic : .inline)
             .toolbar {
+                if sizeClass == .compact {
+                    ToolbarItem(placement: addPlacement) {
+                        Button("Ask", systemImage: "sparkle") {
+                            openDeepLink?(.ask)
+                        }
+                            .tint(.pink)
+                    }
+                }
+                    
                 if #available(iOS 26.0, *) {
+                    ToolbarSpacer(placement: .bottomBar)
                     DefaultToolbarItem(kind: .search, placement: .bottomBar)
                     ToolbarSpacer(placement: .bottomBar)
                 }

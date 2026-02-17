@@ -86,6 +86,7 @@ public enum RaindropsAction: ReduxAction {
     case moreFailed(FindBy, Int, Error)
     //single
     case lookup(URL)
+    case lookupById(Raindrop.ID)
     case loaded(Raindrop)
     case suggest(Raindrop)
     case suggested(URL, RaindropSuggestions)

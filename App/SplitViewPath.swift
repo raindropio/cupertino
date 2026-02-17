@@ -6,6 +6,7 @@ import Features
 struct SplitViewPath: Codable, Equatable {
     var sidebar: FindBy? = .init()
     var detail: [Screen] = []
+    var ask = false
 }
 
 extension SplitViewPath {
@@ -14,6 +15,13 @@ extension SplitViewPath {
         case preview(FindBy, Raindrop.ID)
         case cached(Raindrop.ID)
         case browse(URL)
+    }
+}
+
+extension SplitViewPath {
+    var preferredCompactColumn: NavigationSplitViewColumn {
+        if sidebar != nil || !detail.isEmpty { return .detail }
+        return .sidebar
     }
 }
 
@@ -30,7 +38,6 @@ extension SplitViewPath {
     }
     
     mutating func push(_ screen: Screen) {
-        if sidebar == nil { sidebar = .init() }
         if detail.last != screen {
             detail += [screen]
         }

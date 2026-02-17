@@ -3,8 +3,14 @@ import WebKit
 extension WebPage: WKUIDelegate {
     //window.open, etc
     public func webView(_ webView: WKWebView, createWebViewWith configuration: WKWebViewConfiguration, for navigationAction: WKNavigationAction, windowFeatures: WKWindowFeatures) -> WKWebView? {
-        if navigationAction.targetFrame == nil {
-            webView.load(navigationAction.request)
+        if let handler = navigationDecisionHandler {
+            if case .allow = handler(navigationAction, true), navigationAction.targetFrame == nil {
+                webView.load(navigationAction.request)
+            }
+        } else {
+            if navigationAction.targetFrame == nil {
+                webView.load(navigationAction.request)
+            }
         }
         return nil
     }

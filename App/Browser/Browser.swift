@@ -30,6 +30,7 @@ extension Browser {
 extension Browser: View {
     var body: some View {
         WebView(page, request: start)
+            .ignoresSafeArea(.all, edges: [.vertical])
             //raindrop
             .task(id: stored) { raindrop = stored }
             .task(id: page.url) { await lookup() }

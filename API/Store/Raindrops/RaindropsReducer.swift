@@ -134,6 +134,9 @@ extension RaindropsReducer {
             //Item
             case .lookup(let url):
                 return await lookup(state: state, url: url)
+
+            case .lookupById(let id):
+                return await lookupById(state: state, id: id)
                 
             case .suggest(let raindrop):
                 return await suggest(state: state, raindrop: raindrop)

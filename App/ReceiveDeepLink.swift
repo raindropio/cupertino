@@ -71,6 +71,9 @@ struct ReceiveDeepLink: ViewModifier {
                     NSApp.sendAction(Selector(("showSettingsWindow:")), to: nil, from: nil)
                     #endif
                 }
+                
+            case .ask:
+                path.ask = true
             }
         }
             #if os(iOS)

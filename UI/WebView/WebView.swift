@@ -7,18 +7,21 @@ public struct WebView {
     @Environment(\.horizontalSizeClass) private var horizontalSizeClass
     var request: WebRequest
     var userAgent: String?
+    var pullToRefresh: Bool
+    var autoAdjustInset: Bool
     
-    public init(_ page: WebPage, request: WebRequest, userAgent: String? = nil) {
+    public init(_ page: WebPage, request: WebRequest, userAgent: String? = nil, refreshable: Bool? = true, autoAdjustInset: Bool? = true) {
         self.page = page
         self.request = request
         self.userAgent = userAgent
+        self.pullToRefresh = refreshable ?? true
+        self.autoAdjustInset = autoAdjustInset ?? true
     }
 }
 
 extension WebView: View {
     public var body: some View {
-        Holder(page: page, request: request, userAgent: userAgent)
-            .ignoresSafeArea(.all, edges: [.vertical])
+        Holder(page: page, request: request, userAgent: userAgent, pullToRefresh: pullToRefresh, autoAdjustInset: autoAdjustInset)
             //progress bar
             .overlay(alignment: .topLeading) {
                 ProgressBar(value: page.progress)
@@ -40,10 +43,13 @@ extension WebView: View {
 extension WebView {
     struct Holder {
         @StateObject private var prev = Prev()
+        @Environment(\.webViewNavigationDecision) private var navigationDecision
 
         @ObservedObject var page: WebPage
         var request: WebRequest
         var userAgent: String?
+        var pullToRefresh: Bool
+        var autoAdjustInset: Bool
                 
         class Prev: ObservableObject {
             var request: WebRequest?
@@ -73,13 +79,22 @@ extension WebView {
             //behaviour
             view.allowsBackForwardNavigationGestures = true
             #if canImport(UIKit)
-            view.scrollView.contentInsetAdjustmentBehavior = .automatic
+            view.scrollView.contentInsetAdjustmentBehavior = autoAdjustInset ? .automatic : .never
             #endif
             
+            //disable pull to refresh
+            if !pullToRefresh {
+                view.scrollView.refreshControl = nil
+            }
+            
+            context.coordinator.navigationDecisionHandler = navigationDecision
+
             return view
         }
         
         func updateView(_ view: NativeWebView, context: Context) {
+            context.coordinator.navigationDecisionHandler = navigationDecision
+
             if prev.request?.url.absoluteURL != request.url.absoluteURL {
                 context.coordinator.load(request)
                 prev.request = request

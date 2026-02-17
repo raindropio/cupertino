@@ -1,6 +1,19 @@
 import WebKit
 
 extension WebPage: WKNavigationDelegate {
+    //decide navigation
+    public func webView(
+        _ webView: WKWebView,
+        decidePolicyFor navigationAction: WKNavigationAction,
+        decisionHandler: @escaping (WKNavigationActionPolicy) -> Void
+    ) {
+        guard let handler = navigationDecisionHandler else {
+            decisionHandler(.allow)
+            return
+        }
+        decisionHandler(handler(navigationAction, false))
+    }
+
     //start
     public func webView(_ webView: WKWebView, didStartProvisionalNavigation navigation: WKNavigation!) {
         self.error = nil
@@ -42,9 +55,17 @@ extension WebPage: WKNavigationDelegate {
         webView.scrollView.refreshControl?.endRefreshing()
         
         //fix inset issue on some websites
-        webView.scrollView.contentInset.top = 1
-        webView.scrollView.contentInset.top = 0
+        if webView.scrollView.contentInsetAdjustmentBehavior != .never {
+            webView.scrollView.contentInset.top = 1
+            webView.scrollView.contentInset.top = 0
+        }
         #endif
+        
+        //allow auto focus fields
+        Task {
+            try? await Task.sleep(nanoseconds: 1_000_000)
+            webView.becomeFirstResponder()
+        }
     }
     
     //error

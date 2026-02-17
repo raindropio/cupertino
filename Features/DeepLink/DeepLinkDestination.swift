@@ -20,4 +20,6 @@ public enum DeepLinkDestination: Equatable {
     public enum S: Equatable {
         case extensions
     }
+    
+    case ask
 }

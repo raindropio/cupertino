@@ -28,17 +28,20 @@ fileprivate struct AB: ViewModifier {
         
         content
             #if canImport(UIKit)
-            .overlay(alignment: .bottomTrailing) {
+            .toolbar {
                 if collection != -99, !isEditing, !isSearching {
-                    OptionalPasteButton(
-                        supportedContentTypes: types,
-                        payloadAction: add
-                    )
-                        .circlePasteButton()
-                        .transition(.opacity)
-                        .padding(.horizontal, 24)
-                        .padding(.vertical, 24)
-                        .ignoresSafeArea(.keyboard)
+                    if #available(iOS 26.0, *) {
+                        ToolbarSpacer(placement: .bottomBar)
+                    }
+                    
+                    ToolbarItem(placement: .bottomBar) {
+                        OptionalPasteButton(
+                            supportedContentTypes: types,
+                            payloadAction: add
+                        )
+                            .circlePasteButton()
+                            .transition(.opacity)
+                    }
                 }
             }
             #else

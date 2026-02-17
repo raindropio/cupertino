@@ -21,12 +21,12 @@ struct Folder: View {
                 LoadMoreRaindropsButton(find)
             }
         }
+            .pasteCommands(to: find.collectionId)
             .modifier(SearchBar(find: $find))
             .backport.searchPresentationToolbarBehavior(.avoidHidingContent)
             .modifier(Title(find: find))
             .modifier(Toolbar(find: $find, selection: $selection))
             .raindropSheets()
-            .pasteCommands(to: find.collectionId)
             #if canImport(UIKit)
             .scopeEditMode()
             #endif

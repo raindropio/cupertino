@@ -2,36 +2,52 @@ import SwiftUI
 import UI
 import API
 import Features
+import Backport
 
 extension Folder.Toolbar {
     struct Regular: ViewModifier {
         @EnvironmentObject private var dispatch: Dispatcher
         @Environment(\.containerHorizontalSizeClass) private var sizeClass
+        @Environment(\.openDeepLink) private var openDeepLink
         @IsEditing private var isEditing
         @State private var showFilterComposer = false
 
         @Binding var find: FindBy
         var pick: RaindropsPick
         var total: Int
-
-        private var addPlacement: ToolbarItemPlacement {
+        
+        private var primaryActionsPlacement: ToolbarItemPlacement {
             if #available(iOS 26.0, *) {
-                .bottomBar
+                if sizeClass == .regular {
+                    .primaryAction
+                } else {
+                    .bottomBar
+                }
             } else {
-                .automatic
+                .primaryAction
             }
         }
         
         func body(content: Content) -> some View {
             content
                 .toolbar {
+                    if !isEditing {
+                        ToolbarItem(placement: primaryActionsPlacement) {
+                            Button("Ask", systemImage: "sparkle") {
+                                openDeepLink?(.ask)
+                            }
+                                .tint(.pink)
+                        }
+                    }
+                        
                     if #available(iOS 26.0, *) {
-                        DefaultToolbarItem(kind: .search, placement: .bottomBar)
-                        ToolbarSpacer(placement: .bottomBar)
+                        ToolbarSpacer(placement: primaryActionsPlacement)
+                        DefaultToolbarItem(kind: .search, placement: primaryActionsPlacement)
+                        ToolbarSpacer(placement: primaryActionsPlacement)
                     }
                     
                     if !isEditing {
-                        ToolbarItem(placement: addPlacement) {
+                        ToolbarItem(placement: primaryActionsPlacement) {
                             AddButton(collection: find.collectionId)
                                 .tint(.accentColor)
                         }

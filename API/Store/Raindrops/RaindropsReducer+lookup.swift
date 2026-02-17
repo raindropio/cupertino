@@ -7,7 +7,17 @@ extension RaindropsReducer {
             id = try? await rest.raindropGetId(url: url)
         }
         guard let id else { return nil }
-        
+
+        return await fetchById(id: id)
+    }
+
+    func lookupById(state: S, id: Raindrop.ID) async -> ReduxAction? {
+        guard state.item(id) == nil else { return nil }
+
+        return await fetchById(id: id)
+    }
+
+    private func fetchById(id: Raindrop.ID) async -> ReduxAction? {
         do {
             let item = try await rest.raindropGet(id: id)
             if let item {

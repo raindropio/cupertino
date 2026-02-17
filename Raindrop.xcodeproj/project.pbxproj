@@ -104,6 +104,8 @@
 		76BFE36F291E9F6B00DE9DB2 /* SplitViewPath.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76BFE36A291E9F6B00DE9DB2 /* SplitViewPath.swift */; };
 		76BFE370291E9F6B00DE9DB2 /* SettingsPath.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76BFE36B291E9F6B00DE9DB2 /* SettingsPath.swift */; };
 		76BFE371291E9F6B00DE9DB2 /* AuthScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76BFE36C291E9F6B00DE9DB2 /* AuthScreen.swift */; };
+		76C1358F2F3F7DD6005446F4 /* Ask.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76C1358E2F3F7DD4005446F4 /* Ask.swift */; };
+		76C135912F3F7DE2005446F4 /* Ask+Event.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76C135902F3F7DE0005446F4 /* Ask+Event.swift */; };
 		76D880DF2930E1FB00D43AD9 /* ExtensionController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76D880DE2930E1FB00D43AD9 /* ExtensionController.swift */; };
 		76D880E62930E1FB00D43AD9 /* Share iOS.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = 76D880DC2930E1FB00D43AD9 /* Share iOS.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		76DD83A82E6F396800AE2973 /* AppIcon.icon in Resources */ = {isa = PBXBuildFile; fileRef = 76DD83A72E6F396800AE2973 /* AppIcon.icon */; };
@@ -259,6 +261,8 @@
 		76BFE36A291E9F6B00DE9DB2 /* SplitViewPath.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SplitViewPath.swift; sourceTree = "<group>"; };
 		76BFE36B291E9F6B00DE9DB2 /* SettingsPath.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsPath.swift; sourceTree = "<group>"; };
 		76BFE36C291E9F6B00DE9DB2 /* AuthScreen.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuthScreen.swift; sourceTree = "<group>"; };
+		76C1358E2F3F7DD4005446F4 /* Ask.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Ask.swift; sourceTree = "<group>"; };
+		76C135902F3F7DE0005446F4 /* Ask+Event.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Ask+Event.swift"; sourceTree = "<group>"; };
 		76D00FB329FBD76A005BDD38 /* SignInWithGoogle */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = SignInWithGoogle; sourceTree = "<group>"; };
 		76D880DC2930E1FB00D43AD9 /* Share iOS.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = "Share iOS.appex"; sourceTree = BUILT_PRODUCTS_DIR; };
 		76D880DE2930E1FB00D43AD9 /* ExtensionController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtensionController.swift; sourceTree = "<group>"; };
@@ -489,6 +493,7 @@
 			children = (
 				767AC1102925148D00766998 /* Auth */,
 				76F05F0A293F89D4003CCD75 /* Add */,
+				76C1358B2F3F7CB4005446F4 /* Ask */,
 				765F23FC2991408C00282298 /* Browser */,
 				769056EA2975364E0090C1EF /* Find */,
 				767AC111292514C500766998 /* Sidebar */,
@@ -563,6 +568,15 @@
 				76D880DE2930E1FB00D43AD9 /* ExtensionController.swift */,
 			);
 			path = Modules;
+			sourceTree = "<group>";
+		};
+		76C1358B2F3F7CB4005446F4 /* Ask */ = {
+			isa = PBXGroup;
+			children = (
+				76C1358E2F3F7DD4005446F4 /* Ask.swift */,
+				76C135902F3F7DE0005446F4 /* Ask+Event.swift */,
+			);
+			path = Ask;
 			sourceTree = "<group>";
 		};
 		76D880DD2930E1FB00D43AD9 /* Extension */ = {
@@ -975,6 +989,8 @@
 				7673C0AA295DD3B8002D4229 /* SidebarScreen+Toolbar.swift in Sources */,
 				769056F62975499D0090C1EF /* Nesteds.swift in Sources */,
 				768CA1FB294CC17800AD7E62 /* AuthLogIn.swift in Sources */,
+				76C1358F2F3F7DD6005446F4 /* Ask.swift in Sources */,
+				76C135912F3F7DE2005446F4 /* Ask+Event.swift in Sources */,
 				768CA1FF2950420D00AD7E62 /* AuthContinueWith.swift in Sources */,
 				765F23FE2991409500282298 /* Browser.swift in Sources */,
 				761F6C3229A3ADA0002919BC /* Preview.swift in Sources */,
@@ -1433,7 +1449,7 @@
 				"INFOPLIST_KEY_UILaunchScreen_Generation[sdk=iphonesimulator*]" = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				IPHONEOS_DEPLOYMENT_TARGET = 16.4;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.6;
 				LD_RUNPATH_SEARCH_PATHS = "@executable_path/Frameworks";
 				"LD_RUNPATH_SEARCH_PATHS[sdk=macosx*]" = "@executable_path/../Frameworks";
 				MACOSX_DEPLOYMENT_TARGET = 13.0;
@@ -1478,7 +1494,7 @@
 				"INFOPLIST_KEY_UILaunchScreen_Generation[sdk=iphonesimulator*]" = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				IPHONEOS_DEPLOYMENT_TARGET = 16.4;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.6;
 				LD_RUNPATH_SEARCH_PATHS = "@executable_path/Frameworks";
 				"LD_RUNPATH_SEARCH_PATHS[sdk=macosx*]" = "@executable_path/../Frameworks";
 				MACOSX_DEPLOYMENT_TARGET = 13.0;
@@ -1509,7 +1525,7 @@
 				INFOPLIST_FILE = Extension/Action.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = "Add to Unsorted";
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
-				IPHONEOS_DEPLOYMENT_TARGET = 16.4;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.6;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -1544,7 +1560,7 @@
 				INFOPLIST_FILE = Extension/Action.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = "Add to Unsorted";
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
-				IPHONEOS_DEPLOYMENT_TARGET = 16.4;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.6;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -1577,7 +1593,7 @@
 				INFOPLIST_FILE = Extension/Share.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = Raindrop.io;
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
-				IPHONEOS_DEPLOYMENT_TARGET = 16.4;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.6;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -1609,7 +1625,7 @@
 				INFOPLIST_FILE = Extension/Share.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = Raindrop.io;
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
-				IPHONEOS_DEPLOYMENT_TARGET = 16.4;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.6;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
