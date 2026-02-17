@@ -2,7 +2,7 @@ import SwiftUI
 
 public extension View {
     func onFCMMessage(
-        @_inheritActorContext _ action: @Sendable @escaping (_ message: [AnyHashable : Any]) -> Void
+        _ action: @Sendable @escaping (_ message: [AnyHashable : Any]) -> Void
     ) -> some View {
         modifier(OnFCMMessageModifier(action: action))
     }

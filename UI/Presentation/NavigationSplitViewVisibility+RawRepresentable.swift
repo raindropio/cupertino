@@ -6,7 +6,7 @@ fileprivate let mapping: [Int: NavigationSplitViewVisibility] = [
     3: .doubleColumn
 ]
 
-extension NavigationSplitViewVisibility: RawRepresentable {
+extension NavigationSplitViewVisibility: @retroactive RawRepresentable {
     public init?(rawValue: Int) {
         self = mapping[rawValue] ?? .automatic
     }

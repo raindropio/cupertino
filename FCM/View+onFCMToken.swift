@@ -2,7 +2,7 @@ import SwiftUI
 
 public extension View {
     func onFCMToken(
-        @_inheritActorContext _ action: @Sendable @escaping (_ token: String) -> Void
+        _ action: @Sendable @escaping (_ token: String) -> Void
     ) -> some View {
         modifier(OnFCMToken(action: action))
     }

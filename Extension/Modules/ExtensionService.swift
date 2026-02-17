@@ -15,7 +15,6 @@ final class ExtensionService: ObservableObject {
         Task { await load() }
     }
     
-    @Sendable
     func load() async {
         defer { loading = false }
         
