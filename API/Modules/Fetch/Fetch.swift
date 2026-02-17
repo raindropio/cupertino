@@ -4,9 +4,11 @@ private let session = URLSession(configuration: {
     let configuration = URLSessionConfiguration.default
     configuration.timeoutIntervalForRequest = 30
     configuration.timeoutIntervalForResource = 300 // 5 min for large uploads
-    configuration.waitsForConnectivity = true
+    configuration.waitsForConnectivity = false
     return configuration
 }())
+
+private let inFlightCache = InFlightCache()
 
 final class DefaultFetchDelegate: FetchDelegate {
     let decoder = JSONDecoder()
@@ -214,7 +216,13 @@ extension Fetch {
         var result: (Data, URLResponse)
 
         do {
-            result = try await session.data(for: req)
+            if req.httpMethod == "GET" {
+                result = try await inFlightCache.deduplicated(for: url) {
+                    try await session.data(for: req)
+                }
+            } else {
+                result = try await session.data(for: req)
+            }
 
             #if DEBUG
             let elapsed = Date().timeIntervalSince(start)

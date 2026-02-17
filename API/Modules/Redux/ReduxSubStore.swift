@@ -4,9 +4,10 @@ actor ReduxEngine<R: Reducer> {
     let reducer = R()
     private(set) var state: R.S = R.S()
 
-    func reduce(_ action: ReduxAction) throws -> (R.S, ReduxAction?, R) {
+    func reduce(_ action: ReduxAction) throws -> (R.S, ReduxAction?, R, Bool) {
+        let oldState = state
         let next = try reducer.reduce(state: &state, action: action)
-        return (state, next, reducer)
+        return (state, next, reducer, oldState != state)
     }
 
     func current() -> (R.S, R) {
@@ -23,9 +24,11 @@ public class ReduxSubStore<R: Reducer>: ObservableObject {
         var nextActions: [ReduxAction] = []
 
         if let action = some as? ReduxAction {
-            let (newState, nextFromReduce, reducer) = try await engine.reduce(action)
+            let (newState, nextFromReduce, reducer, stateChanged) = try await engine.reduce(action)
 
-            await MainActor.run { self.state = newState }
+            if stateChanged {
+                await MainActor.run { self.state = newState }
+            }
 
             if let next = nextFromReduce {
                 nextActions.append(next)
