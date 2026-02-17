@@ -22,20 +22,25 @@ public final class Store: ObservableObject, ReduxStore {
     public func dispatch(_ some: Any) async throws {
         do {
             // Sequential: Log → Auth → User (dependency chain for auth/cookies)
-            try await process(some, store: \.log)
-            try await process(some, store: \.auth)
-            try await process(some, store: \.user)
+            try await process(some, store: log)
+            try await process(some, store: auth)
+            try await process(some, store: user)
 
             // Parallel: remaining stores (all have valid auth state)
             try await withThrowingTaskGroup(of: Void.self) { group in
-                group.addTask { try await self.process(some, store: \.raindrops) }
-                group.addTask { try await self.process(some, store: \.collections) }
-                group.addTask { try await self.process(some, store: \.collaborators) }
-                group.addTask { try await self.process(some, store: \.config) }
-                group.addTask { try await self.process(some, store: \.filters) }
-                group.addTask { try await self.process(some, store: \.icons) }
-                group.addTask { try await self.process(some, store: \.recent) }
-                group.addTask { try await self.process(some, store: \.subscription) }
+                func enqueue(_ store: ReduxSubStore<some Reducer>) {
+                    group.addTask { try await self.process(some, store: store) }
+                }
+
+                enqueue(raindrops)
+                enqueue(collections)
+                enqueue(collaborators)
+                enqueue(config)
+                enqueue(filters)
+                enqueue(icons)
+                enqueue(recent)
+                enqueue(subscription)
+
                 try await group.waitForAll()
             }
         } catch {
