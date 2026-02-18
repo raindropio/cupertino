@@ -46,6 +46,10 @@ extension RaindropsReducer {
                         }
                     }
                     
+                case .deleteTags(let tags):
+                    let lower = Set(tags.map { $0.lowercased() })
+                    state.items[id]?.tags.removeAll { lower.contains($0.lowercased()) }
+
                 case .removeTags:
                     state.items[id]?.tags = []
                 }

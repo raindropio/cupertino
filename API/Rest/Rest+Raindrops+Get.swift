@@ -21,6 +21,19 @@ extension Rest {
     }
 }
 
+//MARK: - Get many by IDs
+extension Rest {
+    public func raindropsGet(ids: [Raindrop.ID]) async throws -> [Raindrop] {
+        guard !ids.isEmpty else { return [] }
+        let idsString = ids.map(String.init).joined(separator: ",")
+        let res: ItemsResponse<Raindrop> = try await fetch.get(
+            "raindrops/0",
+            query: [.init(name: "ids", value: idsString)]
+        )
+        return res.items
+    }
+}
+
 //MARK: - Get single
 extension Rest {
     public func raindropGet(id: Raindrop.ID) async throws -> Raindrop? {
