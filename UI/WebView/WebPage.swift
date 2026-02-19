@@ -111,6 +111,8 @@ extension WebPage {
     public func reload() { view?.reload() }
     public func goBack() { view?.goBack() }
     public func goForward() { view?.goForward() }
+    public func focus() { view?.becomeFirstResponder() }
+    public func blur() { view?.resignFirstResponder() }
     
     @MainActor
     public func evaluateJavaScript(_ string: String) async throws { try await view?.evaluateJavaScript(string) }

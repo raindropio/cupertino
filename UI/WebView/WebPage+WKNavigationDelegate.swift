@@ -60,12 +60,6 @@ extension WebPage: WKNavigationDelegate {
             webView.scrollView.contentInset.top = 0
         }
         #endif
-        
-        //allow auto focus fields
-        Task {
-            try? await Task.sleep(nanoseconds: 1_000_000)
-            webView.becomeFirstResponder()
-        }
     }
     
     //error
