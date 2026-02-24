@@ -2,11 +2,11 @@ import SwiftUI
 import API
 
 #if canImport(UIKit)
-@objc(ExtensionController)
-class ExtensionController: UIViewController, UIAdaptivePresentationControllerDelegate {
+@objc(ShareViewController)
+class ShareViewController: UIViewController, UIAdaptivePresentationControllerDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+
         //Appearance
         view.backgroundColor = .clear
         #if os(iOS)
@@ -27,10 +27,10 @@ class ExtensionController: UIViewController, UIAdaptivePresentationControllerDel
             ui.view.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             ui.view.centerYAnchor.constraint(equalTo: view.centerYAnchor)
         ])
-        
+
         presentationController!.delegate = self
     }
-    
+
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         makeSheetTransparent()
@@ -53,8 +53,8 @@ class ExtensionController: UIViewController, UIAdaptivePresentationControllerDel
    }
 }
 #else
-@objc(ExtensionController)
-class ExtensionController: NSViewController {
+@objc(ShareViewController)
+class ShareViewController: NSViewController {
     override func loadView() {
         self.view = NSHostingView(rootView: ExtensionUI(service: .init(self.extensionContext)))
     }
