@@ -51,7 +51,7 @@ extension RaindropItems { fileprivate struct Memorized: View {
         DataSource(
             items,
             content: RaindropItem.init,
-            reorder: sort == .sort ? reorder : nil,
+            reorder: sort == .sort ? Optional(reorder) : nil,
             insert: insert,
             insertOf: find.isSearching ? [] : addTypes,
             loadMore: loadMore

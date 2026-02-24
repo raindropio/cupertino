@@ -72,7 +72,7 @@ extension Receive {
                 }
             }
                 .presentationDetents(UIDevice.current.userInterfaceIdiom == .phone ? [.fraction(0.75), .large] : [.large])
-                .presentationDragIndicator(.hidden)
+                .presentationBackground(.regularMaterial)
         }
     }
 }

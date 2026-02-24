@@ -32,14 +32,14 @@ public final class Store: ObservableObject, ReduxStore {
                     group.addTask { try await self.process(some, store: store) }
                 }
 
-                enqueue(raindrops)
-                enqueue(collections)
-                enqueue(collaborators)
-                enqueue(config)
-                enqueue(filters)
-                enqueue(icons)
-                enqueue(recent)
-                enqueue(subscription)
+                await enqueue(raindrops)
+                await enqueue(collections)
+                await enqueue(collaborators)
+                await enqueue(config)
+                await enqueue(filters)
+                await enqueue(icons)
+                await enqueue(recent)
+                await enqueue(subscription)
 
                 try await group.waitForAll()
             }

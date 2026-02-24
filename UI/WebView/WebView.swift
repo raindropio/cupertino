@@ -41,7 +41,7 @@ extension WebView: View {
 }
 
 extension WebView {
-    struct Holder {
+    @MainActor struct Holder {
         @StateObject private var prev = Prev()
         @Environment(\.webViewNavigationDecision) private var navigationDecision
 

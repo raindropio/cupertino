@@ -38,6 +38,7 @@ extension TagsList {
             }
     }
     
+    @MainActor
     private var suggestions: [Filter] {
         f.state.tags()
             .filter {
