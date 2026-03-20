@@ -25,6 +25,8 @@ public class Dispatcher: ObservableObject {
     //sync version
     @MainActor
     public func sync(_ action: ReduxAction) {
+        //strong capture to survive view teardown
+        let store = self.store
         Task(priority: .userInitiated) {
             try? await store?.dispatch(action)
         }
