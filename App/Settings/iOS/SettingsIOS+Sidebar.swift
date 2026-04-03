@@ -50,6 +50,11 @@ extension SettingsIOS {
                                 .badge(browser.title)
                         }
                             .listItemTint(.cyan)
+
+                        Link(destination: URL(string: UIApplication.openSettingsURLString)!) {
+                            Label("Language", systemImage: "globe").tint(.primary)
+                        }
+                            .listItemTint(.green)
                     }
                     
                     Section {

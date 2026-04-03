@@ -27,6 +27,20 @@ public enum KeychainCookies {
         }
     }
 
+    public static func cleanup() {
+        let query = [
+            kSecClass: kSecClassGenericPassword,
+            kSecAttrAccount: keychainKeyName,
+            kSecAttrAccessGroup: Constants.keychainGroupName
+        ] as [CFString : Any] as CFDictionary
+
+        SecItemDelete(query)
+
+        HTTPCookieStorage.shared.cookies?.forEach {
+            HTTPCookieStorage.shared.deleteCookie($0)
+        }
+    }
+
     public static func persist() {
         let cookies = (HTTPCookieStorage.shared.cookies ?? []).filter {
             $0.domain.contains(Rest.base.root.host!) ||

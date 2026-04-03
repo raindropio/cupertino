@@ -1,5 +1,6 @@
 extension AuthReducer {
     func logout(state: S) async throws {
-        try await rest.authLogout()
+        try? await rest.authLogout()
+        cleanup()
     }
 }
