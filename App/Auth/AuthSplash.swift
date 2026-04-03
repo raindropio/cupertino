@@ -21,27 +21,27 @@ struct AuthSplash: View {
             } description: {
                 Text("Group related items within the same context. Remove duplicate & broken links")
             }
-            
+
             Slide(
-                title: "Search by Content",
-                colors: [.blue, .green]
+                title: "Build Your Knowledge Base",
+                colors: [.red, .pink]
             ) {
-                Image(systemName: "sparkle.magnifyingglass")
+                Image(systemName: "sparkles")
             } description: {
-                Text("Search through the entire content of a pages you’ve saved")
+                Text("Ask questions, get summaries, and organize — all powered by AI")
             }
-            
+
             Slide(
-                title: "Import & Sync Favorites",
+                title: "Never Forget a Thing",
                 colors: [.pink, .indigo]
             ) {
-                Image(systemName: "square.and.arrow.down")
+                Image(systemName: "bell")
             } description: {
-                Text("Transfer existing bookmarks & automatically sync favorites from 1000+ websites")
+                Text("Saved something for later? Reminders resurface your bookmarks at the right time")
             }
-            
+
             Slide(
-                title: "Web & Desktop App",
+                title: "Access from Any Device",
                 colors: [.green, .teal]
             ) {
                 Image(systemName: "laptopcomputer.and.iphone")

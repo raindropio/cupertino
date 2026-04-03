@@ -21,10 +21,10 @@ extension RaindropForm {
                         .buttonStyle(.borderless)
                         .tint(.red)
                 } footer: {
-                    (
-                        Text("Created ") + Text(raindrop.created, formatter: .shortDateTime) + Text("\n") +
-                        Text("Last modified ") + Text(raindrop.lastUpdate, formatter: .shortDateTime)
-                    )
+                    VStack {
+                        Text("Created \(raindrop.created, formatter: .shortDateTime)")
+                        Text("Last modified \(raindrop.lastUpdate, formatter: .shortDateTime)")
+                    }
                     .fixedSize()
                     .frame(maxWidth: .infinity)
                     .multilineTextAlignment(.center)

@@ -13,14 +13,14 @@ struct ProFaq: View {
         }
         
         DisclosureGroup("Do you have monthly and yearly billing options?") {
-            Text("Yes! We offer either monthly or yearly billing options. The yearly billing option is always cheaper (usually ~20% discount).")
+            Text("Yes! We offer either monthly or yearly billing options. The yearly billing option is always cheaper (usually ~\("20%") discount).")
         }
         
         DisclosureGroup("What happens if I cancel my paid plan?") {
             Text(" - Cloud backup will be stopped\n") +
             Text(" - New file uploads limited to 100 Mb per month\n") +
-            Text(" - Permanent copies become unaccessible and could be removed in future\n") +
-            Text(" - Full-text search stop working")
+            Text(" - Permanent copies become inaccessible and could be removed in future\n") +
+            Text(" - Full-text search stops working")
         }
     }
 }

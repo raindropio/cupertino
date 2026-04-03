@@ -23,12 +23,28 @@ public struct ConfirmButton<L: View, A: View> {
 }
 
 extension ConfirmButton where L == Text {
-    public init<S>(
-        _ title: S,
+    public init(
+        _ title: LocalizedStringKey,
         message: String = "",
         role: ButtonRole? = nil,
         @ViewBuilder actions: @escaping () -> A
-    ) where S : StringProtocol {
+    ) {
+        self.label = {
+            Text(title, bundle: .main)
+        }
+        self.message = message
+        self.role = role
+        self.actions = actions
+        self.confirm = false
+    }
+
+    @_disfavoredOverload
+    public init(
+        _ title: String,
+        message: String = "",
+        role: ButtonRole? = nil,
+        @ViewBuilder actions: @escaping () -> A
+    ) {
         self.label = {
             Text(title)
         }

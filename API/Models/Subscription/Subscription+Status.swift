@@ -10,11 +10,11 @@ extension Subscription {
         
         public var title: String {
             switch self {
-            case .active: return "Active"
-            case .payment_failed: return "Payment failed"
-            case .canceled: return "Canceled"
-            case .deactivated: return "Deactivated"
-            case .unknown: return "Unknown"
+            case .active: return String(localized: "Active")
+            case .payment_failed: return String(localized: "Payment failed")
+            case .canceled: return String(localized: "Canceled")
+            case .deactivated: return String(localized: "Deactivated")
+            case .unknown: return String(localized: "Unknown")
             }
         }
         

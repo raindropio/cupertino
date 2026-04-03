@@ -5,25 +5,25 @@ public enum RaindropType: String, Codable, CaseIterable {
     
     public var title: String {
         switch self {
-        case .link: return "Links"
-        case .article: return "Articles"
-        case .image: return "Images"
-        case .video: return "Video"
-        case .audio: return "Audio"
-        case .document: return "Documents"
-        case .book: return "Books"
+        case .link: return String(localized: "Links")
+        case .article: return String(localized: "Articles")
+        case .image: return String(localized: "Images")
+        case .video: return String(localized: "Video")
+        case .audio: return String(localized: "Audio")
+        case .document: return String(localized: "Documents")
+        case .book: return String(localized: "Books")
         }
     }
-    
+
     public var single: String {
         switch self {
-        case .link: return "Link"
-        case .article: return "Article"
-        case .image: return "Image"
-        case .video: return "Video"
-        case .audio: return "Audio"
-        case .document: return "Document"
-        case .book: return "Book"
+        case .link: return String(localized: "Link")
+        case .article: return String(localized: "Article")
+        case .image: return String(localized: "Image")
+        case .video: return String(localized: "Video")
+        case .audio: return String(localized: "Audio")
+        case .document: return String(localized: "Document")
+        case .book: return String(localized: "Book")
         }
     }
     

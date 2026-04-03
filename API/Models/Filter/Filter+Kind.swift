@@ -33,15 +33,15 @@ extension Filter {
         
         public var title: String {
             switch self {
-            case .important: return "Favorites"
+            case .important: return String(localized: "Favorites")
             case .type(let type): return type.title
             case .created(let date): return CreatedDateFormatter.format(date)
-            case .reminder: return "Reminders"
-            case .highlights: return "Highlights"
-            case .broken: return "Broken links"
-            case .duplicate: return "Duplicates"
-            case .notag: return "Without tags"
-            case .file: return "Files"
+            case .reminder: return String(localized: "Reminders")
+            case .highlights: return String(localized: "Highlights")
+            case .broken: return String(localized: "Broken links")
+            case .duplicate: return String(localized: "Duplicates")
+            case .notag: return String(localized: "Without tags")
+            case .file: return String(localized: "Files")
             case .tag(let tag): return tag
             case .raindrop(let id): return "\(id)"
             }

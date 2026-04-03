@@ -7,7 +7,7 @@ enum IntentServiceError: Error, CustomLocalizedStringResourceConvertible {
 
     var localizedStringResource: LocalizedStringResource {
         switch self {
-        case .notAuthenticated: "Please log in to Raindrop.io first"
+        case .notAuthenticated: "Please log in first"
         case .bookmarkNotFound: "Bookmark not found"
         }
     }

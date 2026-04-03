@@ -8,10 +8,10 @@ public enum SortBy: Hashable, Codable {
     
     public var title: String {
         switch self {
-        case .score: return "Best matches"
-        case .sort: return "Manually"
-        case .created(let order): return order == .desc ? "New first" : "Old first"
-        case .title(let order): return order == .desc ? "Title (Z to A)" : "Title (A to Z)"
+        case .score: return String(localized: "Best matches")
+        case .sort: return String(localized: "Manually")
+        case .created(let order): return order == .desc ? String(localized: "New first") : String(localized: "Old first")
+        case .title(let order): return order == .desc ? String(localized: "Title (Z to A)") : String(localized: "Title (A to Z)")
         }
     }
     

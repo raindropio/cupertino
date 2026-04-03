@@ -1,6 +1,58 @@
 import SwiftUI
 
-//MARK: - Init
+//MARK: - Init (LocalizedStringKey)
+public func DisclosureSection<C: View>(
+    _ label: LocalizedStringKey,
+    expandable: Bool = true,
+    isExpanded: Binding<Bool>,
+    content: @escaping () -> C
+) -> some View {
+    _DisclosureSection(
+        isExpanded: isExpanded.wrappedValue,
+        content: content
+    ) {
+        _SectionHeader(expandable: expandable, isExpanded: isExpanded, label: Text(label, bundle: .main)) {}
+    }
+}
+
+public func DisclosureSection<C: View, A: View>(
+    _ label: LocalizedStringKey,
+    expandable: Bool = true,
+    isExpanded: Binding<Bool>,
+    content: @escaping () -> C,
+    actions: @escaping () -> A
+) -> some View {
+    _DisclosureSection(
+        isExpanded: isExpanded.wrappedValue,
+        content: content
+    ) {
+        _SectionHeader(expandable: expandable, isExpanded: isExpanded, label: Text(label, bundle: .main), actions: actions)
+    }
+}
+
+public func DisclosureSection<C: View, A: View>(
+    _ label: LocalizedStringKey,
+    expandable: Bool = true,
+    isExpanded: Bool,
+    toggle: @escaping () -> Void,
+    content: @escaping () -> C,
+    actions: @escaping () -> A
+) -> some View {
+    _DisclosureSection(
+        isExpanded: isExpanded,
+        content: content
+    ) {
+        _SectionHeader(
+            expandable: expandable,
+            isExpanded: .init { isExpanded } set: { _ in toggle() },
+            label: Text(label, bundle: .main),
+            actions: actions
+        )
+    }
+}
+
+//MARK: - Init (StringProtocol)
+@_disfavoredOverload
 public func DisclosureSection<L: StringProtocol, C: View>(
     _ label: L,
     expandable: Bool = true,
@@ -15,6 +67,7 @@ public func DisclosureSection<L: StringProtocol, C: View>(
     }
 }
 
+@_disfavoredOverload
 public func DisclosureSection<L: StringProtocol, C: View, A: View>(
     _ label: L,
     expandable: Bool = true,
@@ -30,6 +83,7 @@ public func DisclosureSection<L: StringProtocol, C: View, A: View>(
     }
 }
 
+@_disfavoredOverload
 public func DisclosureSection<L: StringProtocol, C: View, A: View>(
     _ label: L,
     expandable: Bool = true,
@@ -56,7 +110,7 @@ fileprivate struct _DisclosureSection<C: View, H: View>: View {
     var isExpanded: Bool
     var content: () -> C
     var header: () -> H
-    
+
     var body: some View {
         Section(content: {
             if isExpanded {
@@ -72,24 +126,24 @@ fileprivate struct _DisclosureSection<C: View, H: View>: View {
 #if os(macOS)
 fileprivate struct _SectionHeader<L: View, A: View>: View {
     @State private var hover = false
-    
+
     var expandable: Bool
     @Binding var isExpanded: Bool
     var label: L
     @ViewBuilder var actions: () -> A
-    
+
     var body: some View {
         HStack(spacing: 0) {
             label
-            
+
             Spacer()
-            
+
             Group {
                 if isExpanded {
                     actions()
                         .imageScale(.large)
                 }
-                
+
                 Button { isExpanded.toggle() } label: {
                     Image(systemName: "chevron.right")
                         .imageScale(.medium)
@@ -117,12 +171,12 @@ fileprivate struct _SectionButtonStyle: ButtonStyle {
 #else
 fileprivate struct _SectionHeader<L: View, A: View>: View {
     @Environment(\.headerProminence) private var prominence
-    
+
     var expandable: Bool
     @Binding var isExpanded: Bool
     var label: L
     @ViewBuilder var actions: () -> A
-    
+
     var body: some View {
         HStack(spacing: 10) {
             label
@@ -130,7 +184,7 @@ fileprivate struct _SectionHeader<L: View, A: View>: View {
                     guard expandable else { return }
                     isExpanded.toggle()
                 }
-            
+
             Button {
                 isExpanded.toggle()
             } label: {
@@ -142,9 +196,9 @@ fileprivate struct _SectionHeader<L: View, A: View>: View {
                 .buttonStyle(.plain)
                 .foregroundColor(.gray)
                 .opacity(expandable ? 1 : 0)
-            
+
             Spacer()
-            
+
             if isExpanded {
                 actions()
             }

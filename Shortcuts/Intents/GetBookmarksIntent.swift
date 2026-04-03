@@ -50,8 +50,8 @@ enum BookmarkSortOption: String, AppEnum {
 
     static var typeDisplayRepresentation: TypeDisplayRepresentation = "Sort Order"
     static var caseDisplayRepresentations: [Self: DisplayRepresentation] = [
-        .newestFirst: "Newest First",
-        .oldestFirst: "Oldest First",
+        .newestFirst: "New first",
+        .oldestFirst: "Old first",
         .titleAZ: "Title (A to Z)",
         .titleZA: "Title (Z to A)"
     ]

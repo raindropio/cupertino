@@ -9,7 +9,7 @@ struct FreeFeatures: View {
             Label("Unlimited highlights", systemImage: "checkmark")
             Label("Unlimited devices", systemImage: "checkmark")
             
-            WithLink(url: URL(string: "https://help.raindrop.io/automation")!) {
+            WithLink(url: URL(string: "https://help.raindrop.io/integrations")!) {
                 Label("More than 2,600 integrations", systemImage: "puzzlepiece.extension")
             }
             

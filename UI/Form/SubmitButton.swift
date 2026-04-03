@@ -31,9 +31,9 @@ public struct SubmitButton<Label>: View where Label: View {
 }
 
 extension SubmitButton where Label == Text {
-    public init<S>(_ title: S) where S : StringProtocol {
+    public init(_ title: LocalizedStringKey) {
         self.label = {
-            Text(title)
+            Text(title, bundle: .main)
         }
     }
 }

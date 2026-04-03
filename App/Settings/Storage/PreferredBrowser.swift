@@ -15,17 +15,17 @@ enum PreferredBrowser: String, CaseIterable {
         #if os(iOS)
         case .safari: return "Safari"
         #endif
-        case .system: return "Default System Browser"
+        case .system: return String(localized: "Default System Browser")
         }
     }
-    
+
     var description: String {
         switch self {
-        case .inapp: return "Clean, reader-friendly view with option to highlight content"
+        case .inapp: return String(localized: "Clean, reader-friendly view with option to highlight content")
         #if os(iOS)
-        case .safari: return "Open links in Safari without leaving the app"
+        case .safari: return String(localized: "Open links in Safari without leaving the app")
         #endif
-        case .system: return "Your device’s default browser"
+        case .system: return String(localized: "Your device’s default browser")
         }
     }
     

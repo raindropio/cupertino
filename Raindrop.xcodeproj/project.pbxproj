@@ -98,29 +98,22 @@
 		761F92462F44A7040058B878 /* PBXFileSystemSynchronizedBuildFileExceptionSet */ = {
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
 			membershipExceptions = (
-				Action.plist,
-				Action.xcassets,
-				Share.plist,
+				Action/Assets.xcassets,
+				Action/Info.plist,
+				Action/InfoPlist.xcstrings,
+				Share/Info.plist,
 			);
 			target = 76D880DB2930E1FB00D43AD9 /* Share iOS */;
 		};
 		761F92472F44A7040058B878 /* PBXFileSystemSynchronizedBuildFileExceptionSet */ = {
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
 			membershipExceptions = (
-				Action.plist,
-				Action.xcassets,
-				Share.plist,
+				Action/Assets.xcassets,
+				Action/Info.plist,
+				Action/InfoPlist.xcstrings,
+				Share/Info.plist,
 			);
 			target = 76154B6129C202D5002DDDEB /* Share macOS */;
-		};
-		761F92482F44A7040058B878 /* PBXFileSystemSynchronizedBuildFileExceptionSet */ = {
-			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
-			membershipExceptions = (
-				Action.plist,
-				Share.js,
-				Share.plist,
-			);
-			target = 769FFEFE29CC4C8500C2E6DA /* Action iOS */;
 		};
 		761F93162F44A79F0058B878 /* PBXFileSystemSynchronizedBuildFileExceptionSet */ = {
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
@@ -157,12 +150,22 @@
 			);
 			target = 76154C5729C21039002DDDEB /* WebExtension macOS */;
 		};
+		763E44A22F7FDE810012E48F /* PBXFileSystemSynchronizedBuildFileExceptionSet */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				Action/Info.plist,
+				Share/Info.plist,
+				Share/Inject.js,
+			);
+			target = 769FFEFE29CC4C8500C2E6DA /* Action iOS */;
+		};
 /* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
-		761F921B2F44A7040058B878 /* Extension */ = {isa = PBXFileSystemSynchronizedRootGroup; exceptions = (761F92462F44A7040058B878 /* PBXFileSystemSynchronizedBuildFileExceptionSet */, 761F92472F44A7040058B878 /* PBXFileSystemSynchronizedBuildFileExceptionSet */, 761F92482F44A7040058B878 /* PBXFileSystemSynchronizedBuildFileExceptionSet */, ); explicitFileTypes = {}; explicitFolders = (); path = Extension; sourceTree = "<group>"; };
+		761F921B2F44A7040058B878 /* Extension */ = {isa = PBXFileSystemSynchronizedRootGroup; exceptions = (761F92462F44A7040058B878 /* PBXFileSystemSynchronizedBuildFileExceptionSet */, 761F92472F44A7040058B878 /* PBXFileSystemSynchronizedBuildFileExceptionSet */, 763E44A22F7FDE810012E48F /* PBXFileSystemSynchronizedBuildFileExceptionSet */, ); explicitFileTypes = {}; explicitFolders = (); path = Extension; sourceTree = "<group>"; };
 		761F92D82F44A79F0058B878 /* App */ = {isa = PBXFileSystemSynchronizedRootGroup; exceptions = (761F93162F44A79F0058B878 /* PBXFileSystemSynchronizedBuildFileExceptionSet */, ); explicitFileTypes = {}; explicitFolders = (); path = App; sourceTree = "<group>"; };
 		762357012F47639700BB47F9 /* WebExtension */ = {isa = PBXFileSystemSynchronizedRootGroup; exceptions = (762357122F47639700BB47F9 /* PBXFileSystemSynchronizedBuildFileExceptionSet */, 762357132F47639700BB47F9 /* PBXFileSystemSynchronizedBuildFileExceptionSet */, ); explicitFileTypes = {}; explicitFolders = (ios/_locales, ios/assets, ios/welcome, macos/_locales, macos/assets, macos/welcome, ); path = WebExtension; sourceTree = "<group>"; };
+		768AE24F2F7FBA48009D98D8 /* Localization */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = Localization; sourceTree = "<group>"; };
 		76CA862B2F44BFA0002E1FA2 /* Shortcuts */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = Shortcuts; sourceTree = "<group>"; };
 /* End PBXFileSystemSynchronizedRootGroup section */
 
@@ -236,6 +239,7 @@
 				761F921B2F44A7040058B878 /* Extension */,
 				762357012F47639700BB47F9 /* WebExtension */,
 				76CA862B2F44BFA0002E1FA2 /* Shortcuts */,
+				768AE24F2F7FBA48009D98D8 /* Localization */,
 				767AC1162925196F00766998 /* Features */,
 				7685A1AC286880F600A4BC3C /* API */,
 				76E08B6929A3976000B3202D /* Backport */,
@@ -287,6 +291,7 @@
 			);
 			fileSystemSynchronizedGroups = (
 				761F921B2F44A7040058B878 /* Extension */,
+				768AE24F2F7FBA48009D98D8 /* Localization */,
 			);
 			name = "Share macOS";
 			packageProductDependencies = (
@@ -351,6 +356,7 @@
 			);
 			fileSystemSynchronizedGroups = (
 				761F92D82F44A79F0058B878 /* App */,
+				768AE24F2F7FBA48009D98D8 /* Localization */,
 				76CA862B2F44BFA0002E1FA2 /* Shortcuts */,
 			);
 			name = Raindrop;
@@ -379,6 +385,7 @@
 			);
 			fileSystemSynchronizedGroups = (
 				761F921B2F44A7040058B878 /* Extension */,
+				768AE24F2F7FBA48009D98D8 /* Localization */,
 			);
 			name = "Action iOS";
 			packageProductDependencies = (
@@ -404,6 +411,7 @@
 			);
 			fileSystemSynchronizedGroups = (
 				761F921B2F44A7040058B878 /* Extension */,
+				768AE24F2F7FBA48009D98D8 /* Localization */,
 			);
 			name = "Share iOS";
 			packageProductDependencies = (
@@ -452,6 +460,15 @@
 			knownRegions = (
 				en,
 				Base,
+				nl,
+				fr,
+				ru,
+				ja,
+				it,
+				es,
+				pt,
+				pl,
+				de,
 			);
 			mainGroup = 7685A188286868AC00A4BC3C;
 			packageReferences = (
@@ -588,7 +605,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
-				CODE_SIGN_ENTITLEMENTS = Extension/Share.entitlements;
+				CODE_SIGN_ENTITLEMENTS = Extension/Share/Share.entitlements;
 				CODE_SIGN_IDENTITY = "-";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "Apple Development";
 				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Apple Development";
@@ -597,7 +614,7 @@
 				ENABLE_APP_SANDBOX = YES;
 				ENABLE_HARDENED_RUNTIME = YES;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = Extension/Share.plist;
+				INFOPLIST_FILE = Extension/Share/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = Raindrop.io;
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -620,7 +637,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
-				CODE_SIGN_ENTITLEMENTS = Extension/Share.entitlements;
+				CODE_SIGN_ENTITLEMENTS = Extension/Share/Share.entitlements;
 				CODE_SIGN_IDENTITY = "-";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "Apple Development";
 				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Apple Development";
@@ -629,7 +646,7 @@
 				ENABLE_APP_SANDBOX = YES;
 				ENABLE_HARDENED_RUNTIME = YES;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = Extension/Share.plist;
+				INFOPLIST_FILE = Extension/Share/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = Raindrop.io;
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -1011,14 +1028,13 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = ActionIcon;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
-				CODE_SIGN_ENTITLEMENTS = Extension/Action.entitlements;
+				CODE_SIGN_ENTITLEMENTS = Extension/Action/Action.entitlements;
 				CODE_SIGN_IDENTITY = "-";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "Apple Development";
 				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = Extension/Action.plist;
-				INFOPLIST_KEY_CFBundleDisplayName = "Add to Unsorted";
+				INFOPLIST_FILE = Extension/Action/Info.plist;
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
 				IPHONEOS_DEPLOYMENT_TARGET = 17.6;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -1045,14 +1061,13 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = ActionIcon;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
-				CODE_SIGN_ENTITLEMENTS = Extension/Action.entitlements;
+				CODE_SIGN_ENTITLEMENTS = Extension/Action/Action.entitlements;
 				CODE_SIGN_IDENTITY = "-";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "Apple Development";
 				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = Extension/Action.plist;
-				INFOPLIST_KEY_CFBundleDisplayName = "Add to Unsorted";
+				INFOPLIST_FILE = Extension/Action/Info.plist;
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
 				IPHONEOS_DEPLOYMENT_TARGET = 17.6;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -1080,13 +1095,13 @@
 			buildSettings = {
 				APPLICATION_EXTENSION_API_ONLY = YES;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
-				CODE_SIGN_ENTITLEMENTS = Extension/Share.entitlements;
+				CODE_SIGN_ENTITLEMENTS = Extension/Share/Share.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				ENABLE_APP_SANDBOX = YES;
 				ENABLE_OUTGOING_NETWORK_CONNECTIONS = YES;
 				ENABLE_USER_SELECTED_FILES = readonly;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = Extension/Share.plist;
+				INFOPLIST_FILE = Extension/Share/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = Raindrop.io;
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
 				IPHONEOS_DEPLOYMENT_TARGET = 17.6;
@@ -1114,13 +1129,13 @@
 			buildSettings = {
 				APPLICATION_EXTENSION_API_ONLY = YES;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
-				CODE_SIGN_ENTITLEMENTS = Extension/Share.entitlements;
+				CODE_SIGN_ENTITLEMENTS = Extension/Share/Share.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				ENABLE_APP_SANDBOX = YES;
 				ENABLE_OUTGOING_NETWORK_CONNECTIONS = YES;
 				ENABLE_USER_SELECTED_FILES = readonly;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = Extension/Share.plist;
+				INFOPLIST_FILE = Extension/Share/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = Raindrop.io;
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
 				IPHONEOS_DEPLOYMENT_TARGET = 17.6;

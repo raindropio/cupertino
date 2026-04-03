@@ -29,9 +29,9 @@ public struct EditButton<L> : View where L : View {
 }
 
 extension EditButton where L == Label<Text, Image> {
-    public init<S>(_ title: S) where S : StringProtocol {
+    public init(_ title: LocalizedStringKey) {
         self.label = { _ in
-            Label(title, systemImage: "checkmark.circle")
+            Label { Text(title, bundle: .main) } icon: { Image(systemName: "checkmark.circle") }
         }
     }
 }

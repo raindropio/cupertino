@@ -17,12 +17,12 @@ extension ConfigRaindrops {
         
         public var title: String {
             switch self {
-            case .title: return "Title"
-            case .excerpt: return "Description"
-            case .note: return "Note"
-            case .cover: return "Thumbnail"
-            case .tags: return "Filters"
-            case .info: return "Date, domain & type"
+            case .title: return String(localized: "Title")
+            case .excerpt: return String(localized: "Description")
+            case .note: return String(localized: "Note")
+            case .cover: return String(localized: "Thumbnail")
+            case .tags: return String(localized: "Filters")
+            case .info: return String(localized: "Date, domain & type")
             }
         }
         

@@ -20,14 +20,14 @@ struct PermanentCopy: View {
     }
     
     private var title: String {
-        page.canGoBack ? (page.url?.host() ?? "") : "Permanent copy"
+        page.canGoBack ? (page.url?.host() ?? "") : String(localized: "Web archive")
     }
     
     var body: some View {
         if raindrop.cache?.status != .ready {
             EmptyState(
-                "No permanent copy",
-                message: Text(raindrop.cache?.status?.title ?? "Permanent copy is not created yet"),
+                "No web archive",
+                message: Text(raindrop.cache?.status?.title ?? String(localized: "Web archive is not created yet")),
                 icon: {
                     Image(systemName: "icloud.slash")
                         .foregroundStyle(.red)

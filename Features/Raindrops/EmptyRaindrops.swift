@@ -28,14 +28,14 @@ struct EmptyRaindrops: View {
                             ) {
                                 Image(systemName: "tray")
                             }
-                            
+
                         case -99:
                             EmptyState(
                                 message: Text("**Trash** is empty")
                             ) {
                                 Image(systemName: "trash.slash")
                             }
-                            
+
                         default:
                             EmptyState(
                                 "No items yet",
@@ -43,7 +43,7 @@ struct EmptyRaindrops: View {
                             ) {
                                 Image(systemName: "star")
                             } actions: {
-                                SafariLink("Learn more", destination: URL(string: "https://help.raindrop.io/mobile-app")!)
+                                SafariLink("Learn more", destination: URL(string: "https://help.raindrop.io/bookmarks#ios")!)
                                     .controlSize(.small)
                             }
                         }

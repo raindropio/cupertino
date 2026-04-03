@@ -16,7 +16,7 @@ public struct RaindropHighlights: View {
                     Image(systemName: Filter.Kind.highlights.systemImage)
                         .foregroundStyle(Filter.Kind.highlights.color)
                 } actions: {
-                    SafariLink("Learn more", destination: URL(string: "https://help.raindrop.io/highlights")!)
+                    SafariLink("Learn more", destination: URL(string: "https://help.raindrop.io/highlights#ios")!)
                 }
                     .scenePadding()
             } else {

@@ -10,6 +10,6 @@ public func CopyButton(items: [URL]) -> some View {
         pasteboard.setString(items.map { $0.absoluteString }.joined(separator: "\n"), forType: .string)
         #endif
     } label: {
-        Label("Copy", systemImage: "link")
+        Label { Text("Copy", bundle: .module) } icon: { Image(systemName: "link") }
     }
 }

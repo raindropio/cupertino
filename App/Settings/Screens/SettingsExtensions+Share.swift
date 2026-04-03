@@ -20,7 +20,7 @@ extension SettingsExtensions {
                 
                 DefaultCollection()
                 
-                SafariLink("Enable", destination: URL(string: "https://help.raindrop.io/mobile-app#share-ios")!)
+                SafariLink("Enable", destination: URL(string: "https://help.raindrop.io/mobile-app#share-extension")!)
             }
         }
     }

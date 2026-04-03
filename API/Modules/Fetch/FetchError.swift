@@ -9,9 +9,9 @@ public enum FetchError: LocalizedError, Codable {
     public var errorDescription: String? {
         switch self {
         case .invalidStatus(_, let statusCode): return HTTPURLResponse.localizedString(forStatusCode: statusCode)
-        case .invalidRequest(_, let message): return message ?? "Invalid request"
-        case .invalidResponse(_, let message): return message ?? "Invalid response"
-        case .decoding(let message): return message ?? "Impossible to decode response"
+        case .invalidRequest(_, let message): return message ?? String(localized: "Invalid request")
+        case .invalidResponse(_, let message): return message ?? String(localized: "Invalid response")
+        case .decoding(let message): return message ?? String(localized: "Impossible to decode response")
         }
     }
 }

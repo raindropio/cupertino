@@ -6,9 +6,9 @@ extension Subscription {
         
         public var title: String {
             switch self {
-            case .promonthly1: return "Pro Monthly"
-            case .proannual1: return "Pro Yearly"
-            case .unknown: return "Unknown"
+            case .promonthly1: return String(localized: "Pro Monthly")
+            case .proannual1: return String(localized: "Pro Yearly")
+            case .unknown: return String(localized: "Unknown")
             }
         }
     }

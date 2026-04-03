@@ -3,6 +3,7 @@ import PackageDescription
 
 let package = Package(
     name: "SignInWithGoogle",
+    defaultLocalization: "en",
     platforms: [
         .iOS("16.0"),
         .visionOS("1.0")
@@ -25,6 +26,9 @@ let package = Package(
                 .product(name: "GoogleSignIn", package: "GoogleSignIn-iOS")
             ],
             path: "",
+            resources: [
+                .process("Localizable.xcstrings")
+            ],
             swiftSettings: [
                 .enableUpcomingFeature("ApproachableConcurrency")
             ]

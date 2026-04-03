@@ -40,7 +40,7 @@
 				).@count &gt; 0
 				).@count &gt; 0</string>
 			<key>NSExtensionJavaScriptPreprocessingFile</key>
-			<string>Share</string>
+			<string>Inject</string>
 		</dict>
 		<key>NSExtensionPointIdentifier</key>
 		<string>com.apple.share-services</string>

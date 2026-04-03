@@ -5,5 +5,5 @@ public struct CGroup: Equatable {
     public var hidden = false
     public var collections: [UserCollection.ID] = []
     
-    public static let blank = Self(title: "My collections")
+    public static let blank = Self(title: String(localized: "My collections"))
 }

@@ -19,11 +19,11 @@ enum DatePreset: CaseIterable {
     
     var title: String {
         switch self {
-        case .tomorrow: return "Tomorrow"
-        case .thisWeekend: return "This Weekend"
-        case .nextWeek: return "Next Week"
-        case .someday: return "Someday"
-        case .none: return "None"
+        case .tomorrow: return String(localized: "Tomorrow", bundle: .module)
+        case .thisWeekend: return String(localized: "This Weekend", bundle: .module)
+        case .nextWeek: return String(localized: "Next Week", bundle: .module)
+        case .someday: return String(localized: "Someday", bundle: .module)
+        case .none: return String(localized: "None", bundle: .module)
         }
     }
     

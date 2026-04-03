@@ -35,7 +35,7 @@ extension TagsField {
         var suggestions: [String]
 
         var body: some View {
-            TextTokenField(value: $value, suggestions: suggestions, prompt: "Tags")
+            TextTokenField(value: $value, suggestions: suggestions, prompt: String(localized: "Tags"))
         }
     }
 }

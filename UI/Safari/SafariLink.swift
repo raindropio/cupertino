@@ -16,10 +16,10 @@ public struct SafariLink<L: View> {
 }
 
 extension SafariLink where L == Text {
-    public init<S: StringProtocol>(_ title: S, role: ButtonRole? = nil, destination: URL) {
+    public init(_ title: LocalizedStringKey, role: ButtonRole? = nil, destination: URL) {
         self.role = role
         self.destination = destination
-        self.label = { Text(title) }
+        self.label = { Text(title, bundle: .main) }
     }
 }
 

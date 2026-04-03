@@ -24,7 +24,7 @@ struct InviteCollaborator: View {
                 ActionButton(CollectionAccess.Level.member.title) {
                     try await dispatch(CollaboratorsAction.invite(collection.id, .init(level: .member), link: $link))
                 }
-                
+
                 ActionButton(CollectionAccess.Level.viewer.title) {
                     try await dispatch(CollaboratorsAction.invite(collection.id, .init(level: .viewer), link: $link))
                 }

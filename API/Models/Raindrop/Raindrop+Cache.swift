@@ -15,11 +15,11 @@ extension Raindrop {
             
             public var title: String {
                 switch self {
-                case .ready: return "Ready"
-                case .originUnreachable: return "Origin is unreachable"
-                case .sizeLimit: return "Page size is larger than allowed"
-                case .timeout: return "Request timeout"
-                case .failed: return "Unable to save copy after several failed attempts"
+                case .ready: return String(localized: "Ready")
+                case .originUnreachable: return String(localized: "Origin is unreachable")
+                case .sizeLimit: return String(localized: "Page size is larger than allowed")
+                case .timeout: return String(localized: "Request timeout")
+                case .failed: return String(localized: "Unable to save copy after several failed attempts")
                 }
             }
         }

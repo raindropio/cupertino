@@ -9,7 +9,7 @@ extension SettingsExtensions {
                     Label("Safari Extension", systemImage: "safari")
                         .fontWeight(.medium)
                     
-                    Text("Desktop-class experience. Save all open tabs, add highlights and quickly access your bookmarks")
+                    Text("Highlight text and save all open tabs — all inside Safari")
                         .font(.callout)
                         .foregroundStyle(.secondary)
                 }
@@ -17,7 +17,7 @@ extension SettingsExtensions {
                     .labelStyle(.sidebar)
                     .listItemTint(.teal)
                 
-                Link("Enable", destination: URL(string: "https://help.raindrop.io/mobile-app#share-ios-safari")!)
+                Link("Enable", destination: URL(string: "https://help.raindrop.io/mobile-app#safari-extension")!)
             }
         }
     }

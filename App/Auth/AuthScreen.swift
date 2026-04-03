@@ -15,12 +15,12 @@ struct AuthScreen: View {
                 
                 HStack(spacing: 16) {
                     Button { login = true } label: {
-                        Text("Log In").frame(maxWidth: .infinity).frame(height: 32)
+                        Text("Log In").padding(.horizontal).frame(height: 32)
                     }
                         .buttonStyle(Backport.glass)
                     
                     Button { signup = true } label: {
-                        Text("Sign Up").frame(maxWidth: .infinity).frame(height: 32)
+                        Text("Sign up").frame(maxWidth: .infinity).frame(height: 32)
                     }
                         .buttonStyle(Backport.glassProminent)
                 }
@@ -34,7 +34,8 @@ struct AuthScreen: View {
                     .scenePadding(.horizontal)
                     .frame(maxWidth: 500)
                 
-                Text("We keep your [data safe](https://help.raindrop.io/about#privacy), never sold.\nNo\u{00a0}limits. Starting from $0.")
+                Text("We keep your [data safe](https://help.raindrop.io/security), never sold.\nNo\u{00a0}limits. Starting from $0.")
+                    .openLinksInSafari()
                     .foregroundStyle(.secondary)
                     .font(.callout)
                     .multilineTextAlignment(.center)
@@ -50,7 +51,7 @@ struct AuthScreen: View {
                     }
                     
                     ToolbarItem {
-                        SafariLink(destination: URL(string: "https://help.raindrop.io/about")!) {
+                        SafariLink(destination: URL(string: "https://help.raindrop.io/")!) {
                             Image(systemName: "questionmark.circle")
                                 .imageScale(.large)
                         }

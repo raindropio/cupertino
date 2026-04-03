@@ -2,18 +2,31 @@ import SwiftUI
 import Backport
 
 public struct EmptyState<I: View, A: View> {
-    var title: String = ""
+    var title: Text?
     var message: Text?
     var icon: (() -> I)?
     var actions: (() -> A)?
-    
+
     public init(
-        _ title: String = "",
+        _ title: LocalizedStringKey = "",
         message: Text? = nil,
         icon: @escaping () -> I,
         @ViewBuilder actions: @escaping () -> A
     ) {
-        self.title = title
+        self.title = Text(title, bundle: .main)
+        self.message = message
+        self.icon = icon
+        self.actions = actions
+    }
+
+    @_disfavoredOverload
+    public init(
+        _ title: String,
+        message: Text? = nil,
+        icon: @escaping () -> I,
+        @ViewBuilder actions: @escaping () -> A
+    ) {
+        self.title = title.isEmpty ? nil : Text(title)
         self.message = message
         self.icon = icon
         self.actions = actions
@@ -30,15 +43,15 @@ extension EmptyState: View {
                     .font(.title)
                     .foregroundStyle(.secondary)
             }
-            
+
             VStack(spacing: 12) {
-                if !title.isEmpty {
-                    Text(title)
+                if let title {
+                    title
                         .font(.title)
                         .fontWeight(.bold)
                         .multilineTextAlignment(.center)
                 }
-                
+
                 if let message {
                     message
                         .foregroundStyle(.secondary)
@@ -46,7 +59,7 @@ extension EmptyState: View {
                         .imageScale(.small)
                 }
             }
-            
+
             if let actions {
                 actions()
                     .buttonStyle(Backport.glassProminent)
@@ -58,11 +71,22 @@ extension EmptyState: View {
 
 extension EmptyState where A == EmptyView {
     public init(
-        _ title: String = "",
+        _ title: LocalizedStringKey = "",
         message: Text? = nil,
         icon: @escaping () -> I
     ) {
-        self.title = title
+        self.title = Text(title, bundle: .main)
+        self.message = message
+        self.icon = icon
+    }
+
+    @_disfavoredOverload
+    public init(
+        _ title: String,
+        message: Text? = nil,
+        icon: @escaping () -> I
+    ) {
+        self.title = title.isEmpty ? nil : Text(title)
         self.message = message
         self.icon = icon
     }

@@ -39,7 +39,7 @@ extension RaindropForm: View {
             .scrollBounceBehavior(.basedOnSize, axes: .vertical)
             .safeAnimation(.default, value: raindrop.collection)
             .modifier(Toolbar(raindrop: $raindrop))
-            .navigationTitle((raindrop.isNew ? "New" : "Edit") + " \(raindrop.type.single.localizedLowercase)")
+            .navigationTitle((raindrop.isNew ? String(localized: "New") : String(localized: "Edit")) + " \(raindrop.type.single.localizedLowercase)")
             #if canImport(UIKit)
             .navigationBarTitleDisplayMode(.inline)
             ._safeAreaInsets(.init(top: -15, leading: 0, bottom: 0, trailing: 0))

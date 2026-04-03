@@ -25,7 +25,7 @@ extension Browser {
                             
                             if raindrop.file == nil, raindrop.cache?.status == .ready {
                                 DeepLink(.raindrop(.cache(raindrop.id))) {
-                                    Label("Permanent copy", systemImage: "clock.arrow.circlepath")
+                                    Label("Web archive", systemImage: "clock.arrow.circlepath")
                                 }
                                     .controlSize(.small)
                             }

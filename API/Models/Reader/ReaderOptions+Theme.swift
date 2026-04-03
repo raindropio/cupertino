@@ -10,10 +10,10 @@ extension ReaderOptions {
         
         public var title: String {
             switch self {
-            case .system: return "System"
-            case .day: return "Day"
-            case .night: return "Night"
-            case .sunset: return "Sunset"
+            case .system: return String(localized: "System")
+            case .day: return String(localized: "Day")
+            case .night: return String(localized: "Night")
+            case .sunset: return String(localized: "Sunset")
             }
         }
         

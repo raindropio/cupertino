@@ -2,7 +2,7 @@ import SwiftUI
 
 extension AuthSplash {
     struct Slide<I: View, D: View>: View {
-        var title: String
+        var title: LocalizedStringKey
         var colors: [Color]
         var icon: () -> I
         var description: () -> D

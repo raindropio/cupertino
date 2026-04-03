@@ -17,7 +17,7 @@ extension SettingsExtensions {
                     .labelStyle(.sidebar)
                     .listItemTint(.pink)
                 
-                Link("Enable", destination: URL(string: "https://help.raindrop.io/mobile-app#action-ios")!)
+                Link("Enable", destination: URL(string: "https://help.raindrop.io/mobile-app#add-to-unsorted-action")!)
             }
         }
     }

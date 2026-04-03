@@ -6,8 +6,8 @@ public enum RaindropsPick: Equatable {
     
     public var title: String {
         switch self {
-        case .all(_): return "All items"
-        case .some(let ids): return "\(ids.count) items"
+        case .all(_): return String(localized: "All items")
+        case .some(let ids): return String(localized: "\(ids.count) items")
         }
     }
     

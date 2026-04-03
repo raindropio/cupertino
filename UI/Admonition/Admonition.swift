@@ -11,9 +11,9 @@ public struct Admonition<C: View> {
 }
 
 extension Admonition where C == Text {
-    public init<S: StringProtocol>(_ text: S, role: Role = .note) {
+    public init(_ title: LocalizedStringKey, role: Role = .note) {
         self.role = role
-        self.content = { Text(text) }
+        self.content = { Text(title, bundle: .main) }
     }
 }
 

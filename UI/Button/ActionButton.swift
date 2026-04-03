@@ -26,13 +26,30 @@ public struct ActionButton<L: View> {
 }
 
 extension ActionButton where L == Text {
-    public init<S>(
-        _ title: S,
+    public init(
+        _ title: LocalizedStringKey,
         message: String = "",
         role: ButtonRole? = nil,
         confirm: Bool? = nil,
         action: @escaping () async throws -> Void
-    ) where S : StringProtocol {
+    ) {
+        self.message = message
+        self.label = {
+            Text(title, bundle: .main)
+        }
+        self.role = role
+        self.confirm = confirm ?? (role == .destructive)
+        self.action = action
+    }
+
+    @_disfavoredOverload
+    public init(
+        _ title: String,
+        message: String = "",
+        role: ButtonRole? = nil,
+        confirm: Bool? = nil,
+        action: @escaping () async throws -> Void
+    ) {
         self.message = message
         self.label = {
             Text(title)

@@ -50,7 +50,7 @@ fileprivate struct _Menu: View {
                     
                     if item.file == nil {
                         DeepLink(.raindrop(.cache(item.id))) {
-                            Label("Permanent copy", systemImage: "clock.arrow.circlepath")
+                            Label("Web archive", systemImage: "clock.arrow.circlepath")
                         }
                     }
                     

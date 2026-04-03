@@ -3,7 +3,7 @@ import StoreKit
 extension SubscriptionReducer {
     func purchase(state: inout S, userRef: User.ID, product: Product) throws -> ReduxAction? {
         if let current = state.current, current.status != .deactivated {
-            throw RestError.invalid("You have active subscription")
+            throw RestError.invalid(String(localized: "You have active subscription"))
         }
                 
         return A.purchasing(userRef, product)

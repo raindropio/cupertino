@@ -15,11 +15,11 @@ extension CollectionAccess {
         
         public var title: String {
             switch self {
-            case .noAccess: return "No access"
-            case .public: return "Viewer"
-            case .viewer: return "Viewer"
-            case .member: return "Editor"
-            case .owner: return "Owner"
+            case .noAccess: return String(localized: "No access")
+            case .public: return String(localized: "Viewer")
+            case .viewer: return String(localized: "Viewer")
+            case .member: return String(localized: "Editor")
+            case .owner: return String(localized: "Owner")
             }
         }
         

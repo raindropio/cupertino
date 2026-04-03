@@ -3,6 +3,7 @@ import PackageDescription
 
 let package = Package(
     name: "UI",
+    defaultLocalization: "en",
     platforms: [
         .macOS("13.0"),
         .iOS("16.4"),
@@ -29,6 +30,9 @@ let package = Package(
                 .byName(name: "Backport")
             ],
             path: "",
+            resources: [
+                .process("Localizable.xcstrings")
+            ],
             swiftSettings: [
                 .enableUpcomingFeature("ApproachableConcurrency")
             ]

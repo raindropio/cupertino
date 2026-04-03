@@ -3,10 +3,10 @@ public enum CollectionView: String, Codable, CaseIterable, Identifiable {
     
     public var title: String {
         switch self {
-        case .list: return "List"
-        case .grid: return "Cards"
-        case .masonry: return "Masonry"
-        case .simple: return "Headlines"
+        case .list: return String(localized: "List")
+        case .grid: return String(localized: "Cards")
+        case .masonry: return String(localized: "Masonry")
+        case .simple: return String(localized: "Headlines")
         }
     }
     

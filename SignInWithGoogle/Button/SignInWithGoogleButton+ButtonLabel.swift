@@ -9,9 +9,9 @@ extension SignInWithGoogleButton {
         
         var text: String {
             switch self {
-            case .signIn: return "Sign in with Google"
-            case .continue: return "Continue with Google"
-            case .signUp: return "Sign up with Google"
+            case .signIn: return String(localized: "Sign in with Google", bundle: .module)
+            case .continue: return String(localized: "Continue with Google", bundle: .module)
+            case .signUp: return String(localized: "Sign up with Google", bundle: .module)
             case .compact: return "Google"
             }
         }
