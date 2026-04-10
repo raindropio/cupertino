@@ -7,28 +7,8 @@ extension RaindropsReducer {
         else { return nil }
         
         var newRaindrops = [Raindrop]()
-        
-        //check existing
-        var existing = [URL: Raindrop.ID]()
-        do {
-            existing = try await rest.raindropsGetId(urls: urls)
-        } catch {
-            let restError = (error as? RestError) ?? .unknown(error.localizedDescription)
-            for url in urls {
-                failed?.wrappedValue[url] = restError
-            }
-            throw error
-        }
-        
+
         let chunks = urls
-            //ignore existing
-            .filter { url in
-                if existing[url.compact] != nil {
-                    completed?.wrappedValue.insert(url)
-                    return false
-                }
-                return true
-            }
             //ignore completed
             .filter { !(completed?.wrappedValue ?? []).contains($0) }
             //split to parallel tasks
