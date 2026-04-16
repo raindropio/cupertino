@@ -42,6 +42,8 @@
 				).@count == $extensionItem.attachments.@count
 				).@count &gt; 0</string>
 		</dict>
+		<key>NSExtensionActionWantsFullScreenPresentation</key>
+		<true/>
 		<key>NSExtensionPointIdentifier</key>
 		<string>com.apple.ui-services</string>
 		<key>NSExtensionPrincipalClass</key>
