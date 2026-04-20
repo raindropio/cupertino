@@ -31,6 +31,7 @@ extension OnWebMessageModifier {
         
         func connect(_ page: WebPage, _ channel: String, _ receive: @escaping (M) async -> Void) {
             self.receive = receive
+            page.view?.configuration.userContentController.removeScriptMessageHandler(forName: channel)
             page.view?.configuration.userContentController.add(self, name: channel)
         }
         

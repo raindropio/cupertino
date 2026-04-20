@@ -58,11 +58,15 @@ public class WebPage: NSObject, ObservableObject {
     }
     
     public var url: URL? {
-        request?.canonical ?? request?.url ?? view?.url
+        if let url = request?.canonical { return url }
+        if let url = request?.url { return url }
+        return view?.value(forKey: "URL") as? URL
     }
-    
+
     public var request: WebRequest? {
-        guard let initialURL = view?.backForwardList.currentItem?.initialURL
+        guard
+            let item = view?.backForwardList.currentItem,
+            let initialURL = item.value(forKey: "initialURL") as? URL
         else { return history.first?.value }
         return history[initialURL]
     }

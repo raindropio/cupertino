@@ -1,6 +1,11 @@
 import WebKit
 
 extension WebPage: WKUIDelegate {
+    //deny camera/microphone — prevents TCC crash on missing NSMicrophoneUsageDescription
+    public func webView(_ webView: WKWebView, requestMediaCapturePermissionFor origin: WKSecurityOrigin, initiatedByFrame frame: WKFrameInfo, type: WKMediaCaptureType, decisionHandler: @escaping (WKPermissionDecision) -> Void) {
+        decisionHandler(.deny)
+    }
+
     //window.open, etc
     public func webView(_ webView: WKWebView, createWebViewWith configuration: WKWebViewConfiguration, for navigationAction: WKNavigationAction, windowFeatures: WKWindowFeatures) -> WKWebView? {
         if let handler = navigationDecisionHandler {

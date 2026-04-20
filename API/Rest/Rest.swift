@@ -10,17 +10,17 @@ public class Rest: FetchDelegate {
         public var render = URL(string: "https://rdl.ink/")!
     }
     
-    let decoder: JSONDecoder = {
+    var decoder: JSONDecoder {
         let decoder = JSONDecoder()
         decoder.dateDecodingStrategy = .custom(JSISO8601DateFormatter.decodedDate)
         return decoder
-    }()
-    
-    let encoder: JSONEncoder = {
-        let decoder = JSONEncoder()
-        decoder.dateEncodingStrategy = .custom(JSISO8601DateFormatter.encodeDate)
-        return decoder
-    }()
+    }
+
+    var encoder: JSONEncoder {
+        let encoder = JSONEncoder()
+        encoder.dateEncodingStrategy = .custom(JSISO8601DateFormatter.encodeDate)
+        return encoder
+    }
     
     let fetch = Fetch(base.api)
     

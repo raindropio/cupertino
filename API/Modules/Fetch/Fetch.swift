@@ -11,8 +11,8 @@ private let session = URLSession(configuration: {
 private let inFlightCache = InFlightCache()
 
 final class DefaultFetchDelegate: FetchDelegate {
-    let decoder = JSONDecoder()
-    let encoder = JSONEncoder()
+    var decoder: JSONDecoder { JSONDecoder() }
+    var encoder: JSONEncoder { JSONEncoder() }
 }
 
 final class Fetch {
